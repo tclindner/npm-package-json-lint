@@ -1,0 +1,12 @@
+{
+  "curly": true,
+  "esversion": 6,
+  "globals": {},
+  "latedef": true,
+  "maxdepth": 4,
+  "maxstatements": 20,
+  "mocha": true,
+  "node": true,
+  "nonbsp": true,
+  "undef": true
+}

@@ -1,0 +1,71 @@
+####################################
+####################################
+### OS Files
+####################################
+####################################
+Thumbs.db
+.DS_Store
+
+
+
+
+####################################
+####################################
+### Git
+####################################
+####################################
+*.orig
+
+
+
+
+####################################
+####################################
+### Sublime Text
+####################################
+####################################
+# cache files for sublime text
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# workspace files are user-specific
+*.sublime-workspace
+
+# sublime project files
+*.sublime-project
+
+# sftp configuration file
+sftp-config.json
+
+
+
+
+####################################
+####################################
+### Node
+####################################
+####################################
+# Logs
+logs
+*.log
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
+node_modules
+
+
+
+
+####################################
+####################################
+### Mocha
+####################################
+####################################
+mocha.json

@@ -1,0 +1,12 @@
+# Full documentation can be found at editorconfig.org
+# This requires a plugin to be installed in the editor of choice
+# Link to info on plugins can be found here - http://editorconfig.org/#download
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true

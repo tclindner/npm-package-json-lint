@@ -1,0 +1,50 @@
+# package json lint
+
+A package.json linter for Node projects
+
+## What is package json lint?
+
+package json lint helps enforce standards for your package.json file.
+Currently it can check for:
+
+* validity of data types in nodes. Ex: `name` should always be a string.
+* whether a string is a lowercase
+* whether a version number is a valid
+* the presence of a given module
+* the presence of a pre-release version of a module
+
+## How do I install it?
+First thing first, let's make sure you have the necessary pre-requisites.
+
+### System Dependencies
+
+#### Node
+* node - v4.2.0+
+* npm - v2.14.7+
+
+### Use the cli
+
+* `npm install package-json-lint -g`
+
+## Commands and configuration
+
+| Command | Alias | Description | README |
+|---|---|---|---|
+| pjl-cli --help | -h | Lists supported CLI options |
+| pjl-cli --version | -v | Lists the current version number |
+| pjl-cli --file <file path> | --f | File path including name. Defaults to package.json |
+| pjl-cli --rule <rule name> | --r | Valid rule name to check. Defaults to nothing |
+| pjl-cli --rules-file <file path> | --c | File path of .packagejsonlintrc |
+| pjl-cli --ignore-warnings | --w | Ignore warnings |
+
+## Lint Rules
+
+package json lint has a configurable set of rules. Each rule contains the following properties:
+
+  1. ID - example: author-required
+  2. Type - error or warning
+  3. Node - example: author
+  4. Message - example: author is required
+  5. Rule Type - example: required
+
+As mentioned in the "Commands and configuration" section there are two ways to specify rule sets. The first is using `--rule` to specify a given rule. This will run package json lint with just this rule. The second is using `--rules-file` to specify a JSON file, named `.packagejsonlintrc`, to run a set of rules. If neither of the options above are specified then package json lint looks for a global `.packagejsonlintrc` file in the root of your user directory. Finally, if a global `.packagejsonlintrc` file doesn't exist then all rules are enabled by [default](src/defaultConfig.js).
