@@ -37,6 +37,20 @@ First thing first, let's make sure you have the necessary pre-requisites.
 | pjl-cli --rules-file <file path> | --c | File path of .packagejsonlintrc |
 | pjl-cli --ignore-warnings | --w | Ignore warnings |
 
+### Examples
+
+Run a specific rule, author-valid-values, on a file relative to the current working directory.
+`pjl-cli -f "../relative-path/package.json" -r "author-valid-values: true"`
+
+Run a specific rule, author-valid-values, ignoring warnings on a file relative to the current working directory.
+`pjl-cli -f "../relative-path/package.json" -r "author-valid-values: true" --ignore-warnings`
+
+Run using the config in `.packagejsonlintrc` on a file relative to the current working directory.
+`pjl-cli -f "../relative-path/package.json" -c "./.packagejsonlintrc"`
+
+Run using the default config on a file relative to the current working directory
+`pjl-cli -f "../relative-path/package.json"`
+
 ## Lint Rules
 
 package json lint has a configurable set of rules. Each rule contains the following properties:
