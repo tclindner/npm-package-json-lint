@@ -14,11 +14,13 @@ Currently it can check for:
 * the presence of a pre-release version of a module
 
 ## How do I install it?
+
 First thing first, let's make sure you have the necessary pre-requisites.
 
 ### System Dependencies
 
 #### Node
+
 * node - v4.2.0+
 * npm - v2.14.7+
 
@@ -62,3 +64,15 @@ package json lint has a configurable set of rules. Each rule contains the follow
   5. Rule Type - example: required
 
 As mentioned in the "Commands and configuration" section there are two ways to specify rule sets. The first is using `--rule` to specify a given rule. This will run package json lint with just this rule. The second is using `--rules-file` to specify a JSON file, named `.packagejsonlintrc`, to run a set of rules. If neither of the options above are specified then package json lint looks for a global `.packagejsonlintrc` file in the root of your user directory. Finally, if a global `.packagejsonlintrc` file doesn't exist then all rules are enabled by [default](src/defaultConfig.js).
+
+## Contributing
+
+Please see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Release History
+
+* 2016-04-17 - v0.1.0: First release
+
+## License
+
+Copyright (c) 2016 Thomas Lindner. Licensed under the MIT license.
