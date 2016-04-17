@@ -17,13 +17,14 @@ module.exports = function(grunt) {
   // Register task for coverage
   // Note: This must be run separately. It cannot be run after the
   // normal tests run
-  grunt.registerTask("coverage", [
+  grunt.registerTask("testcoverage", [
     "clean",
     "env:coverage",
     "instrument",
     "mochaTest",
     "storeCoverage",
-    "makeReport"
+    "makeReport",
+    "coverage"
   ]);
 
   // Register task for local testing
