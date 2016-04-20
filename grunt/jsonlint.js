@@ -5,6 +5,7 @@ module.exports = function(grunt) {
       src: [
         "src/**/*.json",
         "grunt/*.json",
+        "tests/unit/**/*.json",
         "*.json",
         ".jscsrc",
         ".jshintrc",
