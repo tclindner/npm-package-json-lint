@@ -9,14 +9,14 @@
     "audit",
     "auditor"
   ],
-  "homepage": "https://github.com/tclindner/package-json-lint",
+  "homepage": "https://github.com/tclindner/npm-package-json-lint",
   "bugs": {
-    "url": "https://github.com/tclindner/package-json-lint/issues"
+    "url": "https://github.com/tclindner/npm-package-json-lint/issues"
   },
   "author": "Thomas Lindner",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tclindner/package-json-lint.git"
+    "url": "https://github.com/tclindner/npm-package-json-lint.git"
   },
   "bin": {
     "pjl-cli": "src/cli.js"

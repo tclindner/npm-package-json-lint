@@ -9,12 +9,12 @@ describe("dependencies-invalid-pre-release-dependencies Unit Tests", function() 
     it("LintIssue object should be returned", function() {
       let packageJsonData = {
         dependencies: {
-          "package-json-lint": "^1.0.0-beta"
+          "npm-package-json-lint": "^1.0.0-beta"
         }
       };
       let invalidPreReleaseDependencies = [
-        "package-json-lint",
-        "grunt-package-json-lint"
+        "npm-package-json-lint",
+        "grunt-npm-package-json-lint"
       ];
       let response = lint(packageJsonData, invalidPreReleaseDependencies);
       response.lintId.should.equal("dependencies-invalid-pre-release-dependencies");
@@ -28,12 +28,12 @@ describe("dependencies-invalid-pre-release-dependencies Unit Tests", function() 
     it("LintIssue object should be returned", function() {
       let packageJsonData = {
         dependencies: {
-          "grunt-package-json-lint": "^1.0.0"
+          "grunt-npm-package-json-lint": "^1.0.0"
         }
       };
       let invalidPreReleaseDependencies = [
-        "package-json-lint",
-        "grunt-package-json-lint"
+        "npm-package-json-lint",
+        "grunt-npm-package-json-lint"
       ];
       let response = lint(packageJsonData, invalidPreReleaseDependencies);
       response.should.be.true();
@@ -44,8 +44,8 @@ describe("dependencies-invalid-pre-release-dependencies Unit Tests", function() 
     it("true should be returned", function() {
       let packageJsonData = {};
       let invalidPreReleaseDependencies = [
-        "package-json-lint",
-        "grunt-package-json-lint"
+        "npm-package-json-lint",
+        "grunt-npm-package-json-lint"
       ];
       let response = lint(packageJsonData, invalidPreReleaseDependencies);
       response.should.be.true();

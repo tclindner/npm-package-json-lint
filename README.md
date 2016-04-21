@@ -26,7 +26,7 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 ### Use the cli
 
-* `npm install package-json-lint -g`
+* `npm install npm-package-json-lint -g`
 
 ## Commands and configuration
 

@@ -15,7 +15,7 @@
 
 ### Code
 
-* Fork and clone the package-json-lint repo
+* Fork and clone the npm-package-json-lint repo
 
 ### Install project dependencies
 
@@ -75,4 +75,4 @@ EditorConfig helps maintain consistent file formatting between different editors
 
 ## License
 
-Contributions to package-json-lint are subject to the [MIT License](https://github.com/tclindner/package-json-lint/blob/master/LICENSE).
+Contributions to npm-package-json-lint are subject to the [MIT License](https://github.com/tclindner/npm-package-json-lint/blob/master/LICENSE).

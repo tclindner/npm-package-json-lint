@@ -9,12 +9,12 @@ describe("devDependencies-invalid-dependencies Unit Tests", function() {
     it("LintIssue object should be returned", function() {
       let packageJsonData = {
         devDependencies: {
-          "package-json-lint": "^1.0.0"
+          "npm-package-json-lint": "^1.0.0"
         }
       };
       let invalidDependencies = [
-        "package-json-lint",
-        "grunt-package-json-lint"
+        "npm-package-json-lint",
+        "grunt-npm-package-json-lint"
       ];
       let response = lint(packageJsonData, invalidDependencies);
       response.lintId.should.equal("devDependencies-invalid-dependencies");
@@ -28,12 +28,12 @@ describe("devDependencies-invalid-dependencies Unit Tests", function() {
     it("LintIssue object should be returned", function() {
       let packageJsonData = {
         devDependencies: {
-          "gulp-package-json-lint": "^1.0.0"
+          "gulp-npm-package-json-lint": "^1.0.0"
         }
       };
       let invalidDependencies = [
-        "package-json-lint",
-        "grunt-package-json-lint"
+        "npm-package-json-lint",
+        "grunt-npm-package-json-lint"
       ];
       let response = lint(packageJsonData, invalidDependencies);
       response.should.be.true();
@@ -44,8 +44,8 @@ describe("devDependencies-invalid-dependencies Unit Tests", function() {
     it("true should be returned", function() {
       let packageJsonData = {};
       let invalidDependencies = [
-        "package-json-lint",
-        "grunt-package-json-lint"
+        "npm-package-json-lint",
+        "grunt-npm-package-json-lint"
       ];
       let response = lint(packageJsonData, invalidDependencies);
       response.should.be.true();
