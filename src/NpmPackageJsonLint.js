@@ -5,7 +5,7 @@ let Config = require("./Config");
 let isPlainObj = require("is-plain-obj");
 let Rules = require("./Rules");
 
-class PackageJsonLint {
+class NpmPackageJsonLint {
   /**
    * constructor
    * @param  {object}           packageJsonData   Valid package.json data
@@ -96,4 +96,4 @@ class PackageJsonLint {
   }
 }
 
-module.exports = PackageJsonLint;
+module.exports = NpmPackageJsonLint;

@@ -31,9 +31,9 @@ describe("Config Unit Tests", function() {
     });
   });
 
-  context("when a relative path string to a .packagejsonlintrc file is passed", function() {
+  context("when a relative path string to a .npmpackagejsonlintrc file is passed", function() {
     it("the config object should return the parsed JSON as an object", function() {
-      let passedConfig = "./.packagejsonlintrc";
+      let passedConfig = "./.npmpackagejsonlintrc";
       let config = new Config(passedConfig);
       let obj = {
         "version-type": true
@@ -44,9 +44,9 @@ describe("Config Unit Tests", function() {
     });
   });
 
-  context("when an absolute path string to a .packagejsonlintrc file is passed", function() {
+  context("when an absolute path string to a .npmpackagejsonlintrc file is passed", function() {
     it("the config object should return the parsed JSON as an object", function() {
-      let passedConfig = "/Users/awesomeUser/.packagejsonlintrc";
+      let passedConfig = "/Users/awesomeUser/.npmpackagejsonlintrc";
       let config = new Config(passedConfig);
       let obj = {
         "version-type": true

@@ -8,12 +8,12 @@ let fs = require("fs");
 let Parser = require("./Parser");
 let path = require("path");
 let pkg = require("./../package.json");
-let PackageJsonLint = require("./PackageJsonLint");
+let NpmPackageJsonLint = require("./NpmPackageJsonLint");
 let Reporter = require("./Reporter");
 let userHome = require("user-home");
 
 const DEFAULT_FILE_NAME = "./package.json";
-const PACKAGE_JSON_RC_FILE_NAME = ".packagejsonlintrc";
+const NPM_PACKAGE_JSON_RC_FILE_NAME = ".npmpackagejsonlintrc";
 
 function handleError(err) {
   console.log(chalk.red.bold(err));
@@ -25,7 +25,7 @@ cliApp.version(pkg.version);
 cliApp.usage(pkg.name);
 cliApp.option("-f, --file <filePath>", `File path including name. Defaults to ${DEFAULT_FILE_NAME}`, DEFAULT_FILE_NAME);
 cliApp.option("-r, --rule <rule name>", "Valid rule name to check. Defaults to nothing");
-cliApp.option("-c, --rules-file <filePath>", "File path of .packagejsonlintrc");
+cliApp.option("-c, --rules-file <filePath>", "File path of .npmpackagejsonlintrc");
 cliApp.option("-w, --ignore-warnings", "Ignore warnings");
 cliApp.parse(process.argv);
 
@@ -56,7 +56,7 @@ if (typeof cliApp.rulesFile !== "undefined") {
 // check if rules have been found. If no, then lets try to find a config file in
 // the user's home directory
 if (!rulesLoaded) {
-  let userHomeRcFile = path.join(userHome, PACKAGE_JSON_RC_FILE_NAME);
+  let userHomeRcFile = path.join(userHome, NPM_PACKAGE_JSON_RC_FILE_NAME);
 
   if (fs.existsSync(userHomeRcFile)) {
     rulesConfig = userHomeRcFile;
@@ -70,8 +70,8 @@ try {
   let parser = new Parser();
   fileData = parser.parse(filePath);
 
-  let packageJsonLint = new PackageJsonLint(fileData, rulesConfig, options);
-  let output = packageJsonLint.lint();
+  let npmPackageJsonLint = new NpmPackageJsonLint(fileData, rulesConfig, options);
+  let output = npmPackageJsonLint.lint();
 
   let reporter = new Reporter();
 

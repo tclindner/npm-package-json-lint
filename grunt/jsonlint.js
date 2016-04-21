@@ -9,7 +9,7 @@ module.exports = function(grunt) {
         "*.json",
         ".jscsrc",
         ".jshintrc",
-        ".packagejsonlintrc"
+        ".npmpackagejsonlintrc"
       ]
     }
   });

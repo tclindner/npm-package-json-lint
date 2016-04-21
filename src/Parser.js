@@ -9,7 +9,7 @@ class Parser {
    * @return {object}          Valid JavaScript object
    */
   parse(fileName) {
-    // Make sure that a .packagejsonlint.rc is present
+    // Make sure that a .npmpackagejsonlintrc is present
     try {
       return this._readFile(fileName);
     } catch (e) {
