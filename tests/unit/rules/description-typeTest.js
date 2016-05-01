@@ -1,16 +1,17 @@
 "use strict";
 
-let should = require("should");
-let requireHelper = require("../../require_helper");
-let lint = requireHelper("rules/description-type").lint;
+const should = require("should");
+const requireHelper = require("../../require_helper");
+const lint = requireHelper("rules/description-type").lint;
 
 describe("description-type Unit Tests", function() {
   context("when package.json has node with incorrect type", function() {
     it("LintIssue object should be returned", function() {
-      let packageJsonData = {
+      const packageJsonData = {
         description: true
       };
-      let response = lint(packageJsonData);
+      const response = lint(packageJsonData);
+
       response.lintId.should.equal("description-type");
       response.lintType.should.equal("error");
       response.node.should.equal("description");
@@ -20,8 +21,9 @@ describe("description-type Unit Tests", function() {
 
   context("when package.json does not have node", function() {
     it("true should be returned", function() {
-      let packageJsonData = {};
-      let response = lint(packageJsonData);
+      const packageJsonData = {};
+      const response = lint(packageJsonData);
+
       response.should.be.true();
     });
   });

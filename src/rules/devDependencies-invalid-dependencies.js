@@ -1,14 +1,14 @@
 "use strict";
 
-let hasDependency = require("./../validators/dependency-audit").hasDependency;
-let LintIssue = require("./../LintIssue");
+const hasDependency = require("./../validators/dependency-audit").hasDependency;
+const LintIssue = require("./../LintIssue");
 const lintId = "devDependencies-invalid-dependencies";
 const lintType = "error";
 const nodeName = "devDependencies";
 const message = "You are using an invalid dependency. Please remove it.";
 const ruleType = "invalid-dependencies";
 
-let lint = function(packageJsonData, invalidDependencies) {
+const lint = function(packageJsonData, invalidDependencies) {
   if (hasDependency(packageJsonData, nodeName, invalidDependencies)) {
     return new LintIssue(lintId, lintType, nodeName, message);
   }

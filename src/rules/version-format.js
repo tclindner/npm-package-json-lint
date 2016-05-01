@@ -1,14 +1,14 @@
 "use strict";
 
-let isValidVersionNumber = require("./../validators/format").isValidVersionNumber;
-let LintIssue = require("./../LintIssue");
+const isValidVersionNumber = require("./../validators/format").isValidVersionNumber;
+const LintIssue = require("./../LintIssue");
 const lintId = "version-format";
 const lintType = "error";
 const nodeName = "version";
 const message = "Format must be a valid semantic version";
 const ruleType = "format";
 
-let lint = function(packageJsonData) {
+const lint = function(packageJsonData) {
   if (!isValidVersionNumber(packageJsonData, nodeName)) {
     return new LintIssue(lintId, lintType, nodeName, message);
   }

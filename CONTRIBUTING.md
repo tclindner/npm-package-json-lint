@@ -31,9 +31,9 @@ Run `node src/cli.js`
 
 ### JS
 
-npm package json lint utilizes both JSHint and JSCS to enforce JavaScript standards. Please see the `.jshintrc` file for JSHint config and `.jscsrc` for JSCS config.
+npm package json lint utilizes both ESLint and JSCS to enforce JavaScript standards. Please see the `.eslintrc.json` file for ESLint config and `.jscsrc` for JSCS config.
 
-* [grunt-contrib-jshint](https://github.com/gruntjs/grunt-contrib-jshint)
+* [grunt-eslint](https://github.com/sindresorhus/grunt-eslint)
 * [grunt-jscs](https://github.com/jscs-dev/grunt-jscs)
 
 #### JSON

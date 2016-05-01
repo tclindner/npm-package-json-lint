@@ -1,3 +1,4 @@
+// Monitor files for changes and run tasks
 module.exports = function(grunt) {
   grunt.config.set("watch", {
     json: {
@@ -8,14 +9,13 @@ module.exports = function(grunt) {
         "jsonlint"
       ]
     },
-    js: {
+    javascript: {
       files: [
         "src/**/*.js",
         "tests/**/*.js"
       ],
       tasks: [
-        "jshint",
-        "jscs",
+        "lint",
         "mochaTest:local"
       ]
     }

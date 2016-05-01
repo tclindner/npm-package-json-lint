@@ -1,11 +1,12 @@
 "use strict";
 
-let fs = require("fs");
-let path = require("path");
+const fs = require("fs");
+const path = require("path");
 
 class Rules {
+
   /**
-   * constructor
+   * Constructor
    */
   constructor() {
     this.rules = {};
@@ -13,27 +14,31 @@ class Rules {
 
   /**
    * Loads rules
-   * @return {object} Set of rules
+   * @return {Object} Set of rules
    */
   load() {
     const rulesDirectory = path.join(__dirname, "rules");
 
     try {
       fs.readdirSync(rulesDirectory).forEach((file) => {
-        this.rules[file.slice(0, -3)] = path.join(rulesDirectory, file);
+        const beginIndex = 0;
+        const endIndex = -3;
+
+        this.rules[file.slice(beginIndex, endIndex)] = path.join(rulesDirectory, file);
       });
 
       return this.rules;
-    } catch (e) {
-      console.log("Error - " + e);
+    } catch (err) {
+      console.log(`Error - ${err}`);
+
       return false;
     }
   }
 
   /**
    * Loads a rule
-   * @param  {string} ruleId Name of the rule
-   * @return {object}        Rule
+   * @param  {String} ruleId Name of the rule
+   * @return {Object}        Rule
    */
   get(ruleId) {
     return require(this.rules[ruleId]);
@@ -41,12 +46,14 @@ class Rules {
 
   /**
    * Registers a rule in the rules object
-   * @param  {string} ruleId     Name of the rule
-   * @param  {string} ruleModule Path to rule
+   * @param  {String}     ruleId      Name of the rule
+   * @param  {String}     ruleModule  Path to rule
+   * @return {undefined}              No return
    */
   _registerRule(ruleId, ruleModule) {
     this.rules[ruleId] = ruleModule;
   }
+
 }
 
 module.exports = Rules;

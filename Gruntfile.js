@@ -3,6 +3,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json")
   });
+
   // Load Grunt plugins from the config files in the grunt/ directory
   grunt.loadTasks("grunt");
   require("time-grunt")(grunt);
@@ -10,8 +11,8 @@ module.exports = function(grunt) {
   // Register task for running linters
   grunt.registerTask("lint", [
     "jsonlint",
-    "jshint",
-    "jscs"
+    "jscs",
+    "eslint"
   ]);
 
   // Register task for coverage
