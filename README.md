@@ -30,14 +30,14 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 ## Commands and configuration
 
-| Command | Alias | Description | README |
-|---|---|---|---|
+| Command | Alias | Description |
+|---|---|---|
 | pjl-cli --help | -h | Lists supported CLI options |
 | pjl-cli --version | -v | Lists the current version number |
-| pjl-cli --file <file path> | --f | File path including name. Defaults to package.json |
-| pjl-cli --rule <rule name> | --r | Valid rule name to check. Defaults to nothing |
-| pjl-cli --rules-file <file path> | --c | File path of .npmpackagejsonlintrc |
-| pjl-cli --ignore-warnings | --w | Ignore warnings |
+| pjl-cli --file <file path> | -f | File path including name. Defaults to package.json |
+| pjl-cli --rule <rule name> | -r | Valid rule name to check. Defaults to nothing |
+| pjl-cli --rules-file <file path> | -c | File path of .npmpackagejsonlintrc |
+| pjl-cli --ignore-warnings | -w | Ignore warnings |
 
 ### Examples
 
