@@ -206,6 +206,7 @@
     "no-useless-constructor": "error",
     "no-var": "error",
     "object-shorthand": "error",
+    "prefer-const": "error",
     "prefer-rest-params": "error",
     "prefer-template": "error",
     "template-curly-spacing": "error"

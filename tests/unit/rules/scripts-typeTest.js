@@ -7,10 +7,10 @@ const lint = requireHelper("rules/scripts-type").lint;
 describe("scripts-type Unit Tests", function() {
   context("when package.json has node with incorrect type", function() {
     it("LintIssue object should be returned", function() {
-      let packageJsonData = {
+      const packageJsonData = {
         scripts: "scripts"
       };
-      let response = lint(packageJsonData);
+      const response = lint(packageJsonData);
 
       response.lintId.should.equal("scripts-type");
       response.lintType.should.equal("error");
@@ -21,8 +21,8 @@ describe("scripts-type Unit Tests", function() {
 
   context("when package.json does not have node", function() {
     it("true should be returned", function() {
-      let packageJsonData = {};
-      let response = lint(packageJsonData);
+      const packageJsonData = {};
+      const response = lint(packageJsonData);
 
       response.should.be.true();
     });

@@ -10,10 +10,10 @@ describe("format Unit Tests", function() {
   describe("isLowercase method", function() {
     context("when the node doesn't exist in the package.json file", function() {
       it("true should be returned", function() {
-        let packageJson = {
+        const packageJson = {
           name: "awesome-module"
         };
-        let response = format.isLowercase(packageJson, "devDependencies");
+        const response = format.isLowercase(packageJson, "devDependencies");
 
         response.should.be.true();
       });
@@ -21,10 +21,10 @@ describe("format Unit Tests", function() {
 
     context("when the node exists in the package.json file and name is lowercase", function() {
       it("true should be returned", function() {
-        let packageJson = {
+        const packageJson = {
           name: "awesome-module"
         };
-        let response = format.isLowercase(packageJson, "name");
+        const response = format.isLowercase(packageJson, "name");
 
         response.should.be.true();
       });
@@ -32,10 +32,10 @@ describe("format Unit Tests", function() {
 
     context("when the node exists in the package.json file, but name is not lowercase", function() {
       it("false should be returned", function() {
-        let packageJson = {
+        const packageJson = {
           name: "aweSome-moDule"
         };
-        let response = format.isLowercase(packageJson, "name");
+        const response = format.isLowercase(packageJson, "name");
 
         response.should.be.false();
       });
@@ -45,10 +45,10 @@ describe("format Unit Tests", function() {
   describe("isValidVersionNumber method", function() {
     context("when the node doesn't exist in the package.json file", function() {
       it("true should be returned", function() {
-        let packageJson = {
+        const packageJson = {
           version: "1.0.0"
         };
-        let response = format.isValidVersionNumber(packageJson, "devDependencies");
+        const response = format.isValidVersionNumber(packageJson, "devDependencies");
 
         response.should.be.true();
       });
@@ -56,10 +56,10 @@ describe("format Unit Tests", function() {
 
     context("when the node exists in the package.json file and version is valid", function() {
       it("true should be returned", function() {
-        let packageJson = {
+        const packageJson = {
           version: "1.0.0"
         };
-        let response = format.isValidVersionNumber(packageJson, "version");
+        const response = format.isValidVersionNumber(packageJson, "version");
 
         response.should.be.true();
       });
@@ -67,10 +67,10 @@ describe("format Unit Tests", function() {
 
     context("when the node exists in the package.json file and version is invalid", function() {
       it("false should be returned", function() {
-        let packageJson = {
+        const packageJson = {
           version: "1a.0"
         };
-        let response = format.isValidVersionNumber(packageJson, "version");
+        const response = format.isValidVersionNumber(packageJson, "version");
 
         response.should.be.false();
       });
@@ -78,10 +78,10 @@ describe("format Unit Tests", function() {
 
     context("when the node exists in the package.json file and version is invalid", function() {
       it("false should be returned", function() {
-        let packageJson = {
+        const packageJson = {
           version: "1.a.0"
         };
-        let response = format.isValidVersionNumber(packageJson, "version");
+        const response = format.isValidVersionNumber(packageJson, "version");
 
         response.should.be.false();
       });

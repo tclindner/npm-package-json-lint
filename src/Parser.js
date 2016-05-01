@@ -24,7 +24,7 @@ class Parser {
    * @return {Object}          Valid JavaScript object
    */
   _readFile(fileName) {
-    let file = fs.readFileSync(fileName);
+    const file = fs.readFileSync(fileName);
 
     return JSON.parse(file);
   }

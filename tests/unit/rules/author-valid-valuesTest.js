@@ -7,14 +7,14 @@ const lint = requireHelper("rules/author-valid-values").lint;
 describe("author-valid-values Unit Tests", function() {
   context("when package.json has node with invalid value", function() {
     it("LintIssue object should be returned", function() {
-      let packageJsonData = {
+      const packageJsonData = {
         author: "LastName, FirstName"
       };
-      let validValues = [
+      const validValues = [
         "FirstName LastName",
         "FirstName MiddleName LastName"
       ];
-      let response = lint(packageJsonData, validValues);
+      const response = lint(packageJsonData, validValues);
 
       response.lintId.should.equal("author-valid-values");
       response.lintType.should.equal("error");
@@ -25,15 +25,15 @@ describe("author-valid-values Unit Tests", function() {
 
   context("when package.json has node with valid value", function() {
     it("LintIssue object should be returned", function() {
-      let packageJsonData = {
+      const packageJsonData = {
         author: "LastName, FirstName"
       };
-      let validValues = [
+      const validValues = [
         "FirstName LastName",
         "FirstName MiddleName LastName",
         "LastName, FirstName"
       ];
-      let response = lint(packageJsonData, validValues);
+      const response = lint(packageJsonData, validValues);
 
       response.should.be.true();
     });
@@ -41,13 +41,13 @@ describe("author-valid-values Unit Tests", function() {
 
   context("when package.json does not have node", function() {
     it("true should be returned", function() {
-      let packageJsonData = {};
-      let validValues = [
+      const packageJsonData = {};
+      const validValues = [
         "FirstName LastName",
         "FirstName MiddleName LastName",
         "LastName, FirstName"
       ];
-      let response = lint(packageJsonData, validValues);
+      const response = lint(packageJsonData, validValues);
 
       response.should.be.true();
     });

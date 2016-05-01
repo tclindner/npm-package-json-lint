@@ -23,9 +23,9 @@ class LintIssue {
    * @return {String} Human-friendly message about the lint issue
    */
   toString() {
-    let formattedLintId = chalk.cyan.bold(this.lintId);
-    let formattedNode = chalk.blue.bold(this.node);
-    let formattedMessage = this.lintType === "error" ? chalk.bold.red(this.lintMessage) : chalk.yellow(this.lintMessage);
+    const formattedLintId = chalk.cyan.bold(this.lintId);
+    const formattedNode = chalk.blue.bold(this.node);
+    const formattedMessage = this.lintType === "error" ? chalk.bold.red(this.lintMessage) : chalk.yellow(this.lintMessage);
 
     return `${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
   }

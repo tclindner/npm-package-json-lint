@@ -7,10 +7,10 @@ const lint = requireHelper("rules/homepage-recommended").lint;
 describe("homepage-recommended Unit Tests", function() {
   context("when package.json has node", function() {
     it("true should be returned", function() {
-      let packageJsonData = {
+      const packageJsonData = {
         homepage: "homepage"
       };
-      let response = lint(packageJsonData);
+      const response = lint(packageJsonData);
 
       response.should.be.true();
     });
@@ -18,8 +18,8 @@ describe("homepage-recommended Unit Tests", function() {
 
   context("when package.json does not have node", function() {
     it("LintIssue object should be returned", function() {
-      let packageJsonData = {};
-      let response = lint(packageJsonData);
+      const packageJsonData = {};
+      const response = lint(packageJsonData);
 
       response.lintId.should.equal("homepage-recommended");
       response.lintType.should.equal("warning");

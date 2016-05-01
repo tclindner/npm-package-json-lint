@@ -7,10 +7,10 @@ const lint = requireHelper("rules/config-type").lint;
 describe("config-type Unit Tests", function() {
   context("when package.json has node with incorrect type", function() {
     it("LintIssue object should be returned", function() {
-      let packageJsonData = {
+      const packageJsonData = {
         config: "config"
       };
-      let response = lint(packageJsonData);
+      const response = lint(packageJsonData);
 
       response.lintId.should.equal("config-type");
       response.lintType.should.equal("error");
@@ -21,8 +21,8 @@ describe("config-type Unit Tests", function() {
 
   context("when package.json does not have node", function() {
     it("true should be returned", function() {
-      let packageJsonData = {};
-      let response = lint(packageJsonData);
+      const packageJsonData = {};
+      const response = lint(packageJsonData);
 
       response.should.be.true();
     });

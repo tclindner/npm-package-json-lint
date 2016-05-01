@@ -7,13 +7,13 @@ const lint = requireHelper("rules/private-valid-values").lint;
 describe("private-valid-values Unit Tests", function() {
   context("when package.json has node with incorrect format", function() {
     it("LintIssue object should be returned", function() {
-      let packageJsonData = {
+      const packageJsonData = {
         private: true
       };
-      let validValues = [
+      const validValues = [
         false
       ];
-      let response = lint(packageJsonData, validValues);
+      const response = lint(packageJsonData, validValues);
 
       response.lintId.should.equal("private-valid-values");
       response.lintType.should.equal("error");
@@ -24,13 +24,13 @@ describe("private-valid-values Unit Tests", function() {
 
   context("when package.json has node with correct format", function() {
     it("LintIssue object should be returned", function() {
-      let packageJsonData = {
+      const packageJsonData = {
         private: false
       };
-      let validValues = [
+      const validValues = [
         false
       ];
-      let response = lint(packageJsonData, validValues);
+      const response = lint(packageJsonData, validValues);
 
       response.should.be.true();
     });
@@ -38,8 +38,8 @@ describe("private-valid-values Unit Tests", function() {
 
   context("when package.json does not have node", function() {
     it("true should be returned", function() {
-      let packageJsonData = {};
-      let response = lint(packageJsonData);
+      const packageJsonData = {};
+      const response = lint(packageJsonData);
 
       response.should.be.true();
     });

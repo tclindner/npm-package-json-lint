@@ -21,8 +21,8 @@ class Rules {
 
     try {
       fs.readdirSync(rulesDirectory).forEach((file) => {
-        let beginIndex = 0;
-        let endIndex = -3;
+        const beginIndex = 0;
+        const endIndex = -3;
 
         this.rules[file.slice(beginIndex, endIndex)] = path.join(rulesDirectory, file);
       });

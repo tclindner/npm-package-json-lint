@@ -7,16 +7,16 @@ const lint = requireHelper("rules/dependencies-invalid-pre-release-dependencies"
 describe("dependencies-invalid-pre-release-dependencies Unit Tests", function() {
   context("when package.json has node with an invalid value", function() {
     it("LintIssue object should be returned", function() {
-      let packageJsonData = {
+      const packageJsonData = {
         dependencies: {
           "npm-package-json-lint": "^1.0.0-beta"
         }
       };
-      let invldPreReleaseDeps = [
+      const invldPreReleaseDeps = [
         "npm-package-json-lint",
         "grunt-npm-package-json-lint"
       ];
-      let response = lint(packageJsonData, invldPreReleaseDeps);
+      const response = lint(packageJsonData, invldPreReleaseDeps);
 
       response.lintId.should.equal("dependencies-invalid-pre-release-dependencies");
       response.lintType.should.equal("error");
@@ -27,16 +27,16 @@ describe("dependencies-invalid-pre-release-dependencies Unit Tests", function() 
 
   context("when package.json has node with a valid value", function() {
     it("LintIssue object should be returned", function() {
-      let packageJsonData = {
+      const packageJsonData = {
         dependencies: {
           "grunt-npm-package-json-lint": "^1.0.0"
         }
       };
-      let invldPreReleaseDeps = [
+      const invldPreReleaseDeps = [
         "npm-package-json-lint",
         "grunt-npm-package-json-lint"
       ];
-      let response = lint(packageJsonData, invldPreReleaseDeps);
+      const response = lint(packageJsonData, invldPreReleaseDeps);
 
       response.should.be.true();
     });
@@ -44,12 +44,12 @@ describe("dependencies-invalid-pre-release-dependencies Unit Tests", function() 
 
   context("when package.json does not have node", function() {
     it("true should be returned", function() {
-      let packageJsonData = {};
-      let invldPreReleaseDeps = [
+      const packageJsonData = {};
+      const invldPreReleaseDeps = [
         "npm-package-json-lint",
         "grunt-npm-package-json-lint"
       ];
-      let response = lint(packageJsonData, invldPreReleaseDeps);
+      const response = lint(packageJsonData, invldPreReleaseDeps);
 
       response.should.be.true();
     });

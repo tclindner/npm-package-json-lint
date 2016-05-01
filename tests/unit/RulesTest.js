@@ -14,8 +14,8 @@ describe("Rules Unit Tests", function() {
   describe("_registerRule method", function() {
     context("when a ruleId and ruleModule are passed in", function() {
       it("the rules object contains the rule as a key and the module path as a value", function() {
-        let rules = new Rules();
-        let firstIndex = 0;
+        const rules = new Rules();
+        const firstIndex = 0;
 
         rules._registerRule("key", "c/git/key.js");
         Object.keys(rules.rules)[firstIndex].should.equal("key");
@@ -27,8 +27,8 @@ describe("Rules Unit Tests", function() {
   describe("load method", function() {
     context("when load is called", function() {
       before(function() {
-        let fsStub = sinon.stub(fs, "readdirSync");
-        let pathStub = sinon.stub(path, "join");
+        const fsStub = sinon.stub(fs, "readdirSync");
+        const pathStub = sinon.stub(path, "join");
 
         fsStub.onFirstCall().returns(["version-type.js", "version-required.js"]);
         pathStub.onFirstCall().returns("c/git/rules");
@@ -42,8 +42,8 @@ describe("Rules Unit Tests", function() {
       });
 
       it("an object of rules should be returned", function() {
-        let rules = new Rules();
-        let result = rules.load();
+        const rules = new Rules();
+        const result = rules.load();
 
         rules.rules["version-type"].should.equal("c/git/rules/version-type.js");
         rules.rules["version-required"].should.equal("c/git/rules/version-required.js");
@@ -52,7 +52,7 @@ describe("Rules Unit Tests", function() {
 
     context("when load is called but a fs error occurs", function() {
       before(function() {
-        let fsStub = sinon.stub(fs, "readdirSync").throws();
+        const fsStub = sinon.stub(fs, "readdirSync").throws();
       });
 
       after(function() {
@@ -60,8 +60,8 @@ describe("Rules Unit Tests", function() {
       });
 
       it("false is returned", function() {
-        let rules = new Rules();
-        let result = rules.load();
+        const rules = new Rules();
+        const result = rules.load();
 
         result.should.be.false();
       });

@@ -20,7 +20,7 @@ const RC_FILE_NAME = ".npmpackagejsonlintrc";
  * @param  {String}     err   Error message
  * @return {undefined}        No return
  */
-let handleError = function(err) {
+const handleError = function(err) {
   const exitCode = 1;
 
   console.log(chalk.red.bold(err));
@@ -39,7 +39,7 @@ cliApp.parse(process.argv);
 
 // File to lint
 const filePath = cliApp.file ? cliApp.file : DEFAULT_FILE_NAME;
-let options = {
+const options = {
   ignoreWarnings: false
 };
 
@@ -65,7 +65,7 @@ if (typeof cliApp.rulesFile !== "undefined") {
 // check if rules have been found. If no, then lets try to find a config file in
 // the user's home directory
 if (!rulesLoaded) {
-  let userHomeRcFile = path.join(userHome, RC_FILE_NAME);
+  const userHomeRcFile = path.join(userHome, RC_FILE_NAME);
 
   if (fs.existsSync(userHomeRcFile)) {
     rulesConfig = userHomeRcFile;
@@ -76,22 +76,22 @@ if (!rulesLoaded) {
 let fileData = null;
 
 try {
-  let parser = new Parser();
+  const parser = new Parser();
 
   fileData = parser.parse(filePath);
 
-  let npmPackageJsonLint = new NpmPackageJsonLint(fileData, rulesConfig, options);
-  let output = npmPackageJsonLint.lint();
+  const npmPackageJsonLint = new NpmPackageJsonLint(fileData, rulesConfig, options);
+  const output = npmPackageJsonLint.lint();
 
-  let reporter = new Reporter();
+  const reporter = new Reporter();
 
-  for (let issueType in output) {
-    let issues = output[issueType];
+  for (const issueType in output) {
+    const issues = output[issueType];
 
     reporter.write(output[issueType], issueType);
   }
 
-  let formattedFileName = chalk.bold.green(filePath);
+  const formattedFileName = chalk.bold.green(filePath);
 
   console.log(`${formattedFileName} check complete`);
 } catch (err) {

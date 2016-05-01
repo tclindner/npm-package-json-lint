@@ -7,10 +7,10 @@ const lint = requireHelper("rules/name-required").lint;
 describe("name-required Unit Tests", function() {
   context("when package.json has node", function() {
     it("true should be returned", function() {
-      let packageJsonData = {
+      const packageJsonData = {
         name: "name"
       };
-      let response = lint(packageJsonData);
+      const response = lint(packageJsonData);
 
       response.should.be.true();
     });
@@ -18,8 +18,8 @@ describe("name-required Unit Tests", function() {
 
   context("when package.json does not have node", function() {
     it("LintIssue object should be returned", function() {
-      let packageJsonData = {};
-      let response = lint(packageJsonData);
+      const packageJsonData = {};
+      const response = lint(packageJsonData);
 
       response.lintId.should.equal("name-required");
       response.lintType.should.equal("error");

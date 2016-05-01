@@ -32,17 +32,17 @@ class NpmPackageJsonLint {
    * @return {Object} Results object
    */
   lint() {
-    for (let configItem in this.config) {
-      let configItemValue = this.config[configItem];
-      let ruleModule = this.rules.get(configItem);
+    for (const configItem in this.config) {
+      const configItemValue = this.config[configItem];
+      const ruleModule = this.rules.get(configItem);
 
       if (inArray(this.arrayRuleTypes, ruleModule.ruleType)) {
-        let lintResult = ruleModule.lint(this.packageJsonData, configItemValue);
+        const lintResult = ruleModule.lint(this.packageJsonData, configItemValue);
 
         this._processResult(lintResult, ruleModule.lintType);
       } else if (configItemValue) {
         // else all other rules either have a true or false flag if they are enabled
-        let lintResult = ruleModule.lint(this.packageJsonData);
+        const lintResult = ruleModule.lint(this.packageJsonData);
 
         this._processResult(lintResult, ruleModule.lintType);
       }
@@ -72,7 +72,7 @@ class NpmPackageJsonLint {
    * @return {Object} Results based on the run
    */
   _getResultsObject() {
-    let result = {
+    const result = {
       errors: this.errors
     };
 
@@ -97,7 +97,7 @@ class NpmPackageJsonLint {
    * @return {Object}                 Configuration object for the run
    */
   _getConfig(config) {
-    let configObj = new Config(config);
+    const configObj = new Config(config);
 
     return configObj.get();
   }

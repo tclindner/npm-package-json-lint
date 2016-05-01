@@ -11,7 +11,7 @@ class Config {
    */
   constructor(passedConfigParam) {
     if (this._isConfigPassed(passedConfigParam)) {
-      let passedConfig = this._getPassedConfig(passedConfigParam);
+      const passedConfig = this._getPassedConfig(passedConfigParam);
 
       this.config = Object.assign({}, passedConfig);
     } else {
@@ -46,7 +46,7 @@ class Config {
    */
   _getPassedConfig(passedConfig) {
     if (typeof passedConfig === "string") {
-      let parser = new Parser();
+      const parser = new Parser();
       let configFile = passedConfig;
 
       if (!path.isAbsolute(passedConfig)) {

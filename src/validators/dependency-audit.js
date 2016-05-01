@@ -15,7 +15,7 @@ const hasDependency = function(packageJsonData, nodeName, depsToCheckFor) {
     return false;
   }
 
-  for (let dependencyName in packageJsonData[nodeName]) {
+  for (const dependencyName in packageJsonData[nodeName]) {
     if (inArray(depsToCheckFor, dependencyName)) {
       return true;
     }
@@ -36,9 +36,9 @@ const hasDepPrereleaseVers = function(packageJsonData, nodeName, depsToCheckFor)
     return false;
   }
 
-  for (let dependencyName in packageJsonData[nodeName]) {
+  for (const dependencyName in packageJsonData[nodeName]) {
     if (inArray(depsToCheckFor, dependencyName)) {
-      let dependencyVersion = packageJsonData[nodeName][dependencyName];
+      const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
       if (dependencyVersion.includes("-beta") || dependencyVersion.includes("-rc")) {
         return true;
