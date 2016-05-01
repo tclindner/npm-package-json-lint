@@ -11,7 +11,7 @@
 
 ### Global Node Module(s)
 
-* Grunt CLI - `npm install grunt-cli -g`
+* [Grunt CLI](https://github.com/gruntjs/grunt-cli) - `npm install grunt-cli -g`
 
 ### Code
 
@@ -31,14 +31,14 @@ Run `node src/cli.js`
 
 ### JS
 
-npm package json lint utilizes both ESLint and JSCS to enforce JavaScript standards. Please see the `.eslintrc.json` file for ESLint config and `.jscsrc` for JSCS config.
+npm-package-json-lint utilizes both ESLint and JSCS to enforce JavaScript standards. Please see the `.eslintrc.json` file for ESLint config and `.jscsrc` for JSCS config.
 
 * [grunt-eslint](https://github.com/sindresorhus/grunt-eslint)
 * [grunt-jscs](https://github.com/jscs-dev/grunt-jscs)
 
 #### JSON
 
-npm package json lint utilizes JSON Lint to ensure JSON files are valid.
+npm-package-json-lint utilizes JSON Lint to ensure JSON files are valid.
 
 * [grunt-jsonlint](https://github.com/brandonramirez/grunt-jsonlint)
 

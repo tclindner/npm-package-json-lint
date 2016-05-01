@@ -1,10 +1,10 @@
-# npm package json lint
+# npm-package-json-lint
 
 A package.json linter for Node projects
 
 ## What is package json lint?
 
-npm package json lint helps enforce standards for your package.json file.
+npm-package-json-lint helps enforce standards for your package.json file.
 Currently it can check for:
 
 * validity of data types in nodes. Ex: `name` should always be a string.
@@ -21,8 +21,8 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 #### Node
 
-* node - v4.2.0+
-* npm - v2.14.7+
+* [Node.js](https://nodejs.org/) - v4.2.0+
+* [npm](http://npmjs.com) - v2.14.7+
 
 ### Use the cli
 
@@ -55,7 +55,7 @@ Run using the default config on a file relative to the current working directory
 
 ## Lint Rules
 
-npm package json lint has a configurable set of rules. Each rule contains the following properties:
+npm-package-json-lint has a configurable set of rules. Each rule contains the following properties:
 
   1. ID - example: author-required
   2. Type - error or warning
