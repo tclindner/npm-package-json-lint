@@ -8,7 +8,6 @@ module.exports = function(grunt) {
         "tests/unit/**/*.json",
         "*.json",
         ".jscsrc",
-        ".jshintrc",
         ".npmpackagejsonlintrc"
       ]
     }
