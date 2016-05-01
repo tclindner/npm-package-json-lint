@@ -1,6 +1,3 @@
-/**
- * Mocha test runner
- */
 module.exports = function(grunt) {
 
   grunt.config("mochaTest", {

@@ -1,8 +1,10 @@
 "use strict";
 
-let should = require("should");
-let requireHelper = require("../../require_helper");
-let type = requireHelper("validators/type");
+/* eslint max-nested-callbacks: "off" */
+
+const should = require("should");
+const requireHelper = require("../../require_helper");
+const type = requireHelper("validators/type");
 
 describe("type Unit Tests", function() {
   describe("isArray method", function() {
@@ -12,6 +14,7 @@ describe("type Unit Tests", function() {
           name: ["awesome-module"]
         };
         let response = type.isArray(packageJson, "devDependencies");
+
         response.should.be.true();
       });
     });
@@ -22,6 +25,7 @@ describe("type Unit Tests", function() {
           name: "awesome-module"
         };
         let response = type.isArray(packageJson, "name");
+
         response.should.be.false();
       });
     });
@@ -32,6 +36,7 @@ describe("type Unit Tests", function() {
           name: true
         };
         let response = type.isArray(packageJson, "name");
+
         response.should.be.false();
       });
     });
@@ -42,6 +47,7 @@ describe("type Unit Tests", function() {
           name: {}
         };
         let response = type.isArray(packageJson, "name");
+
         response.should.be.false();
       });
     });
@@ -52,6 +58,7 @@ describe("type Unit Tests", function() {
           name: ["awesome-module"]
         };
         let response = type.isArray(packageJson, "name");
+
         response.should.be.true();
       });
     });
@@ -64,6 +71,7 @@ describe("type Unit Tests", function() {
           name: ["awesome-module"]
         };
         let response = type.isBoolean(packageJson, "devDependencies");
+
         response.should.be.true();
       });
     });
@@ -74,6 +82,7 @@ describe("type Unit Tests", function() {
           name: "awesome-module"
         };
         let response = type.isBoolean(packageJson, "name");
+
         response.should.be.false();
       });
     });
@@ -84,6 +93,7 @@ describe("type Unit Tests", function() {
           name: true
         };
         let response = type.isBoolean(packageJson, "name");
+
         response.should.be.true();
       });
     });
@@ -94,6 +104,7 @@ describe("type Unit Tests", function() {
           name: {}
         };
         let response = type.isBoolean(packageJson, "name");
+
         response.should.be.false();
       });
     });
@@ -104,6 +115,7 @@ describe("type Unit Tests", function() {
           name: ["awesome-module"]
         };
         let response = type.isBoolean(packageJson, "name");
+
         response.should.be.false();
       });
     });
@@ -116,6 +128,7 @@ describe("type Unit Tests", function() {
           name: ["awesome-module"]
         };
         let response = type.isObject(packageJson, "devDependencies");
+
         response.should.be.true();
       });
     });
@@ -126,6 +139,7 @@ describe("type Unit Tests", function() {
           name: "awesome-module"
         };
         let response = type.isObject(packageJson, "name");
+
         response.should.be.false();
       });
     });
@@ -136,6 +150,7 @@ describe("type Unit Tests", function() {
           name: true
         };
         let response = type.isObject(packageJson, "name");
+
         response.should.be.false();
       });
     });
@@ -146,6 +161,7 @@ describe("type Unit Tests", function() {
           name: {}
         };
         let response = type.isObject(packageJson, "name");
+
         response.should.be.true();
       });
     });
@@ -156,6 +172,7 @@ describe("type Unit Tests", function() {
           name: ["awesome-module"]
         };
         let response = type.isObject(packageJson, "name");
+
         response.should.be.false();
       });
     });
@@ -168,6 +185,7 @@ describe("type Unit Tests", function() {
           name: ["awesome-module"]
         };
         let response = type.isString(packageJson, "devDependencies");
+
         response.should.be.true();
       });
     });
@@ -178,6 +196,7 @@ describe("type Unit Tests", function() {
           name: "awesome-module"
         };
         let response = type.isString(packageJson, "name");
+
         response.should.be.true();
       });
     });
@@ -188,6 +207,7 @@ describe("type Unit Tests", function() {
           name: true
         };
         let response = type.isString(packageJson, "name");
+
         response.should.be.false();
       });
     });
@@ -198,6 +218,7 @@ describe("type Unit Tests", function() {
           name: {}
         };
         let response = type.isString(packageJson, "name");
+
         response.should.be.false();
       });
     });
@@ -208,6 +229,7 @@ describe("type Unit Tests", function() {
           name: ["awesome-module"]
         };
         let response = type.isString(packageJson, "name");
+
         response.should.be.false();
       });
     });

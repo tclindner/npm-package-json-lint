@@ -1,20 +1,23 @@
 "use strict";
 
-let chalk = require("chalk");
-let Config = require("./Config");
-let isPlainObj = require("is-plain-obj");
-let Rules = require("./Rules");
+const chalk = require("chalk");
+const Config = require("./Config");
+const inArray = require("in-array");
+const isPlainObj = require("is-plain-obj");
+const Rules = require("./Rules");
 
 class NpmPackageJsonLint {
+
   /**
    * constructor
-   * @param  {object}           packageJsonData   Valid package.json data
-   * @param  {object or string} passedConfigParam Object or string with desired configuration
-   * @param  {object}           options           Object containing run options
+   * @param  {Object}           packageJsonData   Valid package.json data
+   * @param  {Object|String}    config            Object or string with desired configuration
+   * @param  {Object}           options           Object containing run options
    */
   constructor(packageJsonData, config, options) {
     this.packageJsonData = packageJsonData;
     this.ignoreWarnings = options.ignoreWarnings;
+    this.arrayRuleTypes = ["valid-values", "invalid-dependencies", "invalid-pre-release-dependencies"];
     this.errors = [];
     this.warnings = [];
 
@@ -26,22 +29,22 @@ class NpmPackageJsonLint {
 
   /**
    * Main execution method for package json lint.
-   * @return {object} Results object
+   * @return {Object} Results object
    */
   lint() {
     for (let configItem in this.config) {
       let configItemValue = this.config[configItem];
       let ruleModule = this.rules.get(configItem);
-      let arrayRuleTypes = ["valid-values", "invalid-dependencies", "invalid-pre-release-dependencies"];
-      if (arrayRuleTypes.indexOf(ruleModule.ruleType) > -1) {
+
+      if (inArray(this.arrayRuleTypes, ruleModule.ruleType)) {
         let lintResult = ruleModule.lint(this.packageJsonData, configItemValue);
+
         this._processResult(lintResult, ruleModule.lintType);
-      } else {
+      } else if (configItemValue) {
         // else all other rules either have a true or false flag if they are enabled
-        if (configItemValue) {
-          let lintResult = ruleModule.lint(this.packageJsonData);
-          this._processResult(lintResult, ruleModule.lintType);
-        }
+        let lintResult = ruleModule.lint(this.packageJsonData);
+
+        this._processResult(lintResult, ruleModule.lintType);
       }
     }
 
@@ -50,7 +53,9 @@ class NpmPackageJsonLint {
 
   /**
    * Private method for processing the result
-   * @param {object or boolean} lintResult  Either true if no errors or a LintIssue object is invalid
+   * @param   {Object|Boolean} lintResult  Either true if no errors or a LintIssue object is invalid
+   * @param   {String}         lintType    Error or warning for issue type
+   * @return  {undefined}                  No return
    */
   _processResult(lintResult, lintType) {
     if (typeof lintResult !== "boolean") {
@@ -64,7 +69,7 @@ class NpmPackageJsonLint {
 
   /**
    * Private method for getting the results object
-   * @return {object} Results based on the run
+   * @return {Object} Results based on the run
    */
   _getResultsObject() {
     let result = {
@@ -80,6 +85,7 @@ class NpmPackageJsonLint {
 
   /**
    * Private method for loading rules
+   * @return {undefined}            No return
    */
   _loadRules() {
     this.rules.load();
@@ -87,13 +93,15 @@ class NpmPackageJsonLint {
 
   /**
    * Private method for loading config
-   * @param  {object or string} passedConfigParam Object or string with desired configuration
-   * @return {object}           Configuration object for the run
+   * @param  {Object|String} config   Object or string with desired configuration
+   * @return {Object}                 Configuration object for the run
    */
   _getConfig(config) {
     let configObj = new Config(config);
+
     return configObj.get();
   }
+
 }
 
 module.exports = NpmPackageJsonLint;

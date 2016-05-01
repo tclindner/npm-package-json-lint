@@ -1,14 +1,15 @@
 "use strict";
 
-let chalk = require("chalk");
+const chalk = require("chalk");
 
 class LintIssue {
+
   /**
    * constructor
-   * @param  {string} lintId      Unique, lowercase, hyphen-separate name for the lint
-   * @param  {string} lintType    error or warning
-   * @param  {string} node        Name of the node in the JSON the lint audits
-   * @param  {string} lintMessage Human-friendly message to users
+   * @param  {String} lintId      Unique, lowercase, hyphen-separate name for the lint
+   * @param  {String} lintType    error or warning
+   * @param  {String} node        Name of the node in the JSON the lint audits
+   * @param  {String} lintMessage Human-friendly message to users
    */
   constructor(lintId, lintType, node, lintMessage) {
     this.lintId = lintId;
@@ -19,13 +20,16 @@ class LintIssue {
 
   /**
    * Helper to convert the LintIssue to a printable string
-   * @return {string} Human-friendly message about the lint issue
+   * @return {String} Human-friendly message about the lint issue
    */
   toString() {
-    let formattedMessage = (this.lintType === "error") ? chalk.bold.red(this.lintMessage) : chalk.yellow(this.lintMessage);
+    let formattedLintId = chalk.cyan.bold(this.lintId);
+    let formattedNode = chalk.blue.bold(this.node);
+    let formattedMessage = this.lintType === "error" ? chalk.bold.red(this.lintMessage) : chalk.yellow(this.lintMessage);
 
-    return chalk.cyan.bold(this.lintId) + " - node: " + chalk.blue.bold(this.node) + " - " + formattedMessage;
+    return `${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
   }
+
 }
 
 module.exports = LintIssue;

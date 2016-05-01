@@ -1,6 +1,6 @@
 "use strict";
 
-let isPlainObj = require("is-plain-obj");
+const isPlainObj = require("is-plain-obj");
 
 /**
  * Determines whether or not the node's value is an Array
@@ -8,7 +8,7 @@ let isPlainObj = require("is-plain-obj");
  * @param  {string} nodeName        Name of a node in the package.json file
  * @return {boolean}                True if the node is an array or is missing. False if it is not.
  */
-let isArray = function(packageJsonData, nodeName) {
+const isArray = function(packageJsonData, nodeName) {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
   }
@@ -22,7 +22,7 @@ let isArray = function(packageJsonData, nodeName) {
  * @param  {string} nodeName        Name of a node in the package.json file
  * @return {boolean}                True if the node is a boolean or is missing. False if it is not.
  */
-let isBoolean = function(packageJsonData, nodeName) {
+const isBoolean = function(packageJsonData, nodeName) {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
   }
@@ -36,7 +36,7 @@ let isBoolean = function(packageJsonData, nodeName) {
  * @param  {string} nodeName        Name of a node in the package.json file
  * @return {boolean}                True if the node is an object or is missing. False if it is not.
  */
-let isObject = function(packageJsonData, nodeName) {
+const isObject = function(packageJsonData, nodeName) {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
   }
@@ -50,7 +50,7 @@ let isObject = function(packageJsonData, nodeName) {
  * @param  {string} nodeName        Name of a node in the package.json file
  * @return {boolean}                True if the node is a string or is missing. False if it is not.
  */
-let isString = function(packageJsonData, nodeName) {
+const isString = function(packageJsonData, nodeName) {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
   }

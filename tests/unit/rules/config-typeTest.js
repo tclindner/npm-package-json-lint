@@ -1,8 +1,8 @@
 "use strict";
 
-let should = require("should");
-let requireHelper = require("../../require_helper");
-let lint = requireHelper("rules/config-type").lint;
+const should = require("should");
+const requireHelper = require("../../require_helper");
+const lint = requireHelper("rules/config-type").lint;
 
 describe("config-type Unit Tests", function() {
   context("when package.json has node with incorrect type", function() {
@@ -11,6 +11,7 @@ describe("config-type Unit Tests", function() {
         config: "config"
       };
       let response = lint(packageJsonData);
+
       response.lintId.should.equal("config-type");
       response.lintType.should.equal("error");
       response.node.should.equal("config");
@@ -22,6 +23,7 @@ describe("config-type Unit Tests", function() {
     it("true should be returned", function() {
       let packageJsonData = {};
       let response = lint(packageJsonData);
+
       response.should.be.true();
     });
   });

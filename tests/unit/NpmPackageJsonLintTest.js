@@ -1,10 +1,12 @@
 "use strict";
 
-let fs = require("fs");
-let should = require("should");
-let sinon = require("sinon");
-let requireHelper = require("../require_helper");
-let NpmPackageJsonLint = requireHelper("NpmPackageJsonLint");
+/* eslint max-nested-callbacks: "off" */
+
+const fs = require("fs");
+const should = require("should");
+const sinon = require("sinon");
+const requireHelper = require("../require_helper");
+const NpmPackageJsonLint = requireHelper("NpmPackageJsonLint");
 
 describe("NpmPackageJsonLint Unit Tests", function() {
   describe("lint method", function() {
@@ -29,8 +31,11 @@ describe("NpmPackageJsonLint Unit Tests", function() {
         let rulesStub = sinon.stub(npmPackageJsonLint, "_loadRules").returns(rules);
         let configStub = sinon.stub(npmPackageJsonLint, "_getConfig").returns(config);
         let response = npmPackageJsonLint.lint();
-        response.errors.length.should.equal(2);
-        response.warnings.length.should.equal(0);
+        let expectedErrorCount = 2;
+        let expectedWarningCount = 0;
+
+        response.errors.length.should.equal(expectedErrorCount);
+        response.warnings.length.should.equal(expectedWarningCount);
       });
     });
 
@@ -54,8 +59,11 @@ describe("NpmPackageJsonLint Unit Tests", function() {
         let rulesStub = sinon.stub(npmPackageJsonLint, "_loadRules").returns(rules);
         let configStub = sinon.stub(npmPackageJsonLint, "_getConfig").returns(config);
         let response = npmPackageJsonLint.lint();
-        response.errors.length.should.equal(1);
-        response.warnings.length.should.equal(1);
+        let expectedErrorCount = 1;
+        let expectedWarningCount = 1;
+
+        response.errors.length.should.equal(expectedErrorCount);
+        response.warnings.length.should.equal(expectedWarningCount);
       });
     });
 
@@ -79,7 +87,9 @@ describe("NpmPackageJsonLint Unit Tests", function() {
         let rulesStub = sinon.stub(npmPackageJsonLint, "_loadRules").returns(rules);
         let configStub = sinon.stub(npmPackageJsonLint, "_getConfig").returns(config);
         let response = npmPackageJsonLint.lint();
-        response.errors.length.should.equal(1);
+        let expectedErrorCount = 1;
+
+        response.errors.length.should.equal(expectedErrorCount);
         response.hasOwnProperty("warnings").should.be.false();
       });
     });
@@ -105,7 +115,9 @@ describe("NpmPackageJsonLint Unit Tests", function() {
         let rulesStub = sinon.stub(npmPackageJsonLint, "_loadRules").returns(rules);
         let configStub = sinon.stub(npmPackageJsonLint, "_getConfig").returns(config);
         let response = npmPackageJsonLint.lint();
-        response.errors.length.should.equal(1);
+        let expectedErrorCount = 1;
+
+        response.errors.length.should.equal(expectedErrorCount);
         response.hasOwnProperty("warnings").should.be.false();
       });
     });

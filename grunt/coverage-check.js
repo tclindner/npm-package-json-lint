@@ -1,6 +1,4 @@
-/**
-* Checks to ensure the test coverage meets the minimum thresholds below
-*/
+// Checks to ensure the test coverage meets the minimum thresholds below
 module.exports = function(grunt) {
 
   grunt.config("coverage", {

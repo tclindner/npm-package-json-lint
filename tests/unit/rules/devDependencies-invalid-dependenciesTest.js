@@ -1,8 +1,8 @@
 "use strict";
 
-let should = require("should");
-let requireHelper = require("../../require_helper");
-let lint = requireHelper("rules/devDependencies-invalid-dependencies").lint;
+const should = require("should");
+const requireHelper = require("../../require_helper");
+const lint = requireHelper("rules/devDependencies-invalid-dependencies").lint;
 
 describe("devDependencies-invalid-dependencies Unit Tests", function() {
   context("when package.json has node with an invalid value", function() {
@@ -17,6 +17,7 @@ describe("devDependencies-invalid-dependencies Unit Tests", function() {
         "grunt-npm-package-json-lint"
       ];
       let response = lint(packageJsonData, invalidDependencies);
+
       response.lintId.should.equal("devDependencies-invalid-dependencies");
       response.lintType.should.equal("error");
       response.node.should.equal("devDependencies");
@@ -36,6 +37,7 @@ describe("devDependencies-invalid-dependencies Unit Tests", function() {
         "grunt-npm-package-json-lint"
       ];
       let response = lint(packageJsonData, invalidDependencies);
+
       response.should.be.true();
     });
   });
@@ -48,6 +50,7 @@ describe("devDependencies-invalid-dependencies Unit Tests", function() {
         "grunt-npm-package-json-lint"
       ];
       let response = lint(packageJsonData, invalidDependencies);
+
       response.should.be.true();
     });
   });

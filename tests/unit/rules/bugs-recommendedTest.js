@@ -1,8 +1,8 @@
 "use strict";
 
-let should = require("should");
-let requireHelper = require("../../require_helper");
-let lint = requireHelper("rules/bugs-recommended").lint;
+const should = require("should");
+const requireHelper = require("../../require_helper");
+const lint = requireHelper("rules/bugs-recommended").lint;
 
 describe("bugs-required Unit Tests", function() {
   context("when package.json has node", function() {
@@ -11,6 +11,7 @@ describe("bugs-required Unit Tests", function() {
         bugs: "bugs"
       };
       let response = lint(packageJsonData);
+
       response.should.be.true();
     });
   });
@@ -19,6 +20,7 @@ describe("bugs-required Unit Tests", function() {
     it("LintIssue object should be returned", function() {
       let packageJsonData = {};
       let response = lint(packageJsonData);
+
       response.lintId.should.equal("bugs-recommended");
       response.lintType.should.equal("warning");
       response.node.should.equal("bugs");

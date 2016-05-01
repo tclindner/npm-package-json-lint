@@ -1,8 +1,10 @@
 "use strict";
 
-let should = require("should");
-let requireHelper = require("../../require_helper");
-let validValuesObj = requireHelper("validators/valid-values");
+/* eslint max-nested-callbacks: "off" */
+
+const should = require("should");
+const requireHelper = require("../../require_helper");
+const validValuesObj = requireHelper("validators/valid-values");
 
 describe("value-values Unit Tests", function() {
   describe("isValidValue method", function() {
@@ -22,6 +24,7 @@ describe("value-values Unit Tests", function() {
           "River Tam"
         ];
         let response = validValuesObj.isValidValue(packageJson, "authors", validValues);
+
         response.should.be.true();
       });
     });
@@ -39,6 +42,7 @@ describe("value-values Unit Tests", function() {
           "River Tam"
         ];
         let response = validValuesObj.isValidValue(packageJson, "author", validValues);
+
         response.should.be.true();
       });
     });
@@ -55,6 +59,7 @@ describe("value-values Unit Tests", function() {
           "River Tam"
         ];
         let response = validValuesObj.isValidValue(packageJson, "author", validValues);
+
         response.should.be.false();
       });
     });

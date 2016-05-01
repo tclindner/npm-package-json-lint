@@ -1,8 +1,8 @@
 "use strict";
 
-let should = require("should");
-let requireHelper = require("../../require_helper");
-let lint = requireHelper("rules/license-type").lint;
+const should = require("should");
+const requireHelper = require("../../require_helper");
+const lint = requireHelper("rules/license-type").lint;
 
 describe("license-type Unit Tests", function() {
   context("when package.json has node with incorrect type", function() {
@@ -11,6 +11,7 @@ describe("license-type Unit Tests", function() {
         license: true
       };
       let response = lint(packageJsonData);
+
       response.lintId.should.equal("license-type");
       response.lintType.should.equal("error");
       response.node.should.equal("license");
@@ -22,6 +23,7 @@ describe("license-type Unit Tests", function() {
     it("true should be returned", function() {
       let packageJsonData = {};
       let response = lint(packageJsonData);
+
       response.should.be.true();
     });
   });

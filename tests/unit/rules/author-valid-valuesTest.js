@@ -1,8 +1,8 @@
 "use strict";
 
-let should = require("should");
-let requireHelper = require("../../require_helper");
-let lint = requireHelper("rules/author-valid-values").lint;
+const should = require("should");
+const requireHelper = require("../../require_helper");
+const lint = requireHelper("rules/author-valid-values").lint;
 
 describe("author-valid-values Unit Tests", function() {
   context("when package.json has node with invalid value", function() {
@@ -15,6 +15,7 @@ describe("author-valid-values Unit Tests", function() {
         "FirstName MiddleName LastName"
       ];
       let response = lint(packageJsonData, validValues);
+
       response.lintId.should.equal("author-valid-values");
       response.lintType.should.equal("error");
       response.node.should.equal("author");
@@ -33,6 +34,7 @@ describe("author-valid-values Unit Tests", function() {
         "LastName, FirstName"
       ];
       let response = lint(packageJsonData, validValues);
+
       response.should.be.true();
     });
   });
@@ -46,6 +48,7 @@ describe("author-valid-values Unit Tests", function() {
         "LastName, FirstName"
       ];
       let response = lint(packageJsonData, validValues);
+
       response.should.be.true();
     });
   });

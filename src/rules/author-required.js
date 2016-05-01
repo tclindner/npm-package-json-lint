@@ -1,13 +1,13 @@
 "use strict";
 
-let LintIssue = require("./../LintIssue");
+const LintIssue = require("./../LintIssue");
 const lintId = "author-required";
 const lintType = "error";
 const nodeName = "author";
 const message = "author is required";
 const ruleType = "required";
 
-let lint = function(packageJsonData) {
+const lint = function(packageJsonData) {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return new LintIssue(lintId, lintType, nodeName, message);
   }

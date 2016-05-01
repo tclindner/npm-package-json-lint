@@ -1,8 +1,8 @@
 "use strict";
 
-let should = require("should");
-let requireHelper = require("../../require_helper");
-let lint = requireHelper("rules/directories-type").lint;
+const should = require("should");
+const requireHelper = require("../../require_helper");
+const lint = requireHelper("rules/directories-type").lint;
 
 describe("directories-type Unit Tests", function() {
   context("when package.json has node with incorrect type", function() {
@@ -11,6 +11,7 @@ describe("directories-type Unit Tests", function() {
         directories: "directories"
       };
       let response = lint(packageJsonData);
+
       response.lintId.should.equal("directories-type");
       response.lintType.should.equal("error");
       response.node.should.equal("directories");
@@ -22,6 +23,7 @@ describe("directories-type Unit Tests", function() {
     it("true should be returned", function() {
       let packageJsonData = {};
       let response = lint(packageJsonData);
+
       response.should.be.true();
     });
   });

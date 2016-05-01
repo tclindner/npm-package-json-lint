@@ -1,8 +1,8 @@
 "use strict";
 
-let should = require("should");
-let requireHelper = require("../../require_helper");
-let lint = requireHelper("rules/homepage-type").lint;
+const should = require("should");
+const requireHelper = require("../../require_helper");
+const lint = requireHelper("rules/homepage-type").lint;
 
 describe("homepage-type Unit Tests", function() {
   context("when package.json has node with incorrect type", function() {
@@ -11,6 +11,7 @@ describe("homepage-type Unit Tests", function() {
         homepage: true
       };
       let response = lint(packageJsonData);
+
       response.lintId.should.equal("homepage-type");
       response.lintType.should.equal("error");
       response.node.should.equal("homepage");
@@ -22,6 +23,7 @@ describe("homepage-type Unit Tests", function() {
     it("true should be returned", function() {
       let packageJsonData = {};
       let response = lint(packageJsonData);
+
       response.should.be.true();
     });
   });

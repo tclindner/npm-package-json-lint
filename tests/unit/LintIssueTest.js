@@ -1,9 +1,11 @@
 "use strict";
 
-let chalk = require("chalk");
-let should = require("should");
-let requireHelper = require("../require_helper");
-let LintIssue = requireHelper("LintIssue");
+/* eslint max-nested-callbacks: "off" */
+
+const chalk = require("chalk");
+const should = require("should");
+const requireHelper = require("../require_helper");
+const LintIssue = requireHelper("LintIssue");
 
 describe("LintIssue Unit Tests", function() {
   describe("constructor", function() {
@@ -31,14 +33,22 @@ describe("LintIssue Unit Tests", function() {
   describe("toString method", function() {
     context("when the lintType is an error", function() {
       it("the formattedMessage should equal", function() {
-        let output = chalk.cyan.bold("lintId") + " - node: " + chalk.blue.bold("node") + " - " + chalk.bold.red("lintMessage");
+        let formattedLintId = chalk.cyan.bold("lintId");
+        let formattedNode = chalk.blue.bold("node");
+        let formattedMessage = chalk.bold.red("lintMessage");
+        let output = `${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
         let lintIssue = new LintIssue("lintId", "error", "node", "lintMessage");
+
         lintIssue.toString().should.equal(output);
       });
 
       it("when an array with one error is passed a formatted message should be returned saying there is one error", function() {
-        let output = chalk.cyan.bold("lintId") + " - node: " + chalk.blue.bold("node") + " - " + chalk.yellow("lintMessage");
+        let formattedLintId = chalk.cyan.bold("lintId");
+        let formattedNode = chalk.blue.bold("node");
+        let formattedMessage = chalk.yellow("lintMessage");
+        let output = `${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
         let lintIssue = new LintIssue("lintId", "warning", "node", "lintMessage");
+
         lintIssue.toString().should.equal(output);
       });
     });

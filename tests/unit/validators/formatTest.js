@@ -1,8 +1,10 @@
 "use strict";
 
-let should = require("should");
-let requireHelper = require("../../require_helper");
-let format = requireHelper("validators/format");
+/* eslint max-nested-callbacks: "off" */
+
+const should = require("should");
+const requireHelper = require("../../require_helper");
+const format = requireHelper("validators/format");
 
 describe("format Unit Tests", function() {
   describe("isLowercase method", function() {
@@ -12,6 +14,7 @@ describe("format Unit Tests", function() {
           name: "awesome-module"
         };
         let response = format.isLowercase(packageJson, "devDependencies");
+
         response.should.be.true();
       });
     });
@@ -22,6 +25,7 @@ describe("format Unit Tests", function() {
           name: "awesome-module"
         };
         let response = format.isLowercase(packageJson, "name");
+
         response.should.be.true();
       });
     });
@@ -32,6 +36,7 @@ describe("format Unit Tests", function() {
           name: "aweSome-moDule"
         };
         let response = format.isLowercase(packageJson, "name");
+
         response.should.be.false();
       });
     });
@@ -44,6 +49,7 @@ describe("format Unit Tests", function() {
           version: "1.0.0"
         };
         let response = format.isValidVersionNumber(packageJson, "devDependencies");
+
         response.should.be.true();
       });
     });
@@ -54,6 +60,7 @@ describe("format Unit Tests", function() {
           version: "1.0.0"
         };
         let response = format.isValidVersionNumber(packageJson, "version");
+
         response.should.be.true();
       });
     });
@@ -64,6 +71,7 @@ describe("format Unit Tests", function() {
           version: "1a.0"
         };
         let response = format.isValidVersionNumber(packageJson, "version");
+
         response.should.be.false();
       });
     });
@@ -74,6 +82,7 @@ describe("format Unit Tests", function() {
           version: "1.a.0"
         };
         let response = format.isValidVersionNumber(packageJson, "version");
+
         response.should.be.false();
       });
     });

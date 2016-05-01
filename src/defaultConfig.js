@@ -1,6 +1,6 @@
 "use strict";
 
-let defaultConfig = {
+const defaultConfig = {
   "author-required": true,
   "bin-type": true,
   "bugs-recommended": true,

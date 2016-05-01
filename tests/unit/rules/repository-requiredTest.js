@@ -1,8 +1,8 @@
 "use strict";
 
-let should = require("should");
-let requireHelper = require("../../require_helper");
-let lint = requireHelper("rules/repository-required").lint;
+const should = require("should");
+const requireHelper = require("../../require_helper");
+const lint = requireHelper("rules/repository-required").lint;
 
 describe("repository-required Unit Tests", function() {
   context("when package.json has node", function() {
@@ -11,6 +11,7 @@ describe("repository-required Unit Tests", function() {
         repository: "repository"
       };
       let response = lint(packageJsonData);
+
       response.should.be.true();
     });
   });
@@ -19,6 +20,7 @@ describe("repository-required Unit Tests", function() {
     it("LintIssue object should be returned", function() {
       let packageJsonData = {};
       let response = lint(packageJsonData);
+
       response.lintId.should.equal("repository-required");
       response.lintType.should.equal("error");
       response.node.should.equal("repository");

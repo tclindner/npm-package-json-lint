@@ -1,8 +1,8 @@
 "use strict";
 
-let should = require("should");
-let requireHelper = require("../../require_helper");
-let lint = requireHelper("rules/private-valid-values").lint;
+const should = require("should");
+const requireHelper = require("../../require_helper");
+const lint = requireHelper("rules/private-valid-values").lint;
 
 describe("private-valid-values Unit Tests", function() {
   context("when package.json has node with incorrect format", function() {
@@ -14,6 +14,7 @@ describe("private-valid-values Unit Tests", function() {
         false
       ];
       let response = lint(packageJsonData, validValues);
+
       response.lintId.should.equal("private-valid-values");
       response.lintType.should.equal("error");
       response.node.should.equal("private");
@@ -30,6 +31,7 @@ describe("private-valid-values Unit Tests", function() {
         false
       ];
       let response = lint(packageJsonData, validValues);
+
       response.should.be.true();
     });
   });
@@ -38,6 +40,7 @@ describe("private-valid-values Unit Tests", function() {
     it("true should be returned", function() {
       let packageJsonData = {};
       let response = lint(packageJsonData);
+
       response.should.be.true();
     });
   });

@@ -1,16 +1,18 @@
 "use strict";
 
-let Parser = require("./Parser");
-let path = require("path");
+const Parser = require("./Parser");
+const path = require("path");
 
 class Config {
+
   /**
    * Constructor
-   * @param  {object or string} passedConfigParam Object or string with desired configuration
+   * @param  {Object|String} passedConfigParam Object or string with desired configuration
    */
   constructor(passedConfigParam) {
     if (this._isConfigPassed(passedConfigParam)) {
       let passedConfig = this._getPassedConfig(passedConfigParam);
+
       this.config = Object.assign({}, passedConfig);
     } else {
       this.defaultConfig = require("./defaultConfig");
@@ -20,7 +22,7 @@ class Config {
 
   /**
    * Gets the config
-   * @return {object} Config object
+   * @return {Object} Config object
    */
   get() {
     return this.config;
@@ -28,17 +30,19 @@ class Config {
 
   /**
    * Checks whether config has been passed or not
-   * @param  {object or string}  passedConfig Object or string with desired configuration
+   * @param  {Object|String}  passedConfig    Object or string with desired configuration
    * @return {Boolean}                        True if config is present, false if it isn't
    */
   _isConfigPassed(passedConfig) {
-    return typeof passedConfig !== "undefined" && Object.keys(passedConfig).length !== 0;
+    const noKeysLength = 0;
+
+    return typeof passedConfig !== "undefined" && Object.keys(passedConfig).length !== noKeysLength;
   }
 
   /**
    * Loads the config
-   * @param  {object or string} passedConfig  File path if string. Config object also accepted.
-   * @return {object}                         Config JSON
+   * @param  {Object|String} passedConfig  File path if string. Config object also accepted.
+   * @return {Object}                         Config JSON
    */
   _getPassedConfig(passedConfig) {
     if (typeof passedConfig === "string") {
@@ -54,6 +58,7 @@ class Config {
 
     return passedConfig;
   }
+
 }
 
 module.exports = Config;

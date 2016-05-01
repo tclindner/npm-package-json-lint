@@ -1,14 +1,14 @@
 "use strict";
 
-let isString = require("./../validators/type").isString;
-let LintIssue = require("./../LintIssue");
+const isString = require("./../validators/type").isString;
+const LintIssue = require("./../LintIssue");
 const lintId = "version-type";
 const lintType = "error";
 const nodeName = "version";
 const message = "Type should be a string";
 const ruleType = "type";
 
-let lint = function(packageJsonData) {
+const lint = function(packageJsonData) {
   if (!isString(packageJsonData, nodeName)) {
     return new LintIssue(lintId, lintType, nodeName, message);
   }
