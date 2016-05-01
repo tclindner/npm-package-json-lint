@@ -71,7 +71,7 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Release History
 
-* 2016-04-20 - v0.1.0: First release
+Please see [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
