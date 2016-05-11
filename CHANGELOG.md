@@ -11,13 +11,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [0.3.0] - 2016-05-10
+### Changed
+- Bumped deps
+- Add node 6 tests on TravisCI
+
 ## [0.2.0] - 2016-05-01
 ### Added
 - ESLint to build process
 
 ### Fixed
 - README cli alias flags
-- Remove invalid README column from 
+- Remove invalid README column from
 
 ### Removed
 - JSHint from build process
