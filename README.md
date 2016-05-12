@@ -55,7 +55,7 @@ Run using the default config on a file relative to the current working directory
 
 ## Lint Rules
 
-npm-package-json-lint has a configurable set of rules. Each rule contains the following properties:
+npm-package-json-lint has a configurable set of rules. Please see the [wiki](https://github.com/tclindner/npm-package-json-lint/wiki) for a list of available rules configuration instructions. Each rule contains the following properties:
 
   1. ID - example: author-required
   2. Type - error or warning
@@ -63,7 +63,7 @@ npm-package-json-lint has a configurable set of rules. Each rule contains the fo
   4. Message - example: author is required
   5. Rule Type - example: required
 
-As mentioned in the "Commands and configuration" section there are two ways to specify rule sets. The first is using `--rule` to specify a given rule. This will run package json lint with just this rule. The second is using `--rules-file` to specify a JSON file, named `.npmpackagejsonlintrc`, to run a set of rules. If neither of the options above are specified then package json lint looks for a global `.npmpackagejsonlintrc` file in the root of your user directory. Finally, if a global `.npmpackagejsonlintrc` file doesn't exist then all rules are enabled by [default](src/defaultConfig.js).
+As mentioned in the "Commands and configuration" section there are two ways to specify rule sets. The first is using `--rule` to specify a given rule. This will run package json lint with just this rule. The second is using `--rules-file` to specify a JSON file, named [`.npmpackagejsonlintrc`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint), to run a set of rules. If neither of the options above are specified then package json lint looks for a global [`.npmpackagejsonlintrc`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint) file in the root of your user directory. Finally, if a global [`.npmpackagejsonlintrc`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint) file doesn't exist then all rules are enabled by [default](src/defaultConfig.js).
 
 ## Contributing
 
