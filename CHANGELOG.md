@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - New rule: prefer-tilde-version-dependencies
 - New rule: prefer-caret-version-devDependencies
 - New rule: prefer-tilde-version-devDependencies
+- New rule: prefer-no-version-zero-dependencies
+- New rule: prefer-no-version-zero-devDependencies
 
 ### Changed
 

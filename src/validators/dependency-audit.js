@@ -50,6 +50,36 @@ const hasDepPrereleaseVers = function(packageJsonData, nodeName, depsToCheckFor)
 };
 
 /**
+ * Determines whether or not the package has a dependency with a major version of 0
+ * @param  {object} packageJsonData         Valid JSON
+ * @param  {string} nodeName                Name of a node in the package.json file
+ * @return {boolean}                        True if the package has a dependency with version 0. False if it does not or the node is missing.
+ */
+const hasDepVersZero = function(packageJsonData, nodeName) {
+  if (!packageJsonData.hasOwnProperty(nodeName)) {
+    return false;
+  }
+
+  for (const dependencyName in packageJsonData[nodeName]) {
+    const dependencyVersRange = packageJsonData[nodeName][dependencyName];
+
+    if (semver.validRange(dependencyVersRange)) {
+      const startIndex = 0;
+      const length = 1;
+      const dependencyVersion = dependencyVersRange.replace(/[\D]+/g, "");
+      const dependencyMjrVersion = dependencyVersion.substr(startIndex, length);
+
+      // if first char is 0 then major version is 0
+      if (dependencyMjrVersion === "0") {
+        return true;
+      }
+    }
+  }
+
+  return false;
+};
+
+/**
  * Determines whether or not all dependency version ranges match expected range
  * @param  {object} packageJsonData         Valid JSON
  * @param  {string} nodeName                Name of a node in the package.json file
@@ -77,4 +107,5 @@ const areVersRangesValid = function(packageJsonData, nodeName, rangeSpecifier) {
 
 module.exports.hasDependency = hasDependency;
 module.exports.hasDepPrereleaseVers = hasDepPrereleaseVers;
+module.exports.hasDepVersZero = hasDepVersZero;
 module.exports.areVersRangesValid = areVersRangesValid;
