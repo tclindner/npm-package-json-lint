@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-const Parser = require("./Parser");
-const path = require("path");
+const Parser = require('./Parser');
+const path = require('path');
 
 class Config {
 
@@ -15,7 +15,7 @@ class Config {
 
       this.config = Object.assign({}, passedConfig);
     } else {
-      this.defaultConfig = require("./defaultConfig");
+      this.defaultConfig = require('./defaultConfig');
       this.config = Object.assign({}, this.defaultConfig);
     }
   }
@@ -36,7 +36,7 @@ class Config {
   _isConfigPassed(passedConfig) {
     const noKeysLength = 0;
 
-    return typeof passedConfig !== "undefined" && Object.keys(passedConfig).length !== noKeysLength;
+    return typeof passedConfig !== 'undefined' && Object.keys(passedConfig).length !== noKeysLength;
   }
 
   /**
@@ -45,7 +45,7 @@ class Config {
    * @return {Object}                         Config JSON
    */
   _getPassedConfig(passedConfig) {
-    if (typeof passedConfig === "string") {
+    if (typeof passedConfig === 'string') {
       const parser = new Parser();
       let configFile = passedConfig;
 

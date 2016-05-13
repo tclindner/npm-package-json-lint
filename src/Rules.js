@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
 class Rules {
 
@@ -17,7 +17,7 @@ class Rules {
    * @return {Object} Set of rules
    */
   load() {
-    const rulesDirectory = path.join(__dirname, "rules");
+    const rulesDirectory = path.join(__dirname, 'rules');
 
     try {
       fs.readdirSync(rulesDirectory).forEach((file) => {

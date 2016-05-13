@@ -4,6 +4,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+
+### Changed
+
+### Fixed
+
+### Removed
+
+## [0.4.0] - 2016-05-13
+### Added
 - New rule: prefer-caret-version-dependencies
 - New rule: prefer-tilde-version-dependencies
 - New rule: prefer-caret-version-devDependencies
@@ -12,10 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - New rule: prefer-no-version-zero-devDependencies
 
 ### Changed
-
-### Fixed
-
-### Removed
+- Update to single quotes (ESLint rule: quotes)
 
 ## [0.3.0] - 2016-05-10
 ### Changed

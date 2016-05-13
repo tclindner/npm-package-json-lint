@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-const isArray = require("./../validators/type").isArray;
-const LintIssue = require("./../LintIssue");
-const lintId = "files-type";
-const lintType = "error";
-const nodeName = "files";
-const message = "Type should be an Array";
-const ruleType = "type";
+const isArray = require('./../validators/type').isArray;
+const LintIssue = require('./../LintIssue');
+const lintId = 'files-type';
+const lintType = 'error';
+const nodeName = 'files';
+const message = 'Type should be an Array';
+const ruleType = 'type';
 
 const lint = function(packageJsonData) {
   if (!isArray(packageJsonData, nodeName)) {

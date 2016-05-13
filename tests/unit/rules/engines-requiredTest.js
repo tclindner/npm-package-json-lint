@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 
-const should = require("should");
-const requireHelper = require("../../require_helper");
-const lint = requireHelper("rules/engines-required").lint;
+const should = require('should');
+const requireHelper = require('../../require_helper');
+const lint = requireHelper('rules/engines-required').lint;
 
-describe("engines-required Unit Tests", function() {
-  context("when package.json has node", function() {
-    it("true should be returned", function() {
+describe('engines-required Unit Tests', function() {
+  context('when package.json has node', function() {
+    it('true should be returned', function() {
       const packageJsonData = {
-        engines: "engines"
+        engines: 'engines'
       };
       const response = lint(packageJsonData);
 
@@ -16,15 +16,15 @@ describe("engines-required Unit Tests", function() {
     });
   });
 
-  context("when package.json does not have node", function() {
-    it("LintIssue object should be returned", function() {
+  context('when package.json does not have node', function() {
+    it('LintIssue object should be returned', function() {
       const packageJsonData = {};
       const response = lint(packageJsonData);
 
-      response.lintId.should.equal("engines-required");
-      response.lintType.should.equal("error");
-      response.node.should.equal("engines");
-      response.lintMessage.should.equal("engines is required");
+      response.lintId.should.equal('engines-required');
+      response.lintType.should.equal('error');
+      response.node.should.equal('engines');
+      response.lintMessage.should.equal('engines is required');
     });
   });
 });

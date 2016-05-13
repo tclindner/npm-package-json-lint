@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-const chalk = require("chalk");
-const Config = require("./Config");
-const inArray = require("in-array");
-const isPlainObj = require("is-plain-obj");
-const Rules = require("./Rules");
+const chalk = require('chalk');
+const Config = require('./Config');
+const inArray = require('in-array');
+const isPlainObj = require('is-plain-obj');
+const Rules = require('./Rules');
 
 class NpmPackageJsonLint {
 
@@ -17,7 +17,7 @@ class NpmPackageJsonLint {
   constructor(packageJsonData, config, options) {
     this.packageJsonData = packageJsonData;
     this.ignoreWarnings = options.ignoreWarnings;
-    this.arrayRuleTypes = ["valid-values", "invalid-dependencies", "invalid-pre-release-dependencies"];
+    this.arrayRuleTypes = ['valid-values', 'invalid-dependencies', 'invalid-pre-release-dependencies'];
     this.errors = [];
     this.warnings = [];
 
@@ -58,8 +58,8 @@ class NpmPackageJsonLint {
    * @return  {undefined}                  No return
    */
   _processResult(lintResult, lintType) {
-    if (typeof lintResult !== "boolean") {
-      if (lintType === "error") {
+    if (typeof lintResult !== 'boolean') {
+      if (lintType === 'error') {
         this.errors.push(lintResult);
       } else {
         this.warnings.push(lintResult);

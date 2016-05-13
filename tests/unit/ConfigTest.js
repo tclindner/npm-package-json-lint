@@ -1,22 +1,22 @@
-"use strict";
+'use strict';
 
-const fs = require("fs");
-const path = require("path");
-const should = require("should");
-const sinon = require("sinon");
-const requireHelper = require("../require_helper");
-const Config = requireHelper("Config");
-const defaultConfig = requireHelper("defaultConfig");
+const fs = require('fs');
+const path = require('path');
+const should = require('should');
+const sinon = require('sinon');
+const requireHelper = require('../require_helper');
+const Config = requireHelper('Config');
+const defaultConfig = requireHelper('defaultConfig');
 
-describe("Config Unit Tests", function() {
+describe('Config Unit Tests', function() {
   let spy;
 
   beforeEach(function() {
-    const stub = sinon.stub(fs, "readFileSync");
+    const stub = sinon.stub(fs, 'readFileSync');
 
-    stub.returns("{\"version-type\": true}");
+    stub.returns('{"version-type": true}');
 
-    spy = sinon.spy(path, "join");
+    spy = sinon.spy(path, 'join');
   });
 
   afterEach(function() {
@@ -24,21 +24,23 @@ describe("Config Unit Tests", function() {
     path.join.restore();
   });
 
-  context("when a rules object is passed", function() {
-    it("the config object should return that object", function() {
-      const passedConfig = {"version-type": true};
+  context('when a rules object is passed', function() {
+    it('the config object should return that object', function() {
+      const passedConfig = {
+        'version-type': true
+      };
       const config = new Config(passedConfig);
 
       config.get().should.eql(passedConfig);
     });
   });
 
-  context("when a relative path string to a .npmpackagejsonlintrc file is passed", function() {
-    it("the config object should return the parsed JSON as an object", function() {
-      const passedConfig = "./.npmpackagejsonlintrc";
+  context('when a relative path string to a .npmpackagejsonlintrc file is passed', function() {
+    it('the config object should return the parsed JSON as an object', function() {
+      const passedConfig = './.npmpackagejsonlintrc';
       const config = new Config(passedConfig);
       const obj = {
-        "version-type": true
+        'version-type': true
       };
 
       spy.calledOnce.should.be.true();
@@ -47,12 +49,12 @@ describe("Config Unit Tests", function() {
     });
   });
 
-  context("when an absolute path string to a .npmpackagejsonlintrc file is passed", function() {
-    it("the config object should return the parsed JSON as an object", function() {
-      const passedConfig = "/Users/awesomeUser/.npmpackagejsonlintrc";
+  context('when an absolute path string to a .npmpackagejsonlintrc file is passed', function() {
+    it('the config object should return the parsed JSON as an object', function() {
+      const passedConfig = '/Users/awesomeUser/.npmpackagejsonlintrc';
       const config = new Config(passedConfig);
       const obj = {
-        "version-type": true
+        'version-type': true
       };
 
       spy.called.should.be.false();
@@ -60,8 +62,8 @@ describe("Config Unit Tests", function() {
     });
   });
 
-  context("when an empty object is passed", function() {
-    it("the default config object should be returned", function() {
+  context('when an empty object is passed', function() {
+    it('the default config object should be returned', function() {
       const passedConfig = {};
       const config = new Config(passedConfig);
 

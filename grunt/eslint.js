@@ -1,16 +1,16 @@
 module.exports = function(grunt) {
-  grunt.config("eslint", {
+  grunt.config('eslint', {
     options: {
-      configFile: ".eslintrc.json",
-      format: "node_modules/eslint-formatter-pretty"
+      configFile: '.eslintrc.json',
+      format: 'node_modules/eslint-formatter-pretty'
     },
     javascript: [
-      "src/**/*.js",
-      "grunt/*.js",
-      "tests/unit/**/*.js",
-      "*.js"
+      'src/**/*.js',
+      'grunt/*.js',
+      'tests/unit/**/*.js',
+      '*.js'
     ]
   });
 
-  grunt.loadNpmTasks("grunt-eslint");
+  grunt.loadNpmTasks('grunt-eslint');
 };

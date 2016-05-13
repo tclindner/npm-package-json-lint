@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const isPlainObj = require("is-plain-obj");
+const isPlainObj = require('is-plain-obj');
 
 /**
  * Determines whether or not the node's value is an Array
@@ -27,7 +27,7 @@ const isBoolean = function(packageJsonData, nodeName) {
     return true;
   }
 
-  return typeof packageJsonData[nodeName] === "boolean";
+  return typeof packageJsonData[nodeName] === 'boolean';
 };
 
 /**
@@ -55,7 +55,7 @@ const isString = function(packageJsonData, nodeName) {
     return true;
   }
 
-  return typeof packageJsonData[nodeName] === "string";
+  return typeof packageJsonData[nodeName] === 'string';
 };
 
 module.exports.isArray = isArray;

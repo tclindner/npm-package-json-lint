@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-const chalk = require("chalk");
-const LintIssue = require("./LintIssue");
+const chalk = require('chalk');
+const LintIssue = require('./LintIssue');
 
 class Reporter {
 
