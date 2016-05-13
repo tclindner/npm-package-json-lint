@@ -80,4 +80,51 @@ describe("dependency-audit Unit Tests", function() {
       });
     });
   });
+
+  describe("areVersRangesValid method", function() {
+    context("when the node doesn't exist in the package.json file", function() {
+      it("true should be returned", function() {
+        const packageJson = {
+          dependencies: {
+            "npm-package-json-lint": "^1.0.0",
+            "grunt-npm-package-json-lint": "~2.0.0-beta1",
+            "gulp-npm-package-json-lint": "^2.0.0-rc1"
+          }
+        };
+        const response = dependencyAudit.areVersRangesValid(packageJson, "devDependencies", "~");
+
+        response.should.be.true();
+      });
+    });
+
+    context("when the node exists in the package.json file, not all versions are ~", function() {
+      it("false should be returned", function() {
+        const packageJson = {
+          dependencies: {
+            "npm-package-json-lint": "^1.0.0",
+            "grunt-npm-package-json-lint": "~2.0.0-beta1",
+            "gulp-npm-package-json-lint": "^2.0.0-rc1"
+          }
+        };
+        const response = dependencyAudit.areVersRangesValid(packageJson, "dependencies", "~");
+
+        response.should.be.false();
+      });
+    });
+
+    context("when the node exists in the package.json file, all versions are ~", function() {
+      it("true should be returned", function() {
+        const packageJson = {
+          dependencies: {
+            "npm-package-json-lint": "~1.0.0",
+            "grunt-npm-package-json-lint": "~2.0.0-beta1",
+            "gulp-npm-package-json-lint": "~2.0.0-rc1"
+          }
+        };
+        const response = dependencyAudit.areVersRangesValid(packageJson, "dependencies", "~");
+
+        response.should.be.true();
+      });
+    });
+  });
 });

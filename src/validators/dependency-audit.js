@@ -49,5 +49,32 @@ const hasDepPrereleaseVers = function(packageJsonData, nodeName, depsToCheckFor)
   return false;
 };
 
+/**
+ * Determines whether or not all dependency version ranges match expected range
+ * @param  {object} packageJsonData         Valid JSON
+ * @param  {string} nodeName                Name of a node in the package.json file
+ * @param  {string} rangeSpecifier          A version range specifier
+ * @return {boolean}                        False if the package has an invalid range. True if it is not or the node is missing.
+ */
+const areVersRangesValid = function(packageJsonData, nodeName, rangeSpecifier) {
+  if (!packageJsonData.hasOwnProperty(nodeName)) {
+    return true;
+  }
+
+  const firstCharOfStr = 0;
+  let rangesValid = true;
+
+  for (const dependencyName in packageJsonData[nodeName]) {
+    const dependencyVersion = packageJsonData[nodeName][dependencyName];
+
+    if (!dependencyVersion.startsWith(rangeSpecifier, firstCharOfStr)) {
+      rangesValid = false;
+    }
+  }
+
+  return rangesValid;
+};
+
 module.exports.hasDependency = hasDependency;
 module.exports.hasDepPrereleaseVers = hasDepPrereleaseVers;
+module.exports.areVersRangesValid = areVersRangesValid;
