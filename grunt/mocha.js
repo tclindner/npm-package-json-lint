@@ -1,13 +1,13 @@
 module.exports = function(grunt) {
 
-  grunt.config("mochaTest", {
+  grunt.config('mochaTest', {
     local: {
       options: {
-        reporter: "spec"
+        reporter: 'spec'
       },
-      src: ["tests/unit/**/*.js"]
+      src: ['tests/unit/**/*.js']
     }
   });
 
-  grunt.loadNpmTasks("grunt-mocha-test");
+  grunt.loadNpmTasks('grunt-mocha-test');
 };

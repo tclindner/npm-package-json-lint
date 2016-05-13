@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
-const LintIssue = require("./../LintIssue");
-const lintId = "bugs-recommended";
-const lintType = "warning";
-const nodeName = "bugs";
-const message = "bugs is recommended";
-const ruleType = "recommended";
+const LintIssue = require('./../LintIssue');
+const lintId = 'bugs-recommended';
+const lintType = 'warning';
+const nodeName = 'bugs';
+const message = 'bugs is recommended';
+const ruleType = 'recommended';
 
 const lint = function(packageJsonData) {
   if (!packageJsonData.hasOwnProperty(nodeName)) {

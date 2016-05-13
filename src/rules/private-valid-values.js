@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-const LintIssue = require("./../LintIssue");
-const isValidValue = require("./../validators/valid-values").isValidValue;
-const lintId = "private-valid-values";
-const lintType = "error";
-const nodeName = "private";
-const message = "Invalid value for private";
-const ruleType = "valid-values";
+const LintIssue = require('./../LintIssue');
+const isValidValue = require('./../validators/valid-values').isValidValue;
+const lintId = 'private-valid-values';
+const lintType = 'error';
+const nodeName = 'private';
+const message = 'Invalid value for private';
+const ruleType = 'valid-values';
 
 /**
  * [function description]

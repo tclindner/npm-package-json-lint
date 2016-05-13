@@ -1,7 +1,7 @@
 // Checks to ensure the test coverage meets the minimum thresholds below
 module.exports = function(grunt) {
 
-  grunt.config("coverage", {
+  grunt.config('coverage', {
     default: {
       options: {
         thresholds: {
@@ -10,11 +10,11 @@ module.exports = function(grunt) {
           lines: 100,
           functions: 100
         },
-        dir: "coverage",
-        root: "tests"
+        dir: 'coverage',
+        root: 'tests'
       }
     }
   });
 
-  grunt.loadNpmTasks("grunt-istanbul-coverage");
+  grunt.loadNpmTasks('grunt-istanbul-coverage');
 };

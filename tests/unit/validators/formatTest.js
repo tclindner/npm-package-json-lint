@@ -1,87 +1,87 @@
-"use strict";
+'use strict';
 
 /* eslint max-nested-callbacks: "off" */
 
-const should = require("should");
-const requireHelper = require("../../require_helper");
-const format = requireHelper("validators/format");
+const should = require('should');
+const requireHelper = require('../../require_helper');
+const format = requireHelper('validators/format');
 
-describe("format Unit Tests", function() {
-  describe("isLowercase method", function() {
-    context("when the node doesn't exist in the package.json file", function() {
-      it("true should be returned", function() {
+describe('format Unit Tests', function() {
+  describe('isLowercase method', function() {
+    context('when the node does not exist in the package.json file', function() {
+      it('true should be returned', function() {
         const packageJson = {
-          name: "awesome-module"
+          name: 'awesome-module'
         };
-        const response = format.isLowercase(packageJson, "devDependencies");
+        const response = format.isLowercase(packageJson, 'devDependencies');
 
         response.should.be.true();
       });
     });
 
-    context("when the node exists in the package.json file and name is lowercase", function() {
-      it("true should be returned", function() {
+    context('when the node exists in the package.json file and name is lowercase', function() {
+      it('true should be returned', function() {
         const packageJson = {
-          name: "awesome-module"
+          name: 'awesome-module'
         };
-        const response = format.isLowercase(packageJson, "name");
+        const response = format.isLowercase(packageJson, 'name');
 
         response.should.be.true();
       });
     });
 
-    context("when the node exists in the package.json file, but name is not lowercase", function() {
-      it("false should be returned", function() {
+    context('when the node exists in the package.json file, but name is not lowercase', function() {
+      it('false should be returned', function() {
         const packageJson = {
-          name: "aweSome-moDule"
+          name: 'aweSome-moDule'
         };
-        const response = format.isLowercase(packageJson, "name");
+        const response = format.isLowercase(packageJson, 'name');
 
         response.should.be.false();
       });
     });
   });
 
-  describe("isValidVersionNumber method", function() {
-    context("when the node doesn't exist in the package.json file", function() {
-      it("true should be returned", function() {
+  describe('isValidVersionNumber method', function() {
+    context('when the node does not exist in the package.json file', function() {
+      it('true should be returned', function() {
         const packageJson = {
-          version: "1.0.0"
+          version: '1.0.0'
         };
-        const response = format.isValidVersionNumber(packageJson, "devDependencies");
+        const response = format.isValidVersionNumber(packageJson, 'devDependencies');
 
         response.should.be.true();
       });
     });
 
-    context("when the node exists in the package.json file and version is valid", function() {
-      it("true should be returned", function() {
+    context('when the node exists in the package.json file and version is valid', function() {
+      it('true should be returned', function() {
         const packageJson = {
-          version: "1.0.0"
+          version: '1.0.0'
         };
-        const response = format.isValidVersionNumber(packageJson, "version");
+        const response = format.isValidVersionNumber(packageJson, 'version');
 
         response.should.be.true();
       });
     });
 
-    context("when the node exists in the package.json file and version is invalid", function() {
-      it("false should be returned", function() {
+    context('when the node exists in the package.json file and version is invalid', function() {
+      it('false should be returned', function() {
         const packageJson = {
-          version: "1a.0"
+          version: '1a.0'
         };
-        const response = format.isValidVersionNumber(packageJson, "version");
+        const response = format.isValidVersionNumber(packageJson, 'version');
 
         response.should.be.false();
       });
     });
 
-    context("when the node exists in the package.json file and version is invalid", function() {
-      it("false should be returned", function() {
+    context('when the node exists in the package.json file and version is invalid', function() {
+      it('false should be returned', function() {
         const packageJson = {
-          version: "1.a.0"
+          version: '1.a.0'
         };
-        const response = format.isValidVersionNumber(packageJson, "version");
+        const response = format.isValidVersionNumber(packageJson, 'version');
 
         response.should.be.false();
       });

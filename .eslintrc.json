@@ -155,7 +155,7 @@
     "operator-assignment": ["error", "always"],
     "padded-blocks": ["error", { "classes": "always" }],
     "quote-props": ["error", "consistent"],
-    "quotes": ["error", "double"],
+    "quotes": ["error", "single"],
     "require-jsdoc": ["error", {
       "require": {
         "FunctionDeclaration": true,

@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const inArray = require("in-array");
+const inArray = require('in-array');
 
 /**
  * Determines whether a node has a valid value

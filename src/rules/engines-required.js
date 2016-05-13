@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
-const LintIssue = require("./../LintIssue");
-const lintId = "engines-required";
-const lintType = "error";
-const nodeName = "engines";
-const message = "engines is required";
-const ruleType = "required";
+const LintIssue = require('./../LintIssue');
+const lintId = 'engines-required';
+const lintType = 'error';
+const nodeName = 'engines';
+const message = 'engines is required';
+const ruleType = 'required';
 
 const lint = function(packageJsonData) {
   if (!packageJsonData.hasOwnProperty(nodeName)) {

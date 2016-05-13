@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-const inArray = require("in-array");
-const semver = require("semver");
+const inArray = require('in-array');
+const semver = require('semver');
 
 /**
  * Determines whether or not the package has a given dependency
@@ -40,7 +40,7 @@ const hasDepPrereleaseVers = function(packageJsonData, nodeName, depsToCheckFor)
     if (inArray(depsToCheckFor, dependencyName)) {
       const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
-      if (dependencyVersion.includes("-beta") || dependencyVersion.includes("-rc")) {
+      if (dependencyVersion.includes('-beta') || dependencyVersion.includes('-rc')) {
         return true;
       }
     }
@@ -66,11 +66,11 @@ const hasDepVersZero = function(packageJsonData, nodeName) {
     if (semver.validRange(dependencyVersRange)) {
       const startIndex = 0;
       const length = 1;
-      const dependencyVersion = dependencyVersRange.replace(/[\D]+/g, "");
+      const dependencyVersion = dependencyVersRange.replace(/[\D]+/g, '');
       const dependencyMjrVersion = dependencyVersion.substr(startIndex, length);
 
       // if first char is 0 then major version is 0
-      if (dependencyMjrVersion === "0") {
+      if (dependencyMjrVersion === '0') {
         return true;
       }
     }

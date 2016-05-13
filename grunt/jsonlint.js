@@ -1,17 +1,17 @@
 module.exports = function(grunt) {
 
-  grunt.config("jsonlint", {
+  grunt.config('jsonlint', {
     main: {
       src: [
-        "src/**/*.json",
-        "grunt/*.json",
-        "tests/unit/**/*.json",
-        "*.json",
-        ".jscsrc",
-        ".npmpackagejsonlintrc"
+        'src/**/*.json',
+        'grunt/*.json',
+        'tests/unit/**/*.json',
+        '*.json',
+        '.jscsrc',
+        '.npmpackagejsonlintrc'
       ]
     }
   });
 
-  grunt.loadNpmTasks("grunt-jsonlint");
+  grunt.loadNpmTasks('grunt-jsonlint');
 };

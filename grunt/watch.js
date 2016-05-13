@@ -1,25 +1,25 @@
 // Monitor files for changes and run tasks
 module.exports = function(grunt) {
-  grunt.config.set("watch", {
+  grunt.config.set('watch', {
     json: {
       files: [
-        "**/*.json"
+        '**/*.json'
       ],
       tasks: [
-        "jsonlint"
+        'jsonlint'
       ]
     },
     javascript: {
       files: [
-        "src/**/*.js",
-        "tests/**/*.js"
+        'src/**/*.js',
+        'tests/**/*.js'
       ],
       tasks: [
-        "lint",
-        "mochaTest:local"
+        'lint',
+        'mochaTest:local'
       ]
     }
   });
 
-  grunt.loadNpmTasks("grunt-contrib-watch");
+  grunt.loadNpmTasks('grunt-contrib-watch');
 };

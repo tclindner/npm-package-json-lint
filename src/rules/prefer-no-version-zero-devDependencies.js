@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-const hasDepVersZero = require("./../validators/dependency-audit").hasDepVersZero;
-const LintIssue = require("./../LintIssue");
-const lintId = "prefer-no-version-zero-devDependencies";
-const lintType = "error";
-const nodeName = "devDependencies";
-const message = "You have invalid version 0 dependencies. Please use modules with a major version >= 1.";
-const ruleType = "no-version-zero";
+const hasDepVersZero = require('./../validators/dependency-audit').hasDepVersZero;
+const LintIssue = require('./../LintIssue');
+const lintId = 'prefer-no-version-zero-devDependencies';
+const lintType = 'error';
+const nodeName = 'devDependencies';
+const message = 'You have invalid version 0 dependencies. Please use modules with a major version >= 1.';
+const ruleType = 'no-version-zero';
 
 const lint = function(packageJsonData) {
   if (hasDepVersZero(packageJsonData, nodeName)) {

@@ -1,13 +1,14 @@
 {
   "name": "npm-package-json-lint",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "CLI app for linting package.json files.",
   "keywords": [
     "lint",
     "linter",
     "package.json",
     "audit",
-    "auditor"
+    "auditor",
+    "npm-package-json-lint"
   ],
   "homepage": "https://github.com/tclindner/npm-package-json-lint",
   "bugs": {

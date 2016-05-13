@@ -1,11 +1,11 @@
 // Cleans the dist directory (deletes all files)
 module.exports = function(grunt) {
 
-  grunt.config("clean", {
+  grunt.config('clean', {
     coverage: {
-      src: ["tests/coverage/"]
+      src: ['tests/coverage/']
     }
   });
 
-  grunt.loadNpmTasks("grunt-contrib-clean");
+  grunt.loadNpmTasks('grunt-contrib-clean');
 };

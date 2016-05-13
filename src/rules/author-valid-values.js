@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-const LintIssue = require("./../LintIssue");
-const isValidValue = require("./../validators/valid-values").isValidValue;
-const lintId = "author-valid-values";
-const lintType = "error";
-const nodeName = "author";
-const message = "Invalid value for author";
-const ruleType = "valid-values";
+const LintIssue = require('./../LintIssue');
+const isValidValue = require('./../validators/valid-values').isValidValue;
+const lintId = 'author-valid-values';
+const lintType = 'error';
+const nodeName = 'author';
+const message = 'Invalid value for author';
+const ruleType = 'valid-values';
 
 const lint = function(packageJsonData, validValues) {
   if (!isValidValue(packageJsonData, nodeName, validValues)) {

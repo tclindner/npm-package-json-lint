@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const chalk = require("chalk");
+const chalk = require('chalk');
 
 class LintIssue {
 
@@ -25,7 +25,7 @@ class LintIssue {
   toString() {
     const formattedLintId = chalk.cyan.bold(this.lintId);
     const formattedNode = chalk.blue.bold(this.node);
-    const formattedMessage = this.lintType === "error" ? chalk.bold.red(this.lintMessage) : chalk.yellow(this.lintMessage);
+    const formattedMessage = this.lintType === 'error' ? chalk.bold.red(this.lintMessage) : chalk.yellow(this.lintMessage);
 
     return `${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
   }

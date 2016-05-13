@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-const semver = require("semver");
-const validator = require("validator");
+const semver = require('semver');
+const validator = require('validator');
 
 /**
  * Determines whether or not the node's value is lowercase
