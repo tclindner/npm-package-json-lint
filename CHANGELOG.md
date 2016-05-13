@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- New rule: prefer-caret-version-dependencies
+- New rule: prefer-tilde-version-dependencies
+- New rule: prefer-caret-version-devDependencies
+- New rule: prefer-tilde-version-devDependencies
 
 ### Changed
 
