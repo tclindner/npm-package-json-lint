@@ -3,12 +3,11 @@
 const LintIssue = require('./../LintIssue');
 const isString = require('./../validators/type').isString;
 const lintId = 'description-type';
-const lintType = 'error';
 const nodeName = 'description';
 const message = 'Type should be a string';
 const ruleType = 'type';
 
-const lint = function(packageJsonData) {
+const lint = function(packageJsonData, lintType) {
   if (!isString(packageJsonData, nodeName)) {
     return new LintIssue(lintId, lintType, nodeName, message);
   }
@@ -17,5 +16,4 @@ const lint = function(packageJsonData) {
 };
 
 module.exports.lint = lint;
-module.exports.lintType = lintType;
 module.exports.ruleType = ruleType;

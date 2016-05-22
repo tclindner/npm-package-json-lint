@@ -17,8 +17,8 @@ describe('NpmPackageJsonLint Unit Tests', function() {
           description: true
         };
         const config = {
-          'description-type': true,
-          'name-format': true
+          'description-type': 'error',
+          'name-format': 'error'
         };
         const options = {
           ignoreWarnings: false
@@ -45,15 +45,15 @@ describe('NpmPackageJsonLint Unit Tests', function() {
           name: 'ALLCAPS'
         };
         const config = {
-          'keywords-recommended': true,
-          'name-format': true
+          'require-keywords': 'error',
+          'name-format': 'warning'
         };
         const options = {
           ignoreWarnings: false
         };
         const npmPackageJsonLint = new NpmPackageJsonLint(packageJsonData, config, options);
         const rules = {
-          'keywords-recommended': 'rules\\keywords-recommended.js',
+          'require-keywords': 'rules\\require-keywords.js',
           'name-format': 'rules\\name-format.js'
         };
         const rulesStub = sinon.stub(npmPackageJsonLint, '_loadRules').returns(rules);
@@ -73,15 +73,15 @@ describe('NpmPackageJsonLint Unit Tests', function() {
           name: 'ALLCAPS'
         };
         const config = {
-          'keywords-recommended': true,
-          'name-format': true
+          'require-keywords': 'warning',
+          'name-format': 'error'
         };
         const options = {
           ignoreWarnings: true
         };
         const npmPackageJsonLint = new NpmPackageJsonLint(packageJsonData, config, options);
         const rules = {
-          'keywords-recommended': 'rules\\keywords-recommended.js',
+          'require-keywords': 'rules\\require-keywords.js',
           'name-format': 'rules\\name-format.js'
         };
         const rulesStub = sinon.stub(npmPackageJsonLint, '_loadRules').returns(rules);
@@ -100,17 +100,17 @@ describe('NpmPackageJsonLint Unit Tests', function() {
           author: 'Caitlin Snow'
         };
         const config = {
-          'author-valid-values': [
+          'valid-values-author': ['error', [
             'Barry Allen',
             'Iris West'
-          ]
+          ]]
         };
         const options = {
           ignoreWarnings: true
         };
         const npmPackageJsonLint = new NpmPackageJsonLint(packageJsonData, config, options);
         const rules = {
-          'author-valid-values': 'rules\\author-valid-values.js'
+          'valid-values-author': 'rules\\valid-values-author.js'
         };
         const rulesStub = sinon.stub(npmPackageJsonLint, '_loadRules').returns(rules);
         const configStub = sinon.stub(npmPackageJsonLint, '_getConfig').returns(config);

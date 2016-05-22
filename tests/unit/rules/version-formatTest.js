@@ -10,7 +10,7 @@ describe('version-format Unit Tests', function() {
       const packageJsonData = {
         version: '1.a.0'
       };
-      const response = lint(packageJsonData);
+      const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('version-format');
       response.lintType.should.equal('error');
@@ -24,7 +24,7 @@ describe('version-format Unit Tests', function() {
       const packageJsonData = {
         version: '1.0.0'
       };
-      const response = lint(packageJsonData);
+      const response = lint(packageJsonData, 'error');
 
       response.should.be.true();
     });
@@ -33,7 +33,7 @@ describe('version-format Unit Tests', function() {
   context('when package.json does not have node', function() {
     it('true should be returned', function() {
       const packageJsonData = {};
-      const response = lint(packageJsonData);
+      const response = lint(packageJsonData, 'error');
 
       response.should.be.true();
     });

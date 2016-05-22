@@ -3,12 +3,11 @@
 const isLowercase = require('./../validators/format').isLowercase;
 const LintIssue = require('./../LintIssue');
 const lintId = 'name-format';
-const lintType = 'error';
 const nodeName = 'name';
 const message = 'Format should be all lowercase';
 const ruleType = 'format';
 
-const lint = function(packageJsonData) {
+const lint = function(packageJsonData, lintType) {
   if (!isLowercase(packageJsonData, nodeName)) {
     return new LintIssue(lintId, lintType, nodeName, message);
   }
@@ -17,5 +16,4 @@ const lint = function(packageJsonData) {
 };
 
 module.exports.lint = lint;
-module.exports.lintType = lintType;
 module.exports.ruleType = ruleType;

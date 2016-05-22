@@ -30,10 +30,10 @@ describe('Rules Unit Tests', function() {
         const fsStub = sinon.stub(fs, 'readdirSync');
         const pathStub = sinon.stub(path, 'join');
 
-        fsStub.onFirstCall().returns(['version-type.js', 'version-required.js']);
+        fsStub.onFirstCall().returns(['version-type.js', 'require-version.js']);
         pathStub.onFirstCall().returns('c/git/rules');
         pathStub.onSecondCall().returns('c/git/rules/version-type.js');
-        pathStub.onThirdCall().returns('c/git/rules/version-required.js');
+        pathStub.onThirdCall().returns('c/git/rules/require-version.js');
       });
 
       after(function() {
@@ -46,7 +46,7 @@ describe('Rules Unit Tests', function() {
         const result = rules.load();
 
         rules.rules['version-type'].should.equal('c/git/rules/version-type.js');
-        rules.rules['version-required'].should.equal('c/git/rules/version-required.js');
+        rules.rules['require-version'].should.equal('c/git/rules/require-version.js');
       });
     });
 

@@ -17,7 +17,9 @@ class NpmPackageJsonLint {
   constructor(packageJsonData, config, options) {
     this.packageJsonData = packageJsonData;
     this.ignoreWarnings = options.ignoreWarnings;
-    this.arrayRuleTypes = ['valid-values', 'invalid-dependencies', 'invalid-pre-release-dependencies'];
+    this.arrayRuleTypes = ['valid-values', 'no-restricted-dependencies', 'no-restricted-pre-release-dependencies'];
+    this.firstKey = 0;
+    this.secondKey = 1;
     this.errors = [];
     this.warnings = [];
 
@@ -32,19 +34,20 @@ class NpmPackageJsonLint {
    * @return {Object} Results object
    */
   lint() {
-    for (const configItem in this.config) {
-      const configItemValue = this.config[configItem];
-      const ruleModule = this.rules.get(configItem);
+    for (const rule in this.config) {
+      const ruleModule = this.rules.get(rule);
 
       if (inArray(this.arrayRuleTypes, ruleModule.ruleType)) {
-        const lintResult = ruleModule.lint(this.packageJsonData, configItemValue);
+        const errorWarningSetting = this.config[rule][this.firstKey];
+        const ruleConfigArray = this.config[rule][this.secondKey];
+        const lintResult = ruleModule.lint(this.packageJsonData, errorWarningSetting, ruleConfigArray);
 
-        this._processResult(lintResult, ruleModule.lintType);
-      } else if (configItemValue) {
-        // else all other rules either have a true or false flag if they are enabled
-        const lintResult = ruleModule.lint(this.packageJsonData);
+        this._processResult(lintResult, errorWarningSetting);
+      } else {
+        const errorWarningSetting = this.config[rule];
+        const lintResult = ruleModule.lint(this.packageJsonData, errorWarningSetting);
 
-        this._processResult(lintResult, ruleModule.lintType);
+        this._processResult(lintResult, errorWarningSetting);
       }
     }
 

@@ -10,7 +10,7 @@ describe('main-type Unit Tests', function() {
       const packageJsonData = {
         main: true
       };
-      const response = lint(packageJsonData);
+      const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('main-type');
       response.lintType.should.equal('error');
@@ -22,7 +22,7 @@ describe('main-type Unit Tests', function() {
   context('when package.json does not have node', function() {
     it('true should be returned', function() {
       const packageJsonData = {};
-      const response = lint(packageJsonData);
+      const response = lint(packageJsonData, 'error');
 
       response.should.be.true();
     });

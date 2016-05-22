@@ -1,5 +1,7 @@
 'use strict';
 
+const inArray = require('in-array');
+const isPlainObj = require('is-plain-obj');
 const Parser = require('./Parser');
 const path = require('path');
 
@@ -10,6 +12,17 @@ class Config {
    * @param  {Object|String} passedConfigParam Object or string with desired configuration
    */
   constructor(passedConfigParam) {
+    this.arrayRules = [
+      'valid-values-author',
+      'valid-values-private',
+      'no-restricted-dependencies',
+      'no-restricted-devDependencies',
+      'no-restricted-pre-release-dependencies',
+      'no-restricted-pre-release-devDependencies'
+    ];
+    this.firstKey = 0;
+    this.secondKey = 1;
+
     if (this._isConfigPassed(passedConfigParam)) {
       const passedConfig = this._getPassedConfig(passedConfigParam);
 
@@ -53,10 +66,39 @@ class Config {
         configFile = path.join(__dirname, passedConfig);
       }
 
-      return parser.parse(configFile);
+      const rcFileObj = parser.parse(configFile);
+
+      this._validateConfig(rcFileObj);
+
+      return rcFileObj;
     }
 
     return passedConfig;
+  }
+
+  /**
+   * Validates config file
+   * @param  {Object}     rcFileObj   Object version of .npmpackagejsonlintrc file
+   * @return {boolean}                True if validate config is successful
+   */
+  _validateConfig(rcFileObj) {
+    for (const rule in rcFileObj) {
+      const ruleConfig = rcFileObj[rule];
+
+      if (Array.isArray(ruleConfig) && inArray(this.arrayRules, rule)) {
+        if (typeof ruleConfig[this.firstKey] !== 'string' || typeof ruleConfig[this.firstKey] === 'string' && ruleConfig[this.firstKey] !== 'error' && ruleConfig[this.firstKey] !== 'warning') {
+          throw new Error(`${rule} - first key must be set to "error" or "warning". Currently set to ${ruleConfig[this.firstKey]}`);
+        }
+
+        if (!Array.isArray(ruleConfig[this.secondKey])) {
+          throw new Error(`${rule} - second key must be set an array. Currently set to ${ruleConfig[this.secondKey]}`);
+        }
+      } else if (typeof ruleConfig !== 'string' || typeof ruleConfig === 'string' && ruleConfig !== 'error' && ruleConfig !== 'warning') {
+        throw new Error(`${rule} - must be set to "error" or "warning". Currently set to ${ruleConfig}`);
+      }
+    }
+
+    return true;
   }
 
 }
