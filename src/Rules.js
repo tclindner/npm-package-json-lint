@@ -23,8 +23,10 @@ class Rules {
       fs.readdirSync(rulesDirectory).forEach((file) => {
         const beginIndex = 0;
         const endIndex = -3;
+        const ruleId = file.slice(beginIndex, endIndex);
+        const ruleModule = path.join(rulesDirectory, file);
 
-        this.rules[file.slice(beginIndex, endIndex)] = path.join(rulesDirectory, file);
+        this._registerRule(ruleId, ruleModule);
       });
 
       return this.rules;

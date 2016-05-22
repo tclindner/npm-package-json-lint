@@ -10,7 +10,7 @@ describe('dependencies-type Unit Tests', function() {
       const packageJsonData = {
         dependencies: 'dependencies'
       };
-      const response = lint(packageJsonData);
+      const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('dependencies-type');
       response.lintType.should.equal('error');
@@ -22,7 +22,7 @@ describe('dependencies-type Unit Tests', function() {
   context('when package.json does not have node', function() {
     it('true should be returned', function() {
       const packageJsonData = {};
-      const response = lint(packageJsonData);
+      const response = lint(packageJsonData, 'error');
 
       response.should.be.true();
     });

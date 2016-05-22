@@ -12,7 +12,7 @@ describe('prefer-no-version-zero-dependencies Unit Tests', function() {
           'npm-package-json-lint': '~0.3.0'
         }
       };
-      const response = lint(packageJsonData);
+      const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('prefer-no-version-zero-dependencies');
       response.lintType.should.equal('error');
@@ -28,7 +28,7 @@ describe('prefer-no-version-zero-dependencies Unit Tests', function() {
           'gulp-npm-package-json-lint': '^1.0.0'
         }
       };
-      const response = lint(packageJsonData);
+      const response = lint(packageJsonData, 'error');
 
       response.should.be.true();
     });
@@ -37,7 +37,7 @@ describe('prefer-no-version-zero-dependencies Unit Tests', function() {
   context('when package.json does not have node', function() {
     it('true should be returned', function() {
       const packageJsonData = {};
-      const response = lint(packageJsonData);
+      const response = lint(packageJsonData, 'error');
 
       response.should.be.true();
     });
