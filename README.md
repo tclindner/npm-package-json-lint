@@ -77,6 +77,19 @@ Each rule contains the following properties:
 
 As mentioned in the "Commands and configuration" section there are two ways to specify rule sets. The first is using `--rule` to specify a given rule. This will run npm-package-json-lint with just this rule. The second is using `--rules-file` to specify a JSON file, named [`.npmpackagejsonlintrc`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint-rc), to run a set of rules. If neither of the options above are specified then npm-package-json-lint looks for a global [`.npmpackagejsonlintrc`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint-rc) file in the root of your user directory. Finally, if a global [`.npmpackagejsonlintrc`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint-rc) file doesn't exist then the [defaults](src/defaultConfig.js) are used.
 
+### Configuring rules
+
+npm-package-json-lint rules can either be run as an `error` or a `warning`.
+
+* "warning" - run the rule as a warning
+* "error" - run the rule as an error
+
+Ex: `"require-author": "error"`
+
+## Migrating from v0.x.x to 1.x.x
+
+Please see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Contributing
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md).
