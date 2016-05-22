@@ -2,10 +2,10 @@
 
 const should = require('should');
 const requireHelper = require('../../require_helper');
-const lint = requireHelper('rules/devDependencies-invalid-dependencies').lint;
+const lint = requireHelper('rules/no-restricted-devDependencies').lint;
 
-describe('devDependencies-invalid-dependencies Unit Tests', function() {
-  context('when package.json has node with an invalid value', function() {
+describe('no-restricted-devDependencies Unit Tests', function() {
+  context('when package.json has node with a restricted value', function() {
     it('LintIssue object should be returned', function() {
       const packageJsonData = {
         devDependencies: {
@@ -16,12 +16,12 @@ describe('devDependencies-invalid-dependencies Unit Tests', function() {
         'npm-package-json-lint',
         'grunt-npm-package-json-lint'
       ];
-      const response = lint(packageJsonData, invalidDependencies);
+      const response = lint(packageJsonData, 'error', invalidDependencies);
 
-      response.lintId.should.equal('devDependencies-invalid-dependencies');
+      response.lintId.should.equal('no-restricted-devDependencies');
       response.lintType.should.equal('error');
       response.node.should.equal('devDependencies');
-      response.lintMessage.should.equal('You are using an invalid dependency. Please remove it.');
+      response.lintMessage.should.equal('You are using a restricted dependency. Please remove it.');
     });
   });
 
@@ -36,7 +36,7 @@ describe('devDependencies-invalid-dependencies Unit Tests', function() {
         'npm-package-json-lint',
         'grunt-npm-package-json-lint'
       ];
-      const response = lint(packageJsonData, invalidDependencies);
+      const response = lint(packageJsonData, 'error', invalidDependencies);
 
       response.should.be.true();
     });
@@ -49,7 +49,7 @@ describe('devDependencies-invalid-dependencies Unit Tests', function() {
         'npm-package-json-lint',
         'grunt-npm-package-json-lint'
       ];
-      const response = lint(packageJsonData, invalidDependencies);
+      const response = lint(packageJsonData, 'error', invalidDependencies);
 
       response.should.be.true();
     });

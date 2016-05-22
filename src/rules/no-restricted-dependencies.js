@@ -2,13 +2,12 @@
 
 const hasDependency = require('./../validators/dependency-audit').hasDependency;
 const LintIssue = require('./../LintIssue');
-const lintId = 'devDependencies-invalid-dependencies';
-const lintType = 'error';
-const nodeName = 'devDependencies';
-const message = 'You are using an invalid dependency. Please remove it.';
-const ruleType = 'invalid-dependencies';
+const lintId = 'no-restricted-dependencies';
+const nodeName = 'dependencies';
+const message = 'You are using a restricted dependency. Please remove it.';
+const ruleType = 'no-restricted-dependencies';
 
-const lint = function(packageJsonData, invalidDependencies) {
+const lint = function(packageJsonData, lintType, invalidDependencies) {
   if (hasDependency(packageJsonData, nodeName, invalidDependencies)) {
     return new LintIssue(lintId, lintType, nodeName, message);
   }
@@ -17,5 +16,4 @@ const lint = function(packageJsonData, invalidDependencies) {
 };
 
 module.exports.lint = lint;
-module.exports.lintType = lintType;
 module.exports.ruleType = ruleType;

@@ -2,13 +2,12 @@
 
 const hasDepPrereleaseVers = require('./../validators/dependency-audit').hasDepPrereleaseVers;
 const LintIssue = require('./../LintIssue');
-const lintId = 'devDependencies-invalid-pre-release-dependencies';
-const lintType = 'error';
+const lintId = 'no-restricted-pre-release-devDependencies';
 const nodeName = 'devDependencies';
-const message = 'You are using an invalid pre-release dependency. Please remove it.';
-const ruleType = 'invalid-pre-release-dependencies';
+const message = 'You are using a restricted pre-release dependency. Please remove it.';
+const ruleType = 'no-restricted-pre-release-dependencies';
 
-const lint = function(packageJsonData, invalidPreRelDeps) {
+const lint = function(packageJsonData, lintType, invalidPreRelDeps) {
   if (hasDepPrereleaseVers(packageJsonData, nodeName, invalidPreRelDeps)) {
     return new LintIssue(lintId, lintType, nodeName, message);
   }
@@ -17,5 +16,4 @@ const lint = function(packageJsonData, invalidPreRelDeps) {
 };
 
 module.exports.lint = lint;
-module.exports.lintType = lintType;
 module.exports.ruleType = ruleType;
