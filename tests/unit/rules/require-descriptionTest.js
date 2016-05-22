@@ -2,15 +2,15 @@
 
 const should = require('should');
 const requireHelper = require('../../require_helper');
-const lint = requireHelper('rules/version-required').lint;
+const lint = requireHelper('rules/require-description').lint;
 
-describe('version-required Unit Tests', function() {
+describe('require-description Unit Tests', function() {
   context('when package.json has node', function() {
     it('true should be returned', function() {
       const packageJsonData = {
-        version: 'version'
+        description: 'description'
       };
-      const response = lint(packageJsonData);
+      const response = lint(packageJsonData, 'error');
 
       response.should.be.true();
     });
@@ -19,12 +19,12 @@ describe('version-required Unit Tests', function() {
   context('when package.json does not have node', function() {
     it('LintIssue object should be returned', function() {
       const packageJsonData = {};
-      const response = lint(packageJsonData);
+      const response = lint(packageJsonData, 'error');
 
-      response.lintId.should.equal('version-required');
+      response.lintId.should.equal('require-description');
       response.lintType.should.equal('error');
-      response.node.should.equal('version');
-      response.lintMessage.should.equal('version is required');
+      response.node.should.equal('description');
+      response.lintMessage.should.equal('description is required');
     });
   });
 });

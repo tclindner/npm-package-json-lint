@@ -2,15 +2,15 @@
 
 const should = require('should');
 const requireHelper = require('../../require_helper');
-const lint = requireHelper('rules/author-required').lint;
+const lint = requireHelper('rules/require-name').lint;
 
-describe('author-required Unit Tests', function() {
+describe('require-name Unit Tests', function() {
   context('when package.json has node', function() {
     it('true should be returned', function() {
       const packageJsonData = {
-        author: 'author'
+        name: 'name'
       };
-      const response = lint(packageJsonData);
+      const response = lint(packageJsonData, 'error');
 
       response.should.be.true();
     });
@@ -19,12 +19,12 @@ describe('author-required Unit Tests', function() {
   context('when package.json does not have node', function() {
     it('LintIssue object should be returned', function() {
       const packageJsonData = {};
-      const response = lint(packageJsonData);
+      const response = lint(packageJsonData, 'error');
 
-      response.lintId.should.equal('author-required');
+      response.lintId.should.equal('require-name');
       response.lintType.should.equal('error');
-      response.node.should.equal('author');
-      response.lintMessage.should.equal('author is required');
+      response.node.should.equal('name');
+      response.lintMessage.should.equal('name is required');
     });
   });
 });

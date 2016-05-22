@@ -1,13 +1,12 @@
 'use strict';
 
 const LintIssue = require('./../LintIssue');
-const lintId = 'version-required';
-const lintType = 'error';
-const nodeName = 'version';
-const message = 'version is required';
+const lintId = 'require-license';
+const nodeName = 'license';
+const message = 'license is required';
 const ruleType = 'required';
 
-const lint = function(packageJsonData) {
+const lint = function(packageJsonData, lintType) {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return new LintIssue(lintId, lintType, nodeName, message);
   }
@@ -16,5 +15,4 @@ const lint = function(packageJsonData) {
 };
 
 module.exports.lint = lint;
-module.exports.lintType = lintType;
 module.exports.ruleType = ruleType;
