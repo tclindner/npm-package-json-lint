@@ -1,13 +1,12 @@
 'use strict';
 
 const LintIssue = require('./../LintIssue');
-const lintId = 'homepage-recommended';
-const lintType = 'warning';
+const lintId = 'require-homepage';
 const nodeName = 'homepage';
-const message = 'homepage is recommended';
-const ruleType = 'recommended';
+const message = 'homepage is required';
+const ruleType = 'required';
 
-const lint = function(packageJsonData) {
+const lint = function(packageJsonData, lintType) {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return new LintIssue(lintId, lintType, nodeName, message);
   }
@@ -16,5 +15,4 @@ const lint = function(packageJsonData) {
 };
 
 module.exports.lint = lint;
-module.exports.lintType = lintType;
 module.exports.ruleType = ruleType;
