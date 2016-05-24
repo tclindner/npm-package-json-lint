@@ -52,10 +52,10 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 ### Examples
 
-Run a specific rule, author-valid-values, on a file relative to the current working directory.
+Run a specific rule, require-author, on a file relative to the current working directory.
 `pjl-cli -f "../relative-path/package.json" -r "require-author: 'error'"`
 
-Run a specific rule, author-valid-values, ignoring warnings on a file relative to the current working directory.
+Run a specific rule, require-author, ignoring warnings on a file relative to the current working directory.
 `pjl-cli -f "../relative-path/package.json" -r "require-author: 'error'" --ignore-warnings`
 
 Run using the config in `.npmpackagejsonlintrc` on a file relative to the current working directory.
@@ -88,7 +88,7 @@ Ex: `"require-author": "error"`
 
 ## Migrating from v0.x.x to 1.x.x
 
-Please see [CONTRIBUTING.md](CONTRIBUTING.md).
+Please see the [migration guide](https://github.com/tclindner/npm-package-json-lint/wiki/migrating-from-v0-to-v1).
 
 ## Contributing
 
@@ -100,7 +100,7 @@ Please see [CHANGELOG.md](CHANGELOG.md).
 
 ## Related
 
-* [grunt-npm-package-json-lint](grunt-npm-package-json-lint): Grunt Wrapper for npm-package-json-lint
+* [grunt-npm-package-json-lint](https://github.com/tclindner/grunt-npm-package-json-lint): Grunt Wrapper for npm-package-json-lint
 
 ## License
 
