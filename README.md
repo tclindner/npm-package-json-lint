@@ -10,7 +10,7 @@
 [![devDependency Status](https://david-dm.org/tclindner/npm-package-json-lint/dev-status.svg?style=flat-square)](https://david-dm.org/tclindner/npm-package-json-lint#info=devDependencies)
 
 
-## What is package json lint?
+## What is npm-package-json-lint?
 
 npm-package-json-lint helps enforce standards for your package.json file.
 Currently it can check for:

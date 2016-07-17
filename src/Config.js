@@ -63,7 +63,7 @@ class Config {
       let configFile = passedConfig;
 
       if (!path.isAbsolute(passedConfig)) {
-        configFile = path.join(__dirname, passedConfig);
+        configFile = path.join(process.cwd(), passedConfig);
       }
 
       const rcFileObj = parser.parse(configFile);
