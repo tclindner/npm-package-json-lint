@@ -49,7 +49,7 @@ class Rules {
     if (typeof rule === 'undefined') {
       const errorMsg = `Rule, ${ruleId}, is invalid. Please ensure it matches a valid option.`;
 
-      console.log(chalk.bold.red(errorMsg));
+      throw new Error(chalk.bold.red(errorMsg));
     }
 
     return require(this.rules[ruleId]);
