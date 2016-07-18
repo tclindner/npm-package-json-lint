@@ -1,5 +1,6 @@
 'use strict';
 
+const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
 
@@ -43,6 +44,14 @@ class Rules {
    * @return {Object}        Rule
    */
   get(ruleId) {
+    const rule = this.rules[ruleId];
+
+    if (typeof rule === 'undefined') {
+      const errorMsg = `Rule, ${ruleId}, is invalid. Please ensure it matches a valid option.`;
+
+      throw new Error(chalk.bold.red(errorMsg));
+    }
+
     return require(this.rules[ruleId]);
   }
 

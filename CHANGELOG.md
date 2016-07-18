@@ -11,6 +11,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [1.1.0] - 2016-07-17
+### Added
+- Error handling if an invalid rule name is included in `.npmpackagejsonlintrc.json`.
+
+### Fixed
+- Issue resolving file path of `.npmpackagejsonlintrc.json` when running the cli from a nested directory under `node_modules`
+
 ## [1.0.0] - 2016-05-22
 ### Added
 - New rule: [require-bin](https://github.com/tclindner/npm-package-json-lint/wiki/require-bin)
