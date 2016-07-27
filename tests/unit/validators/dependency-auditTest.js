@@ -1,6 +1,6 @@
 'use strict';
 
-/* eslint max-nested-callbacks: "off" */
+/* eslint max-nested-callbacks: "off", max-lines: "off" */
 
 const should = require('should');
 const requireHelper = require('../../require_helper');
