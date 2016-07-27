@@ -18,8 +18,6 @@ class NpmPackageJsonLint {
     this.packageJsonData = packageJsonData;
     this.ignoreWarnings = options.ignoreWarnings;
     this.arrayRuleTypes = ['valid-values', 'no-restricted-dependencies', 'no-restricted-pre-release-dependencies'];
-    this.firstKey = 0;
-    this.secondKey = 1;
     this.errors = [];
     this.warnings = [];
 
@@ -38,8 +36,8 @@ class NpmPackageJsonLint {
       const ruleModule = this.rules.get(rule);
 
       if (inArray(this.arrayRuleTypes, ruleModule.ruleType)) {
-        const errorWarningSetting = this.config[rule][this.firstKey];
-        const ruleConfigArray = this.config[rule][this.secondKey];
+        const errorWarningSetting = this.config[rule][0];
+        const ruleConfigArray = this.config[rule][1];
         const lintResult = ruleModule.lint(this.packageJsonData, errorWarningSetting, ruleConfigArray);
 
         this._processResult(lintResult, errorWarningSetting);

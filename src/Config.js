@@ -20,8 +20,6 @@ class Config {
       'no-restricted-pre-release-dependencies',
       'no-restricted-pre-release-devDependencies'
     ];
-    this.firstKey = 0;
-    this.secondKey = 1;
 
     if (this._isConfigPassed(passedConfigParam)) {
       const passedConfig = this._getPassedConfig(passedConfigParam);
@@ -86,19 +84,28 @@ class Config {
       const ruleConfig = rcFileObj[rule];
 
       if (Array.isArray(ruleConfig) && inArray(this.arrayRules, rule)) {
-        if (typeof ruleConfig[this.firstKey] !== 'string' || typeof ruleConfig[this.firstKey] === 'string' && ruleConfig[this.firstKey] !== 'error' && ruleConfig[this.firstKey] !== 'warning') {
-          throw new Error(`${rule} - first key must be set to "error" or "warning". Currently set to ${ruleConfig[this.firstKey]}`);
+        if (typeof ruleConfig[0] !== 'string' || this._isRuleValid(ruleConfig[0])) {
+          throw new Error(`${rule} - first key must be set to "error" or "warning". Currently set to ${ruleConfig[0]}`);
         }
 
-        if (!Array.isArray(ruleConfig[this.secondKey])) {
-          throw new Error(`${rule} - second key must be set an array. Currently set to ${ruleConfig[this.secondKey]}`);
+        if (!Array.isArray(ruleConfig[1])) {
+          throw new Error(`${rule} - second key must be set an array. Currently set to ${ruleConfig[1]}`);
         }
-      } else if (typeof ruleConfig !== 'string' || typeof ruleConfig === 'string' && ruleConfig !== 'error' && ruleConfig !== 'warning') {
+      } else if (typeof ruleConfig !== 'string' || this._isRuleValid(ruleConfig)) {
         throw new Error(`${rule} - must be set to "error" or "warning". Currently set to ${ruleConfig}`);
       }
     }
 
     return true;
+  }
+
+  /**
+   * Validates the first key of an array type rule
+   * @param  {String}  key Error type of the rule
+   * @return {Boolean}     True if the rule is valid. False if the rule is invalid.
+   */
+  _isRuleValid(key) {
+    return typeof key === 'string' && key !== 'error' && key !== 'warning';
   }
 
 }

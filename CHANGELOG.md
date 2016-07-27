@@ -11,6 +11,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [1.2.0] - 2016-07-26
+### Changed
+- Bump grunt-eslint to version 19.0.0
+- Move to shared eslint-config-tc module
+
 ## [1.1.0] - 2016-07-17
 ### Added
 - Error handling if an invalid rule name is included in `.npmpackagejsonlintrc.json`.
