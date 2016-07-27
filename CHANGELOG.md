@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [1.3.0] - 2016-07-26
+### Added
+- New rule: [prefer-no-engineStrict](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-no-engineStrict)
+
 ## [1.2.0] - 2016-07-26
 ### Changed
 - Bump grunt-eslint to version 19.0.0
