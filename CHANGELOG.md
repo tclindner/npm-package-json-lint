@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [1.4.0] - 2016-10-15
+### Added
+- New rule: [valid-values-license](https://github.com/tclindner/npm-package-json-lint/wiki/valid-values-license)
+
 ## [1.3.0] - 2016-07-26
 ### Added
 - New rule: [prefer-no-engineStrict](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-no-engineStrict)
