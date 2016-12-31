@@ -104,4 +104,4 @@ Please see [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
-Copyright (c) 2016 Thomas Lindner. Licensed under the MIT license.
+Copyright (c) 2016-2017 Thomas Lindner. Licensed under the MIT license.
