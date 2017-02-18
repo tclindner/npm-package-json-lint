@@ -12,6 +12,7 @@ const Reporter = require('./Reporter');
 const userHome = require('user-home');
 
 const DEFAULT_FILE_NAME = './package.json';
+const DEFAULT_RULE_SEVERITY = 'error';
 const RC_FILE_NAME = '.npmpackagejsonlintrc';
 
 /**
@@ -32,6 +33,7 @@ cliApp.version(pkg.version);
 cliApp.usage(pkg.name);
 cliApp.option('-f, --file <filePath>', `File path including name. Defaults to ${DEFAULT_FILE_NAME}`, DEFAULT_FILE_NAME);
 cliApp.option('-r, --rule <rule name>', 'Valid rule name to check. Defaults to nothing');
+cliApp.option('-s, --rule-severity <rule severity>', `"error" or "warning". Defaults to ${DEFAULT_RULE_SEVERITY}`, DEFAULT_RULE_SEVERITY);
 cliApp.option('-c, --rules-file <filePath>', 'File path of .npmpackagejsonlintrc');
 cliApp.option('-w, --ignore-warnings', 'Ignore warnings');
 cliApp.parse(process.argv);
@@ -52,7 +54,10 @@ let rulesLoaded = false;
 let rulesConfig = {};
 
 if (typeof cliApp.rule !== 'undefined') {
-  rulesConfig[cliApp.rule] = true;
+  const rules = {};
+
+  rules[cliApp.rule] = cliApp.ruleSeverity;
+  rulesConfig.rules = rules;
   rulesLoaded = true;
 }
 

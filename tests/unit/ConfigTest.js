@@ -9,143 +9,264 @@ const Config = requireHelper('Config');
 const defaultConfig = requireHelper('defaultConfig');
 
 describe('Config Unit Tests', function() {
-  let spy;
-
-  beforeEach(function() {
-    const stub = sinon.stub(fs, 'readFileSync');
-
-    stub.returns('{"version-type": "error"}');
-
-    spy = sinon.spy(path, 'join');
-  });
-
-  afterEach(function() {
-    fs.readFileSync.restore();
-    path.join.restore();
-  });
-
-  context('when a rules object is passed', function() {
-    it('the config object should return that object', function() {
-      const passedConfig = {
-        'version-type': 'error'
-      };
-      const config = new Config(passedConfig);
-
-      config.get().should.eql(passedConfig);
-    });
-  });
-
-  context('when a relative path string to a .npmpackagejsonlintrc file is passed', function() {
-    it('the config object should return the parsed JSON as an object', function() {
-      const passedConfig = './.npmpackagejsonlintrc';
-      const config = new Config(passedConfig);
-      const obj = {
-        'version-type': 'error'
-      };
-
-      spy.calledOnce.should.be.true();
-      spy.firstCall.calledWithExactly(__dirname, passedConfig);
-      config.get().should.eql(obj);
-    });
-  });
-
-  context('when an absolute path string to a .npmpackagejsonlintrc file is passed', function() {
-    it('the config object should return the parsed JSON as an object', function() {
-      const passedConfig = '/Users/awesomeUser/.npmpackagejsonlintrc';
-      const config = new Config(passedConfig);
-      const obj = {
-        'version-type': 'error'
-      };
-
-      spy.called.should.be.false();
-      config.get().should.eql(obj);
-    });
-  });
-
   context('when an empty object is passed', function() {
     it('the default config object should be returned', function() {
       const passedConfig = {};
       const config = new Config(passedConfig);
 
-      config.get().should.eql(defaultConfig);
-    });
-  });
-
-  context('when a valid npmpackagejsonlintrc file object is passed', function() {
-    it('true should be returned', function() {
-      const rcFileObj = {
-        'require-author': 'error',
-        'require-version': 'warning',
-        'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
-        'valid-values-private': ['warning', [true, false]]
-      };
-      const config = new Config(rcFileObj);
-
-      config._validateConfig(rcFileObj).should.eql(true);
-    });
-  });
-
-  context('when a rule is set to a boolean', function() {
-    it('an error should be thrown', function() {
-      const rcFileObj = {
-        'require-author': true,
-        'require-version': 'warning',
-        'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
-        'valid-values-private': ['warning', [true, false]]
-      };
-      const config = new Config(rcFileObj);
-
       (function() {
-        config._validateConfig(rcFileObj);
-      }).should.throw('require-author - must be set to "error" or "warning". Currently set to true');
+        config.get(passedConfig);
+      }).should.throw('No configuration passed');
     });
   });
 
-  context('when a rule is set to a number', function() {
-    it('an error should be thrown', function() {
-      const rcFileObj = {
-        'require-author': 1,
-        'require-version': 'warning',
-        'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
-        'valid-values-private': ['warning', [true, false]]
-      };
-      const config = new Config(rcFileObj);
+  context('Tests for when a filepath is passed', function() {
+    let spy;
 
-      (function() {
-        config._validateConfig(rcFileObj);
-      }).should.throw('require-author - must be set to "error" or "warning". Currently set to 1');
+    beforeEach(function() {
+      const stub = sinon.stub(fs, 'readFileSync');
+
+      stub.returns('{"rules": {"version-type": "error"}}');
+
+      spy = sinon.spy(path, 'join');
+    });
+
+    afterEach(function() {
+      fs.readFileSync.restore();
+      path.join.restore();
+    });
+
+    context('when a relative path string to a .npmpackagejsonlintrc file is passed', function() {
+      it('the config object should return the parsed JSON as an object', function() {
+        const passedConfig = './.npmpackagejsonlintrc';
+        const config = new Config(passedConfig);
+        const expectedConfigObj = {
+          'version-type': 'error'
+        };
+        const result = config.get();
+
+        spy.calledOnce.should.be.true();
+        spy.firstCall.calledWithExactly(__dirname, passedConfig);
+        result.should.eql(expectedConfigObj);
+      });
+    });
+
+    context('when an absolute path string to a .npmpackagejsonlintrc file is passed', function() {
+      it('the config object should return the parsed JSON as an object', function() {
+        const passedConfig = '/Users/awesomeUser/.npmpackagejsonlintrc';
+        const config = new Config(passedConfig);
+        const expectedConfigObj = {
+          'version-type': 'error'
+        };
+        const result = config.get();
+
+        spy.called.should.be.false();
+        result.should.eql(expectedConfigObj);
+      });
     });
   });
 
-  context('when a rule is an array rule and the first key is not equal to error or warning', function() {
-    it('an error should be thrown', function() {
-      const rcFileObj = {
-        'require-author': 'error',
-        'require-version': 'warning',
-        'valid-values-author': [true, ['Thomas', 'Lindner', 'Thomas Lindner']],
-        'valid-values-private': ['warning', [true, false]]
-      };
-      const config = new Config(rcFileObj);
+  context('Tests for when a extends is passed', function() {
+    let spy;
 
-      (function() {
-        config._validateConfig(rcFileObj);
-      }).should.throw('valid-values-author - first key must be set to "error" or "warning". Currently set to true');
+    beforeEach(function() {
+      const stub = sinon.stub(fs, 'readFileSync');
+
+      stub.returns('{"extends": "npm-package-json-lint-config-base", "rules": {"version-type": "off"}}');
+
+      spy = sinon.spy(path, 'join');
+    });
+
+    afterEach(function() {
+      fs.readFileSync.restore();
+      path.join.restore();
+    });
+
+    context('when a config object is passed with an extends node', function() {
+      it('the extends config and rules node should be merged', function() {
+        const passedConfig = './.npmpackagejsonlintrc';
+        const config = new Config(passedConfig);
+        const stubbedGetExtendCfgModule = sinon.stub(config, '_getExtendsConfigModule');
+        const extendsObj = {
+          rules: {
+            'name-type': 'error'
+          }
+        };
+
+        stubbedGetExtendCfgModule.returns(extendsObj);
+
+        const expectedConfigObj = {
+          'name-type': 'error',
+          'version-type': 'off'
+        };
+        const result = config.get();
+
+        spy.calledOnce.should.be.true();
+        spy.firstCall.calledWithExactly(__dirname, passedConfig);
+        result.should.eql(expectedConfigObj);
+
+        config._getExtendsConfigModule.restore();
+      });
+
+      it('and they both contain the same rule the main rules node should take precedence', function() {
+        const passedConfig = './.npmpackagejsonlintrc';
+        const config = new Config(passedConfig);
+        const stubbedGetExtendCfgModule = sinon.stub(config, '_getExtendsConfigModule');
+        const extendsObj = {
+          rules: {
+            'version-type': 'warning'
+          }
+        };
+
+        stubbedGetExtendCfgModule.returns(extendsObj);
+
+        const expectedConfigObj = {
+          'version-type': 'off'
+        };
+        const result = config.get();
+
+        spy.calledOnce.should.be.true();
+        spy.firstCall.calledWithExactly(__dirname, passedConfig);
+        result.should.eql(expectedConfigObj);
+
+        config._getExtendsConfigModule.restore();
+      });
     });
   });
 
-  context('when a rule is an array rule and the second key is not an Array', function() {
-    it('an error should be thrown', function() {
-      const rcFileObj = {
-        'require-author': 'error',
-        'require-version': 'warning',
-        'valid-values-author': ['error', 'Thomas'],
-        'valid-values-private': ['warning', [true, false]]
-      };
-      const config = new Config(rcFileObj);
+  context('Tests for when a config object is passed', function() {
+    context('when a valid npmpackagejsonlintrc file object is passed', function() {
+      it('the config object should return the parsed JSON as an object', function() {
+        const rcFileObj = {
+          rules: {
+            'require-author': 'error',
+            'require-version': 'warning',
+            'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
+            'valid-values-private': ['warning', [true, false]]
+          }
+        };
+        const config = new Config(rcFileObj);
+        const expectedConfigObj = {
+          'require-author': 'error',
+          'require-version': 'warning',
+          'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
+          'valid-values-private': ['warning', [true, false]]
+        };
 
-      (function() {
-        config._validateConfig(rcFileObj);
-      }).should.throw('valid-values-author - second key must be set an array. Currently set to Thomas');
+        config.get().should.eql(expectedConfigObj);
+      });
+    });
+  });
+
+  context('_validateConfig tests', function() {
+    context('when a invalid config object is passed', function() {
+      it('an error should be thrown', function() {
+        const rcFileObj = {
+          'require-author': 'error',
+          'require-version': 'warning',
+          'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
+          'valid-values-private': ['warning', [true, false]]
+        };
+        const config = new Config(rcFileObj);
+
+        (function() {
+          config._validateConfig(rcFileObj);
+        }).should.throw('`rules` object missing in config');
+      });
+    });
+  });
+
+  context('_validateRulesConfig tests', function() {
+    context('when a valid npmpackagejsonlintrc file object is passed', function() {
+      it('true should be returned', function() {
+        const rcFileObj = {
+          'require-author': 'error',
+          'require-version': 'warning',
+          'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
+          'valid-values-private': ['warning', [true, false]]
+        };
+        const config = new Config(rcFileObj);
+
+        config._validateRulesConfig(rcFileObj).should.eql(true);
+      });
+    });
+
+    context('when a valid npmpackagejsonlintrc file object is passed', function() {
+      it('true should be returned', function() {
+        const rcFileObj = {
+          'require-author': 'error',
+          'require-version': 'warning',
+          'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
+          'valid-values-private': ['warning', [true, false]]
+        };
+        const config = new Config(rcFileObj);
+
+        config._validateRulesConfig(rcFileObj).should.eql(true);
+      });
+    });
+
+    context('when a rule is set to a boolean', function() {
+      it('an error should be thrown', function() {
+        const rcFileObj = {
+          'require-author': true,
+          'require-version': 'warning',
+          'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
+          'valid-values-private': ['warning', [true, false]]
+        };
+        const config = new Config(rcFileObj);
+
+        (function() {
+          config._validateRulesConfig(rcFileObj);
+        }).should.throw('require-author - must be set to "error", "warning", or "off". Currently set to true');
+      });
+    });
+
+    context('when a rule is set to a number', function() {
+      it('an error should be thrown', function() {
+        const rcFileObj = {
+          'require-author': 1,
+          'require-version': 'warning',
+          'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
+          'valid-values-private': ['warning', [true, false]]
+        };
+        const config = new Config(rcFileObj);
+
+        (function() {
+          config._validateRulesConfig(rcFileObj);
+        }).should.throw('require-author - must be set to "error", "warning", or "off". Currently set to 1');
+      });
+    });
+
+    context('when a rule is an array rule and the first key is not equal to error, warning, or off', function() {
+      it('an error should be thrown', function() {
+        const rcFileObj = {
+          'require-author': 'error',
+          'require-version': 'warning',
+          'valid-values-author': [true, ['Thomas', 'Lindner', 'Thomas Lindner']],
+          'valid-values-private': ['warning', [true, false]]
+        };
+        const config = new Config(rcFileObj);
+
+        (function() {
+          config._validateRulesConfig(rcFileObj);
+        }).should.throw('valid-values-author - first key must be set to "error", "warning", or "off". Currently set to true');
+      });
+    });
+
+    context('when a rule is an array rule and the second key is not an Array', function() {
+      it('an error should be thrown', function() {
+        const rcFileObj = {
+          'require-author': 'error',
+          'require-version': 'warning',
+          'valid-values-author': ['error', 'Thomas'],
+          'valid-values-private': ['warning', [true, false]]
+        };
+        const config = new Config(rcFileObj);
+
+        (function() {
+          config._validateRulesConfig(rcFileObj);
+        }).should.throw('valid-values-author - second key must be set an array. Currently set to Thomas');
+      });
     });
   });
 });
