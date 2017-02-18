@@ -11,6 +11,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [2.0.0] - 2017-02-18
+### Added
+- Support configuration extension!! Now you can add "extends" to your rc file to extend a based configuration. This is great for sharing a standard ruleset between many projects.  Please see the [wiki](https://github.com/tclindner/npm-package-json-lint/wiki) for more information.
+- An optional cli flag for controlling rule severity. Please see the [README.md](README.md) for examples.
+
+### Removed
+- Default configuration is no longer provided. Please see the new default config module, [npm-package-json-lint-config-default](https://github.com/tclindner/npm-package-json-lint-config-default)
+
 ## [1.4.0] - 2016-10-15
 ### Added
 - New rule: [valid-values-license](https://github.com/tclindner/npm-package-json-lint/wiki/valid-values-license)

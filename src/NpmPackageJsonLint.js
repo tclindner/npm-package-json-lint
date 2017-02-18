@@ -22,9 +22,8 @@ class NpmPackageJsonLint {
     this.warnings = [];
 
     this.rules = new Rules();
-    this._loadRules();
-
-    this.config = this._getConfig(config);
+    this.rules.load();
+    this.config = config;
   }
 
   /**
@@ -32,20 +31,25 @@ class NpmPackageJsonLint {
    * @return {Object} Results object
    */
   lint() {
-    for (const rule in this.config) {
+    const configObj = this._getConfig(this.config);
+
+    for (const rule in configObj) {
       const ruleModule = this.rules.get(rule);
 
       if (inArray(this.arrayRuleTypes, ruleModule.ruleType)) {
-        const errorWarningSetting = this.config[rule][0];
-        const ruleConfigArray = this.config[rule][1];
-        const lintResult = ruleModule.lint(this.packageJsonData, errorWarningSetting, ruleConfigArray);
+        const errorWarningOffSetting = configObj[rule][0];
+        const ruleConfigArray = configObj[rule][1];
 
-        this._processResult(lintResult, errorWarningSetting);
+        if (errorWarningOffSetting !== 'off') {
+          this._processResult(ruleModule.lint(this.packageJsonData, errorWarningOffSetting, ruleConfigArray), errorWarningOffSetting);
+        }
+
       } else {
-        const errorWarningSetting = this.config[rule];
-        const lintResult = ruleModule.lint(this.packageJsonData, errorWarningSetting);
+        const errorWarningOffSetting = configObj[rule];
 
-        this._processResult(lintResult, errorWarningSetting);
+        if (errorWarningOffSetting !== 'off') {
+          this._processResult(ruleModule.lint(this.packageJsonData, errorWarningOffSetting), errorWarningOffSetting);
+        }
       }
     }
 
@@ -82,14 +86,6 @@ class NpmPackageJsonLint {
     }
 
     return result;
-  }
-
-  /**
-   * Private method for loading rules
-   * @return {undefined}            No return
-   */
-  _loadRules() {
-    this.rules.load();
   }
 
   /**

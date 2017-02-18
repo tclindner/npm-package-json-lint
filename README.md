@@ -53,10 +53,13 @@ First thing first, let's make sure you have the necessary pre-requisites.
 ### Examples
 
 Run a specific rule, require-author, on a file relative to the current working directory.
-`pjl-cli -f "../relative-path/package.json" -r "require-author: 'error'"`
+`pjl-cli -f "../relative-path/package.json" -r "require-author"`
 
 Run a specific rule, require-author, ignoring warnings on a file relative to the current working directory.
-`pjl-cli -f "../relative-path/package.json" -r "require-author: 'error'" --ignore-warnings`
+`pjl-cli -f "../relative-path/package.json" -r "require-author" --ignore-warnings`
+
+Run a specific rule, require-author, set severity to warning on a file relative to the current working directory.
+`pjl-cli -f "../relative-path/package.json" -r "require-author" -s "warning"`
 
 Run using the config in `.npmpackagejsonlintrc` on a file relative to the current working directory.
 `pjl-cli -f "../relative-path/package.json" -c "./.npmpackagejsonlintrc"`
@@ -66,7 +69,7 @@ Run using the default config on a file relative to the current working directory
 
 ## Lint Rules
 
-npm-package-json-lint has a configurable set of rules. Please see the [wiki](https://github.com/tclindner/npm-package-json-lint/wiki) for a full list of available rules. By [default](src/defaultConfig.js) only type checks and name/version rules are enforced. This is the bare minimum configuration.
+npm-package-json-lint has a configurable set of rules. Please see the [wiki](https://github.com/tclindner/npm-package-json-lint/wiki) for a full list of available rules. By default no rules are enabled. If you would like to use npm-package-json-lint's default ruleset, please see [npm-package-json-lint-config-default](https://github.com/tclindner/npm-package-json-lint-config-default).
 
 Each rule contains the following properties:
 
@@ -75,16 +78,21 @@ Each rule contains the following properties:
   3. Message - example: author is required
   4. Rule Type - example: required
 
-As mentioned in the "Commands and configuration" section there are two ways to specify rule sets. The first is using `--rule` to specify a given rule. This will run npm-package-json-lint with just this rule. The second is using `--rules-file` to specify a JSON file, named [`.npmpackagejsonlintrc`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint-rc), to run a set of rules. If neither of the options above are specified then npm-package-json-lint looks for a global [`.npmpackagejsonlintrc`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint-rc) file in the root of your user directory. Finally, if a global [`.npmpackagejsonlintrc`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint-rc) file doesn't exist then the [defaults](src/defaultConfig.js) are used.
+As mentioned in the "Commands and configuration" section there are two ways to specify rule sets. The first is using `--rule` to specify a given rule. This will run npm-package-json-lint with just this rule. The second is using `--rules-file` to specify a JSON file, named [`.npmpackagejsonlintrc`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint-rc), to run a set of rules. If neither of the options above are specified then npm-package-json-lint looks for a global [`.npmpackagejsonlintrc`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint-rc) file in the root of your user directory.
 
 ### Configuring rules
 
-npm-package-json-lint rules can either be run as an `error` or a `warning`.
+npm-package-json-lint rules can either be run as an `error`, `warning`, or `off`.
 
 * "warning" - run the rule as a warning
 * "error" - run the rule as an error
+* "off" - disables the rule
 
 Ex: `"require-author": "error"`
+
+## Migrating from v10.x.x to 2.x.x
+
+Please see the [migration guide](https://github.com/tclindner/npm-package-json-lint/wiki/migrating-from-v1-to-v2).
 
 ## Migrating from v0.x.x to 1.x.x
 
@@ -101,6 +109,7 @@ Please see [CHANGELOG.md](CHANGELOG.md).
 ## Related
 
 * [grunt-npm-package-json-lint](https://github.com/tclindner/grunt-npm-package-json-lint): Grunt Wrapper for npm-package-json-lint
+* [npm-package-json-lint-config-default](https://github.com/tclindner/npm-package-json-lint-config-default): Shared default configuration module for npm-package-json-lint
 
 ## License
 
