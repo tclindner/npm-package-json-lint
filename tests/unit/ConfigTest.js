@@ -6,7 +6,6 @@ const should = require('should');
 const sinon = require('sinon');
 const requireHelper = require('../require_helper');
 const Config = requireHelper('Config');
-const defaultConfig = requireHelper('defaultConfig');
 
 describe('Config Unit Tests', function() {
   context('when an empty object is passed', function() {

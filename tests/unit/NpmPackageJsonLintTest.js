@@ -134,7 +134,7 @@ describe('NpmPackageJsonLint Unit Tests', function() {
           author: 'Caitlin Snow'
         };
         const config = {
-          'rules': {
+          rules: {
             'require-author': 'error'
           }
         };
