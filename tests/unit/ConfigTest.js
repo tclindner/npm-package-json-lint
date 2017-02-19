@@ -130,6 +130,58 @@ describe('Config Unit Tests', function() {
 
         config._getExtendsConfigModule.restore();
       });
+
+      it('and the module name is relative path', function() {
+        const moduleName = './index.js';
+        const passedConfig = {
+          extends: './index.js',
+          rules: {
+            'version-type': 'warning'
+          }
+        };
+        const config = new Config(passedConfig);
+        const extendsObj = {
+          rules: {
+            'version-type': 'warning'
+          }
+        };
+        const stubbedGetExtendCfgModule = sinon.stub(config, '_getExtendsConfigModule').returns(extendsObj);
+        const result = config.get(moduleName);
+        const expectedObj = {
+          'version-type': 'warning'
+        };
+
+        spy.calledOnce.should.be.true();
+        spy.firstCall.calledWithExactly(process.cwd(), moduleName);
+        stubbedGetExtendCfgModule.calledWithExactly(path.join(process.cwd(), moduleName));
+        result.should.eql(expectedObj);
+
+        config._getExtendsConfigModule.restore();
+      });
+
+      it('and the module name is a node module', function() {
+        const moduleName = 'npm-package-json-lint-config-tc';
+        const passedConfig = {
+          extends: 'npm-package-json-lint-config-tc'
+        };
+        const config = new Config(passedConfig);
+        const extendsObj = {
+          rules: {
+            'version-type': 'warning'
+          }
+        };
+        const stubbedGetExtendCfgModule = sinon.stub(config, '_getExtendsConfigModule').returns(extendsObj);
+        const result = config.get();
+        const expectedObj = {
+          'version-type': 'warning'
+        };
+
+        spy.called.should.be.false();
+        stubbedGetExtendCfgModule.calledWithExactly(moduleName);
+        result.should.eql(expectedObj);
+
+        config._getExtendsConfigModule.restore();
+      });
     });
   });
 
@@ -153,24 +205,6 @@ describe('Config Unit Tests', function() {
         };
 
         config.get().should.eql(expectedConfigObj);
-      });
-    });
-  });
-
-  context('_validateConfig tests', function() {
-    context('when a invalid config object is passed', function() {
-      it('an error should be thrown', function() {
-        const rcFileObj = {
-          'require-author': 'error',
-          'require-version': 'warning',
-          'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
-          'valid-values-private': ['warning', [true, false]]
-        };
-        const config = new Config(rcFileObj);
-
-        (function() {
-          config._validateConfig(rcFileObj);
-        }).should.throw('`rules` object missing in config');
       });
     });
   });

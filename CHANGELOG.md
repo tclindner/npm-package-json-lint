@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [2.0.2] - 2017-02-18
+### Fixed
+- Issue .npmpackagejsonlintrc.json files that only have a extends value with no rules object
+
 ## [2.0.1] - 2017-02-18
 ### Fixed
 - Issue with relative path local config extension modules. Now relative path modules are load relative to the current working directory of the active process.
