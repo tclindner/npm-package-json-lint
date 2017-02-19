@@ -37,6 +37,10 @@ class Config {
         extendsConfig = this._getExtendsConfig(passedConfig.extends);
       }
 
+      if (!passedConfig.hasOwnProperty('rules')) {
+        return Object.assign({}, extendsConfig);
+      }
+
       return Object.assign({}, extendsConfig, passedConfig.rules);
     } else {
       throw new Error('No configuration passed');
@@ -84,7 +88,15 @@ class Config {
    * @return {Object}             Configuration object
    */
   _getExtendsConfig(moduleName) {
-    const configObj = this._getExtendsConfigModule(moduleName);
+    let adjustedModuleName;
+
+    if (moduleName.startsWith('./')) {
+      adjustedModuleName = path.join(process.cwd(), moduleName);
+    } else {
+      adjustedModuleName = moduleName;
+    }
+
+    const configObj = this._getExtendsConfigModule(adjustedModuleName);
 
     this._validateConfig(configObj);
 
@@ -98,7 +110,7 @@ class Config {
    */
   _getExtendsConfigModule(moduleName) {
     /* istanbul ignore next */
-    return require(path.join(process.cwd(), moduleName));
+    return require(moduleName);
   }
 
   /**
@@ -109,8 +121,6 @@ class Config {
   _validateConfig(rcFileObj) {
     if (rcFileObj.hasOwnProperty('rules')) {
       this._validateRulesConfig(rcFileObj.rules);
-    } else {
-      throw new Error('`rules` object missing in config');
     }
 
     return true;
