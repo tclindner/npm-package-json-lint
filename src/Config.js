@@ -98,7 +98,7 @@ class Config {
    */
   _getExtendsConfigModule(moduleName) {
     /* istanbul ignore next */
-    return require(moduleName);
+    return require(path.join(process.cwd(), moduleName));
   }
 
   /**
