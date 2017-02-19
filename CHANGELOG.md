@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [2.0.1] - 2017-02-18
+### Fixed
+- Issue with relative path local config extension modules. Now relative path modules are load relative to the current working directory of the active process.
+
 ## [2.0.0] - 2017-02-18
 ### Added
 - Support configuration extension!! Now you can add "extends" to your rc file to extend a based configuration. This is great for sharing a standard ruleset between many projects.  Please see the [wiki](https://github.com/tclindner/npm-package-json-lint/wiki) for more information.
