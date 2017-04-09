@@ -80,23 +80,27 @@ if (!rulesLoaded) {
 let fileData = null;
 
 try {
+  let exitCode = 0;
   const parser = new Parser();
 
   fileData = parser.parse(filePath);
 
   const npmPackageJsonLint = new NpmPackageJsonLint(fileData, rulesConfig, options);
   const output = npmPackageJsonLint.lint();
-
   const reporter = new Reporter();
 
   for (const issueType in output) {
     const issues = output[issueType];
 
-    reporter.write(output[issueType], issueType);
+    if (issues.length > 0) {
+      exitCode = 2;
+      reporter.write(output[issueType], issueType);
+    }
   }
 
   const formattedFileName = chalk.bold.green(filePath);
 
+  process.exitCode = exitCode;
   console.log(`${formattedFileName} check complete`);
 } catch (err) {
   handleError(err);

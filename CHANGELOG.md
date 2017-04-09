@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [2.1.0] - 2017-04-09
+### Changed
+- CLI process exit code to 2 (non-zero) if issues are detected in the scan
+
 ## [2.0.2] - 2017-02-18
 ### Fixed
 - Issue .npmpackagejsonlintrc.json files that only have a extends value with no rules object
