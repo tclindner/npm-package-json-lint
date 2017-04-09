@@ -90,7 +90,7 @@ npm-package-json-lint rules can either be run as an `error`, `warning`, or `off`
 
 Ex: `"require-author": "error"`
 
-## Migrating from v10.x.x to 2.x.x
+## Migrating from v1.x.x to 2.x.x
 
 Please see the [migration guide](https://github.com/tclindner/npm-package-json-lint/wiki/migrating-from-v1-to-v2).
 
