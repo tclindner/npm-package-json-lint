@@ -81,6 +81,8 @@ let fileData = null;
 
 try {
   let exitCode = 0;
+  const noIssues = 0;
+  const issuesDetectedErrorCode = 2;
   const parser = new Parser();
 
   fileData = parser.parse(filePath);
@@ -92,8 +94,8 @@ try {
   for (const issueType in output) {
     const issues = output[issueType];
 
-    if (issues.length > 0) {
-      exitCode = 2;
+    if (issues.length > noIssues) {
+      exitCode = issuesDetectedErrorCode;
       reporter.write(output[issueType], issueType);
     }
   }
