@@ -126,8 +126,8 @@ describe('NpmPackageJsonLint Unit Tests', function() {
       });
     });
 
-    context('validate that errors and warnings are set', function() {
-      it('one error and one warning expected', function() {
+    context('validate that when array style rules have an array value with off', function() {
+      it('zero errors and zero warning expected', function() {
         const packageJsonData = {
           author: 'Caitlin Snow'
         };
@@ -136,6 +136,27 @@ describe('NpmPackageJsonLint Unit Tests', function() {
             'Barry Allen',
             'Iris West'
           ]]
+        };
+        const options = {
+          ignoreWarnings: true
+        };
+        const npmPackageJsonLint = new NpmPackageJsonLint(packageJsonData, config, options);
+        const configStub = sinon.stub(npmPackageJsonLint, '_getConfig').returns(config);
+        const response = npmPackageJsonLint.lint();
+        const expectedErrorCount = 0;
+
+        response.errors.length.should.equal(expectedErrorCount);
+        response.hasOwnProperty('warnings').should.be.false();
+      });
+    });
+
+    context('validate that when array style rules have a value of off', function() {
+      it('zero errors and zero warnings expected', function() {
+        const packageJsonData = {
+          author: 'Caitlin Snow'
+        };
+        const config = {
+          'valid-values-author': 'off'
         };
         const options = {
           ignoreWarnings: true

@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [2.1.2] - 2017-04-10
+### Fixed
+- Array style rules, like `valid-values-author`, so they can be easily turned off by setting `valid-values-author: 'off'`
+
 ## [2.1.1] - 2017-04-10
 ### Fixed
 - CLI so process exit code remains 0 if only warnings are detected

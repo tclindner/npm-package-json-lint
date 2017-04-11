@@ -37,7 +37,7 @@ class NpmPackageJsonLint {
       const ruleModule = this.rules.get(rule);
 
       if (inArray(this.arrayRuleTypes, ruleModule.ruleType)) {
-        const errorWarningOffSetting = configObj[rule][0];
+        const errorWarningOffSetting = typeof configObj[rule] === 'string' && configObj[rule] === 'off' ? configObj[rule] : configObj[rule][0];
         const ruleConfigArray = configObj[rule][1];
 
         if (errorWarningOffSetting !== 'off') {
