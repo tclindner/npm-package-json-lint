@@ -94,10 +94,11 @@ try {
   for (const issueType in output) {
     const issues = output[issueType];
 
-    if (issues.length > noIssues) {
+    if (issues.length > noIssues && issueType === 'errors') {
       exitCode = issuesDetectedErrorCode;
-      reporter.write(output[issueType], issueType);
     }
+
+    reporter.write(output[issueType], issueType);
   }
 
   const formattedFileName = chalk.bold.green(filePath);

@@ -48,6 +48,7 @@ First thing first, let's make sure you have the necessary pre-requisites.
 | pjl-cli --file <file path> | -f | File path including name. Defaults to package.json |
 | pjl-cli --rule <rule name> | -r | Valid rule name to check. Defaults to nothing |
 | pjl-cli --rules-file <file path> | -c | File path of .npmpackagejsonlintrc |
+| pjl-cli --rule-severity <rule severity> | -s | "error" or "warning". Defaults to "error" |
 | pjl-cli --ignore-warnings | -w | Ignore warnings |
 
 ### Examples
