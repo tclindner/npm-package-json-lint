@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [2.1.1] - 2017-04-10
+### Fixed
+- CLI so process exit code remains 0 if only warnings are detected
+
 ## [2.1.0] - 2017-04-09
 ### Changed
 - CLI process exit code to 2 (non-zero) if issues are detected in the scan
