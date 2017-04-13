@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [2.2.0] - 2017-04-12
+### Added
+- Add new quiet (-q) option to cli that suppresses output if no errors
+
 ## [2.1.2] - 2017-04-10
 ### Fixed
 - Array style rules, like `valid-values-author`, so they can be easily turned off by setting `valid-values-author: 'off'`
