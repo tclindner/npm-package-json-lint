@@ -3,7 +3,8 @@ module.exports = function(grunt) {
   grunt.config('mochaTest', {
     local: {
       options: {
-        reporter: 'spec'
+        reporter: 'spec',
+        timeout: 5000
       },
       src: ['tests/unit/**/*.js']
     }
