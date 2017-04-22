@@ -1,5 +1,7 @@
 'use strict';
 
+// jscs:disable requireSpacesInForStatement, requireSpacesInForStatement
+
 /**
  * Determines whether an array is in alphabetical order
  * @param  {object} packageJsonData Valid JSON
