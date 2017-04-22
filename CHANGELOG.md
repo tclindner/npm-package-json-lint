@@ -12,6 +12,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 
 ## [2.3.0] - 2017-04-22
+### Added
+- New rule: [prefer-alphabetical-dependencies](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-alphabetical-dependencies)
+- New rule: [prefer-alphabetical-devDependencies](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-alphabetical-devDependencies)
+- New rule: [prefer-alphabetical-bundledDependencies](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-alphabetical-bundledDependencies)
+- New rule: [prefer-alphabetical-optionalDependencies](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-alphabetical-optionalDependencies)
+- New rule: [prefer-alphabetical-peerDependencies](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-alphabetical-peerDependencies)
+
 ### Removed
 - grunt tasks, tests, and project linting files from published node module
 
