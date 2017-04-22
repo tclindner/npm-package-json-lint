@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [2.3.0] - 2017-04-22
+### Removed
+- grunt tasks, tests, and project linting files from published node module
+
 ## [2.2.0] - 2017-04-12
 ### Added
 - Add new quiet (-q) option to cli that suppresses output if no errors
