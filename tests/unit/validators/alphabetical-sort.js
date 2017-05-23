@@ -16,7 +16,9 @@ describe('alphabetical-sort Unit Tests', function() {
         };
         const response = alphabeticalSort.isInAlphabeticalOrder(packageJson, 'devDependencies');
 
-        response.should.be.true();
+        response.status.should.be.true();
+        (response.data.invalidNode === null).should.be.true();
+        (response.data.validNode === null).should.be.true();
       });
     });
 
@@ -31,7 +33,9 @@ describe('alphabetical-sort Unit Tests', function() {
         };
         const response = alphabeticalSort.isInAlphabeticalOrder(packageJson, 'devDependencies');
 
-        response.should.be.true();
+        response.status.should.be.true();
+        (response.data.invalidNode === null).should.be.true();
+        (response.data.validNode === null).should.be.true();
       });
     });
 
@@ -46,7 +50,9 @@ describe('alphabetical-sort Unit Tests', function() {
         };
         const response = alphabeticalSort.isInAlphabeticalOrder(packageJson, 'devDependencies');
 
-        response.should.be.false();
+        response.status.should.be.false();
+        response.data.invalidNode.should.equal('semver');
+        response.data.validNode.should.equal('chalk');
       });
     });
   });

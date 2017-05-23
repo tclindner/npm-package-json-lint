@@ -22,7 +22,7 @@ describe('prefer-alphabetical-devDependencies Unit Tests', function() {
       response.lintId.should.equal('prefer-alphabetical-devDependencies');
       response.lintType.should.equal('error');
       response.node.should.equal('devDependencies');
-      response.lintMessage.should.equal('Your devDependencies are not in alphabetical order. Please update the order.');
+      response.lintMessage.should.equal('Your devDependencies are not in alphabetical order. Please move semver after chalk.');
     });
   });
 
