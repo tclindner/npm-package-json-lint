@@ -1,33 +1,48 @@
 'use strict';
 
 // jscs:disable requireSpacesInForStatement, requireSpacesInForStatement
+const increment = 1;
 
 /**
  * Determines whether an array is in alphabetical order
  * @param  {object} packageJsonData Valid JSON
  * @param  {string} nodeName        Name of a node in the package.json file
- * @return {boolean}                True if the node is in alphabetical order or is missing. False if it is not.
+ * @return {object}                 Object containing the status and the dependencies that are out of order, if applicable
  */
 const isInAlphabeticalOrder = function(packageJsonData, nodeName) {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return true;
+    return {
+      status: true,
+      data: {
+        invalidNode: null,
+        validNode: null
+      }
+    };
   }
 
   let isValid = true;
-  const increment = 1;
+  let data = {
+    invalidNode: null,
+    validNode: null
+  };
   const nodeKeysOriginal = Object.keys(packageJsonData[nodeName]);
-  let nodeKeysSorted = Object.keys(packageJsonData[nodeName]);
-
-  nodeKeysSorted = nodeKeysSorted.sort();
+  const nodeKeysSorted = Object.keys(packageJsonData[nodeName]).sort();
 
   for (let keyIndex = 0;keyIndex <= nodeKeysOriginal.length;keyIndex += increment) {
     if (nodeKeysOriginal[keyIndex] !== nodeKeysSorted[keyIndex]) {
       isValid = false;
+      data = {
+        invalidNode: nodeKeysOriginal[keyIndex],
+        validNode: nodeKeysSorted[keyIndex]
+      };
       break;
     }
   }
 
-  return isValid;
+  return {
+    status: isValid,
+    data
+  };
 };
 
 module.exports.isInAlphabeticalOrder = isInAlphabeticalOrder;

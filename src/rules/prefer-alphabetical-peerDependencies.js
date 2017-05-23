@@ -4,12 +4,14 @@ const isInAlphabeticalOrder = require('./../validators/alphabetical-sort').isInA
 const LintIssue = require('./../LintIssue');
 const lintId = 'prefer-alphabetical-peerDependencies';
 const nodeName = 'peerDependencies';
-const message = 'Your peerDependencies are not in alphabetical order. Please update the order.';
+const message = 'Your peerDependencies are not in alphabetical order.';
 const ruleType = 'peerDependencies-alphabetical-order';
 
 const lint = function(packageJsonData, lintType) {
-  if (!isInAlphabeticalOrder(packageJsonData, nodeName)) {
-    return new LintIssue(lintId, lintType, nodeName, message);
+  const result = isInAlphabeticalOrder(packageJsonData, nodeName);
+
+  if (!result.status) {
+    return new LintIssue(lintId, lintType, nodeName, `${message} Please move ${result.data.invalidNode} after ${result.data.validNode}.`);
   }
 
   return true;

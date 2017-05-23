@@ -22,7 +22,7 @@ describe('prefer-alphabetical-optionalDependencies Unit Tests', function() {
       response.lintId.should.equal('prefer-alphabetical-optionalDependencies');
       response.lintType.should.equal('error');
       response.node.should.equal('optionalDependencies');
-      response.lintMessage.should.equal('Your optionalDependencies are not in alphabetical order. Please update the order.');
+      response.lintMessage.should.equal('Your optionalDependencies are not in alphabetical order. Please move semver after chalk.');
     });
   });
 

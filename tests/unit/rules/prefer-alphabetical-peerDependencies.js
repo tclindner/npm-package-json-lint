@@ -22,7 +22,7 @@ describe('prefer-alphabetical-peerDependencies Unit Tests', function() {
       response.lintId.should.equal('prefer-alphabetical-peerDependencies');
       response.lintType.should.equal('error');
       response.node.should.equal('peerDependencies');
-      response.lintMessage.should.equal('Your peerDependencies are not in alphabetical order. Please update the order.');
+      response.lintMessage.should.equal('Your peerDependencies are not in alphabetical order. Please move semver after chalk.');
     });
   });
 
