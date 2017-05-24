@@ -11,7 +11,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
-## [2.4.0] - 2017-05-23
+## [2.4.0] - 2017-05-24
+### Added
+Thanks to @chr1shaefn3r for submitting the new rules
+
+- New rule: [prefer-absolute-version-dependencies](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-absolute-version-dependencies)
+- New rule: [prefer-absolute-version-devDependencies](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-absolute-version-devDependencies)
+
 ### Changed
 - Improved the message when prefer-alphabetical-dependencies, prefer-alphabetical-devDependencies, prefer-alphabetical-bundledDependencies, prefer-alphabetical-optionalDependencies, or prefer-alphabetical-peerDependencies are triggered. Now failing dependency is communicated as well as the dependency it must be placed after.
 
