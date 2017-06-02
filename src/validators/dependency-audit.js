@@ -105,7 +105,39 @@ const areVersRangesValid = function(packageJsonData, nodeName, rangeSpecifier) {
   return rangesValid;
 };
 
+/**
+ * Determines whether or not all dependency versions are absolut
+ * @param  {object} packageJsonData         Valid JSON
+ * @param  {string} nodeName                Name of a node in the package.json file
+ * @return {boolean}                        False if the package has an non-absolute version. True if it is not or the node is missing.
+ */
+const isVersionAbsolute = function(packageJsonData, nodeName) {
+  if (!packageJsonData.hasOwnProperty(nodeName)) {
+    return true;
+  }
+
+  const NOT_FOUND = -1;
+  const firstCharOfStr = 0;
+  let rangesValid = true;
+
+  for (const dependencyName in packageJsonData[nodeName]) {
+    const dependencyVersion = packageJsonData[nodeName][dependencyName];
+
+    if (dependencyVersion.startsWith('^', firstCharOfStr) ||
+      dependencyVersion.startsWith('~', firstCharOfStr) ||
+      dependencyVersion.startsWith('>', firstCharOfStr) ||
+      dependencyVersion.startsWith('<', firstCharOfStr) ||
+      dependencyVersion.indexOf('*') !== NOT_FOUND
+    ) {
+      rangesValid = false;
+    }
+  }
+
+  return rangesValid;
+};
+
 module.exports.hasDependency = hasDependency;
 module.exports.hasDepPrereleaseVers = hasDepPrereleaseVers;
 module.exports.hasDepVersZero = hasDepVersZero;
 module.exports.areVersRangesValid = areVersRangesValid;
+module.exports.isVersionAbsolute = isVersionAbsolute;
