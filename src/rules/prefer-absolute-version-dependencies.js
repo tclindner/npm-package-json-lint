@@ -1,6 +1,6 @@
 'use strict';
 
-const areVersRangesValid = require('./../validators/dependency-audit').areVersRangesValid;
+const isVersionAbsolute = require('./../validators/dependency-audit').isVersionAbsolute;
 const LintIssue = require('./../LintIssue');
 const lintId = 'prefer-absolute-version-dependencies';
 const nodeName = 'dependencies';
@@ -8,9 +8,8 @@ const message = 'You are using an invalid version range. Please use absolute ver
 const ruleType = 'dependencies-version-range';
 
 const lint = function(packageJsonData, lintType) {
-  const rangeSpecifier = '=';
 
-  if (!areVersRangesValid(packageJsonData, nodeName, rangeSpecifier)) {
+  if (!isVersionAbsolute(packageJsonData, nodeName)) {
     return new LintIssue(lintId, lintType, nodeName, message);
   }
 
