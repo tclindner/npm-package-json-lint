@@ -1,6 +1,6 @@
 {
   "name": "npm-package-json-lint",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "CLI app for linting package.json files.",
   "keywords": [
     "lint",
@@ -51,9 +51,9 @@
     "grunt-jscs": "^3.0.1",
     "grunt-jsonlint": "^1.1.0",
     "grunt-mocha-test": "^0.13.2",
-    "mocha": "^3.4.1",
+    "mocha": "^3.4.2",
     "should": "^11.2.1",
-    "sinon": "^2.3.0",
+    "sinon": "^2.3.4",
     "time-grunt": "^1.4.0"
   },
   "engines": {
