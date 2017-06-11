@@ -11,6 +11,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [2.5.0] - 2017-06-11
+### Changed
+@chr1shaefn3r enhanced the following rules so they no longer require a leading equals sign
+
+- [prefer-absolute-version-dependencies](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-absolute-version-dependencies)
+- [prefer-absolute-version-devDependencies](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-absolute-version-devDependencies)
+
 ## [2.4.0] - 2017-05-24
 ### Added
 Thanks to @chr1shaefn3r for submitting the new rules
