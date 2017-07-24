@@ -12,7 +12,6 @@ const Reporter = requireHelper('Reporter');
 describe('Reporter Unit Tests', function() {
   describe('write method', function() {
     context('when an array is passed', function() {
-      const reporter = new Reporter();
       const error = 'doh, I am an error';
       let spy;
 
@@ -29,7 +28,7 @@ describe('Reporter Unit Tests', function() {
         const errorCount = 1;
         const output = chalk.green.bold('\nNo errors found!');
 
-        reporter.write(errors, 'errors');
+        Reporter.write(errors, 'errors');
         spy.withArgs(output).calledOnce.should.be.true();
       });
 
@@ -41,7 +40,7 @@ describe('Reporter Unit Tests', function() {
 
         errors.push(new LintIssue('Lint ID', 'lintType', 'node', 'lintMessage'));
 
-        reporter.write(errors, 'errors');
+        Reporter.write(errors, 'errors');
         spy.calledThrice.should.be.true();
         spy.thirdCall.calledWithExactly(output).should.be.true();
       });
@@ -56,7 +55,7 @@ describe('Reporter Unit Tests', function() {
         errors.push(new LintIssue('Lint ID', 'lintType', 'node', 'lintMessage'));
         errors.push(new LintIssue('Lint ID', 'lintType', 'node', 'lintMessage'));
 
-        reporter.write(errors, 'errors');
+        Reporter.write(errors, 'errors');
         spy.callCount.should.equal(writeMethodCallCount);
         spy.lastCall.calledWithExactly(output).should.be.true();
       });

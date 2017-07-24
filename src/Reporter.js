@@ -10,8 +10,9 @@ class Reporter {
    * @param  {Array}      issues    An array of LintIssues
    * @param  {string}     issueType Error or warning
    * @return {undefined}            No return
+   * @static
    */
-  write(issues, issueType) {
+  static write(issues, issueType) {
     const issueCount = issues.length;
 
     if (issueCount) {

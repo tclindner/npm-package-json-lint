@@ -102,7 +102,6 @@ try {
 
   const npmPackageJsonLint = new NpmPackageJsonLint(fileData, rulesConfig, options);
   const output = npmPackageJsonLint.lint();
-  const reporter = new Reporter();
   let hasErrors = false;
 
   for (const issueType in output) {
@@ -114,7 +113,7 @@ try {
     }
 
     if (shouldLogOutput(cliApp.quiet, hasErrors)) {
-      reporter.write(output[issueType], issueType);
+      Reporter.write(output[issueType], issueType);
     }
   }
 
