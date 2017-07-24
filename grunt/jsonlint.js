@@ -7,7 +7,6 @@ module.exports = function(grunt) {
         'grunt/*.json',
         'tests/unit/**/*.json',
         '*.json',
-        '.jscsrc',
         '.npmpackagejsonlintrc'
       ]
     }

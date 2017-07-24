@@ -1,7 +1,6 @@
 'use strict';
 
 /* eslint max-nested-callbacks: "off" */
-// jscs:disable disallowQuotedKeysInObjects
 
 const should = require('should');
 const requireHelper = require('../../require_helper');

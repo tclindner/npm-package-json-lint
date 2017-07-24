@@ -31,10 +31,9 @@ Run `node src/cli.js`
 
 ### JS
 
-npm-package-json-lint utilizes both ESLint and JSCS to enforce JavaScript standards. Please see the `.eslintrc.json` file for ESLint config and `.jscsrc` for JSCS config.
+npm-package-json-lint utilizes both ESLint to enforce JavaScript standards. Please see the `.eslintrc.json` file for ESLint config.
 
 * [grunt-eslint](https://github.com/sindresorhus/grunt-eslint)
-* [grunt-jscs](https://github.com/jscs-dev/grunt-jscs)
 
 #### JSON
 
@@ -56,15 +55,15 @@ The configuration for Grunt tasks in this project are all in the `grunt/` folder
 Please use the following grunt commands to increment the package's version numbers
 EX: Assume current version is 0.0.1
 
-`grunt bump:patch`
+`npm version patch --no-git-tag-version`
 
 If you run this command the version will increase the patch number (ie 0.0.2)
 
-`grunt bump:minor`
+`npm version minor --no-git-tag-version`
 
 If you run this command the version will increase the minor number (ie 0.1.0)
 
-`grunt bump:major`
+`npm version major --no-git-tag-version`
 
 If you run this command the version will increase the major number (ie 1.0.0)
 

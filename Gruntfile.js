@@ -6,12 +6,10 @@ module.exports = function(grunt) {
 
   // Load Grunt plugins from the config files in the grunt/ directory
   grunt.loadTasks('grunt');
-  require('time-grunt')(grunt);
 
   // Register task for running linters
   grunt.registerTask('lint', [
     'jsonlint',
-    'jscs',
     'eslint'
   ]);
 
