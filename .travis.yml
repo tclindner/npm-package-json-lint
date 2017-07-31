@@ -21,9 +21,9 @@ cache:
   - node_modules
 
 before_script:
-  - npm install -g grunt-cli
   - npm prune
 
 script:
-  - grunt
-  - grunt testcoverage
+  - npm run lint
+  - npm test
+  - npm run coverage
