@@ -38,6 +38,7 @@
     "commander": "^2.11.0",
     "in-array": "^0.1.2",
     "is-plain-obj": "^1.1.0",
+    "log-symbols": "^2.0.0",
     "plur": "^2.1.2",
     "semver": "^5.4.1",
     "user-home": "^2.0.0",
