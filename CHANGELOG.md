@@ -13,8 +13,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [2.6.0] - 2017-07-30
 ### Changed
+- Bumped dependencies
 - Converted grunt tasks to npm scripts
-- Update cli output format for cleaning output
+- Update cli output format for cleaner output
 
 ## [2.5.0] - 2017-06-11
 ### Changed
