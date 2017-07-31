@@ -1,7 +1,6 @@
 'use strict';
 
 const chalk = require('chalk');
-const LintIssue = require('./LintIssue');
 const plur = require('plur');
 
 class Reporter {
