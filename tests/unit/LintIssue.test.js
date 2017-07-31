@@ -6,6 +6,7 @@ const chalk = require('chalk');
 const chai = require('chai');
 const requireHelper = require('../require_helper');
 const LintIssue = requireHelper('LintIssue');
+const logSymbols = require('log-symbols');
 
 const should = chai.should();
 
@@ -35,20 +36,20 @@ describe('LintIssue Unit Tests', function() {
   describe('toString method', function() {
     context('when the lintType is an error', function() {
       it('the formattedMessage should equal', function() {
-        const formattedLintId = chalk.cyan.bold('lintId');
-        const formattedNode = chalk.blue.bold('node');
+        const formattedLintId = chalk.gray.dim('lintId');
+        const formattedNode = chalk.gray.bold('node');
         const formattedMessage = chalk.bold.red('lintMessage');
-        const output = `${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
+        const output = `${logSymbols.error} ${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
         const lintIssue = new LintIssue('lintId', 'error', 'node', 'lintMessage');
 
         lintIssue.toString().should.equal(output);
       });
 
       it('when an array with one error is passed a formatted message should be returned saying there is one error', function() {
-        const formattedLintId = chalk.cyan.bold('lintId');
-        const formattedNode = chalk.blue.bold('node');
+        const formattedLintId = chalk.gray.dim('lintId');
+        const formattedNode = chalk.gray.bold('node');
         const formattedMessage = chalk.yellow('lintMessage');
-        const output = `${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
+        const output = `${logSymbols.warning} ${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
         const lintIssue = new LintIssue('lintId', 'warning', 'node', 'lintMessage');
 
         lintIssue.toString().should.equal(output);
