@@ -53,9 +53,7 @@ cliApp.parse(process.argv);
 
 // File to lint
 const filePath = cliApp.file ? cliApp.file : DEFAULT_FILE_NAME;
-const options = {
-  ignoreWarnings: false
-};
+const options = {ignoreWarnings: false};
 
 // Ignore warnings
 if (cliApp.ignoreWarnings) {
