@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [2.6.0] - 2017-07-30
 ### Changed
 - Converted grunt tasks to npm scripts
-- [prefer-absolute-version-devDependencies](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-absolute-version-devDependencies)
+- Update cli output format for cleaning output
 
 ## [2.5.0] - 2017-06-11
 ### Changed
