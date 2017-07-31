@@ -70,12 +70,9 @@ No warnings found!
     it('and one error, zero warnings is expected', function() {
       const cli = spawnSync('./src/cli.js', ['-c', errorRcFile, '-f', errorPkg]);
       const expected = `
-----errors-----
+1 error
 require-scripts - node: scripts - scripts is required
 
-1 errors found.
-
-No warnings found!
 ./tests/fixtures/errors/package.json check complete
 `;
 
@@ -85,12 +82,9 @@ No warnings found!
     it('and no errors, one warning is expected', function() {
       const cli = spawnSync('./src/cli.js', ['--rules-file', warningRcFile, '--file', warningPkg]);
       const expected = `
-No errors found!
-
-----warnings-----
+1 warning
 require-license - node: license - license is required
 
-1 warnings found.
 ./tests/fixtures/warnings/package.json check complete
 `;
 
@@ -100,12 +94,10 @@ require-license - node: license - license is required
     it('and one error, one warning is expected', function() {
       const cli = spawnSync('./src/cli.js', ['-c', errorWarningRcFile, '-f', errorWarningPkg]);
       const expected = `
-----errors-----
+1 error
 require-scripts - node: scripts - scripts is required
 
-1 errors found.
-
-----warnings-----
+1 warning
 require-license - node: license - license is required
 
 1 warnings found.
@@ -120,7 +112,6 @@ require-license - node: license - license is required
     it('and no errors, no warnings is expected', function() {
       const cli = spawnSync('./src/cli.js', ['-c', validRcFile, '-w']);
       const expected = `
-No errors found!
 ./package.json check complete
 `;
 
@@ -130,10 +121,9 @@ No errors found!
     it('and one error, zero warnings is expected', function() {
       const cli = spawnSync('./src/cli.js', ['-c', errorRcFile, '-f', errorPkg, '-w']);
       const expected = `
-----errors-----
+1 error
 require-scripts - node: scripts - scripts is required
 
-1 errors found.
 ./tests/fixtures/errors/package.json check complete
 `;
 
@@ -143,7 +133,6 @@ require-scripts - node: scripts - scripts is required
     it('and no errors, one warning is expected', function() {
       const cli = spawnSync('./src/cli.js', ['--rules-file', warningRcFile, '--file', warningPkg, '--ignore-warnings']);
       const expected = `
-No errors found!
 ./tests/fixtures/warnings/package.json check complete
 `;
 
@@ -153,10 +142,9 @@ No errors found!
     it('and one error, one warning is expected', function() {
       const cli = spawnSync('./src/cli.js', ['-c', errorWarningRcFile, '-f', errorWarningPkg, '--ignore-warnings']);
       const expected = `
-----errors-----
+1 error
 require-scripts - node: scripts - scripts is required
 
-1 errors found.
 ./tests/fixtures/errorsAndWarnings/package.json check complete
 `;
 
@@ -175,10 +163,8 @@ require-scripts - node: scripts - scripts is required
     it('and one error, zero warnings is expected', function() {
       const cli = spawnSync('./src/cli.js', ['-c', errorRcFile, '-f', errorPkg, '-q']);
       const expected = `
-----errors-----
+1 error
 require-scripts - node: scripts - scripts is required
-
-1 errors found.
 
 No warnings found!
 ./tests/fixtures/errors/package.json check complete
@@ -197,15 +183,12 @@ No warnings found!
     it('and one error, one warning is expected', function() {
       const cli = spawnSync('./src/cli.js', ['-c', errorWarningRcFile, '-f', errorWarningPkg, '--quiet']);
       const expected = `
-----errors-----
+1 error
 require-scripts - node: scripts - scripts is required
 
-1 errors found.
-
-----warnings-----
+1 warning
 require-license - node: license - license is required
 
-1 warnings found.
 ./tests/fixtures/errorsAndWarnings/package.json check complete
 `;
 
@@ -217,12 +200,9 @@ require-license - node: license - license is required
     it('and one error, zero warnings is expected', function() {
       const cli = spawnSync('./src/cli.js', ['-r', 'require-scripts', '-f', errorPkg]);
       const expected = `
-----errors-----
+1 error
 require-scripts - node: scripts - scripts is required
 
-1 errors found.
-
-No warnings found!
 ./tests/fixtures/errors/package.json check complete
 `;
 
@@ -232,12 +212,9 @@ No warnings found!
     it('and one error, zero warnings is expected', function() {
       const cli = spawnSync('./src/cli.js', ['-r', 'require-scripts', '-s', 'error', '-f', errorPkg]);
       const expected = `
-----errors-----
+1 error
 require-scripts - node: scripts - scripts is required
 
-1 errors found.
-
-No warnings found!
 ./tests/fixtures/errors/package.json check complete
 `;
 
@@ -247,12 +224,9 @@ No warnings found!
     it('and one error, zero warnings is expected', function() {
       const cli = spawnSync('./src/cli.js', ['-r', 'require-scripts', '-s', 'warning', '-f', errorPkg]);
       const expected = `
-No errors found!
-
-----warnings-----
+1 warning
 require-scripts - node: scripts - scripts is required
 
-1 warnings found.
 ./tests/fixtures/errors/package.json check complete
 `;
 
@@ -262,9 +236,6 @@ require-scripts - node: scripts - scripts is required
     it('and one error, zero warnings is expected', function() {
       const cli = spawnSync('./src/cli.js', ['-r', 'require-scripts', '-s', 'off', '-f', errorPkg]);
       const expected = `
-No errors found!
-
-No warnings found!
 ./tests/fixtures/errors/package.json check complete
 `;
 
