@@ -4,8 +4,7 @@ const chalk = require('chalk');
 const LintIssue = require('../../src/LintIssue');
 const chai = require('chai');
 const sinon = require('sinon');
-const requireHelper = require('../require_helper');
-const Reporter = requireHelper('Reporter');
+const Reporter = require('./../../src/Reporter');
 
 const should = chai.should();
 

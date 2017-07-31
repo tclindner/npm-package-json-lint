@@ -1,10 +1,7 @@
 'use strict';
 
-/* eslint max-nested-callbacks: "off" */
-
 const chai = require('chai');
-const requireHelper = require('../../require_helper');
-const alphabeticalSort = requireHelper('validators/alphabetical-sort');
+const alphabeticalSort = require('./../../../src/validators/alphabetical-sort');
 
 const should = chai.should();
 

@@ -1,10 +1,9 @@
 'use strict';
 
-/* eslint max-nested-callbacks: "off", max-lines: "off" */
+/* eslint max-lines: "off" */
 
 const chai = require('chai');
-const requireHelper = require('../../require_helper');
-const dependencyAudit = requireHelper('validators/dependency-audit');
+const dependencyAudit = require('./../../../src/validators/dependency-audit');
 
 const should = chai.should();
 

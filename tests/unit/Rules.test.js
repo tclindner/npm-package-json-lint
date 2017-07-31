@@ -1,14 +1,11 @@
 'use strict';
 
-/* eslint max-nested-callbacks: "off" */
-
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
 const chai = require('chai');
 const sinon = require('sinon');
-const requireHelper = require('../require_helper');
-const Rules = requireHelper('Rules');
+const Rules = require('./../../src/Rules');
 
 const should = chai.should();
 

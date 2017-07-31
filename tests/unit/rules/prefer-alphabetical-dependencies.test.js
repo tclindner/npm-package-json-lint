@@ -1,10 +1,7 @@
 'use strict';
 
-/* eslint max-nested-callbacks: "off" */
-
 const chai = require('chai');
-const requireHelper = require('../../require_helper');
-const lint = requireHelper('rules/prefer-alphabetical-dependencies').lint;
+const lint = require('./../../../src/rules/prefer-alphabetical-dependencies').lint;
 
 const should = chai.should();
 

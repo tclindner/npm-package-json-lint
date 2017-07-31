@@ -1,8 +1,7 @@
 'use strict';
 
 const chai = require('chai');
-const requireHelper = require('../../require_helper');
-const lint = requireHelper('rules/prefer-caret-version-dependencies').lint;
+const lint = require('./../../../src/rules/prefer-caret-version-dependencies').lint;
 
 const should = chai.should();
 

@@ -1,8 +1,7 @@
 'use strict';
 
 const chai = require('chai');
-const requireHelper = require('../../require_helper');
-const lint = requireHelper('rules/no-restricted-pre-release-devDependencies').lint;
+const lint = require('./../../../src/rules/no-restricted-pre-release-devDependencies').lint;
 
 const should = chai.should();
 

@@ -1,11 +1,8 @@
 'use strict';
 
-/* eslint max-nested-callbacks: "off" */
-
 const chalk = require('chalk');
 const chai = require('chai');
-const requireHelper = require('../require_helper');
-const LintIssue = requireHelper('LintIssue');
+const LintIssue = require('./../../src/LintIssue');
 const logSymbols = require('log-symbols');
 
 const should = chai.should();

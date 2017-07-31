@@ -1,10 +1,7 @@
 'use strict';
 
-/* eslint max-nested-callbacks: "off" */
-
 const chai = require('chai');
-const requireHelper = require('../../require_helper');
-const validValuesObj = requireHelper('validators/valid-values');
+const validValuesObj = require('./../../../src/validators/valid-values');
 
 const should = chai.should();
 

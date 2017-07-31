@@ -1,10 +1,7 @@
 'use strict';
 
-/* eslint max-nested-callbacks: "off" */
-
 const chai = require('chai');
-const requireHelper = require('../../require_helper');
-const format = requireHelper('validators/format');
+const format = require('./../../../src/validators/format');
 
 const should = chai.should();
 

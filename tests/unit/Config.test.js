@@ -4,8 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const chai = require('chai');
 const sinon = require('sinon');
-const requireHelper = require('../require_helper');
-const Config = requireHelper('Config');
+const Config = require('./../../src/Config');
 
 const should = chai.should();
 
@@ -136,8 +135,8 @@ describe('Config Unit Tests', function() {
       it('and the module name is relative path', function() {
         const moduleName = './index.js';
         const passedConfig = {
-          extends: './index.js',
-          rules: {
+          'extends': './index.js',
+          'rules': {
             'version-type': 'warning'
           }
         };
@@ -164,7 +163,7 @@ describe('Config Unit Tests', function() {
       it('and the module name is a node module', function() {
         const moduleName = 'npm-package-json-lint-config-tc';
         const passedConfig = {
-          extends: 'npm-package-json-lint-config-tc'
+          'extends': 'npm-package-json-lint-config-tc'
         };
         const config = new Config(passedConfig);
         const extendsObj = {

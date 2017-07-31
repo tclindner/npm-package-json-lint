@@ -1,12 +1,9 @@
 'use strict';
 
-/* eslint max-nested-callbacks: "off" */
-
 const fs = require('fs');
 const chai = require('chai');
 const sinon = require('sinon');
-const requireHelper = require('../require_helper');
-const Parser = requireHelper('Parser');
+const Parser = require('./../../src/Parser');
 
 const should = chai.should();
 

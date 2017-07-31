@@ -1,8 +1,7 @@
 'use strict';
 
 const chai = require('chai');
-const requireHelper = require('../../require_helper');
-const lint = requireHelper('rules/require-keywords').lint;
+const lint = require('./../../../src/rules/require-keywords').lint;
 
 const should = chai.should();
 

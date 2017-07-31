@@ -1,8 +1,7 @@
 'use strict';
 
 const chai = require('chai');
-const requireHelper = require('../../require_helper');
-const lint = requireHelper('rules/require-private').lint;
+const lint = require('./../../../src/rules/require-private').lint;
 
 const should = chai.should();
 
@@ -10,7 +9,7 @@ describe('require-private Unit Tests', function() {
   context('when package.json has node', function() {
     it('true should be returned', function() {
       const packageJsonData = {
-        private: 'private'
+        'private': 'private'
       };
       const response = lint(packageJsonData, 'error');
 
