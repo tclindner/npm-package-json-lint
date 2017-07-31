@@ -29,8 +29,7 @@
   "main": "src/NpmPackageJsonLint.js",
   "scripts": {
     "eslint": "eslint *.js --format=node_modules/eslint-formatter-pretty",
-    "jsonlint": "jsonlint *.json",
-    "lint": "npm run eslint && npm run jsonlint",
+    "lint": "npm run eslint",
     "test": "mocha tests/unit --recursive",
     "coverage": "nyc --extension .js --check-coverage --lines 99 --branches 97 --functions 98 npm test"
   },
