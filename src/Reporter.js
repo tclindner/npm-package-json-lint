@@ -1,7 +1,7 @@
 'use strict';
 
 const chalk = require('chalk');
-const LintIssue = require('./LintIssue');
+const plur = require('plur');
 
 class Reporter {
 
@@ -10,22 +10,28 @@ class Reporter {
    * @param  {Array}      issues    An array of LintIssues
    * @param  {string}     issueType Error or warning
    * @return {undefined}            No return
+   * @static
    */
-  write(issues, issueType) {
+  static write(issues, issueType) {
     const issueCount = issues.length;
 
     if (issueCount) {
-      console.log(`\n----${issueType}-----`);
+      const startOfString = 0;
+      const oneChar = 1;
+      const issueTypeAdj = issueType.substring(startOfString, issueType.length - oneChar);
+      const formattedHeading = `${issueCount} ${plur(issueTypeAdj, issueCount)}`;
+
+      if (issueType === 'errors') {
+        console.log(chalk.red.bold.underline(formattedHeading));
+      } else {
+        console.log(chalk.yellow.bold.underline(formattedHeading));
+      }
 
       for (const issue of issues) {
         console.log(issue.toString());
       }
 
-      const formattedIssueCount = chalk.red.bold(issueCount);
-
-      console.log(`\n${formattedIssueCount} ${issueType} found.`);
-    } else {
-      console.log(chalk.green.bold(`\nNo ${issueType} found!`));
+      console.log();
     }
   }
 

@@ -1,7 +1,8 @@
 'use strict';
 
+/* eslint class-methods-use-this: 'off' */
+
 const inArray = require('in-array');
-const isPlainObj = require('is-plain-obj');
 const Parser = require('./Parser');
 const path = require('path');
 
@@ -42,9 +43,9 @@ class Config {
       }
 
       return Object.assign({}, extendsConfig, passedConfig.rules);
-    } else {
-      throw new Error('No configuration passed');
     }
+
+    throw new Error('No configuration passed');
   }
 
   /**

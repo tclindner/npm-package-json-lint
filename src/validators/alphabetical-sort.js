@@ -1,6 +1,5 @@
 'use strict';
 
-// jscs:disable requireSpacesInForStatement, requireSpacesInForStatement
 const increment = 1;
 
 /**

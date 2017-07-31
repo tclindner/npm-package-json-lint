@@ -53,9 +53,7 @@ cliApp.parse(process.argv);
 
 // File to lint
 const filePath = cliApp.file ? cliApp.file : DEFAULT_FILE_NAME;
-const options = {
-  ignoreWarnings: false
-};
+const options = {ignoreWarnings: false};
 
 // Ignore warnings
 if (cliApp.ignoreWarnings) {
@@ -102,7 +100,6 @@ try {
 
   const npmPackageJsonLint = new NpmPackageJsonLint(fileData, rulesConfig, options);
   const output = npmPackageJsonLint.lint();
-  const reporter = new Reporter();
   let hasErrors = false;
 
   for (const issueType in output) {
@@ -114,7 +111,7 @@ try {
     }
 
     if (shouldLogOutput(cliApp.quiet, hasErrors)) {
-      reporter.write(output[issueType], issueType);
+      Reporter.write(output[issueType], issueType);
     }
   }
 

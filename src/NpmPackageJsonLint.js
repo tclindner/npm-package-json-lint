@@ -1,9 +1,9 @@
 'use strict';
 
-const chalk = require('chalk');
+/* eslint class-methods-use-this: 'off' */
+
 const Config = require('./Config');
 const inArray = require('in-array');
-const isPlainObj = require('is-plain-obj');
 const Rules = require('./Rules');
 
 class NpmPackageJsonLint {
@@ -77,9 +77,7 @@ class NpmPackageJsonLint {
    * @return {Object} Results based on the run
    */
   _getResultsObject() {
-    const result = {
-      errors: this.errors
-    };
+    const result = {errors: this.errors};
 
     if (!this.ignoreWarnings) {
       result.warnings = this.warnings;

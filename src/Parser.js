@@ -1,5 +1,7 @@
 'use strict';
 
+/* eslint class-methods-use-this: 'off' */
+
 const fs = require('fs');
 
 class Parser {

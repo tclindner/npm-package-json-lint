@@ -9,10 +9,6 @@
 
 ## Install project dependencies
 
-### Global Node Module(s)
-
-* [Grunt CLI](https://github.com/gruntjs/grunt-cli) - `npm install grunt-cli -g`
-
 ### Code
 
 * Fork and clone the npm-package-json-lint repo
@@ -27,44 +23,46 @@ This installs dependencies from `package.json`.
 
 Run `node src/cli.js`
 
+## npm scripts
+
+`npm run lint`
+
+This will:
+
+* run linters
+
+`npm test`
+
+This will:
+
+* run all of the mocha tests
+
 ## Code guidelines
 
 ### JS
 
-npm-package-json-lint utilizes both ESLint and JSCS to enforce JavaScript standards. Please see the `.eslintrc.json` file for ESLint config and `.jscsrc` for JSCS config.
+npm-package-json-lint utilizes ESLint to enforce JavaScript standards. Please see the `.eslintrc.json` file for ESLint config.
 
-* [grunt-eslint](https://github.com/sindresorhus/grunt-eslint)
-* [grunt-jscs](https://github.com/jscs-dev/grunt-jscs)
-
-#### JSON
-
-npm-package-json-lint utilizes JSON Lint to ensure JSON files are valid.
-
-* [grunt-jsonlint](https://github.com/brandonramirez/grunt-jsonlint)
+* [eslint](https://github.com/eslint/eslint)
 
 #### Checking coding style
 
-Run `grunt lint` before committing to ensure your changes follow our coding standards.
-
-
-### More info on Grunt
-
-The configuration for Grunt tasks in this project are all in the `grunt/` folder in individual files. The Gruntfile loads in all the tasks from this folder.
+Run `npm run lint` before committing to ensure your changes follow our coding standards.
 
 ## Versioning
 
-Please use the following grunt commands to increment the package's version numbers
+Please use the following commands to increment the package's version numbers
 EX: Assume current version is 0.0.1
 
-`grunt bump:patch`
+`npm version patch --no-git-tag-version`
 
 If you run this command the version will increase the patch number (ie 0.0.2)
 
-`grunt bump:minor`
+`npm version minor --no-git-tag-version`
 
 If you run this command the version will increase the minor number (ie 0.1.0)
 
-`grunt bump:major`
+`npm version major --no-git-tag-version`
 
 If you run this command the version will increase the major number (ie 1.0.0)
 

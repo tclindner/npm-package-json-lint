@@ -1,6 +1,7 @@
 'use strict';
 
 const chalk = require('chalk');
+const logSymbols = require('log-symbols');
 
 class LintIssue {
 
@@ -23,11 +24,12 @@ class LintIssue {
    * @return {String} Human-friendly message about the lint issue
    */
   toString() {
-    const formattedLintId = chalk.cyan.bold(this.lintId);
-    const formattedNode = chalk.blue.bold(this.node);
+    const logSymbol = this.lintType === 'error' ? logSymbols.error : logSymbols.warning;
+    const formattedLintId = chalk.gray.dim(this.lintId);
+    const formattedNode = chalk.gray.bold(this.node);
     const formattedMessage = this.lintType === 'error' ? chalk.bold.red(this.lintMessage) : chalk.yellow(this.lintMessage);
 
-    return `${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
+    return `${logSymbol} ${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
   }
 
 }
