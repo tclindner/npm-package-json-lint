@@ -3,7 +3,7 @@
 const fs = require('fs');
 const chai = require('chai');
 const sinon = require('sinon');
-const NpmPackageJsonlint = require('./../../src/NpmPackageJsonLint');
+const NpmPackageJsonLint = require('./../../src/NpmPackageJsonLint');
 
 const should = chai.should();
 
