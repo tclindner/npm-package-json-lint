@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  'rules': {
+  rules: {
     'require-author': 'error',
     'require-description': 'error',
     'require-devDependencies': 'error',
