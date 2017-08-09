@@ -11,6 +11,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [2.7.0] - 2017-08-08
+### Added
+- The ability to pass config using:
+  1. a `npmPackageJsonLintConfig` property in `package.json`
+  2. a `.npmpackagejsonlintrc` file in the current working directory
+  3. a `npmpackagejsonlint.config.js` file that exports a config object in the current working directory.
+  4. a global `.npmpackagejsonlintrc` file in the root of your user directory
+  5. a global `npmpackagejsonlint.config.js` file that exports a config object in the root of your user directory
+
 ## [2.6.0] - 2017-07-30
 ### Changed
 - Bumped dependencies
