@@ -31,7 +31,7 @@
     "eslint": "eslint . --format=node_modules/eslint-formatter-pretty",
     "lint": "npm run eslint",
     "test": "mocha tests/unit --recursive",
-    "coverage": "nyc --extension .js --check-coverage --lines 99 --branches 97 --functions 98 npm test"
+    "coverage": "nyc --extension .js --check-coverage --lines 99 --branches 97 --functions 96 npm test"
   },
   "dependencies": {
     "chalk": "^2.1.0",
