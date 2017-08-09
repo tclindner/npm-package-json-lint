@@ -243,7 +243,7 @@ ${figures.warning} require-license - node: license - license is required
 
   context('when the cli has the config as a JavaScript export', function() {
     it('and one error, one warning is expected', function() {
-      const cli = spawnSync('./../../../src/cli.js', [], {cwd: 'tests/fixtures/configJavaScriptFIle/'});
+      const cli = spawnSync('./../../../src/cli.js', [], {cwd: 'tests/fixtures/configJavaScriptFile/'});
       const expected = `1 error
 ${figures.cross} require-scripts - node: scripts - scripts is required
 
