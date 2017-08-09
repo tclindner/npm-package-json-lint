@@ -224,4 +224,36 @@ ${figures.warning} require-scripts - node: scripts - scripts is required
       cli.stdout.toString().should.equal(expected);
     });
   });
+
+  context('when the cli has the config as a package.json property', function() {
+    it('and one error, one warning is expected', function() {
+      const cli = spawnSync('./../../../src/cli.js', [], {cwd: 'tests/fixtures/packageJsonProperty/'});
+      const expected = `1 error
+${figures.cross} require-scripts - node: scripts - scripts is required
+
+1 warning
+${figures.warning} require-license - node: license - license is required
+
+./package.json check complete
+`;
+
+      cli.stdout.toString().should.equal(expected);
+    });
+  });
+
+  context('when the cli has the config as a JavaScript export', function() {
+    it('and one error, one warning is expected', function() {
+      const cli = spawnSync('./../../../src/cli.js', [], {cwd: 'tests/fixtures/configJavaScriptFIle/'});
+      const expected = `1 error
+${figures.cross} require-scripts - node: scripts - scripts is required
+
+1 warning
+${figures.warning} require-license - node: license - license is required
+
+./package.json check complete
+`;
+
+      cli.stdout.toString().should.equal(expected);
+    });
+  });
 });
