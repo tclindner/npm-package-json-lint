@@ -66,8 +66,11 @@ Run a specific rule, require-author, set severity to warning on a file relative 
 Run using the config in `.npmpackagejsonlintrc` on a file relative to the current working directory.
 `pjl-cli -f "../relative-path/package.json" -c "./.npmpackagejsonlintrc"`
 
-Run using the default config on a file relative to the current working directory
+Run on file relative to the current working directory. npm-package-json-lint attempts to find config. See lookup order below.
 `pjl-cli -f "../relative-path/package.json"`
+
+Run on file in the current working directory. npm-package-json-lint attempts to find config. See lookup order below.
+`pjl-cli`
 
 ## Lint Rules
 
@@ -80,7 +83,13 @@ Each rule contains the following properties:
   3. Message - example: author is required
   4. Rule Type - example: required
 
-As mentioned in the "Commands and configuration" section there are two ways to specify rule sets. The first is using `--rule` to specify a given rule. This will run npm-package-json-lint with just this rule. The second is using `--rules-file` to specify a JSON file, named [`.npmpackagejsonlintrc`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint-rc), to run a set of rules. If neither of the options above are specified then npm-package-json-lint looks for a global [`.npmpackagejsonlintrc`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint-rc) file in the root of your user directory.
+As mentioned in the "Commands and configuration" section there are two ways to specify rule sets. The first is using `--rule` to specify a given rule. This will run npm-package-json-lint with just this rule. The second is providing a configuration object. As of v2.7.0, there are multiple ways to provide a [configuration object](https://github.com/tclindner/npm-package-json-lint/wiki/configuration).
+
+  1. Adding a `--rules-file` to the command to specify a JSON file. This file is typically named [`.npmpackagejsonlintrc`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint-rc); however, you may optionally add a .json extension if you prefer.
+  2. Add a `npmPackageJsonLintConfig` property in `package.json` file
+  3. Add a `npmpackagejsonlint.config.js` file that exports a config object in the current working directory.
+  4. Add a global `.npmpackagejsonlintrc.json` file in the root of your user directory
+  5. Add a global `npmpackagejsonlint.config.js` file that exports a config object in the root of your user directory
 
 ### Configuring rules
 

@@ -2,17 +2,20 @@
 
 /* eslint class-methods-use-this: 'off' */
 
+const fs = require('fs');
 const inArray = require('in-array');
 const Parser = require('./Parser');
 const path = require('path');
+const userHome = require('user-home');
 
 class Config {
 
   /**
    * Constructor
    * @param  {Object|String} passedConfigParam Object or string with desired configuration
+   * @param  {Object}        packageJsonData   User's package.json data
    */
-  constructor(passedConfigParam) {
+  constructor(passedConfigParam, packageJsonData) {
     this.arrayRules = [
       'valid-values-author',
       'valid-values-private',
@@ -23,6 +26,9 @@ class Config {
     ];
 
     this.passedConfigParam = passedConfigParam;
+    this.packageJsonData = packageJsonData;
+    this.rcFileName = '.npmpackagejsonlintrc';
+    this.configFileName = 'npmpackagejsonlint.config.js';
   }
 
   /**
@@ -30,22 +36,44 @@ class Config {
    * @return {Object} Config object
    */
   get() {
-    if (this._isConfigPassed(this.passedConfigParam)) {
-      const passedConfig = this._getPassedConfig(this.passedConfigParam);
-      let extendsConfig = {};
+    const userConfig = this._getUserConfig();
 
-      if (passedConfig.hasOwnProperty('extends')) {
-        extendsConfig = this._getExtendsConfig(passedConfig.extends);
-      }
+    this._validateConfig(userConfig);
 
-      if (!passedConfig.hasOwnProperty('rules')) {
-        return Object.assign({}, extendsConfig);
-      }
+    let extendsConfig = {};
 
-      return Object.assign({}, extendsConfig, passedConfig.rules);
+    if (userConfig.hasOwnProperty('extends')) {
+      extendsConfig = this._getExtendsConfig(userConfig.extends);
     }
 
-    throw new Error('No configuration passed');
+    if (!userConfig.hasOwnProperty('rules')) {
+      return Object.assign({}, extendsConfig);
+    }
+
+    return Object.assign({}, extendsConfig, userConfig.rules);
+  }
+
+  /**
+   * Get users config with multiple fallbacks
+   *
+   * @returns {Object} Users config
+   */
+  _getUserConfig() {
+    if (this._isConfigPassed(this.passedConfigParam)) {
+      return this._getPassedConfig(this.passedConfigParam);
+    } else if (this.packageJsonData.hasOwnProperty('npmPackageJsonLintConfig')) {
+      return this.packageJsonData.npmPackageJsonLintConfig;
+    } else if (this._isConfigFileExist(this._getRelativeConfigFilePth(this.rcFileName))) {
+      return this._loadRcFile(this._getRelativeConfigFilePth(this.rcFileName));
+    } else if (this._isConfigFileExist(this._getRelativeConfigFilePth(this.configFileName))) {
+      return this._loadConfigFile(this._getRelativeConfigFilePth(this.configFileName));
+    } else if (this._isConfigFileExist(this._getUsrHmConfigFilePath(this.rcFileName))) {
+      return this._loadRcFile(this._getUsrHmConfigFilePath(this.rcFileName));
+    } else if (this._isConfigFileExist(this._getUsrHmConfigFilePath(this.configFileName))) {
+      return this._loadConfigFile(this._getUsrHmConfigFilePath(this.configFileName));
+    }
+
+    throw new Error('No configuration found');
   }
 
   /**
@@ -73,11 +101,7 @@ class Config {
         configFile = path.join(process.cwd(), passedConfig);
       }
 
-      const rcFileObj = parser.parse(configFile);
-
-      this._validateConfig(rcFileObj);
-
-      return rcFileObj;
+      return parser.parse(configFile);
     }
 
     return passedConfig;
@@ -102,6 +126,57 @@ class Config {
     this._validateConfig(configObj);
 
     return configObj.rules;
+  }
+
+  /**
+   * Gets relative config file path
+   *
+   * @param  {String}  fileName Name of the file
+   * @return {String}  File path of the config file
+   */
+  _getRelativeConfigFilePth(fileName) {
+    return path.join(process.cwd(), fileName);
+  }
+
+  /**
+   * Gets userhome directory config file path
+   *
+   * @param  {String}  fileName Name of the file
+   * @return {String}  File path of the config file
+   */
+  _getUsrHmConfigFilePath(fileName) {
+    return path.join(userHome, fileName);
+  }
+
+  /**
+   * Checks if a .npmpackagejsonlintrc.json file exists
+   *
+   * @param  {String}  filePath Path of the file
+   * @return {Boolean} true if it exists, false if not
+   */
+  _isConfigFileExist(filePath) {
+    return fs.existsSync(filePath);
+  }
+
+  /**
+   * Gets configuration from a extends config module
+   * @param  {String} filePath  File path of config file
+   * @return {Object}           Configuration object
+   */
+  _loadRcFile(filePath) {
+    const parser = new Parser();
+
+    return parser.parse(filePath);
+  }
+
+  /**
+   * Checks if a .npmpackagejsonlintrc.json file exists
+   *
+   * @param  {String}  filePath File path of config file
+   * @return {Boolean} true if it exists, false if not
+   */
+  _loadConfigFile(filePath) {
+    return require(filePath);
   }
 
   /**

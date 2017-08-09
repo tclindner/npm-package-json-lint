@@ -92,7 +92,7 @@ class NpmPackageJsonLint {
    * @return {Object}                 Configuration object for the run
    */
   _getConfig(config) {
-    const configObj = new Config(config);
+    const configObj = new Config(config, this.packageJsonData);
 
     return configObj.get();
   }
