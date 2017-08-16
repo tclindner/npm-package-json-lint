@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [2.7.1] - 2017-08-15
+### Fixed
+- [Issue #48](https://github.com/tclindner/npm-package-json-lint/issues/48) [valid-values-license](https://github.com/tclindner/npm-package-json-lint/wiki/valid-values-license)
+
 ## [2.7.0] - 2017-08-08
 ### Added
 - The ability to pass config using:
