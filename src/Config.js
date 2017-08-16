@@ -19,6 +19,7 @@ class Config {
     this.arrayRules = [
       'valid-values-author',
       'valid-values-private',
+      'valid-values-license',
       'no-restricted-dependencies',
       'no-restricted-devDependencies',
       'no-restricted-pre-release-dependencies',
