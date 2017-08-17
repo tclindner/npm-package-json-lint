@@ -19,7 +19,7 @@ describe('prefer-property-order Unit Tests', function() {
         'description'
       ];
       const response = lint(packageJsonData, 'error', preferredOrder);
-console.log(response);
+
       response.should.be.true;
     });
   });
