@@ -27,7 +27,7 @@ const isInAlphabeticalOrder = function(packageJsonData, nodeName) {
   const nodeKeysOriginal = Object.keys(packageJsonData[nodeName]);
   const nodeKeysSorted = Object.keys(packageJsonData[nodeName]).sort();
 
-  for (let keyIndex = 0;keyIndex <= nodeKeysOriginal.length;keyIndex += increment) {
+  for (let keyIndex = 0;keyIndex < nodeKeysOriginal.length;keyIndex += increment) {
     if (nodeKeysOriginal[keyIndex] !== nodeKeysSorted[keyIndex]) {
       isValid = false;
       data = {

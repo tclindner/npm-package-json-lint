@@ -23,7 +23,8 @@ class Config {
       'no-restricted-dependencies',
       'no-restricted-devDependencies',
       'no-restricted-pre-release-dependencies',
-      'no-restricted-pre-release-devDependencies'
+      'no-restricted-pre-release-devDependencies',
+      'prefer-property-order'
     ];
 
     this.passedConfigParam = passedConfigParam;
