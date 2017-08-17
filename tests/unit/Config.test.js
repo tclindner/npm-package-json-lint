@@ -387,7 +387,8 @@ describe('Config Unit Tests', function() {
           'require-version': 'warning',
           'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
           'valid-values-private': ['warning', [true, false]],
-          'valid-values-license': ['error', ['private', 'unlicensed']]
+          'valid-values-license': ['error', ['private', 'unlicensed']],
+          'prefer-property-order': ['error', ['name', 'version']]
         };
         const config = new Config(rcFileObj);
 
