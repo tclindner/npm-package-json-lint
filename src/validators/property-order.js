@@ -2,6 +2,7 @@
 
 /* eslint max-statements: 'off' */
 
+const notFound = -1;
 const empty = 0;
 const increment = 1;
 const defaultPreferredNodeOrder = [
@@ -68,13 +69,13 @@ const isInPreferredOrder = function(packageJsonData, userPreferredNodeOrder) {
   for (let keyIndex = 0;keyIndex < actualNodeList.length;keyIndex += increment) {
     let preferredNodeOrderItem = null;
 
-    if (!preferredNodeOrder.includes(actualNodeList[keyIndex])) {
+    if (preferredNodeOrder.indexOf(actualNodeList[keyIndex]) === notFound) {
       isValid = false;
       msg = `${actualNodeList[keyIndex]} is not in the preferred property list.`;
       break;
     }
 
-    if (!preferredNodeOrderCopy.includes(actualNodeList[keyIndex])) {
+    if (preferredNodeOrderCopy.indexOf(actualNodeList[keyIndex]) === notFound) {
       isValid = false;
       msg = `Please move ${actualNodeList[keyIndex]} before ${actualNodeList[keyIndex - increment]}.`;
       break;
