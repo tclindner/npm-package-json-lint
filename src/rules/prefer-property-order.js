@@ -11,15 +11,7 @@ const lint = function(packageJsonData, lintType, preferredOrder) {
   const result = isInPreferredOrder(packageJsonData, preferredOrder);
 
   if (!result.status) {
-    let helpTip = '';
-
-    if (result.data.actualNode === null) {
-      helpTip = `Please add ${result.data.desiredNode} at the end of the file.`;
-    } else {
-      helpTip = `Please move ${result.data.actualNode} after ${result.data.desiredNode}.`;
-    }
-
-    return new LintIssue(lintId, lintType, nodeName, `${message} ${helpTip}`);
+    return new LintIssue(lintId, lintType, nodeName, `${message} ${result.msg}`);
   }
 
   return true;
