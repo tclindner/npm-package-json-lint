@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [2.8.1] - 2017-08-21
+### Changed/Fixed
+- Updated rule: [prefer-property-order](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-property-order) based on discussion with @moshest in [issue #50](https://github.com/tclindner/npm-package-json-lint/issues/50) and @evilebottnawi in [issue #53](https://github.com/tclindner/npm-package-json-lint/issues/53).
+
 ## [2.8.0] - 2017-08-16
 ### Added
 - New rule: [prefer-property-order](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-property-order)
