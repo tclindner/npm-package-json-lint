@@ -17,7 +17,12 @@ class NpmPackageJsonLint {
   constructor(packageJsonData, config, options) {
     this.packageJsonData = packageJsonData;
     this.ignoreWarnings = options.ignoreWarnings;
-    this.arrayRuleTypes = ['valid-values', 'no-restricted-dependencies', 'no-restricted-pre-release-dependencies'];
+    this.arrayRuleTypes = [
+      'valid-values',
+      'no-restricted-dependencies',
+      'no-restricted-pre-release-dependencies',
+      'property-order'
+    ];
     this.errors = [];
     this.warnings = [];
 

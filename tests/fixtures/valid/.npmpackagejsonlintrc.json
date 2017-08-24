@@ -19,6 +19,24 @@
       "Thomas Lindner"
     ]],
     "name-format": "error",
-    "version-format": "error"
+    "version-format": "error",
+    "prefer-property-order": ["error", [
+      "name",
+      "version",
+      "description",
+      "keywords",
+      "homepage",
+      "bugs",
+      "author",
+      "repository",
+      "bin",
+      "files",
+      "main",
+      "scripts",
+      "dependencies",
+      "devDependencies",
+      "engines",
+      "license"
+    ]]
   }
 }
