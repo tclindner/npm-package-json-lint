@@ -1,11 +1,17 @@
 'use strict';
 
 const chai = require('chai');
-const lint = require('./../../../src/rules/no-restricted-pre-release-dependencies').lint;
+const {lint, ruleType} = require('./../../../src/rules/no-restricted-pre-release-dependencies');
 
 const should = chai.should();
 
 describe('no-restricted-pre-release-dependencies Unit Tests', function() {
+  context('a rule type value should be exported', function() {
+    it('it should equal "array"', function() {
+      ruleType.should.equal('array');
+    });
+  });
+
   context('when package.json has node with a restricted value', function() {
     it('LintIssue object should be returned', function() {
       const packageJsonData = {

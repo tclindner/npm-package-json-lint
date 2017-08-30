@@ -1,11 +1,17 @@
 'use strict';
 
 const chai = require('chai');
-const lint = require('./../../../src/rules/valid-values-license').lint;
+const {lint, ruleType} = require('./../../../src/rules/valid-values-license');
 
 const should = chai.should();
 
 describe('valid-values-license Unit Tests', function() {
+  context('a rule type value should be exported', function() {
+    it('it should equal "array"', function() {
+      ruleType.should.equal('array');
+    });
+  });
+
   context('when package.json has node with incorrect value', function() {
     it('LintIssue object should be returned', function() {
       const packageJsonData = {

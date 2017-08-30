@@ -5,7 +5,7 @@ const isValidValue = require('./../validators/valid-values').isValidValue;
 const lintId = 'valid-values-author';
 const nodeName = 'author';
 const message = 'Invalid value for author';
-const ruleType = 'valid-values';
+const ruleType = 'array';
 
 const lint = function(packageJsonData, lintType, validValues) {
   if (!isValidValue(packageJsonData, nodeName, validValues)) {
