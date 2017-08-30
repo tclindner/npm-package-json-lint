@@ -1,6 +1,6 @@
 {
   "name": "npm-package-json-lint",
-  "version": "2.8.2",
+  "version": "2.9.0",
   "description": "CLI app for linting package.json files.",
   "keywords": [
     "lint",
@@ -31,7 +31,7 @@
     "eslint": "eslint . --format=node_modules/eslint-formatter-pretty",
     "lint": "npm run eslint",
     "test": "mocha tests/unit --recursive",
-    "coverage": "nyc --extension .js --check-coverage --lines 99 --branches 97 --functions 96 npm test"
+    "coverage": "nyc --extension .js --check-coverage --lines 99 --branches 98 --functions 96 npm test"
   },
   "dependencies": {
     "chalk": "^2.1.0",
