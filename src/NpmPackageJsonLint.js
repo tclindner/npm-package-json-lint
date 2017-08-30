@@ -1,6 +1,6 @@
 'use strict';
 
-/* eslint class-methods-use-this: 'off' */
+/* eslint class-methods-use-this: 'off', max-statements: 'off' */
 
 const Config = require('./Config');
 const Rules = require('./Rules');
