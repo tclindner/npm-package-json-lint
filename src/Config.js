@@ -3,7 +3,6 @@
 /* eslint class-methods-use-this: 'off' */
 
 const fs = require('fs');
-const inArray = require('in-array');
 const Parser = require('./Parser');
 const path = require('path');
 const userHome = require('user-home');
@@ -198,7 +197,7 @@ class Config {
     if (typeof ruleConfig === 'string' && ruleConfig === 'off') {
       return true;
     } else if (typeof ruleConfig === 'string' && ruleConfig !== 'off') {
-      throw new Error(`${ruleName} - is an array type rule. It must be set to "off" if an array is not supplied.`)
+      throw new Error(`${ruleName} - is an array type rule. It must be set to "off" if an array is not supplied.`);
     } else if (typeof ruleConfig[0] !== 'string' || this._isSeverityInvalid(ruleConfig[0])) {
       throw new Error(`${ruleName} - first key must be set to "error", "warning", or "off". Currently set to "${ruleConfig[0]}".`);
     }
