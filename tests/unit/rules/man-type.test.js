@@ -1,7 +1,9 @@
 'use strict';
 
 const chai = require('chai');
-const {lint, ruleType} = require('./../../../src/rules/man-type');
+const ruleModule = require('./../../../src/rules/man-type');
+const lint = ruleModule.lint;
+const ruleType = ruleModule.ruleType;
 
 const should = chai.should();
 

@@ -1,7 +1,9 @@
 'use strict';
 
 const chai = require('chai');
-const {lint, ruleType} = require('./../../../src/rules/prefer-no-version-zero-dependencies');
+const ruleModule = require('./../../../src/rules/prefer-no-version-zero-dependencies');
+const lint = ruleModule.lint;
+const ruleType = ruleModule.ruleType;
 
 const should = chai.should();
 

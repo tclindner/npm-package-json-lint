@@ -1,7 +1,9 @@
 'use strict';
 
 const chai = require('chai');
-const {lint, ruleType} = require('./../../../src/rules/require-license');
+const ruleModule = require('./../../../src/rules/require-license');
+const lint = ruleModule.lint;
+const ruleType = ruleModule.ruleType;
 
 const should = chai.should();
 

@@ -1,7 +1,9 @@
 'use strict';
 
 const chai = require('chai');
-const {lint, ruleType} = require('./../../../src/rules/valid-values-private');
+const ruleModule = require('./../../../src/rules/valid-values-private');
+const lint = ruleModule.lint;
+const ruleType = ruleModule.ruleType;
 
 const should = chai.should();
 

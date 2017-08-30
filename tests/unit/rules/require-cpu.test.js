@@ -1,7 +1,9 @@
 'use strict';
 
 const chai = require('chai');
-const {lint, ruleType} = require('./../../../src/rules/require-cpu');
+const ruleModule = require('./../../../src/rules/require-cpu');
+const lint = ruleModule.lint;
+const ruleType = ruleModule.ruleType;
 
 const should = chai.should();
 
