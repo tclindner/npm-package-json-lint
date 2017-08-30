@@ -12,6 +12,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 
 
+## [2.9.0] - 2017-08-29
+### Changed
+- Update all rules to export the type of rule they are. Current valid values are "standard" and "array". The rules loader has been updated to references the ruleType export rather than trying to maintain a separate list of array style rules. This change closes [issue #56](https://github.com/tclindner/npm-package-json-lint/issues/56) and should prevent the issue discussed in [issue #53](https://github.com/tclindner/npm-package-json-lint/issues/53) from occurring again.
+
 ## [2.8.2] - 2017-08-23
 ### Fixed
 - Rule loader so it recognized [prefer-property-order](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-property-order) as an array type rule.
