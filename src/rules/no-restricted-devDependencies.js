@@ -5,7 +5,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'no-restricted-devDependencies';
 const nodeName = 'devDependencies';
 const message = 'You are using a restricted dependency. Please remove it.';
-const ruleType = 'no-restricted-dependencies';
+const ruleType = 'array';
 
 const lint = function(packageJsonData, lintType, invalidDependencies) {
   if (hasDependency(packageJsonData, nodeName, invalidDependencies)) {

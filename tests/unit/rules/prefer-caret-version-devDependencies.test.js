@@ -1,11 +1,19 @@
 'use strict';
 
 const chai = require('chai');
-const lint = require('./../../../src/rules/prefer-caret-version-devDependencies').lint;
+const ruleModule = require('./../../../src/rules/prefer-caret-version-devDependencies');
+const lint = ruleModule.lint;
+const ruleType = ruleModule.ruleType;
 
 const should = chai.should();
 
 describe('prefer-caret-version-devDependencies Unit Tests', function() {
+  context('a rule type value should be exported', function() {
+    it('it should equal "standard"', function() {
+      ruleType.should.equal('standard');
+    });
+  });
+
   context('when package.json has node with an invalid value', function() {
     it('LintIssue object should be returned', function() {
       const packageJsonData = {

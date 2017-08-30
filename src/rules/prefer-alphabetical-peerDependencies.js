@@ -5,7 +5,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'prefer-alphabetical-peerDependencies';
 const nodeName = 'peerDependencies';
 const message = 'Your peerDependencies are not in alphabetical order.';
-const ruleType = 'peerDependencies-alphabetical-order';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   const result = isInAlphabeticalOrder(packageJsonData, nodeName);

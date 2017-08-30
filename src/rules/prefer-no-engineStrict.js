@@ -4,7 +4,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'prefer-no-engineStrict';
 const nodeName = 'engineStrict';
 const message = 'engineStrict was deprecated with npm v3.0.0. Please remove it from your package.json file';
-const ruleType = 'deprecated-nodes';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (packageJsonData.hasOwnProperty(nodeName)) {

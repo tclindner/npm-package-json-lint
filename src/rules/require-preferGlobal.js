@@ -4,7 +4,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'require-preferGlobal';
 const nodeName = 'preferGlobal';
 const message = 'preferGlobal is required';
-const ruleType = 'required';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (!packageJsonData.hasOwnProperty(nodeName)) {

@@ -4,7 +4,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'require-keywords';
 const nodeName = 'keywords';
 const message = 'keywords is required';
-const ruleType = 'required';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (!packageJsonData.hasOwnProperty(nodeName)) {

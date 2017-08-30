@@ -5,7 +5,7 @@ const isBoolean = require('./../validators/type').isBoolean;
 const lintId = 'preferGlobal-type';
 const nodeName = 'preferGlobal';
 const message = 'Type should be a boolean';
-const ruleType = 'type';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (!isBoolean(packageJsonData, nodeName)) {

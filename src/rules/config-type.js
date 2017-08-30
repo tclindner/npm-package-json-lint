@@ -5,7 +5,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'config-type';
 const nodeName = 'config';
 const message = 'Type should be an Object';
-const ruleType = 'type';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (!isObject(packageJsonData, nodeName)) {

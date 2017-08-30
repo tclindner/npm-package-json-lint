@@ -1,11 +1,19 @@
 'use strict';
 
 const chai = require('chai');
-const lint = require('./../../../src/rules/prefer-property-order').lint;
+const ruleModule = require('./../../../src/rules/prefer-property-order');
+const lint = ruleModule.lint;
+const ruleType = ruleModule.ruleType;
 
 const should = chai.should();
 
 describe('prefer-property-order Unit Tests', function() {
+  context('a rule type value should be exported', function() {
+    it('it should equal "array"', function() {
+      ruleType.should.equal('array');
+    });
+  });
+
   context('when the properties in the package.json file are in the desired order', function() {
     it('true should be returned', function() {
       const packageJsonData = {

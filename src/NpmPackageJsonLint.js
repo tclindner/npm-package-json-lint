@@ -1,9 +1,8 @@
 'use strict';
 
-/* eslint class-methods-use-this: 'off' */
+/* eslint class-methods-use-this: 'off', max-statements: 'off' */
 
 const Config = require('./Config');
-const inArray = require('in-array');
 const Rules = require('./Rules');
 
 class NpmPackageJsonLint {
@@ -17,12 +16,6 @@ class NpmPackageJsonLint {
   constructor(packageJsonData, config, options) {
     this.packageJsonData = packageJsonData;
     this.ignoreWarnings = options.ignoreWarnings;
-    this.arrayRuleTypes = [
-      'valid-values',
-      'no-restricted-dependencies',
-      'no-restricted-pre-release-dependencies',
-      'property-order'
-    ];
     this.errors = [];
     this.warnings = [];
 
@@ -41,7 +34,8 @@ class NpmPackageJsonLint {
     for (const rule in configObj) {
       const ruleModule = this.rules.get(rule);
 
-      if (inArray(this.arrayRuleTypes, ruleModule.ruleType)) {
+      if (ruleModule.ruleType === 'array') {
+        Config.isArrayRuleConfigValid(rule, configObj[rule]);
         const errorWarningOffSetting = typeof configObj[rule] === 'string' && configObj[rule] === 'off' ? configObj[rule] : configObj[rule][0];
         const ruleConfigArray = configObj[rule][1];
 
@@ -50,6 +44,7 @@ class NpmPackageJsonLint {
         }
 
       } else {
+        Config.isStandardRuleConfigValid(rule, configObj[rule]);
         const errorWarningOffSetting = configObj[rule];
 
         if (errorWarningOffSetting !== 'off') {

@@ -5,7 +5,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'version-format';
 const nodeName = 'version';
 const message = 'Format must be a valid semantic version';
-const ruleType = 'format';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (!isValidVersionNumber(packageJsonData, nodeName)) {

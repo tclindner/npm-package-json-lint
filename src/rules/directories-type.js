@@ -5,7 +5,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'directories-type';
 const nodeName = 'directories';
 const message = 'Type should be an Object';
-const ruleType = 'type';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (!isObject(packageJsonData, nodeName)) {

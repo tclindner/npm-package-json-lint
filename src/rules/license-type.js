@@ -5,7 +5,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'license-type';
 const nodeName = 'license';
 const message = 'Type should be a string';
-const ruleType = 'type';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (!isString(packageJsonData, nodeName)) {

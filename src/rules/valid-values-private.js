@@ -5,7 +5,7 @@ const isValidValue = require('./../validators/valid-values').isValidValue;
 const lintId = 'valid-values-private';
 const nodeName = 'private';
 const message = 'Invalid value for private';
-const ruleType = 'valid-values';
+const ruleType = 'array';
 
 /**
  * [function description]

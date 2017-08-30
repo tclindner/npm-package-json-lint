@@ -5,7 +5,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'no-restricted-pre-release-dependencies';
 const nodeName = 'dependencies';
 const message = 'You are using a restricted pre-release dependency. Please remove it.';
-const ruleType = 'no-restricted-pre-release-dependencies';
+const ruleType = 'array';
 
 const lint = function(packageJsonData, lintType, invalidPreRelDeps) {
   if (hasDepPrereleaseVers(packageJsonData, nodeName, invalidPreRelDeps)) {

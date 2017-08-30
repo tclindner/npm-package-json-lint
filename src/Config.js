@@ -3,7 +3,6 @@
 /* eslint class-methods-use-this: 'off' */
 
 const fs = require('fs');
-const inArray = require('in-array');
 const Parser = require('./Parser');
 const path = require('path');
 const userHome = require('user-home');
@@ -39,8 +38,6 @@ class Config {
    */
   get() {
     const userConfig = this._getUserConfig();
-
-    this._validateConfig(userConfig);
 
     let extendsConfig = {};
 
@@ -125,8 +122,6 @@ class Config {
 
     const configObj = this._getExtendsConfigModule(adjustedModuleName);
 
-    this._validateConfig(configObj);
-
     return configObj.rules;
   }
 
@@ -192,50 +187,51 @@ class Config {
   }
 
   /**
-   * Validates config object
-   * @param  {Object} rcFileObj   Object version of .npmpackagejsonlintrc file
-   * @return {boolean}            True if validate config is successful
+   * Validates array rule config
+   * @param  {String}    ruleName    Name of the rule
+   * @param  {Array}     ruleConfig  Array rule
+   * @return {Boolean}               True if config is valid, false if not
+   * @static
    */
-  _validateConfig(rcFileObj) {
-    if (rcFileObj.hasOwnProperty('rules')) {
-      this._validateRulesConfig(rcFileObj.rules);
+  static isArrayRuleConfigValid(ruleName, ruleConfig) {
+    if (typeof ruleConfig === 'string' && ruleConfig === 'off') {
+      return true;
+    } else if (typeof ruleConfig === 'string' && ruleConfig !== 'off') {
+      throw new Error(`${ruleName} - is an array type rule. It must be set to "off" if an array is not supplied.`);
+    } else if (typeof ruleConfig[0] !== 'string' || this._isSeverityInvalid(ruleConfig[0])) {
+      throw new Error(`${ruleName} - first key must be set to "error", "warning", or "off". Currently set to "${ruleConfig[0]}".`);
+    }
+
+    if (!Array.isArray(ruleConfig[1])) {
+      throw new Error(`${ruleName} - second key must be set an array. Currently set to "${ruleConfig[1]}".`);
     }
 
     return true;
   }
 
   /**
-   * Validates rules object
-   * @param  {Object}     rulesObj   Object version of .npmpackagejsonlintrc file
-   * @return {boolean}               True if validate config is successful
+   * Validates standard rule config
+   * @param  {String}     ruleName     Name of the rule
+   * @param  {Object}     ruleConfig   Value for standard rule config
+   * @return {Boolean}                 True if config is valid, false if not
+   * @static
    */
-  _validateRulesConfig(rulesObj) {
-    for (const rule in rulesObj) {
-      const ruleConfig = rulesObj[rule];
-
-      if (Array.isArray(ruleConfig) && inArray(this.arrayRules, rule)) {
-        if (typeof ruleConfig[0] !== 'string' || this._isRuleValid(ruleConfig[0])) {
-          throw new Error(`${rule} - first key must be set to "error", "warning", or "off". Currently set to ${ruleConfig[0]}`);
-        }
-
-        if (!Array.isArray(ruleConfig[1])) {
-          throw new Error(`${rule} - second key must be set an array. Currently set to ${ruleConfig[1]}`);
-        }
-      } else if (typeof ruleConfig !== 'string' || this._isRuleValid(ruleConfig)) {
-        throw new Error(`${rule} - must be set to "error", "warning", or "off". Currently set to ${ruleConfig}`);
-      }
+  static isStandardRuleConfigValid(ruleName, ruleConfig) {
+    if (this._isSeverityInvalid(ruleConfig)) {
+      throw new Error(`${ruleName} - must be set to "error", "warning", or "off". Currently set to "${ruleConfig}".`);
     }
 
     return true;
   }
 
   /**
-   * Validates the first key of an array type rule
-   * @param  {String}  key Error type of the rule
-   * @return {Boolean}     True if the rule is valid. False if the rule is invalid.
+   * Validates if the severity config is set correctly
+   * @param  {String}  severity Severity the rule is set to
+   * @return {Boolean}          True if the severity is valid. False if the severity is invalid.
+   * @static
    */
-  _isRuleValid(key) {
-    return typeof key === 'string' && key !== 'error' && key !== 'warning' && key !== 'off';
+  static _isSeverityInvalid(severity) {
+    return typeof severity !== 'string' || (typeof severity === 'string' && severity !== 'error' && severity !== 'warning' && severity !== 'off');
   }
 
 }

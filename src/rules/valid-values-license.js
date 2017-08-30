@@ -5,7 +5,7 @@ const isValidValue = require('./../validators/valid-values').isValidValue;
 const lintId = 'valid-values-license';
 const nodeName = 'license';
 const message = 'Invalid value for license';
-const ruleType = 'valid-values';
+const ruleType = 'array';
 
 /**
  * Lints package.json file to check for valid values in the license field

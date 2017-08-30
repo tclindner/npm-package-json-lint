@@ -5,7 +5,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'prefer-alphabetical-dependencies';
 const nodeName = 'dependencies';
 const message = 'Your dependencies are not in alphabetical order.';
-const ruleType = 'dependencies-alphabetical-order';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   const result = isInAlphabeticalOrder(packageJsonData, nodeName);

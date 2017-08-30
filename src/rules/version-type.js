@@ -5,7 +5,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'version-type';
 const nodeName = 'version';
 const message = 'Type should be a string';
-const ruleType = 'type';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (!isString(packageJsonData, nodeName)) {

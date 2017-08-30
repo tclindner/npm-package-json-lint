@@ -379,98 +379,78 @@ describe('Config Unit Tests', function() {
     });
   });
 
-  context('_validateRulesConfig tests', function() {
-    context('when a valid npmpackagejsonlintrc file object is passed', function() {
-      it('true should be returned', function() {
-        const rcFileObj = {
-          'require-author': 'error',
-          'require-version': 'warning',
-          'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
-          'valid-values-private': ['warning', [true, false]],
-          'valid-values-license': ['error', ['private', 'unlicensed']],
-          'prefer-property-order': ['error', ['name', 'version']]
-        };
-        const config = new Config(rcFileObj);
-
-        config._validateRulesConfig(rcFileObj).should.eql(true);
-      });
-    });
-
-    context('when a valid npmpackagejsonlintrc file object is passed', function() {
-      it('true should be returned', function() {
-        const rcFileObj = {
-          'require-author': 'error',
-          'require-version': 'warning',
-          'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
-          'valid-values-private': ['warning', [true, false]]
-        };
-        const config = new Config(rcFileObj);
-
-        config._validateRulesConfig(rcFileObj).should.eql(true);
-      });
-    });
-
-    context('when a rule is set to a boolean', function() {
-      it('an error should be thrown', function() {
-        const rcFileObj = {
-          'require-author': true,
-          'require-version': 'warning',
-          'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
-          'valid-values-private': ['warning', [true, false]]
-        };
-        const config = new Config(rcFileObj);
-
-        (function() {
-          config._validateRulesConfig(rcFileObj);
-        }).should.throw('require-author - must be set to "error", "warning", or "off". Currently set to true');
-      });
-    });
-
-    context('when a rule is set to a number', function() {
-      it('an error should be thrown', function() {
-        const rcFileObj = {
-          'require-author': 1,
-          'require-version': 'warning',
-          'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
-          'valid-values-private': ['warning', [true, false]]
-        };
-        const config = new Config(rcFileObj);
-
-        (function() {
-          config._validateRulesConfig(rcFileObj);
-        }).should.throw('require-author - must be set to "error", "warning", or "off". Currently set to 1');
-      });
-    });
-
+  context('isArrayRuleConfigValid tests', function() {
     context('when a rule is an array rule and the first key is not equal to error, warning, or off', function() {
       it('an error should be thrown', function() {
-        const rcFileObj = {
-          'require-author': 'error',
-          'require-version': 'warning',
-          'valid-values-author': [true, ['Thomas', 'Lindner', 'Thomas Lindner']],
-          'valid-values-private': ['warning', [true, false]]
-        };
-        const config = new Config(rcFileObj);
-
         (function() {
-          config._validateRulesConfig(rcFileObj);
-        }).should.throw('valid-values-author - first key must be set to "error", "warning", or "off". Currently set to true');
+          Config.isArrayRuleConfigValid('valid-values-author', [true, ['Thomas', 'Lindner', 'Thomas Lindner']]);
+        }).should.throw('valid-values-author - first key must be set to "error", "warning", or "off". Currently set to "true".');
       });
     });
 
     context('when a rule is an array rule and the second key is not an Array', function() {
       it('an error should be thrown', function() {
-        const rcFileObj = {
-          'require-author': 'error',
-          'require-version': 'warning',
-          'valid-values-author': ['error', 'Thomas'],
-          'valid-values-private': ['warning', [true, false]]
-        };
-        const config = new Config(rcFileObj);
+        (function() {
+          Config.isArrayRuleConfigValid('valid-values-author', ['error', 'Thomas']);
+        }).should.throw('valid-values-author - second key must be set an array. Currently set to "Thomas".');
+      });
+    });
+
+    context('when a valid array rule config is passed', function() {
+      it('true should be returned', function() {
+        Config.isArrayRuleConfigValid('prefer-property-order', ['error', ['name', 'version']]).should.be.true;
+      });
+    });
+
+    context('when a valid array rule config is passed with a value of off', function() {
+      it('true should be returned', function() {
+        Config.isArrayRuleConfigValid('prefer-property-order', 'off').should.be.true;
+      });
+    });
+
+    context('when a invalid array rule config is passed with a value of error', function() {
+      it('true should be returned', function() {
+        (function() {
+          Config.isArrayRuleConfigValid('valid-values-author', 'error');
+        }).should.throw('valid-values-author - is an array type rule. It must be set to "off" if an array is not supplied.');
+      });
+    });
+  });
+
+  context('isStandardRuleConfigValid tests', function() {
+    context('when a standard rule is passed with a value of error', function() {
+      it('true should be returned', function() {
+        Config.isStandardRuleConfigValid('require-author', 'error').should.be.true;
+      });
+    });
+
+    context('when a standard rule is passed with a value of warning', function() {
+      it('true should be returned', function() {
+        Config.isStandardRuleConfigValid('require-author', 'warning').should.be.true;
+      });
+    });
+
+    context('when a standard rule is passed with a value of off', function() {
+      it('true should be returned', function() {
+        Config.isStandardRuleConfigValid('require-author', 'off').should.be.true;
+      });
+    });
+
+    context('when a rule is set to a boolean', function() {
+      it('an error should be thrown', function() {
+        (function() {
+          Config.isStandardRuleConfigValid('require-author', true);
+        }).should.throw('require-author - must be set to "error", "warning", or "off". Currently set to "true".');
+      });
+    });
+
+    context('when a rule is set to a number', function() {
+      it('an error should be thrown', function() {
+        const dummyValue = 1;
 
         (function() {
-          config._validateRulesConfig(rcFileObj);
-        }).should.throw('valid-values-author - second key must be set an array. Currently set to Thomas');
+          Config.isStandardRuleConfigValid('require-author', dummyValue);
+        }).should.throw('require-author - must be set to "error", "warning", or "off". Currently set to "1".');
       });
     });
   });
