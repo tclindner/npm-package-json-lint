@@ -5,7 +5,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'os-type';
 const nodeName = 'os';
 const message = 'Type should be an array';
-const ruleType = 'type';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (!isArray(packageJsonData, nodeName)) {

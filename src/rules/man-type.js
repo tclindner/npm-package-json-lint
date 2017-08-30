@@ -6,7 +6,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'man-type';
 const nodeName = 'man';
 const message = 'Type should be either a string or an array';
-const ruleType = 'type';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (!isArray(packageJsonData, nodeName) && !isString(packageJsonData, nodeName)) {

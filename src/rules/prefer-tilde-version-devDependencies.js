@@ -5,7 +5,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'prefer-tilde-version-devDependencies';
 const nodeName = 'devDependencies';
 const message = 'You are using an invalid version range. Please use ~.';
-const ruleType = 'devDependencies-version-range';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   const rangeSpecifier = '~';

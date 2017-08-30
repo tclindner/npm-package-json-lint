@@ -5,7 +5,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'name-format';
 const nodeName = 'name';
 const message = 'Format should be all lowercase';
-const ruleType = 'format';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (!isLowercase(packageJsonData, nodeName)) {

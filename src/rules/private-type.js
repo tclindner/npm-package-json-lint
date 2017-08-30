@@ -5,7 +5,7 @@ const isBoolean = require('./../validators/type').isBoolean;
 const lintId = 'private-type';
 const nodeName = 'private';
 const message = 'Type should be a boolean';
-const ruleType = 'type';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (!isBoolean(packageJsonData, nodeName)) {

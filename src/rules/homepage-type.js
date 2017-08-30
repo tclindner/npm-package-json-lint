@@ -5,7 +5,7 @@ const isString = require('./../validators/type').isString;
 const lintId = 'homepage-type';
 const nodeName = 'homepage';
 const message = 'Type should be a string';
-const ruleType = 'type';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (!isString(packageJsonData, nodeName)) {

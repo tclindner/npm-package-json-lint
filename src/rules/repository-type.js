@@ -6,7 +6,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'repository-type';
 const nodeName = 'repository';
 const message = 'Type should be either a string or an Object';
-const ruleType = 'type';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (!isString(packageJsonData, nodeName) && !isObject(packageJsonData, nodeName)) {

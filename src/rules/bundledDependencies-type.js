@@ -5,7 +5,7 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'bundledDependencies-type';
 const nodeName = 'bundledDependencies';
 const message = 'Type should be an Object';
-const ruleType = 'type';
+const ruleType = 'standard';
 
 const lint = function(packageJsonData, lintType) {
   if (!isObject(packageJsonData, nodeName)) {

@@ -1,11 +1,17 @@
 'use strict';
 
 const chai = require('chai');
-const lint = require('./../../../src/rules/require-description').lint;
+const {lint, ruleType} = require('./../../../src/rules/require-description');
 
 const should = chai.should();
 
 describe('require-description Unit Tests', function() {
+  context('a rule type value should be exported', function() {
+    it('it should equal "standard"', function() {
+      ruleType.should.equal('standard');
+    });
+  });
+
   context('when package.json has node', function() {
     it('true should be returned', function() {
       const packageJsonData = {

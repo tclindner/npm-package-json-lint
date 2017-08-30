@@ -1,11 +1,17 @@
 'use strict';
 
 const chai = require('chai');
-const lint = require('./../../../src/rules/prefer-alphabetical-dependencies').lint;
+const {lint, ruleType} = require('./../../../src/rules/prefer-alphabetical-dependencies');
 
 const should = chai.should();
 
 describe('prefer-alphabetical-dependencies Unit Tests', function() {
+  context('a rule type value should be exported', function() {
+    it('it should equal "standard"', function() {
+      ruleType.should.equal('standard');
+    });
+  });
+
   context('when package.json has node with an invalid order', function() {
     it('LintIssue object should be returned', function() {
       const packageJsonData = {

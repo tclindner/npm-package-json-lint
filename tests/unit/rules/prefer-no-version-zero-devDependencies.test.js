@@ -1,11 +1,17 @@
 'use strict';
 
 const chai = require('chai');
-const lint = require('./../../../src/rules/prefer-no-version-zero-devDependencies').lint;
+const {lint, ruleType} = require('./../../../src/rules/prefer-no-version-zero-devDependencies');
 
 const should = chai.should();
 
 describe('prefer-no-version-zero-devDependencies Unit Tests', function() {
+  context('a rule type value should be exported', function() {
+    it('it should equal "standard"', function() {
+      ruleType.should.equal('standard');
+    });
+  });
+
   context('when package.json has node with an invalid value', function() {
     it('LintIssue object should be returned', function() {
       const packageJsonData = {
