@@ -12,6 +12,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 
 
+## [2.11.0] - 2017-09-02
+### Added
+- New rule: [require-module](https://github.com/tclindner/npm-package-json-lint/wiki/require-module)
+
 ## [2.10.0] - 2017-09-02
 ### Changed
 - Addressed issues, from @moshest, [#57](https://github.com/tclindner/npm-package-json-lint/issues/57) and [#58](https://github.com/tclindner/npm-package-json-lint/issues/58). This change gives better recommendations for what change is required by the user to resolve the lint issue. It also no longer throws an error when a property exists in the package.json file that doesn't exist in the preferred property order array. Thanks @moshest.
