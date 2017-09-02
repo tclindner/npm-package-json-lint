@@ -42,7 +42,7 @@ describe('property-order Unit Tests', function() {
     });
 
     context('when the actual node list does not have the same number of nodes as the desired list', function() {
-      it('false should be returned', function() {
+      it('true should be returned', function() {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0'
@@ -74,7 +74,7 @@ describe('property-order Unit Tests', function() {
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
         response.status.should.be.false;
-        response.msg.should.equal('Please move version before description.');
+        response.msg.should.equal('Please move "description" after "version".');
       });
     });
 
@@ -93,12 +93,12 @@ describe('property-order Unit Tests', function() {
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
         response.status.should.be.false;
-        response.msg.should.equal('Please move name before version.');
+        response.msg.should.equal('Please move "version" after "name".');
       });
     });
 
     context('when the actual node list is in a different order than desired', function() {
-      it('false should be returned', function() {
+      it('true should be returned', function() {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
@@ -118,7 +118,7 @@ describe('property-order Unit Tests', function() {
     });
 
     context('when the actual node list is in a different order than desired', function() {
-      it('false should be returned', function() {
+      it('true should be returned', function() {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
@@ -163,8 +163,34 @@ describe('property-order Unit Tests', function() {
       });
     });
 
+    context('when the actual node list is in correct order, but has extra values in preferred order', function() {
+      it('false should be returned', function() {
+        const packageJson = {
+          name: 'awesome-module',
+          version: '1.0.0',
+          description: 'description',
+          homepage: 'https://github.com/tclindner/npm-package-json-lint',
+          license: 'MIT',
+          keywords: ['awesome']
+        };
+        const preferredOrder = [
+          'name',
+          'version',
+          'description',
+          'scripts',
+          'bin',
+          'keywords',
+          'homepage'
+        ];
+        const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
+
+        response.status.should.be.false;
+        response.msg.should.equal('Please move "homepage" after "keywords".');
+      });
+    });
+
     context('when the actual node list is not in correct order and also has extra values in preferred order', function() {
-      it('true should be returned', function() {
+      it('false should be returned', function() {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
@@ -184,12 +210,12 @@ describe('property-order Unit Tests', function() {
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
         response.status.should.be.false;
-        response.msg.should.equal('Please move keywords before homepage.');
+        response.msg.should.equal('Please move "homepage" after "keywords".');
       });
     });
 
     context('when node is not in the preferred node list', function() {
-      it('false should be returned', function() {
+      it('true should be returned', function() {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
@@ -204,13 +230,13 @@ describe('property-order Unit Tests', function() {
         ];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
-        response.status.should.be.false;
-        response.msg.should.equal('description is not in the preferred property list.');
+        response.status.should.be.true;
+        (response.msg === null).should.be.true;
       });
     });
 
     context('when node is not in the preferred node list', function() {
-      it('false should be returned', function() {
+      it('true should be returned', function() {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
@@ -224,8 +250,8 @@ describe('property-order Unit Tests', function() {
         ];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
-        response.status.should.be.false;
-        response.msg.should.equal('name is not in the preferred property list.');
+        response.status.should.be.true;
+        (response.msg === null).should.be.true;
       });
     });
   });

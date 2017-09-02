@@ -66,7 +66,7 @@ describe('prefer-property-order Unit Tests', function() {
       response.lintId.should.equal('prefer-property-order');
       response.lintType.should.equal('error');
       response.node.should.equal('');
-      response.lintMessage.should.equal('Your package.json properties are not in the desired order. Please move version before description.');
+      response.lintMessage.should.equal('Your package.json properties are not in the desired order. Please move "description" after "version".');
     });
   });
 });

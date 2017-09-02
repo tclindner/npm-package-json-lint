@@ -12,6 +12,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 
 
+## [2.10.0] - 2017-09-02
+### Changed
+- Addressed issues, from @moshest, [#57](https://github.com/tclindner/npm-package-json-lint/issues/57) and [#58](https://github.com/tclindner/npm-package-json-lint/issues/58). This change gives better recommendations for what change is required by the user to resolve the lint issue. It also no longer throws an error when a property exists in the package.json file that doesn't exist in the preferred property order array. Thanks @moshest.
+
 ## [2.9.0] - 2017-08-29
 ### Changed
 - Update all rules to export the type of rule they are. Current valid values are "standard" and "array". The rules loader has been updated to references the ruleType export rather than trying to maintain a separate list of array style rules. This change closes [issue #56](https://github.com/tclindner/npm-package-json-lint/issues/56) and should prevent the issue discussed in [issue #53](https://github.com/tclindner/npm-package-json-lint/issues/53) from occurring again.

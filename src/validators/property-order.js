@@ -4,6 +4,8 @@
 
 const notFound = -1;
 const empty = 0;
+const zero = 0;
+const one = 1;
 const increment = 1;
 const defaultPreferredNodeOrder = [
   'name',
@@ -62,29 +64,26 @@ const defaultPreferredNodeOrder = [
 const isInPreferredOrder = function(packageJsonData, userPreferredNodeOrder) {
   let isValid = true;
   let msg = null;
-  const actualNodeList = Object.keys(packageJsonData);
   const preferredNodeOrder = userPreferredNodeOrder.length === empty ? Array.from(defaultPreferredNodeOrder) : Array.from(userPreferredNodeOrder);
-  const preferredNodeOrderCopy = Array.from(preferredNodeOrder);
+  const fltrdPreferredNodeOrder = preferredNodeOrder.filter((property) => packageJsonData.hasOwnProperty(property));
+  const actualNodeList = Object.keys(packageJsonData);
+  const fltrdActualNodeList = actualNodeList.filter((property) => preferredNodeOrder.indexOf(property) !== notFound);
+  const filteredPreferredOrderMap = new Map();
 
-  for (let keyIndex = 0;keyIndex < actualNodeList.length;keyIndex += increment) {
-    let preferredNodeOrderItem = null;
+  fltrdPreferredNodeOrder.forEach((property, index) => {
+    filteredPreferredOrderMap.set(property, index);
+  });
 
-    if (preferredNodeOrder.indexOf(actualNodeList[keyIndex]) === notFound) {
+  for (let keyIndex = 0;keyIndex < fltrdActualNodeList.length;keyIndex += increment) {
+    const currentPkgJsonProperty = fltrdActualNodeList[keyIndex];
+
+    const preferredOrderPosition = filteredPreferredOrderMap.get(currentPkgJsonProperty);
+
+    if (preferredOrderPosition !== keyIndex) {
       isValid = false;
-      msg = `${actualNodeList[keyIndex]} is not in the preferred property list.`;
+      msg = `Please move "${currentPkgJsonProperty}" after "${fltrdPreferredNodeOrder[preferredOrderPosition - one]}".`;
       break;
     }
-
-    if (preferredNodeOrderCopy.indexOf(actualNodeList[keyIndex]) === notFound) {
-      isValid = false;
-      msg = `Please move ${actualNodeList[keyIndex]} before ${actualNodeList[keyIndex - increment]}.`;
-      break;
-    }
-
-    do {
-      preferredNodeOrderItem = preferredNodeOrderCopy.shift();
-
-    } while (actualNodeList[keyIndex] !== preferredNodeOrderItem);
   }
 
   return {
