@@ -4,7 +4,6 @@
 
 const notFound = -1;
 const empty = 0;
-const zero = 0;
 const one = 1;
 const increment = 1;
 const defaultPreferredNodeOrder = [
