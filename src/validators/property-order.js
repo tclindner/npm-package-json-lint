@@ -78,7 +78,11 @@ const isInPreferredOrder = function(packageJsonData, userPreferredNodeOrder) {
 
     const preferredOrderPosition = filteredPreferredOrderMap.get(currentPkgJsonProperty);
 
-    if (preferredOrderPosition !== keyIndex) {
+    if (preferredOrderPosition > keyIndex) {
+      isValid = false;
+      msg = `Please move "${fltrdPreferredNodeOrder[preferredOrderPosition - one]}" before "${currentPkgJsonProperty}".`;
+      break;
+    } else if (preferredOrderPosition < keyIndex) {
       isValid = false;
       msg = `Please move "${currentPkgJsonProperty}" after "${fltrdPreferredNodeOrder[preferredOrderPosition - one]}".`;
       break;
