@@ -19,9 +19,7 @@ module.exports = {
     'name-type': 'error',
     'repository-type': 'error',
     'version-type': 'error',
-    'valid-values-author': ['error', [
-      'Thomas Lindner'
-    ]],
+    'valid-values-author': ['error', ['Thomas Lindner']],
     'name-format': 'error',
     'version-format': 'error'
   }
