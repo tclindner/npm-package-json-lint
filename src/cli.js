@@ -43,9 +43,9 @@ const shouldLogOutput = function(quietFlag, hasErrors) {
 // configure cli options
 cliApp.version(pkg.version);
 cliApp.usage(pkg.name);
-cliApp.option('-f, --file <filePath>', `File path including name. Defaults to ${DEFAULT_FILE_NAME}`, DEFAULT_FILE_NAME);
+cliApp.option('-f, --file <filePath>', 'File path including name.', DEFAULT_FILE_NAME);
 cliApp.option('-r, --rule <rule name>', 'Valid rule name to check. Defaults to nothing');
-cliApp.option('-s, --rule-severity <rule severity>', `"error" or "warning". Defaults to ${DEFAULT_RULE_SEVERITY}`, DEFAULT_RULE_SEVERITY);
+cliApp.option('-s, --rule-severity <rule severity>', '"error" or "warning".', DEFAULT_RULE_SEVERITY);
 cliApp.option('-c, --rules-file <filePath>', 'File path of .npmpackagejsonlintrc');
 cliApp.option('-q, --quiet', 'Report errors only');
 cliApp.option('-w, --ignore-warnings', 'Ignore warnings');
