@@ -15,7 +15,7 @@ const ruleType = 'array';
  * @return {Object|Boolean}             LintIssue object if invalid. True if valid
  */
 const lint = function(packageJsonData, lintType, validValues) {
-  if (!isValidValue(packageJsonData, nodeName, validValues)) {
+  if (!isValidValue(packageJsonData, nodeName, packageJsonData[nodeName], validValues)) {
     return new LintIssue(lintId, lintType, nodeName, message);
   }
 

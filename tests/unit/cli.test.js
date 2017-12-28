@@ -21,9 +21,9 @@ describe('cli Unit Tests', function() {
   Options:
 
     -V, --version                        output the version number
-    -f, --file <filePath>                File path including name. Defaults to ./package.json
+    -f, --file <filePath>                File path including name. (default: ./package.json)
     -r, --rule <rule name>               Valid rule name to check. Defaults to nothing
-    -s, --rule-severity <rule severity>  "error" or "warning". Defaults to error
+    -s, --rule-severity <rule severity>  "error" or "warning". (default: error)
     -c, --rules-file <filePath>          File path of .npmpackagejsonlintrc
     -q, --quiet                          Report errors only
     -w, --ignore-warnings                Ignore warnings

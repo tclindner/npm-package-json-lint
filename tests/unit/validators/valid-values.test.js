@@ -22,7 +22,7 @@ describe('value-values Unit Tests', function() {
           'Simon Tam',
           'River Tam'
         ];
-        const response = validValuesObj.isValidValue(packageJson, 'authors', validValues);
+        const response = validValuesObj.isValidValue(packageJson, 'authors', packageJson.author, validValues);
 
         response.should.be.true;
       });
@@ -40,7 +40,7 @@ describe('value-values Unit Tests', function() {
           'Simon Tam',
           'River Tam'
         ];
-        const response = validValuesObj.isValidValue(packageJson, 'author', validValues);
+        const response = validValuesObj.isValidValue(packageJson, 'author', packageJson.author, validValues);
 
         response.should.be.true;
       });
@@ -57,7 +57,7 @@ describe('value-values Unit Tests', function() {
           'Simon Tam',
           'River Tam'
         ];
-        const response = validValuesObj.isValidValue(packageJson, 'author', validValues);
+        const response = validValuesObj.isValidValue(packageJson, 'author', packageJson.author, validValues);
 
         response.should.be.false;
       });

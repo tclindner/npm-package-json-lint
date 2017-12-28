@@ -11,6 +11,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [2.11.1] - 2017-12-27
+### Fixed
+- Addressed issue, from @hassankhan, [#64](https://github.com/tclindner/npm-package-json-lint/issues/64). This change adds support for authors as objects. Impacts [valid-values-author](https://github.com/tclindner/npm-package-json-lint/wiki/valid-values-author)
 
 ## [2.11.0] - 2017-09-02
 ### Added
