@@ -12,7 +12,7 @@ const ruleType = 'array';
 const lint = function(packageJsonData, lintType, validValues) {
   let value;
 
-  if ((isString(packageJsonData, nodeName))) {
+  if (isString(packageJsonData, nodeName)) {
     value = packageJsonData[nodeName];
   } else if (isObject(packageJsonData, nodeName)) {
     if (packageJsonData[nodeName].hasOwnProperty('name')) {
