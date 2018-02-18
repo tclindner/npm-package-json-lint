@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [2.11.2] - 2018-02-18
+### Fixed
+- Addressed issue, from @akihyro, [#71](https://github.com/tclindner/npm-package-json-lint/issues/71). Bundled dependencies should be arrays instead of objects. Impacts [bundledDependencies-type](https://github.com/tclindner/npm-package-json-lint/wiki/bundledDependencies-type)
+
 ## [2.11.1] - 2017-12-27
 ### Fixed
 - Addressed issue, from @hassankhan, [#64](https://github.com/tclindner/npm-package-json-lint/issues/64). This change adds support for authors as objects. Impacts [valid-values-author](https://github.com/tclindner/npm-package-json-lint/wiki/valid-values-author)
