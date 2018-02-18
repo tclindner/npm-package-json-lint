@@ -34,25 +34,25 @@
     "coverage": "nyc --extension .js --check-coverage --lines 99 --branches 98 --functions 96 npm test"
   },
   "dependencies": {
-    "chalk": "^2.3.0",
-    "commander": "^2.12.2",
+    "chalk": "^2.3.1",
+    "commander": "^2.14.1",
     "in-array": "^0.1.2",
     "is-plain-obj": "^1.1.0",
-    "log-symbols": "^2.1.0",
+    "log-symbols": "^2.2.0",
     "plur": "^2.1.2",
-    "semver": "^5.4.1",
+    "semver": "^5.5.0",
     "user-home": "^2.0.0",
-    "validator": "^9.2.0"
+    "validator": "^9.4.1"
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "eslint": "^4.14.0",
+    "eslint": "^4.18.0",
     "eslint-config-tc": "^2.3.0",
     "eslint-formatter-pretty": "^1.3.0",
     "figures": "^2.0.0",
-    "mocha": "^4.0.1",
+    "mocha": "^5.0.1",
     "nyc": "^11.4.1",
-    "sinon": "^4.1.3"
+    "sinon": "^4.3.0"
   },
   "engines": {
     "node": ">=4.2.0",
