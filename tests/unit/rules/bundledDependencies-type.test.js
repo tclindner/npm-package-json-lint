@@ -24,7 +24,7 @@ describe('bundledDependencies-type Unit Tests', function() {
       response.lintId.should.equal('bundledDependencies-type');
       response.lintType.should.equal('error');
       response.node.should.equal('bundledDependencies');
-      response.lintMessage.should.equal('Type should be an Object');
+      response.lintMessage.should.equal('Type should be an array');
     });
   });
 
