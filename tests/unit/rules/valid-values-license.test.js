@@ -26,7 +26,7 @@ describe('valid-values-license Unit Tests', function() {
       const response = lint(packageJsonData, 'error', validValues);
 
       response.lintId.should.equal('valid-values-license');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('license');
       response.lintMessage.should.equal('Invalid value for license');
     });

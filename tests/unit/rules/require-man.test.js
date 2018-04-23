@@ -31,7 +31,7 @@ describe('require-man Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-man');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('man');
       response.lintMessage.should.equal('man is required');
     });

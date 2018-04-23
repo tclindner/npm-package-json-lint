@@ -22,7 +22,7 @@ describe('man-type Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('man-type');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('man');
       response.lintMessage.should.equal('Type should be either a string or an array');
     });

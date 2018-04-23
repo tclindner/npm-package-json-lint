@@ -31,7 +31,7 @@ describe('require-module Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-module');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('module');
       response.lintMessage.should.equal('module is required');
     });

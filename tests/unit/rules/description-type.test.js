@@ -22,7 +22,7 @@ describe('description-type Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('description-type');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('description');
       response.lintMessage.should.equal('Type should be a string');
     });

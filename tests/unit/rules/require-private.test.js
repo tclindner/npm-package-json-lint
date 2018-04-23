@@ -31,7 +31,7 @@ describe('require-private Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-private');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('private');
       response.lintMessage.should.equal('private is required');
     });

@@ -6,9 +6,9 @@ const nodeName = 'name';
 const message = 'name is required';
 const ruleType = 'standard';
 
-const lint = function(packageJsonData, lintType) {
+const lint = function(packageJsonData, severity) {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return new LintIssue(lintId, lintType, nodeName, message);
+    return new LintIssue(lintId, severity, nodeName, message);
   }
 
   return true;

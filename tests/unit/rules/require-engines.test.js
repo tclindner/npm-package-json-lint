@@ -31,7 +31,7 @@ describe('require-engines Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-engines');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('engines');
       response.lintMessage.should.equal('engines is required');
     });

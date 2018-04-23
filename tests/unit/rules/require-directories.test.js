@@ -31,7 +31,7 @@ describe('require-directories Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-directories');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('directories');
       response.lintMessage.should.equal('directories is required');
     });

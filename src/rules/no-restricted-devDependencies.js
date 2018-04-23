@@ -7,9 +7,9 @@ const nodeName = 'devDependencies';
 const message = 'You are using a restricted dependency. Please remove it.';
 const ruleType = 'array';
 
-const lint = function(packageJsonData, lintType, invalidDependencies) {
+const lint = function(packageJsonData, severity, invalidDependencies) {
   if (hasDependency(packageJsonData, nodeName, invalidDependencies)) {
-    return new LintIssue(lintId, lintType, nodeName, message);
+    return new LintIssue(lintId, severity, nodeName, message);
   }
 
   return true;

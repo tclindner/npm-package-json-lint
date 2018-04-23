@@ -35,7 +35,7 @@ describe('Reporter Unit Tests', function() {
         const errorCount = 1;
         const output = chalk.red.bold.underline(`${errorCount} error`);
 
-        errors.push(new LintIssue('Lint ID', 'lintType', 'node', 'lintMessage'));
+        errors.push(new LintIssue('Lint ID', 'severity', 'node', 'lintMessage'));
 
         Reporter.write(errors, 'errors');
         spy.calledThrice.should.be.true;
@@ -48,8 +48,8 @@ describe('Reporter Unit Tests', function() {
         const output = chalk.red.bold.underline(`${errorCount} errors`);
         const writeMethodCallCount = 4;
 
-        errors.push(new LintIssue('Lint ID', 'lintType', 'node', 'lintMessage'));
-        errors.push(new LintIssue('Lint ID', 'lintType', 'node', 'lintMessage'));
+        errors.push(new LintIssue('Lint ID', 'severity', 'node', 'lintMessage'));
+        errors.push(new LintIssue('Lint ID', 'severity', 'node', 'lintMessage'));
 
         Reporter.write(errors, 'errors');
         spy.callCount.should.equal(writeMethodCallCount);

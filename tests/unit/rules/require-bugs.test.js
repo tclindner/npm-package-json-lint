@@ -31,7 +31,7 @@ describe('require-bugs Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-bugs');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('bugs');
       response.lintMessage.should.equal('bugs is required');
     });

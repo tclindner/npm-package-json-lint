@@ -26,7 +26,7 @@ describe('prefer-alphabetical-bundledDependencies Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('prefer-alphabetical-bundledDependencies');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('bundledDependencies');
       response.lintMessage.should.equal('Your bundledDependencies are not in alphabetical order. Please move semver after chalk.');
     });

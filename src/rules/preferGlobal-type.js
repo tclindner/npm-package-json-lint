@@ -7,9 +7,9 @@ const nodeName = 'preferGlobal';
 const message = 'Type should be a boolean';
 const ruleType = 'standard';
 
-const lint = function(packageJsonData, lintType) {
+const lint = function(packageJsonData, severity) {
   if (!isBoolean(packageJsonData, nodeName)) {
-    return new LintIssue(lintId, lintType, nodeName, message);
+    return new LintIssue(lintId, severity, nodeName, message);
   }
 
   return true;

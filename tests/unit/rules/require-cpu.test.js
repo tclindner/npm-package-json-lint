@@ -31,7 +31,7 @@ describe('require-cpu Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-cpu');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('cpu');
       response.lintMessage.should.equal('cpu is required');
     });

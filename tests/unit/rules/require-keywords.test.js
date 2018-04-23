@@ -31,7 +31,7 @@ describe('require-keywords Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-keywords');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('keywords');
       response.lintMessage.should.equal('keywords is required');
     });

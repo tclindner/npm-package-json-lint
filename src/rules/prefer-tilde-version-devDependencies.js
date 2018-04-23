@@ -7,11 +7,11 @@ const nodeName = 'devDependencies';
 const message = 'You are using an invalid version range. Please use ~.';
 const ruleType = 'standard';
 
-const lint = function(packageJsonData, lintType) {
+const lint = function(packageJsonData, severity) {
   const rangeSpecifier = '~';
 
   if (!areVersRangesValid(packageJsonData, nodeName, rangeSpecifier)) {
-    return new LintIssue(lintId, lintType, nodeName, message);
+    return new LintIssue(lintId, severity, nodeName, message);
   }
 
   return true;

@@ -26,7 +26,7 @@ describe('prefer-alphabetical-optionalDependencies Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('prefer-alphabetical-optionalDependencies');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('optionalDependencies');
       response.lintMessage.should.equal('Your optionalDependencies are not in alphabetical order. Please move semver after chalk.');
     });

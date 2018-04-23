@@ -31,7 +31,7 @@ describe('require-files Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-files');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('files');
       response.lintMessage.should.equal('files is required');
     });

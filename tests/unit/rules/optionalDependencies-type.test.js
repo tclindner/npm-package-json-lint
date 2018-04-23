@@ -22,7 +22,7 @@ describe('optionalDependencies-type Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('optionalDependencies-type');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('optionalDependencies');
       response.lintMessage.should.equal('Type should be an Object');
     });

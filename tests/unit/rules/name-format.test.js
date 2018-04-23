@@ -22,7 +22,7 @@ describe('name-format Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('name-format');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('name');
       response.lintMessage.should.equal('Format should be all lowercase');
     });

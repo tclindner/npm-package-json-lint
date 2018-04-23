@@ -31,7 +31,7 @@ describe('require-bundledDependencies Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-bundledDependencies');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('bundledDependencies');
       response.lintMessage.should.equal('bundledDependencies is required');
     });

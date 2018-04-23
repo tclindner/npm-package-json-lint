@@ -31,7 +31,7 @@ describe('require-dependencies Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-dependencies');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('dependencies');
       response.lintMessage.should.equal('dependencies is required');
     });

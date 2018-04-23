@@ -7,9 +7,9 @@ const nodeName = 'license';
 const message = 'Type should be a string';
 const ruleType = 'standard';
 
-const lint = function(packageJsonData, lintType) {
+const lint = function(packageJsonData, severity) {
   if (!isString(packageJsonData, nodeName)) {
-    return new LintIssue(lintId, lintType, nodeName, message);
+    return new LintIssue(lintId, severity, nodeName, message);
   }
 
   return true;

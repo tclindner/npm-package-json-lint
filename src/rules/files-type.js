@@ -7,9 +7,9 @@ const nodeName = 'files';
 const message = 'Type should be an Array';
 const ruleType = 'standard';
 
-const lint = function(packageJsonData, lintType) {
+const lint = function(packageJsonData, severity) {
   if (!isArray(packageJsonData, nodeName)) {
-    return new LintIssue(lintId, lintType, nodeName, message);
+    return new LintIssue(lintId, severity, nodeName, message);
   }
 
   return true;

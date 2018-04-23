@@ -31,7 +31,7 @@ describe('require-main Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-main');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('main');
       response.lintMessage.should.equal('main is required');
     });

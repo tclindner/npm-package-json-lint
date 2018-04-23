@@ -22,7 +22,7 @@ describe('version-format Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('version-format');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('version');
       response.lintMessage.should.equal('Format must be a valid semantic version');
     });

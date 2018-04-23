@@ -26,7 +26,7 @@ describe('valid-values-author Unit Tests', function() {
       const response = lint(packageJsonData, 'error', validValues);
 
       response.lintId.should.equal('valid-values-author');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('author');
       response.lintMessage.should.equal('Invalid value for author');
     });
@@ -63,7 +63,7 @@ describe('valid-values-author Unit Tests', function() {
       const response = lint(packageJsonData, 'error', validValues);
 
       response.lintId.should.equal('valid-values-author');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('author');
       response.lintMessage.should.equal('Invalid value for author');
     });
@@ -103,7 +103,7 @@ describe('valid-values-author Unit Tests', function() {
       const response = lint(packageJsonData, 'error', validValues);
 
       response.lintId.should.equal('valid-values-author');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('author');
       response.lintMessage.should.equal('author object missing name property');
     });
@@ -121,7 +121,7 @@ describe('valid-values-author Unit Tests', function() {
       const response = lint(packageJsonData, 'error', validValues);
 
       response.lintId.should.equal('valid-values-author');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('author');
       response.lintMessage.should.equal('author node has invalid data type');
     });
