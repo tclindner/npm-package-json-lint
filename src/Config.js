@@ -26,9 +26,10 @@ const getProjectDir = function() {
 
   // calculates the path of the project including npm-package-json-lint as a dependency
   // NOTE: config-file is located in /src/
-  //       ../ is npm-package-json-lint
-  //       ../ is module referencing npm-package-json-lint
-  return path.resolve(__dirname, '../../');
+  //   ../ is npm-package-json-lint
+  //   ../ is node_modules directory
+  //   ../ is module referencing npm-package-json-lint
+  return path.resolve(__dirname, '../../../');
 };
 
 /**

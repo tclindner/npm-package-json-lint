@@ -11,11 +11,12 @@ const Parser = require('./../Parser');
  * @param {Object} config         The configuration information.
  * @param {Config} configContext  Plugin context for the config instance
  * @param {String} parentName     Name of parent. For troubleshooting.
+ * @param  {Object} originalFilePath Base config file the extends originated from
  * @returns {Object} A new configuration object with all of the 'extends' fields
  *      loaded and merged.
  * @private
  */
-const applyExtends = function(config, configContext, parentName) {
+const applyExtends = function(config, configContext, parentName, originalFilePath) {
   let configExtends = config.extends;
 
   if (!Array.isArray(config.extends)) {
@@ -25,7 +26,7 @@ const applyExtends = function(config, configContext, parentName) {
   return configExtends.reduceRight((previousConfig, moduleName) => {
     try {
       /* eslint-disable no-use-before-define */
-      const extendsConfig = loadFromModule(moduleName, configContext);
+      const extendsConfig = loadFromModule(moduleName, configContext, originalFilePath);
 
       // Merge base object
       const mergedConfig = Object.assign({}, extendsConfig, previousConfig);
@@ -50,10 +51,11 @@ const applyExtends = function(config, configContext, parentName) {
  *
  * @param  {String} moduleName    Name of the configuration module
  * @param  {Object} configContext Plugin context for the config instance
+ * @param  {Object} originalFilePath Base config file the extends originated from
  * @return {Object}               Configuration object
  * @private
  */
-const loadFromModule = function(moduleName, configContext) {
+const loadFromModule = function(moduleName, configContext, originalFilePath) {
   let config = {};
   let adjustedModuleName = moduleName;
 
@@ -61,14 +63,17 @@ const loadFromModule = function(moduleName, configContext) {
     adjustedModuleName = path.join(configContext.options.cwd, moduleName);
     config = loadConfigFile(adjustedModuleName);
   } else {
-    config = require(adjustedModuleName);
+    const originalFileDir = path.dirname(originalFilePath);
+    const resolvedModule = require.resolve(adjustedModuleName, {paths: originalFileDir});
+
+    config = require(resolvedModule);
   }
 
   if (Object.keys(config).length) {
     ConfigValidator.validate(config, adjustedModuleName, configContext.linterContext);
 
     if (config.extends) {
-      config = applyExtends(config, configContext, adjustedModuleName);
+      config = applyExtends(config, configContext, adjustedModuleName, originalFilePath);
     }
   }
 
@@ -117,7 +122,7 @@ const loadFromDisk = function(filePath, configContext) {
     ConfigValidator.validate(config, filePath, configContext.linterContext);
 
     if (config.extends) {
-      config = applyExtends(config, configContext, filePath);
+      config = applyExtends(config, configContext, filePath, filePath);
     }
   }
 
@@ -159,7 +164,7 @@ class ConfigFile {
       ConfigValidator.validate(config, filePath, configContext.linterContext);
 
       if (config.extends) {
-        config = applyExtends(config, configContext, filePath);
+        config = applyExtends(config, configContext, filePath, filePath);
       }
     }
 
