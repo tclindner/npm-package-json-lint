@@ -7,451 +7,506 @@ const path = require('path');
 const chai = require('chai');
 const sinon = require('sinon');
 const Config = require('./../../src/Config');
+const ConfigFile = require('./../../src/config/ConfigFile');
+const NpmPackageJsonLint = require('./../../src/NpmPackageJsonLint');
 
 const should = chai.should();
+const linterContext = new NpmPackageJsonLint();
 
 describe('Config Unit Tests', function() {
-  context('Tests for when a filepath is passed', function() {
-    let spy;
-
-    beforeEach(function() {
-      const stub = sinon.stub(fs, 'readFileSync');
-
-      stub.returns('{"rules": {"version-type": "error"}}');
-
-      spy = sinon.spy(path, 'join');
-    });
-
-    afterEach(function() {
-      fs.readFileSync.restore();
-      path.join.restore();
-    });
-
-    context('when a relative path string to a .npmpackagejsonlintrc file is passed', function() {
-      it('the config object should return the parsed JSON as an object', function() {
-        const passedConfig = './.npmpackagejsonlintrc';
-        const config = new Config(passedConfig, {});
-        const expectedConfigObj = {
-          'version-type': 'error'
-        };
-        const result = config.get();
-
-        spy.calledOnce.should.be.true;
-        spy.firstCall.calledWithExactly(__dirname, passedConfig);
-        result.should.eql(expectedConfigObj);
-      });
-    });
-
-    context('when an absolute path string to a .npmpackagejsonlintrc file is passed', function() {
-      it('the config object should return the parsed JSON as an object', function() {
-        const passedConfig = '/Users/awesomeUser/.npmpackagejsonlintrc';
-        const config = new Config(passedConfig, {});
-        const expectedConfigObj = {
-          'version-type': 'error'
-        };
-        const result = config.get();
-
-        spy.called.should.be.false;
-        result.should.eql(expectedConfigObj);
-      });
-    });
-  });
-
-  context('Tests for when a extends is passed', function() {
-    let spy;
-
-    beforeEach(function() {
-      const stub = sinon.stub(fs, 'readFileSync');
-
-      stub.returns('{"extends": "npm-package-json-lint-config-base", "rules": {"version-type": "off"}}');
-
-      spy = sinon.spy(path, 'join');
-    });
-
-    afterEach(function() {
-      fs.readFileSync.restore();
-      path.join.restore();
-    });
-
-    context('when a config object is passed with an extends node', function() {
-      it('the extends config and rules node should be merged', function() {
-        const passedConfig = './.npmpackagejsonlintrc';
-        const config = new Config(passedConfig, {});
-        const stubbedGetExtendCfgModule = sinon.stub(config, '_getExtendsConfigModule');
-        const extendsObj = {
+  context('get method tests', function() {
+    context('when each source has a different rule', function() {
+      it('a config object should returned with all rules', function() {
+        const configFile = './configfile';
+        const options = {
+          configFile,
+          cwd: process.cwd(),
+          useConfigFiles: true,
           rules: {
-            'name-type': 'error'
+            'require-scripts': 'error'
           }
         };
+        const config = new Config(options, linterContext);
 
-        stubbedGetExtendCfgModule.returns(extendsObj);
+        const stubGetFromProp = sinon.stub(config, 'getConfigFromPkgJsonProp');
+        const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
+        const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
+        const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
+
+        stubGetFromProp.returns({rules: {'version-type': 'error'}});
+        stubHierarchy.returns({rules: {'require-version': 'error'}});
+        stubCli.returns({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
-          'name-type': 'error',
-          'version-type': 'off'
-        };
-        const result = config.get();
-
-        spy.calledOnce.should.be.true;
-        spy.firstCall.calledWithExactly(__dirname, passedConfig);
-        result.should.eql(expectedConfigObj);
-
-        config._getExtendsConfigModule.restore();
-      });
-
-      it('and they both contain the same rule the main rules node should take precedence', function() {
-        const passedConfig = './.npmpackagejsonlintrc';
-        const config = new Config(passedConfig, {});
-        const stubbedGetExtendCfgModule = sinon.stub(config, '_getExtendsConfigModule');
-        const extendsObj = {
           rules: {
-            'version-type': 'warning'
+            'version-type': 'error',
+            'require-version': 'error',
+            'require-name': 'error',
+            'require-scripts': 'error'
           }
         };
+        const filePath = './.npmpackagejsonlintrc.json';
+        const result = config.get(filePath);
 
-        stubbedGetExtendCfgModule.returns(extendsObj);
+        stubGetFromProp.calledOnce.should.be.true;
+        stubGetFromProp.firstCall.calledWithExactly(filePath).should.be.true;
+
+        stubHierarchy.calledOnce.should.be.true;
+        stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
+
+        stubCli.calledOnce.should.be.true;
+        stubCli.firstCall.calledWithExactly(configFile).should.be.true;
+
+        stubUserHome.notCalled.should.be.true;
+
+        result.should.deep.equal(expectedConfigObj);
+
+        config.getConfigFromPkgJsonProp.restore();
+        config.getProjectHierarchyConfig.restore();
+        config.loadCliSpecifiedCfgFile.restore();
+        config.getUserHomeConfig.restore();
+      });
+    });
+
+    context('when package.json property does not have rules', function() {
+      it('a config object should returned with rules from other sources', function() {
+        const configFile = './configfile';
+        const options = {
+          configFile,
+          cwd: process.cwd(),
+          useConfigFiles: true,
+          rules: {
+            'require-scripts': 'error'
+          }
+        };
+        const config = new Config(options, linterContext);
+
+        const stubGetFromProp = sinon.stub(config, 'getConfigFromPkgJsonProp');
+        const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
+        const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
+        const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
+
+        stubGetFromProp.returns({rules: {}});
+        stubHierarchy.returns({rules: {'require-version': 'error'}});
+        stubCli.returns({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
-          'version-type': 'off'
-        };
-        const result = config.get();
-
-        spy.calledOnce.should.be.true;
-        spy.firstCall.calledWithExactly(__dirname, passedConfig);
-        result.should.eql(expectedConfigObj);
-
-        config._getExtendsConfigModule.restore();
-      });
-
-      it('and the module name is relative path', function() {
-        const moduleName = './index.js';
-        const passedConfig = {
-          'extends': './index.js',
-          'rules': {
-            'version-type': 'warning'
-          }
-        };
-        const config = new Config(passedConfig, {});
-        const extendsObj = {
           rules: {
-            'version-type': 'warning'
+            'require-version': 'error',
+            'require-name': 'error',
+            'require-scripts': 'error'
           }
         };
-        const stubbedGetExtendCfgModule = sinon.stub(config, '_getExtendsConfigModule').returns(extendsObj);
-        const result = config.get(moduleName);
-        const expectedObj = {
-          'version-type': 'warning'
-        };
+        const filePath = './.npmpackagejsonlintrc.json';
+        const result = config.get(filePath);
 
-        spy.calledOnce.should.be.true;
-        spy.firstCall.calledWithExactly(process.cwd(), moduleName);
-        stubbedGetExtendCfgModule.calledWithExactly(path.join(process.cwd(), moduleName));
-        result.should.eql(expectedObj);
+        stubGetFromProp.calledOnce.should.be.true;
+        stubGetFromProp.firstCall.calledWithExactly(filePath).should.be.true;
 
-        config._getExtendsConfigModule.restore();
-      });
+        stubHierarchy.calledOnce.should.be.true;
+        stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
 
-      it('and the module name is a node module', function() {
-        const moduleName = 'npm-package-json-lint-config-tc';
-        const passedConfig = {
-          'extends': 'npm-package-json-lint-config-tc'
-        };
-        const config = new Config(passedConfig, {});
-        const extendsObj = {
-          rules: {
-            'version-type': 'warning'
-          }
-        };
-        const stubbedGetExtendCfgModule = sinon.stub(config, '_getExtendsConfigModule').returns(extendsObj);
-        const result = config.get();
-        const expectedObj = {
-          'version-type': 'warning'
-        };
+        stubCli.calledOnce.should.be.true;
+        stubCli.firstCall.calledWithExactly(configFile).should.be.true;
 
-        spy.called.should.be.false;
-        stubbedGetExtendCfgModule.calledWithExactly(moduleName);
-        result.should.eql(expectedObj);
+        stubUserHome.notCalled.should.be.true;
 
-        config._getExtendsConfigModule.restore();
+        result.should.deep.equal(expectedConfigObj);
+
+        config.getConfigFromPkgJsonProp.restore();
+        config.getProjectHierarchyConfig.restore();
+        config.loadCliSpecifiedCfgFile.restore();
+        config.getUserHomeConfig.restore();
       });
     });
-  });
 
-  context('Tests for when a config object is passed', function() {
-    context('when a valid npmpackagejsonlintrc file object is passed', function() {
-      it('the config object should return the parsed JSON as an object', function() {
-        const rcFileObj = {
+    context('when project hierarchy does not have rules', function() {
+      it('a config object should returned with rules from other sources', function() {
+        const configFile = './configfile';
+        const options = {
+          configFile,
+          cwd: process.cwd(),
+          useConfigFiles: true,
           rules: {
-            'require-author': 'error',
-            'require-version': 'warning',
-            'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
-            'valid-values-private': ['warning', [true, false]]
+            'require-scripts': 'error'
           }
         };
-        const config = new Config(rcFileObj, {});
+        const config = new Config(options, linterContext);
+
+        const stubGetFromProp = sinon.stub(config, 'getConfigFromPkgJsonProp');
+        const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
+        const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
+        const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
+
+        stubGetFromProp.returns({rules: {'version-type': 'error'}});
+        stubHierarchy.returns({rules: {}});
+        stubCli.returns({rules: {'require-name': 'error'}});
+
         const expectedConfigObj = {
-          'require-author': 'error',
-          'require-version': 'warning',
-          'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
-          'valid-values-private': ['warning', [true, false]]
+          rules: {
+            'version-type': 'error',
+            'require-name': 'error',
+            'require-scripts': 'error'
+          }
         };
+        const filePath = './.npmpackagejsonlintrc.json';
+        const result = config.get(filePath);
 
-        config.get().should.eql(expectedConfigObj);
+        stubGetFromProp.calledOnce.should.be.true;
+        stubGetFromProp.firstCall.calledWithExactly(filePath).should.be.true;
+
+        stubHierarchy.calledOnce.should.be.true;
+        stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
+
+        stubCli.calledOnce.should.be.true;
+        stubCli.firstCall.calledWithExactly(configFile).should.be.true;
+
+        stubUserHome.notCalled.should.be.true;
+
+        result.should.deep.equal(expectedConfigObj);
+
+        config.getConfigFromPkgJsonProp.restore();
+        config.getProjectHierarchyConfig.restore();
+        config.loadCliSpecifiedCfgFile.restore();
+        config.getUserHomeConfig.restore();
+      });
+    });
+
+    context('when cli specified config does not have rules', function() {
+      it('a config object should returned with rules from other sources', function() {
+        const configFile = './configfile';
+        const options = {
+          configFile,
+          cwd: process.cwd(),
+          useConfigFiles: true,
+          rules: {
+            'require-scripts': 'error'
+          }
+        };
+        const config = new Config(options, linterContext);
+
+        const stubGetFromProp = sinon.stub(config, 'getConfigFromPkgJsonProp');
+        const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
+        const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
+        const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
+
+        stubGetFromProp.returns({rules: {'version-type': 'error'}});
+        stubHierarchy.returns({rules: {'require-version': 'error'}});
+        stubCli.returns({rules: {}});
+
+        const expectedConfigObj = {
+          rules: {
+            'version-type': 'error',
+            'require-version': 'error',
+            'require-scripts': 'error'
+          }
+        };
+        const filePath = './.npmpackagejsonlintrc.json';
+        const result = config.get(filePath);
+
+        stubGetFromProp.calledOnce.should.be.true;
+        stubGetFromProp.firstCall.calledWithExactly(filePath).should.be.true;
+
+        stubHierarchy.calledOnce.should.be.true;
+        stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
+
+        stubCli.calledOnce.should.be.true;
+        stubCli.firstCall.calledWithExactly(configFile).should.be.true;
+
+        stubUserHome.notCalled.should.be.true;
+
+        result.should.deep.equal(expectedConfigObj);
+
+        config.getConfigFromPkgJsonProp.restore();
+        config.getProjectHierarchyConfig.restore();
+        config.loadCliSpecifiedCfgFile.restore();
+        config.getUserHomeConfig.restore();
+      });
+    });
+
+    context('when cli specified rules does not exist', function() {
+      it('a config object should returned with rules from other sources', function() {
+        const configFile = './configfile';
+        const options = {
+          configFile,
+          cwd: process.cwd(),
+          useConfigFiles: true,
+          rules: {}
+        };
+        const config = new Config(options, linterContext);
+
+        const stubGetFromProp = sinon.stub(config, 'getConfigFromPkgJsonProp');
+        const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
+        const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
+        const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
+
+        stubGetFromProp.returns({rules: {'version-type': 'error'}});
+        stubHierarchy.returns({rules: {'require-version': 'error'}});
+        stubCli.returns({rules: {'require-name': 'error'}});
+
+        const expectedConfigObj = {
+          rules: {
+            'version-type': 'error',
+            'require-version': 'error',
+            'require-name': 'error'
+          }
+        };
+        const filePath = './.npmpackagejsonlintrc.json';
+        const result = config.get(filePath);
+
+        stubGetFromProp.calledOnce.should.be.true;
+        stubGetFromProp.firstCall.calledWithExactly(filePath).should.be.true;
+
+        stubHierarchy.calledOnce.should.be.true;
+        stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
+
+        stubCli.calledOnce.should.be.true;
+        stubCli.firstCall.calledWithExactly(configFile).should.be.true;
+
+        stubUserHome.notCalled.should.be.true;
+
+        result.should.deep.equal(expectedConfigObj);
+
+        config.getConfigFromPkgJsonProp.restore();
+        config.getProjectHierarchyConfig.restore();
+        config.loadCliSpecifiedCfgFile.restore();
+        config.getUserHomeConfig.restore();
+      });
+    });
+
+    context('when no rules exist in package.json, hierarchy, and cli', function() {
+      it('a config object should returned from user home', function() {
+        const configFile = './configfile';
+        const options = {
+          configFile,
+          cwd: process.cwd(),
+          useConfigFiles: true,
+          rules: {}
+        };
+        const config = new Config(options, linterContext);
+
+        const stubGetFromProp = sinon.stub(config, 'getConfigFromPkgJsonProp');
+        const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
+        const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
+        const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
+
+        stubGetFromProp.returns({rules: {}});
+        stubHierarchy.returns({rules: {}});
+        stubCli.returns({rules: {}});
+        stubUserHome.returns({rules: {'require-name': 'error'}});
+
+        const expectedConfigObj = {
+          rules: {
+            'require-name': 'error'
+          }
+        };
+        const filePath = './.npmpackagejsonlintrc.json';
+        const result = config.get(filePath);
+
+        stubGetFromProp.calledOnce.should.be.true;
+        stubGetFromProp.firstCall.calledWithExactly(filePath).should.be.true;
+
+        stubHierarchy.calledOnce.should.be.true;
+        stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
+
+        stubCli.calledOnce.should.be.true;
+        stubCli.firstCall.calledWithExactly(configFile).should.be.true;
+
+        stubUserHome.calledOnce.should.be.true;
+
+        result.should.deep.equal(expectedConfigObj);
+
+        config.getConfigFromPkgJsonProp.restore();
+        config.getProjectHierarchyConfig.restore();
+        config.loadCliSpecifiedCfgFile.restore();
+        config.getUserHomeConfig.restore();
+      });
+    });
+
+    context('when project hierarchy exists, but useConfigFiles is off', function() {
+      it('a config object should returned with all rules', function() {
+        const configFile = './configfile';
+        const options = {
+          configFile,
+          cwd: process.cwd(),
+          useConfigFiles: false,
+          rules: {
+            'require-scripts': 'error'
+          }
+        };
+        const config = new Config(options, linterContext);
+
+        const stubGetFromProp = sinon.stub(config, 'getConfigFromPkgJsonProp');
+        const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
+        const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
+        const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
+
+        stubGetFromProp.returns({rules: {}});
+        stubHierarchy.returns({rules: {'require-version': 'error'}});
+        stubCli.returns({rules: {}});
+
+        const expectedConfigObj = {
+          rules: {
+            'require-scripts': 'error'
+          }
+        };
+        const filePath = './.npmpackagejsonlintrc.json';
+        const result = config.get(filePath);
+
+        stubGetFromProp.calledOnce.should.be.true;
+        stubGetFromProp.firstCall.calledWithExactly(filePath).should.be.true;
+
+        stubHierarchy.notCalled.should.be.true;
+
+        stubCli.calledOnce.should.be.true;
+        stubCli.firstCall.calledWithExactly(configFile).should.be.true;
+
+        stubUserHome.notCalled.should.be.true;
+
+        result.should.deep.equal(expectedConfigObj);
+
+        config.getConfigFromPkgJsonProp.restore();
+        config.getProjectHierarchyConfig.restore();
+        config.loadCliSpecifiedCfgFile.restore();
+        config.getUserHomeConfig.restore();
       });
     });
   });
 
-  context('_getUserConfig tests', function() {
-    context('when config is passed', function() {
-      it('the passed config should be returned', function() {
-        const rulesObj = {
-          rules: {
-            'require-author': 'error',
-            'require-version': 'warning',
-            'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
-            'valid-values-private': ['warning', [true, false]]
-          }
-        };
-        const config = new Config(rulesObj, {});
-        const stubIsConfigPassed = sinon.stub(config, '_isConfigPassed').returns(true);
-        const stubGetPassedConfig = sinon.stub(config, '_getPassedConfig').returns(rulesObj);
+  context('getConfigFromPkgJsonProp method tests', function() {
+    it('loadFromPackageJson should be called', function() {
+      const configFile = './configfile';
+      const options = {
+        configFile,
+        cwd: process.cwd(),
+        useConfigFiles: true,
+        rules: {
+          'require-scripts': 'error'
+        }
+      };
+      const config = new Config(options, linterContext);
 
-        config._getUserConfig().should.eql(rulesObj);
+      const stub = sinon.stub(ConfigFile, 'loadFromPackageJson');
 
-        config._isConfigPassed.restore();
-        config._getPassedConfig.restore();
-      });
-    });
+      stub.returns('a');
 
-    context('when config is passed in the package.json file', function() {
-      it('the config should be returned', function() {
-        const calledZeroTimes = 0;
-        const rulesObj = {
-          rules: {
-            'require-author': 'error',
-            'require-version': 'warning',
-            'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
-            'valid-values-private': ['warning', [true, false]]
-          }
-        };
-        const pkgJson = {
-          npmPackageJsonLintConfig: rulesObj
-        };
-        const config = new Config({}, pkgJson);
-        const stubIsConfigPassed = sinon.stub(config, '_isConfigPassed').returns(false);
-        const spyGetPassedConfig = sinon.spy(config, '_getPassedConfig');
+      const expected = 'a';
+      const filePath = './.npmpackagejsonlintrc.json';
+      const result = config.getConfigFromPkgJsonProp(filePath);
 
-        config._getUserConfig().should.eql(rulesObj);
-        spyGetPassedConfig.callCount.should.eql(calledZeroTimes);
+      stub.calledOnce.should.be.true;
+      stub.firstCall.calledWithExactly(filePath, config).should.be.true;
 
-        config._isConfigPassed.restore();
-        config._getPassedConfig.restore();
-      });
-    });
+      result.should.equal(expected);
 
-    context('when _isConfigFileExist is true', function() {
-      it('the config should be returned', function() {
-        const calledZeroTimes = 0;
-        const rulesObj = {
-          rules: {
-            'require-author': 'error',
-            'require-version': 'warning',
-            'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
-            'valid-values-private': ['warning', [true, false]]
-          }
-        };
-        const config = new Config(rulesObj, {});
-        const stubIsConfigPassed = sinon.stub(config, '_isConfigPassed').returns(false);
-        const spyGetPassedConfig = sinon.spy(config, '_getPassedConfig');
-        const stubGetRelativeConfigFilePath = sinon.stub(config, '_getRelativeConfigFilePth').returns('/home/user/project/.npmpackagejsonlintrc.json');
-        const stubIsConfigFileExist = sinon.stub(config, '_isConfigFileExist').returns(true);
-        const stubLoadConfigFile = sinon.stub(config, '_loadRcFile').returns(rulesObj);
-
-        config._getUserConfig().should.eql(rulesObj);
-        spyGetPassedConfig.callCount.should.eql(calledZeroTimes);
-
-        config._isConfigPassed.restore();
-        config._getPassedConfig.restore();
-        config._getRelativeConfigFilePth.restore();
-        config._isConfigFileExist.restore();
-        config._loadRcFile.restore();
-      });
-    });
-
-    context('when _loadRcFile is true', function() {
-      it('the passed config should be returned', function() {
-        const calledZeroTimes = 0;
-        const rulesObj = {
-          rules: {
-            'require-author': 'error',
-            'require-version': 'warning',
-            'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
-            'valid-values-private': ['warning', [true, false]]
-          }
-        };
-        const config = new Config(rulesObj, {});
-        const stubIsConfigPassed = sinon.stub(config, '_isConfigPassed').returns(false);
-        const spyGetPassedConfig = sinon.spy(config, '_getPassedConfig');
-        const stubGetRelativeConfigFilePath = sinon.stub(config, '_getRelativeConfigFilePth').returns('/home/user/project/.npmpackagejsonlintrc.json');
-        const stubIsConfigFileExist = sinon.stub(config, '_isConfigFileExist')
-          .onFirstCall()
-          .returns(false)
-          .onSecondCall()
-          .returns(true);
-        const spyLoadRcFile = sinon.spy(config, '_loadRcFile');
-        const stubGetUserHomeConfigFilePath = sinon.stub(config, '_getUsrHmConfigFilePath').returns('/home/user/project/npmpackagejsonlint.config.js');
-        const stubLoadConfigFile = sinon.stub(config, '_loadConfigFile').returns(rulesObj);
-
-        config._getUserConfig().should.eql(rulesObj);
-        spyGetPassedConfig.callCount.should.eql(calledZeroTimes);
-        spyLoadRcFile.callCount.should.eql(calledZeroTimes);
-
-        config._isConfigPassed.restore();
-        config._getPassedConfig.restore();
-        config._getRelativeConfigFilePth.restore();
-        config._isConfigFileExist.restore();
-        config._loadRcFile.restore();
-        config._loadConfigFile.restore();
-        config._getUsrHmConfigFilePath.restore();
-      });
-    });
-
-    context('when config is passed', function() {
-      it('the passed config should be returned', function() {
-        const calledZeroTimes = 0;
-        const rulesObj = {
-          rules: {
-            'require-author': 'error',
-            'require-version': 'warning',
-            'valid-values-author': ['error', ['Thomas', 'Lindner', 'Thomas Lindner']],
-            'valid-values-private': ['warning', [true, false]]
-          }
-        };
-        const config = new Config(rulesObj, {});
-        const stubIsConfigPassed = sinon.stub(config, '_isConfigPassed').returns(false);
-        const spyGetPassedConfig = sinon.spy(config, '_getPassedConfig');
-        const stubGetRelativeConfigFilePath = sinon.stub(config, '_getRelativeConfigFilePth').returns('/home/user/project/.npmpackagejsonlintrc.json');
-        const stubIsConfigFileExist = sinon.stub(config, '_isConfigFileExist').returns(false);
-        const stubGetUserHomeConfigFilePath = sinon.stub(config, '_getUsrHmConfigFilePath').returns('/home/user/project/npmpackagejsonlint.config.js');
-        const spyLoadConfigFile = sinon.spy(config, '_loadConfigFile');
-
-        (function() {
-          config._getUserConfig();
-        }).should.throw('No configuration found');
-        spyGetPassedConfig.callCount.should.eql(calledZeroTimes);
-        spyLoadConfigFile.callCount.should.eql(calledZeroTimes);
-
-        config._isConfigPassed.restore();
-        config._getPassedConfig.restore();
-        config._getRelativeConfigFilePth.restore();
-        config._isConfigFileExist.restore();
-        config._loadConfigFile.restore();
-        config._getUsrHmConfigFilePath.restore();
-      });
+      ConfigFile.loadFromPackageJson.restore();
     });
   });
 
-  context('_getRelativeConfigFilePth tests', function() {
-    context('when config is passed', function() {
-      it('the passed config should be returned', function() {
-        const cwd = '/home/user/project/';
-        const fileName = '.npmpackagejsonfilerc.json';
-        const config = new Config({}, {});
-        const stubIsConfigPassed = sinon.stub(process, 'cwd').returns(cwd);
+  context('loadCliSpecifiedCfgFile method tests', function() {
+    it('no passed config, empty config object should be returned', function() {
+      const configFile = '';
+      const options = {
+        configFile,
+        cwd: '/dummy/cwd',
+        useConfigFiles: true,
+        rules: {
+          'require-scripts': 'error'
+        }
+      };
+      const config = new Config(options, linterContext);
 
-        config._getRelativeConfigFilePth(fileName).should.eql(`${cwd}${fileName}`);
+      const stub = sinon.stub(ConfigFile, 'load');
 
-        process.cwd.restore();
-      });
-    });
-  });
+      stub.returns('a');
 
-  context('_isConfigFileExist tests', function() {
-    context('when config is passed', function() {
-      it('the passed config should be returned', function() {
-        const config = new Config({}, {});
-        const stubIsConfigPassed = sinon.stub(fs, 'existsSync').returns(true);
+      const expected = {rules: {}};
+      const result = config.loadCliSpecifiedCfgFile(configFile);
 
-        config._isConfigFileExist('filePath').should.be.true;
+      stub.notCalled.should.be.true;
 
-        fs.existsSync.restore();
-      });
-    });
-  });
+      result.should.deep.equal(expected);
 
-  context('isArrayRuleConfigValid tests', function() {
-    context('when a rule is an array rule and the first key is not equal to error, warning, or off', function() {
-      it('an error should be thrown', function() {
-        (function() {
-          Config.isArrayRuleConfigValid('valid-values-author', [true, ['Thomas', 'Lindner', 'Thomas Lindner']]);
-        }).should.throw('valid-values-author - first key must be set to "error", "warning", or "off". Currently set to "true".');
-      });
+      ConfigFile.load.restore();
     });
 
-    context('when a rule is an array rule and the second key is not an Array', function() {
-      it('an error should be thrown', function() {
-        (function() {
-          Config.isArrayRuleConfigValid('valid-values-author', ['error', 'Thomas']);
-        }).should.throw('valid-values-author - second key must be set an array. Currently set to "Thomas".');
-      });
+    it('scoped module, config object should be returned', function() {
+      const configFile = '@myscope/npm-package-json-lint-config-awesome';
+      const options = {
+        configFile,
+        cwd: '/dummy/cwd',
+        useConfigFiles: true,
+        rules: {
+          'require-scripts': 'error'
+        }
+      };
+      const config = new Config(options, linterContext);
+
+      const stub = sinon.stub(ConfigFile, 'load');
+
+      stub.returns('a');
+
+      const expected = 'a';
+      const result = config.loadCliSpecifiedCfgFile(configFile);
+
+      stub.calledOnce.should.be.true;
+      stub.firstCall.calledWithExactly(configFile, config).should.be.true;
+
+      result.should.equal(expected);
+
+      ConfigFile.load.restore();
     });
 
-    context('when a valid array rule config is passed', function() {
-      it('true should be returned', function() {
-        Config.isArrayRuleConfigValid('prefer-property-order', ['error', ['name', 'version']]).should.be.true;
-      });
+    it('with resolvable module, config object should be returned', function() {
+      const configFile = 'eslint-config-tc';
+      const options = {
+        configFile,
+        cwd: process.cwd(),
+        useConfigFiles: true,
+        rules: {
+          'require-scripts': 'error'
+        }
+      };
+      const config = new Config(options, linterContext);
+      const stub = sinon.stub(ConfigFile, 'load');
+
+      stub.returns('a');
+
+      const expected = 'a';
+      const result = config.loadCliSpecifiedCfgFile(configFile);
+
+      stub.calledOnce.should.be.true;
+      stub.firstCall.calledWithExactly(configFile, config).should.be.true;
+
+      result.should.equal(expected);
+
+      ConfigFile.load.restore();
     });
 
-    context('when a valid array rule config is passed with a value of off', function() {
-      it('true should be returned', function() {
-        Config.isArrayRuleConfigValid('prefer-property-order', 'off').should.be.true;
-      });
-    });
+    it('with real local file, config object should be returned', function() {
+      const configFile = './test/fixtures/valid/.npmpackagejsonlintrc.json';
+      const options = {
+        configFile,
+        cwd: process.cwd(),
+        useConfigFiles: true,
+        rules: {
+          'require-scripts': 'error'
+        }
+      };
+      const config = new Config(options, linterContext);
+      const stub = sinon.stub(ConfigFile, 'load');
 
-    context('when a invalid array rule config is passed with a value of error', function() {
-      it('true should be returned', function() {
-        (function() {
-          Config.isArrayRuleConfigValid('valid-values-author', 'error');
-        }).should.throw('valid-values-author - is an array type rule. It must be set to "off" if an array is not supplied.');
-      });
-    });
-  });
+      stub.returns('a');
 
-  context('isStandardRuleConfigValid tests', function() {
-    context('when a standard rule is passed with a value of error', function() {
-      it('true should be returned', function() {
-        Config.isStandardRuleConfigValid('require-author', 'error').should.be.true;
-      });
-    });
+      const expected = 'a';
+      const result = config.loadCliSpecifiedCfgFile(configFile);
 
-    context('when a standard rule is passed with a value of warning', function() {
-      it('true should be returned', function() {
-        Config.isStandardRuleConfigValid('require-author', 'warning').should.be.true;
-      });
-    });
+      stub.calledOnce.should.be.true;
+      stub.firstCall.calledWithExactly(`${process.cwd()}/test/fixtures/valid/.npmpackagejsonlintrc.json`, config).should.be.true;
 
-    context('when a standard rule is passed with a value of off', function() {
-      it('true should be returned', function() {
-        Config.isStandardRuleConfigValid('require-author', 'off').should.be.true;
-      });
-    });
+      result.should.equal(expected);
 
-    context('when a rule is set to a boolean', function() {
-      it('an error should be thrown', function() {
-        (function() {
-          Config.isStandardRuleConfigValid('require-author', true);
-        }).should.throw('require-author - must be set to "error", "warning", or "off". Currently set to "true".');
-      });
-    });
-
-    context('when a rule is set to a number', function() {
-      it('an error should be thrown', function() {
-        const dummyValue = 1;
-
-        (function() {
-          Config.isStandardRuleConfigValid('require-author', dummyValue);
-        }).should.throw('require-author - must be set to "error", "warning", or "off". Currently set to "1".');
-      });
+      ConfigFile.load.restore();
     });
   });
 });

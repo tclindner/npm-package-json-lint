@@ -11,6 +11,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [3.0.0-alpha1] - 2018-04-29
+### Added
+- Added support for glob based package.json file detection. Addresses [#74](https://github.com/tclindner/npm-package-json-lint/issues/74).
+- Added support for recursive config file detection. Addresses [#75](https://github.com/tclindner/npm-package-json-lint/issues/75).
+- Added support for running npm-package-json-lint programmatically. Addresses [#76](https://github.com/tclindner/npm-package-json-lint/issues/76).
+
+### Fixed
+- Addressed issue, from @akihyro, [#71](https://github.com/tclindner/npm-package-json-lint/issues/71). Bundled dependencies should be arrays instead of objects. Impacts [bundledDependencies-type](https://github.com/tclindner/npm-package-json-lint/wiki/bundledDependencies-type)
+
 ## [2.11.2] - 2018-02-18
 ### Fixed
 - Addressed issue, from @akihyro, [#71](https://github.com/tclindner/npm-package-json-lint/issues/71). Bundled dependencies should be arrays instead of objects. Impacts [bundledDependencies-type](https://github.com/tclindner/npm-package-json-lint/wiki/bundledDependencies-type)

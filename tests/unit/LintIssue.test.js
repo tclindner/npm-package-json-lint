@@ -10,7 +10,7 @@ const should = chai.should();
 describe('LintIssue Unit Tests', function() {
   describe('constructor', function() {
     context('when a new object is created', function() {
-      // const lintIssue = new LintIssue('lintId', 'severity', 'node', 'lintMessage');
+      const lintIssue = new LintIssue('lintId', 'severity', 'node', 'lintMessage');
 
       it('the lintId should be set', function() {
         lintIssue.lintId.should.equal('lintId');

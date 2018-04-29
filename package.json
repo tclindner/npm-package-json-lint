@@ -1,6 +1,6 @@
 {
   "name": "npm-package-json-lint",
-  "version": "2.11.2",
+  "version": "3.0.0-alpha1",
   "description": "CLI app for linting package.json files.",
   "keywords": [
     "lint",
@@ -20,28 +20,29 @@
     "url": "https://github.com/tclindner/npm-package-json-lint.git"
   },
   "bin": {
-    "pjl-cli": "src/cli.js"
+    "npmPkgJsonLint": "src/cli.js"
   },
   "files": [
     "src",
     "CONTRIBUTING.md"
   ],
-  "main": "src/NpmPackageJsonLint.js",
+  "main": "src/api.js",
   "scripts": {
     "eslint": "eslint . --format=node_modules/eslint-formatter-pretty",
     "lint": "npm run eslint",
     "test": "mocha tests/unit --recursive",
-    "coverage": "nyc --extension .js --check-coverage --lines 99 --branches 98 --functions 96 npm test"
+    "coverage": "nyc --extension .js --check-coverage --lines 94 --branches 81 --functions 94 npm test"
   },
   "dependencies": {
+    "ajv": "^6.4.0",
     "chalk": "^2.3.1",
-    "commander": "^2.14.1",
     "in-array": "^0.1.2",
+    "is-path-inside": "^2.0.0",
     "is-plain-obj": "^1.1.0",
     "log-symbols": "^2.2.0",
+    "meow": "^4.0.0",
     "plur": "^2.1.2",
     "semver": "^5.5.0",
-    "user-home": "^2.0.0",
     "validator": "^9.4.1"
   },
   "devDependencies": {
