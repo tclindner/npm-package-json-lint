@@ -63,8 +63,7 @@ const loadFromModule = function(moduleName, configContext, originalFilePath) {
     adjustedModuleName = path.join(configContext.options.cwd, moduleName);
     config = loadConfigFile(adjustedModuleName);
   } else {
-    const originalFileDir = path.dirname(originalFilePath);
-    const resolvedModule = require.resolve(adjustedModuleName, {paths: originalFileDir});
+    const resolvedModule = require.resolve(adjustedModuleName, {paths: path.dirname(originalFilePath)});
 
     config = require(resolvedModule);
   }
@@ -102,7 +101,6 @@ const loadConfigFile = function(filePath) {
 
   default:
     throw new Error(`Unsupport config file extension. File path: ${filePath}`);
-    break;
   }
 
   return config;
