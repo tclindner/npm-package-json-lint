@@ -63,6 +63,7 @@ describe('cli Unit Tests', function() {
       const cli = spawnSync(relativePathToCli, ['--help']);
 
       cli.stdout.toString().should.equal(expected);
+      cli.stderr.toString().should.equal('');
       cli.status.should.equal(zeroClean);
     });
   });
@@ -74,6 +75,7 @@ describe('cli Unit Tests', function() {
       const cli = spawnSync(relativePathToCli, ['--version']);
 
       cli.stdout.toString().should.equal(expected);
+      cli.stderr.toString().should.equal('');
       cli.status.should.equal(zeroClean);
     });
   });
@@ -85,6 +87,7 @@ describe('cli Unit Tests', function() {
       const expected = 'No lint targets provided\n';
 
       cli.stdout.toString().should.equal(expected);
+      cli.stderr.toString().should.equal('');
       cli.status.should.equal(oneMissingTargets);
     });
   });
@@ -113,6 +116,7 @@ ${figures.warning} require-license - node: license - license is required
 `;
 
       cli.stdout.toString().should.equal(expected);
+      cli.stderr.toString().should.equal('');
       cli.status.should.equal(zeroClean);
     });
 
@@ -127,6 +131,7 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
 `;
 
       cli.stdout.toString().should.equal(expected);
+      cli.stderr.toString().should.equal('');
       cli.status.should.equal(twoLintErrorsDetected);
     });
   });
@@ -137,6 +142,7 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
       const expected = '';
 
       cli.stdout.toString().should.equal(expected);
+      cli.stderr.toString().should.equal('');
       cli.status.should.equal(zeroClean);
     });
 
@@ -149,6 +155,7 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
 `;
 
       cli.stdout.toString().should.equal(expected);
+      cli.stderr.toString().should.equal('');
       cli.status.should.equal(twoLintErrorsDetected);
     });
 
@@ -169,6 +176,7 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
 `;
 
       cli.stdout.toString().should.equal(expected);
+      cli.stderr.toString().should.equal('');
       cli.status.should.equal(twoLintErrorsDetected);
     });
   });
@@ -185,6 +193,7 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
 `;
 
       cli.stdout.toString().should.equal(expected);
+      cli.stderr.toString().should.equal('');
       cli.status.should.equal(twoLintErrorsDetected);
     });
   });
@@ -201,6 +210,7 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
 `;
 
       cli.stdout.toString().should.equal(expected);
+      cli.stderr.toString().should.equal('');
       cli.status.should.equal(twoLintErrorsDetected);
     });
   });
@@ -263,6 +273,7 @@ Totals
 `;
 
       cli.stdout.toString().should.equal(expected);
+      cli.stderr.toString().should.equal('');
       cli.status.should.equal(twoLintErrorsDetected);
     });
   });
