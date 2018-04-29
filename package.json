@@ -1,6 +1,6 @@
 {
   "name": "npm-package-json-lint",
-  "version": "3.0.0-alpha1",
+  "version": "3.0.0-alpha2",
   "description": "CLI app for linting package.json files.",
   "keywords": [
     "lint",
@@ -36,6 +36,7 @@
   "dependencies": {
     "ajv": "^6.4.0",
     "chalk": "^2.3.1",
+    "glob": "^7.1.2",
     "in-array": "^0.1.2",
     "is-path-inside": "^2.0.0",
     "is-plain-obj": "^1.1.0",

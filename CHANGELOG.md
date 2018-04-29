@@ -17,6 +17,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Added support for recursive config file detection. Addresses [#75](https://github.com/tclindner/npm-package-json-lint/issues/75).
 - Added support for running npm-package-json-lint programmatically. Addresses [#76](https://github.com/tclindner/npm-package-json-lint/issues/76).
 
+### Changed
+- npm-package-json-lint's cli has been renamed from `pjl-cli` to `npmPkgJsonLint`. The cli interface has also changed. Multiple patterns can now specified. Please run `npmPkgJsonLint --help` for examples.
+
 ### Removed
 - Dropped support for Node 4 and 5.
 
