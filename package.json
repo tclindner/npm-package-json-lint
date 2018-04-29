@@ -44,6 +44,7 @@
     "meow": "^4.0.0",
     "plur": "^2.1.2",
     "semver": "^5.5.0",
+    "strip-json-comments": "^2.0.1",
     "validator": "^9.4.1"
   },
   "devDependencies": {
