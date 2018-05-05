@@ -12,8 +12,6 @@ const ConfigFile = require('./config/ConfigFile');
 const ConfigFileType = require('./config/ConfigFileType');
 const ConfigValidator = require('./config/ConfigValidator');
 
-const userHomeDir = os.homedir();
-
 /**
  * Determines the base directory for node packages referenced in a config file.
  * This does not include node_modules in the path so it can be used for all
@@ -95,6 +93,7 @@ class Config {
    */
   getUserHomeConfig() {
     if (typeof this.personalConfig === 'undefined') {
+      const userHomeDir = os.homedir();
       let configObj = {};
 
       const jsonRcFilePath = path.join(userHomeDir, ConfigFileType.rcFileName);
@@ -129,19 +128,25 @@ class Config {
       const javaScriptConfigFilePath = path.join(directory, ConfigFileType.javaScriptConfigFileName);
 
       if (fs.existsSync(jsonRcFilePath) && fs.statSync(jsonRcFilePath).isFile()) {
-        const rcConfig = ConfigFile.load(jsonRcFilePath, this);
-
-        config = Object.assign({}, rcConfig, config);
+        config = ConfigFile.load(jsonRcFilePath, this);
       } else if (fs.existsSync(javaScriptConfigFilePath) && fs.statSync(javaScriptConfigFilePath).isFile()) {
-        const jsonConfig = ConfigFile.load(javaScriptConfigFilePath, this);
-
-        config = Object.assign({}, jsonConfig, config);
+        config = ConfigFile.load(javaScriptConfigFilePath, this);
       }
 
-      if (!config.root) {
-        const parentDir = path.join(directory, '../');
+      if (config.hasOwnProperty('root') && !config.root) {
+        const parentDir = path.resolve(directory, '../');
+        const parentConfig = this.getProjectHierarchyConfig(parentDir);
 
-        config = Object.assign({}, this.getProjectHierarchyConfig(parentDir), config);
+        // Merge base object
+        const mergedConfig = Object.assign({}, parentConfig, config);
+
+        // Merge rules
+        const rules = Object.assign({}, parentConfig.rules, config.rules);
+
+        // Override merged rules
+        mergedConfig.rules = rules;
+
+        config = mergedConfig;
       }
     }
 
