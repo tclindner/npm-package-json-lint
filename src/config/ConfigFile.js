@@ -107,35 +107,13 @@ const loadConfigFile = function(filePath) {
 };
 
 /**
- * Loads a configuration file from the given file path.
- *
- * @param {Object} filePath The path of the config file.
- * @param {Config} configContext Plugins context
- * @returns {Object} The configuration information.
- */
-const loadFromDisk = function(filePath, configContext) {
-  let config = loadConfigFile(filePath);
-
-  if (config) {
-    ConfigValidator.validate(config, filePath, configContext.linterContext);
-
-    if (config.extends) {
-      config = applyExtends(config, configContext, filePath, filePath);
-    }
-  }
-
-  return config;
-};
-
-/**
  * Public ConfigFile class
  * @class
  */
 class ConfigFile {
 
   /**
-   * Loads a config object from the config cache based on its filename, falling back to the disk if the file is not yet
-   * cached.
+   * Loads a configuration file from the given file path.
    *
    * @param {string} filePath the path to the config file
    * @param {Config} configContext Context for the config instance
@@ -143,7 +121,17 @@ class ConfigFile {
    * @private
    */
   static load(filePath, configContext) {
-    return loadFromDisk(filePath, configContext);
+    let config = loadConfigFile(filePath);
+
+    if (config) {
+      ConfigValidator.validate(config, filePath, configContext.linterContext);
+
+      if (config.hasOwnProperty('extends') && config.extends) {
+        config = applyExtends(config, configContext, filePath, filePath);
+      }
+    }
+
+    return config;
   }
 
   /**
@@ -158,12 +146,10 @@ class ConfigFile {
   static loadFromPackageJson(filePath, configContext) {
     let config = Parser.parseJsonFile(filePath).npmPackageJsonLintConfig || ConfigFile.createEmptyConfig();
 
-    if (config) {
-      ConfigValidator.validate(config, filePath, configContext.linterContext);
+    ConfigValidator.validate(config, filePath, configContext.linterContext);
 
-      if (config.extends) {
-        config = applyExtends(config, configContext, filePath, filePath);
-      }
+    if (config.hasOwnProperty('extends') && config.extends) {
+      config = applyExtends(config, configContext, filePath, filePath);
     }
 
     return config;
