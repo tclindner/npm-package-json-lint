@@ -157,8 +157,8 @@ describe('CLIEngine Unit Tests', function() {
     });
 
     it('when called with invalid pattern', function() {
-      const path = './tests/fixtures/valid/.npmpackagejsonlintrc.json';
-      const patterns = [path];
+      const pattern = './tests/fixtures/valid/.npmpackagejsonlintrc.json';
+      const patterns = [pattern];
 
       const options = {
         configFile: '',
@@ -170,7 +170,7 @@ describe('CLIEngine Unit Tests', function() {
 
       (function() {
         cliEngine.executeOnPackageJsonFiles(patterns);
-      }).should.throw(`Pattern, ${path}, is a file, but isn't a package.json file.`);
+      }).should.throw(`Pattern, ${pattern}, is a file, but isn't a package.json file.`);
     });
   });
 
