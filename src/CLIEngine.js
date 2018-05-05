@@ -204,6 +204,7 @@ const getFileList = function(patterns, options) {
         return;
       }
 
+      addedFiles.add(file);
       files.push(file);
     } else {
       const globOptions = {
@@ -226,6 +227,7 @@ const getFileList = function(patterns, options) {
           return;
         }
 
+        addedFiles.add(filePath);
         files.push(filePath);
       });
     }
