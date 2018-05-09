@@ -12,6 +12,8 @@ const ConfigFile = require('./config/ConfigFile');
 const ConfigFileType = require('./config/ConfigFileType');
 const ConfigValidator = require('./config/ConfigValidator');
 
+const noRules = 0;
+
 /**
  * Determines the base directory for node packages referenced in a config file.
  * This does not include node_modules in the path so it can be used for all
@@ -51,18 +53,6 @@ class Config {
     this.cliConfig = this.options.rules;
 
     ConfigValidator.validateRules(this.cliConfig, 'cli', this.linterContext);
-  }
-
-  /**
-   * Loads configuration from current package.json file.
-   *
-   * @param {String}    filePath    The file to load.
-   * @returns {Object}  The configuration object from the file.
-   * @throws {Error}    If the file cannot be read.
-   * @private
-   */
-  getConfigFromPkgJsonProp(filePath) {
-    return ConfigFile.loadFromPackageJson(filePath, this);
   }
 
   /**
@@ -119,17 +109,22 @@ class Config {
    * @returns {Object} Config object
    */
   getProjectHierarchyConfig(filePath) {
-    let config = {};
+    let config = ConfigFile.createEmptyConfig();
 
     const directory = filePath ? path.dirname(filePath) : this.options.cwd;
 
     if (directory === getProjectDir() || isPathInside(directory, getProjectDir())) {
+      const pkgJsonFilePath = path.join(directory, 'package.json');
       const jsonRcFilePath = path.join(directory, ConfigFileType.rcFileName);
       const javaScriptConfigFilePath = path.join(directory, ConfigFileType.javaScriptConfigFileName);
 
-      if (fs.existsSync(jsonRcFilePath) && fs.statSync(jsonRcFilePath).isFile()) {
+      if (fs.existsSync(pkgJsonFilePath) && fs.statSync(pkgJsonFilePath).isFile()) {
+        config = ConfigFile.loadFromPackageJson(pkgJsonFilePath, this);
+      }
+
+      if (this.useConfigFiles && Object.keys(config.rules).length === noRules && fs.existsSync(jsonRcFilePath) && fs.statSync(jsonRcFilePath).isFile()) {
         config = ConfigFile.load(jsonRcFilePath, this);
-      } else if (fs.existsSync(javaScriptConfigFilePath) && fs.statSync(javaScriptConfigFilePath).isFile()) {
+      } else if (this.useConfigFiles && Object.keys(config.rules).length === noRules && fs.existsSync(javaScriptConfigFilePath) && fs.statSync(javaScriptConfigFilePath).isFile()) {
         config = ConfigFile.load(javaScriptConfigFilePath, this);
       }
 
@@ -167,29 +162,22 @@ class Config {
   get(filePath) {
     let finalConfig = {};
 
-    // Step 1: Get the package.json config object
-    const packageConfig = this.getConfigFromPkgJsonProp(filePath);
+    // Step 1: Get project hierarchy config from
+    // package.json property, .npmpackagejsonlintrc.json, and npmpackagejsonlint.config.js files
+    const projectHierarchyConfig = this.getProjectHierarchyConfig(filePath);
 
-    // Step 2: Get project hierarchy config from
-    // .npmpackagejsonlintrc.json and npmpackagejsonlint.config.js files
-    let projectHierarchyConfig = ConfigFile.createEmptyConfig();
-
-    if (this.useConfigFiles) {
-      projectHierarchyConfig = this.getProjectHierarchyConfig(filePath);
-    }
-
-    // Step 3: Load cli specified config
+    // Step 2: Load cli specified config
     const cliSpecifiedCfgFileConfig = this.loadCliSpecifiedCfgFile(this.options.configFile);
 
-    // Step 4: Merge config
+    // Step 3: Merge config
     // NOTE: Object.assign does a shallow copy of objects, so we need to
     // do this for all of it properties then create a new final object
 
-    const finalRules = Object.assign({}, packageConfig.rules, projectHierarchyConfig.rules, cliSpecifiedCfgFileConfig.rules, this.cliConfig);
+    const finalRules = Object.assign({}, projectHierarchyConfig.rules, cliSpecifiedCfgFileConfig.rules, this.cliConfig);
 
     finalConfig = {rules: finalRules};
 
-    // Step 5: Check if any config has been found.
+    // Step 4: Check if any config has been found.
     // If no, try to load personal config from user home directory
     if (!Object.keys(finalConfig.rules).length) {
       const personalConfig = this.getUserHomeConfig();
@@ -205,7 +193,7 @@ class Config {
       }
     }
 
-    // Step 6: return final config
+    // Step 5: return final config
     return finalConfig;
   }
 

@@ -30,18 +30,15 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubGetFromProp = sinon.stub(config, 'getConfigFromPkgJsonProp');
         const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
         const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
         const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
 
-        stubGetFromProp.returns({rules: {'version-type': 'error'}});
         stubHierarchy.returns({rules: {'require-version': 'error'}});
         stubCli.returns({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           rules: {
-            'version-type': 'error',
             'require-version': 'error',
             'require-name': 'error',
             'require-scripts': 'error'
@@ -49,9 +46,6 @@ describe('Config Unit Tests', function() {
         };
         const filePath = './.npmpackagejsonlintrc.json';
         const result = config.get(filePath);
-
-        stubGetFromProp.calledOnce.should.be.true;
-        stubGetFromProp.firstCall.calledWithExactly(filePath).should.be.true;
 
         stubHierarchy.calledOnce.should.be.true;
         stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
@@ -63,7 +57,6 @@ describe('Config Unit Tests', function() {
 
         result.should.deep.equal(expectedConfigObj);
 
-        config.getConfigFromPkgJsonProp.restore();
         config.getProjectHierarchyConfig.restore();
         config.loadCliSpecifiedCfgFile.restore();
         config.getUserHomeConfig.restore();
@@ -83,12 +76,10 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubGetFromProp = sinon.stub(config, 'getConfigFromPkgJsonProp');
         const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
         const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
         const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
 
-        stubGetFromProp.returns({rules: {}});
         stubHierarchy.returns({rules: {'require-version': 'error'}});
         stubCli.returns({rules: {'require-name': 'error'}});
 
@@ -102,9 +93,6 @@ describe('Config Unit Tests', function() {
         const filePath = './.npmpackagejsonlintrc.json';
         const result = config.get(filePath);
 
-        stubGetFromProp.calledOnce.should.be.true;
-        stubGetFromProp.firstCall.calledWithExactly(filePath).should.be.true;
-
         stubHierarchy.calledOnce.should.be.true;
         stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
 
@@ -115,7 +103,6 @@ describe('Config Unit Tests', function() {
 
         result.should.deep.equal(expectedConfigObj);
 
-        config.getConfigFromPkgJsonProp.restore();
         config.getProjectHierarchyConfig.restore();
         config.loadCliSpecifiedCfgFile.restore();
         config.getUserHomeConfig.restore();
@@ -135,27 +122,21 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubGetFromProp = sinon.stub(config, 'getConfigFromPkgJsonProp');
         const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
         const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
         const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
 
-        stubGetFromProp.returns({rules: {'version-type': 'error'}});
         stubHierarchy.returns({rules: {}});
         stubCli.returns({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           rules: {
-            'version-type': 'error',
             'require-name': 'error',
             'require-scripts': 'error'
           }
         };
         const filePath = './.npmpackagejsonlintrc.json';
         const result = config.get(filePath);
-
-        stubGetFromProp.calledOnce.should.be.true;
-        stubGetFromProp.firstCall.calledWithExactly(filePath).should.be.true;
 
         stubHierarchy.calledOnce.should.be.true;
         stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
@@ -167,7 +148,6 @@ describe('Config Unit Tests', function() {
 
         result.should.deep.equal(expectedConfigObj);
 
-        config.getConfigFromPkgJsonProp.restore();
         config.getProjectHierarchyConfig.restore();
         config.loadCliSpecifiedCfgFile.restore();
         config.getUserHomeConfig.restore();
@@ -187,27 +167,21 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubGetFromProp = sinon.stub(config, 'getConfigFromPkgJsonProp');
         const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
         const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
         const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
 
-        stubGetFromProp.returns({rules: {'version-type': 'error'}});
         stubHierarchy.returns({rules: {'require-version': 'error'}});
         stubCli.returns({rules: {}});
 
         const expectedConfigObj = {
           rules: {
-            'version-type': 'error',
             'require-version': 'error',
             'require-scripts': 'error'
           }
         };
         const filePath = './.npmpackagejsonlintrc.json';
         const result = config.get(filePath);
-
-        stubGetFromProp.calledOnce.should.be.true;
-        stubGetFromProp.firstCall.calledWithExactly(filePath).should.be.true;
 
         stubHierarchy.calledOnce.should.be.true;
         stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
@@ -219,7 +193,6 @@ describe('Config Unit Tests', function() {
 
         result.should.deep.equal(expectedConfigObj);
 
-        config.getConfigFromPkgJsonProp.restore();
         config.getProjectHierarchyConfig.restore();
         config.loadCliSpecifiedCfgFile.restore();
         config.getUserHomeConfig.restore();
@@ -237,27 +210,21 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubGetFromProp = sinon.stub(config, 'getConfigFromPkgJsonProp');
         const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
         const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
         const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
 
-        stubGetFromProp.returns({rules: {'version-type': 'error'}});
         stubHierarchy.returns({rules: {'require-version': 'error'}});
         stubCli.returns({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           rules: {
-            'version-type': 'error',
             'require-version': 'error',
             'require-name': 'error'
           }
         };
         const filePath = './.npmpackagejsonlintrc.json';
         const result = config.get(filePath);
-
-        stubGetFromProp.calledOnce.should.be.true;
-        stubGetFromProp.firstCall.calledWithExactly(filePath).should.be.true;
 
         stubHierarchy.calledOnce.should.be.true;
         stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
@@ -269,7 +236,6 @@ describe('Config Unit Tests', function() {
 
         result.should.deep.equal(expectedConfigObj);
 
-        config.getConfigFromPkgJsonProp.restore();
         config.getProjectHierarchyConfig.restore();
         config.loadCliSpecifiedCfgFile.restore();
         config.getUserHomeConfig.restore();
@@ -287,12 +253,10 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubGetFromProp = sinon.stub(config, 'getConfigFromPkgJsonProp');
         const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
         const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
         const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
 
-        stubGetFromProp.returns({rules: {}});
         stubHierarchy.returns({rules: {}});
         stubCli.returns({rules: {}});
         stubUserHome.returns({rules: {'require-name': 'error'}});
@@ -305,9 +269,6 @@ describe('Config Unit Tests', function() {
         const filePath = './.npmpackagejsonlintrc.json';
         const result = config.get(filePath);
 
-        stubGetFromProp.calledOnce.should.be.true;
-        stubGetFromProp.firstCall.calledWithExactly(filePath).should.be.true;
-
         stubHierarchy.calledOnce.should.be.true;
         stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
 
@@ -318,90 +279,10 @@ describe('Config Unit Tests', function() {
 
         result.should.deep.equal(expectedConfigObj);
 
-        config.getConfigFromPkgJsonProp.restore();
         config.getProjectHierarchyConfig.restore();
         config.loadCliSpecifiedCfgFile.restore();
         config.getUserHomeConfig.restore();
       });
-    });
-
-    context('when project hierarchy exists, but useConfigFiles is off', function() {
-      it('a config object should returned with all rules', function() {
-        const configFile = './configfile';
-        const options = {
-          configFile,
-          cwd: process.cwd(),
-          useConfigFiles: false,
-          rules: {
-            'require-scripts': 'error'
-          }
-        };
-        const config = new Config(options, linterContext);
-
-        const stubGetFromProp = sinon.stub(config, 'getConfigFromPkgJsonProp');
-        const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
-        const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
-        const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
-
-        stubGetFromProp.returns({rules: {}});
-        stubHierarchy.returns({rules: {'require-version': 'error'}});
-        stubCli.returns({rules: {}});
-
-        const expectedConfigObj = {
-          rules: {
-            'require-scripts': 'error'
-          }
-        };
-        const filePath = './.npmpackagejsonlintrc.json';
-        const result = config.get(filePath);
-
-        stubGetFromProp.calledOnce.should.be.true;
-        stubGetFromProp.firstCall.calledWithExactly(filePath).should.be.true;
-
-        stubHierarchy.notCalled.should.be.true;
-
-        stubCli.calledOnce.should.be.true;
-        stubCli.firstCall.calledWithExactly(configFile).should.be.true;
-
-        stubUserHome.notCalled.should.be.true;
-
-        result.should.deep.equal(expectedConfigObj);
-
-        config.getConfigFromPkgJsonProp.restore();
-        config.getProjectHierarchyConfig.restore();
-        config.loadCliSpecifiedCfgFile.restore();
-        config.getUserHomeConfig.restore();
-      });
-    });
-  });
-
-  context('getConfigFromPkgJsonProp method tests', function() {
-    it('loadFromPackageJson should be called', function() {
-      const configFile = './configfile';
-      const options = {
-        configFile,
-        cwd: process.cwd(),
-        useConfigFiles: true,
-        rules: {
-          'require-scripts': 'error'
-        }
-      };
-      const config = new Config(options, linterContext);
-
-      const stub = sinon.stub(ConfigFile, 'loadFromPackageJson');
-
-      stub.returns('a');
-
-      const expected = 'a';
-      const filePath = './.npmpackagejsonlintrc.json';
-      const result = config.getConfigFromPkgJsonProp(filePath);
-
-      stub.calledOnce.should.be.true;
-      stub.firstCall.calledWithExactly(filePath, config).should.be.true;
-
-      result.should.equal(expected);
-
-      ConfigFile.loadFromPackageJson.restore();
     });
   });
 
@@ -509,42 +390,6 @@ describe('Config Unit Tests', function() {
       result.should.equal(expected);
 
       ConfigFile.load.restore();
-    });
-  });
-
-  context('getConfigFromPkgJsonProp method tests', function() {
-    context('when called', function() {
-      it('a config object should returned with all rules', function() {
-        const configFile = './configfile';
-        const options = {
-          configFile,
-          cwd: process.cwd(),
-          useConfigFiles: true,
-          rules: {
-            'require-scripts': 'error'
-          }
-        };
-        const config = new Config(options, linterContext);
-
-        const stub = sinon.stub(ConfigFile, 'loadFromPackageJson');
-
-        stub.returns({rules: {'require-name': 'error'}});
-
-        const expectedConfigObj = {
-          rules: {
-            'require-name': 'error'
-          }
-        };
-        const filePath = './.npmpackagejsonlintrc.json';
-        const result = config.getConfigFromPkgJsonProp(filePath);
-
-        stub.calledOnce.should.be.true;
-        stub.firstCall.calledWithExactly(filePath, config).should.be.true;
-
-        result.should.deep.equal(expectedConfigObj);
-
-        ConfigFile.loadFromPackageJson.restore();
-      });
     });
   });
 
@@ -851,7 +696,7 @@ describe('Config Unit Tests', function() {
 
   context('getProjectHierarchyConfig method tests', function() {
     context('when called', function() {
-      it('and rc file does and is root, the config object should returned', function() {
+      it('and package.json prop exists and is root, the config object should returned', function() {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -863,6 +708,7 @@ describe('Config Unit Tests', function() {
         const stubDirname = sinon.stub(path, 'dirname');
         const stubExists = sinon.stub(fs, 'existsSync');
         const stubStats = sinon.stub(fs, 'statSync');
+        const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
         const stubLoad = sinon.stub(ConfigFile, 'load');
 
         stubDirname.returns('./npm-package-json-lint/');
@@ -872,7 +718,7 @@ describe('Config Unit Tests', function() {
             return true;
           }
         });
-        stubLoad.returns({root: true, rules: {'require-name': 'error'}});
+        stubLoadPkgJson.returns({root: true, rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           root: true,
@@ -887,10 +733,71 @@ describe('Config Unit Tests', function() {
         stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
 
         stubExists.calledOnce.should.be.true;
-        stubExists.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
+        stubExists.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
 
         stubStats.calledOnce.should.be.true;
-        stubStats.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
+        stubStats.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
+
+        stubLoadPkgJson.calledOnce.should.be.true;
+        stubLoadPkgJson.firstCall.calledWithExactly('npm-package-json-lint/package.json', config).should.be.true;
+
+        stubLoad.notCalled.should.be.true;
+
+        result.should.deep.equal(expectedConfigObj);
+
+        path.dirname.restore();
+        fs.existsSync.restore();
+        fs.statSync.restore();
+        ConfigFile.loadFromPackageJson.restore();
+        ConfigFile.load.restore();
+      });
+
+      it('and package.json prop exists and has no prop, the config object should returned', function() {
+        const options = {
+          configFile: '',
+          cwd: process.cwd(),
+          useConfigFiles: true,
+          rules: {}
+        };
+        const config = new Config(options, linterContext);
+
+        const stubDirname = sinon.stub(path, 'dirname');
+        const stubExists = sinon.stub(fs, 'existsSync');
+        const stubStats = sinon.stub(fs, 'statSync');
+        const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
+        const stubLoad = sinon.stub(ConfigFile, 'load');
+
+        stubDirname.returns('./npm-package-json-lint/');
+        stubExists.returns(true);
+        stubStats.returns({
+          isFile: function() {
+            return true;
+          }
+        });
+        stubLoadPkgJson.returns({root: true, rules: {}});
+        stubLoad.returns({rules: {'require-name': 'error'}});
+
+        const expectedConfigObj = {
+          rules: {
+            'require-name': 'error'
+          }
+        };
+        const filePath = './package.json';
+        const result = config.getProjectHierarchyConfig(filePath);
+
+        stubDirname.calledOnce.should.be.true;
+        stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
+
+        stubExists.calledTwice.should.be.true;
+        stubExists.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
+        stubExists.secondCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
+
+        stubStats.calledTwice.should.be.true;
+        stubStats.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
+        stubStats.secondCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
+
+        stubLoadPkgJson.calledOnce.should.be.true;
+        stubLoadPkgJson.firstCall.calledWithExactly('npm-package-json-lint/package.json', config).should.be.true;
 
         stubLoad.calledOnce.should.be.true;
         stubLoad.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json', config).should.be.true;
@@ -900,10 +807,11 @@ describe('Config Unit Tests', function() {
         path.dirname.restore();
         fs.existsSync.restore();
         fs.statSync.restore();
+        ConfigFile.loadFromPackageJson.restore();
         ConfigFile.load.restore();
       });
 
-      it('and rc file does and is not root, the config object should returned', function() {
+      it('and rc file does and is root, the config object should returned', function() {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -915,62 +823,7 @@ describe('Config Unit Tests', function() {
         const stubDirname = sinon.stub(path, 'dirname');
         const stubExists = sinon.stub(fs, 'existsSync');
         const stubStats = sinon.stub(fs, 'statSync');
-        const stubLoad = sinon.stub(ConfigFile, 'load');
-
-        stubDirname.onCall(0).returns('./npm-package-json-lint/');
-        stubDirname.onCall(1).returns('./npm-package-json-lint/');
-        stubDirname.onCall(2).returns('/home/');
-        stubExists.returns(true);
-        stubStats.returns({
-          isFile: function() {
-            return true;
-          }
-        });
-        stubLoad.onCall(0).returns({root: false, rules: {'require-name': 'error'}});
-        stubLoad.onCall(1).returns({root: false, rules: {'require-version': 'error', 'require-name': 'warning'}});
-
-        const expectedConfigObj = {
-          root: false,
-          rules: {
-            'require-name': 'error',
-            'require-version': 'error'
-          }
-        };
-        const filePath = './package.json';
-        const result = config.getProjectHierarchyConfig(filePath);
-
-        stubDirname.calledThrice.should.be.true;
-        stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
-
-        stubExists.calledTwice.should.be.true;
-        stubExists.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
-
-        stubStats.calledTwice.should.be.true;
-        stubStats.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
-
-        stubLoad.calledTwice.should.be.true;
-        stubLoad.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json', config).should.be.true;
-
-        result.should.deep.equal(expectedConfigObj);
-
-        path.dirname.restore();
-        fs.existsSync.restore();
-        fs.statSync.restore();
-        ConfigFile.load.restore();
-      });
-
-      it('and rc file does not, JavaScript config does and is root, the config object should returned', function() {
-        const options = {
-          configFile: '',
-          cwd: process.cwd(),
-          useConfigFiles: true,
-          rules: {}
-        };
-        const config = new Config(options, linterContext);
-
-        const stubDirname = sinon.stub(path, 'dirname');
-        const stubExists = sinon.stub(fs, 'existsSync');
-        const stubStats = sinon.stub(fs, 'statSync');
+        const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
         const stubLoad = sinon.stub(ConfigFile, 'load');
 
         stubDirname.returns('./npm-package-json-lint/');
@@ -996,11 +849,138 @@ describe('Config Unit Tests', function() {
         stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
 
         stubExists.calledTwice.should.be.true;
-        stubExists.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
-        stubExists.secondCall.calledWithExactly('npm-package-json-lint/npmpackagejsonlint.config.js').should.be.true;
+        stubExists.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
+        stubExists.secondCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
+
+        stubStats.calledOnce.should.be.true;
+        stubStats.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
+
+        stubLoadPkgJson.notCalled.should.be.true;
+
+        stubLoad.calledOnce.should.be.true;
+        stubLoad.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json', config).should.be.true;
+
+        result.should.deep.equal(expectedConfigObj);
+
+        path.dirname.restore();
+        fs.existsSync.restore();
+        fs.statSync.restore();
+        ConfigFile.loadFromPackageJson.restore();
+        ConfigFile.load.restore();
+      });
+
+      it('and rc file does and is not root, the config object should returned', function() {
+        const options = {
+          configFile: '',
+          cwd: process.cwd(),
+          useConfigFiles: true,
+          rules: {}
+        };
+        const config = new Config(options, linterContext);
+
+        const stubDirname = sinon.stub(path, 'dirname');
+        const stubExists = sinon.stub(fs, 'existsSync');
+        const stubStats = sinon.stub(fs, 'statSync');
+        const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
+        const stubLoad = sinon.stub(ConfigFile, 'load');
+
+        stubDirname.onCall(0).returns('./npm-package-json-lint/');
+        stubDirname.onCall(1).returns('./npm-package-json-lint/');
+        stubDirname.onCall(2).returns('/home/');
+        stubExists.onCall(0).returns(false);
+        stubExists.onCall(1).returns(true);
+        stubExists.onCall(2).returns(false);
+        stubExists.onCall(3).returns(true);
+        stubStats.returns({
+          isFile: function() {
+            return true;
+          }
+        });
+
+        stubLoadPkgJson.returns({rules: {}});
+        stubLoad.onCall(0).returns({root: false, rules: {'require-name': 'error'}});
+        stubLoad.onCall(1).returns({root: false, rules: {'require-version': 'error', 'require-name': 'warning'}});
+
+        const expectedConfigObj = {
+          root: false,
+          rules: {
+            'require-name': 'error',
+            'require-version': 'error'
+          }
+        };
+        const filePath = './package.json';
+        const result = config.getProjectHierarchyConfig(filePath);
+
+        stubDirname.calledThrice.should.be.true;
+        stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
+
+        stubExists.callCount.should.equal(4);
+        stubExists.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
+        stubExists.secondCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
+        stubExists.thirdCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
+
+        stubStats.calledTwice.should.be.true;
+        stubStats.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
+
+        stubLoad.calledTwice.should.be.true;
+        stubLoad.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json', config).should.be.true;
+
+        result.should.deep.equal(expectedConfigObj);
+
+        path.dirname.restore();
+        fs.existsSync.restore();
+        fs.statSync.restore();
+        ConfigFile.loadFromPackageJson.restore();
+        ConfigFile.load.restore();
+      });
+
+      it('and rc file does not, JavaScript config does and is root, the config object should returned', function() {
+        const options = {
+          configFile: '',
+          cwd: process.cwd(),
+          useConfigFiles: true,
+          rules: {}
+        };
+        const config = new Config(options, linterContext);
+
+        const stubDirname = sinon.stub(path, 'dirname');
+        const stubExists = sinon.stub(fs, 'existsSync');
+        const stubStats = sinon.stub(fs, 'statSync');
+        const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
+        const stubLoad = sinon.stub(ConfigFile, 'load');
+
+        stubDirname.returns('./npm-package-json-lint/');
+        stubExists.onCall(0).returns(false);
+        stubExists.onCall(1).returns(false);
+        stubExists.onCall(2).returns(true);
+        stubStats.returns({
+          isFile: function() {
+            return true;
+          }
+        });
+        stubLoad.returns({root: true, rules: {'require-name': 'error'}});
+
+        const expectedConfigObj = {
+          root: true,
+          rules: {
+            'require-name': 'error'
+          }
+        };
+        const filePath = './package.json';
+        const result = config.getProjectHierarchyConfig(filePath);
+
+        stubDirname.calledOnce.should.be.true;
+        stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
+
+        stubExists.calledThrice.should.be.true;
+        stubExists.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
+        stubExists.secondCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
+        stubExists.thirdCall.calledWithExactly('npm-package-json-lint/npmpackagejsonlint.config.js').should.be.true;
 
         stubStats.calledOnce.should.be.true;
         stubStats.firstCall.calledWithExactly('npm-package-json-lint/npmpackagejsonlint.config.js').should.be.true;
+
+        stubLoadPkgJson.notCalled.should.be.true;
 
         stubLoad.calledOnce.should.be.true;
         stubLoad.firstCall.calledWithExactly('npm-package-json-lint/npmpackagejsonlint.config.js', config).should.be.true;
@@ -1010,6 +990,7 @@ describe('Config Unit Tests', function() {
         path.dirname.restore();
         fs.existsSync.restore();
         fs.statSync.restore();
+        ConfigFile.loadFromPackageJson.restore();
         ConfigFile.load.restore();
       });
 
@@ -1025,23 +1006,29 @@ describe('Config Unit Tests', function() {
         const stubDirname = sinon.stub(path, 'dirname');
         const stubExists = sinon.stub(fs, 'existsSync');
         const stubStats = sinon.stub(fs, 'statSync');
+        const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
         const stubLoad = sinon.stub(ConfigFile, 'load');
 
         stubDirname.returns('./npm-package-json-lint/');
         stubExists.returns(false);
 
-        const expectedConfigObj = {};
+        const expectedConfigObj = {
+          rules: {}
+        };
         const filePath = './package.json';
         const result = config.getProjectHierarchyConfig(filePath);
 
         stubDirname.calledOnce.should.be.true;
         stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
 
-        stubExists.calledTwice.should.be.true;
-        stubExists.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
-        stubExists.secondCall.calledWithExactly('npm-package-json-lint/npmpackagejsonlint.config.js').should.be.true;
+        stubExists.calledThrice.should.be.true;
+        stubExists.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
+        stubExists.secondCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
+        stubExists.thirdCall.calledWithExactly('npm-package-json-lint/npmpackagejsonlint.config.js').should.be.true;
 
         stubStats.notCalled.should.be.true;
+
+        stubLoadPkgJson.notCalled.should.be.true;
 
         stubLoad.notCalled.should.be.true;
 
@@ -1050,6 +1037,62 @@ describe('Config Unit Tests', function() {
         path.dirname.restore();
         fs.existsSync.restore();
         fs.statSync.restore();
+        ConfigFile.loadFromPackageJson.restore();
+        ConfigFile.load.restore();
+      });
+
+      it('and pkg prop does not exist, config files do, but useConfigFiles is false, then empty config object should returned', function() {
+        const options = {
+          configFile: '',
+          cwd: process.cwd(),
+          useConfigFiles: false,
+          rules: {}
+        };
+        const config = new Config(options, linterContext);
+
+        const stubDirname = sinon.stub(path, 'dirname');
+        const stubExists = sinon.stub(fs, 'existsSync');
+        const stubStats = sinon.stub(fs, 'statSync');
+        const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
+        const stubLoad = sinon.stub(ConfigFile, 'load');
+
+        stubDirname.returns('./npm-package-json-lint/');
+        stubExists.returns(true);
+        stubStats.returns({
+          isFile: function() {
+            return true;
+          }
+        });
+        stubLoadPkgJson.returns({rules: {}});
+        stubLoad.returns({root: true, rules: {'require-name': 'error'}});
+
+        const expectedConfigObj = {
+          rules: {
+          }
+        };
+        const filePath = './package.json';
+        const result = config.getProjectHierarchyConfig(filePath);
+
+        stubDirname.calledOnce.should.be.true;
+        stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
+
+        stubExists.calledOnce.should.be.true;
+        stubExists.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
+
+        stubStats.calledOnce.should.be.true;
+        stubStats.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
+
+        stubLoadPkgJson.calledOnce.should.be.true;
+        stubLoadPkgJson.firstCall.calledWithExactly('npm-package-json-lint/package.json', config).should.be.true;
+
+        stubLoad.notCalled.should.be.true;
+
+        result.should.deep.equal(expectedConfigObj);
+
+        path.dirname.restore();
+        fs.existsSync.restore();
+        fs.statSync.restore();
+        ConfigFile.loadFromPackageJson.restore();
         ConfigFile.load.restore();
       });
     });
