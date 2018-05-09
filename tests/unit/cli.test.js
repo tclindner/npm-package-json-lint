@@ -39,7 +39,7 @@ const threeRunTimeException = 3;
 describe('cli Unit Tests', function() {
   context('when the help command is run', function() {
     const expected = `
-  CLI app for linting package.json files.
+  Configurable linter for package.json files.
 
   Usage
     $ npmPkgJsonLint <patterns>
