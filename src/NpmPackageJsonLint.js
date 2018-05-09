@@ -17,7 +17,7 @@ class NpmPackageJsonLint {
   }
 
   /**
-   * Main execution method for package json lint.
+   * Runs configured rules against the provided package.json object.
    *
    * @param  {Object}   packageJsonData   Valid package.json data
    * @param  {Object}   configObj         Configuration object
