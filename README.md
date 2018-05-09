@@ -45,7 +45,7 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 * `npm install npm-package-json-lint`
 
-## Commands and configuration
+## CLI commands and configuration
 
 | Command | Alias | Description |
 |---|---|---|
@@ -98,6 +98,186 @@ $ npmPkgJsonLint --quiet ./packages
 ```
 
 > Looks for all `package.json` files in the `packages` directory. The CLI engine automatically looks for relevant config files for each package.json file that is found. Removes any warnings from the output using the long form for quieting output.
+
+## Node.js API
+
+npm-package-json-lint exports two main objects: `CLIEngine` and `NpmPackageJsonLint`.
+
+### NpmPackageJsonLint()
+
+Creates an instance of NpmPackageJsonLint
+
+`NpmPackageJsonLint` has one public method, `lint`. `lint` takes a package.json object in object form and a config object as parameters.
+
+#### .lint(packageJsonData, configObj)
+
+Runs configured rules against the provided package.json object.
+
+##### packageJsonData
+
+Type: `object`
+
+A package.json file in object form.
+
+##### configObj
+
+Type: `object`
+
+A valid configuration object.
+
+##### Example
+
+The following example demostrates how to use `lint`.
+
+```js
+const NpmPackageJsonLint = require('npm-package-json-lint').NpmPackageJsonLint;
+
+const npmPackageJsonLint = new NpmPackageJsonLint();
+const results = npmPackageJsonLint.lint(packageJsonDataAsObject, configObject);
+```
+
+##### Return
+
+`lint` returns an object with an array of `LintIssue`s. Please see `LintIssue` section for more detail.
+
+```js
+{
+  issues: [
+    {
+      lintId: 'require-name',
+      severity: 'error',
+      node: 'name',
+      lintMessage: 'name is required'
+    }
+  ]
+}
+```
+
+#### .version
+
+Calling `.version` on an instance of `NpmPackageJsonLint` will return the version number of npm-package-json-lint that the linter is associated with.
+
+##### Example
+
+```js
+const NpmPackageJsonLint = require('npm-package-json-lint').NpmPackageJsonLint;
+
+const npmPackageJsonLint = new NpmPackageJsonLint();
+
+npmPackageJsonLint.version; // => '3.0.0'
+```
+
+### CLIEngine(options)
+
+Creates an instance of CLIEngine
+
+##### options
+
+Type: `object`
+
+CLIEngine configuration object
+
+* `configFile`      {string}  Name of module/file to use.
+* `cwd`             {string}  The current working diretory for all file operations.
+* `useConfigFiles`  {boolean} False disables use of .npmpackagejsonlintrc.json files and npmpackagejsonlint.config.js files.
+* `rules`            {object} An object of rules to use.
+
+##### Example
+
+The following example demostrates how to initialize a `CLIEngine`.
+
+```js
+const CLIEngine = require('npm-package-json-lint').CLIEngine;
+
+const cliEngineOptions = {
+  configFile: '',
+  cwd: process.cwd(),
+  useConfigFiles: true,
+  rules: {}
+};
+
+const cliEngine = new CLIEngine(cliEngineOptions);
+```
+
+#### .executeOnPackageJsonFiles(patterns)
+
+Runs npm-package-json-lint against the array a patterns.
+
+##### patterns
+
+Type: `array`
+
+An array of glob patterns
+
+##### Example
+
+The following example demostrates how to use `executeOnPackageJsonFiles`.
+
+```js
+const CLIEngine = require('npm-package-json-lint').CLIEngine;
+
+const cliEngineOptions = {
+  configFile: '',
+  cwd: process.cwd(),
+  useConfigFiles: true,
+  rules: {}
+};
+const patterns = ['.'];
+
+const cliEngine = new CLIEngine(cliEngineOptions);
+const results = cliEngine.executeOnPackageJsonFiles(patterns);
+```
+
+##### Return
+
+`executeOnPackageJsonFiles` returns an object with an array of results.
+
+```js
+{
+  results: [
+    {
+      filePath: './package.json',
+      issues: [
+        {
+          lintId: 'require-name',
+          severity: 'error',
+          node: 'name',
+          lintMessage: 'name is required'
+        }
+      ],
+      errorCount: 1,
+      warningCount: 0
+    }
+  ],
+  errorCount: 1,
+  warningCount: 0
+}
+```
+
+#### .version
+
+Calling `.version` on an instance of `CLIEngine` will return the version number of npm-package-json-lint that the CLIEngine is associated with.
+
+##### Example
+
+```js
+const CLIEngine = require('npm-package-json-lint').CLIEngine;
+
+const cliEngineOptions = {
+  configFile: '',
+  cwd: process.cwd(),
+  useConfigFiles: true,
+  rules: {}
+};
+
+const cliEngine = new CLIEngine(cliEngineOptions);
+
+cliEngine.version; // => '3.0.0'
+```
+
+> **WARNING**
+
+Only the functions documented above are supported. All other functions that are exposed may change with any release. Please refrain from using them.
 
 ## Lint Rules
 
