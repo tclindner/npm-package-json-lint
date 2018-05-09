@@ -11,10 +11,8 @@ const ruleType = 'array';
 const lint = function(packageJsonData, severity, validValues) {
   if (packageJsonData.hasOwnProperty(nodeName)) {
     if (isObject(packageJsonData, nodeName)) {
-      const validValuesAsJson = validValues.map((validValue) => {
-        return JSON.stringify(validValue);
-      });
-      const valueAsJson = JSON.stringify(value);
+      const validValuesAsJson = validValues.map((validValue) => JSON.stringify(validValue));
+      const valueAsJson = JSON.stringify(packageJsonData[nodeName]);
 
       if (!isValidValue(packageJsonData, nodeName, valueAsJson, validValuesAsJson)) {
         return new LintIssue(lintId, severity, nodeName, message);
