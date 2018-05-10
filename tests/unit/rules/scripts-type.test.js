@@ -18,7 +18,7 @@ describe('scripts-type Unit Tests', function() {
     it('true should be returned', function() {
       const packageJsonData = {
         scripts: {
-          'script': 'echo hello'
+          myscript: 'echo hello'
         }
       };
       const response = lint(packageJsonData, 'error');
