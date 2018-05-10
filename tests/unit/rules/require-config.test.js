@@ -31,7 +31,7 @@ describe('require-config Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-config');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('config');
       response.lintMessage.should.equal('config is required');
     });

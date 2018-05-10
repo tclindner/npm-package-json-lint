@@ -31,7 +31,7 @@ describe('require-description Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-description');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('description');
       response.lintMessage.should.equal('description is required');
     });

@@ -31,7 +31,7 @@ describe('require-author Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-author');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('author');
       response.lintMessage.should.equal('author is required');
     });

@@ -31,7 +31,7 @@ describe('require-contributors Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-contributors');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('contributors');
       response.lintMessage.should.equal('contributors is required');
     });

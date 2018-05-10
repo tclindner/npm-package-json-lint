@@ -31,7 +31,7 @@ describe('require-os Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-os');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('os');
       response.lintMessage.should.equal('os is required');
     });

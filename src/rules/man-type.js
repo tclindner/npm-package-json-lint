@@ -8,9 +8,9 @@ const nodeName = 'man';
 const message = 'Type should be either a string or an array';
 const ruleType = 'standard';
 
-const lint = function(packageJsonData, lintType) {
+const lint = function(packageJsonData, severity) {
   if (!isArray(packageJsonData, nodeName) && !isString(packageJsonData, nodeName)) {
-    return new LintIssue(lintId, lintType, nodeName, message);
+    return new LintIssue(lintId, severity, nodeName, message);
   }
 
   return true;

@@ -1,13 +1,13 @@
 'use strict';
 
 const chai = require('chai');
-const ruleModule = require('./../../../src/rules/os-type');
+const ruleModule = require('./../../../src/rules/cpu-type');
 const lint = ruleModule.lint;
 const ruleType = ruleModule.ruleType;
 
 const should = chai.should();
 
-describe('os-type Unit Tests', function() {
+describe('cpu-type Unit Tests', function() {
   context('a rule type value should be exported', function() {
     it('it should equal "standard"', function() {
       ruleType.should.equal('standard');
@@ -17,13 +17,13 @@ describe('os-type Unit Tests', function() {
   context('when package.json has node with incorrect type', function() {
     it('LintIssue object should be returned', function() {
       const packageJsonData = {
-        os: true
+        cpu: true
       };
       const response = lint(packageJsonData, 'error');
 
-      response.lintId.should.equal('os-type');
-      response.lintType.should.equal('error');
-      response.node.should.equal('os');
+      response.lintId.should.equal('cpu-type');
+      response.severity.should.equal('error');
+      response.node.should.equal('cpu');
       response.lintMessage.should.equal('Type should be an array');
     });
   });

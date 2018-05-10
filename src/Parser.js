@@ -3,32 +3,86 @@
 /* eslint class-methods-use-this: 'off' */
 
 const fs = require('fs');
+const stripComments = require('strip-json-comments');
 
+/**
+ * Require JavaScript file
+ *
+ * @param  {String} fileName String file path of file to load
+ * @return {Object}          Config object from file.
+ * @throws {Error}           If the file cannot be read.
+ */
+const requireFile = function(fileName) {
+  return require(fileName);
+};
+
+/**
+ * Sychronously reads file from file system
+ *
+ * @param  {String} fileName String file path of file to load
+ * @return {String}          File contents with BOM removed.
+ * @throws {Error}           If the file cannot be read.
+ */
+const readFile = function(fileName) {
+  return fs.readFileSync(fileName, 'utf8').replace(/^\ufeff/, '');
+};
+
+/**
+ * Helper method for throwing errors when file fails to load.
+ *
+ * @param {String} fileName Name of the file that failed to load.
+ * @param {Object} err      Error object
+ * @returns {Undefined} No return
+ * @throws {Error}
+ */
+const handleError = function(fileName, err) {
+  throw new Error(`Failed to read config file: ${fileName}. \nError: ${err.message}`);
+};
+
+/**
+ * Public Parser class
+ * @class
+ */
 class Parser {
 
   /**
-   * Parse a file
+   * Parse a JSON file
+   *
    * @param  {String} fileName String file path of file to load
    * @return {Object}          Valid JavaScript object
+   * @static
    */
-  parse(fileName) {
-    // Make sure that a .npmpackagejsonlintrc is present
+  static parseJsonFile(fileName) {
+    let json = {};
+
     try {
-      return this._readFile(fileName);
+      const fileContents = readFile(fileName);
+
+      json = JSON.parse(stripComments(fileContents));
     } catch (err) {
-      throw new Error(`${fileName} does not exist :(`);
+      handleError(fileName, err);
     }
+
+    return json;
   }
 
   /**
-   * Sychronously reads file from file system
+   * Parse a JavaScript file
+   *
    * @param  {String} fileName String file path of file to load
    * @return {Object}          Valid JavaScript object
+   * @static
    */
-  _readFile(fileName) {
-    const file = fs.readFileSync(fileName);
+  static parseJavaScriptFile(fileName) {
+    let obj = {};
 
-    return JSON.parse(file);
+    try {
+      obj = requireFile(fileName);
+    } catch (err) {
+      handleError(fileName, err);
+    }
+
+    return obj;
   }
 
 }

@@ -28,7 +28,7 @@ describe('no-restricted-pre-release-devDependencies Unit Tests', function() {
       const response = lint(packageJsonData, 'error', invldPreReleaseDeps);
 
       response.lintId.should.equal('no-restricted-pre-release-devDependencies');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('devDependencies');
       response.lintMessage.should.equal('You are using a restricted pre-release dependency. Please remove it.');
     });

@@ -1,7 +1,7 @@
 {
   "name": "npm-package-json-lint",
-  "version": "2.11.2",
-  "description": "CLI app for linting package.json files.",
+  "version": "3.0.0",
+  "description": "Configurable linter for package.json files.",
   "keywords": [
     "lint",
     "linter",
@@ -20,43 +20,47 @@
     "url": "https://github.com/tclindner/npm-package-json-lint.git"
   },
   "bin": {
-    "pjl-cli": "src/cli.js"
+    "npmPkgJsonLint": "src/cli.js"
   },
   "files": [
     "src",
     "CONTRIBUTING.md"
   ],
-  "main": "src/NpmPackageJsonLint.js",
+  "main": "src/api.js",
   "scripts": {
     "eslint": "eslint . --format=node_modules/eslint-formatter-pretty",
     "lint": "npm run eslint",
     "test": "mocha tests/unit --recursive",
-    "coverage": "nyc --extension .js --check-coverage --lines 99 --branches 98 --functions 96 npm test"
+    "coverage": "nyc --extension .js --check-coverage --lines 99 --branches 94 --functions 99 npm test"
   },
   "dependencies": {
-    "chalk": "^2.3.1",
-    "commander": "^2.14.1",
-    "in-array": "^0.1.2",
+    "ajv": "^6.4.0",
+    "chalk": "^2.4.1",
+    "glob": "^7.1.2",
+    "is-path-inside": "^2.0.0",
     "is-plain-obj": "^1.1.0",
+    "is-resolvable": "^1.1.0",
     "log-symbols": "^2.2.0",
-    "plur": "^2.1.2",
+    "meow": "^5.0.0",
+    "plur": "^3.0.1",
     "semver": "^5.5.0",
-    "user-home": "^2.0.0",
-    "validator": "^9.4.1"
+    "strip-json-comments": "^2.0.1",
+    "validator": "^10.1.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "eslint": "^4.18.0",
-    "eslint-config-tc": "^2.3.0",
+    "eslint": "^4.19.1",
+    "eslint-config-tc": "^2.4.0",
     "eslint-formatter-pretty": "^1.3.0",
     "figures": "^2.0.0",
-    "mocha": "^5.0.1",
-    "nyc": "^11.4.1",
-    "sinon": "^4.3.0"
+    "mocha": "^5.1.1",
+    "npm-package-json-lint-config-default": "^1.1.0",
+    "nyc": "^11.7.1",
+    "sinon": "^4.5.0"
   },
   "engines": {
-    "node": ">=4.2.0",
-    "npm": ">=2.14.7"
+    "node": ">=6.0.0",
+    "npm": ">=3.0.0"
   },
   "license": "MIT"
 }

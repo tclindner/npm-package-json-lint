@@ -31,7 +31,7 @@ describe('require-version Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-version');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('version');
       response.lintMessage.should.equal('version is required');
     });

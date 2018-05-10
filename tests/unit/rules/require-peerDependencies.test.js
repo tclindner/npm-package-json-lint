@@ -31,7 +31,7 @@ describe('require-peerDependencies Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-peerDependencies');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('peerDependencies');
       response.lintMessage.should.equal('peerDependencies is required');
     });

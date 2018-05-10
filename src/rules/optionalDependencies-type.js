@@ -7,9 +7,9 @@ const nodeName = 'optionalDependencies';
 const message = 'Type should be an Object';
 const ruleType = 'standard';
 
-const lint = function(packageJsonData, lintType) {
+const lint = function(packageJsonData, severity) {
   if (!isObject(packageJsonData, nodeName)) {
-    return new LintIssue(lintId, lintType, nodeName, message);
+    return new LintIssue(lintId, severity, nodeName, message);
   }
 
   return true;

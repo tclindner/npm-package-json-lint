@@ -31,7 +31,7 @@ describe('require-optionalDependencies Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-optionalDependencies');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('optionalDependencies');
       response.lintMessage.should.equal('optionalDependencies is required');
     });

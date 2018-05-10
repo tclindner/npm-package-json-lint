@@ -9,7 +9,7 @@ const nodeName = 'author';
 const message = 'Invalid value for author';
 const ruleType = 'array';
 
-const lint = function(packageJsonData, lintType, validValues) {
+const lint = function(packageJsonData, severity, validValues) {
   let value;
 
   if (isString(packageJsonData, nodeName)) {
@@ -18,14 +18,14 @@ const lint = function(packageJsonData, lintType, validValues) {
     if (packageJsonData[nodeName].hasOwnProperty('name')) {
       value = packageJsonData[nodeName].name;
     } else {
-      return new LintIssue(lintId, lintType, nodeName, 'author object missing name property');
+      return new LintIssue(lintId, severity, nodeName, 'author object missing name property');
     }
   } else {
-    return new LintIssue(lintId, lintType, nodeName, 'author node has invalid data type');
+    return new LintIssue(lintId, severity, nodeName, 'author node has invalid data type');
   }
 
   if (!isValidValue(packageJsonData, nodeName, value, validValues)) {
-    return new LintIssue(lintId, lintType, nodeName, message);
+    return new LintIssue(lintId, severity, nodeName, message);
   }
 
   return true;

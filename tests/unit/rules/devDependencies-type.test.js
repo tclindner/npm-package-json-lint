@@ -22,7 +22,7 @@ describe('devDependencies-type Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('devDependencies-type');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('devDependencies');
       response.lintMessage.should.equal('Type should be an Object');
     });

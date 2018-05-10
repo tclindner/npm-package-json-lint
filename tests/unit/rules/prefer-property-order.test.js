@@ -64,7 +64,7 @@ describe('prefer-property-order Unit Tests', function() {
       const response = lint(packageJsonData, 'error', preferredOrder);
 
       response.lintId.should.equal('prefer-property-order');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('');
       response.lintMessage.should.equal('Your package.json properties are not in the desired order. Please move "description" after "version".');
     });

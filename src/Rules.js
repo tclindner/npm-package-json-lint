@@ -32,9 +32,7 @@ class Rules {
 
       return this.rules;
     } catch (err) {
-      console.log(`Error - ${err}`);
-
-      return false;
+      throw new Error(`Error while loading rules from rules directory - ${err.message}`);
     }
   }
 
@@ -53,6 +51,15 @@ class Rules {
     }
 
     return require(this.rules[ruleId]);
+  }
+
+  /**
+   * Gets entire rule set
+   *
+   * @returns {Object} Rule set
+   */
+  getRules() {
+    return this.rules;
   }
 
   /**

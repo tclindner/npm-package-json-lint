@@ -24,7 +24,7 @@ describe('prefer-caret-version-devDependencies Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('prefer-caret-version-devDependencies');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('devDependencies');
       response.lintMessage.should.equal('You are using an invalid version range. Please use ^.');
     });

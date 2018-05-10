@@ -22,7 +22,7 @@ describe('repository-type Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('repository-type');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('repository');
       response.lintMessage.should.equal('Type should be either a string or an Object');
     });

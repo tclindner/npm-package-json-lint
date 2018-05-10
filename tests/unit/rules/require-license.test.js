@@ -31,7 +31,7 @@ describe('require-license Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-license');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('license');
       response.lintMessage.should.equal('license is required');
     });

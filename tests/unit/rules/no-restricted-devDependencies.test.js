@@ -28,7 +28,7 @@ describe('no-restricted-devDependencies Unit Tests', function() {
       const response = lint(packageJsonData, 'error', invalidDependencies);
 
       response.lintId.should.equal('no-restricted-devDependencies');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('devDependencies');
       response.lintMessage.should.equal('You are using a restricted dependency. Please remove it.');
     });

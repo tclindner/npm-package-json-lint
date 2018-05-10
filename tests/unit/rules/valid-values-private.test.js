@@ -25,7 +25,7 @@ describe('valid-values-private Unit Tests', function() {
       const response = lint(packageJsonData, 'error', validValues);
 
       response.lintId.should.equal('valid-values-private');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('private');
       response.lintMessage.should.equal('Invalid value for private');
     });

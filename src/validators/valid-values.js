@@ -1,7 +1,5 @@
 'use strict';
 
-const inArray = require('in-array');
-
 /**
  * Determines whether a node has a valid value
  * @param  {object} packageJsonData Valid JSON
@@ -15,7 +13,7 @@ const isValidValue = function(packageJsonData, nodeName, value, validValues) {
     return true;
   }
 
-  return inArray(validValues, value);
+  return validValues.includes(value);
 };
 
 module.exports.isValidValue = isValidValue;

@@ -31,7 +31,7 @@ describe('require-name Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('require-name');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('name');
       response.lintMessage.should.equal('name is required');
     });

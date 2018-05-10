@@ -1,6 +1,5 @@
 'use strict';
 
-const inArray = require('in-array');
 const semver = require('semver');
 
 /**
@@ -16,7 +15,7 @@ const hasDependency = function(packageJsonData, nodeName, depsToCheckFor) {
   }
 
   for (const dependencyName in packageJsonData[nodeName]) {
-    if (inArray(depsToCheckFor, dependencyName)) {
+    if (depsToCheckFor.includes(dependencyName)) {
       return true;
     }
   }
@@ -37,7 +36,7 @@ const hasDepPrereleaseVers = function(packageJsonData, nodeName, depsToCheckFor)
   }
 
   for (const dependencyName in packageJsonData[nodeName]) {
-    if (inArray(depsToCheckFor, dependencyName)) {
+    if (depsToCheckFor.includes(dependencyName)) {
       const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
       if (dependencyVersion.includes('-beta') || dependencyVersion.includes('-rc')) {

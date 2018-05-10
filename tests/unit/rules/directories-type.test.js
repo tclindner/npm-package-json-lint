@@ -22,7 +22,7 @@ describe('directories-type Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('directories-type');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('directories');
       response.lintMessage.should.equal('Type should be an Object');
     });

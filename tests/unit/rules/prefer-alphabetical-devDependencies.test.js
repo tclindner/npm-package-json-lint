@@ -26,7 +26,7 @@ describe('prefer-alphabetical-devDependencies Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('prefer-alphabetical-devDependencies');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('devDependencies');
       response.lintMessage.should.equal('Your devDependencies are not in alphabetical order. Please move semver after chalk.');
     });

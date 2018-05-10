@@ -24,7 +24,7 @@ describe('prefer-no-version-zero-dependencies Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('prefer-no-version-zero-dependencies');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('dependencies');
       response.lintMessage.should.equal('You have invalid version 0 dependencies. Please use modules with a major version >= 1.');
     });

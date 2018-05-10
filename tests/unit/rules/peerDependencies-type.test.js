@@ -22,7 +22,7 @@ describe('peerDependencies-type Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('peerDependencies-type');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('peerDependencies');
       response.lintMessage.should.equal('Type should be an Object');
     });

@@ -24,7 +24,7 @@ describe('prefer-absolute-version-dependencies Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('prefer-absolute-version-dependencies');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('dependencies');
       response.lintMessage.should.equal('You are using an invalid version range. Please use absolute versions.');
     });

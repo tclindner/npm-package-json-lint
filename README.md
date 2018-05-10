@@ -32,45 +32,252 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 #### Node
 
-* [Node.js](https://nodejs.org/) - v4.2.0+
-* [npm](http://npmjs.com) - v2.14.7+
+* [Node.js](https://nodejs.org/) - v6.0.0+
+* [npm](http://npmjs.com) - v3.0.0+
 
 ### Use the cli
 
+#### Use cli globally
+
 * `npm install npm-package-json-lint -g`
 
-## Commands and configuration
+#### Use cli in project
+
+* `npm install npm-package-json-lint`
+
+## CLI commands and configuration
 
 | Command | Alias | Description |
 |---|---|---|
-| pjl-cli --help | -h | Lists supported CLI options |
-| pjl-cli --version | -v | Lists the current version number |
-| pjl-cli --file <file path> | -f | File path including name. Defaults to package.json |
-| pjl-cli --rule <rule name> | -r | Valid rule name to check. Defaults to nothing |
-| pjl-cli --rules-file <file path> | -c | File path of .npmpackagejsonlintrc |
-| pjl-cli --rule-severity <rule severity> | -s | "error" or "warning". Defaults to "error" |
-| pjl-cli --quiet | -q | Report errors only |
-| pjl-cli --ignore-warnings | -w | Ignore warnings |
+| npmPkgJsonLint --help | N/A | Lists supported CLI options |
+| npmPkgJsonLint --version | N/A | Lists the current version number |
+| npmPkgJsonLint --configFile <file path> | -c | File path to local config file or module name. |
+| npmPkgJsonLint --quiet | -q | Report errors only |
+| npmPkgJsonLint --noConfigFiles | -ncf | Skips loading project config files (i.e. .npmpackagejsonlintrc.json and npmpackagejsonlint.config.js) |
 
 ### Examples
 
-Run a specific rule, require-author, on a file relative to the current working directory.
-`pjl-cli -f "../relative-path/package.json" -r "require-author"`
+```bash
+$ npmPkgJsonLint .
+```
 
-Run a specific rule, require-author, ignoring warnings on a file relative to the current working directory.
-`pjl-cli -f "../relative-path/package.json" -r "require-author" --ignore-warnings`
+> Looks for all `package.json` files in the project. The CLI engine automatically looks for relevant config files for each package.json file that is found.
 
-Run a specific rule, require-author, set severity to warning on a file relative to the current working directory.
-`pjl-cli -f "../relative-path/package.json" -r "require-author" -s "warning"`
+```bash
+$ npmPkgJsonLint ./packages
+```
 
-Run using the config in `.npmpackagejsonlintrc` on a file relative to the current working directory.
-`pjl-cli -f "../relative-path/package.json" -c "./.npmpackagejsonlintrc"`
+> Looks for all `package.json` files in the `packages` directory. The CLI engine automatically looks for relevant config files for each package.json file that is found.
 
-Run on file relative to the current working directory. npm-package-json-lint attempts to find config. See lookup order below.
-`pjl-cli -f "../relative-path/package.json"`
+```bash
+$ npmPkgJsonLint ./package1 ./package2
+```
 
-Run on file in the current working directory. npm-package-json-lint attempts to find config. See lookup order below.
-`pjl-cli`
+> Looks for all `package.json` files in the `package1` and `package2` directories. The CLI engine automatically looks for relevant config files for each package.json file that is found.
+
+```bash
+$ npmPkgJsonLint -c ./config/.npmpackagejsonlintrc.json .
+```
+
+> Looks for all `package.json` files in the project. The CLI engine automatically looks for relevant config files for each package.json file that is found. The CLI also merges the config found in `./config/.npmpackagejsonlintrc.json`
+
+```bash
+$ npmPkgJsonLint --configFile ./config/npmpackagejsonlint.config.json .
+```
+
+> Same as above using the long form for specifying config files.
+
+```bash
+$ npmPkgJsonLint -q .
+```
+
+> Looks for all `package.json` files in the project. The CLI engine automatically looks for relevant config files for each package.json file that is found. Removes any warnings from the output.
+
+```bash
+$ npmPkgJsonLint --quiet ./packages
+```
+
+> Looks for all `package.json` files in the `packages` directory. The CLI engine automatically looks for relevant config files for each package.json file that is found. Removes any warnings from the output using the long form for quieting output.
+
+## Node.js API
+
+npm-package-json-lint exports two main objects: `CLIEngine` and `NpmPackageJsonLint`.
+
+### NpmPackageJsonLint()
+
+Creates an instance of NpmPackageJsonLint
+
+`NpmPackageJsonLint` has one public method, `lint`. `lint` takes a package.json object in object form and a config object as parameters.
+
+#### .lint(packageJsonData, configObj)
+
+Runs configured rules against the provided package.json object.
+
+##### packageJsonData
+
+Type: `object`
+
+A package.json file in object form.
+
+##### configObj
+
+Type: `object`
+
+A valid configuration object.
+
+##### Example
+
+The following example demostrates how to use `lint`.
+
+```js
+const NpmPackageJsonLint = require('npm-package-json-lint').NpmPackageJsonLint;
+
+const npmPackageJsonLint = new NpmPackageJsonLint();
+const results = npmPackageJsonLint.lint(packageJsonDataAsObject, configObject);
+```
+
+##### Return
+
+`lint` returns an object with an array of `LintIssue`s. Please see `LintIssue` section for more detail.
+
+```js
+{
+  issues: [
+    {
+      lintId: 'require-name',
+      severity: 'error',
+      node: 'name',
+      lintMessage: 'name is required'
+    }
+  ]
+}
+```
+
+#### .version
+
+Calling `.version` on an instance of `NpmPackageJsonLint` will return the version number of npm-package-json-lint that the linter is associated with.
+
+##### Example
+
+```js
+const NpmPackageJsonLint = require('npm-package-json-lint').NpmPackageJsonLint;
+
+const npmPackageJsonLint = new NpmPackageJsonLint();
+
+npmPackageJsonLint.version; // => '3.0.0'
+```
+
+### CLIEngine(options)
+
+Creates an instance of CLIEngine
+
+##### options
+
+Type: `object`
+
+CLIEngine configuration object
+
+* `configFile`      {string}  Name of module/file to use.
+* `cwd`             {string}  The current working diretory for all file operations.
+* `useConfigFiles`  {boolean} False disables use of .npmpackagejsonlintrc.json files and npmpackagejsonlint.config.js files.
+* `rules`            {object} An object of rules to use.
+
+##### Example
+
+The following example demostrates how to initialize a `CLIEngine`.
+
+```js
+const CLIEngine = require('npm-package-json-lint').CLIEngine;
+
+const cliEngineOptions = {
+  configFile: '',
+  cwd: process.cwd(),
+  useConfigFiles: true,
+  rules: {}
+};
+
+const cliEngine = new CLIEngine(cliEngineOptions);
+```
+
+#### .executeOnPackageJsonFiles(patterns)
+
+Runs npm-package-json-lint against the array a patterns.
+
+##### patterns
+
+Type: `array`
+
+An array of glob patterns
+
+##### Example
+
+The following example demostrates how to use `executeOnPackageJsonFiles`.
+
+```js
+const CLIEngine = require('npm-package-json-lint').CLIEngine;
+
+const cliEngineOptions = {
+  configFile: '',
+  cwd: process.cwd(),
+  useConfigFiles: true,
+  rules: {}
+};
+const patterns = ['.'];
+
+const cliEngine = new CLIEngine(cliEngineOptions);
+const results = cliEngine.executeOnPackageJsonFiles(patterns);
+```
+
+##### Return
+
+`executeOnPackageJsonFiles` returns an object with an array of results.
+
+```js
+{
+  results: [
+    {
+      filePath: './package.json',
+      issues: [
+        {
+          lintId: 'require-name',
+          severity: 'error',
+          node: 'name',
+          lintMessage: 'name is required'
+        }
+      ],
+      errorCount: 1,
+      warningCount: 0
+    }
+  ],
+  errorCount: 1,
+  warningCount: 0
+}
+```
+
+#### .version
+
+Calling `.version` on an instance of `CLIEngine` will return the version number of npm-package-json-lint that the CLIEngine is associated with.
+
+##### Example
+
+```js
+const CLIEngine = require('npm-package-json-lint').CLIEngine;
+
+const cliEngineOptions = {
+  configFile: '',
+  cwd: process.cwd(),
+  useConfigFiles: true,
+  rules: {}
+};
+
+const cliEngine = new CLIEngine(cliEngineOptions);
+
+cliEngine.version; // => '3.0.0'
+```
+
+> **WARNING**
+
+Only the functions documented above are supported. All other functions that are exposed may change with any release. Please refrain from using them.
 
 ## Lint Rules
 
@@ -83,9 +290,9 @@ Each rule contains the following properties:
   3. Message - example: author is required
   4. Rule Type - example: required
 
-As mentioned in the "Commands and configuration" section there are two ways to specify rule sets. The first is using `--rule` to specify a given rule. This will run npm-package-json-lint with just this rule. The second is providing a configuration object. As of v2.7.0, there are multiple ways to provide a [configuration object](https://github.com/tclindner/npm-package-json-lint/wiki/configuration).
+As of v2.7.0, there are multiple ways to provide a [configuration object](https://github.com/tclindner/npm-package-json-lint/wiki/configuration).
 
-  1. Adding a `--rules-file` to the command to specify a JSON file. This file is typically named [`.npmpackagejsonlintrc`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint-rc); however, you may optionally add a .json extension if you prefer.
+  1. Adding a `--configFile` to the command to specify a JSON file. This file is named [`.npmpackagejsonlintrc.json`](https://github.com/tclindner/npm-package-json-lint/wiki/npm-package-json-lint-rc).
   2. Add a `npmPackageJsonLintConfig` property in `package.json` file
   3. Add a `npmpackagejsonlint.config.js` file that exports a config object in the current working directory.
   4. Add a global `.npmpackagejsonlintrc.json` file in the root of your user directory
@@ -100,6 +307,10 @@ npm-package-json-lint rules can either be run as an `error`, `warning`, or `off`
 * "off" - disables the rule
 
 Ex: `"require-author": "error"`
+
+## Migrating from v2.x.x to 3.x.x
+
+Please see the [migration guide](https://github.com/tclindner/npm-package-json-lint/wiki/migrating-from-v2-to-v3).
 
 ## Migrating from v1.x.x to 2.x.x
 

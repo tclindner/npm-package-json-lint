@@ -26,7 +26,7 @@ describe('prefer-alphabetical-dependencies Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('prefer-alphabetical-dependencies');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('dependencies');
       response.lintMessage.should.equal('Your dependencies are not in alphabetical order. Please move semver after chalk.');
     });

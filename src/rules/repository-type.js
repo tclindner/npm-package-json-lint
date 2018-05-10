@@ -8,9 +8,9 @@ const nodeName = 'repository';
 const message = 'Type should be either a string or an Object';
 const ruleType = 'standard';
 
-const lint = function(packageJsonData, lintType) {
+const lint = function(packageJsonData, severity) {
   if (!isString(packageJsonData, nodeName) && !isObject(packageJsonData, nodeName)) {
-    return new LintIssue(lintId, lintType, nodeName, message);
+    return new LintIssue(lintId, severity, nodeName, message);
   }
 
   return true;

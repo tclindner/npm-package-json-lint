@@ -19,17 +19,15 @@ describe('NpmPackageJsonLint Unit Tests', function() {
           'description-type': 'error',
           'name-format': 'error'
         };
-        const options = {
-          ignoreWarnings: false
-        };
-        const npmPackageJsonLint = new NpmPackageJsonLint(packageJsonData, config, options);
-        const configStub = sinon.stub(npmPackageJsonLint, '_getConfig').returns(config);
-        const response = npmPackageJsonLint.lint();
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 2;
         const expectedErrorCount = 2;
         const expectedWarningCount = 0;
 
-        response.errors.length.should.equal(expectedErrorCount);
-        response.warnings.length.should.equal(expectedWarningCount);
+        response.issues.length.should.equal(expectedIssues);
+        response.issues.filter((issue) => issue.severity === 'error').length.should.equal(expectedErrorCount);
+        response.issues.filter((issue) => issue.severity === 'warning').length.should.equal(expectedWarningCount);
       });
     });
 
@@ -42,17 +40,15 @@ describe('NpmPackageJsonLint Unit Tests', function() {
           'require-keywords': 'error',
           'name-format': 'warning'
         };
-        const options = {
-          ignoreWarnings: false
-        };
-        const npmPackageJsonLint = new NpmPackageJsonLint(packageJsonData, config, options);
-        const configStub = sinon.stub(npmPackageJsonLint, '_getConfig').returns(config);
-        const response = npmPackageJsonLint.lint();
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 2;
         const expectedErrorCount = 1;
         const expectedWarningCount = 1;
 
-        response.errors.length.should.equal(expectedErrorCount);
-        response.warnings.length.should.equal(expectedWarningCount);
+        response.issues.length.should.equal(expectedIssues);
+        response.issues.filter((issue) => issue.severity === 'error').length.should.equal(expectedErrorCount);
+        response.issues.filter((issue) => issue.severity === 'warning').length.should.equal(expectedWarningCount);
       });
     });
 
@@ -65,17 +61,15 @@ describe('NpmPackageJsonLint Unit Tests', function() {
           'require-keywords': 'off',
           'name-format': 'off'
         };
-        const options = {
-          ignoreWarnings: false
-        };
-        const npmPackageJsonLint = new NpmPackageJsonLint(packageJsonData, config, options);
-        const configStub = sinon.stub(npmPackageJsonLint, '_getConfig').returns(config);
-        const response = npmPackageJsonLint.lint();
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 0;
         const expectedErrorCount = 0;
         const expectedWarningCount = 0;
 
-        response.errors.length.should.equal(expectedErrorCount);
-        response.warnings.length.should.equal(expectedWarningCount);
+        response.issues.length.should.equal(expectedIssues);
+        response.issues.filter((issue) => issue.severity === 'error').length.should.equal(expectedErrorCount);
+        response.issues.filter((issue) => issue.severity === 'warning').length.should.equal(expectedWarningCount);
       });
     });
 
@@ -88,16 +82,15 @@ describe('NpmPackageJsonLint Unit Tests', function() {
           'require-keywords': 'warning',
           'name-format': 'error'
         };
-        const options = {
-          ignoreWarnings: true
-        };
-        const npmPackageJsonLint = new NpmPackageJsonLint(packageJsonData, config, options);
-        const configStub = sinon.stub(npmPackageJsonLint, '_getConfig').returns(config);
-        const response = npmPackageJsonLint.lint();
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 2;
         const expectedErrorCount = 1;
+        const expectedWarningCount = 1;
 
-        response.errors.length.should.equal(expectedErrorCount);
-        response.hasOwnProperty('warnings').should.be.false;
+        response.issues.length.should.equal(expectedIssues);
+        response.issues.filter((issue) => issue.severity === 'error').length.should.equal(expectedErrorCount);
+        response.issues.filter((issue) => issue.severity === 'warning').length.should.equal(expectedWarningCount);
       });
     });
 
@@ -112,16 +105,15 @@ describe('NpmPackageJsonLint Unit Tests', function() {
             'Iris West'
           ]]
         };
-        const options = {
-          ignoreWarnings: true
-        };
-        const npmPackageJsonLint = new NpmPackageJsonLint(packageJsonData, config, options);
-        const configStub = sinon.stub(npmPackageJsonLint, '_getConfig').returns(config);
-        const response = npmPackageJsonLint.lint();
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 1;
         const expectedErrorCount = 1;
+        const expectedWarningCount = 0;
 
-        response.errors.length.should.equal(expectedErrorCount);
-        response.hasOwnProperty('warnings').should.be.false;
+        response.issues.length.should.equal(expectedIssues);
+        response.issues.filter((issue) => issue.severity === 'error').length.should.equal(expectedErrorCount);
+        response.issues.filter((issue) => issue.severity === 'warning').length.should.equal(expectedWarningCount);
       });
     });
 
@@ -136,16 +128,15 @@ describe('NpmPackageJsonLint Unit Tests', function() {
             'Iris West'
           ]]
         };
-        const options = {
-          ignoreWarnings: true
-        };
-        const npmPackageJsonLint = new NpmPackageJsonLint(packageJsonData, config, options);
-        const configStub = sinon.stub(npmPackageJsonLint, '_getConfig').returns(config);
-        const response = npmPackageJsonLint.lint();
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 0;
         const expectedErrorCount = 0;
+        const expectedWarningCount = 0;
 
-        response.errors.length.should.equal(expectedErrorCount);
-        response.hasOwnProperty('warnings').should.be.false;
+        response.issues.length.should.equal(expectedIssues);
+        response.issues.filter((issue) => issue.severity === 'error').length.should.equal(expectedErrorCount);
+        response.issues.filter((issue) => issue.severity === 'warning').length.should.equal(expectedWarningCount);
       });
     });
 
@@ -157,41 +148,39 @@ describe('NpmPackageJsonLint Unit Tests', function() {
         const config = {
           'valid-values-author': 'off'
         };
-        const options = {
-          ignoreWarnings: true
-        };
-        const npmPackageJsonLint = new NpmPackageJsonLint(packageJsonData, config, options);
-        const configStub = sinon.stub(npmPackageJsonLint, '_getConfig').returns(config);
-        const response = npmPackageJsonLint.lint();
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 0;
         const expectedErrorCount = 0;
+        const expectedWarningCount = 0;
 
-        response.errors.length.should.equal(expectedErrorCount);
-        response.hasOwnProperty('warnings').should.be.false;
+        response.issues.length.should.equal(expectedIssues);
+        response.issues.filter((issue) => issue.severity === 'error').length.should.equal(expectedErrorCount);
+        response.issues.filter((issue) => issue.severity === 'warning').length.should.equal(expectedWarningCount);
       });
     });
   });
 
-  describe('_getConfig method', function() {
-    context('when a valid config object is passed', function() {
-      it('config is returned', function() {
-        const packageJsonData = {
-          author: 'Caitlin Snow'
-        };
-        const config = {
-          rules: {
-            'require-author': 'error'
-          }
-        };
-        const options = {
-          ignoreWarnings: true
-        };
-        const npmPackageJsonLint = new NpmPackageJsonLint(packageJsonData, config, options);
-        const actual = npmPackageJsonLint._getConfig(config);
-        const expected = {
-          'require-author': 'error'
-        };
+  describe('getRules method', function() {
+    context('when getRules is called', function() {
+      it('all rules are returned', function() {
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const rules = npmPackageJsonLint.getRules();
 
-        actual.should.eql(expected);
+        rules['require-author'].includes('src/rules/require-author.js').should.be.true;
+        rules['require-name'].includes('src/rules/require-name.js').should.be.true;
+      });
+    });
+  });
+
+  describe('getRule method', function() {
+    context('when getRule is called', function() {
+      it('specified rule is returned', function() {
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const rule = npmPackageJsonLint.getRule('require-name');
+
+        (typeof rule.lint).should.equal('function');
+        rule.ruleType.should.equal('standard');
       });
     });
   });

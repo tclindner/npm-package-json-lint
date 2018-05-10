@@ -22,7 +22,7 @@ describe('version-type Unit Tests', function() {
       const response = lint(packageJsonData, 'error');
 
       response.lintId.should.equal('version-type');
-      response.lintType.should.equal('error');
+      response.severity.should.equal('error');
       response.node.should.equal('version');
       response.lintMessage.should.equal('Type should be a string');
     });

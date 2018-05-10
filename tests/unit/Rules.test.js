@@ -89,9 +89,39 @@ describe('Rules Unit Tests', function() {
 
       it('false is returned', function() {
         const rules = new Rules();
-        const result = rules.load();
 
-        result.should.be.false;
+        (function() {
+          rules.load();
+        }).should.throw('Error while loading rules from rules directory - ');
+      });
+    });
+  });
+
+  describe('getRules method', function() {
+    context('when getRules is called', function() {
+      it('the rules object should be returned', function() {
+        const rules = new Rules();
+        rules._registerRule('ruleId', 'ruleModule');
+
+        rules.getRules().should.deep.equal({ruleId: 'ruleModule'});
+      });
+    });
+
+    context('when load is called but a fs error occurs', function() {
+      before(function() {
+        const fsStub = sinon.stub(fs, 'readdirSync').throws();
+      });
+
+      after(function() {
+        fs.readdirSync.restore();
+      });
+
+      it('false is returned', function() {
+        const rules = new Rules();
+
+        (function() {
+          rules.load();
+        }).should.throw('Error while loading rules from rules directory - ');
       });
     });
   });

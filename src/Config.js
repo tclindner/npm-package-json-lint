@@ -3,235 +3,198 @@
 /* eslint class-methods-use-this: 'off' */
 
 const fs = require('fs');
-const Parser = require('./Parser');
 const path = require('path');
-const userHome = require('user-home');
+const os = require('os');
+const isPathInside = require('is-path-inside');
+const isResolvable = require('is-resolvable');
 
+const ConfigFile = require('./config/ConfigFile');
+const ConfigFileType = require('./config/ConfigFileType');
+const ConfigValidator = require('./config/ConfigValidator');
+
+const noRules = 0;
+
+/**
+ * Determines the base directory for node packages referenced in a config file.
+ * This does not include node_modules in the path so it can be used for all
+ * references relative to a config file.
+ *
+ * @returns {String} The base directory for the file path.
+ * @private
+ */
+const getProjectDir = function() {
+
+  // calculates the path of the project including npm-package-json-lint as a dependency
+  // NOTE: config-file is located in /src/
+  //   ../ is npm-package-json-lint
+  //   ../ is node_modules directory
+  //   ../ is module referencing npm-package-json-lint
+  return path.resolve(__dirname, '../../../');
+};
+
+/**
+ * Public Config class
+ * @class
+ */
 class Config {
 
   /**
    * Constructor
-   * @param  {Object|String} passedConfigParam Object or string with desired configuration
-   * @param  {Object}        packageJsonData   User's package.json data
+   * @param  {Object} providedOptions Options object
+   * @param  {Object} linter          Instance of npm-package-json-lint linter
    */
-  constructor(passedConfigParam, packageJsonData) {
-    this.arrayRules = [
-      'valid-values-author',
-      'valid-values-private',
-      'valid-values-license',
-      'no-restricted-dependencies',
-      'no-restricted-devDependencies',
-      'no-restricted-pre-release-dependencies',
-      'no-restricted-pre-release-devDependencies',
-      'prefer-property-order'
-    ];
+  constructor(providedOptions, linter) {
+    const options = providedOptions || {};
 
-    this.passedConfigParam = passedConfigParam;
-    this.packageJsonData = packageJsonData;
-    this.rcFileName = '.npmpackagejsonlintrc';
-    this.configFileName = 'npmpackagejsonlint.config.js';
+    this.linterContext = linter;
+    this.options = options;
+    this.useConfigFiles = options.useConfigFiles;
+
+    this.cliConfig = this.options.rules;
+
+    ConfigValidator.validateRules(this.cliConfig, 'cli', this.linterContext);
   }
 
   /**
-   * Gets the config
-   * @return {Object} Config object
-   */
-  get() {
-    const userConfig = this._getUserConfig();
-
-    let extendsConfig = {};
-
-    if (userConfig.hasOwnProperty('extends')) {
-      extendsConfig = this._getExtendsConfig(userConfig.extends);
-    }
-
-    if (!userConfig.hasOwnProperty('rules')) {
-      return Object.assign({}, extendsConfig);
-    }
-
-    return Object.assign({}, extendsConfig, userConfig.rules);
-  }
-
-  /**
-   * Get users config with multiple fallbacks
+   * Loads the config options from a config specified on the command line.
    *
-   * @returns {Object} Users config
+   * @param {String} config A shareable named config or path to a config file.
+   * @returns {undefined} No return
    */
-  _getUserConfig() {
-    if (this._isConfigPassed(this.passedConfigParam)) {
-      return this._getPassedConfig(this.passedConfigParam);
-    } else if (this.packageJsonData.hasOwnProperty('npmPackageJsonLintConfig')) {
-      return this.packageJsonData.npmPackageJsonLintConfig;
-    } else if (this._isConfigFileExist(this._getRelativeConfigFilePth(this.rcFileName))) {
-      return this._loadRcFile(this._getRelativeConfigFilePth(this.rcFileName));
-    } else if (this._isConfigFileExist(this._getRelativeConfigFilePth(this.configFileName))) {
-      return this._loadConfigFile(this._getRelativeConfigFilePth(this.configFileName));
-    } else if (this._isConfigFileExist(this._getUsrHmConfigFilePath(this.rcFileName))) {
-      return this._loadRcFile(this._getUsrHmConfigFilePath(this.rcFileName));
-    } else if (this._isConfigFileExist(this._getUsrHmConfigFilePath(this.configFileName))) {
-      return this._loadConfigFile(this._getUsrHmConfigFilePath(this.configFileName));
+  loadCliSpecifiedCfgFile(config) {
+    let configObj = ConfigFile.createEmptyConfig();
+    const firstChar = 0;
+
+    if (config) {
+      const resolvable = isResolvable(config) || config.charAt(firstChar) === '@';
+      const filePath = resolvable ? config : path.resolve(this.options.cwd, config);
+
+      configObj = ConfigFile.load(filePath, this);
     }
 
-    throw new Error('No configuration found');
+    return configObj;
   }
 
   /**
-   * Checks whether config has been passed or not
-   * @param  {Object|String}  passedConfig    Object or string with desired configuration
-   * @return {Boolean}                        True if config is present, false if it isn't
+   * Gets the personal config object from user's home directory.
+   *
+   * @returns {Object} the personal config object (null if there is no personal config)
+   * @private
    */
-  _isConfigPassed(passedConfig) {
-    const noKeysLength = 0;
+  getUserHomeConfig() {
+    if (typeof this.personalConfig === 'undefined') {
+      const userHomeDir = os.homedir();
+      let configObj = {};
 
-    return typeof passedConfig !== 'undefined' && Object.keys(passedConfig).length !== noKeysLength;
-  }
+      const jsonRcFilePath = path.join(userHomeDir, ConfigFileType.rcFileName);
+      const javaScriptConfigFilePath = path.join(userHomeDir, ConfigFileType.javaScriptConfigFileName);
 
-  /**
-   * Loads the config
-   * @param  {Object|String} passedConfig  File path if string. Config object also accepted.
-   * @return {Object}                         Config JSON
-   */
-  _getPassedConfig(passedConfig) {
-    if (typeof passedConfig === 'string') {
-      const parser = new Parser();
-      let configFile = passedConfig;
-
-      if (!path.isAbsolute(passedConfig)) {
-        configFile = path.join(process.cwd(), passedConfig);
+      if (fs.existsSync(jsonRcFilePath) && fs.statSync(jsonRcFilePath).isFile()) {
+        configObj = ConfigFile.load(jsonRcFilePath, this);
+      } else if (fs.existsSync(javaScriptConfigFilePath) && fs.statSync(javaScriptConfigFilePath).isFile()) {
+        configObj = ConfigFile.load(javaScriptConfigFilePath, this);
       }
 
-      return parser.parse(configFile);
+      this.personalConfig = configObj;
     }
 
-    return passedConfig;
+    return this.personalConfig;
   }
 
+  /* eslint-disable max-statements */
   /**
-   * Gets configuration from a extends config module
-   * @param  {String} moduleName  Name of the configuration module
-   * @return {Object}             Configuration object
-   */
-  _getExtendsConfig(moduleName) {
-    let adjustedModuleName;
-
-    if (moduleName.startsWith('./')) {
-      adjustedModuleName = path.join(process.cwd(), moduleName);
-    } else {
-      adjustedModuleName = moduleName;
-    }
-
-    const configObj = this._getExtendsConfigModule(adjustedModuleName);
-
-    return configObj.rules;
-  }
-
-  /**
-   * Gets relative config file path
+   * Finds local config files from the specified directory and its parent directories.
    *
-   * @param  {String}  fileName Name of the file
-   * @return {String}  File path of the config file
+   * @param {string} filePath a file in whose directory we start looking for a local config
+   * @returns {Object} Config object
    */
-  _getRelativeConfigFilePth(fileName) {
-    return path.join(process.cwd(), fileName);
-  }
+  getProjectHierarchyConfig(filePath) {
+    let config = ConfigFile.createEmptyConfig();
 
-  /**
-   * Gets userhome directory config file path
-   *
-   * @param  {String}  fileName Name of the file
-   * @return {String}  File path of the config file
-   */
-  _getUsrHmConfigFilePath(fileName) {
-    return path.join(userHome, fileName);
-  }
+    const directory = filePath ? path.dirname(filePath) : this.options.cwd;
 
-  /**
-   * Checks if a .npmpackagejsonlintrc.json file exists
-   *
-   * @param  {String}  filePath Path of the file
-   * @return {Boolean} true if it exists, false if not
-   */
-  _isConfigFileExist(filePath) {
-    return fs.existsSync(filePath);
-  }
+    if (directory === getProjectDir() || isPathInside(directory, getProjectDir())) {
+      const pkgJsonFilePath = path.join(directory, 'package.json');
+      const jsonRcFilePath = path.join(directory, ConfigFileType.rcFileName);
+      const javaScriptConfigFilePath = path.join(directory, ConfigFileType.javaScriptConfigFileName);
 
-  /**
-   * Gets configuration from a extends config module
-   * @param  {String} filePath  File path of config file
-   * @return {Object}           Configuration object
-   */
-  _loadRcFile(filePath) {
-    const parser = new Parser();
+      if (fs.existsSync(pkgJsonFilePath) && fs.statSync(pkgJsonFilePath).isFile()) {
+        config = ConfigFile.loadFromPackageJson(pkgJsonFilePath, this);
+      }
 
-    return parser.parse(filePath);
-  }
+      if (this.useConfigFiles && Object.keys(config.rules).length === noRules && fs.existsSync(jsonRcFilePath) && fs.statSync(jsonRcFilePath).isFile()) {
+        config = ConfigFile.load(jsonRcFilePath, this);
+      } else if (this.useConfigFiles && Object.keys(config.rules).length === noRules && fs.existsSync(javaScriptConfigFilePath) && fs.statSync(javaScriptConfigFilePath).isFile()) {
+        config = ConfigFile.load(javaScriptConfigFilePath, this);
+      }
 
-  /**
-   * Checks if a .npmpackagejsonlintrc.json file exists
-   *
-   * @param  {String}  filePath File path of config file
-   * @return {Boolean} true if it exists, false if not
-   */
-  _loadConfigFile(filePath) {
-    return require(filePath);
-  }
+      if (config.hasOwnProperty('root') && !config.root) {
+        const parentDir = path.resolve(directory, '../');
+        const parentConfig = this.getProjectHierarchyConfig(parentDir);
 
-  /**
-   * Loads extends config module
-   * @param  {String} moduleName  Name of the configuration module
-   * @return {Object}             Configuration object
-   */
-  _getExtendsConfigModule(moduleName) {
-    /* istanbul ignore next */
-    return require(moduleName);
-  }
+        // Merge base object
+        const mergedConfig = Object.assign({}, parentConfig, config);
 
-  /**
-   * Validates array rule config
-   * @param  {String}    ruleName    Name of the rule
-   * @param  {Array}     ruleConfig  Array rule
-   * @return {Boolean}               True if config is valid, false if not
-   * @static
-   */
-  static isArrayRuleConfigValid(ruleName, ruleConfig) {
-    if (typeof ruleConfig === 'string' && ruleConfig === 'off') {
-      return true;
-    } else if (typeof ruleConfig === 'string' && ruleConfig !== 'off') {
-      throw new Error(`${ruleName} - is an array type rule. It must be set to "off" if an array is not supplied.`);
-    } else if (typeof ruleConfig[0] !== 'string' || this._isSeverityInvalid(ruleConfig[0])) {
-      throw new Error(`${ruleName} - first key must be set to "error", "warning", or "off". Currently set to "${ruleConfig[0]}".`);
+        // Merge rules
+        const rules = Object.assign({}, parentConfig.rules, config.rules);
+
+        // Override merged rules
+        mergedConfig.rules = rules;
+
+        config = mergedConfig;
+      }
     }
 
-    if (!Array.isArray(ruleConfig[1])) {
-      throw new Error(`${ruleName} - second key must be set an array. Currently set to "${ruleConfig[1]}".`);
-    }
-
-    return true;
+    return config;
   }
 
   /**
-   * Validates standard rule config
-   * @param  {String}     ruleName     Name of the rule
-   * @param  {Object}     ruleConfig   Value for standard rule config
-   * @return {Boolean}                 True if config is valid, false if not
-   * @static
+   * Get config object.
+   * Order of precedence is:
+   *   1. Config supplied in package.json file
+   *   2. Config supplied in project hierarchy (files in current directory take precedence over parent directory)
+   *   3. Config file supplied in CLI argument
+   *   4. Direct rules supplied to CLI
+   *
+   * @param {string} filePath a file in whose directory we start looking for a local config
+   * @returns {Object} config object
    */
-  static isStandardRuleConfigValid(ruleName, ruleConfig) {
-    if (this._isSeverityInvalid(ruleConfig)) {
-      throw new Error(`${ruleName} - must be set to "error", "warning", or "off". Currently set to "${ruleConfig}".`);
+  get(filePath) {
+    let finalConfig = {};
+
+    // Step 1: Get project hierarchy config from
+    // package.json property, .npmpackagejsonlintrc.json, and npmpackagejsonlint.config.js files
+    const projectHierarchyConfig = this.getProjectHierarchyConfig(filePath);
+
+    // Step 2: Load cli specified config
+    const cliSpecifiedCfgFileConfig = this.loadCliSpecifiedCfgFile(this.options.configFile);
+
+    // Step 3: Merge config
+    // NOTE: Object.assign does a shallow copy of objects, so we need to
+    // do this for all of it properties then create a new final object
+
+    const finalRules = Object.assign({}, projectHierarchyConfig.rules, cliSpecifiedCfgFileConfig.rules, this.cliConfig);
+
+    finalConfig = {rules: finalRules};
+
+    // Step 4: Check if any config has been found.
+    // If no, try to load personal config from user home directory
+    if (!Object.keys(finalConfig.rules).length) {
+      const personalConfig = this.getUserHomeConfig();
+
+      if (Object.keys(personalConfig).length) {
+        finalConfig = Object.assign({}, personalConfig);
+      } else {
+
+        // No config found in all locations
+        const relativeFilePath = `./${path.relative(this.options.cwd, filePath)}`;
+
+        throw new Error(`No npm-package-json-lint configuration found.\n${relativeFilePath}`);
+      }
     }
 
-    return true;
-  }
-
-  /**
-   * Validates if the severity config is set correctly
-   * @param  {String}  severity Severity the rule is set to
-   * @return {Boolean}          True if the severity is valid. False if the severity is invalid.
-   * @static
-   */
-  static _isSeverityInvalid(severity) {
-    return typeof severity !== 'string' || (typeof severity === 'string' && severity !== 'error' && severity !== 'warning' && severity !== 'off');
+    // Step 5: return final config
+    return finalConfig;
   }
 
 }

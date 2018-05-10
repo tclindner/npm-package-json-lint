@@ -1,0 +1,6 @@
+{
+  "extends": "npm-package-json-lint-config-awesome-module",
+  "rules": {
+    "require-author": "error"
+  }
+}

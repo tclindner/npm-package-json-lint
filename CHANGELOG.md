@@ -11,6 +11,20 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [3.0.0] - 2018-05-09
+### Added
+- Added support for glob based package.json file detection. Addresses [#74](https://github.com/tclindner/npm-package-json-lint/issues/74) from @dnepro.
+- Added support for recursive config file detection. Addresses [#75](https://github.com/tclindner/npm-package-json-lint/issues/75) from @dnepro.
+- Added support for running npm-package-json-lint programmatically. Addresses [#76](https://github.com/tclindner/npm-package-json-lint/issues/76) from @minijus.
+- New rule: [valid-values-publishConfig](https://github.com/tclindner/npm-package-json-lint/wiki/valid-values-publishConfig). Addresses [#80](https://github.com/tclindner/npm-package-json-lint/issues/80) from @ntwb.
+- Improved rule: [scripts-type](https://github.com/tclindner/npm-package-json-lint/wiki/scripts-type). Addresses [#77](https://github.com/tclindner/npm-package-json-lint/issues/77) from @reggi.
+
+### Changed
+- npm-package-json-lint's cli has been renamed from `pjl-cli` to `npmPkgJsonLint`. The cli interface has also changed. Multiple patterns can now specified. Please run `npmPkgJsonLint --help` for examples.
+
+### Removed
+- Dropped support for Node 4 and 5.
+
 ## [2.11.2] - 2018-02-18
 ### Fixed
 - Addressed issue, from @akihyro, [#71](https://github.com/tclindner/npm-package-json-lint/issues/71). Bundled dependencies should be arrays instead of objects. Impacts [bundledDependencies-type](https://github.com/tclindner/npm-package-json-lint/wiki/bundledDependencies-type)

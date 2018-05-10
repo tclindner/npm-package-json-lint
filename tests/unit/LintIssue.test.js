@@ -10,14 +10,14 @@ const should = chai.should();
 describe('LintIssue Unit Tests', function() {
   describe('constructor', function() {
     context('when a new object is created', function() {
-      const lintIssue = new LintIssue('lintId', 'lintType', 'node', 'lintMessage');
+      const lintIssue = new LintIssue('lintId', 'severity', 'node', 'lintMessage');
 
       it('the lintId should be set', function() {
         lintIssue.lintId.should.equal('lintId');
       });
 
-      it('the lintType should be set', function() {
-        lintIssue.lintType.should.equal('lintType');
+      it('the severity should be set', function() {
+        lintIssue.severity.should.equal('severity');
       });
 
       it('the node should be set', function() {
@@ -31,7 +31,7 @@ describe('LintIssue Unit Tests', function() {
   });
 
   describe('toString method', function() {
-    context('when the lintType is an error', function() {
+    context('when the severity is an error', function() {
       it('the formattedMessage should equal', function() {
         const formattedLintId = chalk.gray.dim('lintId');
         const formattedNode = chalk.gray.bold('node');
