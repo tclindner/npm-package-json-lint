@@ -13,11 +13,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [3.0.0] - 2018-05-09
 ### Added
-- Added support for glob based package.json file detection. Addresses [#74](https://github.com/tclindner/npm-package-json-lint/issues/74).
-- Added support for recursive config file detection. Addresses [#75](https://github.com/tclindner/npm-package-json-lint/issues/75).
-- Added support for running npm-package-json-lint programmatically. Addresses [#76](https://github.com/tclindner/npm-package-json-lint/issues/76).
-- New rule: [valid-values-publishConfig](https://github.com/tclindner/npm-package-json-lint/wiki/valid-values-publishConfig). Addresses [#80]
-- Improved rule: [scripts-type](https://github.com/tclindner/npm-package-json-lint/wiki/scripts-type). Addresses [#77]
+- Added support for glob based package.json file detection. Addresses [#74](https://github.com/tclindner/npm-package-json-lint/issues/74) from @dnepro.
+- Added support for recursive config file detection. Addresses [#75](https://github.com/tclindner/npm-package-json-lint/issues/75) from @dnepro.
+- Added support for running npm-package-json-lint programmatically. Addresses [#76](https://github.com/tclindner/npm-package-json-lint/issues/76) from @minijus.
+- New rule: [valid-values-publishConfig](https://github.com/tclindner/npm-package-json-lint/wiki/valid-values-publishConfig). Addresses [#80](https://github.com/tclindner/npm-package-json-lint/issues/80) from @ntwb.
+- Improved rule: [scripts-type](https://github.com/tclindner/npm-package-json-lint/wiki/scripts-type). Addresses [#77](https://github.com/tclindner/npm-package-json-lint/issues/77) from @reggi.
 
 ### Changed
 - npm-package-json-lint's cli has been renamed from `pjl-cli` to `npmPkgJsonLint`. The cli interface has also changed. Multiple patterns can now specified. Please run `npmPkgJsonLint --help` for examples.
