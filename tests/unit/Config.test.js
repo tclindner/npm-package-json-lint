@@ -752,6 +752,28 @@ describe('Config Unit Tests', function() {
         ConfigFile.load.restore();
       });
 
+      it('and package.json prop exists and root is not set, the config object should returned', function() {
+        const options = {
+          configFile: '',
+          cwd: process.cwd(),
+          useConfigFiles: false,
+          rules: {}
+        };
+        const config = new Config(options, linterContext);
+
+        const expectedConfigObj = {
+          root: true,
+          rules: {
+            'require-author': 'error',
+            'version-format': 'error'
+          }
+        };
+        const filePath = './tests/fixtures/hierarchyWithoutRoot/subdirectory/package.json';
+        const result = config.getProjectHierarchyConfig(filePath);
+
+        result.should.deep.equal(expectedConfigObj);
+      });
+
       it('and package.json prop exists and has no prop, the config object should returned', function() {
         const options = {
           configFile: '',

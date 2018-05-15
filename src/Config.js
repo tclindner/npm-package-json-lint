@@ -128,9 +128,9 @@ class Config {
         config = ConfigFile.load(javaScriptConfigFilePath, this);
       }
 
-      if (config.hasOwnProperty('root') && !config.root) {
-        const parentDir = path.resolve(directory, '../');
-        const parentConfig = this.getProjectHierarchyConfig(parentDir);
+      if (!config.hasOwnProperty('root') || !config.root) {
+        const parentPackageJsonFile = path.resolve(directory, '../', 'package.json');
+        const parentConfig = this.getProjectHierarchyConfig(parentPackageJsonFile);
 
         // Merge base object
         const mergedConfig = Object.assign({}, parentConfig, config);
