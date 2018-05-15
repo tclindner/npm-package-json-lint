@@ -11,6 +11,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+
+## [3.0.1] - 2018-05-14
+### Fixed
+- Addressed issue, from @ntwb, [#79](https://github.com/tclindner/npm-package-json-lint/issues/79).
+
+
 ## [3.0.0] - 2018-05-09
 ### Added
 - Added support for glob based package.json file detection. Addresses [#74](https://github.com/tclindner/npm-package-json-lint/issues/74) from @dnepro.

@@ -752,6 +752,28 @@ describe('Config Unit Tests', function() {
         ConfigFile.load.restore();
       });
 
+      it('and package.json prop exists and root is not set, the config object should returned', function() {
+        const options = {
+          configFile: '',
+          cwd: process.cwd(),
+          useConfigFiles: false,
+          rules: {}
+        };
+        const config = new Config(options, linterContext);
+
+        const expectedConfigObj = {
+          root: true,
+          rules: {
+            'require-author': 'error',
+            'version-format': 'error'
+          }
+        };
+        const filePath = './tests/fixtures/hierarchyWithoutRoot/subdirectory/package.json';
+        const result = config.getProjectHierarchyConfig(filePath);
+
+        result.should.deep.equal(expectedConfigObj);
+      });
+
       it('and package.json prop exists and has no prop, the config object should returned', function() {
         const options = {
           configFile: '',
@@ -775,9 +797,10 @@ describe('Config Unit Tests', function() {
           }
         });
         stubLoadPkgJson.returns({root: true, rules: {}});
-        stubLoad.returns({rules: {'require-name': 'error'}});
+        stubLoad.returns({root: true, rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
+          root: true,
           rules: {
             'require-name': 'error'
           }
@@ -1009,7 +1032,8 @@ describe('Config Unit Tests', function() {
         const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
         const stubLoad = sinon.stub(ConfigFile, 'load');
 
-        stubDirname.returns('./npm-package-json-lint/');
+        stubDirname.onCall(0).returns('./npm-package-json-lint/');
+        stubDirname.onCall(1).returns('/home');
         stubExists.returns(false);
 
         const expectedConfigObj = {
@@ -1018,7 +1042,7 @@ describe('Config Unit Tests', function() {
         const filePath = './package.json';
         const result = config.getProjectHierarchyConfig(filePath);
 
-        stubDirname.calledOnce.should.be.true;
+        stubDirname.calledTwice.should.be.true;
         stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
 
         stubExists.calledThrice.should.be.true;
@@ -1056,7 +1080,8 @@ describe('Config Unit Tests', function() {
         const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
         const stubLoad = sinon.stub(ConfigFile, 'load');
 
-        stubDirname.returns('./npm-package-json-lint/');
+        stubDirname.onCall(0).returns('./npm-package-json-lint/');
+        stubDirname.onCall(1).returns('/home');
         stubExists.returns(true);
         stubStats.returns({
           isFile: function() {
@@ -1073,7 +1098,7 @@ describe('Config Unit Tests', function() {
         const filePath = './package.json';
         const result = config.getProjectHierarchyConfig(filePath);
 
-        stubDirname.calledOnce.should.be.true;
+        stubDirname.calledTwice.should.be.true;
         stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
 
         stubExists.calledOnce.should.be.true;
