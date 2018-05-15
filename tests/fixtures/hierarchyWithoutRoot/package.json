@@ -15,7 +15,7 @@
     "mocha": "^2.4.5"
   },
   "npmPackageJsonLintConfig": {
-    "root": "true",
+    "root": true,
     "rules": {
       "require-author": "off",
       "version-format": "error"
