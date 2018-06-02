@@ -11,6 +11,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [3.1.0] - 2018-06-02
+### Added
+- New rule: [valid-values-engines](https://github.com/tclindner/npm-package-json-lint/wiki/valid-values-engines). Addresses [#85](https://github.com/tclindner/npm-package-json-lint/issues/85) from @ntwb.
 
 ## [3.0.1] - 2018-05-14
 ### Fixed
