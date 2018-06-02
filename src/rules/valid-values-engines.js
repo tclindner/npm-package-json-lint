@@ -24,7 +24,7 @@ const lint = function(packageJsonData, severity, validValues) {
       for (const engineDefinition in packageJsonData[nodeName]) {
         const versionRange = packageJsonData[nodeName][engineDefinition];
 
-        if (semver.valid(versionRange) !== null) {
+        if (semver.validRange(versionRange) === null) {
           return new LintIssue(lintId, severity, nodeName, `engines, ${engineDefinition} version range is invalid. Currently set to ${versionRange}`);
         }
       }
