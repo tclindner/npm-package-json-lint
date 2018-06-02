@@ -45,7 +45,7 @@ describe('valid-values-engines Unit Tests', function() {
         }
       };
       const validValues = [
-        {node: '^6.0.0'}
+        {node: '^6.a.0'}
       ];
       const response = lint(packageJsonData, 'error', validValues);
 
