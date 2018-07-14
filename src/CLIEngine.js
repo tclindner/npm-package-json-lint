@@ -1,5 +1,7 @@
 'use strict';
 
+/* eslint max-lines-per-function: 'off' */
+
 const fs = require('fs');
 const path = require('path');
 const NpmPackageJsonLint = require('./NpmPackageJsonLint');
