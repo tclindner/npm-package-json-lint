@@ -11,6 +11,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [3.2.0] - 2018-07-14
+### Added
+- New rule: [no-absolute-version-dependencies](https://github.com/tclindner/npm-package-json-lint/wiki/no-absolute-version-dependencies).
+- New rule: [no-caret-version-dependencies](https://github.com/tclindner/npm-package-json-lint/wiki/no-caret-version-dependencies).
+- New rule: [no-tilde-version-dependencies](https://github.com/tclindner/npm-package-json-lint/wiki/no-tilde-version-dependencies).
+- New rule: [no-absolute-version-devDependencies](https://github.com/tclindner/npm-package-json-lint/wiki/no-absolute-version-devDependencies).
+- New rule: [no-caret-version-devDependencies](https://github.com/tclindner/npm-package-json-lint/wiki/no-caret-version-devDependencies).
+- New rule: [no-tilde-version-devDependencies](https://github.com/tclindner/npm-package-json-lint/wiki/no-tilde-version-devDependencies).
+
+Huge shout-out to @fastfrwrd for contributing these rules! :tada:
+
 ## [3.1.0] - 2018-06-02
 ### Added
 - New rule: [valid-values-engines](https://github.com/tclindner/npm-package-json-lint/wiki/valid-values-engines). Addresses [#85](https://github.com/tclindner/npm-package-json-lint/issues/85) from @ntwb.
