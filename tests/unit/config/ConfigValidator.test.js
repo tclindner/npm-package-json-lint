@@ -207,6 +207,69 @@ describe('ConfigValidator Unit Tests', function() {
       });
     });
 
+    context('isObjectRuleConfigValid tests', function() {
+      context('when a rule is an object rule and the first key is not equal to error, warning, or off', function() {
+        it('an error should be thrown', function() {
+          const ruleConfig = {
+            'description-format': [true, {requireCapitalFirstLetter: true, requireEndingPeriod: true}]
+          };
+          const source = 'cli';
+
+          (function() {
+            ConfigValidator.validateRules(ruleConfig, source, linterContext);
+          }).should.throw('cli:\n\tConfiguration for rule "description-format" is invalid:\n\tfirst key must be set to "error", "warning", or "off". Currently set to "true".');
+        });
+      });
+
+      context('when a rule is an object rule and the second key is not an Object', function() {
+        it('an error should be thrown', function() {
+          const ruleConfig = {
+            'description-format': ['error', 'Thomas']
+          };
+          const source = 'cli';
+
+          (function() {
+            ConfigValidator.validateRules(ruleConfig, source, linterContext);
+          }).should.throw('cli:\n\tConfiguration for rule "description-format" is invalid:\n\tsecond key must be set an object. Currently set to "Thomas".');
+        });
+      });
+
+      context('when a valid object rule config is passed', function() {
+        it('true should be returned', function() {
+          const ruleConfig = {
+            'description-format': ['error', {requireCapitalFirstLetter: true, requireEndingPeriod: true}]
+          };
+          const source = 'cli';
+
+          ConfigValidator.validateRules(ruleConfig, source, linterContext);
+        });
+      });
+
+      context('when a valid object rule config is passed with a value of off', function() {
+        it('true should be returned', function() {
+          const ruleConfig = {
+            'description-format': 'off'
+          };
+          const source = 'cli';
+
+          ConfigValidator.validateRules(ruleConfig, source, linterContext);
+        });
+      });
+
+      context('when a invalid object rule config is passed with a value of error', function() {
+        it('true should be returned', function() {
+          const ruleConfig = {
+            'description-format': 'error'
+          };
+          const source = 'cli';
+
+          (function() {
+            ConfigValidator.validateRules(ruleConfig, source, linterContext);
+          }).should.throw('cli:\n\tConfiguration for rule "description-format" is invalid:\n\tis an object type rule. It must be set to "off" if an object is not supplied.');
+        });
+      });
+    });
+
     context('isStandardRuleConfigValid tests', function() {
       context('when a standard rule is passed with a value of error', function() {
         it('true should be returned', function() {
