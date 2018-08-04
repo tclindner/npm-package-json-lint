@@ -1,7 +1,7 @@
-** Description of change **
+**Description of change**
 
 
-** Checklist **
+**Checklist**
 
   - [ ] Unit tests have been added
   - [ ] Specific notes for documentation, if applicable
