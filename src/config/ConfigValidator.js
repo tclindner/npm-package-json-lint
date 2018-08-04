@@ -2,6 +2,7 @@
 
 const Ajv = require('ajv');
 const ConfigSchema = require('./ConfigSchema');
+const isPlainObj = require('is-plain-obj');
 
 /**
  * Formats an array of schema validation errors.
@@ -41,6 +42,32 @@ const formatSchemaErrors = function(errors) {
  */
 const isSeverityInvalid = function(severity) {
   return typeof severity !== 'string' || (typeof severity === 'string' && severity !== 'error' && severity !== 'warning' && severity !== 'off');
+};
+
+/**
+ * Validates object rule config
+ *
+ * @param  {Object}     ruleConfig  Object rule
+ * @return {Boolean}               True if config is valid, false if not
+ * @static
+ */
+const isObjectRuleConfigValid = function(ruleConfig) {
+  const severityIndex = 0;
+  const object = 1;
+
+  if (typeof ruleConfig === 'string' && ruleConfig === 'off') {
+    return true;
+  } else if (typeof ruleConfig === 'string' && ruleConfig !== 'off') {
+    throw new Error('is an object type rule. It must be set to "off" if an object is not supplied.');
+  } else if (typeof ruleConfig[severityIndex] !== 'string' || isSeverityInvalid(ruleConfig[severityIndex])) {
+    throw new Error(`first key must be set to "error", "warning", or "off". Currently set to "${ruleConfig[severityIndex]}".`);
+  }
+
+  if (!isPlainObj(ruleConfig[object])) {
+    throw new Error(`second key must be set an object. Currently set to "${ruleConfig[object]}".`);
+  }
+
+  return true;
 };
 
 /**
@@ -98,6 +125,8 @@ const validateRule = function(ruleModule, ruleName, userConfig, source) {
     try {
       if (ruleModule.ruleType === 'array') {
         isArrayRuleConfigValid(userConfig);
+      } else if (ruleModule.ruleType === 'object') {
+        isObjectRuleConfigValid(userConfig);
       } else {
         isStandardRuleConfigValid(userConfig);
       }

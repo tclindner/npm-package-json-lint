@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [3.3.0] - 2018-08-03
+### Added
+- New rule: [description-format](https://github.com/tclindner/npm-package-json-lint/wiki/description-format). Addresses [#89](https://github.com/tclindner/npm-package-json-lint/issues/89) from @ntwb.
+
 ## [3.2.0] - 2018-07-14
 ### Added
 - New rule: [no-absolute-version-dependencies](https://github.com/tclindner/npm-package-json-lint/wiki/no-absolute-version-dependencies).

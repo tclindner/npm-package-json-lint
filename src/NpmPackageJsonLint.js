@@ -29,12 +29,12 @@ class NpmPackageJsonLint {
     for (const rule in configObj) {
       const ruleModule = this.rules.get(rule);
 
-      if (ruleModule.ruleType === 'array') {
+      if (ruleModule.ruleType === 'array' || ruleModule.ruleType === 'object') {
         const severity = typeof configObj[rule] === 'string' && configObj[rule] === 'off' ? configObj[rule] : configObj[rule][0];
-        const ruleConfigArray = configObj[rule][1];
+        const ruleConfig = configObj[rule][1];
 
         if (severity !== 'off') {
-          const lintResult = ruleModule.lint(packageJsonData, severity, ruleConfigArray);
+          const lintResult = ruleModule.lint(packageJsonData, severity, ruleConfig);
 
           if (typeof lintResult === 'object') {
             lintIssues.push(lintResult);
