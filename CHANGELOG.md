@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [3.3.1] - 2018-08-23
+### Fixed
+- Resolved an issue in the CLIEngine where the file path separator was incompatible with Windows path separators. Addresses [#91](https://github.com/tclindner/npm-package-json-lint/issues/91) from @aduth.
+
 ## [3.3.0] - 2018-08-03
 ### Added
 - New rule: [description-format](https://github.com/tclindner/npm-package-json-lint/wiki/description-format). Addresses [#89](https://github.com/tclindner/npm-package-json-lint/issues/89) from @ntwb.
