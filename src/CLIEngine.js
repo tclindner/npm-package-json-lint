@@ -178,7 +178,7 @@ const getFileList = function(patterns, options) {
       const fileStats = fs.statSync(resolvedPath);
 
       if (fileStats.isFile()) {
-        if (resolvedPath.endsWith('/package.json')) {
+        if (resolvedPath.endsWith(`${path.sep}package.json`)) {
           newPath = resolvedPath;
         } else {
           throw new Error(`Pattern, ${pattern}, is a file, but isn't a package.json file.`);
