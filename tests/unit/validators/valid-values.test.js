@@ -12,7 +12,7 @@ describe('value-values Unit Tests', function() {
     };
 
     context('when the node does not exist in the package.json file', function() {
-      it('false should be returned', function() {
+      it('true should be returned', function() {
         const validValues = [
           'Zoe Washburn',
           'Hoban Washburn',
@@ -58,6 +58,52 @@ describe('value-values Unit Tests', function() {
           'River Tam'
         ];
         const response = validValuesObj.isValidValue(packageJson, 'author', packageJson.author, validValues);
+
+        response.should.be.false;
+      });
+    });
+  });
+
+  describe('matchValidValue method', function() {
+    const packageJson = {
+      name: '@lerna/publish'
+    };
+
+    context('when the node does not exist in the package.json file', function() {
+      it('true should be returned', function() {
+        const validRegexes = [
+          /^@babel\//,
+          /run$/,
+          /[0-9]+/
+        ];
+        const response = validValuesObj.matchValidValue(packageJson, 'names', packageJson.name, validRegexes);
+
+        response.should.be.true;
+      });
+    });
+
+    context('when the node exists in the package.json file and the value matches', function() {
+      it('true should be returned', function() {
+        const validRegexes = [
+          /^@lerna\//,
+          /^@babel\//,
+          /run$/,
+          /[0-9]+/
+        ];
+        const response = validValuesObj.matchValidValue(packageJson, 'name', packageJson.name, validRegexes);
+
+        response.should.be.true;
+      });
+    });
+
+    context('when the node exists in the package.json file, but the value does not match', function() {
+      it('false should be returned', function() {
+        const validRegexes = [
+          /^@babel\//,
+          /run$/,
+          /[0-9]+/
+        ];
+        const response = validValuesObj.matchValidValue(packageJson, 'name', packageJson.name, validRegexes);
 
         response.should.be.false;
       });
