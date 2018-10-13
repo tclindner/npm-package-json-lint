@@ -11,6 +11,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [3.4.1] - 2018-10-13
+### Fixed
+- Resolved an issue with the following rules:
+  * `no-caret-version-dependencies`
+  * `no-caret-version-devDependencies`
+  * `no-tilde-version-dependencies`
+  * `no-tilde-version-devDependencies`
+
+Addresses [#97](https://github.com/tclindner/npm-package-json-lint/issues/97) from @agvctm.
+
 ## [3.4.0] - 2018-10-06
 ### Added
 - New rule: [valid-values-name-scope](https://github.com/tclindner/npm-package-json-lint/wiki/valid-values-name-scope).

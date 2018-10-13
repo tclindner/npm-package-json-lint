@@ -432,6 +432,26 @@ describe('dependency-audit Unit Tests', function() {
     });
   });
 
+  describe('doesVersStartsWithRange method', function() {
+    context('when dependencyVersion begins with range specifier', function() {
+      it('true should be returned', function() {
+        const dependencyVersion = '^1.0.0';
+        const response = dependencyAudit.doesVersStartsWithRange(dependencyVersion, '^');
+
+        response.should.be.true;
+      });
+    });
+
+    context('when dependencyVersion does not begin with range specifier', function() {
+      it('false should be returned', function() {
+        const dependencyVersion = '^1.0.0';
+        const response = dependencyAudit.doesVersStartsWithRange(dependencyVersion, '~');
+
+        response.should.be.false;
+      });
+    });
+  });
+
   describe('areVersRangesValid method', function() {
     context('when the node does not exist in the package.json file', function() {
       it('true should be returned', function() {
@@ -475,6 +495,53 @@ describe('dependency-audit Unit Tests', function() {
         const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~');
 
         response.should.be.true;
+      });
+    });
+  });
+
+  describe('doVersContainInvalidRange method', function() {
+    context('when the node does not exist in the package.json file', function() {
+      it('false should be returned', function() {
+        const packageJson = {
+          dependencies: {
+            'npm-package-json-lint': '^1.0.0',
+            'grunt-npm-package-json-lint': '~2.0.0-beta1',
+            'gulp-npm-package-json-lint': '^2.0.0-rc1'
+          }
+        };
+        const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'devDependencies', '~');
+
+        response.should.be.false;
+      });
+    });
+
+    context('when the node exists in the package.json file and some versions contain invalid ranges', function() {
+      it('true should be returned', function() {
+        const packageJson = {
+          dependencies: {
+            'npm-package-json-lint': '^1.0.0',
+            'grunt-npm-package-json-lint': '~2.0.0-beta1',
+            'gulp-npm-package-json-lint': '^2.0.0-rc1'
+          }
+        };
+        const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~');
+
+        response.should.be.true;
+      });
+    });
+
+    context('when the node exists in the package.json file and none of the versions contain an invalid ranges', function() {
+      it('false should be returned', function() {
+        const packageJson = {
+          dependencies: {
+            'npm-package-json-lint': '^1.0.0',
+            'grunt-npm-package-json-lint': '^2.0.0-beta1',
+            'gulp-npm-package-json-lint': '^2.0.0-rc1'
+          }
+        };
+        const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~');
+
+        response.should.be.false;
       });
     });
   });
