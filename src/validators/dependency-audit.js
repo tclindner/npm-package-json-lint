@@ -79,6 +79,18 @@ const hasDepVersZero = function(packageJsonData, nodeName) {
 };
 
 /**
+ * Determines if the dependencies version string starts with the specified range
+ * @param  {String}   dependencyVersion   Dependency's version range
+ * @param  {String}   rangeSpecifier      A version range specifier
+ * @return {Boolean}                      True if the version starts with the range, false if it doesn't.
+ */
+const doesVersStartsWithRange = function(dependencyVersion, rangeSpecifier) {
+  const firstCharOfStr = 0;
+
+  return dependencyVersion.startsWith(rangeSpecifier, firstCharOfStr);
+};
+
+/**
  * Determines whether or not all dependency version ranges match expected range
  * @param  {object} packageJsonData         Valid JSON
  * @param  {string} nodeName                Name of a node in the package.json file
@@ -90,19 +102,43 @@ const areVersRangesValid = function(packageJsonData, nodeName, rangeSpecifier) {
     return true;
   }
 
-  const firstCharOfStr = 0;
   let rangesValid = true;
 
   for (const dependencyName in packageJsonData[nodeName]) {
     const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
-    if (!dependencyVersion.startsWith(rangeSpecifier, firstCharOfStr)) {
+    if (!doesVersStartsWithRange(dependencyVersion, rangeSpecifier)) {
       rangesValid = false;
     }
   }
 
   return rangesValid;
 };
+
+/**
+ * Determines if any dependencies have a version string that starts with the specified invalid range
+ * @param  {object} packageJsonData         Valid JSON
+ * @param  {string} nodeName                Name of a node in the package.json file
+ * @param  {string} rangeSpecifier          A version range specifier
+ * @return {Boolean}                        True if any dependencies versions start with the invalid range, false if they don't.
+ */
+const doVersContainInvalidRange = function(packageJsonData, nodeName, rangeSpecifier) {
+  if (!packageJsonData.hasOwnProperty(nodeName)) {
+    return false;
+  }
+
+  let containsInvalidVersion = false;
+
+  for (const dependencyName in packageJsonData[nodeName]) {
+    const dependencyVersion = packageJsonData[nodeName][dependencyName];
+
+    if (doesVersStartsWithRange(dependencyVersion, rangeSpecifier)) {
+      containsInvalidVersion = true;
+    }
+  }
+
+  return containsInvalidVersion;
+}
 
 /**
  * Determines whether or not all dependency versions are absolut
@@ -138,5 +174,7 @@ const isVersionAbsolute = function(packageJsonData, nodeName) {
 module.exports.hasDependency = hasDependency;
 module.exports.hasDepPrereleaseVers = hasDepPrereleaseVers;
 module.exports.hasDepVersZero = hasDepVersZero;
+module.exports.doesVersStartsWithRange = doesVersStartsWithRange;
 module.exports.areVersRangesValid = areVersRangesValid;
+module.exports.doVersContainInvalidRange = doVersContainInvalidRange;
 module.exports.isVersionAbsolute = isVersionAbsolute;

@@ -1,6 +1,6 @@
 'use strict';
 
-const areVersRangesValid = require('./../validators/dependency-audit').areVersRangesValid;
+const doVersContainInvalidRange = require('./../validators/dependency-audit').doVersContainInvalidRange;
 const LintIssue = require('./../LintIssue');
 const lintId = 'no-tilde-version-devDependencies';
 const nodeName = 'devDependencies';
@@ -10,7 +10,7 @@ const ruleType = 'standard';
 const lint = function(packageJsonData, severity) {
   const rangeSpecifier = '~';
 
-  if (packageJsonData.hasOwnProperty(nodeName) && areVersRangesValid(packageJsonData, nodeName, rangeSpecifier)) {
+  if (packageJsonData.hasOwnProperty(nodeName) && doVersContainInvalidRange(packageJsonData, nodeName, rangeSpecifier)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }
 

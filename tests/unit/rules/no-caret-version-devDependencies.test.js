@@ -18,7 +18,8 @@ describe('no-caret-version-devDependencies Unit Tests', function() {
     it('LintIssue object should be returned', function() {
       const packageJsonData = {
         devDependencies: {
-          'npm-package-json-lint': '^1.0.0'
+          'npm-package-json-lint': '^1.0.0',
+          'gulp-npm-package-json-lint': '~2.0.0'
         }
       };
       const response = lint(packageJsonData, 'error');
@@ -34,6 +35,7 @@ describe('no-caret-version-devDependencies Unit Tests', function() {
     it('LintIssue object should be returned', function() {
       const packageJsonData = {
         devDependencies: {
+          'npm-package-json-lint': '~1.0.0',
           'gulp-npm-package-json-lint': '~1.0.0'
         }
       };
