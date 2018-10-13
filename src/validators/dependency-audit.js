@@ -138,7 +138,7 @@ const doVersContainInvalidRange = function(packageJsonData, nodeName, rangeSpeci
   }
 
   return containsInvalidVersion;
-}
+};
 
 /**
  * Determines whether or not all dependency versions are absolut
