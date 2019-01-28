@@ -156,6 +156,88 @@ describe('CLIEngine Unit Tests', function() {
       results.should.deep.equal(expected);
     });
 
+    it('when called with patterns and ignorePath', function() {
+      const patterns = ['./tests/fixtures/ignorePath/'];
+      const ignorePath = path.resolve(__dirname, '../fixtures/ignorePath/.gitignore-example');
+
+      const expected = {
+        errorCount: 0,
+        results: [
+          {
+            errorCount: 0,
+            filePath: './tests/fixtures/ignorePath/package.json',
+            issues: [],
+            warningCount: 0
+          }
+        ],
+        warningCount: 0
+      };
+
+      const options = {
+        configFile: '',
+        cwd: process.cwd(),
+        useConfigFiles: true,
+        ignorePath,
+        rules: {}
+      };
+      const cliEngine = new CLIEngine(options);
+      const results = cliEngine.executeOnPackageJsonFiles(patterns);
+
+      results.should.deep.equal(expected);
+    });
+
+    it('when called with patterns should respect .npmpackagejsonlintignore', function() {
+      const cwd = path.resolve(__dirname, '../fixtures/npmPackageJsonLintIgnore');
+      const patterns = [cwd];
+
+      const expected = {
+        errorCount: 0,
+        results: [
+          {
+            errorCount: 0,
+            filePath: './package.json',
+            issues: [],
+            warningCount: 0
+          }
+        ],
+        warningCount: 0
+      };
+
+      const options = {
+        configFile: '',
+        cwd,
+        useConfigFiles: true,
+        rules: {}
+      };
+      const cliEngine = new CLIEngine(options);
+      const results = cliEngine.executeOnPackageJsonFiles(patterns);
+
+      results.should.deep.equal(expected);
+    });
+
+    it('when called with patterns (pattern is file) and ignorePath', function() {
+      const patterns = ['./tests/fixtures/ignorePath/ignoredDirectory/package.json'];
+      const ignorePath = path.resolve(__dirname, '../fixtures/ignorePath/.gitignore-example');
+
+      const expected = {
+        errorCount: 0,
+        results: [],
+        warningCount: 0
+      };
+
+      const options = {
+        configFile: '',
+        cwd: process.cwd(),
+        useConfigFiles: true,
+        ignorePath,
+        rules: {}
+      };
+      const cliEngine = new CLIEngine(options);
+      const results = cliEngine.executeOnPackageJsonFiles(patterns);
+
+      results.should.deep.equal(expected);
+    });
+
     it('when called with invalid pattern', function() {
       const pattern = './tests/fixtures/valid/.npmpackagejsonlintrc.json';
       const patterns = [pattern];

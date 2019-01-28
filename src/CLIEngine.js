@@ -7,9 +7,13 @@ const path = require('path');
 const NpmPackageJsonLint = require('./NpmPackageJsonLint');
 const Config = require('./Config');
 const glob = require('glob');
+const ignore = require('ignore');
 const ConfigValidator = require('./config/ConfigValidator');
 const Parser = require('./Parser');
 const pkg = require('../package.json');
+
+const DEFAULT_IGNORE_FILENAME = '.npmpackagejsonlintignore';
+const FILE_NOT_FOUND_ERROR_CODE = 'ENOENT';
 
 const noIssues = 0;
 
@@ -155,6 +159,31 @@ const isIssueAnError = function(issue) {
 };
 
 /**
+ * Generates ignorer based on ignore file content.
+ *
+ * @param {String}            cwd     Current work directory.
+ * @param {CLIEngineOptions}  options CLIEngineOptions object.
+ * @returns {Object}          Ignorer
+ */
+const getIgnorer = function(cwd, options) {
+  const ignoreFilePath = options.ignorePath || DEFAULT_IGNORE_FILENAME;
+  const absoluteIgnoreFilePath = path.isAbsolute(ignoreFilePath)
+    ? ignoreFilePath
+    : path.resolve(cwd, ignoreFilePath);
+  let ignoreText = '';
+
+  try {
+    ignoreText = fs.readFileSync(absoluteIgnoreFilePath, 'utf8');
+  } catch (readError) {
+    if (readError.code !== FILE_NOT_FOUND_ERROR_CODE) {
+      throw readError;
+    }
+  }
+
+  return ignore().add(ignoreText);
+};
+
+/**
  * Generates a list of files to lint based on a list of provided patterns
  *
  * @param {Array<String>}     patterns An array of patterns
@@ -197,12 +226,13 @@ const getFileList = function(patterns, options) {
 
   const files = [];
   const addedFiles = new Set();
+  const ignorer = getIgnorer(cwd, options);
 
   globPatterns.forEach((pattern) => {
     const file = path.resolve(cwd, pattern);
 
     if (fs.existsSync(file) && fs.statSync(file).isFile()) {
-      if (addedFiles.has(file)) {
+      if (addedFiles.has(file) || ignorer.ignores(path.relative(cwd, file))) {
         return;
       }
 
@@ -225,7 +255,7 @@ const getFileList = function(patterns, options) {
       globFiles.forEach((globFile) => {
         const filePath = path.resolve(cwd, globFile);
 
-        if (addedFiles.has(filePath)) {
+        if (addedFiles.has(filePath) || ignorer.ignores(path.relative(cwd, filePath))) {
           return;
         }
 

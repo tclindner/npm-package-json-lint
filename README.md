@@ -54,6 +54,7 @@ First thing first, let's make sure you have the necessary pre-requisites.
 | npmPkgJsonLint --configFile <file path> | -c | File path to local config file or module name. |
 | npmPkgJsonLint --quiet | -q | Report errors only |
 | npmPkgJsonLint --noConfigFiles | -ncf | Skips loading project config files (i.e. .npmpackagejsonlintrc.json and npmpackagejsonlint.config.js) |
+| npmPkgJsonLint --ignorePath | -i | Path to a file containing patterns that describe files to ignore. |
 
 ### Examples
 
@@ -98,6 +99,12 @@ $ npmPkgJsonLint --quiet ./packages
 ```
 
 > Looks for all `package.json` files in the `packages` directory. The CLI engine automatically looks for relevant config files for each package.json file that is found. Removes any warnings from the output using the long form for quieting output.
+
+```bash
+$ npmPkgJsonLint . --ignorePath .gitignore
+```
+
+> Looks for all `package.json` files in the project and exclude ignored paths. The CLI engine automatically looks for relevant config files for each package.json file that is found.
 
 ## Node.js API
 
@@ -180,7 +187,8 @@ CLIEngine configuration object
 * `configFile`      {string}  Name of module/file to use.
 * `cwd`             {string}  The current working diretory for all file operations.
 * `useConfigFiles`  {boolean} False disables use of .npmpackagejsonlintrc.json files and npmpackagejsonlint.config.js files.
-* `rules`            {object} An object of rules to use.
+* `ignorePath`      {string} Path to a file containing patterns that describe files to ignore. The path can be absolute or relative to process.cwd(). By default, npm-package-json-lint looks for .npmpackagejsonlintignore in process.cwd().
+* `rules`           {object} An object of rules to use.
 
 ##### Example
 
@@ -193,6 +201,7 @@ const cliEngineOptions = {
   configFile: '',
   cwd: process.cwd(),
   useConfigFiles: true,
+  ignorePath: '',
   rules: {}
 };
 
@@ -220,6 +229,7 @@ const cliEngineOptions = {
   configFile: '',
   cwd: process.cwd(),
   useConfigFiles: true,
+  ignorePath: '',
   rules: {}
 };
 const patterns = ['.'];
@@ -267,6 +277,7 @@ const cliEngineOptions = {
   configFile: '',
   cwd: process.cwd(),
   useConfigFiles: true,
+  ignorePath: '',
   rules: {}
 };
 

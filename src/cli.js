@@ -24,6 +24,7 @@ const cli = meow(`
         --quiet, -q Report errors only
         --noConfigFiles, -ncf Disables use of .npmpackagejsonlintrc.json files, npmpackagejsonlint.config.js files, and npmPackageJsonLintConfig object in package.json file.
         --configFile, -c File path of .npmpackagejsonlintrc.json
+        --ignorePath, -i Path to a file containing patterns that describe files to ignore. The path can be absolute or relative to process.cwd(). By default, npm-package-json-lint looks for .npmpackagejsonlintignore in process.cwd().
 
       Examples
         $ npmPkgJsonLint --version
@@ -34,6 +35,8 @@ const cli = meow(`
         $ npmPkgJsonLint --configFile ./config/npmpackagejsonlint.config.json .
         $ npmPkgJsonLint -q .
         $ npmPkgJsonLint --quiet ./packages
+        $ npmPkgJsonLint . --ignorePath .gitignore
+        $ npmPkgJsonLint . -i .gitignore
 `, {
   flags: {
     quiet: {
@@ -49,6 +52,11 @@ const cli = meow(`
     configFile: {
       'type': 'string',
       'alias': 'c',
+      'default': ''
+    },
+    ignorePath: {
+      'type': 'string',
+      'alias': 'i',
       'default': ''
     }
   }
@@ -73,6 +81,7 @@ const cliEngineOptions = {
   configFile: cli.flags.configFile,
   cwd: process.cwd(),
   useConfigFiles: !cli.flags.noConfigFiles,
+  ignorePath: cli.flags.ignorePath,
   rules: {}
 };
 
