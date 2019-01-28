@@ -34,8 +34,8 @@
     "coverage": "nyc --extension .js --check-coverage --lines 99 --branches 94 --functions 99 npm test"
   },
   "dependencies": {
-    "ajv": "^6.5.4",
-    "chalk": "^2.4.1",
+    "ajv": "^6.7.0",
+    "chalk": "^2.4.2",
     "glob": "^7.1.3",
     "is-path-inside": "^2.0.0",
     "is-plain-obj": "^1.1.0",
@@ -45,13 +45,13 @@
     "plur": "^3.0.1",
     "semver": "^5.6.0",
     "strip-json-comments": "^2.0.1",
-    "validator": "^10.8.0"
+    "validator": "^10.11.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "eslint": "^5.7.0",
+    "eslint": "^5.12.1",
     "eslint-config-tc": "^4.2.0",
-    "eslint-formatter-pretty": "^1.3.0",
+    "eslint-formatter-pretty": "^2.1.1",
     "figures": "^2.0.0",
     "mocha": "^5.2.0",
     "npm-package-json-lint-config-default": "^2.0.0",
