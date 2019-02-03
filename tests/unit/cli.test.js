@@ -37,7 +37,7 @@ const twoLintErrorsDetected = 2;
 const threeRunTimeException = 3;
 
 describe('cli Unit Tests', function() {
-  context('when the help command is run', function() {
+  describe('when the help command is run', function() {
     const expected = `
   Configurable linter for package.json files.
 
@@ -62,41 +62,41 @@ describe('cli Unit Tests', function() {
     $ npmPkgJsonLint . --ignorePath .gitignore
     $ npmPkgJsonLint . -i .gitignore\n\n`;
 
-    it('with --help, a list of commands is printed', function() {
+    test('with --help, a list of commands is printed', function() {
       const cli = spawnSync(relativePathToCli, ['--help']);
 
-      cli.stdout.toString().should.equal(expected);
-      cli.stderr.toString().should.equal('');
-      cli.status.should.equal(zeroClean);
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(zeroClean);
     });
   });
 
-  context('when the version command is run', function() {
+  describe('when the version command is run', function() {
     const expected = `${pkg.version}\n`;
 
-    it('with --version, a list of commands is printed', function() {
+    test('with --version, a list of commands is printed', function() {
       const cli = spawnSync(relativePathToCli, ['--version']);
 
-      cli.stdout.toString().should.equal(expected);
-      cli.stderr.toString().should.equal('');
-      cli.status.should.equal(zeroClean);
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(zeroClean);
     });
   });
 
   // NOTE: also tests loading config and package.json files
-  context('when the cli is run without targets', function() {
-    it('an except should be thrown that no lint targets were provided', function() {
+  describe('when the cli is run without targets', function() {
+    test('an except should be thrown that no lint targets were provided', function() {
       const cli = spawnSync(relativePathToCli);
       const expected = 'No lint targets provided\n';
 
-      cli.stdout.toString().should.equal(expected);
-      cli.stderr.toString().should.equal('');
-      cli.status.should.equal(oneMissingTargets);
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(oneMissingTargets);
     });
   });
 
-  context('when the cli is run without quiet', function() {
-    it('and one error, zero warnings is expected', function() {
+  describe('when the cli is run without quiet', function() {
+    test('and one error, zero warnings is expected', function() {
       const cli = spawnSync(relativePathToCli, ['-c', errorRcFile, errorPkg]);
       const expected = `
 ${errorPkg}
@@ -105,11 +105,11 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
 0 warnings
 `;
 
-      cli.stdout.toString().should.equal(expected);
-      cli.status.should.equal(twoLintErrorsDetected);
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.status).toStrictEqual(twoLintErrorsDetected);
     });
 
-    it('and no errors, one warning is expected', function() {
+    test('and no errors, one warning is expected', function() {
       const cli = spawnSync(relativePathToCli, ['--configFile', warningRcFile, warningPkg]);
       const expected = `
 ${warningPkg}
@@ -118,12 +118,12 @@ ${figures.warning} require-license - node: license - license is required
 1 warning
 `;
 
-      cli.stdout.toString().should.equal(expected);
-      cli.stderr.toString().should.equal('');
-      cli.status.should.equal(zeroClean);
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(zeroClean);
     });
 
-    it('and one error, one warning is expected', function() {
+    test('and one error, one warning is expected', function() {
       const cli = spawnSync(relativePathToCli, ['-c', errorWarningRcFile, errorWarningPkg]);
       const expected = `
 ${errorWarningPkg}
@@ -133,23 +133,23 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
 1 warning
 `;
 
-      cli.stdout.toString().should.equal(expected);
-      cli.stderr.toString().should.equal('');
-      cli.status.should.equal(twoLintErrorsDetected);
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(twoLintErrorsDetected);
     });
   });
 
-  context('when the cli is run and quiet is set', function() {
-    it('and no errors, no warnings is expected', function() {
+  describe('when the cli is run and quiet is set', function() {
+    test('and no errors, no warnings is expected', function() {
       const cli = spawnSync(relativePathToCli, ['-c', validRcFile, '-q', validPkg]);
       const expected = '';
 
-      cli.stdout.toString().should.equal(expected);
-      cli.stderr.toString().should.equal('');
-      cli.status.should.equal(zeroClean);
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(zeroClean);
     });
 
-    it('and one error, zero warnings is expected', function() {
+    test('and one error, zero warnings is expected', function() {
       const cli = spawnSync(relativePathToCli, ['-c', errorRcFile, errorPkg, '-q']);
       const expected = `
 ${errorPkg}
@@ -157,20 +157,20 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
 1 error
 `;
 
-      cli.stdout.toString().should.equal(expected);
-      cli.stderr.toString().should.equal('');
-      cli.status.should.equal(twoLintErrorsDetected);
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(twoLintErrorsDetected);
     });
 
-    it('and no errors, one warning is expected', function() {
+    test('and no errors, one warning is expected', function() {
       const cli = spawnSync(relativePathToCli, ['--configFile', warningRcFile, warningPkg, '--quiet']);
       const expected = '';
 
-      cli.stdout.toString().should.equal(expected);
-      cli.status.should.equal(zeroClean);
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.status).toStrictEqual(zeroClean);
     });
 
-    it('and one error, one warning is expected', function() {
+    test('and one error, one warning is expected', function() {
       const cli = spawnSync(relativePathToCli, ['-c', errorWarningRcFile, errorWarningPkg, '--quiet']);
       const expected = `
 ${errorWarningPkg}
@@ -178,14 +178,14 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
 1 error
 `;
 
-      cli.stdout.toString().should.equal(expected);
-      cli.stderr.toString().should.equal('');
-      cli.status.should.equal(twoLintErrorsDetected);
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(twoLintErrorsDetected);
     });
   });
 
-  context('when the cli has the config as a package.json property', function() {
-    it('and one error, one warning is expected', function() {
+  describe('when the cli has the config as a package.json property', function() {
+    test('and one error, one warning is expected', function() {
       const cli = spawnSync(relativePathToCli, [packageJsonPropertyPkg]);
       const expected = `
 ${packageJsonPropertyPkg}
@@ -195,14 +195,14 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
 1 warning
 `;
 
-      cli.stdout.toString().should.equal(expected);
-      cli.stderr.toString().should.equal('');
-      cli.status.should.equal(twoLintErrorsDetected);
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(twoLintErrorsDetected);
     });
   });
 
-  context('when the cli has the config as a JavaScript export', function() {
-    it('and one error, one warning is expected', function() {
+  describe('when the cli has the config as a JavaScript export', function() {
+    test('and one error, one warning is expected', function() {
       const cli = spawnSync(relativePathToCli, ['-c', configJavaScriptFile, configJavaScriptFilePkg]);
       const expected = `
 ${configJavaScriptFilePkg}
@@ -212,34 +212,34 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
 1 warning
 `;
 
-      cli.stdout.toString().should.equal(expected);
-      cli.stderr.toString().should.equal('');
-      cli.status.should.equal(twoLintErrorsDetected);
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(twoLintErrorsDetected);
     });
   });
 
-  context('when the cli is run with invalid config', function() {
-    it('invalid rcfile', function() {
+  describe('when the cli is run with invalid config', function() {
+    test('invalid rcfile', function() {
       const cli = spawnSync(relativePathToCli, ['-c', invalidRcFile, validPkg]);
 
-      cli.status.should.equal(threeRunTimeException);
+      expect(cli.status).toStrictEqual(threeRunTimeException);
     });
 
-    it('invalid package.json config property', function() {
+    test('invalid package.json config property', function() {
       const cli = spawnSync(relativePathToCli, [invalidPkgJsonPropertyPkg]);
 
-      cli.status.should.equal(threeRunTimeException);
+      expect(cli.status).toStrictEqual(threeRunTimeException);
     });
 
-    it('invalid JavaScript config file', function() {
+    test('invalid JavaScript config file', function() {
       const cli = spawnSync(relativePathToCli, ['-c', invalidConfigJsFile, validPkg]);
 
-      cli.status.should.equal(threeRunTimeException);
+      expect(cli.status).toStrictEqual(threeRunTimeException);
     });
   });
 
-  context('when the cli is run against all fixtures using pattern', function() {
-    it('each file results and totals will be output', function() {
+  describe('when the cli is run against all fixtures using pattern', function() {
+    test('each file results and totals will be output', function() {
       const cli = spawnSync(relativePathToCli, [validFixturesPath, errorFixturesPath, warningFixturesPath, errAndWarnsFixturesPath, configJsFileFixturesPath, pkgJsonPropFixturePath]);
       const expected = `
 ${errorPkg}
@@ -275,9 +275,9 @@ Totals
 4 warnings
 `;
 
-      cli.stdout.toString().should.equal(expected);
-      cli.stderr.toString().should.equal('');
-      cli.status.should.equal(twoLintErrorsDetected);
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(twoLintErrorsDetected);
     });
   });
 });

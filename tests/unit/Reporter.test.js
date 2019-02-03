@@ -1,30 +1,14 @@
 'use strict';
 
 const chalk = require('chalk');
-const LintIssue = require('../../src/LintIssue');
-const chai = require('chai');
-const sinon = require('sinon');
 const Reporter = require('./../../src/Reporter');
-
-const should = chai.should();
 
 /* eslint-disable no-magic-numbers */
 
 describe('Reporter Unit Tests', function() {
   describe('write method', function() {
-    context('when results are for a single file', function() {
-      const error = 'doh, I am an error';
-      let spy;
-
-      beforeEach(function() {
-        spy = sinon.spy(console, 'log');
-      });
-
-      afterEach(function() {
-        console.log.restore();
-      });
-
-      it('and zero errors, zero warnings exist, and quiet is false. Spy should be 0', function() {
+    describe('when results are for a single file', function() {
+      test('and zero errors, zero warnings exist, and quiet is false. Spy should be 0', function() {
         const results = {
           results: [
             {
@@ -39,11 +23,13 @@ describe('Reporter Unit Tests', function() {
         };
         const expectedCallCount = 0;
 
+        jest.spyOn(console, 'log');
+
         Reporter.write(results, false);
-        spy.callCount.should.equal(expectedCallCount);
+        expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
       });
 
-      it('and one error, zero warning exist, and quiet is false. Spy should be 5', function() {
+      test('and one error, zero warning exist, and quiet is false. Spy should be 5', function() {
         const results = {
           results: [
             {
@@ -65,17 +51,17 @@ describe('Reporter Unit Tests', function() {
         };
         const expectedCallCount = 5;
 
-        Reporter.write(results, false);
-        spy.callCount.should.equal(expectedCallCount);
-        spy.firstCall.calledWithExactly('').should.be.true;
-        spy.secondCall.calledWithExactly(chalk.underline('dummyText')).should.be.true;
+        jest.spyOn(console, 'log');
 
-        // NOTE: getCall() is zero-based
-        spy.getCall(3).calledWithExactly(chalk.red.bold('1 error')).should.be.true;
-        spy.getCall(4).calledWithExactly(chalk.yellow.bold('0 warnings')).should.be.true;
+        Reporter.write(results, false);
+        expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
+        expect(console.log).toHaveBeenNthCalledWith(1, '');
+        expect(console.log).toHaveBeenNthCalledWith(2, chalk.underline('dummyText'));
+        expect(console.log).toHaveBeenNthCalledWith(3, chalk.red.bold('1 error'));
+        expect(console.log).toHaveBeenNthCalledWith(4, chalk.yellow.bold('0 warnings'));
       });
 
-      it('and one error, one warning exist, and quiet is false. Spy should be 6', function() {
+      test('and one error, one warning exist, and quiet is false. Spy should be 6', function() {
         const results = {
           results: [
             {
@@ -103,17 +89,19 @@ describe('Reporter Unit Tests', function() {
         };
         const expectedCallCount = 6;
 
+        jest.spyOn(console, 'log');
+
         Reporter.write(results, false);
-        spy.callCount.should.equal(expectedCallCount);
-        spy.firstCall.calledWithExactly('').should.be.true;
-        spy.secondCall.calledWithExactly(chalk.underline('dummyText')).should.be.true;
+        expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
+        expect(console.log).toHaveBeenNthCalledWith(1, '');
+        expect(console.log).toHaveBeenNthCalledWith(2, chalk.underline('dummyText'));
 
         // NOTE: getCall() is zero-based
-        spy.getCall(4).calledWithExactly(chalk.red.bold('1 error')).should.be.true;
-        spy.getCall(5).calledWithExactly(chalk.yellow.bold('1 warning')).should.be.true;
+        expect(console.log).toHaveBeenNthCalledWith(4, chalk.red.bold('1 error'));
+        expect(console.log).toHaveBeenNthCalledWith(5, chalk.yellow.bold('1 warning'));
       });
 
-      it('and one error, one warning exist (filtered out), and quiet is true. Spy should be 4', function() {
+      test('and one error, one warning exist (filtered out), and quiet is true. Spy should be 4', function() {
         const results = {
           results: [
             {
@@ -135,16 +123,16 @@ describe('Reporter Unit Tests', function() {
         };
         const expectedCallCount = 4;
 
-        Reporter.write(results, true);
-        spy.callCount.should.equal(expectedCallCount);
-        spy.firstCall.calledWithExactly('').should.be.true;
-        spy.secondCall.calledWithExactly(chalk.underline('dummyText')).should.be.true;
+        jest.spyOn(console, 'log');
 
-        // NOTE: getCall() is zero-based
-        spy.getCall(3).calledWithExactly(chalk.red.bold('1 error')).should.be.true;
+        Reporter.write(results, true);
+        expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
+        expect(console.log).toHaveBeenNthCalledWith(1, '');
+        expect(console.log).toHaveBeenNthCalledWith(2, chalk.underline('dummyText'));
+        expect(console.log).toHaveBeenNthCalledWith(3, chalk.red.bold('1 error'));
       });
 
-      it('and two errors, two warnings exist, and quiet is false. Spy should be 8', function() {
+      test('and two errors, two warnings exist, and quiet is false. Spy should be 8', function() {
         const results = {
           results: [
             {
@@ -184,30 +172,19 @@ describe('Reporter Unit Tests', function() {
         };
         const expectedCallCount = 8;
 
-        Reporter.write(results, false);
-        spy.callCount.should.equal(expectedCallCount);
-        spy.firstCall.calledWithExactly('').should.be.true;
-        spy.secondCall.calledWithExactly(chalk.underline('dummyText')).should.be.true;
+        jest.spyOn(console, 'log');
 
-        // NOTE: getCall() is zero-based
-        spy.getCall(6).calledWithExactly(chalk.red.bold('2 errors')).should.be.true;
-        spy.getCall(7).calledWithExactly(chalk.yellow.bold('2 warnings')).should.be.true;
+        Reporter.write(results, false);
+        expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
+        expect(console.log).toHaveBeenNthCalledWith(1, '');
+        expect(console.log).toHaveBeenNthCalledWith(2, chalk.underline('dummyText'));
+        expect(console.log).toHaveBeenNthCalledWith(6, chalk.red.bold('2 errors'));
+        expect(console.log).toHaveBeenNthCalledWith(7, chalk.yellow.bold('2 warnings'));
       });
     });
 
-    context('when results are for more than one file', function() {
-      const error = 'doh, I am an error';
-      let spy;
-
-      beforeEach(function() {
-        spy = sinon.spy(console, 'log');
-      });
-
-      afterEach(function() {
-        console.log.restore();
-      });
-
-      it('and one error in each file, zero warnings exist, and quiet is false. Spy should be 14', function() {
+    describe('when results are for more than one file', function() {
+      test('and one error in each file, zero warnings exist, and quiet is false. Spy should be 14', function() {
         const results = {
           results: [
             {
@@ -242,25 +219,26 @@ describe('Reporter Unit Tests', function() {
         };
         const expectedCallCount = 14;
 
-        Reporter.write(results, false);
-        spy.callCount.should.equal(expectedCallCount);
-        spy.firstCall.calledWithExactly('').should.be.true;
-        spy.secondCall.calledWithExactly(chalk.underline('dummyText')).should.be.true;
+        jest.spyOn(console, 'log');
 
-        // NOTE: getCall() is zero-based
-        spy.getCall(3).calledWithExactly(chalk.red.bold('1 error')).should.be.true;
-        spy.getCall(4).calledWithExactly(chalk.yellow.bold('0 warnings')).should.be.true;
-        spy.getCall(5).calledWithExactly('').should.be.true;
-        spy.getCall(6).calledWithExactly(chalk.underline('dummyText2')).should.be.true;
-        spy.getCall(8).calledWithExactly(chalk.red.bold('1 error')).should.be.true;
-        spy.getCall(9).calledWithExactly(chalk.yellow.bold('0 warnings')).should.be.true;
-        spy.getCall(10).calledWithExactly('').should.be.true;
-        spy.getCall(11).calledWithExactly(chalk.underline('Totals')).should.be.true;
-        spy.getCall(12).calledWithExactly(chalk.red.bold('2 errors')).should.be.true;
-        spy.getCall(13).calledWithExactly(chalk.yellow.bold('0 warnings')).should.be.true;
+        Reporter.write(results, false);
+        
+        expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
+        expect(console.log).toHaveBeenNthCalledWith(1, '');
+        expect(console.log).toHaveBeenNthCalledWith(2, chalk.underline('dummyText'));
+        expect(console.log).toHaveBeenNthCalledWith(3, chalk.red.bold('1 error'));
+        expect(console.log).toHaveBeenNthCalledWith(4, chalk.yellow.bold('0 warnings'));
+        expect(console.log).toHaveBeenNthCalledWith(5, '');
+        expect(console.log).toHaveBeenNthCalledWith(6, chalk.underline('dummyText2'));
+        expect(console.log).toHaveBeenNthCalledWith(8, chalk.red.bold('1 error'));
+        expect(console.log).toHaveBeenNthCalledWith(9, chalk.yellow.bold('0 warnings'));
+        expect(console.log).toHaveBeenNthCalledWith(10, '');
+        expect(console.log).toHaveBeenNthCalledWith(11, chalk.underline('Totals'));
+        expect(console.log).toHaveBeenNthCalledWith(12, chalk.red.bold('2 errors'));
+        expect(console.log).toHaveBeenNthCalledWith(13, chalk.yellow.bold('0 warnings'));
       });
 
-      it('and one error in each file, one warning exist (filtered out), and quiet is true. Spy should be 11', function() {
+      test('and one error in each file, one warning exist (filtered out), and quiet is true. Spy should be 11', function() {
         const results = {
           results: [
             {
@@ -295,19 +273,19 @@ describe('Reporter Unit Tests', function() {
         };
         const expectedCallCount = 11;
 
-        Reporter.write(results, true);
-        spy.callCount.should.equal(expectedCallCount);
-        spy.firstCall.calledWithExactly('').should.be.true;
-        spy.secondCall.calledWithExactly(chalk.underline('dummyText')).should.be.true;
+        jest.spyOn(console, 'log');
 
-        // NOTE: getCall() is zero-based
-        spy.getCall(3).calledWithExactly(chalk.red.bold('1 error')).should.be.true;
-        spy.getCall(4).calledWithExactly('').should.be.true;
-        spy.getCall(5).calledWithExactly(chalk.underline('dummyText2')).should.be.true;
-        spy.getCall(7).calledWithExactly(chalk.red.bold('1 error')).should.be.true;
-        spy.getCall(8).calledWithExactly('').should.be.true;
-        spy.getCall(9).calledWithExactly(chalk.underline('Totals')).should.be.true;
-        spy.getCall(10).calledWithExactly(chalk.red.bold('2 errors')).should.be.true;
+        Reporter.write(results, true);
+        expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
+        expect(console.log).toHaveBeenNthCalledWith(1, '');
+        expect(console.log).toHaveBeenNthCalledWith(2, chalk.underline('dummyText'));
+        expect(console.log).toHaveBeenNthCalledWith(3, chalk.red.bold('1 error'));
+        expect(console.log).toHaveBeenNthCalledWith(4, '');
+        expect(console.log).toHaveBeenNthCalledWith(5, chalk.underline('dummyText2'));
+        expect(console.log).toHaveBeenNthCalledWith(7, chalk.red.bold('1 error'));
+        expect(console.log).toHaveBeenNthCalledWith(8, '');
+        expect(console.log).toHaveBeenNthCalledWith(9, chalk.underline('Totals'));
+        expect(console.log).toHaveBeenNthCalledWith(10, chalk.red.bold('2 errors'));
       });
     });
   });

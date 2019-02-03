@@ -2,16 +2,12 @@
 
 /* eslint max-lines: 'off', id-length: 'off' */
 
-const path = require('path');
-const chai = require('chai');
-const sinon = require('sinon');
 const Config = require('./../../../src/Config');
 const ConfigFile = require('./../../../src/config/ConfigFile');
 const ConfigValidator = require('./../../../src/config/ConfigValidator');
 const NpmPackageJsonLint = require('./../../../src/NpmPackageJsonLint');
 const Parser = require('./../../../src/Parser');
 
-const should = chai.should();
 const linterContext = new NpmPackageJsonLint();
 
 const options = {
@@ -23,23 +19,23 @@ const options = {
 const config = new Config(options, linterContext);
 
 describe('ConfigFile Unit Tests', function() {
-  context('createEmptyConfig method', function() {
-    it('when called an empty config object is returned', function() {
+  describe('createEmptyConfig method', function() {
+    test('when called an empty config object is returned', function() {
       const result = ConfigFile.createEmptyConfig();
       const expected = {
         rules: {}
       };
 
-      result.should.deep.equal(expected);
+      expect(result).toStrictEqual(expected);
     });
   });
 
-  context('loadFromPackageJson method', function() {
-    it('when package.json property does not exist, an empty config object is returned', function() {
-      const stubParser = sinon.stub(Parser, 'parseJsonFile');
-      const stubValidator = sinon.stub(ConfigValidator, 'validate');
+  describe('loadFromPackageJson method', function() {
+    test('when package.json property does not exist, an empty config object is returned', function() {
+      Parser.parseJsonFile = jest.fn();
+      ConfigValidator.validate = jest.fn();
 
-      stubParser.returns({name: 'name'});
+      Parser.parseJsonFile.mockReturnValue({name: 'name'});
 
       const expectedConfigObj = {
         rules: {}
@@ -47,23 +43,20 @@ describe('ConfigFile Unit Tests', function() {
       const filePath = './package.json';
       const result = ConfigFile.loadFromPackageJson(filePath, config);
 
-      stubParser.calledOnce.should.be.true;
-      stubParser.firstCall.calledWithExactly(filePath).should.be.true;
+      expect(Parser.parseJsonFile).toHaveBeenCalledTimes(1);
+      expect(Parser.parseJsonFile).toHaveBeenCalledWith(filePath);
 
-      stubValidator.calledOnce.should.be.true;
-      stubValidator.firstCall.calledWithExactly(config, filePath, linterContext);
+      expect(ConfigValidator.validate).toHaveBeenCalledTimes(1);
+      expect(ConfigValidator.validate).toHaveBeenCalledWith(config, filePath, linterContext);
 
-      result.should.deep.equal(expectedConfigObj);
-
-      Parser.parseJsonFile.restore();
-      ConfigValidator.validate.restore();
+      expect(result).toStrictEqual(expectedConfigObj);
     });
 
-    it('when package.json property does exist and is valid, a config object is returned', function() {
-      const stubParser = sinon.stub(Parser, 'parseJsonFile');
-      const stubValidator = sinon.stub(ConfigValidator, 'validate');
+    test('when package.json property does exist and is valid, a config object is returned', function() {
+      Parser.parseJsonFile = jest.fn();
+      ConfigValidator.validate = jest.fn();
 
-      stubParser.returns({
+      Parser.parseJsonFile.mockReturnValue({
         name: 'name',
         npmPackageJsonLintConfig: {
           rules: {
@@ -80,26 +73,23 @@ describe('ConfigFile Unit Tests', function() {
       const filePath = './package.json';
       const result = ConfigFile.loadFromPackageJson(filePath, config);
 
-      stubParser.calledOnce.should.be.true;
-      stubParser.firstCall.calledWithExactly(filePath).should.be.true;
+      expect(Parser.parseJsonFile).toHaveBeenCalledTimes(1);
+      expect(Parser.parseJsonFile).toBeCalledWith(filePath);
 
-      stubValidator.calledOnce.should.be.true;
-      stubValidator.firstCall.calledWithExactly(config, filePath, linterContext);
+      expect(ConfigValidator.validate).toHaveBeenCalledTimes(1);
+      expect(ConfigValidator.validate).toHaveBeenCalledWith(config, filePath, linterContext);
 
-      result.should.deep.equal(expectedConfigObj);
-
-      Parser.parseJsonFile.restore();
-      ConfigValidator.validate.restore();
+      expect(result).toStrictEqual(expectedConfigObj);
     });
   });
 
-  context('load method', function() {
-    it('when file is rc file (json), a config object is returned', function() {
-      const stubParserJson = sinon.stub(Parser, 'parseJsonFile');
-      const stubParserJs = sinon.stub(Parser, 'parseJavaScriptFile');
-      const stubValidator = sinon.stub(ConfigValidator, 'validate');
+  describe('load method', function() {
+    test('when file is rc file (json), a config object is returned', function() {
+      Parser.parseJsonFile = jest.fn();
+      Parser.parseJavaScriptFile = jest.fn();
+      ConfigValidator.validate = jest.fn();
 
-      stubParserJson.returns({rules: {'require-name': 'error'}});
+      Parser.parseJsonFile.mockReturnValue({rules: {'require-name': 'error'}});
 
       const expectedConfigObj = {
         rules: {
@@ -109,27 +99,23 @@ describe('ConfigFile Unit Tests', function() {
       const filePath = './npmpackagejsonlintrc.json';
       const result = ConfigFile.load(filePath, config);
 
-      stubParserJson.calledOnce.should.be.true;
-      stubParserJson.firstCall.calledWithExactly(filePath).should.be.true;
+      expect(Parser.parseJsonFile).toHaveBeenCalledTimes(1);
+      expect(Parser.parseJsonFile).toHaveBeenCalledWith(filePath);
 
-      stubParserJs.notCalled.should.be.true;
+      expect(Parser.parseJavaScriptFile).not.toHaveBeenCalled();
 
-      stubValidator.calledOnce.should.be.true;
-      stubValidator.firstCall.calledWithExactly(config, filePath, linterContext);
+      expect(ConfigValidator.validate).toHaveBeenCalledTimes(1);
+      expect(ConfigValidator.validate).toHaveBeenCalledWith(config, filePath, linterContext);
 
-      result.should.deep.equal(expectedConfigObj);
-
-      Parser.parseJsonFile.restore();
-      Parser.parseJavaScriptFile.restore();
-      ConfigValidator.validate.restore();
+      expect(result).toStrictEqual(expectedConfigObj);
     });
 
-    it('when file is js file, a config object is returned', function() {
-      const stubParserJson = sinon.stub(Parser, 'parseJsonFile');
-      const stubParserJs = sinon.stub(Parser, 'parseJavaScriptFile');
-      const stubValidator = sinon.stub(ConfigValidator, 'validate');
+    test('when file is js file, a config object is returned', function() {
+      Parser.parseJsonFile = jest.fn();
+      Parser.parseJavaScriptFile = jest.fn();
+      ConfigValidator.validate = jest.fn();
 
-      stubParserJs.returns({rules: {'require-name': 'error'}});
+      Parser.parseJavaScriptFile.mockReturnValue({rules: {'require-name': 'error'}});
 
       const expectedConfigObj = {
         rules: {
@@ -139,44 +125,32 @@ describe('ConfigFile Unit Tests', function() {
       const filePath = './npmpackagejsonlint.config.js';
       const result = ConfigFile.load(filePath, config);
 
-      stubParserJson.notCalled.should.be.true;
+      expect(Parser.parseJsonFile).not.toHaveBeenCalled();
 
-      stubParserJs.calledOnce.should.be.true;
-      stubParserJs.firstCall.calledWithExactly(filePath).should.be.true;
+      expect(Parser.parseJavaScriptFile).toHaveBeenCalledTimes(1);
+      expect(Parser.parseJavaScriptFile).toHaveBeenCalledWith(filePath);
 
-      stubValidator.calledOnce.should.be.true;
-      stubValidator.firstCall.calledWithExactly(config, filePath, linterContext);
+      expect(ConfigValidator.validate).toHaveBeenCalledTimes(1);
+      expect(ConfigValidator.validate).toHaveBeenCalledWith(config, filePath, linterContext);
 
-      result.should.deep.equal(expectedConfigObj);
-
-      Parser.parseJsonFile.restore();
-      Parser.parseJavaScriptFile.restore();
-      ConfigValidator.validate.restore();
+      expect(result).toStrictEqual(expectedConfigObj);
     });
 
-    it('when file is yaml file, an error is thrown', function() {
-      const stubParserJson = sinon.stub(Parser, 'parseJsonFile');
-      const stubParserJs = sinon.stub(Parser, 'parseJavaScriptFile');
-      const stubValidator = sinon.stub(ConfigValidator, 'validate');
+    test('when file is yaml file, an error is thrown', function() {
+      Parser.parseJsonFile = jest.fn();
+      Parser.parseJavaScriptFile = jest.fn();
+      ConfigValidator.validate = jest.fn();
 
       const filePath = './npmpackagejsonlint.config.yaml';
 
-      (function() {
-        ConfigFile.load(filePath, config);
-      }).should.throw('Unsupport config file extension. File path: ./npmpackagejsonlint.config.yaml');
+      expect(ConfigFile.load(filePath, config)).toThrow('Unsupport config file extension. File path: ./npmpackagejsonlint.config.yaml');
 
-      stubParserJson.notCalled.should.be.true;
-
-      stubParserJs.notCalled.should.be.true;
-
-      stubValidator.notCalled.should.be.true;
-
-      Parser.parseJsonFile.restore();
-      Parser.parseJavaScriptFile.restore();
-      ConfigValidator.validate.restore();
+      expect(Parser.parseJsonFile).not.toHaveBeenCalled();
+      expect(Parser.parseJavaScriptFile).not.toHaveBeenCalled();
+      expect(ConfigValidator.validate).not.toHaveBeenCalled();
     });
 
-    it('when file has local extends (valid), a config object is returned', function() {
+    test('when file has local extends (valid), a config object is returned', function() {
       const expectedConfigObj = {
         'extends': './tests/fixtures/extendsLocal/npmpackagejsonlint.config.js',
         'rules': {
@@ -187,18 +161,16 @@ describe('ConfigFile Unit Tests', function() {
       const filePath = './tests/fixtures/extendsLocal/.npmpackagejsonlintrc.json';
       const result = ConfigFile.load(filePath, config);
 
-      result.should.deep.equal(expectedConfigObj);
+      expect(result).toStrictEqual(expectedConfigObj);
     });
 
-    it('when file has local extends (invalid), a config object is returned', function() {
+    test('when file has local extends (invalid), a config object is returned', function() {
       const filePath = './tests/fixtures/extendsLocalInvalid/.npmpackagejsonlintrc.json';
 
-      (function() {
-        ConfigFile.load(filePath, config);
-      }).should.throw();
+      expect(ConfigFile.load(filePath, config)).toThrow();
     });
 
-    it('when file has module extends (valid), a config object is returned', function() {
+    test('when file has module extends (valid), a config object is returned', function() {
       const expectedConfigObj = {
         'extends': 'npm-package-json-lint-config-default',
         'rules': {
@@ -235,15 +207,13 @@ describe('ConfigFile Unit Tests', function() {
       const filePath = './tests/fixtures/extendsModule/.npmpackagejsonlintrc.json';
       const result = ConfigFile.load(filePath, config);
 
-      result.should.deep.equal(expectedConfigObj);
+      expect(result).toStrictEqual(expectedConfigObj);
     });
 
-    it('when file module extends (invalid), a config object is returned', function() {
+    test('when file module extends (invalid), a config object is returned', function() {
       const filePath = './tests/fixtures/extendsModuleInvalid/.npmpackagejsonlintrc.json';
 
-      (function() {
-        ConfigFile.load(filePath, config);
-      }).should.throw();
+      expect(ConfigFile.load(filePath, config)).toThrow();
     });
   });
 });

@@ -1,39 +1,36 @@
 'use strict';
 
-const chai = require('chai');
 const ruleModule = require('./../../../src/rules/name-format');
 const lint = ruleModule.lint;
 const ruleType = ruleModule.ruleType;
 
-const should = chai.should();
-
 describe('name-format Unit Tests', function() {
-  context('a rule type value should be exported', function() {
-    it('it should equal "standard"', function() {
-      ruleType.should.equal('standard');
+  describe('a rule type value should be exported', function() {
+    test('it should equal "standard"', function() {
+      expect(ruleType).toStrictEqual('standard');
     });
   });
 
-  context('when package.json has node with incorrect format', function() {
-    it('LintIssue object should be returned', function() {
+  describe('when package.json has node with incorrect format', function() {
+    test('LintIssue object should be returned', function() {
       const packageJsonData = {
         name: 'ImNotLowercase'
       };
       const response = lint(packageJsonData, 'error');
 
-      response.lintId.should.equal('name-format');
-      response.severity.should.equal('error');
-      response.node.should.equal('name');
-      response.lintMessage.should.equal('Format should be all lowercase');
+      expect(response.lintId).toStrictEqual('name-format');
+      expect(response.severity).toStrictEqual('error');
+      expect(response.node).toStrictEqual('name');
+      expect(response.lintMessage).toStrictEqual('Format should be all lowercase');
     });
   });
 
-  context('when package.json does not have node', function() {
-    it('true should be returned', function() {
+  describe('when package.json does not have node', function() {
+    test('true should be returned', function() {
       const packageJsonData = {};
       const response = lint(packageJsonData, 'error');
 
-      response.should.be.true;
+      expect(response).toBeTruthy();
     });
   });
 });

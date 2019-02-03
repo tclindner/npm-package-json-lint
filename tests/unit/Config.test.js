@@ -5,20 +5,16 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const chai = require('chai');
-const sinon = require('sinon');
-const isResolvable = require('is-resolvable');
 const Config = require('./../../src/Config');
 const ConfigFile = require('./../../src/config/ConfigFile');
 const NpmPackageJsonLint = require('./../../src/NpmPackageJsonLint');
 
-const should = chai.should();
 const linterContext = new NpmPackageJsonLint();
 
 describe('Config Unit Tests', function() {
-  context('get method tests', function() {
-    context('when each source has a different rule', function() {
-      it('a config object should returned with all rules', function() {
+  describe('get method tests', function() {
+    describe('when each source has a different rule', function() {
+      test('a config object should returned with all rules', function() {
         const configFile = './configfile';
         const options = {
           configFile,
@@ -30,12 +26,12 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
-        const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
-        const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
+        config.getProjectHierarchyConfig = jest.fn();
+        config.loadCliSpecifiedCfgFile = jest.fn();
+        config.getUserHomeConfig = jest.fn();
 
-        stubHierarchy.returns({rules: {'require-version': 'error'}});
-        stubCli.returns({rules: {'require-name': 'error'}});
+        config.getProjectHierarchyConfig.mockReturnValue({rules: {'require-version': 'error'}});
+        config.loadCliSpecifiedCfgFile.mockReturnValue({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           rules: {
@@ -47,24 +43,20 @@ describe('Config Unit Tests', function() {
         const filePath = './.npmpackagejsonlintrc.json';
         const result = config.get(filePath);
 
-        stubHierarchy.calledOnce.should.be.true;
-        stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
+        expect(config.getProjectHierarchyConfig).toHaveBeenCalledTimes(1);
+        expect(config.getProjectHierarchyConfig).toHaveBeenCalledWith(filePath);
 
-        stubCli.calledOnce.should.be.true;
-        stubCli.firstCall.calledWithExactly(configFile).should.be.true;
+        expect(config.loadCliSpecifiedCfgFile).toHaveBeenCalledTimes(1);
+        expect(config.loadCliSpecifiedCfgFile).toHaveBeenCalledWith(configFile);
 
-        stubUserHome.notCalled.should.be.true;
+        expect(config.getUserHomeConfig).not.toHaveBeenCalled();
 
-        result.should.deep.equal(expectedConfigObj);
-
-        config.getProjectHierarchyConfig.restore();
-        config.loadCliSpecifiedCfgFile.restore();
-        config.getUserHomeConfig.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
     });
 
-    context('when package.json property does not have rules', function() {
-      it('a config object should returned with rules from other sources', function() {
+    describe('when package.json property does not have rules', function() {
+      test('a config object should returned with rules from other sources', function() {
         const configFile = './configfile';
         const options = {
           configFile,
@@ -76,12 +68,12 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
-        const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
-        const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
+        config.getProjectHierarchyConfig = jest.fn();
+        config.loadCliSpecifiedCfgFile = jest.fn();
+        config.getUserHomeConfig = jest.fn();
 
-        stubHierarchy.returns({rules: {'require-version': 'error'}});
-        stubCli.returns({rules: {'require-name': 'error'}});
+        config.getProjectHierarchyConfig.mockReturnValue({rules: {'require-version': 'error'}});
+        config.loadCliSpecifiedCfgFile.mockReturnValue({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           rules: {
@@ -93,24 +85,20 @@ describe('Config Unit Tests', function() {
         const filePath = './.npmpackagejsonlintrc.json';
         const result = config.get(filePath);
 
-        stubHierarchy.calledOnce.should.be.true;
-        stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
+        expect(config.getProjectHierarchyConfig).toHaveBeenCalledTimes(1);
+        expect(config.getProjectHierarchyConfig).toHaveBeenCalledWith(filePath);
 
-        stubCli.calledOnce.should.be.true;
-        stubCli.firstCall.calledWithExactly(configFile).should.be.true;
+        expect(config.loadCliSpecifiedCfgFile).toHaveBeenCalledTimes(1);
+        expect(config.loadCliSpecifiedCfgFile).toHaveBeenCalledWith(configFile);
 
-        stubUserHome.notCalled.should.be.true;
+        expect(config.getUserHomeConfig).not.toHaveBeenCalled();
 
-        result.should.deep.equal(expectedConfigObj);
-
-        config.getProjectHierarchyConfig.restore();
-        config.loadCliSpecifiedCfgFile.restore();
-        config.getUserHomeConfig.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
     });
 
-    context('when project hierarchy does not have rules', function() {
-      it('a config object should returned with rules from other sources', function() {
+    describe('when project hierarchy does not have rules', function() {
+      test('a config object should returned with rules from other sources', function() {
         const configFile = './configfile';
         const options = {
           configFile,
@@ -122,12 +110,12 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
-        const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
-        const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
+        config.getProjectHierarchyConfig = jest.fn();
+        config.loadCliSpecifiedCfgFile = jest.fn();
+        config.getUserHomeConfig = jest.fn();
 
-        stubHierarchy.returns({rules: {}});
-        stubCli.returns({rules: {'require-name': 'error'}});
+        config.getProjectHierarchyConfig.mockReturnValue({rules: {}});
+        config.loadCliSpecifiedCfgFile.mockReturnValue({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           rules: {
@@ -138,24 +126,20 @@ describe('Config Unit Tests', function() {
         const filePath = './.npmpackagejsonlintrc.json';
         const result = config.get(filePath);
 
-        stubHierarchy.calledOnce.should.be.true;
-        stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
+        expect(config.getProjectHierarchyConfig).toHaveBeenCalledTimes(1);
+        expect(config.getProjectHierarchyConfig).toHaveBeenCalledWith(filePath);
 
-        stubCli.calledOnce.should.be.true;
-        stubCli.firstCall.calledWithExactly(configFile).should.be.true;
+        expect(config.loadCliSpecifiedCfgFile).toHaveBeenCalledTimes(1);
+        expect(config.loadCliSpecifiedCfgFile).toHaveBeenCalledWith(configFile);
 
-        stubUserHome.notCalled.should.be.true;
+        expect(config.getUserHomeConfig).not.toHaveBeenCalled();
 
-        result.should.deep.equal(expectedConfigObj);
-
-        config.getProjectHierarchyConfig.restore();
-        config.loadCliSpecifiedCfgFile.restore();
-        config.getUserHomeConfig.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
     });
 
-    context('when cli specified config does not have rules', function() {
-      it('a config object should returned with rules from other sources', function() {
+    describe('when cli specified config does not have rules', function() {
+      test('a config object should returned with rules from other sources', function() {
         const configFile = './configfile';
         const options = {
           configFile,
@@ -167,12 +151,12 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
-        const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
-        const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
+        config.getProjectHierarchyConfig = jest.fn();
+        config.loadCliSpecifiedCfgFile = jest.fn();
+        config.getUserHomeConfig = jest.fn();
 
-        stubHierarchy.returns({rules: {'require-version': 'error'}});
-        stubCli.returns({rules: {}});
+        config.getProjectHierarchyConfig.mockReturnValue({rules: {'require-version': 'error'}});
+        config.loadCliSpecifiedCfgFile.mockReturnValue({rules: {}});
 
         const expectedConfigObj = {
           rules: {
@@ -183,24 +167,20 @@ describe('Config Unit Tests', function() {
         const filePath = './.npmpackagejsonlintrc.json';
         const result = config.get(filePath);
 
-        stubHierarchy.calledOnce.should.be.true;
-        stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
+        expect(config.getProjectHierarchyConfig).toHaveBeenCalledTimes(1);
+        expect(config.getProjectHierarchyConfig).toHaveBeenCalledWith(filePath);
 
-        stubCli.calledOnce.should.be.true;
-        stubCli.firstCall.calledWithExactly(configFile).should.be.true;
+        expect(config.loadCliSpecifiedCfgFile).toHaveBeenCalledTimes(1);
+        expect(config.loadCliSpecifiedCfgFile).toHaveBeenCalledWith(configFile);
 
-        stubUserHome.notCalled.should.be.true;
+        expect(config.getUserHomeConfig).not.toHaveBeenCalled();
 
-        result.should.deep.equal(expectedConfigObj);
-
-        config.getProjectHierarchyConfig.restore();
-        config.loadCliSpecifiedCfgFile.restore();
-        config.getUserHomeConfig.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
     });
 
-    context('when cli specified rules does not exist', function() {
-      it('a config object should returned with rules from other sources', function() {
+    describe('when cli specified rules does not exist', function() {
+      test('a config object should returned with rules from other sources', function() {
         const configFile = './configfile';
         const options = {
           configFile,
@@ -210,12 +190,12 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
-        const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
-        const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
+        config.getProjectHierarchyConfig = jest.fn();
+        config.loadCliSpecifiedCfgFile = jest.fn();
+        config.getUserHomeConfig = jest.fn();
 
-        stubHierarchy.returns({rules: {'require-version': 'error'}});
-        stubCli.returns({rules: {'require-name': 'error'}});
+        config.getProjectHierarchyConfig.mockReturnValue({rules: {'require-version': 'error'}});
+        config.loadCliSpecifiedCfgFile.mockReturnValue({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           rules: {
@@ -226,24 +206,20 @@ describe('Config Unit Tests', function() {
         const filePath = './.npmpackagejsonlintrc.json';
         const result = config.get(filePath);
 
-        stubHierarchy.calledOnce.should.be.true;
-        stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
+        expect(config.getProjectHierarchyConfig).toHaveBeenCalledTimes(1);
+        expect(config.getProjectHierarchyConfig).toHaveBeenCalledWith(filePath);
 
-        stubCli.calledOnce.should.be.true;
-        stubCli.firstCall.calledWithExactly(configFile).should.be.true;
+        expect(config.loadCliSpecifiedCfgFile).toHaveBeenCalledTimes(1);
+        expect(config.loadCliSpecifiedCfgFile).toHaveBeenCalledWith(configFile);
 
-        stubUserHome.notCalled.should.be.true;
+        expect(config.getUserHomeConfig).not.toHaveBeenCalled();
 
-        result.should.deep.equal(expectedConfigObj);
-
-        config.getProjectHierarchyConfig.restore();
-        config.loadCliSpecifiedCfgFile.restore();
-        config.getUserHomeConfig.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
     });
 
-    context('when no rules exist in package.json, hierarchy, and cli', function() {
-      it('a config object should returned from user home', function() {
+    describe('when no rules exist in package.json, hierarchy, and cli', function() {
+      test('a config object should returned from user home', function() {
         const configFile = './configfile';
         const options = {
           configFile,
@@ -253,13 +229,13 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubHierarchy = sinon.stub(config, 'getProjectHierarchyConfig');
-        const stubCli = sinon.stub(config, 'loadCliSpecifiedCfgFile');
-        const stubUserHome = sinon.stub(config, 'getUserHomeConfig');
+        config.getProjectHierarchyConfig = jest.fn();
+        config.loadCliSpecifiedCfgFile = jest.fn();
+        config.getUserHomeConfig = jest.fn();
 
-        stubHierarchy.returns({rules: {}});
-        stubCli.returns({rules: {}});
-        stubUserHome.returns({rules: {'require-name': 'error'}});
+        config.getProjectHierarchyConfig.mockReturnValue({rules: {}});
+        config.loadCliSpecifiedCfgFile.mockReturnValue({rules: {}});
+        config.getUserHomeConfig.returns({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           rules: {
@@ -269,25 +245,21 @@ describe('Config Unit Tests', function() {
         const filePath = './.npmpackagejsonlintrc.json';
         const result = config.get(filePath);
 
-        stubHierarchy.calledOnce.should.be.true;
-        stubHierarchy.firstCall.calledWithExactly(filePath).should.be.true;
+        expect(config.getProjectHierarchyConfig).toHaveBeenCalledTimes(1);
+        expect(config.getProjectHierarchyConfig).toHaveBeenCalledWith(filePath);
 
-        stubCli.calledOnce.should.be.true;
-        stubCli.firstCall.calledWithExactly(configFile).should.be.true;
+        expect(config.loadCliSpecifiedCfgFile).toHaveBeenCalledTimes(1);
+        expect(config.loadCliSpecifiedCfgFile).toHaveBeenCalledWith(configFile);
 
-        stubUserHome.calledOnce.should.be.true;
+        expect(config.getUserHomeConfig).toHaveBeenCalledTimes(1);
 
-        result.should.deep.equal(expectedConfigObj);
-
-        config.getProjectHierarchyConfig.restore();
-        config.loadCliSpecifiedCfgFile.restore();
-        config.getUserHomeConfig.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
     });
   });
 
-  context('loadCliSpecifiedCfgFile method tests', function() {
-    it('no passed config, empty config object should be returned', function() {
+  describe('loadCliSpecifiedCfgFile method tests', function() {
+    test('no passed config, empty config object should be returned', function() {
       const configFile = '';
       const options = {
         configFile,
@@ -299,21 +271,19 @@ describe('Config Unit Tests', function() {
       };
       const config = new Config(options, linterContext);
 
-      const stub = sinon.stub(ConfigFile, 'load');
+      ConfigFile.load = jest.fn();
 
-      stub.returns('a');
+      ConfigFile.load.mockReturnValue('a');
 
       const expected = {rules: {}};
       const result = config.loadCliSpecifiedCfgFile(configFile);
 
-      stub.notCalled.should.be.true;
+      expect(ConfigFile.load).not.toHaveBeenCalled();
 
-      result.should.deep.equal(expected);
-
-      ConfigFile.load.restore();
+      expect(result).toStrictEqual(expected);
     });
 
-    it('scoped module, config object should be returned', function() {
+    test('scoped module, config object should be returned', function() {
       const configFile = '@myscope/npm-package-json-lint-config-awesome';
       const options = {
         configFile,
@@ -325,22 +295,20 @@ describe('Config Unit Tests', function() {
       };
       const config = new Config(options, linterContext);
 
-      const stub = sinon.stub(ConfigFile, 'load');
+      ConfigFile.load = jest.fn();
 
-      stub.returns('a');
+      ConfigFile.load.mockReturnValue('a');
 
       const expected = 'a';
       const result = config.loadCliSpecifiedCfgFile(configFile);
 
-      stub.calledOnce.should.be.true;
-      stub.firstCall.calledWithExactly(configFile, config).should.be.true;
+      expect(ConfigFile.load).toHaveBeenCalledTimes(1);
+      expect(ConfigFile.load).toHaveBeenCalledWith(configFile, config);
 
-      result.should.equal(expected);
-
-      ConfigFile.load.restore();
+      expect(result).toStrictEqual(expected);
     });
 
-    it('with resolvable module, config object should be returned', function() {
+    test('with resolvable module, config object should be returned', function() {
       const configFile = 'eslint-config-tc';
       const options = {
         configFile,
@@ -351,22 +319,20 @@ describe('Config Unit Tests', function() {
         }
       };
       const config = new Config(options, linterContext);
-      const stub = sinon.stub(ConfigFile, 'load');
+      ConfigFile.load = jest.fn();
 
-      stub.returns('a');
+      ConfigFile.load.mockReturnValue('a');
 
       const expected = 'a';
       const result = config.loadCliSpecifiedCfgFile(configFile);
 
-      stub.calledOnce.should.be.true;
-      stub.firstCall.calledWithExactly(configFile, config).should.be.true;
+      expect(ConfigFile.load).toHaveBeenCalledTimes(1);
+      expect(ConfigFile.load).toHaveBeenCalledWith(configFile, config);
 
-      result.should.equal(expected);
-
-      ConfigFile.load.restore();
+      expect(result).toStrictEqual(expected);
     });
 
-    it('with real local file, config object should be returned', function() {
+    test('with real local file, config object should be returned', function() {
       const configFile = './test/fixtures/valid/.npmpackagejsonlintrc.json';
       const options = {
         configFile,
@@ -377,25 +343,23 @@ describe('Config Unit Tests', function() {
         }
       };
       const config = new Config(options, linterContext);
-      const stub = sinon.stub(ConfigFile, 'load');
+      ConfigFile.load = jest.fn();
 
-      stub.returns('a');
+      ConfigFile.load.mockReturnValue('a');
 
       const expected = 'a';
       const result = config.loadCliSpecifiedCfgFile(configFile);
 
-      stub.calledOnce.should.be.true;
-      stub.firstCall.calledWithExactly(`${process.cwd()}/test/fixtures/valid/.npmpackagejsonlintrc.json`, config).should.be.true;
+      expect(ConfigFile.load).toHaveBeenCalledTimes(1);
+      expect(ConfigFile.load).toHaveBeenCalledWith(`${process.cwd()}/test/fixtures/valid/.npmpackagejsonlintrc.json`, config);
 
-      result.should.equal(expected);
-
-      ConfigFile.load.restore();
+      expect(result).toStrictEqual(expected);
     });
   });
 
-  context('loadCliSpecifiedCfgFile method tests', function() {
-    context('when called without config object', function() {
-      it('an empty config object should returned', function() {
+  describe('loadCliSpecifiedCfgFile method tests', function() {
+    describe('when called without config object', function() {
+      test('an empty config object should returned', function() {
         const configFile = '';
         const options = {
           configFile,
@@ -405,23 +369,21 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stub = sinon.stub(ConfigFile, 'load');
+        ConfigFile.load = jest.fn();
 
         const expectedConfigObj = {
           rules: {}
         };
         const result = config.loadCliSpecifiedCfgFile(config.options.configFile);
 
-        stub.notCalled.should.be.true;
+        expect(ConfigFile.load).not.toHaveBeenCalled();
 
-        result.should.deep.equal(expectedConfigObj);
-
-        ConfigFile.load.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
     });
 
-    context('when called with config file path that is resolvable', function() {
-      it('the config object should returned', function() {
+    describe('when called with config file path that is resolvable', function() {
+      test('the config object should returned', function() {
         const configFile = 'eslint-config-tc';
         const options = {
           configFile,
@@ -431,9 +393,9 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubLoad = sinon.stub(ConfigFile, 'load');
+        ConfigFile.load = jest.fn();
 
-        stubLoad.returns({rules: {'require-name': 'error'}});
+        ConfigFile.load.mockReturnValue({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           rules: {
@@ -442,17 +404,15 @@ describe('Config Unit Tests', function() {
         };
         const result = config.loadCliSpecifiedCfgFile(config.options.configFile);
 
-        stubLoad.calledOnce.should.be.true;
-        stubLoad.firstCall.calledWithExactly(configFile, config).should.be.true;
+        expect(ConfigFile.load).toHaveBeenCalledTimes(1);
+        expect(ConfigFile.load).toHaveBeenCalledWith(configFile, config);
 
-        result.should.deep.equal(expectedConfigObj);
-
-        ConfigFile.load.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
     });
 
-    context('when called with config file path starts with @', function() {
-      it('the config object should returned', function() {
+    describe('when called with config file path starts with @', function() {
+      test('the config object should returned', function() {
         const configFile = '@tclindner/eslint-config-tc';
         const options = {
           configFile,
@@ -462,9 +422,9 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubLoad = sinon.stub(ConfigFile, 'load');
+        ConfigFile.load = jest.fn();
 
-        stubLoad.returns({rules: {'require-name': 'error'}});
+        ConfigFile.load.mockReturnValue({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           rules: {
@@ -473,17 +433,15 @@ describe('Config Unit Tests', function() {
         };
         const result = config.loadCliSpecifiedCfgFile(config.options.configFile);
 
-        stubLoad.calledOnce.should.be.true;
-        stubLoad.firstCall.calledWithExactly(configFile, config).should.be.true;
+        expect(ConfigFile.load).toHaveBeenCalledTimes(1);
+        expect(ConfigFile.load).toHaveBeenCalledWith(configFile, config);
 
-        result.should.deep.equal(expectedConfigObj);
-
-        ConfigFile.load.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
     });
 
-    context('when called with config file path is not resolvable and does not start with @', function() {
-      it('the config object should returned', function() {
+    describe('when called with config file path is not resolvable and does not start with @', function() {
+      test('the config object should returned', function() {
         const configFile = 'npm-package-json-lint-config-my-awesome-config';
         const options = {
           configFile,
@@ -493,9 +451,9 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubLoad = sinon.stub(ConfigFile, 'load');
+        ConfigFile.load = jest.fn();
 
-        stubLoad.returns({rules: {'require-name': 'error'}});
+        ConfigFile.load.mockReturnValue({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           rules: {
@@ -504,19 +462,17 @@ describe('Config Unit Tests', function() {
         };
         const result = config.loadCliSpecifiedCfgFile(config.options.configFile);
 
-        stubLoad.calledOnce.should.be.true;
-        stubLoad.firstCall.calledWithExactly(`${config.options.cwd}/${configFile}`, config).should.be.true;
+        expect(ConfigFile.load).toHaveBeenCalledTimes(1);
+        expect(ConfigFile.load).toHaveBeenCalledWith(`${config.options.cwd}/${configFile}`, config);
 
-        result.should.deep.equal(expectedConfigObj);
-
-        ConfigFile.load.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
     });
   });
 
-  context('getUserHomeConfig method tests', function() {
-    context('when called and personalConfig cache exists', function() {
-      it('the peronalConfig object should be returned returned', function() {
+  describe('getUserHomeConfig method tests', function() {
+    describe('when called and personalConfig cache exists', function() {
+      test('the peronalConfig object should be returned returned', function() {
         const configFile = '';
         const options = {
           configFile,
@@ -532,7 +488,7 @@ describe('Config Unit Tests', function() {
           }
         };
 
-        const stubExists = sinon.stub(fs, 'existsSync');
+        fs.existsSync = jest.fn();
 
         const expectedConfigObj = {
           rules: {
@@ -542,16 +498,14 @@ describe('Config Unit Tests', function() {
 
         const result = config.getUserHomeConfig();
 
-        stubExists.notCalled.should.be.true;
+        expect(fs.existsSync).not.toHaveBeenCalled();
 
-        result.should.deep.equal(expectedConfigObj);
-
-        fs.existsSync.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
     });
 
-    context('when called and personalConfig cache does not exist', function() {
-      it('and rc file does, the config object should returned', function() {
+    describe('when called and personalConfig cache does not exist', function() {
+      test('and rc file does, the config object should returned', function() {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -560,19 +514,19 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubExists = sinon.stub(fs, 'existsSync');
-        const stubStats = sinon.stub(fs, 'statSync');
-        const stubHome = sinon.stub(os, 'homedir');
-        const stubLoad = sinon.stub(ConfigFile, 'load');
+        fs.existsSync = jest.fn();
+        fs.statSync = jest.fn();
+        os.homedir = jest.fn();
+        ConfigFile.load = jest.fn();
 
-        stubExists.returns(true);
-        stubStats.returns({
+        fs.existsSync.mockReturnValue(true);
+        fs.statSync.mockReturnValue({
           isFile: function() {
             return true;
           }
         });
-        stubHome.returns('/home/');
-        stubLoad.returns({rules: {'require-name': 'error'}});
+        os.homedir.mockReturnValue('/home/');
+        ConfigFile.load.mockReturnValue({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           rules: {
@@ -581,27 +535,22 @@ describe('Config Unit Tests', function() {
         };
         const result = config.getUserHomeConfig();
 
-        stubExists.calledOnce.should.be.true;
-        stubExists.firstCall.calledWithExactly('/home/.npmpackagejsonlintrc.json').should.be.true;
+        expect(fs.existsSync).toHaveBeenCalledTimes(1);
+        expect(fs.existsSync).toHaveBeenCalledWith('/home/.npmpackagejsonlintrc.json');
 
-        stubStats.calledOnce.should.be.true;
-        stubStats.firstCall.calledWithExactly('/home/.npmpackagejsonlintrc.json').should.be.true;
+        expect(fs.statSync).toHaveBeenCalledTimes(1);
+        expect(fs.statSync).toHaveBeenCalledWith('/home/.npmpackagejsonlintrc.json');
 
-        stubHome.calledOnce.should.be.true;
+        expect(os.homedir).toHaveBeenCalledTimes(1);
 
-        stubLoad.calledOnce.should.be.true;
-        stubLoad.firstCall.calledWithExactly('/home/.npmpackagejsonlintrc.json', config).should.be.true;
+        expect(ConfigFile.load).toHaveBeenCalledTimes(1);
+        expect(ConfigFile.load).toHaveBeenCalledWith('/home/.npmpackagejsonlintrc.json', config);
 
-        result.should.deep.equal(expectedConfigObj);
-        config.personalConfig.should.deep.equal(expectedConfigObj);
-
-        fs.existsSync.restore();
-        fs.statSync.restore();
-        os.homedir.restore();
-        ConfigFile.load.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
+        expect(config.personalConfig).toStrictEqual(expectedConfigObj);
       });
 
-      it('and rc file does not, JavaScript config does, the config object should returned', function() {
+      test('and rc file does not, JavaScript config does, the config object should returned', function() {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -610,20 +559,21 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubExists = sinon.stub(fs, 'existsSync');
-        const stubStats = sinon.stub(fs, 'statSync');
-        const stubHome = sinon.stub(os, 'homedir');
-        const stubLoad = sinon.stub(ConfigFile, 'load');
+        fs.existsSync = jest.fn();
+        fs.statSync = jest.fn();
+        os.homedir = jest.fn();
+        ConfigFile.load = jest.fn();
 
-        stubExists.onCall(0).returns(false);
-        stubExists.onCall(1).returns(true);
-        stubStats.returns({
+        fs.existsSync
+          .mockReturnValue(false)
+          .mockReturnValue(true);
+        fs.statSync.mockReturnValue({
           isFile: function() {
             return true;
           }
         });
-        stubHome.returns('/home/');
-        stubLoad.returns({rules: {'require-name': 'error'}});
+        os.homedir.mockReturnValue('/home/');
+        ConfigFile.load.mockReturnValue({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           rules: {
@@ -632,28 +582,23 @@ describe('Config Unit Tests', function() {
         };
         const result = config.getUserHomeConfig();
 
-        stubExists.calledTwice.should.be.true;
-        stubExists.firstCall.calledWithExactly('/home/.npmpackagejsonlintrc.json').should.be.true;
-        stubExists.secondCall.calledWithExactly('/home/npmpackagejsonlint.config.js').should.be.true;
+        expect(fs.existsSync).toHaveBeenCalledTimes(2);
+        expect(fs.existsSync).toHaveBeenNthCalledWith(1, '/home/.npmpackagejsonlintrc.json');
+        expect(fs.existsSync).toHaveBeenNthCalledWith(2, '/home/npmpackagejsonlint.config.js');
 
-        stubStats.calledOnce.should.be.true;
-        stubStats.firstCall.calledWithExactly('/home/npmpackagejsonlint.config.js').should.be.true;
+        expect(fs.statSync).toHaveBeenCalledTimes(1);
+        expect(fs.statSync).toHaveBeenCalledWith('/home/npmpackagejsonlint.config.js');
 
-        stubHome.calledOnce.should.be.true;
+        expect(os.homedir).toHaveBeenCalledTimes(1);
 
-        stubLoad.calledOnce.should.be.true;
-        stubLoad.firstCall.calledWithExactly('/home/npmpackagejsonlint.config.js', config).should.be.true;
+        expect(ConfigFile.load).toHaveBeenCalledTimes(1);
+        expect(ConfigFile.load).toHaveBeenCalledWith('/home/npmpackagejsonlint.config.js', config);
 
-        result.should.deep.equal(expectedConfigObj);
-        config.personalConfig.should.deep.equal(expectedConfigObj);
-
-        fs.existsSync.restore();
-        fs.statSync.restore();
-        os.homedir.restore();
-        ConfigFile.load.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
+        expect(config.personalConfig).toStrictEqual(expectedConfigObj);
       });
 
-      it('and rc/js config files do not exist, empty object should returned', function() {
+      test('and rc/js config files do not exist, empty object should returned', function() {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -662,41 +607,36 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubExists = sinon.stub(fs, 'existsSync');
-        const stubStats = sinon.stub(fs, 'statSync');
-        const stubHome = sinon.stub(os, 'homedir');
-        const stubLoad = sinon.stub(ConfigFile, 'load');
+        fs.existsSync = jest.fn();
+        fs.statSync = jest.fn();
+        os.homedir = jest.fn();
+        ConfigFile.load = jest.fn();
 
-        stubExists.returns(false);
-        stubHome.returns('/home/');
+        fs.existsSync.mockReturnValue(false);
+        os.homedir.mockReturnValue('/home/');
 
         const expectedConfigObj = {};
         const result = config.getUserHomeConfig();
 
-        stubExists.calledTwice.should.be.true;
-        stubExists.firstCall.calledWithExactly('/home/.npmpackagejsonlintrc.json').should.be.true;
-        stubExists.secondCall.calledWithExactly('/home/npmpackagejsonlint.config.js').should.be.true;
+        expect(fs.existsSync).toHaveBeenCalledTimes(2);
+        expect(fs.existsSync).toHaveBeenNthCalledWith(1, '/home/.npmpackagejsonlintrc.json');
+        expect(fs.existsSync).toHaveBeenNthCalledWith(2, '/home/npmpackagejsonlint.config.js');
 
-        stubStats.notCalled.should.be.true;
+        expect(fs.statSync).not.toHaveBeenCalled();
 
-        stubHome.calledOnce.should.be.true;
+        expect(os.homedir).toHaveBeenCalledTimes(1);
 
-        stubLoad.notCalled.should.be.true;
+        expect(ConfigFile.load).not.toHaveBeenCalled();
 
-        result.should.deep.equal(expectedConfigObj);
-        config.personalConfig.should.deep.equal(expectedConfigObj);
-
-        fs.existsSync.restore();
-        fs.statSync.restore();
-        os.homedir.restore();
-        ConfigFile.load.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
+        expect(config.personalConfig).toStrictEqual(expectedConfigObj);
       });
     });
   });
 
-  context('getProjectHierarchyConfig method tests', function() {
-    context('when called', function() {
-      it('and package.json prop exists and is root, the config object should returned', function() {
+  describe('getProjectHierarchyConfig method tests', function() {
+    describe('when called', function() {
+      test('and package.json prop exists and is root, the config object should returned', function() {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -705,20 +645,20 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubDirname = sinon.stub(path, 'dirname');
-        const stubExists = sinon.stub(fs, 'existsSync');
-        const stubStats = sinon.stub(fs, 'statSync');
-        const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
-        const stubLoad = sinon.stub(ConfigFile, 'load');
+        path.dirname = jest.fn();
+        fs.existsSync = jest.fn();
+        fs.statSync = jest.fn();
+        ConfigFile.loadFromPackageJson = jest.fn();
+        ConfigFile.load = jest.fn();
 
-        stubDirname.returns('./npm-package-json-lint/');
-        stubExists.returns(true);
-        stubStats.returns({
+        path.dirname.mockReturnValue('./npm-package-json-lint/');
+        fs.existsSync.mockReturnValue(true);
+        fs.statSync.mockReturnValue({
           isFile: function() {
             return true;
           }
         });
-        stubLoadPkgJson.returns({root: true, rules: {'require-name': 'error'}});
+        ConfigFile.loadFromPackageJson.mockReturnValue({root: true, rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           root: true,
@@ -729,30 +669,24 @@ describe('Config Unit Tests', function() {
         const filePath = './package.json';
         const result = config.getProjectHierarchyConfig(filePath);
 
-        stubDirname.calledOnce.should.be.true;
-        stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
+        expect(path.dirname).toHaveBeenCalledTimes(1);
+        expect(path.dirname).toHaveBeenCalledWith(filePath);
 
-        stubExists.calledOnce.should.be.true;
-        stubExists.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
+        expect(fs.existsSync).toHaveBeenCalledTimes(1);
+        expect(fs.existsSync).toHaveBeenCalledWith('npm-package-json-lint/package.json');
 
-        stubStats.calledOnce.should.be.true;
-        stubStats.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
+        expect(fs.statSync).toHaveBeenCalledTimes(1);
+        expect(fs.statSync).toHaveBeenCalledWith('npm-package-json-lint/package.json');
 
-        stubLoadPkgJson.calledOnce.should.be.true;
-        stubLoadPkgJson.firstCall.calledWithExactly('npm-package-json-lint/package.json', config).should.be.true;
+        expect(ConfigFile.loadFromPackageJson).toHaveBeenCalledTimes(1);
+        expect(ConfigFile.loadFromPackageJson).toHaveBeenCalledWith('npm-package-json-lint/package.json', config);
 
-        stubLoad.notCalled.should.be.true;
+        expect(ConfigFile.load).not.toHaveBeenCalled();
 
-        result.should.deep.equal(expectedConfigObj);
-
-        path.dirname.restore();
-        fs.existsSync.restore();
-        fs.statSync.restore();
-        ConfigFile.loadFromPackageJson.restore();
-        ConfigFile.load.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
 
-      it('and package.json prop exists and root is not set, the config object should returned', function() {
+      test('and package.json prop exists and root is not set, the config object should returned', function() {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -771,10 +705,10 @@ describe('Config Unit Tests', function() {
         const filePath = './tests/fixtures/hierarchyWithoutRoot/subdirectory/package.json';
         const result = config.getProjectHierarchyConfig(filePath);
 
-        result.should.deep.equal(expectedConfigObj);
+        expect(result).toStrictEqual(expectedConfigObj);
       });
 
-      it('and package.json prop exists and has no prop, the config object should returned', function() {
+      test('and package.json prop exists and has no prop, the config object should returned', function() {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -783,21 +717,21 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubDirname = sinon.stub(path, 'dirname');
-        const stubExists = sinon.stub(fs, 'existsSync');
-        const stubStats = sinon.stub(fs, 'statSync');
-        const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
-        const stubLoad = sinon.stub(ConfigFile, 'load');
+        path.dirname = jest.fn();
+        fs.existsSync = jest.fn();
+        fs.statSync = jest.fn();
+        ConfigFile.loadFromPackageJson = jest.fn();
+        ConfigFile.load = jest.fn();
 
-        stubDirname.returns('./npm-package-json-lint/');
-        stubExists.returns(true);
-        stubStats.returns({
+        path.dirname.mockReturnValue('./npm-package-json-lint/');
+        fs.existsSync.mockReturnValue(true);
+        fs.statSync.mockReturnValue({
           isFile: function() {
             return true;
           }
         });
-        stubLoadPkgJson.returns({root: true, rules: {}});
-        stubLoad.returns({root: true, rules: {'require-name': 'error'}});
+        ConfigFile.loadFromPackageJson.mockReturnValue({root: true, rules: {}});
+        ConfigFile.load.mockReturnValue({root: true, rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           root: true,
@@ -808,33 +742,27 @@ describe('Config Unit Tests', function() {
         const filePath = './package.json';
         const result = config.getProjectHierarchyConfig(filePath);
 
-        stubDirname.calledOnce.should.be.true;
-        stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
+        expect(path.dirname).toHaveBeenCalledTimes(1);
+        expect(path.dirname).toHaveBeenCalledWith(filePath);
 
-        stubExists.calledTwice.should.be.true;
-        stubExists.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
-        stubExists.secondCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
+        expect(fs.existsSync).toHaveBeenCalledTimes(2);
+        expect(fs.existsSync).toHaveBeenNthCalledWith(1, 'npm-package-json-lint/package.json');
+        expect(fs.existsSync).toHaveBeenNthCalledWith(2, 'npm-package-json-lint/.npmpackagejsonlintrc.json');
 
-        stubStats.calledTwice.should.be.true;
-        stubStats.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
-        stubStats.secondCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
+        expect(fs.statSync).toHaveBeenCalledTimes(2);
+        expect(fs.statSync).toHaveBeenNthCalledWith(1, 'npm-package-json-lint/package.json');
+        expect(fs.statSync).toHaveBeenNthCalledWith(2, 'npm-package-json-lint/.npmpackagejsonlintrc.json');
 
-        stubLoadPkgJson.calledOnce.should.be.true;
-        stubLoadPkgJson.firstCall.calledWithExactly('npm-package-json-lint/package.json', config).should.be.true;
+        expect(ConfigFile.loadFromPackageJson).toHaveBeenCalledTimes(1);
+        expect(ConfigFile.loadFromPackageJson).toHaveBeenCalledWith('npm-package-json-lint/package.json', config);
 
-        stubLoad.calledOnce.should.be.true;
-        stubLoad.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json', config).should.be.true;
+        expect(ConfigFile.load).toHaveBeenCalledTimes(1);
+        expect(ConfigFile.load).toHaveBeenCalledWith('npm-package-json-lint/.npmpackagejsonlintrc.json', config);
 
-        result.should.deep.equal(expectedConfigObj);
-
-        path.dirname.restore();
-        fs.existsSync.restore();
-        fs.statSync.restore();
-        ConfigFile.loadFromPackageJson.restore();
-        ConfigFile.load.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
 
-      it('and rc file does and is root, the config object should returned', function() {
+      test('and rc file does and is root, the config object should returned', function() {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -843,21 +771,22 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubDirname = sinon.stub(path, 'dirname');
-        const stubExists = sinon.stub(fs, 'existsSync');
-        const stubStats = sinon.stub(fs, 'statSync');
-        const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
-        const stubLoad = sinon.stub(ConfigFile, 'load');
+        path.dirname = jest.fn();
+        fs.existsSync = jest.fn();
+        fs.statSync = jest.fn();
+        ConfigFile.loadFromPackageJson = jest.fn();
+        ConfigFile.load = jest.fn();
 
-        stubDirname.returns('./npm-package-json-lint/');
-        stubExists.onCall(0).returns(false);
-        stubExists.onCall(1).returns(true);
-        stubStats.returns({
+        path.dirname.mockReturnValue('./npm-package-json-lint/');
+        fs.existsSync
+          .mockReturnValueOnce(false)
+          .mockReturnValueOnce(true);
+        fs.statSync.mockReturnValue({
           isFile: function() {
             return true;
           }
         });
-        stubLoad.returns({root: true, rules: {'require-name': 'error'}});
+        ConfigFile.load.mockReturnValue({root: true, rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           root: true,
@@ -868,31 +797,25 @@ describe('Config Unit Tests', function() {
         const filePath = './package.json';
         const result = config.getProjectHierarchyConfig(filePath);
 
-        stubDirname.calledOnce.should.be.true;
-        stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
+        expect(path.dirname).toHaveBeenCalledTimes(1);
+        expect(path.dirname).toHaveBeenCalledWith(filePath);
 
-        stubExists.calledTwice.should.be.true;
-        stubExists.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
-        stubExists.secondCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
+        expect(fs.existsSync).toHaveBeenCalledTimes(2);
+        expect(fs.existsSync).toHaveBeenNthCalledWith(1, 'npm-package-json-lint/package.json');
+        expect(fs.existsSync).toHaveBeenNthCalledWith(2, 'npm-package-json-lint/.npmpackagejsonlintrc.json');
 
-        stubStats.calledOnce.should.be.true;
-        stubStats.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
+        expect(fs.statSync).toHaveBeenCalledTimes(1);
+        expect(fs.statSync).toHaveBeenCalledWith('npm-package-json-lint/.npmpackagejsonlintrc.json');
 
-        stubLoadPkgJson.notCalled.should.be.true;
+        expect(ConfigFile.loadFromPackageJson).not.toHaveBeenCalled();
 
-        stubLoad.calledOnce.should.be.true;
-        stubLoad.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json', config).should.be.true;
+        expect(ConfigFile.load).toHaveBeenCalledTimes(1);
+        expect(ConfigFile.load).toHaveBeenCalledWith('npm-package-json-lint/.npmpackagejsonlintrc.json', config);
 
-        result.should.deep.equal(expectedConfigObj);
-
-        path.dirname.restore();
-        fs.existsSync.restore();
-        fs.statSync.restore();
-        ConfigFile.loadFromPackageJson.restore();
-        ConfigFile.load.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
 
-      it('and rc file does and is not root, the config object should returned', function() {
+      test('and rc file does and is not root, the config object should returned', function() {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -901,28 +824,31 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubDirname = sinon.stub(path, 'dirname');
-        const stubExists = sinon.stub(fs, 'existsSync');
-        const stubStats = sinon.stub(fs, 'statSync');
-        const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
-        const stubLoad = sinon.stub(ConfigFile, 'load');
+        path.dirname = jest.fn();
+        fs.existsSync = jest.fn();
+        fs.statSync = jest.fn();
+        ConfigFile.loadFromPackageJson = jest.fn();
+        ConfigFile.load = jest.fn();
 
-        stubDirname.onCall(0).returns('./npm-package-json-lint/');
-        stubDirname.onCall(1).returns('./npm-package-json-lint/');
-        stubDirname.onCall(2).returns('/home/');
-        stubExists.onCall(0).returns(false);
-        stubExists.onCall(1).returns(true);
-        stubExists.onCall(2).returns(false);
-        stubExists.onCall(3).returns(true);
-        stubStats.returns({
+        path.dirname
+          .mockReturnValueOnce('./npm-package-json-lint/')
+          .mockReturnValueOnce('./npm-package-json-lint/')
+          .mockReturnValueOnce('/home/');
+        fs.existsSync
+          .mockReturnValueOnce(false)
+          .mockReturnValueOnce(true)
+          .mockReturnValueOnce(false)
+          .mockReturnValueOnce(true);
+        fs.statSync.mockReturnValue({
           isFile: function() {
             return true;
           }
         });
 
-        stubLoadPkgJson.returns({rules: {}});
-        stubLoad.onCall(0).returns({root: false, rules: {'require-name': 'error'}});
-        stubLoad.onCall(1).returns({root: false, rules: {'require-version': 'error', 'require-name': 'warning'}});
+        ConfigFile.loadFromPackageJson.mockReturnValue({rules: {}});
+        ConfigFile.load
+          .mockReturnValueOnce({root: false, rules: {'require-name': 'error'}})
+          .mockReturnValueOnce({root: false, rules: {'require-version': 'error', 'require-name': 'warning'}});
 
         const expectedConfigObj = {
           root: false,
@@ -934,30 +860,24 @@ describe('Config Unit Tests', function() {
         const filePath = './package.json';
         const result = config.getProjectHierarchyConfig(filePath);
 
-        stubDirname.calledThrice.should.be.true;
-        stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
+        expect(path.dirname).toHaveBeenCalledTimes(3);
+        expect(path.dirname).toHaveBeenCalledWith(filePath);
 
-        stubExists.callCount.should.equal(4);
-        stubExists.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
-        stubExists.secondCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
-        stubExists.thirdCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
+        expect(fs.existsSync).toHaveBeenCalledTimes(4);
+        expect(fs.existsSync).toHaveBeenNthCalledWith(1, 'npm-package-json-lint/package.json');
+        expect(fs.existsSync).toHaveBeenNthCalledWith(2, 'npm-package-json-lint/.npmpackagejsonlintrc.json');
+        expect(fs.existsSync).toHaveBeenCalledWith(3, 'npm-package-json-lint/package.json');
 
-        stubStats.calledTwice.should.be.true;
-        stubStats.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
+        expect(fs.statSync).toHaveBeenCalledTimes(2);
+        expect(fs.statSync).toHaveBeenCalledWith('npm-package-json-lint/.npmpackagejsonlintrc.json');
 
-        stubLoad.calledTwice.should.be.true;
-        stubLoad.firstCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json', config).should.be.true;
+        expect(ConfigFile.load).toHaveBeenCalledTimes(2);
+        expect(ConfigFile.load).toHaveBeenCalledWith('npm-package-json-lint/.npmpackagejsonlintrc.json', config);
 
-        result.should.deep.equal(expectedConfigObj);
-
-        path.dirname.restore();
-        fs.existsSync.restore();
-        fs.statSync.restore();
-        ConfigFile.loadFromPackageJson.restore();
-        ConfigFile.load.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
 
-      it('and rc file does not, JavaScript config does and is root, the config object should returned', function() {
+      test('and rc file does not, JavaScript config does and is root, the config object should returned', function() {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -966,22 +886,23 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubDirname = sinon.stub(path, 'dirname');
-        const stubExists = sinon.stub(fs, 'existsSync');
-        const stubStats = sinon.stub(fs, 'statSync');
-        const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
-        const stubLoad = sinon.stub(ConfigFile, 'load');
+        path.dirname = jest.fn();
+        fs.existsSync = jest.fn();
+        fs.statSync = jest.fn();
+        ConfigFile.loadFromPackageJson = jest.fn();
+        ConfigFile.load = jest.fn();
 
-        stubDirname.returns('./npm-package-json-lint/');
-        stubExists.onCall(0).returns(false);
-        stubExists.onCall(1).returns(false);
-        stubExists.onCall(2).returns(true);
-        stubStats.returns({
+        path.dirname.mockReturnValue('./npm-package-json-lint/');
+        fs.existsSync
+          .mockReturnValueOnce(false)
+          .mockReturnValue(false)
+          .mockReturnValue(true);
+        fs.statSync.mockReturnValue({
           isFile: function() {
             return true;
           }
         });
-        stubLoad.returns({root: true, rules: {'require-name': 'error'}});
+        ConfigFile.load.mockReturnValue({root: true, rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           root: true,
@@ -992,32 +913,26 @@ describe('Config Unit Tests', function() {
         const filePath = './package.json';
         const result = config.getProjectHierarchyConfig(filePath);
 
-        stubDirname.calledOnce.should.be.true;
-        stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
+        expect(path.dirname).toHaveBeenCalledTimes(1);
+        expect(path.dirname).toHaveBeenCalledWith(filePath);
 
-        stubExists.calledThrice.should.be.true;
-        stubExists.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
-        stubExists.secondCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
-        stubExists.thirdCall.calledWithExactly('npm-package-json-lint/npmpackagejsonlint.config.js').should.be.true;
+        expect(fs.existsSync).toHaveBeenCalledTimes(3)
+        expect(fs.existsSync).toHaveBeenNthCalledWith(1, 'npm-package-json-lint/package.json');
+        expect(fs.existsSync).toHaveBeenNthCalledWith(2, 'npm-package-json-lint/.npmpackagejsonlintrc.json');
+        expect(fs.existsSync).toHaveBeenNthCalledWith(3, 'npm-package-json-lint/npmpackagejsonlint.config.js');
 
-        stubStats.calledOnce.should.be.true;
-        stubStats.firstCall.calledWithExactly('npm-package-json-lint/npmpackagejsonlint.config.js').should.be.true;
+        expect(fs.statSync).toHaveBeenCalledTimes(1);
+        expect(fs.statSync).toHaveBeenCalledWith('npm-package-json-lint/npmpackagejsonlint.config.js');
 
-        stubLoadPkgJson.notCalled.should.be.true;
+        expect(ConfigFile.loadFromPackageJson).not.toHaveBeenCalled();
 
-        stubLoad.calledOnce.should.be.true;
-        stubLoad.firstCall.calledWithExactly('npm-package-json-lint/npmpackagejsonlint.config.js', config).should.be.true;
+        expect(ConfigFile.load).toHaveBeenCalledTimes(1);
+        expect(ConfigFile.load).toHaveBeenCalledWith('npm-package-json-lint/npmpackagejsonlint.config.js', config);
 
-        result.should.deep.equal(expectedConfigObj);
-
-        path.dirname.restore();
-        fs.existsSync.restore();
-        fs.statSync.restore();
-        ConfigFile.loadFromPackageJson.restore();
-        ConfigFile.load.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
 
-      it('and rc/js config files do not exist, empty object should returned', function() {
+      test('and rc/js config files do not exist, empty object should returned', function() {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -1026,15 +941,16 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubDirname = sinon.stub(path, 'dirname');
-        const stubExists = sinon.stub(fs, 'existsSync');
-        const stubStats = sinon.stub(fs, 'statSync');
-        const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
-        const stubLoad = sinon.stub(ConfigFile, 'load');
+        path.dirname = jest.fn();
+        fs.existsSync = jest.fn();
+        fs.statSync = jest.fn();
+        ConfigFile.loadFromPackageJson = jest.fn();
+        ConfigFile.load = jest.fn();
 
-        stubDirname.onCall(0).returns('./npm-package-json-lint/');
-        stubDirname.onCall(1).returns('/home');
-        stubExists.returns(false);
+        path.dirname
+          .mockReturnValueOnce('./npm-package-json-lint/')
+          .mockReturnValueOnce('/home');
+        fs.existsSync.mockReturnValue(false);
 
         const expectedConfigObj = {
           rules: {}
@@ -1042,30 +958,24 @@ describe('Config Unit Tests', function() {
         const filePath = './package.json';
         const result = config.getProjectHierarchyConfig(filePath);
 
-        stubDirname.calledTwice.should.be.true;
-        stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
+        expect(path.dirname).toHaveBeenCalledTimes(2);
+        expect(path.dirname).toHaveBeenCalledWith(filePath);
 
-        stubExists.calledThrice.should.be.true;
-        stubExists.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
-        stubExists.secondCall.calledWithExactly('npm-package-json-lint/.npmpackagejsonlintrc.json').should.be.true;
-        stubExists.thirdCall.calledWithExactly('npm-package-json-lint/npmpackagejsonlint.config.js').should.be.true;
+        expect(fs.existsSync).toHaveBeenCalledTimes(3)
+        expect(fs.existsSync).toHaveBeenNthCalledWith(1, 'npm-package-json-lint/package.json');
+        expect(fs.existsSync).toHaveBeenNthCalledWith(2, 'npm-package-json-lint/.npmpackagejsonlintrc.json');
+        expect(fs.existsSync).toHaveBeenNthCalledWith(3, 'npm-package-json-lint/npmpackagejsonlint.config.js');
 
-        stubStats.notCalled.should.be.true;
+        expect(fs.statSync).not.toHaveBeenCalled();
 
-        stubLoadPkgJson.notCalled.should.be.true;
+        expect(ConfigFile.loadFromPackageJson).not.toHaveBeenCalled();
 
-        stubLoad.notCalled.should.be.true;
+        expect(ConfigFile.load).not.toHaveBeenCalled();
 
-        result.should.deep.equal(expectedConfigObj);
-
-        path.dirname.restore();
-        fs.existsSync.restore();
-        fs.statSync.restore();
-        ConfigFile.loadFromPackageJson.restore();
-        ConfigFile.load.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
 
-      it('and pkg prop does not exist, config files do, but useConfigFiles is false, then empty config object should returned', function() {
+      test('and pkg prop does not exist, config files do, but useConfigFiles is false, then empty config object should returned', function() {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -1074,22 +984,23 @@ describe('Config Unit Tests', function() {
         };
         const config = new Config(options, linterContext);
 
-        const stubDirname = sinon.stub(path, 'dirname');
-        const stubExists = sinon.stub(fs, 'existsSync');
-        const stubStats = sinon.stub(fs, 'statSync');
-        const stubLoadPkgJson = sinon.stub(ConfigFile, 'loadFromPackageJson');
-        const stubLoad = sinon.stub(ConfigFile, 'load');
+        path.dirname = jest.fn();
+        fs.existsSync = jest.fn();
+        fs.statSync = jest.fn();
+        ConfigFile.loadFromPackageJson = jest.fn();
+        ConfigFile.load = jest.fn();
 
-        stubDirname.onCall(0).returns('./npm-package-json-lint/');
-        stubDirname.onCall(1).returns('/home');
-        stubExists.returns(true);
-        stubStats.returns({
+        path.dirname
+          .mockReturnValueOnce('./npm-package-json-lint/')
+          .mockReturnValueOnce('/home');
+        fs.existsSync.mockReturnValue(true);
+        fs.statSync.mockReturnValue({
           isFile: function() {
             return true;
           }
         });
-        stubLoadPkgJson.returns({rules: {}});
-        stubLoad.returns({root: true, rules: {'require-name': 'error'}});
+        ConfigFile.loadFromPackageJson.mockReturnValue({rules: {}});
+        ConfigFile.load.mockReturnValue({root: true, rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           rules: {
@@ -1098,27 +1009,21 @@ describe('Config Unit Tests', function() {
         const filePath = './package.json';
         const result = config.getProjectHierarchyConfig(filePath);
 
-        stubDirname.calledTwice.should.be.true;
-        stubDirname.firstCall.calledWithExactly(filePath).should.be.true;
+        expect(path.dirname).toHaveBeenCalledTimes(2);
+        expect(path.dirname).toHaveBeenCalledWith(filePath);
 
-        stubExists.calledOnce.should.be.true;
-        stubExists.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
+        expect(fs.existsSync).toHaveBeenCalledTimes(1);
+        expect(fs.existsSync).toHaveBeenCalledWith('npm-package-json-lint/package.json');
 
-        stubStats.calledOnce.should.be.true;
-        stubStats.firstCall.calledWithExactly('npm-package-json-lint/package.json').should.be.true;
+        expect(fs.statSync).toHaveBeenCalledTimes(1);
+        expect(fs.statSync).toHaveBeenCalledWith('npm-package-json-lint/package.json');
 
-        stubLoadPkgJson.calledOnce.should.be.true;
-        stubLoadPkgJson.firstCall.calledWithExactly('npm-package-json-lint/package.json', config).should.be.true;
+        expect(ConfigFile.loadFromPackageJson).toHaveBeenCalledTimes(1);
+        expect(ConfigFile.loadFromPackageJson).toHaveBeenCalledWith('npm-package-json-lint/package.json', config);
 
-        stubLoad.notCalled.should.be.true;
+        expect(ConfigFile.load).not.toHaveBeenCalled();
 
-        result.should.deep.equal(expectedConfigObj);
-
-        path.dirname.restore();
-        fs.existsSync.restore();
-        fs.statSync.restore();
-        ConfigFile.loadFromPackageJson.restore();
-        ConfigFile.load.restore();
+        expect(result).toStrictEqual(expectedConfigObj);
       });
     });
   });

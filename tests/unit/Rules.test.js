@@ -3,103 +3,80 @@
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
-const chai = require('chai');
-const sinon = require('sinon');
 const Rules = require('./../../src/Rules');
-
-const should = chai.should();
 
 describe('Rules Unit Tests', function() {
   describe('_registerRule method', function() {
-    context('when a ruleId and ruleModule are passed in', function() {
-      it('the rules object contains the rule as a key and the module path as a value', function() {
+    describe('when a ruleId and ruleModule are passed in', function() {
+      test('the rules object contains the rule as a key and the module path as a value', function() {
         const rules = new Rules();
         const firstIndex = 0;
 
         rules._registerRule('key', 'c/git/key.js');
-        Object.keys(rules.rules)[firstIndex].should.equal('key');
-        rules.rules.key.should.equal('c/git/key.js');
+        expect(Object.keys(rules.rules)[firstIndex]).toStrictEqual('key');
+        expect(rules.rules.key).toStrictEqual('c/git/key.js');
       });
     });
   });
 
   describe('get method', function() {
-    context('when get is called for an invalid ruleId', function() {
-      before(function() {
-        const fsStub = sinon.stub(fs, 'readdirSync');
-        const pathStub = sinon.stub(path, 'join');
+    describe('when get is called for an invalid ruleId', function() {
+      test('an error should be thrown', function() {
+        fs.readdirSync = jest.fn();
+        path.join = jest.fn();
+  
+        fs.readdirSync.mockReturnValue(['version-type.js', 'require-version.js']);
+        path.join
+          .mockReturnValueOnce('c/git/rules')
+          .mockReturnValueOnce('c/git/rules/version-type.js')
+          .mockReturnValueOnce('c/git/rules/require-version.js');
 
-        fsStub.onFirstCall().returns(['version-type.js', 'require-version.js']);
-        pathStub.onFirstCall().returns('c/git/rules');
-        pathStub.onSecondCall().returns('c/git/rules/version-type.js');
-        pathStub.onThirdCall().returns('c/git/rules/require-version.js');
-      });
-
-      after(function() {
-        fs.readdirSync.restore();
-        path.join.restore();
-      });
-
-      it('an error should be thrown', function() {
         const rules = new Rules();
 
         rules.load();
 
-        (function() {
-          rules.get('required-version');
-        }).should.throw(chalk.bold.red('Rule, required-version, is invalid. Please ensure it matches a valid option.'));
+        expect(rules.get('required-version')).toThrow(chalk.bold.red('Rule, required-version, is invalid. Please ensure it matches a valid option.'));
       });
     });
   });
 
   describe('load method', function() {
-    context('when load is called', function() {
-      before(function() {
-        const fsStub = sinon.stub(fs, 'readdirSync');
-        const pathStub = sinon.stub(path, 'join');
+    describe('when load is called', function() {
+      test('an object of rules should be returned', function() {
+        fs.readdirSync = jest.fn();
+        path.join = jest.fn();
 
-        fsStub.onFirstCall().returns(['version-type.js', 'require-version.js']);
-        pathStub.onFirstCall().returns('c/git/rules');
-        pathStub.onSecondCall().returns('c/git/rules/version-type.js');
-        pathStub.onThirdCall().returns('c/git/rules/require-version.js');
-      });
-
-      after(function() {
-        fs.readdirSync.restore();
-        path.join.restore();
-      });
-
-      it('an object of rules should be returned', function() {
+        fs.readdirSync.mockReturnValue(['version-type.js', 'require-version.js']);
+        path.join
+          .mockReturnValueOnce('c/git/rules')
+          .mockReturnValueOnce('c/git/rules/version-type.js')
+          .mockReturnValueOnce('c/git/rules/require-version.js');
+        
         const rules = new Rules();
         const result = rules.load();
 
-        rules.rules['version-type'].should.equal('c/git/rules/version-type.js');
-        rules.rules['require-version'].should.equal('c/git/rules/require-version.js');
+        expect(rules.rules['version-type']).toStrictEqual('c/git/rules/version-type.js');
+        expect(rules.rules['require-version']).toStrictEqual('c/git/rules/require-version.js');
       });
     });
 
-    context('when load is called but a fs error occurs', function() {
-      before(function() {
-        const fsStub = sinon.stub(fs, 'readdirSync').throws();
-      });
+    describe('when load is called but a fs error occurs', function() {
+      test('false is returned', function() {
+        fs.readdirSync = jest.fn();
+        fs.readFileSync.mockImplementation(() => {
+          throw new Error('Error while loading rules from rules directory - ');
+        });
 
-      after(function() {
-        fs.readdirSync.restore();
-      });
-
-      it('false is returned', function() {
         const rules = new Rules();
 
-        (function() {
-          rules.load();
-        }).should.throw('Error while loading rules from rules directory - ');
+        expect(rules.load()).toThrow('Error while loading rules from rules directory - ');
       });
     });
   });
 
   describe('getRules method', function() {
-    context('when getRules is called', function() {
-      it('the rules object should be returned', function() {
+    describe('when getRules is called', function() {
+      test('the rules object should be returned', function() {
         const rules = new Rules();
         rules._registerRule('ruleId', 'ruleModule');
 
@@ -107,21 +84,16 @@ describe('Rules Unit Tests', function() {
       });
     });
 
-    context('when load is called but a fs error occurs', function() {
-      before(function() {
-        const fsStub = sinon.stub(fs, 'readdirSync').throws();
-      });
+    describe('when load is called but a fs error occurs', function() {
+      test('false is returned', function() {
+        fs.readdirSync = jest.fn();
+        fs.readFileSync.mockImplementation(() => {
+          throw new Error('Error while loading rules from rules directory - ');
+        });
 
-      after(function() {
-        fs.readdirSync.restore();
-      });
-
-      it('false is returned', function() {
         const rules = new Rules();
 
-        (function() {
-          rules.load();
-        }).should.throw('Error while loading rules from rules directory - ');
+        expect(rules.load()).toThrow('Error while loading rules from rules directory - ');
       });
     });
   });

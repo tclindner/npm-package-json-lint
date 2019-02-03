@@ -2,22 +2,14 @@
 
 /* eslint max-lines: 'off', id-length: 'off' */
 
-const fs = require('fs');
 const path = require('path');
-const chai = require('chai');
-const sinon = require('sinon');
 const Config = require('./../../src/Config');
-const ConfigFile = require('./../../src/config/ConfigFile');
-const ConfigValidator = require('./../../src/config/ConfigValidator');
-const Parser = require('./../../src/Parser');
 const CLIEngine = require('./../../src/CLIEngine');
 const pkg = require('./../../package.json');
 
-const should = chai.should();
-
 describe('CLIEngine Unit Tests', function() {
-  context('version', function() {
-    it('matches package', function() {
+  describe('version', function() {
+    test('matches package', function() {
       const options = {
         configFile: '',
         cwd: process.cwd(),
@@ -25,12 +17,12 @@ describe('CLIEngine Unit Tests', function() {
         rules: {}
       };
       const cliEngine = new CLIEngine(options);
-      cliEngine.version.should.equal(pkg.version);
+      expect(cliEngine.version).toStrictEqual(pkg.version);
     });
   });
 
-  context('invalid rules object', function() {
-    it('error is thrown', function() {
+  describe('invalid rules object', function() {
+    test('error is thrown', function() {
       const options = {
         configFile: '',
         cwd: process.cwd(),
@@ -40,14 +32,12 @@ describe('CLIEngine Unit Tests', function() {
         }
       };
 
-      (function() {
-        const cliEngine = new CLIEngine(options);
-      }).should.throw('cli:\n\tConfiguration for rule "require-name" is invalid:\n\tmust be set to "error", "warning", or "off". Currently set to "blah".');
+      expect(new CLIEngine(options)).toThrow('cli:\n\tConfiguration for rule "require-name" is invalid:\n\tmust be set to "error", "warning", or "off". Currently set to "blah".');
     });
   });
 
-  context('getRules method tests', function() {
-    it('when called a list of rules is returned', function() {
+  describe('getRules method tests', function() {
+    test('when called a list of rules is returned', function() {
       const options = {
         configFile: '',
         cwd: process.cwd(),
@@ -57,14 +47,13 @@ describe('CLIEngine Unit Tests', function() {
       const cliEngine = new CLIEngine(options);
       const results = cliEngine.getRules();
 
-      const type = typeof results;
-      type.should.equal('object');
-      results.hasOwnProperty('require-name').should.be.true;
+      expect(results).toBe('object');
+      expect(results).toHaveProperty('require-name');
     });
   });
 
-  context('getErrorResults method tests', function() {
-    it('when called warnings should be filtered out', function() {
+  describe('getErrorResults method tests', function() {
+    test('when called warnings should be filtered out', function() {
       const results = [
         {
           filePath: 'dummyText',
@@ -104,12 +93,12 @@ describe('CLIEngine Unit Tests', function() {
         }
       ];
 
-      filteredResults.should.deep.equal(expected);
+      expect(filteredResults).toStrictEqual(expected);
     });
   });
 
-  context('executeOnPackageJsonFiles method tests', function() {
-    it('when called with patterns', function() {
+  describe('executeOnPackageJsonFiles method tests', function() {
+    test('when called with patterns', function() {
       const patterns = [
         './tests/fixtures/valid/',
         './tests/fixtures/errors/**',
@@ -153,10 +142,10 @@ describe('CLIEngine Unit Tests', function() {
       const cliEngine = new CLIEngine(options);
       const results = cliEngine.executeOnPackageJsonFiles(patterns);
 
-      results.should.deep.equal(expected);
+      expect(results).toStrictEqual(expected);
     });
 
-    it('when called with patterns and ignorePath', function() {
+    test('when called with patterns and ignorePath', function() {
       const patterns = ['./tests/fixtures/ignorePath/'];
       const ignorePath = path.resolve(__dirname, '../fixtures/ignorePath/.gitignore-example');
 
@@ -183,10 +172,10 @@ describe('CLIEngine Unit Tests', function() {
       const cliEngine = new CLIEngine(options);
       const results = cliEngine.executeOnPackageJsonFiles(patterns);
 
-      results.should.deep.equal(expected);
+      expect(results).toStrictEqual(expected);
     });
 
-    it('when called with patterns should respect .npmpackagejsonlintignore', function() {
+    test('when called with patterns should respect .npmpackagejsonlintignore', function() {
       const cwd = path.resolve(__dirname, '../fixtures/npmPackageJsonLintIgnore');
       const patterns = [cwd];
 
@@ -212,10 +201,10 @@ describe('CLIEngine Unit Tests', function() {
       const cliEngine = new CLIEngine(options);
       const results = cliEngine.executeOnPackageJsonFiles(patterns);
 
-      results.should.deep.equal(expected);
+      expect(results).toStrictEqual(expected);
     });
 
-    it('when called with patterns (pattern is file) and ignorePath', function() {
+    test('when called with patterns (pattern is file) and ignorePath', function() {
       const patterns = ['./tests/fixtures/ignorePath/ignoredDirectory/package.json'];
       const ignorePath = path.resolve(__dirname, '../fixtures/ignorePath/.gitignore-example');
 
@@ -235,10 +224,10 @@ describe('CLIEngine Unit Tests', function() {
       const cliEngine = new CLIEngine(options);
       const results = cliEngine.executeOnPackageJsonFiles(patterns);
 
-      results.should.deep.equal(expected);
+      expect(results).toStrictEqual(expected);
     });
 
-    it('when called with invalid pattern', function() {
+    test('when called with invalid pattern', function() {
       const pattern = './tests/fixtures/valid/.npmpackagejsonlintrc.json';
       const patterns = [pattern];
 
@@ -250,14 +239,12 @@ describe('CLIEngine Unit Tests', function() {
       };
       const cliEngine = new CLIEngine(options);
 
-      (function() {
-        cliEngine.executeOnPackageJsonFiles(patterns);
-      }).should.throw(`Pattern, ${pattern}, is a file, but isn't a package.json file.`);
+      expect(cliEngine.executeOnPackageJsonFiles(patterns)).toThrow(`Pattern, ${pattern}, is a file, but isn't a package.json file.`);
     });
   });
 
-  context('executeOnPackageJsonObject method tests', function() {
-    it('when called with absolute path', function() {
+  describe('executeOnPackageJsonObject method tests', function() {
+    test('when called with absolute path', function() {
       const pkgObject = {
         name: 'name'
       };
@@ -333,10 +320,10 @@ describe('CLIEngine Unit Tests', function() {
       const cliEngine = new CLIEngine(options);
       const results = cliEngine.executeOnPackageJsonObject(pkgObject, fileName);
 
-      results.should.deep.equal(expected);
+      expect(results).toStrictEqual(expected);
     });
 
-    it('when called with relative path', function() {
+    test('when called with relative path', function() {
       const pkgObject = {
         name: 'name'
       };
@@ -412,15 +399,14 @@ describe('CLIEngine Unit Tests', function() {
       const cliEngine = new CLIEngine(options);
       const results = cliEngine.executeOnPackageJsonObject(pkgObject, fileName);
 
-      results.should.deep.equal(expected);
+      expect(results).toStrictEqual(expected);
     });
   });
 
-  context('getConfigForFile method tests', function() {
-    it('when called config object should be returned', function() {
-      const stub = sinon.stub(Config.prototype, 'get');
-
-      stub.returns({rules: {'require-name': 'error'}});
+  describe('getConfigForFile method tests', function() {
+    test('when called config object should be returned', function() {
+      Config.prototype.get = jest.fn();
+      Config.prototype.get.mockReturnValue({rules: {'require-name': 'error'}});
 
       const expectedConfigObj = {
         rules: {
@@ -437,12 +423,10 @@ describe('CLIEngine Unit Tests', function() {
       const cliEngine = new CLIEngine(options);
       const results = cliEngine.getConfigForFile(filePath);
 
-      stub.calledOnce.should.be.true;
-      stub.firstCall.calledWithExactly(filePath).should.be.true;
+      expect(Config.prototype.get).toHaveBeenCalledTimes(1);
+      expect(Config.prototype.get).toHaveBeenCalledWith(filePath);
 
-      results.should.deep.equal(expectedConfigObj);
-
-      Config.prototype.get.restore();
+      expect(results).toStrictEqual(expectedConfigObj);
     });
   });
 });
