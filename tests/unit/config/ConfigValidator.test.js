@@ -120,7 +120,10 @@ describe('ConfigValidator Unit Tests', function() {
           'root': true
         };
         const source = 'cli';
-        const stub = sinon.stub(ConfigValidator, 'validateRules').throws();
+        ConfigValidator.validateRules = jest.fn();
+        ConfigValidator.validateRules.mockImplementation(() => {
+          throw new Error();
+        });
 
         expect(ConfigValidator.validate(config, source, linterContext)).toThrow();
       });

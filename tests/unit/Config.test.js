@@ -916,7 +916,7 @@ describe('Config Unit Tests', function() {
         expect(path.dirname).toHaveBeenCalledTimes(1);
         expect(path.dirname).toHaveBeenCalledWith(filePath);
 
-        expect(fs.existsSync).toHaveBeenCalledTimes(3)
+        expect(fs.existsSync).toHaveBeenCalledTimes(3);
         expect(fs.existsSync).toHaveBeenNthCalledWith(1, 'npm-package-json-lint/package.json');
         expect(fs.existsSync).toHaveBeenNthCalledWith(2, 'npm-package-json-lint/.npmpackagejsonlintrc.json');
         expect(fs.existsSync).toHaveBeenNthCalledWith(3, 'npm-package-json-lint/npmpackagejsonlint.config.js');
@@ -961,7 +961,7 @@ describe('Config Unit Tests', function() {
         expect(path.dirname).toHaveBeenCalledTimes(2);
         expect(path.dirname).toHaveBeenCalledWith(filePath);
 
-        expect(fs.existsSync).toHaveBeenCalledTimes(3)
+        expect(fs.existsSync).toHaveBeenCalledTimes(3);
         expect(fs.existsSync).toHaveBeenNthCalledWith(1, 'npm-package-json-lint/package.json');
         expect(fs.existsSync).toHaveBeenNthCalledWith(2, 'npm-package-json-lint/.npmpackagejsonlintrc.json');
         expect(fs.existsSync).toHaveBeenNthCalledWith(3, 'npm-package-json-lint/npmpackagejsonlint.config.js');

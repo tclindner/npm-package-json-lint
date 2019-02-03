@@ -24,7 +24,7 @@ describe('Rules Unit Tests', function() {
       test('an error should be thrown', function() {
         fs.readdirSync = jest.fn();
         path.join = jest.fn();
-  
+
         fs.readdirSync.mockReturnValue(['version-type.js', 'require-version.js']);
         path.join
           .mockReturnValueOnce('c/git/rules')
@@ -51,7 +51,7 @@ describe('Rules Unit Tests', function() {
           .mockReturnValueOnce('c/git/rules')
           .mockReturnValueOnce('c/git/rules/version-type.js')
           .mockReturnValueOnce('c/git/rules/require-version.js');
-        
+
         const rules = new Rules();
         const result = rules.load();
 

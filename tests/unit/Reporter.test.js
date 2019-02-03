@@ -222,7 +222,7 @@ describe('Reporter Unit Tests', function() {
         jest.spyOn(console, 'log');
 
         Reporter.write(results, false);
-        
+
         expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
         expect(console.log).toHaveBeenNthCalledWith(1, '');
         expect(console.log).toHaveBeenNthCalledWith(2, chalk.underline('dummyText'));
