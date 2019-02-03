@@ -35,7 +35,7 @@ This will:
 
 This will:
 
-* run all of the mocha tests
+* run all of the jest tests
 
 ## Code guidelines
 
