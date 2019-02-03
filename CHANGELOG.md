@@ -11,6 +11,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [3.5.0] - 2019-02-03
+### Added
+- New cli flag, `ignorePath` (`-i`) - Path to a file containing patterns that describe files to ignore.
+
+Huge shout-out to @evilebottnawi for contributing the new cli option! :tada:
+
 ## [3.4.1] - 2018-10-13
 ### Fixed
 - Resolved an issue with the following rules:
