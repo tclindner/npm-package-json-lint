@@ -48,6 +48,7 @@ describe('cli Unit Tests', function() {
     --quiet, -q Report errors only
     --noConfigFiles, -ncf Disables use of .npmpackagejsonlintrc.json files, npmpackagejsonlint.config.js files, and npmPackageJsonLintConfig object in package.json file.
     --configFile, -c File path of .npmpackagejsonlintrc.json
+    --ignorePath, -i Path to a file containing patterns that describe files to ignore. The path can be absolute or relative to process.cwd(). By default, npm-package-json-lint looks for .npmpackagejsonlintignore in process.cwd().
 
   Examples
     $ npmPkgJsonLint --version
@@ -57,7 +58,9 @@ describe('cli Unit Tests', function() {
     $ npmPkgJsonLint -c ./config/.npmpackagejsonlintrc.json .
     $ npmPkgJsonLint --configFile ./config/npmpackagejsonlint.config.json .
     $ npmPkgJsonLint -q .
-    $ npmPkgJsonLint --quiet ./packages\n\n`;
+    $ npmPkgJsonLint --quiet ./packages
+    $ npmPkgJsonLint . --ignorePath .gitignore
+    $ npmPkgJsonLint . -i .gitignore\n\n`;
 
     it('with --help, a list of commands is printed', function() {
       const cli = spawnSync(relativePathToCli, ['--help']);
