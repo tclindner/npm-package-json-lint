@@ -1,5 +1,5 @@
 {
-  "name": "npm-package-json-lint",
+  "name": "npm-package-json-lint-packagejsonproperty",
   "version": "0.1.0",
   "description": "CLI app for linting package.json files.",
   "keywords": [
