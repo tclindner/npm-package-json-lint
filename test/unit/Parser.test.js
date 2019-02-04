@@ -25,7 +25,9 @@ describe('Parser Unit Tests', function() {
           throw new Error('Failed to read config file: missing.json. \nError: Error');
         });
 
-        expect(Parser.parseJsonFile('missing.json')).toThrow('Failed to read config file: missing.json. \nError: Error');
+        expect(() => {
+          Parser.parseJsonFile('missing.json')
+        }).toThrow('Failed to read config file: missing.json. \nError: Error');
       });
     });
   });

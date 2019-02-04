@@ -174,7 +174,7 @@ describe('NpmPackageJsonLint Unit Tests', function() {
         const npmPackageJsonLint = new NpmPackageJsonLint();
         const rule = npmPackageJsonLint.getRule('require-name');
 
-        expect(rule.lint).toBe('function');
+        expect(typeof rule.lint).toStrictEqual('function');
         expect(rule.ruleType).toStrictEqual('standard');
       });
     });

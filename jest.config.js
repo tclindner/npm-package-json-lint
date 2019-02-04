@@ -12,6 +12,7 @@ module.exports = {
       statements: 99
     }
   },
+  restoreMocks: true,
   testEnvironment: 'node',
   verbose: true
 };

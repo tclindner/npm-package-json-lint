@@ -35,7 +35,9 @@ describe('Rules Unit Tests', function() {
 
         rules.load();
 
-        expect(rules.get('required-version')).toThrow(chalk.bold.red('Rule, required-version, is invalid. Please ensure it matches a valid option.'));
+        expect(() => {
+          rules.get('required-version')
+        }).toThrow(chalk.bold.red('Rule, required-version, is invalid. Please ensure it matches a valid option.'));
       });
     });
   });
@@ -63,13 +65,15 @@ describe('Rules Unit Tests', function() {
     describe('when load is called but a fs error occurs', function() {
       test('false is returned', function() {
         fs.readdirSync = jest.fn();
-        fs.readFileSync.mockImplementation(() => {
+        fs.readdirSync.mockImplementation(() => {
           throw new Error('Error while loading rules from rules directory - ');
         });
 
         const rules = new Rules();
 
-        expect(rules.load()).toThrow('Error while loading rules from rules directory - ');
+        expect(() => {
+          rules.load()
+        }).toThrow('Error while loading rules from rules directory - ');
       });
     });
   });
@@ -80,20 +84,22 @@ describe('Rules Unit Tests', function() {
         const rules = new Rules();
         rules._registerRule('ruleId', 'ruleModule');
 
-        rules.getRules().should.deep.equal({ruleId: 'ruleModule'});
+        expect(rules.getRules()).toStrictEqual({ruleId: 'ruleModule'});
       });
     });
 
     describe('when load is called but a fs error occurs', function() {
       test('false is returned', function() {
         fs.readdirSync = jest.fn();
-        fs.readFileSync.mockImplementation(() => {
+        fs.readdirSync.mockImplementation(() => {
           throw new Error('Error while loading rules from rules directory - ');
         });
 
         const rules = new Rules();
 
-        expect(rules.load()).toThrow('Error while loading rules from rules directory - ');
+        expect(() => {
+          rules.load()
+        }).toThrow('Error while loading rules from rules directory - ');
       });
     });
   });

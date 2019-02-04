@@ -235,7 +235,7 @@ describe('Config Unit Tests', function() {
 
         config.getProjectHierarchyConfig.mockReturnValue({rules: {}});
         config.loadCliSpecifiedCfgFile.mockReturnValue({rules: {}});
-        config.getUserHomeConfig.returns({rules: {'require-name': 'error'}});
+        config.getUserHomeConfig.mockReturnValue({rules: {'require-name': 'error'}});
 
         const expectedConfigObj = {
           rules: {
@@ -866,7 +866,7 @@ describe('Config Unit Tests', function() {
         expect(fs.existsSync).toHaveBeenCalledTimes(4);
         expect(fs.existsSync).toHaveBeenNthCalledWith(1, 'npm-package-json-lint/package.json');
         expect(fs.existsSync).toHaveBeenNthCalledWith(2, 'npm-package-json-lint/.npmpackagejsonlintrc.json');
-        expect(fs.existsSync).toHaveBeenCalledWith(3, 'npm-package-json-lint/package.json');
+        expect(fs.existsSync).toHaveBeenNthCalledWith(3, 'npm-package-json-lint/package.json');
 
         expect(fs.statSync).toHaveBeenCalledTimes(2);
         expect(fs.statSync).toHaveBeenCalledWith('npm-package-json-lint/.npmpackagejsonlintrc.json');

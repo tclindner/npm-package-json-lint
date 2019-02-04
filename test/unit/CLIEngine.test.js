@@ -32,7 +32,9 @@ describe('CLIEngine Unit Tests', function() {
         }
       };
 
-      expect(new CLIEngine(options)).toThrow('cli:\n\tConfiguration for rule "require-name" is invalid:\n\tmust be set to "error", "warning", or "off". Currently set to "blah".');
+      expect(() => {
+        const cliEngine = new CLIEngine(options)
+      }).toThrow('cli:\n\tConfiguration for rule "require-name" is invalid:\n\tmust be set to "error", "warning", or "off". Currently set to "blah".');
     });
   });
 
@@ -47,7 +49,7 @@ describe('CLIEngine Unit Tests', function() {
       const cliEngine = new CLIEngine(options);
       const results = cliEngine.getRules();
 
-      expect(results).toBe('object');
+      expect(typeof results).toStrictEqual('object');
       expect(results).toHaveProperty('require-name');
     });
   });
@@ -239,7 +241,9 @@ describe('CLIEngine Unit Tests', function() {
       };
       const cliEngine = new CLIEngine(options);
 
-      expect(cliEngine.executeOnPackageJsonFiles(patterns)).toThrow(`Pattern, ${pattern}, is a file, but isn't a package.json file.`);
+      expect(() => {
+        cliEngine.executeOnPackageJsonFiles(patterns)
+      }).toThrow(`Pattern, ${pattern}, is a file, but isn't a package.json file.`);
     });
   });
 
