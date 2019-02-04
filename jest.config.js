@@ -11,5 +11,6 @@ module.exports = {
       lines: 99,
       statements: 99
     }
-  }
+  },
+  testEnvironment: 'node'
 };
