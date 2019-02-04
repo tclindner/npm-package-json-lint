@@ -12,5 +12,6 @@ module.exports = {
       statements: 99
     }
   },
-  testEnvironment: 'node'
+  testEnvironment: 'node',
+  verbose: true
 };
