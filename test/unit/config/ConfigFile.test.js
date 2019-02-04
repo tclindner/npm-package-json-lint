@@ -138,7 +138,7 @@ describe('ConfigFile Unit Tests', function() {
       const filePath = './npmpackagejsonlint.config.yaml';
 
       expect(() => {
-        ConfigFile.load(filePath, config)
+        ConfigFile.load(filePath, config);
       }).toThrow('Unsupport config file extension. File path: ./npmpackagejsonlint.config.yaml');
 
       expect(Parser.parseJsonFile).not.toHaveBeenCalled();
@@ -164,7 +164,7 @@ describe('ConfigFile Unit Tests', function() {
       const filePath = './tests/fixtures/extendsLocalInvalid/.npmpackagejsonlintrc.json';
 
       expect(() => {
-        ConfigFile.load(filePath, config)
+        ConfigFile.load(filePath, config);
       }).toThrow();
     });
 
@@ -212,7 +212,7 @@ describe('ConfigFile Unit Tests', function() {
       const filePath = './tests/fixtures/extendsModuleInvalid/.npmpackagejsonlintrc.json';
 
       expect(() => {
-        ConfigFile.load(filePath, config)
+        ConfigFile.load(filePath, config);
       }).toThrow();
     });
   });

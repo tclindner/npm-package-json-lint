@@ -3,6 +3,8 @@
 const fs = require('fs');
 const Parser = require('./../../src/Parser');
 
+jest.mock('fs');
+
 describe('Parser Unit Tests', function() {
   describe('parseJsonFile method', function() {
     describe('when file is present', function() {
@@ -11,7 +13,6 @@ describe('Parser Unit Tests', function() {
         const obj = {
           key: 'value'
         };
-        fs.readFileSync = jest.fn();
         fs.readFileSync.mockReturnValue(json);
 
         expect(Parser.parseJsonFile('dummyFile.txt')).toStrictEqual(obj);
@@ -20,13 +21,12 @@ describe('Parser Unit Tests', function() {
 
     describe('when file is not present', function() {
       test('an error should be thrown', function() {
-        fs.readFileSync = jest.fn();
         fs.readFileSync.mockImplementation(() => {
           throw new Error('Failed to read config file: missing.json. \nError: Error');
         });
 
         expect(() => {
-          Parser.parseJsonFile('missing.json')
+          Parser.parseJsonFile('missing.json');
         }).toThrow('Failed to read config file: missing.json. \nError: Error');
       });
     });

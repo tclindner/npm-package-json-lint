@@ -9,6 +9,9 @@ const Config = require('./../../src/Config');
 const ConfigFile = require('./../../src/config/ConfigFile');
 const NpmPackageJsonLint = require('./../../src/NpmPackageJsonLint');
 
+jest.mock('fs');
+jest.mock('path');
+jest.mock('os');
 const linterContext = new NpmPackageJsonLint();
 
 describe('Config Unit Tests', function() {

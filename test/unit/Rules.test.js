@@ -5,6 +5,9 @@ const fs = require('fs');
 const path = require('path');
 const Rules = require('./../../src/Rules');
 
+jest.mock('fs');
+jest.mock('path');
+
 describe('Rules Unit Tests', function() {
   describe('_registerRule method', function() {
     describe('when a ruleId and ruleModule are passed in', function() {
@@ -22,9 +25,6 @@ describe('Rules Unit Tests', function() {
   describe('get method', function() {
     describe('when get is called for an invalid ruleId', function() {
       test('an error should be thrown', function() {
-        fs.readdirSync = jest.fn();
-        path.join = jest.fn();
-
         fs.readdirSync.mockReturnValue(['version-type.js', 'require-version.js']);
         path.join
           .mockReturnValueOnce('c/git/rules')
@@ -36,7 +36,7 @@ describe('Rules Unit Tests', function() {
         rules.load();
 
         expect(() => {
-          rules.get('required-version')
+          rules.get('required-version');
         }).toThrow(chalk.bold.red('Rule, required-version, is invalid. Please ensure it matches a valid option.'));
       });
     });
@@ -45,9 +45,6 @@ describe('Rules Unit Tests', function() {
   describe('load method', function() {
     describe('when load is called', function() {
       test('an object of rules should be returned', function() {
-        fs.readdirSync = jest.fn();
-        path.join = jest.fn();
-
         fs.readdirSync.mockReturnValue(['version-type.js', 'require-version.js']);
         path.join
           .mockReturnValueOnce('c/git/rules')
@@ -64,7 +61,6 @@ describe('Rules Unit Tests', function() {
 
     describe('when load is called but a fs error occurs', function() {
       test('false is returned', function() {
-        fs.readdirSync = jest.fn();
         fs.readdirSync.mockImplementation(() => {
           throw new Error('Error while loading rules from rules directory - ');
         });
@@ -72,7 +68,7 @@ describe('Rules Unit Tests', function() {
         const rules = new Rules();
 
         expect(() => {
-          rules.load()
+          rules.load();
         }).toThrow('Error while loading rules from rules directory - ');
       });
     });
@@ -90,7 +86,6 @@ describe('Rules Unit Tests', function() {
 
     describe('when load is called but a fs error occurs', function() {
       test('false is returned', function() {
-        fs.readdirSync = jest.fn();
         fs.readdirSync.mockImplementation(() => {
           throw new Error('Error while loading rules from rules directory - ');
         });
@@ -98,7 +93,7 @@ describe('Rules Unit Tests', function() {
         const rules = new Rules();
 
         expect(() => {
-          rules.load()
+          rules.load();
         }).toThrow('Error while loading rules from rules directory - ');
       });
     });

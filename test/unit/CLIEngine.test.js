@@ -33,7 +33,7 @@ describe('CLIEngine Unit Tests', function() {
       };
 
       expect(() => {
-        const cliEngine = new CLIEngine(options)
+        const cliEngine = new CLIEngine(options);
       }).toThrow('cli:\n\tConfiguration for rule "require-name" is invalid:\n\tmust be set to "error", "warning", or "off". Currently set to "blah".');
     });
   });
@@ -242,7 +242,7 @@ describe('CLIEngine Unit Tests', function() {
       const cliEngine = new CLIEngine(options);
 
       expect(() => {
-        cliEngine.executeOnPackageJsonFiles(patterns)
+        cliEngine.executeOnPackageJsonFiles(patterns);
       }).toThrow(`Pattern, ${pattern}, is a file, but isn't a package.json file.`);
     });
   });

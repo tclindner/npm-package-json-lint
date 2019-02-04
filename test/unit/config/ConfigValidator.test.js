@@ -16,7 +16,7 @@ describe('ConfigValidator Unit Tests', function() {
           const source = 'cli';
 
           expect(() => {
-            ConfigValidator.validateRules(ruleConfig, source, linterContext)
+            ConfigValidator.validateRules(ruleConfig, source, linterContext);
           }).toThrow('cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\tfirst key must be set to "error", "warning", or "off". Currently set to "true".');
         });
       });
@@ -29,7 +29,7 @@ describe('ConfigValidator Unit Tests', function() {
           const source = 'cli';
 
           expect(() => {
-            ConfigValidator.validateRules(ruleConfig, source, linterContext)
+            ConfigValidator.validateRules(ruleConfig, source, linterContext);
           }).toThrow('cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\tsecond key must be set an array. Currently set to "Thomas".');
         });
       });
@@ -41,7 +41,7 @@ describe('ConfigValidator Unit Tests', function() {
           };
           const source = 'cli';
 
-          ConfigValidator.validateRules(ruleConfig, source, linterContext)
+          ConfigValidator.validateRules(ruleConfig, source, linterContext);
         });
       });
 
@@ -52,7 +52,7 @@ describe('ConfigValidator Unit Tests', function() {
           };
           const source = 'cli';
 
-          ConfigValidator.validateRules(ruleConfig, source, linterContext)
+          ConfigValidator.validateRules(ruleConfig, source, linterContext);
         });
       });
 
@@ -64,7 +64,7 @@ describe('ConfigValidator Unit Tests', function() {
           const source = 'cli';
 
           expect(() => {
-            ConfigValidator.validateRules(ruleConfig, source, linterContext)
+            ConfigValidator.validateRules(ruleConfig, source, linterContext);
           }).toThrow('cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\tis an array type rule. It must be set to "off" if an array is not supplied.');
         });
       });
@@ -79,7 +79,7 @@ describe('ConfigValidator Unit Tests', function() {
           const source = 'cli';
 
           expect(() => {
-            ConfigValidator.validateRules(ruleConfig, source, linterContext)
+            ConfigValidator.validateRules(ruleConfig, source, linterContext);
           }).toThrow('cli:\n\tConfiguration for rule "description-format" is invalid:\n\tfirst key must be set to "error", "warning", or "off". Currently set to "true".');
         });
       });
@@ -92,7 +92,7 @@ describe('ConfigValidator Unit Tests', function() {
           const source = 'cli';
 
           expect(() => {
-            ConfigValidator.validateRules(ruleConfig, source, linterContext)
+            ConfigValidator.validateRules(ruleConfig, source, linterContext);
           }).toThrow('cli:\n\tConfiguration for rule "description-format" is invalid:\n\tsecond key must be set an object. Currently set to "Thomas".');
         });
       });
@@ -104,7 +104,7 @@ describe('ConfigValidator Unit Tests', function() {
           };
           const source = 'cli';
 
-          ConfigValidator.validateRules(ruleConfig, source, linterContext)
+          ConfigValidator.validateRules(ruleConfig, source, linterContext);
         });
       });
 
@@ -115,7 +115,7 @@ describe('ConfigValidator Unit Tests', function() {
           };
           const source = 'cli';
 
-          ConfigValidator.validateRules(ruleConfig, source, linterContext)
+          ConfigValidator.validateRules(ruleConfig, source, linterContext);
         });
       });
 
@@ -127,7 +127,7 @@ describe('ConfigValidator Unit Tests', function() {
           const source = 'cli';
 
           expect(() => {
-            ConfigValidator.validateRules(ruleConfig, source, linterContext)
+            ConfigValidator.validateRules(ruleConfig, source, linterContext);
           }).toThrow('cli:\n\tConfiguration for rule "description-format" is invalid:\n\tis an object type rule. It must be set to "off" if an object is not supplied.');
         });
       });
@@ -141,7 +141,7 @@ describe('ConfigValidator Unit Tests', function() {
           };
           const source = 'cli';
 
-          ConfigValidator.validateRules(ruleConfig, source, linterContext)
+          ConfigValidator.validateRules(ruleConfig, source, linterContext);
         });
       });
 
@@ -152,7 +152,7 @@ describe('ConfigValidator Unit Tests', function() {
           };
           const source = 'cli';
 
-          ConfigValidator.validateRules(ruleConfig, source, linterContext)
+          ConfigValidator.validateRules(ruleConfig, source, linterContext);
         });
       });
 
@@ -163,7 +163,7 @@ describe('ConfigValidator Unit Tests', function() {
           };
           const source = 'cli';
 
-          ConfigValidator.validateRules(ruleConfig, source, linterContext)
+          ConfigValidator.validateRules(ruleConfig, source, linterContext);
         });
       });
 
@@ -175,7 +175,7 @@ describe('ConfigValidator Unit Tests', function() {
           const source = 'cli';
 
           expect(() => {
-            ConfigValidator.validateRules(ruleConfig, source, linterContext)
+            ConfigValidator.validateRules(ruleConfig, source, linterContext);
           }).toThrow('cli:\n\tConfiguration for rule "require-author" is invalid:\n\tmust be set to "error", "warning", or "off". Currently set to "true".');
         });
       });
@@ -189,7 +189,7 @@ describe('ConfigValidator Unit Tests', function() {
           const source = 'cli';
 
           expect(() => {
-            ConfigValidator.validateRules(ruleConfig, source, linterContext)
+            ConfigValidator.validateRules(ruleConfig, source, linterContext);
           }).toThrow('cli:\n\tConfiguration for rule "require-author" is invalid:\n\tmust be set to "error", "warning", or "off". Currently set to "1".');
         });
       });
@@ -273,7 +273,7 @@ describe('ConfigValidator Unit Tests', function() {
         ConfigValidator.validateRules.mockReturnValue(true);
 
         expect(() => {
-          ConfigValidator.validate(config, source, linterContext)
+          ConfigValidator.validate(config, source, linterContext);
         }).toThrow('npm-package-json-lint configuration in cli is invalid:');
       });
 
@@ -288,7 +288,7 @@ describe('ConfigValidator Unit Tests', function() {
         ConfigValidator.validateRules.mockReturnValue(true);
 
         expect(() => {
-          ConfigValidator.validate(config, source, linterContext)
+          ConfigValidator.validate(config, source, linterContext);
         }).toThrow('npm-package-json-lint configuration in cli is invalid:');
       });
 
@@ -303,7 +303,7 @@ describe('ConfigValidator Unit Tests', function() {
         ConfigValidator.validateRules.mockReturnValue(true);
 
         expect(() => {
-          ConfigValidator.validate(config, source, linterContext)
+          ConfigValidator.validate(config, source, linterContext);
         }).toThrow('npm-package-json-lint configuration in cli is invalid:');
       });
     });
@@ -322,7 +322,7 @@ describe('ConfigValidator Unit Tests', function() {
         });
 
         expect(() => {
-          ConfigValidator.validate(config, source, linterContext)
+          ConfigValidator.validate(config, source, linterContext);
         }).toThrow();
       });
     });
