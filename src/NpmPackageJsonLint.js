@@ -1,6 +1,4 @@
-'use strict';
-
-/* eslint class-methods-use-this: 'off', max-statements: 'off' */
+/* eslint class-methods-use-this: 'off', max-statements: 'off', guard-for-in: 'off' */
 
 const Rules = require('./Rules');
 const pkg = require('./../package.json');

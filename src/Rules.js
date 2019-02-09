@@ -1,4 +1,4 @@
-'use strict';
+/* eslint global-require: 'off' */
 
 const chalk = require('chalk');
 const fs = require('fs');

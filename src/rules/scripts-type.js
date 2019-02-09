@@ -1,6 +1,6 @@
-'use strict';
+/* eslint no-restricted-syntax: 'off' */
 
-const isObject = require('./../validators/type').isObject;
+const {isObject} = require('./../validators/type');
 const LintIssue = require('./../LintIssue');
 const lintId = 'scripts-type';
 const nodeName = 'scripts';
@@ -9,7 +9,7 @@ const ruleType = 'standard';
 
 /* eslint-disable max-statements */
 
-const lint = function(packageJsonData, severity) {
+const lint = (packageJsonData, severity) => {
   if (!isObject(packageJsonData, nodeName)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }

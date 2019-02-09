@@ -1,7 +1,6 @@
-'use strict';
+/* eslint global-require: 'off', import/no-dynamic-require: 'off' */
 
 const path = require('path');
-
 const ConfigValidator = require('./ConfigValidator');
 const Parser = require('./../Parser');
 
@@ -16,7 +15,7 @@ const Parser = require('./../Parser');
  *      loaded and merged.
  * @private
  */
-const applyExtends = function(config, configContext, parentName, originalFilePath) {
+const applyExtends = (config, configContext, parentName, originalFilePath) => {
   let configExtends = config.extends;
 
   if (!Array.isArray(config.extends)) {
@@ -55,7 +54,7 @@ const applyExtends = function(config, configContext, parentName, originalFilePat
  * @return {Object}               Configuration object
  * @private
  */
-const loadFromModule = function(moduleName, configContext, originalFilePath) {
+const loadFromModule = (moduleName, configContext, originalFilePath) => {
   let config = {};
   let adjustedModuleName = moduleName;
 
@@ -87,20 +86,20 @@ const loadFromModule = function(moduleName, configContext, originalFilePath) {
  * @returns {Object} The configuration information.
  * @private
  */
-const loadConfigFile = function(filePath) {
+const loadConfigFile = (filePath) => {
   let config = {};
 
   switch (path.extname(filePath)) {
-  case '.js':
-    config = Parser.parseJavaScriptFile(filePath);
-    break;
+    case '.js':
+      config = Parser.parseJavaScriptFile(filePath);
+      break;
 
-  case '.json':
-    config = Parser.parseJsonFile(filePath);
-    break;
+    case '.json':
+      config = Parser.parseJsonFile(filePath);
+      break;
 
-  default:
-    throw new Error(`Unsupport config file extension. File path: ${filePath}`);
+    default:
+      throw new Error(`Unsupport config file extension. File path: ${filePath}`);
   }
 
   return config;

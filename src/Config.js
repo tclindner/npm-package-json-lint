@@ -1,6 +1,4 @@
-'use strict';
-
-/* eslint class-methods-use-this: 'off' */
+/* eslint class-methods-use-this: 'off', complexity: 'off' */
 
 const fs = require('fs');
 const path = require('path');
@@ -22,7 +20,7 @@ const noRules = 0;
  * @returns {String} The base directory for the file path.
  * @private
  */
-const getProjectDir = function() {
+const getProjectDir = () => {
 
   // calculates the path of the project including npm-package-json-lint as a dependency
   // NOTE: config-file is located in /src/

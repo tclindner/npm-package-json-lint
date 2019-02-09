@@ -1,5 +1,3 @@
-'use strict';
-
 /* eslint max-statements: 'off' */
 
 const notFound = -1;
@@ -60,7 +58,7 @@ const defaultPreferredNodeOrder = [
  * @param  {Array}  userPreferredNodeOrder  Preferred order of nodes
  * @return {Object}                         Object containing the status and the node that is out of order, if applicable
  */
-const isInPreferredOrder = function(packageJsonData, userPreferredNodeOrder) {
+const isInPreferredOrder = (packageJsonData, userPreferredNodeOrder) => {
   let isValid = true;
   let msg = null;
   const preferredNodeOrder = userPreferredNodeOrder.length === empty ? Array.from(defaultPreferredNodeOrder) : Array.from(userPreferredNodeOrder);

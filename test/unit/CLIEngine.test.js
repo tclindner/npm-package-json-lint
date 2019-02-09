@@ -1,5 +1,3 @@
-'use strict';
-
 /* eslint max-lines: 'off', id-length: 'off' */
 
 const path = require('path');
@@ -7,9 +5,9 @@ const Config = require('./../../src/Config');
 const CLIEngine = require('./../../src/CLIEngine');
 const pkg = require('./../../package.json');
 
-describe('CLIEngine Unit Tests', function() {
-  describe('version', function() {
-    test('matches package', function() {
+describe('CLIEngine Unit Tests', () => {
+  describe('version', () => {
+    test('matches package', () => {
       const options = {
         configFile: '',
         cwd: process.cwd(),
@@ -21,8 +19,8 @@ describe('CLIEngine Unit Tests', function() {
     });
   });
 
-  describe('invalid rules object', function() {
-    test('error is thrown', function() {
+  describe('invalid rules object', () => {
+    test('error is thrown', () => {
       const options = {
         configFile: '',
         cwd: process.cwd(),
@@ -38,8 +36,8 @@ describe('CLIEngine Unit Tests', function() {
     });
   });
 
-  describe('getRules method tests', function() {
-    test('when called a list of rules is returned', function() {
+  describe('getRules method tests', () => {
+    test('when called a list of rules is returned', () => {
       const options = {
         configFile: '',
         cwd: process.cwd(),
@@ -54,8 +52,8 @@ describe('CLIEngine Unit Tests', function() {
     });
   });
 
-  describe('getErrorResults method tests', function() {
-    test('when called warnings should be filtered out', function() {
+  describe('getErrorResults method tests', () => {
+    test('when called warnings should be filtered out', () => {
       const results = [
         {
           filePath: 'dummyText',
@@ -99,8 +97,8 @@ describe('CLIEngine Unit Tests', function() {
     });
   });
 
-  describe('executeOnPackageJsonFiles method tests', function() {
-    test('when called with patterns', function() {
+  describe('executeOnPackageJsonFiles method tests', () => {
+    test('when called with patterns', () => {
       const patterns = [
         './test/fixtures/valid/',
         './test/fixtures/errors/**',
@@ -147,7 +145,7 @@ describe('CLIEngine Unit Tests', function() {
       expect(results).toStrictEqual(expected);
     });
 
-    test('when called with patterns and ignorePath', function() {
+    test('when called with patterns and ignorePath', () => {
       const patterns = ['./test/fixtures/ignorePath/'];
       const ignorePath = path.resolve(__dirname, '../fixtures/ignorePath/.gitignore-example');
 
@@ -177,7 +175,7 @@ describe('CLIEngine Unit Tests', function() {
       expect(results).toStrictEqual(expected);
     });
 
-    test('when called with patterns should respect .npmpackagejsonlintignore', function() {
+    test('when called with patterns should respect .npmpackagejsonlintignore', () => {
       const cwd = path.resolve(__dirname, '../fixtures/npmPackageJsonLintIgnore');
       const patterns = [cwd];
 
@@ -206,7 +204,7 @@ describe('CLIEngine Unit Tests', function() {
       expect(results).toStrictEqual(expected);
     });
 
-    test('when called with patterns (pattern is file) and ignorePath', function() {
+    test('when called with patterns (pattern is file) and ignorePath', () => {
       const patterns = ['./test/fixtures/ignorePath/ignoredDirectory/package.json'];
       const ignorePath = path.resolve(__dirname, '../fixtures/ignorePath/.gitignore-example');
 
@@ -229,7 +227,7 @@ describe('CLIEngine Unit Tests', function() {
       expect(results).toStrictEqual(expected);
     });
 
-    test('when called with invalid pattern', function() {
+    test('when called with invalid pattern', () => {
       const pattern = './test/fixtures/valid/.npmpackagejsonlintrc.json';
       const patterns = [pattern];
 
@@ -247,8 +245,8 @@ describe('CLIEngine Unit Tests', function() {
     });
   });
 
-  describe('executeOnPackageJsonObject method tests', function() {
-    test('when called with absolute path', function() {
+  describe('executeOnPackageJsonObject method tests', () => {
+    test('when called with absolute path', () => {
       const pkgObject = {
         name: 'name'
       };
@@ -327,7 +325,7 @@ describe('CLIEngine Unit Tests', function() {
       expect(results).toStrictEqual(expected);
     });
 
-    test('when called with relative path', function() {
+    test('when called with relative path', () => {
       const pkgObject = {
         name: 'name'
       };
@@ -407,8 +405,8 @@ describe('CLIEngine Unit Tests', function() {
     });
   });
 
-  describe('getConfigForFile method tests', function() {
-    test('when called config object should be returned', function() {
+  describe('getConfigForFile method tests', () => {
+    test('when called config object should be returned', () => {
       jest.spyOn(Config.prototype, 'get').mockReturnValue({rules: {'require-name': 'error'}});
 
       const expectedConfigObj = {

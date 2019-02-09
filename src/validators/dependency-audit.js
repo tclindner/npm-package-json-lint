@@ -1,5 +1,4 @@
-'use strict';
-
+/* eslint no-restricted-syntax: 'off', guard-for-in: 'off' */
 const semver = require('semver');
 
 /**
@@ -9,7 +8,7 @@ const semver = require('semver');
  * @param  {string} depsToCheckFor  An array of packages to check for
  * @return {boolean}                        True if the package has a dependency. False if it is not or the node is missing.
  */
-const hasDependency = function(packageJsonData, nodeName, depsToCheckFor) {
+const hasDependency = (packageJsonData, nodeName, depsToCheckFor) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return false;
   }
@@ -30,7 +29,7 @@ const hasDependency = function(packageJsonData, nodeName, depsToCheckFor) {
  * @param  {string} depsToCheckFor          An array of packages to check for
  * @return {boolean}                        True if the package has a pre-release version of a dependency. False if it is not or the node is missing.
  */
-const hasDepPrereleaseVers = function(packageJsonData, nodeName, depsToCheckFor) {
+const hasDepPrereleaseVers = (packageJsonData, nodeName, depsToCheckFor) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return false;
   }
@@ -54,7 +53,7 @@ const hasDepPrereleaseVers = function(packageJsonData, nodeName, depsToCheckFor)
  * @param  {string} nodeName                Name of a node in the package.json file
  * @return {boolean}                        True if the package has a dependency with version 0. False if it does not or the node is missing.
  */
-const hasDepVersZero = function(packageJsonData, nodeName) {
+const hasDepVersZero = (packageJsonData, nodeName) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return false;
   }
@@ -84,7 +83,7 @@ const hasDepVersZero = function(packageJsonData, nodeName) {
  * @param  {String}   rangeSpecifier      A version range specifier
  * @return {Boolean}                      True if the version starts with the range, false if it doesn't.
  */
-const doesVersStartsWithRange = function(dependencyVersion, rangeSpecifier) {
+const doesVersStartsWithRange = (dependencyVersion, rangeSpecifier) => {
   const firstCharOfStr = 0;
 
   return dependencyVersion.startsWith(rangeSpecifier, firstCharOfStr);
@@ -97,7 +96,7 @@ const doesVersStartsWithRange = function(dependencyVersion, rangeSpecifier) {
  * @param  {string} rangeSpecifier          A version range specifier
  * @return {boolean}                        False if the package has an invalid range. True if it is not or the node is missing.
  */
-const areVersRangesValid = function(packageJsonData, nodeName, rangeSpecifier) {
+const areVersRangesValid = (packageJsonData, nodeName, rangeSpecifier) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
   }
@@ -122,7 +121,7 @@ const areVersRangesValid = function(packageJsonData, nodeName, rangeSpecifier) {
  * @param  {string} rangeSpecifier          A version range specifier
  * @return {Boolean}                        True if any dependencies versions start with the invalid range, false if they don't.
  */
-const doVersContainInvalidRange = function(packageJsonData, nodeName, rangeSpecifier) {
+const doVersContainInvalidRange = (packageJsonData, nodeName, rangeSpecifier) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return false;
   }
@@ -146,7 +145,7 @@ const doVersContainInvalidRange = function(packageJsonData, nodeName, rangeSpeci
  * @param  {string} nodeName                Name of a node in the package.json file
  * @return {boolean}                        False if the package has an non-absolute version. True if it is not or the node is missing.
  */
-const isVersionAbsolute = function(packageJsonData, nodeName) {
+const isVersionAbsolute = (packageJsonData, nodeName) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
   }
@@ -158,11 +157,11 @@ const isVersionAbsolute = function(packageJsonData, nodeName) {
   for (const dependencyName in packageJsonData[nodeName]) {
     const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
-    if (dependencyVersion.startsWith('^', firstCharOfStr) ||
-      dependencyVersion.startsWith('~', firstCharOfStr) ||
-      dependencyVersion.startsWith('>', firstCharOfStr) ||
-      dependencyVersion.startsWith('<', firstCharOfStr) ||
-      dependencyVersion.indexOf('*') !== NOT_FOUND
+    if (dependencyVersion.startsWith('^', firstCharOfStr)
+      || dependencyVersion.startsWith('~', firstCharOfStr)
+      || dependencyVersion.startsWith('>', firstCharOfStr)
+      || dependencyVersion.startsWith('<', firstCharOfStr)
+      || dependencyVersion.indexOf('*') !== NOT_FOUND
     ) {
       rangesValid = false;
     }

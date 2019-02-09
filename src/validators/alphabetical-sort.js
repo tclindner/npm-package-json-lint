@@ -1,5 +1,3 @@
-'use strict';
-
 const increment = 1;
 
 /**
@@ -8,7 +6,7 @@ const increment = 1;
  * @param  {string} nodeName        Name of a node in the package.json file
  * @return {object}                 Object containing the status and the dependencies that are out of order, if applicable
  */
-const isInAlphabeticalOrder = function(packageJsonData, nodeName) {
+const isInAlphabeticalOrder = (packageJsonData, nodeName) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return {
       status: true,

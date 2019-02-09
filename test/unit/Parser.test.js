@@ -1,14 +1,12 @@
-'use strict';
-
 const fs = require('fs');
 const Parser = require('./../../src/Parser');
 
 jest.mock('fs');
 
-describe('Parser Unit Tests', function() {
-  describe('parseJsonFile method', function() {
-    describe('when file is present', function() {
-      test('an object should be returned', function() {
+describe('Parser Unit Tests', () => {
+  describe('parseJsonFile method', () => {
+    describe('when file is present', () => {
+      test('an object should be returned', () => {
         const json = '{"key": "value"}';
         const obj = {
           key: 'value'
@@ -19,8 +17,8 @@ describe('Parser Unit Tests', function() {
       });
     });
 
-    describe('when file is not present', function() {
-      test('an error should be thrown', function() {
+    describe('when file is not present', () => {
+      test('an error should be thrown', () => {
         fs.readFileSync.mockImplementation(() => {
           throw new Error('Failed to read config file: missing.json. \nError: Error');
         });
@@ -32,9 +30,9 @@ describe('Parser Unit Tests', function() {
     });
   });
 
-  // describe('parseJavaScriptFile method', function() {
-  //   describe('when file is present', function() {
-  //     test('an object should be returned', function() {
+  // describe('parseJavaScriptFile method', () => {
+  //   describe('when file is present', () => {
+  //     test('an object should be returned', () => {
   //       const packageJson = {
   //         name: 'Marcel the Shell with Shoes On'
   //       };
@@ -45,11 +43,11 @@ describe('Parser Unit Tests', function() {
   //     });
   //   });
 
-  //   describe('when file is not present', function() {
-  //     test('an error should be thrown', function() {
+  //   describe('when file is not present', () => {
+  //     test('an error should be thrown', () => {
   //       const stub = sinon.stub(fs, 'readFileSync').throws();
 
-  //       (function() {
+  //       (() => {
   //         Parser.parseJavaScriptFile('missing.json');
   //       }).should.throw('Failed to read config file: missing.json. \nError: Error');
   //       fs.readFileSync.restore();

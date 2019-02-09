@@ -1,7 +1,5 @@
-'use strict';
-
 const LintIssue = require('./../LintIssue');
-const isValidValue = require('./../validators/valid-values').isValidValue;
+const {isValidValue} = require('./../validators/valid-values');
 const lintId = 'valid-values-license';
 const nodeName = 'license';
 const message = 'Invalid value for license';
@@ -15,7 +13,7 @@ const ruleType = 'array';
  * @param  {Array}    validValues       An array of valid values
  * @return {Object|Boolean}             LintIssue object if invalid. True if valid
  */
-const lint = function(packageJsonData, severity, validValues) {
+const lint = (packageJsonData, severity, validValues) => {
   if (!isValidValue(packageJsonData, nodeName, packageJsonData[nodeName], validValues)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }

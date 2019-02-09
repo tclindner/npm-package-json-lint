@@ -1,18 +1,16 @@
-'use strict';
-
 const ruleModule = require('./../../../src/rules/prefer-property-order');
-const lint = ruleModule.lint;
-const ruleType = ruleModule.ruleType;
 
-describe('prefer-property-order Unit Tests', function() {
-  describe('a rule type value should be exported', function() {
-    test('it should equal "array"', function() {
+const {lint, ruleType} = ruleModule;
+
+describe('prefer-property-order Unit Tests', () => {
+  describe('a rule type value should be exported', () => {
+    test('it should equal "array"', () => {
       expect(ruleType).toStrictEqual('array');
     });
   });
 
-  describe('when the properties in the package.json file are in the desired order', function() {
-    test('true should be returned', function() {
+  describe('when the properties in the package.json file are in the desired order', () => {
+    test('true should be returned', () => {
       const packageJsonData = {
         name: 'awesome-module',
         version: '1.0.0',
@@ -29,8 +27,8 @@ describe('prefer-property-order Unit Tests', function() {
     });
   });
 
-  describe('when the actual node list does not have the same number of nodes as the desired list', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when the actual node list does not have the same number of nodes as the desired list', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         name: 'awesome-module',
         version: '1.0.0'
@@ -46,8 +44,8 @@ describe('prefer-property-order Unit Tests', function() {
     });
   });
 
-  describe('when the actual node list is in a different order than desired', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when the actual node list is in a different order than desired', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         name: 'awesome-module',
         description: 'description',

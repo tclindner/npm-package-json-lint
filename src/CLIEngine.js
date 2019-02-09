@@ -1,13 +1,11 @@
-'use strict';
-
-/* eslint max-lines-per-function: 'off' */
+/* eslint max-lines-per-function: 'off', no-param-reassign: 'off' */
 
 const fs = require('fs');
 const path = require('path');
-const NpmPackageJsonLint = require('./NpmPackageJsonLint');
-const Config = require('./Config');
 const glob = require('glob');
 const ignore = require('ignore');
+const NpmPackageJsonLint = require('./NpmPackageJsonLint');
+const Config = require('./Config');
 const ConfigValidator = require('./config/ConfigValidator');
 const Parser = require('./Parser');
 const pkg = require('../package.json');
@@ -61,7 +59,7 @@ const noIssues = 0;
  * @returns {ResultCounts}  Counts object
  * @private
  */
-const aggregateCountsPerFile = function(issues) {
+const aggregateCountsPerFile = (issues) => {
   const incrementOne = 1;
 
   return issues.reduce((counts, issue) => {
@@ -85,7 +83,7 @@ const aggregateCountsPerFile = function(issues) {
  * @returns {ResultCounts}          Counts object
  * @private
  */
-const aggregateOverallCounts = function(results) {
+const aggregateOverallCounts = (results) => {
   return results.reduce((counts, result) => {
     counts.errorCount += result.errorCount;
     counts.warningCount += result.warningCount;
@@ -107,7 +105,7 @@ const aggregateOverallCounts = function(results) {
  * @returns {LintResult} The results for linting on this text.
  * @private
  */
-const processPackageJsonObject = function(packageJsonObj, configHelper, fileName, linter) {
+const processPackageJsonObject = (packageJsonObj, configHelper, fileName, linter) => {
   let filePath;
 
   if (fileName) {
@@ -141,7 +139,7 @@ const processPackageJsonObject = function(packageJsonObj, configHelper, fileName
  * @returns {LintResult}    The linter results
  * @private
  */
-const processPackageJsonFile = function(fileName, configHelper, linter) {
+const processPackageJsonFile = (fileName, configHelper, linter) => {
   const packageJsonObj = Parser.parseJsonFile(path.resolve(fileName));
 
   return processPackageJsonObject(packageJsonObj, configHelper, fileName, linter);
@@ -154,7 +152,7 @@ const processPackageJsonFile = function(fileName, configHelper, linter) {
  * @returns {boolean} True if error, false if warning.
  * @private
  */
-const isIssueAnError = function(issue) {
+const isIssueAnError = (issue) => {
   return issue.severity === 'error';
 };
 
@@ -165,7 +163,7 @@ const isIssueAnError = function(issue) {
  * @param {CLIEngineOptions}  options CLIEngineOptions object.
  * @returns {Object}          Ignorer
  */
-const getIgnorer = function(cwd, options) {
+const getIgnorer = (cwd, options) => {
   const ignoreFilePath = options.ignorePath || DEFAULT_IGNORE_FILENAME;
   const absoluteIgnoreFilePath = path.isAbsolute(ignoreFilePath)
     ? ignoreFilePath
@@ -190,7 +188,7 @@ const getIgnorer = function(cwd, options) {
  * @param {CLIEngineOptions}  options  CLIEngineOptions object.
  * @returns {Array}           Files list
  */
-const getFileList = function(patterns, options) {
+const getFileList = (patterns, options) => {
   const cwd = (options && options.cwd) || process.cwd();
 
   // step 1 - filter out empty entries

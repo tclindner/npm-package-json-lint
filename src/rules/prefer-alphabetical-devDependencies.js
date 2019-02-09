@@ -1,13 +1,11 @@
-'use strict';
-
-const isInAlphabeticalOrder = require('./../validators/alphabetical-sort').isInAlphabeticalOrder;
+const {isInAlphabeticalOrder} = require('./../validators/alphabetical-sort');
 const LintIssue = require('./../LintIssue');
 const lintId = 'prefer-alphabetical-devDependencies';
 const nodeName = 'devDependencies';
 const message = 'Your devDependencies are not in alphabetical order.';
 const ruleType = 'standard';
 
-const lint = function(packageJsonData, severity) {
+const lint = (packageJsonData, severity) => {
   const result = isInAlphabeticalOrder(packageJsonData, nodeName);
 
   if (!result.status) {

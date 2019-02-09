@@ -1,14 +1,12 @@
-'use strict';
-
 const LintIssue = require('./../LintIssue');
-const isObject = require('./../validators/type').isObject;
-const isValidValue = require('./../validators/valid-values').isValidValue;
+const {isObject} = require('./../validators/type');
+const {isValidValue} = require('./../validators/valid-values');
 const lintId = 'valid-values-publishConfig';
 const nodeName = 'publishConfig';
 const message = 'Invalid value for publishConfig';
 const ruleType = 'array';
 
-const lint = function(packageJsonData, severity, validValues) {
+const lint = (packageJsonData, severity, validValues) => {
   if (packageJsonData.hasOwnProperty(nodeName)) {
     if (isObject(packageJsonData, nodeName)) {
       const validValuesAsJson = validValues.map((validValue) => JSON.stringify(validValue));

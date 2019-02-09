@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-'use strict';
-
-/* eslint-disable no-process-exit */
 
 const chalk = require('chalk');
 const meow = require('meow');

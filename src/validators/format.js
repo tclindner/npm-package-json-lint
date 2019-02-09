@@ -1,5 +1,3 @@
-'use strict';
-
 const semver = require('semver');
 const validator = require('validator');
 
@@ -9,7 +7,7 @@ const validator = require('validator');
  * @param  {string} nodeName        Name of a node in the package.json file
  * @return {boolean}                True if the node is lowercase or is missing. False if it is not.
  */
-const isLowercase = function(packageJsonData, nodeName) {
+const isLowercase = (packageJsonData, nodeName) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
   }
@@ -23,7 +21,7 @@ const isLowercase = function(packageJsonData, nodeName) {
  * @param  {string} nodeName        Name of a node in the package.json file
  * @return {boolean}                True if the node is a valid version number or is missing. False if it is not.
  */
-const isValidVersionNumber = function(packageJsonData, nodeName) {
+const isValidVersionNumber = (packageJsonData, nodeName) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
   }

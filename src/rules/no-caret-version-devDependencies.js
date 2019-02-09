@@ -1,13 +1,11 @@
-'use strict';
-
-const doVersContainInvalidRange = require('./../validators/dependency-audit').doVersContainInvalidRange;
+const {doVersContainInvalidRange} = require('./../validators/dependency-audit');
 const LintIssue = require('./../LintIssue');
 const lintId = 'no-caret-version-devDependencies';
 const nodeName = 'devDependencies';
 const message = 'You are using an invalid version range. Please do not use ^.';
 const ruleType = 'standard';
 
-const lint = function(packageJsonData, severity) {
+const lint = (packageJsonData, severity) => {
   const rangeSpecifier = '^';
 
   if (packageJsonData.hasOwnProperty(nodeName) && doVersContainInvalidRange(packageJsonData, nodeName, rangeSpecifier)) {

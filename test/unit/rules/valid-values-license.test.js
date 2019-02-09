@@ -1,18 +1,16 @@
-'use strict';
-
 const ruleModule = require('./../../../src/rules/valid-values-license');
-const lint = ruleModule.lint;
-const ruleType = ruleModule.ruleType;
 
-describe('valid-values-license Unit Tests', function() {
-  describe('a rule type value should be exported', function() {
-    test('it should equal "array"', function() {
+const {lint, ruleType} = ruleModule;
+
+describe('valid-values-license Unit Tests', () => {
+  describe('a rule type value should be exported', () => {
+    test('it should equal "array"', () => {
       expect(ruleType).toStrictEqual('array');
     });
   });
 
-  describe('when package.json has node with incorrect value', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has node with incorrect value', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         license: 'MIT'
       };
@@ -29,8 +27,8 @@ describe('valid-values-license Unit Tests', function() {
     });
   });
 
-  describe('when package.json has node with correct value', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has node with correct value', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         license: 'unlicensed'
       };
@@ -44,8 +42,8 @@ describe('valid-values-license Unit Tests', function() {
     });
   });
 
-  describe('when package.json does not have node', function() {
-    test('true should be returned', function() {
+  describe('when package.json does not have node', () => {
+    test('true should be returned', () => {
       const packageJsonData = {};
       const response = lint(packageJsonData, 'error');
 
