@@ -1,5 +1,6 @@
 const {hasDependency} = require('./../validators/dependency-audit');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'no-restricted-dependencies';
 const nodeName = 'dependencies';
 const message = 'You are using a restricted dependency. Please remove it.';

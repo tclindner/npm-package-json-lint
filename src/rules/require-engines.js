@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-engines';
 const nodeName = 'engines';
 const message = 'engines is required';

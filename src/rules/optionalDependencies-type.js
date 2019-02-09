@@ -1,5 +1,6 @@
 const {isObject} = require('./../validators/type');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'optionalDependencies-type';
 const nodeName = 'optionalDependencies';
 const message = 'Type should be an Object';

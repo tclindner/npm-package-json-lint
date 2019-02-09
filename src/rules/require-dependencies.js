@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-dependencies';
 const nodeName = 'dependencies';
 const message = 'dependencies is required';

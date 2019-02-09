@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-scripts';
 const nodeName = 'scripts';
 const message = 'scripts is required';

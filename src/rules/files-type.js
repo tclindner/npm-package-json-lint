@@ -1,5 +1,6 @@
 const {isArray} = require('./../validators/type');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'files-type';
 const nodeName = 'files';
 const message = 'Type should be an Array';

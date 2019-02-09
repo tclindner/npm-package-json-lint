@@ -1,5 +1,6 @@
 const {hasDepVersZero} = require('./../validators/dependency-audit');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'prefer-no-version-zero-devDependencies';
 const nodeName = 'devDependencies';
 const message = 'You have invalid version 0 dependencies. Please use modules with a major version >= 1.';

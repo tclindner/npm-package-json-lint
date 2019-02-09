@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-name';
 const nodeName = 'name';
 const message = 'name is required';

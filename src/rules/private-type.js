@@ -1,5 +1,6 @@
 const LintIssue = require('./../LintIssue');
 const {isBoolean} = require('./../validators/type');
+
 const lintId = 'private-type';
 const nodeName = 'private';
 const message = 'Type should be a boolean';

@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-version';
 const nodeName = 'version';
 const message = 'version is required';

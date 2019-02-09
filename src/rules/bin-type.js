@@ -1,5 +1,6 @@
 const {isObject, isString} = require('./../validators/type');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'bin-type';
 const nodeName = 'bin';
 const message = 'Type should be either a string or an Object';

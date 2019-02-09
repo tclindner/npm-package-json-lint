@@ -1,4 +1,4 @@
-/* eslint global-require: 'off' */
+/* eslint global-require: 'off', import/no-dynamic-require: 'off' */
 
 const chalk = require('chalk');
 const fs = require('fs');

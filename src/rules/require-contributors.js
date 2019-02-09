@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-contributors';
 const nodeName = 'contributors';
 const message = 'contributors is required';

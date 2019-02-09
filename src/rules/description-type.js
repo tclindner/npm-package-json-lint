@@ -1,5 +1,6 @@
 const LintIssue = require('./../LintIssue');
 const {isString} = require('./../validators/type');
+
 const lintId = 'description-type';
 const nodeName = 'description';
 const message = 'Type should be a string';

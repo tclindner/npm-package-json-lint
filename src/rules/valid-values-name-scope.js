@@ -1,5 +1,6 @@
 const LintIssue = require('./../LintIssue');
 const {matchValidValue} = require('./../validators/valid-values');
+
 const lintId = 'valid-values-name-scope';
 const nodeName = 'name';
 const message = 'Invalid value for name scope';

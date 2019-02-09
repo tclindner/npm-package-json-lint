@@ -1,5 +1,6 @@
 const {isObject} = require('./../validators/type');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'peerDependencies-type';
 const nodeName = 'peerDependencies';
 const message = 'Type should be an Object';

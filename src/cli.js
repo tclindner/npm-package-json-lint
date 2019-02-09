@@ -70,9 +70,6 @@ if (patterns.length === noPatternsProvided) {
   process.exit(exitCodes.oneMissingTarget);
 }
 
-// CLI Options
-const quiet = cli.flags.quiet;
-
 // CLIEngine Options
 const cliEngineOptions = {
   configFile: cli.flags.configFile,
@@ -89,11 +86,11 @@ try {
   const cliEngine = new CLIEngine(cliEngineOptions);
   const cliEngineOutput = cliEngine.executeOnPackageJsonFiles(patterns);
 
-  if (quiet) {
+  if (cli.flags.quiet) {
     cliEngineOutput.results = CLIEngine.getErrorResults(cliEngineOutput.results);
   }
 
-  Reporter.write(cliEngineOutput, quiet);
+  Reporter.write(cliEngineOutput, cli.flags.quiet);
 
   if (cliEngineOutput.errorCount > noIssues) {
     exitCode = exitCodes.twoLintErrorsDetected;

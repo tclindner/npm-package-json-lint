@@ -1,5 +1,6 @@
 const LintIssue = require('./../LintIssue');
 const {isValidValue} = require('./../validators/valid-values');
+
 const lintId = 'valid-values-private';
 const nodeName = 'private';
 const message = 'Invalid value for private';

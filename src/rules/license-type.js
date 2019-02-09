@@ -1,5 +1,6 @@
 const {isString} = require('./../validators/type');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'license-type';
 const nodeName = 'license';
 const message = 'Type should be a string';

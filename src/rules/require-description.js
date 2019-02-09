@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-description';
 const nodeName = 'description';
 const message = 'description is required';

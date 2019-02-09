@@ -1,4 +1,4 @@
-/* eslint max-lines-per-function: 'off', no-param-reassign: 'off' */
+/* eslint max-lines-per-function: 'off', no-param-reassign: 'off', arrow-body-style: 'off' */
 
 const fs = require('fs');
 const path = require('path');

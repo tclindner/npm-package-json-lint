@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-private';
 const nodeName = 'private';
 const message = 'private is required';

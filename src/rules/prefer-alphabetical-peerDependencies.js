@@ -1,5 +1,6 @@
 const {isInAlphabeticalOrder} = require('./../validators/alphabetical-sort');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'prefer-alphabetical-peerDependencies';
 const nodeName = 'peerDependencies';
 const message = 'Your peerDependencies are not in alphabetical order.';

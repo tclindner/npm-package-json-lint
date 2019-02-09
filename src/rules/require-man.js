@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-man';
 const nodeName = 'man';
 const message = 'man is required';

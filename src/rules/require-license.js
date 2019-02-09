@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-license';
 const nodeName = 'license';
 const message = 'license is required';

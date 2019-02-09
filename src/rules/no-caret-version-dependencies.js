@@ -1,5 +1,6 @@
 const {doVersContainInvalidRange} = require('./../validators/dependency-audit');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'no-caret-version-dependencies';
 const nodeName = 'dependencies';
 const message = 'You are using an invalid version range. Please do not use ^.';

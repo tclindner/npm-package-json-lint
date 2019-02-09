@@ -1,6 +1,7 @@
 const LintIssue = require('./../LintIssue');
 const {isObject} = require('./../validators/type');
 const {isValidValue} = require('./../validators/valid-values');
+
 const lintId = 'valid-values-publishConfig';
 const nodeName = 'publishConfig';
 const message = 'Invalid value for publishConfig';

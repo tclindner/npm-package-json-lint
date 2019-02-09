@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-cpu';
 const nodeName = 'cpu';
 const message = 'cpu is required';

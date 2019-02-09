@@ -1,5 +1,6 @@
 const {isVersionAbsolute} = require('./../validators/dependency-audit');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'prefer-absolute-version-devDependencies';
 const nodeName = 'devDependencies';
 const message = 'You are using an invalid version range. Please use absolute versions.';

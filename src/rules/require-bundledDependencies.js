@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-bundledDependencies';
 const nodeName = 'bundledDependencies';
 const message = 'bundledDependencies is required';

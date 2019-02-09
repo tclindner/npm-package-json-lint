@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-os';
 const nodeName = 'os';
 const message = 'os is required';

@@ -1,5 +1,6 @@
 const {isArray} = require('./../validators/type');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'cpu-type';
 const nodeName = 'cpu';
 const message = 'Type should be an array';

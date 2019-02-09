@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-bugs';
 const nodeName = 'bugs';
 const message = 'bugs is required';

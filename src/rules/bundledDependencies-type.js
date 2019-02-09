@@ -1,5 +1,6 @@
 const {isArray} = require('./../validators/type');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'bundledDependencies-type';
 const nodeName = 'bundledDependencies';
 const message = 'Type should be an array';

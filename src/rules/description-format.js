@@ -1,5 +1,6 @@
 const LintIssue = require('./../LintIssue');
 const {isString} = require('./../validators/type');
+
 const lintId = 'description-format';
 const nodeName = 'description';
 const ruleType = 'object';
@@ -9,7 +10,7 @@ const lint = (packageJsonData, severity, config) => {
     return true;
   }
 
-  const description = packageJsonData.description;
+  const {description} = packageJsonData;
 
   if (!isString(packageJsonData, nodeName)) {
     return new LintIssue(lintId, severity, nodeName, 'Type should be a string');

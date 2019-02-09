@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-keywords';
 const nodeName = 'keywords';
 const message = 'keywords is required';

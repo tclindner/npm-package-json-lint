@@ -40,9 +40,7 @@ const formatSchemaErrors = (errors) => {
  * @return {Boolean}          True if the severity is valid. False if the severity is invalid.
  * @private
  */
-const isSeverityInvalid = (severity) => {
-  return typeof severity !== 'string' || (typeof severity === 'string' && severity !== 'error' && severity !== 'warning' && severity !== 'off');
-};
+const isSeverityInvalid = (severity) => typeof severity !== 'string' || (typeof severity === 'string' && severity !== 'error' && severity !== 'warning' && severity !== 'off');
 
 /**
  * Validates object rule config

@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-directories';
 const nodeName = 'directories';
 const message = 'directories is required';

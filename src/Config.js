@@ -17,18 +17,16 @@ const noRules = 0;
  * This does not include node_modules in the path so it can be used for all
  * references relative to a config file.
  *
+ * calculates the path of the project including npm-package-json-lint as a dependency
+ * NOTE: config-file is located in /src/
+ * ../ is npm-package-json-lint
+ * ../ is node_modules directory
+ * ../ is module referencing npm-package-json-lint
+ *
  * @returns {String} The base directory for the file path.
  * @private
  */
-const getProjectDir = () => {
-
-  // calculates the path of the project including npm-package-json-lint as a dependency
-  // NOTE: config-file is located in /src/
-  //   ../ is npm-package-json-lint
-  //   ../ is node_modules directory
-  //   ../ is module referencing npm-package-json-lint
-  return path.resolve(__dirname, '../../../');
-};
+const getProjectDir = () => path.resolve(__dirname, '../../../');
 
 /**
  * Public Config class

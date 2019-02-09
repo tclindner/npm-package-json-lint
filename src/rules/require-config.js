@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-config';
 const nodeName = 'config';
 const message = 'config is required';

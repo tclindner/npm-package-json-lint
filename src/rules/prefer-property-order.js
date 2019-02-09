@@ -1,5 +1,6 @@
 const {isInPreferredOrder} = require('./../validators/property-order');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'prefer-property-order';
 const nodeName = '';
 const message = 'Your package.json properties are not in the desired order.';

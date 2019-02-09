@@ -1,5 +1,6 @@
 const {isInAlphabeticalOrder} = require('./../validators/alphabetical-sort');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'prefer-alphabetical-optionalDependencies';
 const nodeName = 'optionalDependencies';
 const message = 'Your optionalDependencies are not in alphabetical order.';

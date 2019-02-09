@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-publishConfig';
 const nodeName = 'publishConfig';
 const message = 'publishConfig is required';

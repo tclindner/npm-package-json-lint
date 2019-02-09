@@ -1,5 +1,6 @@
 const {isValidVersionNumber} = require('./../validators/format');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'version-format';
 const nodeName = 'version';
 const message = 'Format must be a valid semantic version';

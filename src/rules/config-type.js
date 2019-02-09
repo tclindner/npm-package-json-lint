@@ -1,5 +1,6 @@
 const {isObject} = require('./../validators/type');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'config-type';
 const nodeName = 'config';
 const message = 'Type should be an Object';

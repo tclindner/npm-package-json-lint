@@ -31,10 +31,7 @@ const printResultSetIssues = (issues) => {
  * @private
  */
 const printIndividualResultSet = (resultSet, quiet) => {
-  const filePath = resultSet.filePath;
-  const issues = resultSet.issues;
-  const errorCount = resultSet.errorCount;
-  const warningCount = resultSet.warningCount;
+  const {filePath, issues, errorCount, warningCount} = resultSet;
 
   if (errorCount > zeroIssues || (!quiet && warningCount > zeroIssues)) {
     console.log('');
@@ -64,8 +61,7 @@ const printIndividualResultSet = (resultSet, quiet) => {
  * @private
  */
 const printTotals = (cliEngineOutput, quiet) => {
-  const errorCount = cliEngineOutput.errorCount;
-  const warningCount = cliEngineOutput.warningCount;
+  const {errorCount, warningCount} = cliEngineOutput;
 
   if (errorCount > zeroIssues || warningCount > zeroIssues) {
     const errorCountMessage = `${errorCount} ${plur('error', errorCount)}`;

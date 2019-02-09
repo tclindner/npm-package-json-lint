@@ -1,5 +1,6 @@
 const LintIssue = require('./../LintIssue');
 const {isBoolean} = require('./../validators/type');
+
 const lintId = 'preferGlobal-type';
 const nodeName = 'preferGlobal';
 const message = 'Type should be a boolean';

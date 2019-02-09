@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-bin';
 const nodeName = 'bin';
 const message = 'bin is required';

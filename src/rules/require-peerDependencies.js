@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-peerDependencies';
 const nodeName = 'peerDependencies';
 const message = 'peerDependencies is required';

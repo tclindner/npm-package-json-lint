@@ -1,4 +1,5 @@
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'require-author';
 const nodeName = 'author';
 const message = 'author is required';
