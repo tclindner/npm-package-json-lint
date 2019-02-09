@@ -205,8 +205,7 @@ describe('ConfigValidator Unit Tests', function() {
           'root': true
         };
         const source = 'cli';
-        ConfigValidator.validateRules = jest.fn();
-        ConfigValidator.validateRules.mockReturnValue(true);
+        jest.spyOn(ConfigValidator, 'validateRules').mockReturnValue(true);
 
         ConfigValidator.validate(config, source, linterContext);
       });
@@ -217,8 +216,7 @@ describe('ConfigValidator Unit Tests', function() {
           'rules': {}
         };
         const source = 'cli';
-        ConfigValidator.validateRules = jest.fn();
-        ConfigValidator.validateRules.mockReturnValue(true);
+        jest.spyOn(ConfigValidator, 'validateRules').mockReturnValue(true);
 
         ConfigValidator.validate(config, source, linterContext);
       });
@@ -229,8 +227,7 @@ describe('ConfigValidator Unit Tests', function() {
           'root': true
         };
         const source = 'cli';
-        ConfigValidator.validateRules = jest.fn();
-        ConfigValidator.validateRules.mockReturnValue(true);
+        jest.spyOn(ConfigValidator, 'validateRules').mockReturnValue(true);
 
         ConfigValidator.validate(config, source, linterContext);
       });
@@ -241,8 +238,7 @@ describe('ConfigValidator Unit Tests', function() {
           root: true
         };
         const source = 'cli';
-        ConfigValidator.validateRules = jest.fn();
-        ConfigValidator.validateRules.mockReturnValue(true);
+        jest.spyOn(ConfigValidator, 'validateRules').mockReturnValue(true);
 
         ConfigValidator.validate(config, source, linterContext);
       });
@@ -254,8 +250,7 @@ describe('ConfigValidator Unit Tests', function() {
           'root': true
         };
         const source = 'cli';
-        ConfigValidator.validateRules = jest.fn();
-        ConfigValidator.validateRules.mockReturnValue(true);
+        jest.spyOn(ConfigValidator, 'validateRules').mockReturnValue(true);
 
         ConfigValidator.validate(config, source, linterContext);
       });
@@ -269,8 +264,7 @@ describe('ConfigValidator Unit Tests', function() {
           'root': true
         };
         const source = 'cli';
-        ConfigValidator.validateRules = jest.fn();
-        ConfigValidator.validateRules.mockReturnValue(true);
+        jest.spyOn(ConfigValidator, 'validateRules').mockReturnValue(true);
 
         expect(() => {
           ConfigValidator.validate(config, source, linterContext);
@@ -284,8 +278,7 @@ describe('ConfigValidator Unit Tests', function() {
           'root': true
         };
         const source = 'cli';
-        ConfigValidator.validateRules = jest.fn();
-        ConfigValidator.validateRules.mockReturnValue(true);
+        jest.spyOn(ConfigValidator, 'validateRules').mockReturnValue(true);
 
         expect(() => {
           ConfigValidator.validate(config, source, linterContext);
@@ -299,8 +292,7 @@ describe('ConfigValidator Unit Tests', function() {
           'root': 'true'
         };
         const source = 'cli';
-        ConfigValidator.validateRules = jest.fn();
-        ConfigValidator.validateRules.mockReturnValue(true);
+        jest.spyOn(ConfigValidator, 'validateRules').mockReturnValue(true);
 
         expect(() => {
           ConfigValidator.validate(config, source, linterContext);
@@ -316,8 +308,7 @@ describe('ConfigValidator Unit Tests', function() {
           'root': true
         };
         const source = 'cli';
-        ConfigValidator.validateRules = jest.fn();
-        ConfigValidator.validateRules.mockImplementation(() => {
+        jest.spyOn(ConfigValidator, 'validateRules').mockImplementation(() => {
           throw new Error();
         });
 
