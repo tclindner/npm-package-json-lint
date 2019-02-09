@@ -1,5 +1,5 @@
 {
-  "extends": "./tests/fixtures/extendsLocal/npmpackagejsonlint.config.js",
+  "extends": "./test/fixtures/extendsLocal/npmpackagejsonlint.config.js",
   "rules": {
     "require-author": "error"
   }

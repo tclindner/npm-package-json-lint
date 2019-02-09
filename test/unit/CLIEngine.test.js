@@ -102,11 +102,11 @@ describe('CLIEngine Unit Tests', function() {
   describe('executeOnPackageJsonFiles method tests', function() {
     test('when called with patterns', function() {
       const patterns = [
-        './tests/fixtures/valid/',
-        './tests/fixtures/errors/**',
-        './tests/fixtures/errors',
-        './tests/fixtures/errors/package.json',
-        './tests/fixtures/errors/package.json'
+        './test/fixtures/valid/',
+        './test/fixtures/errors/**',
+        './test/fixtures/errors',
+        './test/fixtures/errors/package.json',
+        './test/fixtures/errors/package.json'
       ];
 
       const expected = {
@@ -114,13 +114,13 @@ describe('CLIEngine Unit Tests', function() {
         results: [
           {
             errorCount: 0,
-            filePath: './tests/fixtures/valid/package.json',
+            filePath: './test/fixtures/valid/package.json',
             issues: [],
             warningCount: 0
           },
           {
             errorCount: 1,
-            filePath: './tests/fixtures/errors/package.json',
+            filePath: './test/fixtures/errors/package.json',
             issues: [
               {
                 lintId: 'require-scripts',
@@ -148,7 +148,7 @@ describe('CLIEngine Unit Tests', function() {
     });
 
     test('when called with patterns and ignorePath', function() {
-      const patterns = ['./tests/fixtures/ignorePath/'];
+      const patterns = ['./test/fixtures/ignorePath/'];
       const ignorePath = path.resolve(__dirname, '../fixtures/ignorePath/.gitignore-example');
 
       const expected = {
@@ -156,7 +156,7 @@ describe('CLIEngine Unit Tests', function() {
         results: [
           {
             errorCount: 0,
-            filePath: './tests/fixtures/ignorePath/package.json',
+            filePath: './test/fixtures/ignorePath/package.json',
             issues: [],
             warningCount: 0
           }
@@ -207,7 +207,7 @@ describe('CLIEngine Unit Tests', function() {
     });
 
     test('when called with patterns (pattern is file) and ignorePath', function() {
-      const patterns = ['./tests/fixtures/ignorePath/ignoredDirectory/package.json'];
+      const patterns = ['./test/fixtures/ignorePath/ignoredDirectory/package.json'];
       const ignorePath = path.resolve(__dirname, '../fixtures/ignorePath/.gitignore-example');
 
       const expected = {
@@ -230,7 +230,7 @@ describe('CLIEngine Unit Tests', function() {
     });
 
     test('when called with invalid pattern', function() {
-      const pattern = './tests/fixtures/valid/.npmpackagejsonlintrc.json';
+      const pattern = './test/fixtures/valid/.npmpackagejsonlintrc.json';
       const patterns = [pattern];
 
       const options = {
@@ -258,7 +258,7 @@ describe('CLIEngine Unit Tests', function() {
         results: [
           {
             errorCount: 8,
-            filePath: './tests/fixtures/errors/package.json',
+            filePath: './test/fixtures/errors/package.json',
             issues: [
               {
                 lintId: 'require-author',
@@ -314,7 +314,7 @@ describe('CLIEngine Unit Tests', function() {
         ],
         warningCount: 0
       };
-      const fileName = `${process.cwd()}/tests/fixtures/errors/package.json`;
+      const fileName = `${process.cwd()}/test/fixtures/errors/package.json`;
       const options = {
         configFile: '',
         cwd: process.cwd(),
@@ -337,7 +337,7 @@ describe('CLIEngine Unit Tests', function() {
         results: [
           {
             errorCount: 8,
-            filePath: './tests/fixtures/errors/package.json',
+            filePath: './test/fixtures/errors/package.json',
             issues: [
               {
                 lintId: 'require-author',
@@ -393,7 +393,7 @@ describe('CLIEngine Unit Tests', function() {
         ],
         warningCount: 0
       };
-      const fileName = './tests/fixtures/errors/package.json';
+      const fileName = './test/fixtures/errors/package.json';
       const options = {
         configFile: '',
         cwd: process.cwd(),
