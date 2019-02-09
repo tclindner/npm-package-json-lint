@@ -1,18 +1,16 @@
-'use strict';
-
 const ruleModule = require('./../../../src/rules/require-private');
-const lint = ruleModule.lint;
-const ruleType = ruleModule.ruleType;
 
-describe('require-private Unit Tests', function() {
-  describe('a rule type value should be exported', function() {
-    test('it should equal "standard"', function() {
+const {lint, ruleType} = ruleModule;
+
+describe('require-private Unit Tests', () => {
+  describe('a rule type value should be exported', () => {
+    test('it should equal "standard"', () => {
       expect(ruleType).toStrictEqual('standard');
     });
   });
 
-  describe('when package.json has node', function() {
-    test('true should be returned', function() {
+  describe('when package.json has node', () => {
+    test('true should be returned', () => {
       const packageJsonData = {
         'private': 'private'
       };
@@ -22,8 +20,8 @@ describe('require-private Unit Tests', function() {
     });
   });
 
-  describe('when package.json does not have node', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json does not have node', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {};
       const response = lint(packageJsonData, 'error');
 

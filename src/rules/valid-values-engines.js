@@ -1,17 +1,16 @@
-'use strict';
+/* eslint max-statements: 'off', no-restricted-syntax: 'off', guard-for-in: 'off' */
 
-/* eslint max-statements: 'off' */
-
-const LintIssue = require('./../LintIssue');
-const isObject = require('./../validators/type').isObject;
-const isValidValue = require('./../validators/valid-values').isValidValue;
 const semver = require('semver');
+const LintIssue = require('./../LintIssue');
+const {isObject} = require('./../validators/type');
+const {isValidValue} = require('./../validators/valid-values');
+
 const lintId = 'valid-values-engines';
 const nodeName = 'engines';
 const message = 'Invalid value for engines';
 const ruleType = 'array';
 
-const lint = function(packageJsonData, severity, validValues) {
+const lint = (packageJsonData, severity, validValues) => {
   if (packageJsonData.hasOwnProperty(nodeName)) {
     if (isObject(packageJsonData, nodeName)) {
       const validValuesAsJson = validValues.map((validValue) => JSON.stringify(validValue));

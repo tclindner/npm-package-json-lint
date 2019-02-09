@@ -1,8 +1,8 @@
-'use strict';
+/* eslint no-else-return: 'off' */
 
 const Ajv = require('ajv');
-const ConfigSchema = require('./ConfigSchema');
 const isPlainObj = require('is-plain-obj');
+const ConfigSchema = require('./ConfigSchema');
 
 /**
  * Formats an array of schema validation errors.
@@ -10,7 +10,7 @@ const isPlainObj = require('is-plain-obj');
  * @param {Array} errors An array of error messages to format.
  * @returns {String} Formatted error message
  */
-const formatSchemaErrors = function(errors) {
+const formatSchemaErrors = (errors) => {
   const secondChar = 1;
 
   return errors.map((error) => {
@@ -40,9 +40,7 @@ const formatSchemaErrors = function(errors) {
  * @return {Boolean}          True if the severity is valid. False if the severity is invalid.
  * @private
  */
-const isSeverityInvalid = function(severity) {
-  return typeof severity !== 'string' || (typeof severity === 'string' && severity !== 'error' && severity !== 'warning' && severity !== 'off');
-};
+const isSeverityInvalid = (severity) => typeof severity !== 'string' || (typeof severity === 'string' && severity !== 'error' && severity !== 'warning' && severity !== 'off');
 
 /**
  * Validates object rule config
@@ -51,7 +49,7 @@ const isSeverityInvalid = function(severity) {
  * @return {Boolean}               True if config is valid, false if not
  * @static
  */
-const isObjectRuleConfigValid = function(ruleConfig) {
+const isObjectRuleConfigValid = (ruleConfig) => {
   const severityIndex = 0;
   const object = 1;
 
@@ -77,7 +75,7 @@ const isObjectRuleConfigValid = function(ruleConfig) {
  * @return {Boolean}               True if config is valid, false if not
  * @static
  */
-const isArrayRuleConfigValid = function(ruleConfig) {
+const isArrayRuleConfigValid = (ruleConfig) => {
   const severityIndex = 0;
   const arrayIndex = 1;
 
@@ -103,7 +101,7 @@ const isArrayRuleConfigValid = function(ruleConfig) {
  * @return {Boolean}                 True if config is valid, false if not
  * @static
  */
-const isStandardRuleConfigValid = function(ruleConfig) {
+const isStandardRuleConfigValid = (ruleConfig) => {
   if (isSeverityInvalid(ruleConfig)) {
     throw new Error(`must be set to "error", "warning", or "off". Currently set to "${ruleConfig}".`);
   }
@@ -120,7 +118,7 @@ const isStandardRuleConfigValid = function(ruleConfig) {
  * @param {String|null} source The name of the configuration source to report in any errors.
  * @returns {undefined} No return
  */
-const validateRule = function(ruleModule, ruleName, userConfig, source) {
+const validateRule = (ruleModule, ruleName, userConfig, source) => {
   if (ruleModule) {
     try {
       if (ruleModule.ruleType === 'array') {
@@ -149,7 +147,7 @@ const validateRule = function(ruleModule, ruleName, userConfig, source) {
  * @param {string} source The name of the configuration source to report in any errors.
  * @returns {undefined} No return
  */
-const validateConfigSchema = function(config, source) {
+const validateConfigSchema = (config, source) => {
   const ajv = new Ajv({allErrors: true});
   const schemaValidateResult = ajv.validate(ConfigSchema.get(), config);
 

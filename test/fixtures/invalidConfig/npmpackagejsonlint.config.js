@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   'require-author': 'error',
   'require-description': 'error',

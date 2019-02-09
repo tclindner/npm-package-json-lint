@@ -1,35 +1,33 @@
-'use strict';
-
 /* eslint max-lines: "off" */
 
 const dependencyAudit = require('./../../../src/validators/dependency-audit');
 
-describe('dependency-audit Unit Tests', function() {
-  describe('hasDependency method', function() {
+describe('dependency-audit Unit Tests', () => {
+  describe('hasDependency method', () => {
     const packageJson = {
       dependencies: {
         'grunt-npm-package-json-lint': '^1.0.0'
       }
     };
 
-    describe('when the node does not exist in the package.json file', function() {
-      test('false should be returned', function() {
+    describe('when the node does not exist in the package.json file', () => {
+      test('false should be returned', () => {
         const response = dependencyAudit.hasDependency(packageJson, 'devDependencies', ['grunt-npm-package-json-lint']);
 
         expect(response).toBeFalsy();
       });
     });
 
-    describe('when the node exists in the package.json file and the dependency is present', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file and the dependency is present', () => {
+      test('true should be returned', () => {
         const response = dependencyAudit.hasDependency(packageJson, 'dependencies', ['grunt-npm-package-json-lint']);
 
         expect(response).toBeTruthy();
       });
     });
 
-    describe('when the node exists in the package.json file, but the dependency do not', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file, but the dependency do not', () => {
+      test('false should be returned', () => {
         const response = dependencyAudit.hasDependency(packageJson, 'dependencies', ['gulp-npm-package-json-lint']);
 
         expect(response).toBeFalsy();
@@ -37,7 +35,7 @@ describe('dependency-audit Unit Tests', function() {
     });
   });
 
-  describe('hasDepPrereleaseVers method', function() {
+  describe('hasDepPrereleaseVers method', () => {
     const packageJson = {
       dependencies: {
         'npm-package-json-lint': '^1.0.0',
@@ -46,32 +44,32 @@ describe('dependency-audit Unit Tests', function() {
       }
     };
 
-    describe('when the node does not exist in the package.json file', function() {
-      test('false should be returned', function() {
+    describe('when the node does not exist in the package.json file', () => {
+      test('false should be returned', () => {
         const response = dependencyAudit.hasDepPrereleaseVers(packageJson, 'devDependencies', ['grunt-npm-package-json-lint']);
 
         expect(response).toBeFalsy();
       });
     });
 
-    describe('when the node exists in the package.json file, the dependency is present and the version is pre-release (beta)', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, the dependency is present and the version is pre-release (beta)', () => {
+      test('true should be returned', () => {
         const response = dependencyAudit.hasDepPrereleaseVers(packageJson, 'dependencies', ['grunt-npm-package-json-lint']);
 
         expect(response).toBeTruthy();
       });
     });
 
-    describe('when the node exists in the package.json file, the dependency is present and the version is pre-release (rc)', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, the dependency is present and the version is pre-release (rc)', () => {
+      test('true should be returned', () => {
         const response = dependencyAudit.hasDepPrereleaseVers(packageJson, 'dependencies', ['gulp-npm-package-json-lint']);
 
         expect(response).toBeTruthy();
       });
     });
 
-    describe('when the node exists in the package.json file, the dependency is present and the version is not pre-release', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file, the dependency is present and the version is not pre-release', () => {
+      test('false should be returned', () => {
         const response = dependencyAudit.hasDepPrereleaseVers(packageJson, 'dependencies', ['npm-package-json-lint']);
 
         expect(response).toBeFalsy();
@@ -79,9 +77,9 @@ describe('dependency-audit Unit Tests', function() {
     });
   });
 
-  describe('hasDepVersZero method - part 1', function() {
-    describe('when the node does not exist in the package.json file', function() {
-      test('false should be returned', function() {
+  describe('hasDepVersZero method - part 1', () => {
+    describe('when the node does not exist in the package.json file', () => {
+      test('false should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '~ 1.0'
@@ -93,8 +91,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '~0.6.1-1'
@@ -106,8 +104,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '>=0.1.97'
@@ -119,8 +117,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '0.1.20 || 1.2.4'
@@ -132,8 +130,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '0.1.20 || >1.2.4'
@@ -145,8 +143,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '0.1.20 || 1.2.4'
@@ -158,8 +156,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '0.1.20 || 1.2.4'
@@ -171,8 +169,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '>=0.2.3 || <0.0.1'
@@ -184,8 +182,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '>=0.2.3 || <0.0.1'
@@ -197,8 +195,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '>=0.2.3 || <0.0.1'
@@ -210,8 +208,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '~v0.5.4-pre'
@@ -224,9 +222,9 @@ describe('dependency-audit Unit Tests', function() {
     });
   });
 
-  describe('hasDepVersZero method - part 2', function() {
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+  describe('hasDepVersZero method - part 2', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '=0.7.x'
@@ -238,8 +236,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '>=0.7.x'
@@ -251,8 +249,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '<=0.7.x'
@@ -264,8 +262,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '>0.2.3 >0.2.4 <=0.2.5'
@@ -277,8 +275,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '>=0.2.3 <=0.2.4'
@@ -290,8 +288,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '^0.1.0 || ~3.0.1 || 5.0.0'
@@ -303,8 +301,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '^0.1.0 || ~3.0.1 || 5.0.0'
@@ -316,8 +314,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '^0.1.0 || ~3.0.1 || 5.0.0'
@@ -329,8 +327,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '^0.1.0 || ~3.0.1 || >4 <=5.0.0'
@@ -342,8 +340,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+      test('false should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '=0.1.'
@@ -355,8 +353,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, all versions are 1+', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, all versions are 1+', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '~ 1.0',
@@ -429,9 +427,9 @@ describe('dependency-audit Unit Tests', function() {
     });
   });
 
-  describe('doesVersStartsWithRange method', function() {
-    describe('when dependencyVersion begins with range specifier', function() {
-      test('true should be returned', function() {
+  describe('doesVersStartsWithRange method', () => {
+    describe('when dependencyVersion begins with range specifier', () => {
+      test('true should be returned', () => {
         const dependencyVersion = '^1.0.0';
         const response = dependencyAudit.doesVersStartsWithRange(dependencyVersion, '^');
 
@@ -439,8 +437,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when dependencyVersion does not begin with range specifier', function() {
-      test('false should be returned', function() {
+    describe('when dependencyVersion does not begin with range specifier', () => {
+      test('false should be returned', () => {
         const dependencyVersion = '^1.0.0';
         const response = dependencyAudit.doesVersStartsWithRange(dependencyVersion, '~');
 
@@ -449,9 +447,9 @@ describe('dependency-audit Unit Tests', function() {
     });
   });
 
-  describe('areVersRangesValid method', function() {
-    describe('when the node does not exist in the package.json file', function() {
-      test('true should be returned', function() {
+  describe('areVersRangesValid method', () => {
+    describe('when the node does not exist in the package.json file', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '^1.0.0',
@@ -465,8 +463,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are ~', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are ~', () => {
+      test('false should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '^1.0.0',
@@ -480,8 +478,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, all versions are ~', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, all versions are ~', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '~1.0.0',
@@ -496,9 +494,9 @@ describe('dependency-audit Unit Tests', function() {
     });
   });
 
-  describe('doVersContainInvalidRange method', function() {
-    describe('when the node does not exist in the package.json file', function() {
-      test('false should be returned', function() {
+  describe('doVersContainInvalidRange method', () => {
+    describe('when the node does not exist in the package.json file', () => {
+      test('false should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '^1.0.0',
@@ -512,8 +510,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and some versions contain invalid ranges', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file and some versions contain invalid ranges', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '^1.0.0',
@@ -527,8 +525,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and none of the versions contain an invalid ranges', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file and none of the versions contain an invalid ranges', () => {
+      test('false should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '^1.0.0',
@@ -543,9 +541,9 @@ describe('dependency-audit Unit Tests', function() {
     });
   });
 
-  describe('isVersionAbsolute method', function() {
-    describe('when the node does not exist in the package.json file', function() {
-      test('true should be returned', function() {
+  describe('isVersionAbsolute method', () => {
+    describe('when the node does not exist in the package.json file', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '^1.0.0',
@@ -559,8 +557,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are absolute', function() {
-      test('with caret versioning false should be returned', function() {
+    describe('when the node exists in the package.json file, not all versions are absolute', () => {
+      test('with caret versioning false should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '^1.0.0',
@@ -571,7 +569,7 @@ describe('dependency-audit Unit Tests', function() {
 
         expect(response).toBeFalsy();
       });
-      test('with tilde versioning false should be returned', function() {
+      test('with tilde versioning false should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '~1.0.0',
@@ -582,7 +580,7 @@ describe('dependency-audit Unit Tests', function() {
 
         expect(response).toBeFalsy();
       });
-      test('with star versioning false should be returned', function() {
+      test('with star versioning false should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '1.0.*',
@@ -593,7 +591,7 @@ describe('dependency-audit Unit Tests', function() {
 
         expect(response).toBeFalsy();
       });
-      test('with greater versioning false should be returned', function() {
+      test('with greater versioning false should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '>1.0.0',
@@ -604,7 +602,7 @@ describe('dependency-audit Unit Tests', function() {
 
         expect(response).toBeFalsy();
       });
-      test('with greater versioning false should be returned', function() {
+      test('with greater versioning false should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '>1.0.0',
@@ -615,7 +613,7 @@ describe('dependency-audit Unit Tests', function() {
 
         expect(response).toBeFalsy();
       });
-      test('with less versioning false should be returned', function() {
+      test('with less versioning false should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '<1.0.0',
@@ -628,8 +626,8 @@ describe('dependency-audit Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, all versions are absolute', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file, all versions are absolute', () => {
+      test('true should be returned', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '1.0.0',

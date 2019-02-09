@@ -1,18 +1,16 @@
-'use strict';
-
 const ruleModule = require('./../../../src/rules/description-format');
-const lint = ruleModule.lint;
-const ruleType = ruleModule.ruleType;
 
-describe('description-format Unit Tests', function() {
-  describe('a rule type value should be exported', function() {
-    test('it should equal "object"', function() {
+const {lint, ruleType} = ruleModule;
+
+describe('description-format Unit Tests', () => {
+  describe('a rule type value should be exported', () => {
+    test('it should equal "object"', () => {
       expect(ruleType).toStrictEqual('object');
     });
   });
 
-  describe('when package.json has node with incorrect format', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has node with incorrect format', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         description: true
       };
@@ -29,8 +27,8 @@ describe('description-format Unit Tests', function() {
     });
   });
 
-  describe('when package.json has node with lowercase first letter', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has node with lowercase first letter', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         description: 'lowercase'
       };
@@ -46,8 +44,8 @@ describe('description-format Unit Tests', function() {
     });
   });
 
-  describe('when package.json has node without period at end', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has node without period at end', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         description: 'My description'
       };
@@ -63,8 +61,8 @@ describe('description-format Unit Tests', function() {
     });
   });
 
-  describe('when package.json has node with correct format', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has node with correct format', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         description: 'My description.'
       };
@@ -78,8 +76,8 @@ describe('description-format Unit Tests', function() {
     });
   });
 
-  describe('when no rule config passed', function() {
-    test('true should be returned', function() {
+  describe('when no rule config passed', () => {
+    test('true should be returned', () => {
       const packageJsonData = {
         description: 'lowercase'
       };
@@ -90,8 +88,8 @@ describe('description-format Unit Tests', function() {
     });
   });
 
-  describe('when package.json does not have node', function() {
-    test('true should be returned', function() {
+  describe('when package.json does not have node', () => {
+    test('true should be returned', () => {
       const packageJsonData = {};
       const config = {
         requireCapitalFirstLetter: true,

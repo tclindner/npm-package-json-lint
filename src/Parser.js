@@ -1,6 +1,4 @@
-'use strict';
-
-/* eslint class-methods-use-this: 'off' */
+/* eslint class-methods-use-this: 'off', global-require: 'off', import/no-dynamic-require: 'off' */
 
 const fs = require('fs');
 const stripComments = require('strip-json-comments');
@@ -12,9 +10,7 @@ const stripComments = require('strip-json-comments');
  * @return {Object}          Config object from file.
  * @throws {Error}           If the file cannot be read.
  */
-const requireFile = function(fileName) {
-  return require(fileName);
-};
+const requireFile = (fileName) => require(fileName);
 
 /**
  * Sychronously reads file from file system
@@ -23,9 +19,7 @@ const requireFile = function(fileName) {
  * @return {String}          File contents with BOM removed.
  * @throws {Error}           If the file cannot be read.
  */
-const readFile = function(fileName) {
-  return fs.readFileSync(fileName, 'utf8').replace(/^\ufeff/, '');
-};
+const readFile = (fileName) => fs.readFileSync(fileName, 'utf8').replace(/^\ufeff/, '');
 
 /**
  * Helper method for throwing errors when file fails to load.
@@ -35,7 +29,7 @@ const readFile = function(fileName) {
  * @returns {Undefined} No return
  * @throws {Error}
  */
-const handleError = function(fileName, err) {
+const handleError = (fileName, err) => {
   throw new Error(`Failed to read config file: ${fileName}. \nError: ${err.message}`);
 };
 

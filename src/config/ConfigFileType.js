@@ -1,5 +1,3 @@
-'use strict';
-
 const rcFileName = '.npmpackagejsonlintrc.json';
 const javaScriptConfigFileName = 'npmpackagejsonlint.config.js';
 

@@ -1,15 +1,13 @@
-'use strict';
-
 const validValuesObj = require('./../../../src/validators/valid-values');
 
-describe('value-values Unit Tests', function() {
-  describe('isValidValue method', function() {
+describe('value-values Unit Tests', () => {
+  describe('isValidValue method', () => {
     const packageJson = {
       author: 'Malcolm Reynolds'
     };
 
-    describe('when the node does not exist in the package.json file', function() {
-      test('true should be returned', function() {
+    describe('when the node does not exist in the package.json file', () => {
+      test('true should be returned', () => {
         const validValues = [
           'Zoe Washburn',
           'Hoban Washburn',
@@ -25,8 +23,8 @@ describe('value-values Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and the value is valid', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file and the value is valid', () => {
+      test('true should be returned', () => {
         const validValues = [
           'Malcolm Reynolds',
           'Zoe Washburn',
@@ -43,8 +41,8 @@ describe('value-values Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, but the value is invalid', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file, but the value is invalid', () => {
+      test('false should be returned', () => {
         const validValues = [
           'Zoe Washburn',
           'Hoban Washburn',
@@ -61,13 +59,13 @@ describe('value-values Unit Tests', function() {
     });
   });
 
-  describe('matchValidValue method', function() {
+  describe('matchValidValue method', () => {
     const packageJson = {
       name: '@lerna/publish'
     };
 
-    describe('when the node does not exist in the package.json file', function() {
-      test('true should be returned', function() {
+    describe('when the node does not exist in the package.json file', () => {
+      test('true should be returned', () => {
         const validRegexes = [
           /^@babel\//,
           /run$/,
@@ -79,8 +77,8 @@ describe('value-values Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and the value matches', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file and the value matches', () => {
+      test('true should be returned', () => {
         const validRegexes = [
           /^@lerna\//,
           /^@babel\//,
@@ -93,8 +91,8 @@ describe('value-values Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file, but the value does not match', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file, but the value does not match', () => {
+      test('false should be returned', () => {
         const validRegexes = [
           /^@babel\//,
           /run$/,

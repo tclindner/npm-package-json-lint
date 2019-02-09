@@ -1,18 +1,16 @@
-'use strict';
-
 const ruleModule = require('./../../../src/rules/valid-values-engines');
-const lint = ruleModule.lint;
-const ruleType = ruleModule.ruleType;
 
-describe('valid-values-engines Unit Tests', function() {
-  describe('a rule type value should be exported', function() {
-    test('it should equal "array"', function() {
+const {lint, ruleType} = ruleModule;
+
+describe('valid-values-engines Unit Tests', () => {
+  describe('a rule type value should be exported', () => {
+    test('it should equal "array"', () => {
       expect(ruleType).toStrictEqual('array');
     });
   });
 
-  describe('when package.json has object node with invalid value', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has object node with invalid value', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         engines: {
           node: '^6.0.0'
@@ -34,8 +32,8 @@ describe('valid-values-engines Unit Tests', function() {
     });
   });
 
-  describe('when package.json has object node with vvalid value, but invalid version range', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has object node with vvalid value, but invalid version range', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         engines: {
           node: '^6.a.0'
@@ -53,8 +51,8 @@ describe('valid-values-engines Unit Tests', function() {
     });
   });
 
-  describe('when package.json has object node with valid value', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has object node with valid value', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         engines: {
           node: '^6.0.0',
@@ -77,8 +75,8 @@ describe('valid-values-engines Unit Tests', function() {
     });
   });
 
-  describe('when package.json has node but is invalid type', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has node but is invalid type', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         engines: true
       };
@@ -101,8 +99,8 @@ describe('valid-values-engines Unit Tests', function() {
     });
   });
 
-  describe('when package.json does not have node', function() {
-    test('true should be returned', function() {
+  describe('when package.json does not have node', () => {
+    test('true should be returned', () => {
       const packageJsonData = {};
       const validValues = [
         {

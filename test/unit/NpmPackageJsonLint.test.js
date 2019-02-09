@@ -1,11 +1,9 @@
-'use strict';
-
 const NpmPackageJsonLint = require('./../../src/NpmPackageJsonLint');
 
-describe('NpmPackageJsonLint Unit Tests', function() {
-  describe('lint method', function() {
-    describe('validate that errors and warnings are set', function() {
-      test('two errors and zero warnings expected', function() {
+describe('NpmPackageJsonLint Unit Tests', () => {
+  describe('lint method', () => {
+    describe('validate that errors and warnings are set', () => {
+      test('two errors and zero warnings expected', () => {
         const packageJsonData = {
           name: 'ALLCAPS',
           description: true
@@ -26,8 +24,8 @@ describe('NpmPackageJsonLint Unit Tests', function() {
       });
     });
 
-    describe('validate that errors and warnings are set', function() {
-      test('one error and one warning expected', function() {
+    describe('validate that errors and warnings are set', () => {
+      test('one error and one warning expected', () => {
         const packageJsonData = {
           name: 'ALLCAPS'
         };
@@ -47,8 +45,8 @@ describe('NpmPackageJsonLint Unit Tests', function() {
       });
     });
 
-    describe('validate that errors and warnings are set, but "off" rules are skipped!', function() {
-      test('zero errors and zero warnings expected', function() {
+    describe('validate that errors and warnings are set, but "off" rules are skipped!', () => {
+      test('zero errors and zero warnings expected', () => {
         const packageJsonData = {
           name: 'ALLCAPS'
         };
@@ -68,8 +66,8 @@ describe('NpmPackageJsonLint Unit Tests', function() {
       });
     });
 
-    describe('validate that errors and warnings are set', function() {
-      test('one error and one warning expected', function() {
+    describe('validate that errors and warnings are set', () => {
+      test('one error and one warning expected', () => {
         const packageJsonData = {
           name: 'ALLCAPS'
         };
@@ -89,8 +87,8 @@ describe('NpmPackageJsonLint Unit Tests', function() {
       });
     });
 
-    describe('validate that errors and warnings are set', function() {
-      test('one error and one warning expected', function() {
+    describe('validate that errors and warnings are set', () => {
+      test('one error and one warning expected', () => {
         const packageJsonData = {
           author: 'Caitlin Snow'
         };
@@ -112,8 +110,8 @@ describe('NpmPackageJsonLint Unit Tests', function() {
       });
     });
 
-    describe('validate that when array style rules have an array value with off', function() {
-      test('zero errors and zero warning expected', function() {
+    describe('validate that when array style rules have an array value with off', () => {
+      test('zero errors and zero warning expected', () => {
         const packageJsonData = {
           author: 'Caitlin Snow'
         };
@@ -135,8 +133,8 @@ describe('NpmPackageJsonLint Unit Tests', function() {
       });
     });
 
-    describe('validate that when array style rules have a value of off', function() {
-      test('zero errors and zero warnings expected', function() {
+    describe('validate that when array style rules have a value of off', () => {
+      test('zero errors and zero warnings expected', () => {
         const packageJsonData = {
           author: 'Caitlin Snow'
         };
@@ -156,9 +154,9 @@ describe('NpmPackageJsonLint Unit Tests', function() {
     });
   });
 
-  describe('getRules method', function() {
-    describe('when getRules is called', function() {
-      test('all rules are returned', function() {
+  describe('getRules method', () => {
+    describe('when getRules is called', () => {
+      test('all rules are returned', () => {
         const npmPackageJsonLint = new NpmPackageJsonLint();
         const rules = npmPackageJsonLint.getRules();
 
@@ -168,9 +166,9 @@ describe('NpmPackageJsonLint Unit Tests', function() {
     });
   });
 
-  describe('getRule method', function() {
-    describe('when getRule is called', function() {
-      test('specified rule is returned', function() {
+  describe('getRule method', () => {
+    describe('when getRule is called', () => {
+      test('specified rule is returned', () => {
         const npmPackageJsonLint = new NpmPackageJsonLint();
         const rule = npmPackageJsonLint.getRule('require-name');
 

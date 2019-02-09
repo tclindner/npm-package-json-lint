@@ -1,7 +1,6 @@
-'use strict';
-
 const LintIssue = require('./../LintIssue');
-const matchValidValue = require('./../validators/valid-values').matchValidValue;
+const {matchValidValue} = require('./../validators/valid-values');
+
 const lintId = 'valid-values-name-scope';
 const nodeName = 'name';
 const message = 'Invalid value for name scope';
@@ -15,7 +14,7 @@ const ruleType = 'array';
  * @param  {Array}    validValues       An array of valid values
  * @return {Object|Boolean}             LintIssue object if invalid. True if valid
  */
-const lint = function(packageJsonData, severity, validValues) {
+const lint = (packageJsonData, severity, validValues) => {
   const validRegexes = validValues.map((scope) => new RegExp(`^${scope}/`));
 
   if (!matchValidValue(packageJsonData, nodeName, packageJsonData[nodeName], validRegexes)) {

@@ -1,5 +1,3 @@
-'use strict';
-
 /* eslint max-lines: 'off', id-length: 'off' */
 
 const Config = require('./../../../src/Config');
@@ -20,9 +18,9 @@ const options = {
 };
 const config = new Config(options, linterContext);
 
-describe('ConfigFile Unit Tests', function() {
-  describe('load method', function() {
-    test('when file has local extends (valid), a config object is returned', function() {
+describe('ConfigFile Unit Tests', () => {
+  describe('load method', () => {
+    test('when file has local extends (valid), a config object is returned', () => {
       const expectedConfigObj = {
         'extends': './test/fixtures/extendsLocal/npmpackagejsonlint.config.js',
         'rules': {
@@ -36,7 +34,7 @@ describe('ConfigFile Unit Tests', function() {
       expect(result).toStrictEqual(expectedConfigObj);
     });
 
-    test('when file has local extends (invalid), a config object is returned', function() {
+    test('when file has local extends (invalid), a config object is returned', () => {
       const filePath = './test/fixtures/extendsLocalInvalid/.npmpackagejsonlintrc.json';
 
       expect(() => {
@@ -44,7 +42,7 @@ describe('ConfigFile Unit Tests', function() {
       }).toThrow();
     });
 
-    test('when file has module extends (valid), a config object is returned', function() {
+    test('when file has module extends (valid), a config object is returned', () => {
       const expectedConfigObj = {
         'extends': 'npm-package-json-lint-config-default',
         'rules': {
@@ -84,7 +82,7 @@ describe('ConfigFile Unit Tests', function() {
       expect(result).toStrictEqual(expectedConfigObj);
     });
 
-    test('when file module extends (invalid), a config object is returned', function() {
+    test('when file module extends (invalid), a config object is returned', () => {
       const filePath = './test/fixtures/extendsModuleInvalid/.npmpackagejsonlintrc.json';
 
       expect(() => {
@@ -92,7 +90,7 @@ describe('ConfigFile Unit Tests', function() {
       }).toThrow();
     });
 
-    test('when file is rc file (json), a config object is returned', function() {
+    test('when file is rc file (json), a config object is returned', () => {
       jest.spyOn(Parser, 'parseJavaScriptFile');
       jest.spyOn(Parser, 'parseJsonFile');
       Parser.parseJsonFile.mockReturnValue({rules: {'require-name': 'error'}});
@@ -116,7 +114,7 @@ describe('ConfigFile Unit Tests', function() {
       expect(result).toStrictEqual(expectedConfigObj);
     });
 
-    test('when file is js file, a config object is returned', function() {
+    test('when file is js file, a config object is returned', () => {
       jest.spyOn(Parser, 'parseJsonFile');
       jest.spyOn(Parser, 'parseJavaScriptFile').mockReturnValue({rules: {'require-name': 'error'}});
 
@@ -141,7 +139,7 @@ describe('ConfigFile Unit Tests', function() {
       Parser.parseJavaScriptFile.mockRestore();
     });
 
-    test('when file is yaml file, an error is thrown', function() {
+    test('when file is yaml file, an error is thrown', () => {
       const filePath = './npmpackagejsonlint.config.yaml';
       jest.spyOn(Parser, 'parseJsonFile');
       jest.spyOn(Parser, 'parseJavaScriptFile');
@@ -156,8 +154,8 @@ describe('ConfigFile Unit Tests', function() {
     });
   });
 
-  describe('createEmptyConfig method', function() {
-    test('when called an empty config object is returned', function() {
+  describe('createEmptyConfig method', () => {
+    test('when called an empty config object is returned', () => {
       const result = ConfigFile.createEmptyConfig();
       const expected = {
         rules: {}
@@ -167,8 +165,8 @@ describe('ConfigFile Unit Tests', function() {
     });
   });
 
-  describe('loadFromPackageJson method', function() {
-    test('when package.json property does not exist, an empty config object is returned', function() {
+  describe('loadFromPackageJson method', () => {
+    test('when package.json property does not exist, an empty config object is returned', () => {
       jest.spyOn(Parser, 'parseJsonFile');
       Parser.parseJsonFile.mockReturnValue({name: 'name'});
 
@@ -187,7 +185,7 @@ describe('ConfigFile Unit Tests', function() {
       expect(result).toStrictEqual(expectedConfigObj);
     });
 
-    test('when package.json property does exist and is valid, a config object is returned', function() {
+    test('when package.json property does exist and is valid, a config object is returned', () => {
       jest.spyOn(Parser, 'parseJsonFile');
       Parser.parseJsonFile.mockReturnValue({
         name: 'name',

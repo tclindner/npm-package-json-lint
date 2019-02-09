@@ -1,11 +1,9 @@
-'use strict';
-
 const propertyOrder = require('./../../../src/validators/property-order');
 
-describe('property-order Unit Tests', function() {
-  describe('isInPreferredOrder method', function() {
-    describe('when the properties in the package.json file are in the desired order', function() {
-      test('true should be returned', function() {
+describe('property-order Unit Tests', () => {
+  describe('isInPreferredOrder method', () => {
+    describe('when the properties in the package.json file are in the desired order', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
@@ -23,8 +21,8 @@ describe('property-order Unit Tests', function() {
       });
     });
 
-    describe('when the properties in the package.json file are in the desired order, but the defaults are used', function() {
-      test('true should be returned', function() {
+    describe('when the properties in the package.json file are in the desired order, but the defaults are used', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
@@ -38,8 +36,8 @@ describe('property-order Unit Tests', function() {
       });
     });
 
-    describe('when the actual node list does not have the same number of nodes as the desired list', function() {
-      test('true should be returned', function() {
+    describe('when the actual node list does not have the same number of nodes as the desired list', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0'
@@ -56,8 +54,8 @@ describe('property-order Unit Tests', function() {
       });
     });
 
-    describe('when the actual node list is in a different order than desired', function() {
-      test('false should be returned', function() {
+    describe('when the actual node list is in a different order than desired', () => {
+      test('false should be returned', () => {
         const packageJson = {
           name: 'awesome-module',
           description: 'description',
@@ -75,8 +73,8 @@ describe('property-order Unit Tests', function() {
       });
     });
 
-    describe('when the actual node list is in a different order than desired', function() {
-      test('false should be returned', function() {
+    describe('when the actual node list is in a different order than desired', () => {
+      test('false should be returned', () => {
         const packageJson = {
           version: '1.0.0',
           name: 'awesome-module',
@@ -94,8 +92,8 @@ describe('property-order Unit Tests', function() {
       });
     });
 
-    describe('when the actual node list is in a different order than desired', function() {
-      test('true should be returned', function() {
+    describe('when the actual node list is in a different order than desired', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
@@ -114,8 +112,8 @@ describe('property-order Unit Tests', function() {
       });
     });
 
-    describe('when the actual node list is in a different order than desired', function() {
-      test('true should be returned', function() {
+    describe('when the actual node list is in a different order than desired', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
@@ -136,8 +134,8 @@ describe('property-order Unit Tests', function() {
       });
     });
 
-    describe('when the actual node list is in correct order, but has extra values in preferred order', function() {
-      test('true should be returned', function() {
+    describe('when the actual node list is in correct order, but has extra values in preferred order', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
@@ -160,8 +158,8 @@ describe('property-order Unit Tests', function() {
       });
     });
 
-    describe('when the actual node list is in correct order, but has extra values in preferred order', function() {
-      test('false should be returned', function() {
+    describe('when the actual node list is in correct order, but has extra values in preferred order', () => {
+      test('false should be returned', () => {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
@@ -186,8 +184,8 @@ describe('property-order Unit Tests', function() {
       });
     });
 
-    describe('when the actual node list is not in correct order and also has extra values in preferred order', function() {
-      test('false should be returned', function() {
+    describe('when the actual node list is not in correct order and also has extra values in preferred order', () => {
+      test('false should be returned', () => {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
@@ -211,8 +209,8 @@ describe('property-order Unit Tests', function() {
       });
     });
 
-    describe('when node is not in the preferred node list', function() {
-      test('true should be returned', function() {
+    describe('when node is not in the preferred node list', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
@@ -232,8 +230,8 @@ describe('property-order Unit Tests', function() {
       });
     });
 
-    describe('when node is not in the preferred node list', function() {
-      test('true should be returned', function() {
+    describe('when node is not in the preferred node list', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',

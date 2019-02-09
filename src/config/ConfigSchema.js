@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Top level config properties
  * @type {Object}

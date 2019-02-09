@@ -1,15 +1,13 @@
-'use strict';
-
 const ConfigValidator = require('./../../../src/config/ConfigValidator');
 const NpmPackageJsonLint = require('./../../../src/NpmPackageJsonLint');
 
 const linterContext = new NpmPackageJsonLint();
 
-describe('ConfigValidator Unit Tests', function() {
-  describe('validateRules method', function() {
-    describe('isArrayRuleConfigValid tests', function() {
-      describe('when a rule is an array rule and the first key is not equal to error, warning, or off', function() {
-        test('an error should be thrown', function() {
+describe('ConfigValidator Unit Tests', () => {
+  describe('validateRules method', () => {
+    describe('isArrayRuleConfigValid tests', () => {
+      describe('when a rule is an array rule and the first key is not equal to error, warning, or off', () => {
+        test('an error should be thrown', () => {
           const ruleConfig = {
             'valid-values-author': [true, ['Thomas', 'Lindner', 'Thomas Lindner']]
           };
@@ -21,8 +19,8 @@ describe('ConfigValidator Unit Tests', function() {
         });
       });
 
-      describe('when a rule is an array rule and the second key is not an Array', function() {
-        test('an error should be thrown', function() {
+      describe('when a rule is an array rule and the second key is not an Array', () => {
+        test('an error should be thrown', () => {
           const ruleConfig = {
             'valid-values-author': ['error', 'Thomas']
           };
@@ -34,8 +32,8 @@ describe('ConfigValidator Unit Tests', function() {
         });
       });
 
-      describe('when a valid array rule config is passed', function() {
-        test('true should be returned', function() {
+      describe('when a valid array rule config is passed', () => {
+        test('true should be returned', () => {
           const ruleConfig = {
             'prefer-property-order': ['error', ['name', 'version']]
           };
@@ -45,8 +43,8 @@ describe('ConfigValidator Unit Tests', function() {
         });
       });
 
-      describe('when a valid array rule config is passed with a value of off', function() {
-        test('true should be returned', function() {
+      describe('when a valid array rule config is passed with a value of off', () => {
+        test('true should be returned', () => {
           const ruleConfig = {
             'prefer-property-order': 'off'
           };
@@ -56,8 +54,8 @@ describe('ConfigValidator Unit Tests', function() {
         });
       });
 
-      describe('when a invalid array rule config is passed with a value of error', function() {
-        test('true should be returned', function() {
+      describe('when a invalid array rule config is passed with a value of error', () => {
+        test('true should be returned', () => {
           const ruleConfig = {
             'valid-values-author': 'error'
           };
@@ -70,9 +68,9 @@ describe('ConfigValidator Unit Tests', function() {
       });
     });
 
-    describe('isObjectRuleConfigValid tests', function() {
-      describe('when a rule is an object rule and the first key is not equal to error, warning, or off', function() {
-        test('an error should be thrown', function() {
+    describe('isObjectRuleConfigValid tests', () => {
+      describe('when a rule is an object rule and the first key is not equal to error, warning, or off', () => {
+        test('an error should be thrown', () => {
           const ruleConfig = {
             'description-format': [true, {requireCapitalFirstLetter: true, requireEndingPeriod: true}]
           };
@@ -84,8 +82,8 @@ describe('ConfigValidator Unit Tests', function() {
         });
       });
 
-      describe('when a rule is an object rule and the second key is not an Object', function() {
-        test('an error should be thrown', function() {
+      describe('when a rule is an object rule and the second key is not an Object', () => {
+        test('an error should be thrown', () => {
           const ruleConfig = {
             'description-format': ['error', 'Thomas']
           };
@@ -97,8 +95,8 @@ describe('ConfigValidator Unit Tests', function() {
         });
       });
 
-      describe('when a valid object rule config is passed', function() {
-        test('true should be returned', function() {
+      describe('when a valid object rule config is passed', () => {
+        test('true should be returned', () => {
           const ruleConfig = {
             'description-format': ['error', {requireCapitalFirstLetter: true, requireEndingPeriod: true}]
           };
@@ -108,8 +106,8 @@ describe('ConfigValidator Unit Tests', function() {
         });
       });
 
-      describe('when a valid object rule config is passed with a value of off', function() {
-        test('true should be returned', function() {
+      describe('when a valid object rule config is passed with a value of off', () => {
+        test('true should be returned', () => {
           const ruleConfig = {
             'description-format': 'off'
           };
@@ -119,8 +117,8 @@ describe('ConfigValidator Unit Tests', function() {
         });
       });
 
-      describe('when a invalid object rule config is passed with a value of error', function() {
-        test('true should be returned', function() {
+      describe('when a invalid object rule config is passed with a value of error', () => {
+        test('true should be returned', () => {
           const ruleConfig = {
             'description-format': 'error'
           };
@@ -133,9 +131,9 @@ describe('ConfigValidator Unit Tests', function() {
       });
     });
 
-    describe('isStandardRuleConfigValid tests', function() {
-      describe('when a standard rule is passed with a value of error', function() {
-        test('true should be returned', function() {
+    describe('isStandardRuleConfigValid tests', () => {
+      describe('when a standard rule is passed with a value of error', () => {
+        test('true should be returned', () => {
           const ruleConfig = {
             'require-author': 'error'
           };
@@ -145,8 +143,8 @@ describe('ConfigValidator Unit Tests', function() {
         });
       });
 
-      describe('when a standard rule is passed with a value of warning', function() {
-        test('true should be returned', function() {
+      describe('when a standard rule is passed with a value of warning', () => {
+        test('true should be returned', () => {
           const ruleConfig = {
             'require-author': 'warning'
           };
@@ -156,8 +154,8 @@ describe('ConfigValidator Unit Tests', function() {
         });
       });
 
-      describe('when a standard rule is passed with a value of off', function() {
-        test('true should be returned', function() {
+      describe('when a standard rule is passed with a value of off', () => {
+        test('true should be returned', () => {
           const ruleConfig = {
             'require-author': 'off'
           };
@@ -167,8 +165,8 @@ describe('ConfigValidator Unit Tests', function() {
         });
       });
 
-      describe('when a rule is set to a boolean', function() {
-        test('an error should be thrown', function() {
+      describe('when a rule is set to a boolean', () => {
+        test('an error should be thrown', () => {
           const ruleConfig = {
             'require-author': true
           };
@@ -180,8 +178,8 @@ describe('ConfigValidator Unit Tests', function() {
         });
       });
 
-      describe('when a rule is set to a number', function() {
-        test('an error should be thrown', function() {
+      describe('when a rule is set to a number', () => {
+        test('an error should be thrown', () => {
           const dummyValue = 1;
           const ruleConfig = {
             'require-author': dummyValue
@@ -196,9 +194,9 @@ describe('ConfigValidator Unit Tests', function() {
     });
   });
 
-  describe('validate method', function() {
-    describe('when validate is called with a valid schema and rules', function() {
-      test('all top level items, an exception should not be thrown', function() {
+  describe('validate method', () => {
+    describe('when validate is called with a valid schema and rules', () => {
+      test('all top level items, an exception should not be thrown', () => {
         const config = {
           'extends': 'value',
           'rules': {},
@@ -210,7 +208,7 @@ describe('ConfigValidator Unit Tests', function() {
         ConfigValidator.validate(config, source, linterContext);
       });
 
-      test('extends and rules only for top level items, an exception should not be thrown', function() {
+      test('extends and rules only for top level items, an exception should not be thrown', () => {
         const config = {
           'extends': 'value',
           'rules': {}
@@ -221,7 +219,7 @@ describe('ConfigValidator Unit Tests', function() {
         ConfigValidator.validate(config, source, linterContext);
       });
 
-      test('extends and root only for top level items, an exception should not be thrown', function() {
+      test('extends and root only for top level items, an exception should not be thrown', () => {
         const config = {
           'extends': 'value',
           'root': true
@@ -232,7 +230,7 @@ describe('ConfigValidator Unit Tests', function() {
         ConfigValidator.validate(config, source, linterContext);
       });
 
-      test('rules and root for top level items, an exception should not be thrown', function() {
+      test('rules and root for top level items, an exception should not be thrown', () => {
         const config = {
           rules: {},
           root: true
@@ -243,7 +241,7 @@ describe('ConfigValidator Unit Tests', function() {
         ConfigValidator.validate(config, source, linterContext);
       });
 
-      test('extends as array items, an exception should not be thrown', function() {
+      test('extends as array items, an exception should not be thrown', () => {
         const config = {
           'extends': ['value', 'value2'],
           'rules': {},
@@ -256,8 +254,8 @@ describe('ConfigValidator Unit Tests', function() {
       });
     });
 
-    describe('when validate is called with an invalid schema and valid rules', function() {
-      test('extends is bool, an error should be thrown', function() {
+    describe('when validate is called with an invalid schema and valid rules', () => {
+      test('extends is bool, an error should be thrown', () => {
         const config = {
           'extends': false,
           'rules': {},
@@ -271,7 +269,7 @@ describe('ConfigValidator Unit Tests', function() {
         }).toThrow('npm-package-json-lint configuration in cli is invalid:');
       });
 
-      test('rules is bool, an error should be thrown', function() {
+      test('rules is bool, an error should be thrown', () => {
         const config = {
           'extends': ['value', 'value2'],
           'rules': false,
@@ -285,7 +283,7 @@ describe('ConfigValidator Unit Tests', function() {
         }).toThrow('npm-package-json-lint configuration in cli is invalid:');
       });
 
-      test('root is string, an error should be thrown', function() {
+      test('root is string, an error should be thrown', () => {
         const config = {
           'extends': ['value', 'value2'],
           'rules': {},
@@ -300,8 +298,8 @@ describe('ConfigValidator Unit Tests', function() {
       });
     });
 
-    describe('when validate is called with a valid schema and invalid rules', function() {
-      test('an error should be thrown', function() {
+    describe('when validate is called with a valid schema and invalid rules', () => {
+      test('an error should be thrown', () => {
         const config = {
           'extends': 'value',
           'rules': {},

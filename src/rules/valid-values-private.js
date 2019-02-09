@@ -1,7 +1,6 @@
-'use strict';
-
 const LintIssue = require('./../LintIssue');
-const isValidValue = require('./../validators/valid-values').isValidValue;
+const {isValidValue} = require('./../validators/valid-values');
+
 const lintId = 'valid-values-private';
 const nodeName = 'private';
 const message = 'Invalid value for private';
@@ -14,7 +13,7 @@ const ruleType = 'array';
  * @param  {Array}    validValues       An array of valid values
  * @return {Object|Boolean}             LintIssue object if invalid. True if valid
  */
-const lint = function(packageJsonData, severity, validValues) {
+const lint = (packageJsonData, severity, validValues) => {
   if (!isValidValue(packageJsonData, nodeName, packageJsonData[nodeName], validValues)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }

@@ -1,18 +1,16 @@
-'use strict';
-
 const ruleModule = require('./../../../src/rules/valid-values-author');
-const lint = ruleModule.lint;
-const ruleType = ruleModule.ruleType;
 
-describe('valid-values-author Unit Tests', function() {
-  describe('a rule type value should be exported', function() {
-    test('it should equal "array"', function() {
+const {lint, ruleType} = ruleModule;
+
+describe('valid-values-author Unit Tests', () => {
+  describe('a rule type value should be exported', () => {
+    test('it should equal "array"', () => {
       expect(ruleType).toStrictEqual('array');
     });
   });
 
-  describe('when package.json has string node with invalid value', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has string node with invalid value', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         author: 'LastName, FirstName'
       };
@@ -29,8 +27,8 @@ describe('valid-values-author Unit Tests', function() {
     });
   });
 
-  describe('when package.json has string node with valid value', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has string node with valid value', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         author: 'LastName, FirstName'
       };
@@ -45,8 +43,8 @@ describe('valid-values-author Unit Tests', function() {
     });
   });
 
-  describe('when package.json has object node with invalid value', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has object node with invalid value', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         author: {
           name: 'LastName, FirstName',
@@ -66,8 +64,8 @@ describe('valid-values-author Unit Tests', function() {
     });
   });
 
-  describe('when package.json has object node with valid value', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has object node with valid value', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         author: {
           name: 'LastName, FirstName',
@@ -85,8 +83,8 @@ describe('valid-values-author Unit Tests', function() {
     });
   });
 
-  describe('when package.json has object node but is missing the name property', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has object node but is missing the name property', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         author: {
           names: 'LastName, FirstName',
@@ -106,8 +104,8 @@ describe('valid-values-author Unit Tests', function() {
     });
   });
 
-  describe('when package.json has node but is invalid type', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has node but is invalid type', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         author: true
       };
@@ -124,8 +122,8 @@ describe('valid-values-author Unit Tests', function() {
     });
   });
 
-  describe('when package.json does not have node', function() {
-    test('true should be returned', function() {
+  describe('when package.json does not have node', () => {
+    test('true should be returned', () => {
       const packageJsonData = {};
       const validValues = [
         'FirstName LastName',

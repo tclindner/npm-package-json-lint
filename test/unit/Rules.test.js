@@ -1,5 +1,3 @@
-'use strict';
-
 const chalk = require('chalk');
 const fs = require('fs');
 const path = require('path');
@@ -8,10 +6,10 @@ const Rules = require('./../../src/Rules');
 jest.mock('fs');
 jest.mock('path');
 
-describe('Rules Unit Tests', function() {
-  describe('_registerRule method', function() {
-    describe('when a ruleId and ruleModule are passed in', function() {
-      test('the rules object contains the rule as a key and the module path as a value', function() {
+describe('Rules Unit Tests', () => {
+  describe('_registerRule method', () => {
+    describe('when a ruleId and ruleModule are passed in', () => {
+      test('the rules object contains the rule as a key and the module path as a value', () => {
         const rules = new Rules();
         const firstIndex = 0;
 
@@ -22,9 +20,9 @@ describe('Rules Unit Tests', function() {
     });
   });
 
-  describe('get method', function() {
-    describe('when get is called for an invalid ruleId', function() {
-      test('an error should be thrown', function() {
+  describe('get method', () => {
+    describe('when get is called for an invalid ruleId', () => {
+      test('an error should be thrown', () => {
         fs.readdirSync.mockReturnValue(['version-type.js', 'require-version.js']);
         path.join
           .mockReturnValueOnce('c/git/rules')
@@ -42,9 +40,9 @@ describe('Rules Unit Tests', function() {
     });
   });
 
-  describe('load method', function() {
-    describe('when load is called', function() {
-      test('an object of rules should be returned', function() {
+  describe('load method', () => {
+    describe('when load is called', () => {
+      test('an object of rules should be returned', () => {
         fs.readdirSync.mockReturnValue(['version-type.js', 'require-version.js']);
         path.join
           .mockReturnValueOnce('c/git/rules')
@@ -59,8 +57,8 @@ describe('Rules Unit Tests', function() {
       });
     });
 
-    describe('when load is called but a fs error occurs', function() {
-      test('false is returned', function() {
+    describe('when load is called but a fs error occurs', () => {
+      test('false is returned', () => {
         fs.readdirSync.mockImplementation(() => {
           throw new Error('Error while loading rules from rules directory - ');
         });
@@ -74,9 +72,9 @@ describe('Rules Unit Tests', function() {
     });
   });
 
-  describe('getRules method', function() {
-    describe('when getRules is called', function() {
-      test('the rules object should be returned', function() {
+  describe('getRules method', () => {
+    describe('when getRules is called', () => {
+      test('the rules object should be returned', () => {
         const rules = new Rules();
         rules._registerRule('ruleId', 'ruleModule');
 
@@ -84,8 +82,8 @@ describe('Rules Unit Tests', function() {
       });
     });
 
-    describe('when load is called but a fs error occurs', function() {
-      test('false is returned', function() {
+    describe('when load is called but a fs error occurs', () => {
+      test('false is returned', () => {
         fs.readdirSync.mockImplementation(() => {
           throw new Error('Error while loading rules from rules directory - ');
         });

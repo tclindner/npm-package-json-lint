@@ -1,13 +1,12 @@
-'use strict';
-
-const areVersRangesValid = require('./../validators/dependency-audit').areVersRangesValid;
+const {areVersRangesValid} = require('./../validators/dependency-audit');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'prefer-tilde-version-dependencies';
 const nodeName = 'dependencies';
 const message = 'You are using an invalid version range. Please use ~.';
 const ruleType = 'standard';
 
-const lint = function(packageJsonData, severity) {
+const lint = (packageJsonData, severity) => {
   const rangeSpecifier = '~';
 
   if (!areVersRangesValid(packageJsonData, nodeName, rangeSpecifier)) {

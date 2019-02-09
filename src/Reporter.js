@@ -1,4 +1,4 @@
-'use strict';
+/* eslint no-restricted-syntax: 'off' */
 
 const chalk = require('chalk');
 const plur = require('plur');
@@ -15,7 +15,7 @@ const oneFile = 1;
  * @returns {Undefined} No return
  * @private
  */
-const printResultSetIssues = function(issues) {
+const printResultSetIssues = (issues) => {
   for (const issue of issues) {
     console.log(issue.toString());
   }
@@ -30,11 +30,8 @@ const printResultSetIssues = function(issues) {
  * @returns {Undefined} No results
  * @private
  */
-const printIndividualResultSet = function(resultSet, quiet) {
-  const filePath = resultSet.filePath;
-  const issues = resultSet.issues;
-  const errorCount = resultSet.errorCount;
-  const warningCount = resultSet.warningCount;
+const printIndividualResultSet = (resultSet, quiet) => {
+  const {filePath, issues, errorCount, warningCount} = resultSet;
 
   if (errorCount > zeroIssues || (!quiet && warningCount > zeroIssues)) {
     console.log('');
@@ -63,9 +60,8 @@ const printIndividualResultSet = function(resultSet, quiet) {
  * @returns {Undefined} No results
  * @private
  */
-const printTotals = function(cliEngineOutput, quiet) {
-  const errorCount = cliEngineOutput.errorCount;
-  const warningCount = cliEngineOutput.warningCount;
+const printTotals = (cliEngineOutput, quiet) => {
+  const {errorCount, warningCount} = cliEngineOutput;
 
   if (errorCount > zeroIssues || warningCount > zeroIssues) {
     const errorCountMessage = `${errorCount} ${plur('error', errorCount)}`;

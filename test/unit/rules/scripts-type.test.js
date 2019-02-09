@@ -1,18 +1,16 @@
-'use strict';
-
 const ruleModule = require('./../../../src/rules/scripts-type');
-const lint = ruleModule.lint;
-const ruleType = ruleModule.ruleType;
 
-describe('scripts-type Unit Tests', function() {
-  describe('a rule type value should be exported', function() {
-    test('it should equal "standard"', function() {
+const {lint, ruleType} = ruleModule;
+
+describe('scripts-type Unit Tests', () => {
+  describe('a rule type value should be exported', () => {
+    test('it should equal "standard"', () => {
       expect(ruleType).toStrictEqual('standard');
     });
   });
 
-  describe('when package.json has node with correct type', function() {
-    test('true should be returned', function() {
+  describe('when package.json has node with correct type', () => {
+    test('true should be returned', () => {
       const packageJsonData = {
         scripts: {
           myscript: 'echo hello'
@@ -24,8 +22,8 @@ describe('scripts-type Unit Tests', function() {
     });
   });
 
-  describe('when package.json has node with incorrect type', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has node with incorrect type', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         scripts: 'scripts'
       };
@@ -38,8 +36,8 @@ describe('scripts-type Unit Tests', function() {
     });
   });
 
-  describe('when package.json has node with correct type, but individual script has invalid type (bool)', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has node with correct type, but individual script has invalid type (bool)', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         scripts: {
           myscript: false
@@ -54,8 +52,8 @@ describe('scripts-type Unit Tests', function() {
     });
   });
 
-  describe('when package.json has node with correct type, but individual script has invalid type (object)', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has node with correct type, but individual script has invalid type (object)', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         scripts: {
           myscript: {
@@ -72,8 +70,8 @@ describe('scripts-type Unit Tests', function() {
     });
   });
 
-  describe('when package.json does not have node', function() {
-    test('true should be returned', function() {
+  describe('when package.json does not have node', () => {
+    test('true should be returned', () => {
       const packageJsonData = {};
       const response = lint(packageJsonData, 'error');
 

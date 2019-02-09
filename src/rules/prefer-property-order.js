@@ -1,13 +1,12 @@
-'use strict';
-
-const isInPreferredOrder = require('./../validators/property-order').isInPreferredOrder;
+const {isInPreferredOrder} = require('./../validators/property-order');
 const LintIssue = require('./../LintIssue');
+
 const lintId = 'prefer-property-order';
 const nodeName = '';
 const message = 'Your package.json properties are not in the desired order.';
 const ruleType = 'array';
 
-const lint = function(packageJsonData, severity, preferredOrder) {
+const lint = (packageJsonData, severity, preferredOrder) => {
   const result = isInPreferredOrder(packageJsonData, preferredOrder);
 
   if (!result.status) {

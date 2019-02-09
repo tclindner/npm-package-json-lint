@@ -1,18 +1,16 @@
-'use strict';
-
 const ruleModule = require('./../../../src/rules/no-restricted-pre-release-dependencies');
-const lint = ruleModule.lint;
-const ruleType = ruleModule.ruleType;
 
-describe('no-restricted-pre-release-dependencies Unit Tests', function() {
-  describe('a rule type value should be exported', function() {
-    test('it should equal "array"', function() {
+const {lint, ruleType} = ruleModule;
+
+describe('no-restricted-pre-release-dependencies Unit Tests', () => {
+  describe('a rule type value should be exported', () => {
+    test('it should equal "array"', () => {
       expect(ruleType).toStrictEqual('array');
     });
   });
 
-  describe('when package.json has node with a restricted value', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has node with a restricted value', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         dependencies: {
           'npm-package-json-lint': '^1.0.0-beta'
@@ -31,8 +29,8 @@ describe('no-restricted-pre-release-dependencies Unit Tests', function() {
     });
   });
 
-  describe('when package.json has node with a valid value', function() {
-    test('LintIssue object should be returned', function() {
+  describe('when package.json has node with a valid value', () => {
+    test('LintIssue object should be returned', () => {
       const packageJsonData = {
         dependencies: {
           'grunt-npm-package-json-lint': '^1.0.0'
@@ -48,8 +46,8 @@ describe('no-restricted-pre-release-dependencies Unit Tests', function() {
     });
   });
 
-  describe('when package.json does not have node', function() {
-    test('true should be returned', function() {
+  describe('when package.json does not have node', () => {
+    test('true should be returned', () => {
       const packageJsonData = {};
       const invldPreReleaseDeps = [
         'npm-package-json-lint',

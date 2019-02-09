@@ -1,14 +1,12 @@
-'use strict';
-
 const chalk = require('chalk');
 const Reporter = require('./../../src/Reporter');
 
 /* eslint-disable no-magic-numbers */
 
-describe('Reporter Unit Tests', function() {
-  describe('write method', function() {
-    describe('when results are for a single file', function() {
-      test('and zero errors, zero warnings exist, and quiet is false. Spy should be 0', function() {
+describe('Reporter Unit Tests', () => {
+  describe('write method', () => {
+    describe('when results are for a single file', () => {
+      test('and zero errors, zero warnings exist, and quiet is false. Spy should be 0', () => {
         const results = {
           results: [
             {
@@ -31,7 +29,7 @@ describe('Reporter Unit Tests', function() {
         consoleMock.mockRestore();
       });
 
-      test('and one error, zero warning exist, and quiet is false. Spy should be 5', function() {
+      test('and one error, zero warning exist, and quiet is false. Spy should be 5', () => {
         const results = {
           results: [
             {
@@ -65,7 +63,7 @@ describe('Reporter Unit Tests', function() {
         consoleMock.mockRestore();
       });
 
-      test('and one error, one warning exist, and quiet is false. Spy should be 6', function() {
+      test('and one error, one warning exist, and quiet is false. Spy should be 6', () => {
         const results = {
           results: [
             {
@@ -105,7 +103,7 @@ describe('Reporter Unit Tests', function() {
         consoleMock.mockRestore();
       });
 
-      test('and one error, one warning exist (filtered out), and quiet is true. Spy should be 4', function() {
+      test('and one error, one warning exist (filtered out), and quiet is true. Spy should be 4', () => {
         const results = {
           results: [
             {
@@ -138,7 +136,7 @@ describe('Reporter Unit Tests', function() {
         consoleMock.mockRestore();
       });
 
-      test('and two errors, two warnings exist, and quiet is false. Spy should be 8', function() {
+      test('and two errors, two warnings exist, and quiet is false. Spy should be 8', () => {
         const results = {
           results: [
             {
@@ -191,8 +189,8 @@ describe('Reporter Unit Tests', function() {
       });
     });
 
-    describe('when results are for more than one file', function() {
-      test('and one error in each file, zero warnings exist, and quiet is false. Spy should be 14', function() {
+    describe('when results are for more than one file', () => {
+      test('and one error in each file, zero warnings exist, and quiet is false. Spy should be 14', () => {
         const results = {
           results: [
             {
@@ -248,7 +246,7 @@ describe('Reporter Unit Tests', function() {
         consoleMock.mockRestore();
       });
 
-      test('and one error in each file, one warning exist (filtered out), and quiet is true. Spy should be 11', function() {
+      test('and one error in each file, one warning exist (filtered out), and quiet is true. Spy should be 11', () => {
         const results = {
           results: [
             {

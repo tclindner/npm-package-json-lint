@@ -1,5 +1,3 @@
-'use strict';
-
 /* eslint max-lines: 'off', id-length: 'off' */
 
 const fs = require('fs');
@@ -12,10 +10,10 @@ const linterContext = {};
 jest.mock('os');
 jest.mock('./../../src/config/ConfigValidator');
 
-describe('Config Unit Tests', function() {
-  describe('get method tests', function() {
-    describe('when each source has a different rule', function() {
-      test('a config object should returned with all rules', function() {
+describe('Config Unit Tests', () => {
+  describe('get method tests', () => {
+    describe('when each source has a different rule', () => {
+      test('a config object should returned with all rules', () => {
         const configFile = './configfile';
         const options = {
           configFile,
@@ -53,8 +51,8 @@ describe('Config Unit Tests', function() {
       });
     });
 
-    describe('when package.json property does not have rules', function() {
-      test('a config object should returned with rules from other sources', function() {
+    describe('when package.json property does not have rules', () => {
+      test('a config object should returned with rules from other sources', () => {
         const configFile = './configfile';
         const options = {
           configFile,
@@ -92,8 +90,8 @@ describe('Config Unit Tests', function() {
       });
     });
 
-    describe('when project hierarchy does not have rules', function() {
-      test('a config object should returned with rules from other sources', function() {
+    describe('when project hierarchy does not have rules', () => {
+      test('a config object should returned with rules from other sources', () => {
         const configFile = './configfile';
         const options = {
           configFile,
@@ -130,8 +128,8 @@ describe('Config Unit Tests', function() {
       });
     });
 
-    describe('when cli specified config does not have rules', function() {
-      test('a config object should returned with rules from other sources', function() {
+    describe('when cli specified config does not have rules', () => {
+      test('a config object should returned with rules from other sources', () => {
         const configFile = './configfile';
         const options = {
           configFile,
@@ -168,8 +166,8 @@ describe('Config Unit Tests', function() {
       });
     });
 
-    describe('when cli specified rules does not exist', function() {
-      test('a config object should returned with rules from other sources', function() {
+    describe('when cli specified rules does not exist', () => {
+      test('a config object should returned with rules from other sources', () => {
         const configFile = './configfile';
         const options = {
           configFile,
@@ -204,8 +202,8 @@ describe('Config Unit Tests', function() {
       });
     });
 
-    describe('when no rules exist in package.json, hierarchy, and cli', function() {
-      test('a config object should returned from user home', function() {
+    describe('when no rules exist in package.json, hierarchy, and cli', () => {
+      test('a config object should returned from user home', () => {
         const configFile = './configfile';
         const options = {
           configFile,
@@ -240,8 +238,8 @@ describe('Config Unit Tests', function() {
     });
   });
 
-  describe('loadCliSpecifiedCfgFile method tests', function() {
-    test('no passed config, empty config object should be returned', function() {
+  describe('loadCliSpecifiedCfgFile method tests', () => {
+    test('no passed config, empty config object should be returned', () => {
       const configFile = '';
       const options = {
         configFile,
@@ -263,7 +261,7 @@ describe('Config Unit Tests', function() {
       expect(result).toStrictEqual(expected);
     });
 
-    test('scoped module, config object should be returned', function() {
+    test('scoped module, config object should be returned', () => {
       const configFile = '@myscope/npm-package-json-lint-config-awesome';
       const options = {
         configFile,
@@ -286,7 +284,7 @@ describe('Config Unit Tests', function() {
       expect(result).toStrictEqual(expected);
     });
 
-    test('with resolvable module, config object should be returned', function() {
+    test('with resolvable module, config object should be returned', () => {
       const configFile = 'eslint-config-tc';
       const options = {
         configFile,
@@ -308,7 +306,7 @@ describe('Config Unit Tests', function() {
       expect(result).toStrictEqual(expected);
     });
 
-    test('with real local file, config object should be returned', function() {
+    test('with real local file, config object should be returned', () => {
       const configFile = './test/fixtures/valid/.npmpackagejsonlintrc.json';
       const options = {
         configFile,
@@ -331,9 +329,9 @@ describe('Config Unit Tests', function() {
     });
   });
 
-  describe('loadCliSpecifiedCfgFile method tests', function() {
-    describe('when called without config object', function() {
-      test('an empty config object should returned', function() {
+  describe('loadCliSpecifiedCfgFile method tests', () => {
+    describe('when called without config object', () => {
+      test('an empty config object should returned', () => {
         const configFile = '';
         const options = {
           configFile,
@@ -356,8 +354,8 @@ describe('Config Unit Tests', function() {
       });
     });
 
-    describe('when called with config file path that is resolvable', function() {
-      test('the config object should returned', function() {
+    describe('when called with config file path that is resolvable', () => {
+      test('the config object should returned', () => {
         const configFile = 'eslint-config-tc';
         const options = {
           configFile,
@@ -383,8 +381,8 @@ describe('Config Unit Tests', function() {
       });
     });
 
-    describe('when called with config file path starts with @', function() {
-      test('the config object should returned', function() {
+    describe('when called with config file path starts with @', () => {
+      test('the config object should returned', () => {
         const configFile = '@tclindner/eslint-config-tc';
         const options = {
           configFile,
@@ -410,8 +408,8 @@ describe('Config Unit Tests', function() {
       });
     });
 
-    describe('when called with config file path is not resolvable and does not start with @', function() {
-      test('the config object should returned', function() {
+    describe('when called with config file path is not resolvable and does not start with @', () => {
+      test('the config object should returned', () => {
         const configFile = 'npm-package-json-lint-config-my-awesome-config';
         const options = {
           configFile,
@@ -438,9 +436,9 @@ describe('Config Unit Tests', function() {
     });
   });
 
-  describe('getUserHomeConfig method tests', function() {
-    describe('when called and personalConfig cache exists', function() {
-      test('the peronalConfig object should be returned returned', function() {
+  describe('getUserHomeConfig method tests', () => {
+    describe('when called and personalConfig cache exists', () => {
+      test('the peronalConfig object should be returned returned', () => {
         const configFile = '';
         const options = {
           configFile,
@@ -472,8 +470,8 @@ describe('Config Unit Tests', function() {
       });
     });
 
-    describe('when called and personalConfig cache does not exist', function() {
-      test('and rc file does, the config object should returned', function() {
+    describe('when called and personalConfig cache does not exist', () => {
+      test('and rc file does, the config object should returned', () => {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -486,7 +484,7 @@ describe('Config Unit Tests', function() {
 
         const fsExistsMock = jest.spyOn(fs, 'existsSync').mockReturnValue(true);
         jest.spyOn(fs, 'statSync').mockReturnValue({
-          isFile: function() {
+          isFile() {
             return true;
           }
         });
@@ -514,7 +512,7 @@ describe('Config Unit Tests', function() {
         expect(config.personalConfig).toStrictEqual(expectedConfigObj);
       });
 
-      test('and rc file does not, JavaScript config does, the config object should returned', function() {
+      test('and rc file does not, JavaScript config does, the config object should returned', () => {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -529,7 +527,7 @@ describe('Config Unit Tests', function() {
           .mockReturnValueOnce(false)
           .mockReturnValueOnce(true);
         jest.spyOn(fs, 'statSync').mockReturnValue({
-          isFile: function() {
+          isFile() {
             return true;
           }
         });
@@ -558,7 +556,7 @@ describe('Config Unit Tests', function() {
         expect(config.personalConfig).toStrictEqual(expectedConfigObj);
       });
 
-      test('and rc/js config files do not exist, empty object should returned', function() {
+      test('and rc/js config files do not exist, empty object should returned', () => {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -591,9 +589,9 @@ describe('Config Unit Tests', function() {
     });
   });
 
-  describe('getProjectHierarchyConfig method tests', function() {
-    describe('when called', function() {
-      test('and package.json prop exists and is root, the config object should returned', function() {
+  describe('getProjectHierarchyConfig method tests', () => {
+    describe('when called', () => {
+      test('and package.json prop exists and is root, the config object should returned', () => {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -608,7 +606,7 @@ describe('Config Unit Tests', function() {
         const dirNameMock = jest.spyOn(path, 'dirname').mockReturnValue('./npm-package-json-lint/');
         const fsExistsMock = jest.spyOn(fs, 'existsSync').mockReturnValue(true);
         const fsStatMock = jest.spyOn(fs, 'statSync').mockReturnValue({
-          isFile: function() {
+          isFile() {
             return true;
           }
         });
@@ -645,7 +643,7 @@ describe('Config Unit Tests', function() {
         fsStatMock.mockRestore();
       });
 
-      test('and package.json prop exists and root is not set, the config object should returned', function() {
+      test('and package.json prop exists and root is not set, the config object should returned', () => {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -667,7 +665,7 @@ describe('Config Unit Tests', function() {
         expect(result).toStrictEqual(expectedConfigObj);
       });
 
-      test('and package.json prop exists and has no prop, the config object should returned', function() {
+      test('and package.json prop exists and has no prop, the config object should returned', () => {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -682,7 +680,7 @@ describe('Config Unit Tests', function() {
         const dirNameMock = jest.spyOn(path, 'dirname').mockReturnValue('./npm-package-json-lint/');
         const fsExistsMock = jest.spyOn(fs, 'existsSync').mockReturnValue(true);
         const fsStatMock = jest.spyOn(fs, 'statSync').mockReturnValue({
-          isFile: function() {
+          isFile() {
             return true;
           }
         });
@@ -720,7 +718,7 @@ describe('Config Unit Tests', function() {
         fsStatMock.mockRestore();
       });
 
-      test('and rc file does and is root, the config object should returned', function() {
+      test('and rc file does and is root, the config object should returned', () => {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -737,7 +735,7 @@ describe('Config Unit Tests', function() {
           .mockReturnValueOnce(false)
           .mockReturnValueOnce(true);
         const fsStatMock = jest.spyOn(fs, 'statSync').mockReturnValue({
-          isFile: function() {
+          isFile() {
             return true;
           }
         });
@@ -773,7 +771,7 @@ describe('Config Unit Tests', function() {
         fsStatMock.mockRestore();
       });
 
-      test('and rc file does and is not root, the config object should returned', function() {
+      test('and rc file does and is not root, the config object should returned', () => {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -797,7 +795,7 @@ describe('Config Unit Tests', function() {
           .mockReturnValueOnce(false)
           .mockReturnValueOnce(true);
         const fsStatMock = jest.spyOn(fs, 'statSync').mockReturnValue({
-          isFile: function() {
+          isFile() {
             return true;
           }
         });
@@ -833,7 +831,7 @@ describe('Config Unit Tests', function() {
         fsStatMock.mockRestore();
       });
 
-      test('and rc file does not, JavaScript config does and is root, the config object should returned', function() {
+      test('and rc file does not, JavaScript config does and is root, the config object should returned', () => {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -851,7 +849,7 @@ describe('Config Unit Tests', function() {
           .mockReturnValueOnce(false)
           .mockReturnValueOnce(true);
         const fsStatMock = jest.spyOn(fs, 'statSync').mockReturnValue({
-          isFile: function() {
+          isFile() {
             return true;
           }
         });
@@ -888,7 +886,7 @@ describe('Config Unit Tests', function() {
         fsStatMock.mockRestore();
       });
 
-      test('and rc/js config files do not exist, empty object should returned', function() {
+      test('and rc/js config files do not exist, empty object should returned', () => {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -933,7 +931,7 @@ describe('Config Unit Tests', function() {
         fsStatMock.mockRestore();
       });
 
-      test('and pkg prop does not exist, config files do, but useConfigFiles is false, then empty config object should returned', function() {
+      test('and pkg prop does not exist, config files do, but useConfigFiles is false, then empty config object should returned', () => {
         const options = {
           configFile: '',
           cwd: process.cwd(),
@@ -950,7 +948,7 @@ describe('Config Unit Tests', function() {
           .mockReturnValueOnce('/home');
         const fsExistsMock = jest.spyOn(fs, 'existsSync').mockReturnValue(true);
         const fsStatMock = jest.spyOn(fs, 'statSync').mockReturnValue({
-          isFile: function() {
+          isFile() {
             return true;
           }
         });

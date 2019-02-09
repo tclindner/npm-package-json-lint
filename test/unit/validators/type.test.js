@@ -1,11 +1,9 @@
-'use strict';
-
 const type = require('./../../../src/validators/type');
 
-describe('type Unit Tests', function() {
-  describe('isArray method', function() {
-    describe('when the node does not exist in the package.json file', function() {
-      test('true should be returned', function() {
+describe('type Unit Tests', () => {
+  describe('isArray method', () => {
+    describe('when the node does not exist in the package.json file', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: ['awesome-module']
         };
@@ -15,8 +13,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is a string', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file and it is a string', () => {
+      test('false should be returned', () => {
         const packageJson = {
           name: 'awesome-module'
         };
@@ -26,8 +24,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is a boolean', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file and it is a boolean', () => {
+      test('false should be returned', () => {
         const packageJson = {
           name: true
         };
@@ -37,8 +35,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is an object', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file and it is an object', () => {
+      test('false should be returned', () => {
         const packageJson = {
           name: {}
         };
@@ -48,8 +46,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is an array', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file and it is an array', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: ['awesome-module']
         };
@@ -60,9 +58,9 @@ describe('type Unit Tests', function() {
     });
   });
 
-  describe('isBoolean method', function() {
-    describe('when the node does not exist in the package.json file', function() {
-      test('true should be returned', function() {
+  describe('isBoolean method', () => {
+    describe('when the node does not exist in the package.json file', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: ['awesome-module']
         };
@@ -72,8 +70,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is a string', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file and it is a string', () => {
+      test('false should be returned', () => {
         const packageJson = {
           name: 'awesome-module'
         };
@@ -83,8 +81,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is a boolean', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file and it is a boolean', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: true
         };
@@ -94,8 +92,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is an object', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file and it is an object', () => {
+      test('false should be returned', () => {
         const packageJson = {
           name: {}
         };
@@ -105,8 +103,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is an array', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file and it is an array', () => {
+      test('false should be returned', () => {
         const packageJson = {
           name: ['awesome-module']
         };
@@ -117,9 +115,9 @@ describe('type Unit Tests', function() {
     });
   });
 
-  describe('isObject method', function() {
-    describe('when the node does not exist in the package.json file', function() {
-      test('true should be returned', function() {
+  describe('isObject method', () => {
+    describe('when the node does not exist in the package.json file', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: ['awesome-module']
         };
@@ -129,8 +127,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is a string', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file and it is a string', () => {
+      test('false should be returned', () => {
         const packageJson = {
           name: 'awesome-module'
         };
@@ -140,8 +138,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is a boolean', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file and it is a boolean', () => {
+      test('false should be returned', () => {
         const packageJson = {
           name: true
         };
@@ -151,8 +149,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is an object', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file and it is an object', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: {}
         };
@@ -162,8 +160,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is an array', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file and it is an array', () => {
+      test('false should be returned', () => {
         const packageJson = {
           name: ['awesome-module']
         };
@@ -174,9 +172,9 @@ describe('type Unit Tests', function() {
     });
   });
 
-  describe('isString method', function() {
-    describe('when the node does not exist in the package.json file', function() {
-      test('true should be returned', function() {
+  describe('isString method', () => {
+    describe('when the node does not exist in the package.json file', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: ['awesome-module']
         };
@@ -186,8 +184,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is a string', function() {
-      test('true should be returned', function() {
+    describe('when the node exists in the package.json file and it is a string', () => {
+      test('true should be returned', () => {
         const packageJson = {
           name: 'awesome-module'
         };
@@ -197,8 +195,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is a boolean', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file and it is a boolean', () => {
+      test('false should be returned', () => {
         const packageJson = {
           name: true
         };
@@ -208,8 +206,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is an object', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file and it is an object', () => {
+      test('false should be returned', () => {
         const packageJson = {
           name: {}
         };
@@ -219,8 +217,8 @@ describe('type Unit Tests', function() {
       });
     });
 
-    describe('when the node exists in the package.json file and it is an array', function() {
-      test('false should be returned', function() {
+    describe('when the node exists in the package.json file and it is an array', () => {
+      test('false should be returned', () => {
         const packageJson = {
           name: ['awesome-module']
         };
