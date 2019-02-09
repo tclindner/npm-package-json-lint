@@ -33,7 +33,7 @@ describe('CLIEngine Unit Tests', function() {
       };
 
       expect(() => {
-        const cliEngine = new CLIEngine(options);
+        const engine = new CLIEngine(options);
       }).toThrow('cli:\n\tConfiguration for rule "require-name" is invalid:\n\tmust be set to "error", "warning", or "off". Currently set to "blah".');
     });
   });
@@ -409,8 +409,7 @@ describe('CLIEngine Unit Tests', function() {
 
   describe('getConfigForFile method tests', function() {
     test('when called config object should be returned', function() {
-      Config.prototype.get = jest.fn();
-      Config.prototype.get.mockReturnValue({rules: {'require-name': 'error'}});
+      jest.spyOn(Config.prototype, 'get').mockReturnValue({rules: {'require-name': 'error'}});
 
       const expectedConfigObj = {
         rules: {
