@@ -1,0 +1,43 @@
+{
+  "name": "npm-package-json-lint-packagejsonproperty",
+  "version": "0.1.0",
+  "description": "CLI app for linting package.json files.",
+  "keywords": [
+    "lint"
+  ],
+  "homepage": "https://github.com/tclindner/npm-package-json-lint",
+  "author": "Thomas Lindner",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tclindner/npm-package-json-lint"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5"
+  },
+  "npmPackageJsonLintConfig": {
+    "rules": {
+      "require-author": "error",
+      "require-description": "error",
+      "require-devDependencies": "error",
+      "require-homepage": "error",
+      "require-keywords": "error",
+      "require-license": "warning",
+      "require-name": "error",
+      "require-repository": "error",
+      "require-scripts": "error",
+      "require-version": "error",
+      "description-type": "error",
+      "devDependencies-type": "error",
+      "homepage-type": "error",
+      "keywords-type": "error",
+      "name-type": "error",
+      "repository-type": "error",
+      "version-type": "error",
+      "valid-values-author": ["error", [
+        "Thomas Lindner"
+      ]],
+      "name-format": "error",
+      "version-format": "error"
+    }
+  }
+}

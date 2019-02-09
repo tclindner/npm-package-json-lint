@@ -1,3 +1,6 @@
 {
-  "extends": "eslint-config-tc"
+  "extends": "eslint-config-tc",
+  "env": {
+    "jest": true
+  }
 }

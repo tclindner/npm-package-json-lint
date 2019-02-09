@@ -1,0 +1,17 @@
+{
+  "name": "npm-package-json-lint-warnings",
+  "version": "0.1.0",
+  "description": "CLI app for linting package.json files.",
+  "keywords": [
+    "lint"
+  ],
+  "homepage": "https://github.com/tclindner/npm-package-json-lint",
+  "author": "Thomas Lindner",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tclindner/npm-package-json-lint"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5"
+  }
+}
