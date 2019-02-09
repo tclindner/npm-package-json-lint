@@ -6,13 +6,14 @@ module.exports = {
   ],
   coverageThreshold: {
     global: {
-      branches: 94,
-      functions: 99,
-      lines: 99,
-      statements: 99
+      branches: 92,
+      functions: 100,
+      lines: 97,
+      statements: 97
     }
   },
   restoreMocks: true,
-  testEnvironment: 'node',
-  verbose: true
+  resetMocks: true,
+  resetModules: true,
+  testEnvironment: 'node'
 };
