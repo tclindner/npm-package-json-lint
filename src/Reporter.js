@@ -15,7 +15,7 @@ const oneFile = 1;
  * @returns {Undefined} No return
  * @private
  */
-const printResultSetIssues = (issues) => {
+const printResultSetIssues = issues => {
   for (const issue of issues) {
     console.log(issue.toString());
   }
@@ -49,7 +49,6 @@ const printIndividualResultSet = (resultSet, quiet) => {
       console.log(chalk.yellow.bold(warningCountMessage));
     }
   }
-
 };
 
 /**
@@ -82,7 +81,6 @@ const printTotals = (cliEngineOutput, quiet) => {
  * @class
  */
 class Reporter {
-
   /**
    * Print CLIEngine Output
    *
@@ -100,7 +98,6 @@ class Reporter {
       printTotals(cliEngineOutput, quiet);
     }
   }
-
 }
 
 module.exports = Reporter;

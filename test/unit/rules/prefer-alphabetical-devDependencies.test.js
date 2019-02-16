@@ -13,8 +13,8 @@ describe('prefer-alphabetical-devDependencies Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         devDependencies: {
-          'semver': '^5.3.0',
-          'chalk': '^1.1.3',
+          semver: '^5.3.0',
+          chalk: '^1.1.3',
           'user-home': '^2.0.0'
         }
       };
@@ -23,7 +23,9 @@ describe('prefer-alphabetical-devDependencies Unit Tests', () => {
       expect(response.lintId).toStrictEqual('prefer-alphabetical-devDependencies');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('devDependencies');
-      expect(response.lintMessage).toStrictEqual('Your devDependencies are not in alphabetical order. Please move semver after chalk.');
+      expect(response.lintMessage).toStrictEqual(
+        'Your devDependencies are not in alphabetical order. Please move semver after chalk.'
+      );
     });
   });
 
@@ -31,8 +33,8 @@ describe('prefer-alphabetical-devDependencies Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         devDependencies: {
-          'chalk': '^1.1.3',
-          'semver': '^5.3.0',
+          chalk: '^1.1.3',
+          semver: '^5.3.0',
           'user-home': '^2.0.0'
         }
       };

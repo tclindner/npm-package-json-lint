@@ -323,7 +323,10 @@ describe('Config Unit Tests', () => {
       const result = config.loadCliSpecifiedCfgFile(configFile);
 
       expect(ConfigFile.load).toHaveBeenCalledTimes(1);
-      expect(ConfigFile.load).toHaveBeenCalledWith(`${process.cwd()}/test/fixtures/valid/.npmpackagejsonlintrc.json`, config);
+      expect(ConfigFile.load).toHaveBeenCalledWith(
+        `${process.cwd()}/test/fixtures/valid/.npmpackagejsonlintrc.json`,
+        config
+      );
 
       expect(result).toStrictEqual(expected);
     });
@@ -523,7 +526,8 @@ describe('Config Unit Tests', () => {
 
         jest.spyOn(ConfigFile, 'load').mockReturnValue({rules: {'require-name': 'error'}});
 
-        const fsExistsMock = jest.spyOn(fs, 'existsSync')
+        const fsExistsMock = jest
+          .spyOn(fs, 'existsSync')
           .mockReturnValueOnce(false)
           .mockReturnValueOnce(true);
         jest.spyOn(fs, 'statSync').mockReturnValue({
@@ -731,7 +735,8 @@ describe('Config Unit Tests', () => {
         jest.spyOn(ConfigFile, 'load').mockReturnValue({root: true, rules: {'require-name': 'error'}});
 
         const dirNameMock = jest.spyOn(path, 'dirname').mockReturnValue('./npm-package-json-lint/');
-        const fsExistsMock = jest.spyOn(fs, 'existsSync')
+        const fsExistsMock = jest
+          .spyOn(fs, 'existsSync')
           .mockReturnValueOnce(false)
           .mockReturnValueOnce(true);
         const fsStatMock = jest.spyOn(fs, 'statSync').mockReturnValue({
@@ -781,15 +786,18 @@ describe('Config Unit Tests', () => {
         const config = new Config(options, linterContext);
 
         jest.spyOn(ConfigFile, 'loadFromPackageJson').mockReturnValue({rules: {}});
-        jest.spyOn(ConfigFile, 'load')
-          .mockReturnValueOnce({root: false, rules: {'require-name': 'error'}})
-          .mockReturnValueOnce({root: false, rules: {'require-version': 'error', 'require-name': 'warning'}});
+        jest
+          .spyOn(ConfigFile, 'load')
+          .mockReturnValueOnce({root: false, rules: {'require-name': 'error' } })
+          .mockReturnValueOnce({root: false, rules: {'require-version': 'error', 'require-name': 'warning' }});
 
-        const dirNameMock = jest.spyOn(path, 'dirname')
+        const dirNameMock = jest
+          .spyOn(path, 'dirname')
           .mockReturnValueOnce('./npm-package-json-lint/')
           .mockReturnValueOnce('./npm-package-json-lint/')
           .mockReturnValueOnce('/home/');
-        const fsExistsMock = jest.spyOn(fs, 'existsSync')
+        const fsExistsMock = jest
+          .spyOn(fs, 'existsSync')
           .mockReturnValueOnce(false)
           .mockReturnValueOnce(true)
           .mockReturnValueOnce(false)
@@ -844,7 +852,8 @@ describe('Config Unit Tests', () => {
         jest.spyOn(ConfigFile, 'load').mockReturnValue({root: true, rules: {'require-name': 'error'}});
 
         const dirNameMock = jest.spyOn(path, 'dirname').mockReturnValue('./npm-package-json-lint/');
-        const fsExistsMock = jest.spyOn(fs, 'existsSync')
+        const fsExistsMock = jest
+          .spyOn(fs, 'existsSync')
           .mockReturnValueOnce(false)
           .mockReturnValueOnce(false)
           .mockReturnValueOnce(true);
@@ -898,7 +907,8 @@ describe('Config Unit Tests', () => {
         jest.spyOn(ConfigFile, 'loadFromPackageJson');
         jest.spyOn(ConfigFile, 'load');
 
-        const dirNameMock = jest.spyOn(path, 'dirname')
+        const dirNameMock = jest
+          .spyOn(path, 'dirname')
           .mockReturnValueOnce('./npm-package-json-lint/')
           .mockReturnValueOnce('/home');
         const fsExistsMock = jest.spyOn(fs, 'existsSync').mockReturnValue(false);
@@ -943,7 +953,8 @@ describe('Config Unit Tests', () => {
         jest.spyOn(ConfigFile, 'loadFromPackageJson').mockReturnValue({rules: {}});
         jest.spyOn(ConfigFile, 'load').mockReturnValue({root: true, rules: {'require-name': 'error'}});
 
-        const dirNameMock = jest.spyOn(path, 'dirname')
+        const dirNameMock = jest
+          .spyOn(path, 'dirname')
           .mockReturnValueOnce('./npm-package-json-lint/')
           .mockReturnValueOnce('/home');
         const fsExistsMock = jest.spyOn(fs, 'existsSync').mockReturnValue(true);
@@ -954,8 +965,7 @@ describe('Config Unit Tests', () => {
         });
 
         const expectedConfigObj = {
-          rules: {
-          }
+          rules: {}
         };
         const filePath = './package.json';
         const result = config.getProjectHierarchyConfig(filePath);

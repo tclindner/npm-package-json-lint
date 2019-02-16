@@ -2,7 +2,6 @@ const chalk = require('chalk');
 const logSymbols = require('log-symbols');
 
 class LintIssue {
-
   /**
    * constructor
    * @param  {String} lintId      Unique, lowercase, hyphen-separate name for the lint
@@ -29,7 +28,6 @@ class LintIssue {
 
     return `${logSymbol} ${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
   }
-
 }
 
 module.exports = LintIssue;

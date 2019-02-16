@@ -41,7 +41,6 @@ const applyExtends = (config, configContext, parentName, originalFilePath) => {
       err.message += `\nReferenced from: ${parentName}`;
       throw err;
     }
-
   }, config);
 };
 
@@ -86,7 +85,7 @@ const loadFromModule = (moduleName, configContext, originalFilePath) => {
  * @returns {Object} The configuration information.
  * @private
  */
-const loadConfigFile = (filePath) => {
+const loadConfigFile = filePath => {
   let config = {};
 
   switch (path.extname(filePath)) {
@@ -110,7 +109,6 @@ const loadConfigFile = (filePath) => {
  * @class
  */
 class ConfigFile {
-
   /**
    * Loads a configuration file from the given file path.
    *
@@ -162,7 +160,6 @@ class ConfigFile {
   static createEmptyConfig() {
     return {rules: {}};
   }
-
 }
 
 module.exports = ConfigFile;

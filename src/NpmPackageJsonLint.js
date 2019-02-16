@@ -4,7 +4,6 @@ const Rules = require('./Rules');
 const pkg = require('./../package.json');
 
 class NpmPackageJsonLint {
-
   /**
    * constructor
    */
@@ -28,7 +27,8 @@ class NpmPackageJsonLint {
       const ruleModule = this.rules.get(rule);
 
       if (ruleModule.ruleType === 'array' || ruleModule.ruleType === 'object') {
-        const severity = typeof configObj[rule] === 'string' && configObj[rule] === 'off' ? configObj[rule] : configObj[rule][0];
+        const severity =
+          typeof configObj[rule] === 'string' && configObj[rule] === 'off' ? configObj[rule] : configObj[rule][0];
         const ruleConfig = configObj[rule][1];
 
         if (severity !== 'off') {
@@ -72,7 +72,6 @@ class NpmPackageJsonLint {
   getRule(rule) {
     return this.rules.get(rule);
   }
-
 }
 
 module.exports = NpmPackageJsonLint;

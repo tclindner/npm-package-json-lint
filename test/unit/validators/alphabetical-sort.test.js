@@ -19,8 +19,8 @@ describe('alphabetical-sort Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           devDependencies: {
-            'chalk': '^1.1.3',
-            'semver': '^5.3.0',
+            chalk: '^1.1.3',
+            semver: '^5.3.0',
             'user-home': '^2.0.0'
           }
         };
@@ -36,8 +36,8 @@ describe('alphabetical-sort Unit Tests', () => {
       test('false should be returned', () => {
         const packageJson = {
           devDependencies: {
-            'semver': '^5.3.0',
-            'chalk': '^1.1.3',
+            semver: '^5.3.0',
+            chalk: '^1.1.3',
             'user-home': '^2.0.0'
           }
         };

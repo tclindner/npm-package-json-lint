@@ -19,8 +19,8 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         const expectedWarningCount = 0;
 
         expect(response.issues.length).toStrictEqual(expectedIssues);
-        expect(response.issues.filter((issue) => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
-        expect(response.issues.filter((issue) => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
       });
     });
 
@@ -40,8 +40,8 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         const expectedWarningCount = 1;
 
         expect(response.issues.length).toStrictEqual(expectedIssues);
-        expect(response.issues.filter((issue) => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
-        expect(response.issues.filter((issue) => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
       });
     });
 
@@ -61,8 +61,8 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         const expectedWarningCount = 0;
 
         expect(response.issues.length).toStrictEqual(expectedIssues);
-        expect(response.issues.filter((issue) => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
-        expect(response.issues.filter((issue) => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
       });
     });
 
@@ -82,8 +82,8 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         const expectedWarningCount = 1;
 
         expect(response.issues.length).toStrictEqual(expectedIssues);
-        expect(response.issues.filter((issue) => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
-        expect(response.issues.filter((issue) => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
       });
     });
 
@@ -93,10 +93,7 @@ describe('NpmPackageJsonLint Unit Tests', () => {
           author: 'Caitlin Snow'
         };
         const config = {
-          'valid-values-author': ['error', [
-            'Barry Allen',
-            'Iris West'
-          ]]
+          'valid-values-author': ['error', ['Barry Allen', 'Iris West']]
         };
         const npmPackageJsonLint = new NpmPackageJsonLint();
         const response = npmPackageJsonLint.lint(packageJsonData, config);
@@ -105,8 +102,8 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         const expectedWarningCount = 0;
 
         expect(response.issues.length).toStrictEqual(expectedIssues);
-        expect(response.issues.filter((issue) => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
-        expect(response.issues.filter((issue) => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
       });
     });
 
@@ -116,10 +113,7 @@ describe('NpmPackageJsonLint Unit Tests', () => {
           author: 'Caitlin Snow'
         };
         const config = {
-          'valid-values-author': ['off', [
-            'Barry Allen',
-            'Iris West'
-          ]]
+          'valid-values-author': ['off', ['Barry Allen', 'Iris West']]
         };
         const npmPackageJsonLint = new NpmPackageJsonLint();
         const response = npmPackageJsonLint.lint(packageJsonData, config);
@@ -128,8 +122,8 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         const expectedWarningCount = 0;
 
         expect(response.issues.length).toStrictEqual(expectedIssues);
-        expect(response.issues.filter((issue) => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
-        expect(response.issues.filter((issue) => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
       });
     });
 
@@ -148,8 +142,8 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         const expectedWarningCount = 0;
 
         expect(response.issues.length).toStrictEqual(expectedIssues);
-        expect(response.issues.filter((issue) => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
-        expect(response.issues.filter((issue) => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
       });
     });
   });

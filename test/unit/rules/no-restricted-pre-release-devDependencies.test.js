@@ -16,10 +16,7 @@ describe('no-restricted-pre-release-devDependencies Unit Tests', () => {
           'npm-package-json-lint': '^1.0.0-beta'
         }
       };
-      const invldPreReleaseDeps = [
-        'npm-package-json-lint',
-        'grunt-npm-package-json-lint'
-      ];
+      const invldPreReleaseDeps = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
       const response = lint(packageJsonData, 'error', invldPreReleaseDeps);
 
       expect(response.lintId).toStrictEqual('no-restricted-pre-release-devDependencies');
@@ -36,10 +33,7 @@ describe('no-restricted-pre-release-devDependencies Unit Tests', () => {
           'grunt-npm-package-json-lint': '^1.0.0'
         }
       };
-      const invldPreReleaseDeps = [
-        'npm-package-json-lint',
-        'grunt-npm-package-json-lint'
-      ];
+      const invldPreReleaseDeps = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
       const response = lint(packageJsonData, 'error', invldPreReleaseDeps);
 
       expect(response).toBeTruthy();
@@ -49,10 +43,7 @@ describe('no-restricted-pre-release-devDependencies Unit Tests', () => {
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
-      const invldPreReleaseDeps = [
-        'npm-package-json-lint',
-        'grunt-npm-package-json-lint'
-      ];
+      const invldPreReleaseDeps = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
       const response = lint(packageJsonData, 'error', invldPreReleaseDeps);
 
       expect(response).toBeTruthy();

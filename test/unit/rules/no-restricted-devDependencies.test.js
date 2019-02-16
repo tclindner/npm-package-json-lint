@@ -16,10 +16,7 @@ describe('no-restricted-devDependencies Unit Tests', () => {
           'npm-package-json-lint': '^1.0.0'
         }
       };
-      const invalidDependencies = [
-        'npm-package-json-lint',
-        'grunt-npm-package-json-lint'
-      ];
+      const invalidDependencies = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
       const response = lint(packageJsonData, 'error', invalidDependencies);
 
       expect(response.lintId).toStrictEqual('no-restricted-devDependencies');
@@ -36,10 +33,7 @@ describe('no-restricted-devDependencies Unit Tests', () => {
           'gulp-npm-package-json-lint': '^1.0.0'
         }
       };
-      const invalidDependencies = [
-        'npm-package-json-lint',
-        'grunt-npm-package-json-lint'
-      ];
+      const invalidDependencies = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
       const response = lint(packageJsonData, 'error', invalidDependencies);
 
       expect(response).toBeTruthy();
@@ -49,10 +43,7 @@ describe('no-restricted-devDependencies Unit Tests', () => {
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
-      const invalidDependencies = [
-        'npm-package-json-lint',
-        'grunt-npm-package-json-lint'
-      ];
+      const invalidDependencies = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
       const response = lint(packageJsonData, 'error', invalidDependencies);
 
       expect(response).toBeTruthy();

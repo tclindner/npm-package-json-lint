@@ -33,7 +33,6 @@ const getProjectDir = () => path.resolve(__dirname, '../../../');
  * @class
  */
 class Config {
-
   /**
    * Constructor
    * @param  {Object} providedOptions Options object
@@ -118,9 +117,19 @@ class Config {
         config = ConfigFile.loadFromPackageJson(pkgJsonFilePath, this);
       }
 
-      if (this.useConfigFiles && Object.keys(config.rules).length === noRules && fs.existsSync(jsonRcFilePath) && fs.statSync(jsonRcFilePath).isFile()) {
+      if (
+        this.useConfigFiles &&
+        Object.keys(config.rules).length === noRules &&
+        fs.existsSync(jsonRcFilePath) &&
+        fs.statSync(jsonRcFilePath).isFile()
+      ) {
         config = ConfigFile.load(jsonRcFilePath, this);
-      } else if (this.useConfigFiles && Object.keys(config.rules).length === noRules && fs.existsSync(javaScriptConfigFilePath) && fs.statSync(javaScriptConfigFilePath).isFile()) {
+      } else if (
+        this.useConfigFiles &&
+        Object.keys(config.rules).length === noRules &&
+        fs.existsSync(javaScriptConfigFilePath) &&
+        fs.statSync(javaScriptConfigFilePath).isFile()
+      ) {
         config = ConfigFile.load(javaScriptConfigFilePath, this);
       }
 
@@ -181,7 +190,6 @@ class Config {
       if (Object.keys(personalConfig).length) {
         finalConfig = Object.assign({}, personalConfig);
       } else {
-
         // No config found in all locations
         const relativeFilePath = `./${path.relative(this.options.cwd, filePath)}`;
 
@@ -192,7 +200,6 @@ class Config {
     // Step 5: return final config
     return finalConfig;
   }
-
 }
 
 module.exports = Config;

@@ -157,11 +157,12 @@ const isVersionAbsolute = (packageJsonData, nodeName) => {
   for (const dependencyName in packageJsonData[nodeName]) {
     const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
-    if (dependencyVersion.startsWith('^', firstCharOfStr)
-      || dependencyVersion.startsWith('~', firstCharOfStr)
-      || dependencyVersion.startsWith('>', firstCharOfStr)
-      || dependencyVersion.startsWith('<', firstCharOfStr)
-      || dependencyVersion.indexOf('*') !== NOT_FOUND
+    if (
+      dependencyVersion.startsWith('^', firstCharOfStr) ||
+      dependencyVersion.startsWith('~', firstCharOfStr) ||
+      dependencyVersion.startsWith('>', firstCharOfStr) ||
+      dependencyVersion.startsWith('<', firstCharOfStr) ||
+      dependencyVersion.indexOf('*') !== NOT_FOUND
     ) {
       rangesValid = false;
     }

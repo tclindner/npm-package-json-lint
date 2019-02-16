@@ -9,11 +9,7 @@ describe('property-order Unit Tests', () => {
           version: '1.0.0',
           description: 'description'
         };
-        const preferredOrder = [
-          'name',
-          'version',
-          'description'
-        ];
+        const preferredOrder = ['name', 'version', 'description'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBeTruthy();
@@ -42,11 +38,7 @@ describe('property-order Unit Tests', () => {
           name: 'awesome-module',
           version: '1.0.0'
         };
-        const preferredOrder = [
-          'name',
-          'version',
-          'description'
-        ];
+        const preferredOrder = ['name', 'version', 'description'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBeTruthy();
@@ -61,11 +53,7 @@ describe('property-order Unit Tests', () => {
           description: 'description',
           version: '1.0.0'
         };
-        const preferredOrder = [
-          'name',
-          'version',
-          'description'
-        ];
+        const preferredOrder = ['name', 'version', 'description'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBeFalsy();
@@ -80,11 +68,7 @@ describe('property-order Unit Tests', () => {
           name: 'awesome-module',
           description: 'description'
         };
-        const preferredOrder = [
-          'name',
-          'version',
-          'description'
-        ];
+        const preferredOrder = ['name', 'version', 'description'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBeFalsy();
@@ -99,12 +83,7 @@ describe('property-order Unit Tests', () => {
           version: '1.0.0',
           description: 'description'
         };
-        const preferredOrder = [
-          'name',
-          'version',
-          'homepage',
-          'description'
-        ];
+        const preferredOrder = ['name', 'version', 'homepage', 'description'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBeTruthy();
@@ -120,13 +99,7 @@ describe('property-order Unit Tests', () => {
           description: 'description',
           homepage: 'https://github.com/tclindner/npm-package-json-lint'
         };
-        const preferredOrder = [
-          'name',
-          'version',
-          'description',
-          'keywords',
-          'homepage'
-        ];
+        const preferredOrder = ['name', 'version', 'description', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBeTruthy();
@@ -142,15 +115,7 @@ describe('property-order Unit Tests', () => {
           description: 'description',
           homepage: 'https://github.com/tclindner/npm-package-json-lint'
         };
-        const preferredOrder = [
-          'name',
-          'version',
-          'description',
-          'scripts',
-          'bin',
-          'keywords',
-          'homepage'
-        ];
+        const preferredOrder = ['name', 'version', 'description', 'scripts', 'bin', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBeTruthy();
@@ -168,15 +133,7 @@ describe('property-order Unit Tests', () => {
           license: 'MIT',
           keywords: ['awesome']
         };
-        const preferredOrder = [
-          'name',
-          'version',
-          'description',
-          'scripts',
-          'bin',
-          'keywords',
-          'homepage'
-        ];
+        const preferredOrder = ['name', 'version', 'description', 'scripts', 'bin', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBeFalsy();
@@ -193,15 +150,7 @@ describe('property-order Unit Tests', () => {
           homepage: 'https://github.com/tclindner/npm-package-json-lint',
           keywords: ['word']
         };
-        const preferredOrder = [
-          'name',
-          'version',
-          'description',
-          'scripts',
-          'bin',
-          'keywords',
-          'homepage'
-        ];
+        const preferredOrder = ['name', 'version', 'description', 'scripts', 'bin', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBeFalsy();
@@ -217,12 +166,7 @@ describe('property-order Unit Tests', () => {
           description: 'description',
           homepage: 'https://github.com/tclindner/npm-package-json-lint'
         };
-        const preferredOrder = [
-          'name',
-          'version',
-          'keywords',
-          'homepage'
-        ];
+        const preferredOrder = ['name', 'version', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBeTruthy();
@@ -238,11 +182,7 @@ describe('property-order Unit Tests', () => {
           description: 'description',
           homepage: 'https://github.com/tclindner/npm-package-json-lint'
         };
-        const preferredOrder = [
-          'version',
-          'keywords',
-          'homepage'
-        ];
+        const preferredOrder = ['version', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBeTruthy();

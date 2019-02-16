@@ -14,10 +14,7 @@ describe('valid-values-name-scope Unit Tests', () => {
       const packageJsonData = {
         name: '@great/awesome-package'
       };
-      const validValues = [
-        '@cool',
-        '@awesome'
-      ];
+      const validValues = ['@cool', '@awesome'];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-name-scope');
@@ -32,10 +29,7 @@ describe('valid-values-name-scope Unit Tests', () => {
       const packageJsonData = {
         name: 'awesome-package'
       };
-      const validValues = [
-        '@cool',
-        '@awesome'
-      ];
+      const validValues = ['@cool', '@awesome'];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-name-scope');
@@ -50,10 +44,7 @@ describe('valid-values-name-scope Unit Tests', () => {
       const packageJsonData = {
         name: '@cool/awesome-package'
       };
-      const validValues = [
-        '@cool',
-        '@awesome'
-      ];
+      const validValues = ['@cool', '@awesome'];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response).toBeTruthy();
@@ -63,10 +54,7 @@ describe('valid-values-name-scope Unit Tests', () => {
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
-      const validValues = [
-        '@cool',
-        '@awesome'
-      ];
+      const validValues = ['@cool', '@awesome'];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response).toBeTruthy();

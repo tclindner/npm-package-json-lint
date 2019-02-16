@@ -6,7 +6,6 @@ const javaScriptConfigFileName = 'npmpackagejsonlint.config.js';
  * @class
  */
 class ConfigFileType {
-
   /**
    * Get rc file name
    *
@@ -26,7 +25,6 @@ class ConfigFileType {
   static get javaScriptConfigFileName() {
     return javaScriptConfigFileName;
   }
-
 }
 
 module.exports = ConfigFileType;

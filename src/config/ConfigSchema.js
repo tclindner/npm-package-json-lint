@@ -3,9 +3,9 @@
  * @type {Object}
  */
 const topLevelConfigProperties = {
-  'extends': {type: ['string', 'array']},
-  'rules': {type: 'object'},
-  'root': {type: 'boolean'}
+  extends: {type: ['string', 'array']},
+  rules: {type: 'object'},
+  root: {type: 'boolean'}
 };
 
 /**
@@ -23,7 +23,6 @@ const configurationSchema = {
  * @class
  */
 class ConfigSchema {
-
   /**
    * Gets configuration schema
    *
@@ -32,7 +31,6 @@ class ConfigSchema {
   static get() {
     return configurationSchema;
   }
-
 }
 
 module.exports = ConfigSchema;

@@ -10,7 +10,7 @@ const stripComments = require('strip-json-comments');
  * @return {Object}          Config object from file.
  * @throws {Error}           If the file cannot be read.
  */
-const requireFile = (fileName) => require(fileName);
+const requireFile = fileName => require(fileName);
 
 /**
  * Sychronously reads file from file system
@@ -19,7 +19,7 @@ const requireFile = (fileName) => require(fileName);
  * @return {String}          File contents with BOM removed.
  * @throws {Error}           If the file cannot be read.
  */
-const readFile = (fileName) => fs.readFileSync(fileName, 'utf8').replace(/^\ufeff/, '');
+const readFile = fileName => fs.readFileSync(fileName, 'utf8').replace(/^\ufeff/, '');
 
 /**
  * Helper method for throwing errors when file fails to load.
@@ -38,7 +38,6 @@ const handleError = (fileName, err) => {
  * @class
  */
 class Parser {
-
   /**
    * Parse a JSON file
    *
@@ -78,7 +77,6 @@ class Parser {
 
     return obj;
   }
-
 }
 
 module.exports = Parser;

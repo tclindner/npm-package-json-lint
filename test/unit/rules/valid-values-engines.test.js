@@ -39,9 +39,7 @@ describe('valid-values-engines Unit Tests', () => {
           node: '^6.a.0'
         }
       };
-      const validValues = [
-        {node: '^6.a.0'}
-      ];
+      const validValues = [{node: '^6.a.0'}];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-engines');

@@ -7,7 +7,6 @@ const message = 'You are using an invalid version range. Please do not use absol
 const ruleType = 'standard';
 
 const lint = (packageJsonData, severity) => {
-
   if (packageJsonData.hasOwnProperty(nodeName) && isVersionAbsolute(packageJsonData, nodeName)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }

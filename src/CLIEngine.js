@@ -59,21 +59,24 @@ const noIssues = 0;
  * @returns {ResultCounts}  Counts object
  * @private
  */
-const aggregateCountsPerFile = (issues) => {
+const aggregateCountsPerFile = issues => {
   const incrementOne = 1;
 
-  return issues.reduce((counts, issue) => {
-    if (issue.severity === 'error') {
-      counts.errorCount += incrementOne;
-    } else {
-      counts.warningCount += incrementOne;
-    }
+  return issues.reduce(
+    (counts, issue) => {
+      if (issue.severity === 'error') {
+        counts.errorCount += incrementOne;
+      } else {
+        counts.warningCount += incrementOne;
+      }
 
-    return counts;
-  }, {
-    errorCount: 0,
-    warningCount: 0
-  });
+      return counts;
+    },
+    {
+      errorCount: 0,
+      warningCount: 0
+    }
+  );
 };
 
 /**
@@ -83,16 +86,19 @@ const aggregateCountsPerFile = (issues) => {
  * @returns {ResultCounts}          Counts object
  * @private
  */
-const aggregateOverallCounts = (results) => {
-  return results.reduce((counts, result) => {
-    counts.errorCount += result.errorCount;
-    counts.warningCount += result.warningCount;
+const aggregateOverallCounts = results => {
+  return results.reduce(
+    (counts, result) => {
+      counts.errorCount += result.errorCount;
+      counts.warningCount += result.warningCount;
 
-    return counts;
-  }, {
-    errorCount: 0,
-    warningCount: 0
-  });
+      return counts;
+    },
+    {
+      errorCount: 0,
+      warningCount: 0
+    }
+  );
 };
 
 /**
@@ -152,7 +158,7 @@ const processPackageJsonFile = (fileName, configHelper, linter) => {
  * @returns {boolean} True if error, false if warning.
  * @private
  */
-const isIssueAnError = (issue) => {
+const isIssueAnError = issue => {
   return issue.severity === 'error';
 };
 
@@ -165,9 +171,7 @@ const isIssueAnError = (issue) => {
  */
 const getIgnorer = (cwd, options) => {
   const ignoreFilePath = options.ignorePath || DEFAULT_IGNORE_FILENAME;
-  const absoluteIgnoreFilePath = path.isAbsolute(ignoreFilePath)
-    ? ignoreFilePath
-    : path.resolve(cwd, ignoreFilePath);
+  const absoluteIgnoreFilePath = path.isAbsolute(ignoreFilePath) ? ignoreFilePath : path.resolve(cwd, ignoreFilePath);
   let ignoreText = '';
 
   try {
@@ -192,10 +196,10 @@ const getFileList = (patterns, options) => {
   const cwd = (options && options.cwd) || process.cwd();
 
   // step 1 - filter out empty entries
-  const filteredPatterns = patterns.filter((pattern) => pattern.length);
+  const filteredPatterns = patterns.filter(pattern => pattern.length);
 
   // step 2 - convert directories to globs
-  const globPatterns = filteredPatterns.map((pattern) => {
+  const globPatterns = filteredPatterns.map(pattern => {
     const suffix = '/**/package.json';
 
     let newPath = pattern;
@@ -226,7 +230,7 @@ const getFileList = (patterns, options) => {
   const addedFiles = new Set();
   const ignorer = getIgnorer(cwd, options);
 
-  globPatterns.forEach((pattern) => {
+  globPatterns.forEach(pattern => {
     const file = path.resolve(cwd, pattern);
 
     if (fs.existsSync(file) && fs.statSync(file).isFile()) {
@@ -248,9 +252,9 @@ const getFileList = (patterns, options) => {
 
       // remove node_module package.json files. Manually doing this instead of using glob ignore
       // because of https://github.com/isaacs/node-glob/issues/309
-      globFiles = globFiles.filter((globFile) => !globFile.includes('node_modules'));
+      globFiles = globFiles.filter(globFile => !globFile.includes('node_modules'));
 
-      globFiles.forEach((globFile) => {
+      globFiles.forEach(globFile => {
         const filePath = path.resolve(cwd, globFile);
 
         if (addedFiles.has(filePath) || ignorer.ignores(path.relative(cwd, filePath))) {
@@ -271,14 +275,12 @@ const getFileList = (patterns, options) => {
  * @class
  */
 class CLIEngine {
-
   /**
    * constructor
    * @param {CLIEngineOptions} passedOptions The options for the CLIEngine.
    * @constructor
    */
   constructor(passedOptions) {
-
     const options = Object.assign(Object.create(null), {cwd: process.cwd()}, passedOptions);
 
     this.options = options;
@@ -310,7 +312,7 @@ class CLIEngine {
   static getErrorResults(results) {
     const filtered = [];
 
-    results.forEach((result) => {
+    results.forEach(result => {
       const filteredIssues = result.issues.filter(isIssueAnError);
 
       if (filteredIssues.length > noIssues) {
@@ -334,7 +336,7 @@ class CLIEngine {
    */
   executeOnPackageJsonFiles(patterns) {
     const fileList = getFileList(patterns, this.options);
-    const results = fileList.map((filePath) => processPackageJsonFile(filePath, this.config, this.linter));
+    const results = fileList.map(filePath => processPackageJsonFile(filePath, this.config, this.linter));
     const stats = aggregateOverallCounts(results);
 
     return {
@@ -355,9 +357,7 @@ class CLIEngine {
   executeOnPackageJsonObject(packageJsonObj, filename) {
     const results = [];
 
-    const resolvedFilename = filename && !path.isAbsolute(filename)
-      ? path.resolve(this.options.cwd, filename)
-      : filename;
+    const resolvedFilename = filename && !path.isAbsolute(filename) ? path.resolve(this.options.cwd, filename) : filename;
 
     results.push(processPackageJsonObject(packageJsonObj, this.config, resolvedFilename, this.linter));
 
@@ -380,7 +380,6 @@ class CLIEngine {
   getConfigForFile(filePath) {
     return this.config.get(filePath);
   }
-
 }
 
 module.exports = CLIEngine;

@@ -99,7 +99,6 @@ describe('cli Unit Tests', () => {
 
   describe('when the cli is run without quiet', () => {
     test('and one error, zero warnings is expected', () => {
-
       const cli = spawnSync(relativePathToCli, ['-c', errorRcFile, errorPkg], {env});
       const expected = `
 ${errorPkg}
@@ -243,7 +242,18 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
 
   describe('when the cli is run against all fixtures using pattern', () => {
     test('each file results and totals will be output', () => {
-      const cli = spawnSync(relativePathToCli, [validFixturesPath, errorFixturesPath, warningFixturesPath, errAndWarnsFixturesPath, configJsFileFixturesPath, pkgJsonPropFixturePath], {env});
+      const cli = spawnSync(
+        relativePathToCli,
+        [
+          validFixturesPath,
+          errorFixturesPath,
+          warningFixturesPath,
+          errAndWarnsFixturesPath,
+          configJsFileFixturesPath,
+          pkgJsonPropFixturePath
+        ],
+        {env}
+      );
       const expected = `
 ${errorPkg}
 ${figures.cross} require-scripts - node: scripts - scripts is required
