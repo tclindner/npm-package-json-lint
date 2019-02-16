@@ -46,7 +46,9 @@ describe('dependency-audit Unit Tests', () => {
 
     describe('when the node does not exist in the package.json file', () => {
       test('false should be returned', () => {
-        const response = dependencyAudit.hasDepPrereleaseVers(packageJson, 'devDependencies', ['grunt-npm-package-json-lint']);
+        const response = dependencyAudit.hasDepPrereleaseVers(packageJson, 'devDependencies', [
+          'grunt-npm-package-json-lint'
+        ]);
 
         expect(response).toBeFalsy();
       });
@@ -640,7 +642,5 @@ describe('dependency-audit Unit Tests', () => {
         expect(response).toBeTruthy();
       });
     });
-
   });
-
 });

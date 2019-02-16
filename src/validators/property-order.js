@@ -61,17 +61,18 @@ const defaultPreferredNodeOrder = [
 const isInPreferredOrder = (packageJsonData, userPreferredNodeOrder) => {
   let isValid = true;
   let msg = null;
-  const preferredNodeOrder = userPreferredNodeOrder.length === empty ? Array.from(defaultPreferredNodeOrder) : Array.from(userPreferredNodeOrder);
-  const fltrdPreferredNodeOrder = preferredNodeOrder.filter((property) => packageJsonData.hasOwnProperty(property));
+  const preferredNodeOrder =
+    userPreferredNodeOrder.length === empty ? Array.from(defaultPreferredNodeOrder) : Array.from(userPreferredNodeOrder);
+  const fltrdPreferredNodeOrder = preferredNodeOrder.filter(property => packageJsonData.hasOwnProperty(property));
   const actualNodeList = Object.keys(packageJsonData);
-  const fltrdActualNodeList = actualNodeList.filter((property) => preferredNodeOrder.indexOf(property) !== notFound);
+  const fltrdActualNodeList = actualNodeList.filter(property => preferredNodeOrder.indexOf(property) !== notFound);
   const filteredPreferredOrderMap = new Map();
 
   fltrdPreferredNodeOrder.forEach((property, index) => {
     filteredPreferredOrderMap.set(property, index);
   });
 
-  for (let keyIndex = 0;keyIndex < fltrdActualNodeList.length;keyIndex += increment) {
+  for (let keyIndex = 0; keyIndex < fltrdActualNodeList.length; keyIndex += increment) {
     const currentPkgJsonProperty = fltrdActualNodeList[keyIndex];
 
     const preferredOrderPosition = filteredPreferredOrderMap.get(currentPkgJsonProperty);

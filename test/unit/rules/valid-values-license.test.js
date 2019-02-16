@@ -14,10 +14,7 @@ describe('valid-values-license Unit Tests', () => {
       const packageJsonData = {
         license: 'MIT'
       };
-      const validValues = [
-        'private',
-        'unlicensed'
-      ];
+      const validValues = ['private', 'unlicensed'];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-license');
@@ -32,10 +29,7 @@ describe('valid-values-license Unit Tests', () => {
       const packageJsonData = {
         license: 'unlicensed'
       };
-      const validValues = [
-        'private',
-        'unlicensed'
-      ];
+      const validValues = ['private', 'unlicensed'];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response).toBeTruthy();

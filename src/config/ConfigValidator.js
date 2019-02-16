@@ -10,28 +10,33 @@ const ConfigSchema = require('./ConfigSchema');
  * @param {Array} errors An array of error messages to format.
  * @returns {String} Formatted error message
  */
-const formatSchemaErrors = (errors) => {
+const formatSchemaErrors = errors => {
   const secondChar = 1;
 
-  return errors.map((error) => {
-    if (error.keyword === 'additionalProperties') {
-      const formattedPropertyPath = error.dataPath.length ? `${error.dataPath.slice(secondChar)}.${error.params.additionalProperty}` : error.params.additionalProperty;
+  return errors
+    .map(error => {
+      if (error.keyword === 'additionalProperties') {
+        const formattedPropertyPath = error.dataPath.length
+          ? `${error.dataPath.slice(secondChar)}.${error.params.additionalProperty}`
+          : error.params.additionalProperty;
 
-      return `Unexpected top-level property "${formattedPropertyPath}"`;
-    }
+        return `Unexpected top-level property "${formattedPropertyPath}"`;
+      }
 
-    if (error.keyword === 'type') {
-      const formattedField = error.dataPath.slice(secondChar);
-      const formattedExpectedType = Array.isArray(error.schema) ? error.schema.join('/') : error.schema;
-      const formattedValue = JSON.stringify(error.data);
+      if (error.keyword === 'type') {
+        const formattedField = error.dataPath.slice(secondChar);
+        const formattedExpectedType = Array.isArray(error.schema) ? error.schema.join('/') : error.schema;
+        const formattedValue = JSON.stringify(error.data);
 
-      return `Property "${formattedField}" is the wrong type (expected ${formattedExpectedType} but got \`${formattedValue}\`)`;
-    }
+        return `Property "${formattedField}" is the wrong type (expected ${formattedExpectedType} but got \`${formattedValue}\`)`;
+      }
 
-    const field = error.dataPath[0] === '.' ? error.dataPath.slice(secondChar) : error.dataPath;
+      const field = error.dataPath[0] === '.' ? error.dataPath.slice(secondChar) : error.dataPath;
 
-    return `"${field}" ${error.message}. Value: ${JSON.stringify(error.data)}`;
-  }).map((message) => `\t- ${message}.\n`).join('');
+      return `"${field}" ${error.message}. Value: ${JSON.stringify(error.data)}`;
+    })
+    .map(message => `\t- ${message}.\n`)
+    .join('');
 };
 
 /**
@@ -40,7 +45,9 @@ const formatSchemaErrors = (errors) => {
  * @return {Boolean}          True if the severity is valid. False if the severity is invalid.
  * @private
  */
-const isSeverityInvalid = (severity) => typeof severity !== 'string' || (typeof severity === 'string' && severity !== 'error' && severity !== 'warning' && severity !== 'off');
+const isSeverityInvalid = severity =>
+  typeof severity !== 'string' ||
+  (typeof severity === 'string' && severity !== 'error' && severity !== 'warning' && severity !== 'off');
 
 /**
  * Validates object rule config
@@ -49,7 +56,7 @@ const isSeverityInvalid = (severity) => typeof severity !== 'string' || (typeof 
  * @return {Boolean}               True if config is valid, false if not
  * @static
  */
-const isObjectRuleConfigValid = (ruleConfig) => {
+const isObjectRuleConfigValid = ruleConfig => {
   const severityIndex = 0;
   const object = 1;
 
@@ -58,7 +65,9 @@ const isObjectRuleConfigValid = (ruleConfig) => {
   } else if (typeof ruleConfig === 'string' && ruleConfig !== 'off') {
     throw new Error('is an object type rule. It must be set to "off" if an object is not supplied.');
   } else if (typeof ruleConfig[severityIndex] !== 'string' || isSeverityInvalid(ruleConfig[severityIndex])) {
-    throw new Error(`first key must be set to "error", "warning", or "off". Currently set to "${ruleConfig[severityIndex]}".`);
+    throw new Error(
+      `first key must be set to "error", "warning", or "off". Currently set to "${ruleConfig[severityIndex]}".`
+    );
   }
 
   if (!isPlainObj(ruleConfig[object])) {
@@ -75,7 +84,7 @@ const isObjectRuleConfigValid = (ruleConfig) => {
  * @return {Boolean}               True if config is valid, false if not
  * @static
  */
-const isArrayRuleConfigValid = (ruleConfig) => {
+const isArrayRuleConfigValid = ruleConfig => {
   const severityIndex = 0;
   const arrayIndex = 1;
 
@@ -84,7 +93,9 @@ const isArrayRuleConfigValid = (ruleConfig) => {
   } else if (typeof ruleConfig === 'string' && ruleConfig !== 'off') {
     throw new Error('is an array type rule. It must be set to "off" if an array is not supplied.');
   } else if (typeof ruleConfig[severityIndex] !== 'string' || isSeverityInvalid(ruleConfig[severityIndex])) {
-    throw new Error(`first key must be set to "error", "warning", or "off". Currently set to "${ruleConfig[severityIndex]}".`);
+    throw new Error(
+      `first key must be set to "error", "warning", or "off". Currently set to "${ruleConfig[severityIndex]}".`
+    );
   }
 
   if (!Array.isArray(ruleConfig[arrayIndex])) {
@@ -101,7 +112,7 @@ const isArrayRuleConfigValid = (ruleConfig) => {
  * @return {Boolean}                 True if config is valid, false if not
  * @static
  */
-const isStandardRuleConfigValid = (ruleConfig) => {
+const isStandardRuleConfigValid = ruleConfig => {
   if (isSeverityInvalid(ruleConfig)) {
     throw new Error(`must be set to "error", "warning", or "off". Currently set to "${ruleConfig}".`);
   }
@@ -161,7 +172,6 @@ const validateConfigSchema = (config, source) => {
  * @class
  */
 class ConfigValidator {
-
   /**
    * Validates entire config object, including top-level properties.
    *
@@ -190,13 +200,12 @@ class ConfigValidator {
       return;
     }
 
-    Object.keys(rulesConfig).forEach((ruleName) => {
+    Object.keys(rulesConfig).forEach(ruleName => {
       const ruleModule = linterContext.getRule(ruleName);
 
       validateRule(ruleModule, ruleName, rulesConfig[ruleName], source);
     });
   }
-
 }
 
 module.exports = ConfigValidator;

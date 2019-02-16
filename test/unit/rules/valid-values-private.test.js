@@ -12,11 +12,9 @@ describe('valid-values-private Unit Tests', () => {
   describe('when package.json has node with incorrect format', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        'private': true
+        private: true
       };
-      const validValues = [
-        false
-      ];
+      const validValues = [false];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-private');
@@ -29,11 +27,9 @@ describe('valid-values-private Unit Tests', () => {
   describe('when package.json has node with correct format', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        'private': false
+        private: false
       };
-      const validValues = [
-        false
-      ];
+      const validValues = [false];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response).toBeTruthy();

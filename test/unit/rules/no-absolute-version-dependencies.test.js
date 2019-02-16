@@ -21,7 +21,9 @@ describe('no-absolute-version-dependencies Unit Tests', () => {
       expect(response.lintId).toStrictEqual('no-absolute-version-dependencies');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('dependencies');
-      expect(response.lintMessage).toStrictEqual('You are using an invalid version range. Please do not use absolute versions.');
+      expect(response.lintMessage).toStrictEqual(
+        'You are using an invalid version range. Please do not use absolute versions.'
+      );
     });
   });
 
@@ -37,7 +39,9 @@ describe('no-absolute-version-dependencies Unit Tests', () => {
       expect(response.lintId).toStrictEqual('no-absolute-version-dependencies');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('dependencies');
-      expect(response.lintMessage).toStrictEqual('You are using an invalid version range. Please do not use absolute versions.');
+      expect(response.lintMessage).toStrictEqual(
+        'You are using an invalid version range. Please do not use absolute versions.'
+      );
     });
   });
 

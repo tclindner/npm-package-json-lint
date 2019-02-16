@@ -22,8 +22,8 @@ describe('ConfigFile Unit Tests', () => {
   describe('load method', () => {
     test('when file has local extends (valid), a config object is returned', () => {
       const expectedConfigObj = {
-        'extends': './test/fixtures/extendsLocal/npmpackagejsonlint.config.js',
-        'rules': {
+        extends: './test/fixtures/extendsLocal/npmpackagejsonlint.config.js',
+        rules: {
           'require-author': 'error',
           'require-description': 'error'
         }
@@ -44,8 +44,8 @@ describe('ConfigFile Unit Tests', () => {
 
     test('when file has module extends (valid), a config object is returned', () => {
       const expectedConfigObj = {
-        'extends': 'npm-package-json-lint-config-default',
-        'rules': {
+        extends: 'npm-package-json-lint-config-default',
+        rules: {
           'bin-type': 'error',
           'config-type': 'error',
           'cpu-type': 'error',

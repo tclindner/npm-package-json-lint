@@ -21,7 +21,9 @@ describe('prefer-no-version-zero-dependencies Unit Tests', () => {
       expect(response.lintId).toStrictEqual('prefer-no-version-zero-dependencies');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('dependencies');
-      expect(response.lintMessage).toStrictEqual('You have invalid version 0 dependencies. Please use modules with a major version >= 1.');
+      expect(response.lintMessage).toStrictEqual(
+        'You have invalid version 0 dependencies. Please use modules with a major version >= 1.'
+      );
     });
   });
 

@@ -13,7 +13,7 @@ const ruleType = 'array';
 const lint = (packageJsonData, severity, validValues) => {
   if (packageJsonData.hasOwnProperty(nodeName)) {
     if (isObject(packageJsonData, nodeName)) {
-      const validValuesAsJson = validValues.map((validValue) => JSON.stringify(validValue));
+      const validValuesAsJson = validValues.map(validValue => JSON.stringify(validValue));
       const valueAsJson = JSON.stringify(packageJsonData[nodeName]);
 
       if (!isValidValue(packageJsonData, nodeName, valueAsJson, validValuesAsJson)) {
@@ -24,7 +24,12 @@ const lint = (packageJsonData, severity, validValues) => {
         const versionRange = packageJsonData[nodeName][engineDefinition];
 
         if (semver.validRange(versionRange) === null) {
-          return new LintIssue(lintId, severity, nodeName, `engines, ${engineDefinition} version range is invalid. Currently set to ${versionRange}`);
+          return new LintIssue(
+            lintId,
+            severity,
+            nodeName,
+            `engines, ${engineDefinition} version range is invalid. Currently set to ${versionRange}`
+          );
         }
       }
     } else {

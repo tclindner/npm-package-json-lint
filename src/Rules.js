@@ -5,7 +5,6 @@ const fs = require('fs');
 const path = require('path');
 
 class Rules {
-
   /**
    * Constructor
    */
@@ -21,7 +20,7 @@ class Rules {
     const rulesDirectory = path.join(__dirname, 'rules');
 
     try {
-      fs.readdirSync(rulesDirectory).forEach((file) => {
+      fs.readdirSync(rulesDirectory).forEach(file => {
         const beginIndex = 0;
         const endIndex = -3;
         const ruleId = file.slice(beginIndex, endIndex);
@@ -71,7 +70,6 @@ class Rules {
   _registerRule(ruleId, ruleModule) {
     this.rules[ruleId] = ruleModule;
   }
-
 }
 
 module.exports = Rules;

@@ -15,7 +15,9 @@ describe('ConfigValidator Unit Tests', () => {
 
           expect(() => {
             ConfigValidator.validateRules(ruleConfig, source, linterContext);
-          }).toThrow('cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\tfirst key must be set to "error", "warning", or "off". Currently set to "true".');
+          }).toThrow(
+            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\tfirst key must be set to "error", "warning", or "off". Currently set to "true".'
+          );
         });
       });
 
@@ -28,7 +30,9 @@ describe('ConfigValidator Unit Tests', () => {
 
           expect(() => {
             ConfigValidator.validateRules(ruleConfig, source, linterContext);
-          }).toThrow('cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\tsecond key must be set an array. Currently set to "Thomas".');
+          }).toThrow(
+            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\tsecond key must be set an array. Currently set to "Thomas".'
+          );
         });
       });
 
@@ -63,7 +67,9 @@ describe('ConfigValidator Unit Tests', () => {
 
           expect(() => {
             ConfigValidator.validateRules(ruleConfig, source, linterContext);
-          }).toThrow('cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\tis an array type rule. It must be set to "off" if an array is not supplied.');
+          }).toThrow(
+            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\tis an array type rule. It must be set to "off" if an array is not supplied.'
+          );
         });
       });
     });
@@ -78,7 +84,9 @@ describe('ConfigValidator Unit Tests', () => {
 
           expect(() => {
             ConfigValidator.validateRules(ruleConfig, source, linterContext);
-          }).toThrow('cli:\n\tConfiguration for rule "description-format" is invalid:\n\tfirst key must be set to "error", "warning", or "off". Currently set to "true".');
+          }).toThrow(
+            'cli:\n\tConfiguration for rule "description-format" is invalid:\n\tfirst key must be set to "error", "warning", or "off". Currently set to "true".'
+          );
         });
       });
 
@@ -91,7 +99,9 @@ describe('ConfigValidator Unit Tests', () => {
 
           expect(() => {
             ConfigValidator.validateRules(ruleConfig, source, linterContext);
-          }).toThrow('cli:\n\tConfiguration for rule "description-format" is invalid:\n\tsecond key must be set an object. Currently set to "Thomas".');
+          }).toThrow(
+            'cli:\n\tConfiguration for rule "description-format" is invalid:\n\tsecond key must be set an object. Currently set to "Thomas".'
+          );
         });
       });
 
@@ -126,7 +136,9 @@ describe('ConfigValidator Unit Tests', () => {
 
           expect(() => {
             ConfigValidator.validateRules(ruleConfig, source, linterContext);
-          }).toThrow('cli:\n\tConfiguration for rule "description-format" is invalid:\n\tis an object type rule. It must be set to "off" if an object is not supplied.');
+          }).toThrow(
+            'cli:\n\tConfiguration for rule "description-format" is invalid:\n\tis an object type rule. It must be set to "off" if an object is not supplied.'
+          );
         });
       });
     });
@@ -174,7 +186,9 @@ describe('ConfigValidator Unit Tests', () => {
 
           expect(() => {
             ConfigValidator.validateRules(ruleConfig, source, linterContext);
-          }).toThrow('cli:\n\tConfiguration for rule "require-author" is invalid:\n\tmust be set to "error", "warning", or "off". Currently set to "true".');
+          }).toThrow(
+            'cli:\n\tConfiguration for rule "require-author" is invalid:\n\tmust be set to "error", "warning", or "off". Currently set to "true".'
+          );
         });
       });
 
@@ -188,7 +202,9 @@ describe('ConfigValidator Unit Tests', () => {
 
           expect(() => {
             ConfigValidator.validateRules(ruleConfig, source, linterContext);
-          }).toThrow('cli:\n\tConfiguration for rule "require-author" is invalid:\n\tmust be set to "error", "warning", or "off". Currently set to "1".');
+          }).toThrow(
+            'cli:\n\tConfiguration for rule "require-author" is invalid:\n\tmust be set to "error", "warning", or "off". Currently set to "1".'
+          );
         });
       });
     });
@@ -198,9 +214,9 @@ describe('ConfigValidator Unit Tests', () => {
     describe('when validate is called with a valid schema and rules', () => {
       test('all top level items, an exception should not be thrown', () => {
         const config = {
-          'extends': 'value',
-          'rules': {},
-          'root': true
+          extends: 'value',
+          rules: {},
+          root: true
         };
         const source = 'cli';
         jest.spyOn(ConfigValidator, 'validateRules').mockReturnValue(true);
@@ -210,8 +226,8 @@ describe('ConfigValidator Unit Tests', () => {
 
       test('extends and rules only for top level items, an exception should not be thrown', () => {
         const config = {
-          'extends': 'value',
-          'rules': {}
+          extends: 'value',
+          rules: {}
         };
         const source = 'cli';
         jest.spyOn(ConfigValidator, 'validateRules').mockReturnValue(true);
@@ -221,8 +237,8 @@ describe('ConfigValidator Unit Tests', () => {
 
       test('extends and root only for top level items, an exception should not be thrown', () => {
         const config = {
-          'extends': 'value',
-          'root': true
+          extends: 'value',
+          root: true
         };
         const source = 'cli';
         jest.spyOn(ConfigValidator, 'validateRules').mockReturnValue(true);
@@ -243,9 +259,9 @@ describe('ConfigValidator Unit Tests', () => {
 
       test('extends as array items, an exception should not be thrown', () => {
         const config = {
-          'extends': ['value', 'value2'],
-          'rules': {},
-          'root': true
+          extends: ['value', 'value2'],
+          rules: {},
+          root: true
         };
         const source = 'cli';
         jest.spyOn(ConfigValidator, 'validateRules').mockReturnValue(true);
@@ -257,9 +273,9 @@ describe('ConfigValidator Unit Tests', () => {
     describe('when validate is called with an invalid schema and valid rules', () => {
       test('extends is bool, an error should be thrown', () => {
         const config = {
-          'extends': false,
-          'rules': {},
-          'root': true
+          extends: false,
+          rules: {},
+          root: true
         };
         const source = 'cli';
         jest.spyOn(ConfigValidator, 'validateRules').mockReturnValue(true);
@@ -271,9 +287,9 @@ describe('ConfigValidator Unit Tests', () => {
 
       test('rules is bool, an error should be thrown', () => {
         const config = {
-          'extends': ['value', 'value2'],
-          'rules': false,
-          'root': true
+          extends: ['value', 'value2'],
+          rules: false,
+          root: true
         };
         const source = 'cli';
         jest.spyOn(ConfigValidator, 'validateRules').mockReturnValue(true);
@@ -285,9 +301,9 @@ describe('ConfigValidator Unit Tests', () => {
 
       test('root is string, an error should be thrown', () => {
         const config = {
-          'extends': ['value', 'value2'],
-          'rules': {},
-          'root': 'true'
+          extends: ['value', 'value2'],
+          rules: {},
+          root: 'true'
         };
         const source = 'cli';
         jest.spyOn(ConfigValidator, 'validateRules').mockReturnValue(true);
@@ -301,9 +317,9 @@ describe('ConfigValidator Unit Tests', () => {
     describe('when validate is called with a valid schema and invalid rules', () => {
       test('an error should be thrown', () => {
         const config = {
-          'extends': 'value',
-          'rules': {},
-          'root': true
+          extends: 'value',
+          rules: {},
+          root: true
         };
         const source = 'cli';
         jest.spyOn(ConfigValidator, 'validateRules').mockImplementation(() => {

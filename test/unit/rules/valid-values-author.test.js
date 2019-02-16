@@ -14,10 +14,7 @@ describe('valid-values-author Unit Tests', () => {
       const packageJsonData = {
         author: 'LastName, FirstName'
       };
-      const validValues = [
-        'FirstName LastName',
-        'FirstName MiddleName LastName'
-      ];
+      const validValues = ['FirstName LastName', 'FirstName MiddleName LastName'];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-author');
@@ -32,11 +29,7 @@ describe('valid-values-author Unit Tests', () => {
       const packageJsonData = {
         author: 'LastName, FirstName'
       };
-      const validValues = [
-        'FirstName LastName',
-        'FirstName MiddleName LastName',
-        'LastName, FirstName'
-      ];
+      const validValues = ['FirstName LastName', 'FirstName MiddleName LastName', 'LastName, FirstName'];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response).toBeTruthy();
@@ -51,10 +44,7 @@ describe('valid-values-author Unit Tests', () => {
           url: 'http://www.example.com'
         }
       };
-      const validValues = [
-        'FirstName LastName',
-        'FirstName MiddleName LastName'
-      ];
+      const validValues = ['FirstName LastName', 'FirstName MiddleName LastName'];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-author');
@@ -72,11 +62,7 @@ describe('valid-values-author Unit Tests', () => {
           url: 'http://www.example.com'
         }
       };
-      const validValues = [
-        'FirstName LastName',
-        'FirstName MiddleName LastName',
-        'LastName, FirstName'
-      ];
+      const validValues = ['FirstName LastName', 'FirstName MiddleName LastName', 'LastName, FirstName'];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response).toBeTruthy();
@@ -91,10 +77,7 @@ describe('valid-values-author Unit Tests', () => {
           url: 'http://www.example.com'
         }
       };
-      const validValues = [
-        'FirstName LastName',
-        'FirstName MiddleName LastName'
-      ];
+      const validValues = ['FirstName LastName', 'FirstName MiddleName LastName'];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-author');
@@ -109,10 +92,7 @@ describe('valid-values-author Unit Tests', () => {
       const packageJsonData = {
         author: true
       };
-      const validValues = [
-        'FirstName LastName',
-        'FirstName MiddleName LastName'
-      ];
+      const validValues = ['FirstName LastName', 'FirstName MiddleName LastName'];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-author');
@@ -125,11 +105,7 @@ describe('valid-values-author Unit Tests', () => {
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
-      const validValues = [
-        'FirstName LastName',
-        'FirstName MiddleName LastName',
-        'LastName, FirstName'
-      ];
+      const validValues = ['FirstName LastName', 'FirstName MiddleName LastName', 'LastName, FirstName'];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response).toBeTruthy();

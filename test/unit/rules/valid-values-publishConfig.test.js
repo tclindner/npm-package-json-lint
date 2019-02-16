@@ -16,10 +16,7 @@ describe('valid-values-publishConfig Unit Tests', () => {
           access: 'public'
         }
       };
-      const validValues = [
-        {access: 'private'},
-        {access: 'protected'}
-      ];
+      const validValues = [{access: 'private'}, {access: 'protected'}];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-publishConfig');
@@ -36,10 +33,7 @@ describe('valid-values-publishConfig Unit Tests', () => {
           access: 'public'
         }
       };
-      const validValues = [
-        {access: 'private'},
-        {access: 'public'}
-      ];
+      const validValues = [{access: 'private'}, {access: 'public'}];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response).toBeTruthy();
@@ -51,10 +45,7 @@ describe('valid-values-publishConfig Unit Tests', () => {
       const packageJsonData = {
         publishConfig: true
       };
-      const validValues = [
-        {access: 'private'},
-        {access: 'protected'}
-      ];
+      const validValues = [{access: 'private'}, {access: 'protected'}];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-publishConfig');
@@ -67,10 +58,7 @@ describe('valid-values-publishConfig Unit Tests', () => {
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
-      const validValues = [
-        {access: 'private'},
-        {access: 'protected'}
-      ];
+      const validValues = [{access: 'private'}, {access: 'protected'}];
       const response = lint(packageJsonData, 'error', validValues);
 
       expect(response).toBeTruthy();

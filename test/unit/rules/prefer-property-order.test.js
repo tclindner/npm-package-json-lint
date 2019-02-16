@@ -16,11 +16,7 @@ describe('prefer-property-order Unit Tests', () => {
         version: '1.0.0',
         description: 'description'
       };
-      const preferredOrder = [
-        'name',
-        'version',
-        'description'
-      ];
+      const preferredOrder = ['name', 'version', 'description'];
       const response = lint(packageJsonData, 'error', preferredOrder);
 
       expect(response).toBeTruthy();
@@ -33,11 +29,7 @@ describe('prefer-property-order Unit Tests', () => {
         name: 'awesome-module',
         version: '1.0.0'
       };
-      const preferredOrder = [
-        'name',
-        'version',
-        'description'
-      ];
+      const preferredOrder = ['name', 'version', 'description'];
       const response = lint(packageJsonData, 'error', preferredOrder);
 
       expect(response).toBeTruthy();
@@ -51,17 +43,15 @@ describe('prefer-property-order Unit Tests', () => {
         description: 'description',
         version: '1.0.0'
       };
-      const preferredOrder = [
-        'name',
-        'version',
-        'description'
-      ];
+      const preferredOrder = ['name', 'version', 'description'];
       const response = lint(packageJsonData, 'error', preferredOrder);
 
       expect(response.lintId).toStrictEqual('prefer-property-order');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('');
-      expect(response.lintMessage).toStrictEqual('Your package.json properties are not in the desired order. Please move "description" after "version".');
+      expect(response.lintMessage).toStrictEqual(
+        'Your package.json properties are not in the desired order. Please move "description" after "version".'
+      );
     });
   });
 });

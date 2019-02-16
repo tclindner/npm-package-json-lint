@@ -10,7 +10,12 @@ const lint = (packageJsonData, severity) => {
   const result = isInAlphabeticalOrder(packageJsonData, nodeName);
 
   if (!result.status) {
-    return new LintIssue(lintId, severity, nodeName, `${message} Please move ${result.data.invalidNode} after ${result.data.validNode}.`);
+    return new LintIssue(
+      lintId,
+      severity,
+      nodeName,
+      `${message} Please move ${result.data.invalidNode} after ${result.data.validNode}.`
+    );
   }
 
   return true;

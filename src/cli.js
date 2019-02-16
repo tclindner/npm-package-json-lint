@@ -13,7 +13,8 @@ const exitCodes = {
 };
 
 // configure cli
-const cli = meow(`
+const cli = meow(
+  `
       Usage
         $ npmPkgJsonLint <patterns>
 
@@ -34,30 +35,32 @@ const cli = meow(`
         $ npmPkgJsonLint --quiet ./packages
         $ npmPkgJsonLint . --ignorePath .gitignore
         $ npmPkgJsonLint . -i .gitignore
-`, {
-  flags: {
-    quiet: {
-      'type': 'boolean',
-      'alias': 'q',
-      'default': false
-    },
-    noConfigFiles: {
-      'type': 'boolean',
-      'alias': 'ncf',
-      'default': false
-    },
-    configFile: {
-      'type': 'string',
-      'alias': 'c',
-      'default': ''
-    },
-    ignorePath: {
-      'type': 'string',
-      'alias': 'i',
-      'default': ''
+`,
+  {
+    flags: {
+      quiet: {
+        type: 'boolean',
+        alias: 'q',
+        default: false
+      },
+      noConfigFiles: {
+        type: 'boolean',
+        alias: 'ncf',
+        default: false
+      },
+      configFile: {
+        type: 'string',
+        alias: 'c',
+        default: ''
+      },
+      ignorePath: {
+        type: 'string',
+        alias: 'i',
+        default: ''
+      }
     }
   }
-});
+);
 
 const {input} = cli;
 

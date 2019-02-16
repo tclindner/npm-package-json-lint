@@ -32,7 +32,9 @@ describe('CLIEngine Unit Tests', () => {
 
       expect(() => {
         const engine = new CLIEngine(options);
-      }).toThrow('cli:\n\tConfiguration for rule "require-name" is invalid:\n\tmust be set to "error", "warning", or "off". Currently set to "blah".');
+      }).toThrow(
+        'cli:\n\tConfiguration for rule "require-name" is invalid:\n\tmust be set to "error", "warning", or "off". Currently set to "blah".'
+      );
     });
   });
 
