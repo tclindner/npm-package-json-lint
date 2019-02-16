@@ -788,7 +788,7 @@ describe('Config Unit Tests', () => {
         jest.spyOn(ConfigFile, 'loadFromPackageJson').mockReturnValue({rules: {}});
         jest
           .spyOn(ConfigFile, 'load')
-          .mockReturnValueOnce({root: false, rules: {'require-name': 'error' } })
+          .mockReturnValueOnce({root: false, rules: {'require-name': 'error' }})
           .mockReturnValueOnce({root: false, rules: {'require-version': 'error', 'require-name': 'warning' }});
 
         const dirNameMock = jest
