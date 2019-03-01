@@ -11,6 +11,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [3.6.0] - 2019-02-28
+### Added
+- New rule: [require-repository-directory](https://github.com/tclindner/npm-package-json-lint/wiki/require-repository-directory).
+
+Huge shout-out to @greatislander for contributing the rule! :tada:
+
 ## [3.5.0] - 2019-02-03
 ### Added
 - New cli flag, `ignorePath` (`-i`) - Path to a file containing patterns that describe files to ignore.
