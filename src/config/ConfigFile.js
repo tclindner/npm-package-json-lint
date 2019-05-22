@@ -61,7 +61,7 @@ const loadFromModule = (moduleName, configContext, originalFilePath) => {
     adjustedModuleName = path.join(configContext.options.cwd, moduleName);
     config = loadConfigFile(adjustedModuleName);
   } else {
-    const resolvedModule = require.resolve(adjustedModuleName, {paths: path.dirname(originalFilePath)});
+    const resolvedModule = require.resolve(adjustedModuleName, {paths: [path.dirname(originalFilePath)]});
 
     config = require(resolvedModule);
   }
