@@ -11,6 +11,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [3.6.1] - 2019-05-22
+### Fixed
+- @lddubeau resolved an issue with how require.resolve was implemented. The issue was causing npm-package-json-lint to crash on Node 12.3.0. Please see #110 for more details.
+
+Huge shout-out to @lddubeau for identifying and fixing this issue :tada:
+
 ## [3.6.0] - 2019-02-28
 ### Added
 - New rule: [require-repository-directory](https://github.com/tclindner/npm-package-json-lint/wiki/require-repository-directory).
