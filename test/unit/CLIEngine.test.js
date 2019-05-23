@@ -144,7 +144,7 @@ describe('CLIEngine Unit Tests', () => {
       const cliEngine = new CLIEngine(options);
       const results = cliEngine.executeOnPackageJsonFiles(patterns);
 
-      expect(results).toStrictEqual(expected);
+      expect(results).toEqual(expected);
     });
 
     test('when called with patterns and ignorePath', () => {
@@ -324,7 +324,7 @@ describe('CLIEngine Unit Tests', () => {
       const cliEngine = new CLIEngine(options);
       const results = cliEngine.executeOnPackageJsonObject(pkgObject, fileName);
 
-      expect(results).toStrictEqual(expected);
+      expect(results).toEqual(expected);
     });
 
     test('when called with relative path', () => {
@@ -403,7 +403,7 @@ describe('CLIEngine Unit Tests', () => {
       const cliEngine = new CLIEngine(options);
       const results = cliEngine.executeOnPackageJsonObject(pkgObject, fileName);
 
-      expect(results).toStrictEqual(expected);
+      expect(results).toEqual(expected);
     });
   });
 
