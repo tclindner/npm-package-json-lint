@@ -3,61 +3,55 @@ jobs:
   build:
     docker:
       - image: circleci/node:8
-    working_directory: ~/repo
     steps:
       - checkout
       - run: npm install
       - run: npm run lint
       - persist_to_workspace:
-          root: ~/repo
-          paths: .
+          root: ~/
+          paths:
+            - project
   test-node8:
     docker:
       - image: circleci/node:8
-    working_directory: ~/repo
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: ~/
       - run: npm run test:ci
   test-node9:
     docker:
       - image: circleci/node:9
-    working_directory: ~/repo
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: ~/
       - run: npm run test:ci
   test-node10:
     docker:
       - image: circleci/node:10
-    working_directory: ~/repo
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: ~/
       - run: npm run test:ci
   test-node11:
     docker:
       - image: circleci/node:11
-    working_directory: ~/repo
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: ~/
       - run: npm run test:ci
   test-node12:
     docker:
       - image: circleci/node:12
-    working_directory: ~/repo
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: ~/
       - run: npm run test:ci
   publish-beta:
     docker:
       - image: circleci/node:10
-    working_directory: ~/repo
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: ~/
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" >> ~/.npmrc
@@ -67,10 +61,9 @@ jobs:
   publish-stable:
     docker:
       - image: circleci/node:10
-    working_directory: ~/repo
     steps:
       - attach_workspace:
-          at: ~/repo
+          at: ~/
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" >> ~/.npmrc
