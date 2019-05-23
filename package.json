@@ -1,6 +1,6 @@
 {
   "name": "npm-package-json-lint",
-  "version": "3.6.0",
+  "version": "3.6.1",
   "description": "Configurable linter for package.json files.",
   "keywords": [
     "lint",
