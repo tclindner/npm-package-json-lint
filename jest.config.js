@@ -13,5 +13,6 @@ module.exports = {
   restoreMocks: true,
   resetMocks: true,
   resetModules: true,
-  testEnvironment: 'node'
+  testEnvironment: 'node',
+  testPathIgnorePatterns: ['<rootDir>/node_modules/']
 };
