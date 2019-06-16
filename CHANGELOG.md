@@ -11,6 +11,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Removed
 
+## [3.7.0] - 2019-06-16
+### Added
+- New rule: [require-types](https://github.com/tclindner/npm-package-json-lint/wiki/require-types).
+- New rule: [require-typings](https://github.com/tclindner/npm-package-json-lint/wiki/require-typings).
+
+Addresses [#109](https://github.com/tclindner/npm-package-json-lint/issues/109) from @ceilfors.
+
 ## [3.6.1] - 2019-05-22
 ### Fixed
 - @lddubeau resolved an issue with how require.resolve was implemented. The issue was causing npm-package-json-lint to crash on Node 12.3.0. Please see #110 for more details.
