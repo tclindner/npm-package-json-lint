@@ -624,7 +624,6 @@ describe('Config Unit Tests', () => {
         const filePath = './package.json';
         const result = config.getProjectHierarchyConfig(filePath);
 
-        expect(path.dirname).toHaveBeenCalledTimes(1);
         expect(path.dirname).toHaveBeenCalledWith(filePath);
 
         expect(fs.existsSync).toHaveBeenCalledTimes(1);
@@ -641,9 +640,7 @@ describe('Config Unit Tests', () => {
         expect(result).toStrictEqual(expectedConfigObj);
 
         dirNameMock.mockRestore();
-        dirNameMock.mockRestore();
         fsExistsMock.mockRestore();
-        fsStatMock.mockRestore();
         fsStatMock.mockRestore();
       });
 
@@ -887,102 +884,6 @@ describe('Config Unit Tests', () => {
 
         expect(ConfigFile.load).toHaveBeenCalledTimes(1);
         expect(ConfigFile.load).toHaveBeenCalledWith('npm-package-json-lint/npmpackagejsonlint.config.js', config);
-
-        expect(result).toStrictEqual(expectedConfigObj);
-
-        dirNameMock.mockRestore();
-        fsExistsMock.mockRestore();
-        fsStatMock.mockRestore();
-      });
-
-      test('and rc/js config files do not exist, empty object should returned', () => {
-        const options = {
-          configFile: '',
-          cwd: process.cwd(),
-          useConfigFiles: true,
-          rules: {}
-        };
-        const config = new Config(options, linterContext);
-
-        jest.spyOn(ConfigFile, 'loadFromPackageJson');
-        jest.spyOn(ConfigFile, 'load');
-
-        const dirNameMock = jest
-          .spyOn(path, 'dirname')
-          .mockReturnValueOnce('./npm-package-json-lint/')
-          .mockReturnValueOnce('/home');
-        const fsExistsMock = jest.spyOn(fs, 'existsSync').mockReturnValue(false);
-        const fsStatMock = jest.spyOn(fs, 'statSync');
-
-        const expectedConfigObj = {
-          rules: {}
-        };
-        const filePath = './package.json';
-        const result = config.getProjectHierarchyConfig(filePath);
-
-        expect(path.dirname).toHaveBeenCalledTimes(2);
-        expect(path.dirname).toHaveBeenCalledWith(filePath);
-
-        expect(fs.existsSync).toHaveBeenCalledTimes(3);
-        expect(fs.existsSync).toHaveBeenNthCalledWith(1, 'npm-package-json-lint/package.json');
-        expect(fs.existsSync).toHaveBeenNthCalledWith(2, 'npm-package-json-lint/.npmpackagejsonlintrc.json');
-        expect(fs.existsSync).toHaveBeenNthCalledWith(3, 'npm-package-json-lint/npmpackagejsonlint.config.js');
-
-        expect(fs.statSync).not.toHaveBeenCalled();
-
-        expect(ConfigFile.loadFromPackageJson).not.toHaveBeenCalled();
-
-        expect(ConfigFile.load).not.toHaveBeenCalled();
-
-        expect(result).toStrictEqual(expectedConfigObj);
-
-        dirNameMock.mockRestore();
-        fsExistsMock.mockRestore();
-        fsStatMock.mockRestore();
-      });
-
-      test('and pkg prop does not exist, config files do, but useConfigFiles is false, then empty config object should returned', () => {
-        const options = {
-          configFile: '',
-          cwd: process.cwd(),
-          useConfigFiles: false,
-          rules: {}
-        };
-        const config = new Config(options, linterContext);
-
-        jest.spyOn(ConfigFile, 'loadFromPackageJson').mockReturnValue({rules: {}});
-        jest.spyOn(ConfigFile, 'load').mockReturnValue({root: true, rules: {'require-name': 'error'}});
-
-        const dirNameMock = jest
-          .spyOn(path, 'dirname')
-          .mockReturnValueOnce('./npm-package-json-lint/')
-          .mockReturnValueOnce('/home');
-        const fsExistsMock = jest.spyOn(fs, 'existsSync').mockReturnValue(true);
-        const fsStatMock = jest.spyOn(fs, 'statSync').mockReturnValue({
-          isFile() {
-            return true;
-          }
-        });
-
-        const expectedConfigObj = {
-          rules: {}
-        };
-        const filePath = './package.json';
-        const result = config.getProjectHierarchyConfig(filePath);
-
-        expect(path.dirname).toHaveBeenCalledTimes(2);
-        expect(path.dirname).toHaveBeenCalledWith(filePath);
-
-        expect(fs.existsSync).toHaveBeenCalledTimes(1);
-        expect(fs.existsSync).toHaveBeenCalledWith('npm-package-json-lint/package.json');
-
-        expect(fs.statSync).toHaveBeenCalledTimes(1);
-        expect(fs.statSync).toHaveBeenCalledWith('npm-package-json-lint/package.json');
-
-        expect(ConfigFile.loadFromPackageJson).toHaveBeenCalledTimes(1);
-        expect(ConfigFile.loadFromPackageJson).toHaveBeenCalledWith('npm-package-json-lint/package.json', config);
-
-        expect(ConfigFile.load).not.toHaveBeenCalled();
 
         expect(result).toStrictEqual(expectedConfigObj);
 

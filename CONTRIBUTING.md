@@ -13,6 +13,11 @@
 
 * Fork and clone the npm-package-json-lint repo
 
+#### Branches
+
+  * Use the `v3.x.x` branch for fixes to v3.
+  * Use `master` for new enhancements and breaking changes for v4.
+
 ### Install project dependencies
 
 `npm install`
