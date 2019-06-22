@@ -32,8 +32,8 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 #### Node
 
-* [Node.js](https://nodejs.org/) - v6.0.0+
-* [npm](http://npmjs.com) - v3.0.0+
+* [Node.js](https://nodejs.org/) - v8.0.0+
+* [npm](http://npmjs.com) - v6.0.0+
 
 ### Use the cli
 
