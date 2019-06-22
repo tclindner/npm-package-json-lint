@@ -44,9 +44,9 @@
     "log-symbols": "^3.0.0",
     "meow": "^5.0.0",
     "plur": "^3.1.1",
-    "semver": "^5.6.0",
+    "semver": "^6.1.1",
     "strip-json-comments": "^3.0.1",
-    "validator": "^10.11.0"
+    "validator": "^11.0.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
