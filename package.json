@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "ajv": "^6.10.0",
+    "ajv-errors": "^1.0.1",
     "chalk": "^2.4.2",
     "glob": "^7.1.4",
     "ignore": "^5.1.2",
@@ -45,8 +46,7 @@
     "meow": "^5.0.0",
     "plur": "^3.1.1",
     "semver": "^6.1.1",
-    "strip-json-comments": "^3.0.1",
-    "validator": "^11.0.0"
+    "strip-json-comments": "^3.0.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
