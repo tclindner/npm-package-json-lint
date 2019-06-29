@@ -8,8 +8,6 @@ const nodeName = 'scripts';
 const message = 'Type should be an Object';
 const ruleType = 'standard';
 
-/* eslint-disable max-statements */
-
 const lint = (packageJsonData, severity) => {
   if (!isObject(packageJsonData, nodeName)) {
     return new LintIssue(lintId, severity, nodeName, message);
@@ -33,5 +31,7 @@ const lint = (packageJsonData, severity) => {
   return true;
 };
 
-module.exports.lint = lint;
-module.exports.ruleType = ruleType;
+module.exports = {
+  lint,
+  ruleType
+};

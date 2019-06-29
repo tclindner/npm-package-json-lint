@@ -36,5 +36,7 @@ const lint = (packageJsonData, severity, config) => {
   return true;
 };
 
-module.exports.lint = lint;
-module.exports.ruleType = ruleType;
+module.exports = {
+  lint,
+  ruleType
+};

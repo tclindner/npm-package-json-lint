@@ -1,8 +1,6 @@
 const chalk = require('chalk');
 const Reporter = require('./../../src/Reporter');
 
-/* eslint-disable no-magic-numbers */
-
 describe('Reporter Unit Tests', () => {
   describe('write method', () => {
     describe('when results are for a single file', () => {

@@ -1,5 +1,3 @@
-/* eslint max-lines: 'off', id-length: 'off' */
-
 const Config = require('./../../../src/Config');
 const ConfigFile = require('./../../../src/config/ConfigFile');
 const ConfigValidator = require('./../../../src/config/ConfigValidator');
