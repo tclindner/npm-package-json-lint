@@ -1,6 +1,11 @@
 const ruleModule = require('./../../../src/rules/prefer-no-engineStrict');
+const property = require('../../../src/validators/property');
 
 const {lint, ruleType} = ruleModule;
+
+jest.mock('../../../src/validators/property');
+
+const nodeName = 'engineStrict';
 
 describe('prefer-no-engineStrict Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -11,6 +16,8 @@ describe('prefer-no-engineStrict Unit Tests', () => {
 
   describe('when package.json has engineStrict node', () => {
     test('LintIssue object should be returned', () => {
+      property.exists.mockReturnValue(true);
+
       const packageJsonData = {
         engineStrict: 'dummy-value'
       };
@@ -18,19 +25,27 @@ describe('prefer-no-engineStrict Unit Tests', () => {
 
       expect(response.lintId).toStrictEqual('prefer-no-engineStrict');
       expect(response.severity).toStrictEqual('error');
-      expect(response.node).toStrictEqual('engineStrict');
+      expect(response.node).toStrictEqual(nodeName);
       expect(response.lintMessage).toStrictEqual(
         'engineStrict was deprecated with npm v3.0.0. Please remove it from your package.json file'
       );
+
+      expect(property.exists).toHaveBeenCalledTimes(1);
+      expect(property.exists).toHaveBeenCalledWith(packageJsonData, nodeName);
     });
   });
 
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
+      property.exists.mockReturnValue(false);
+
       const packageJsonData = {};
       const response = lint(packageJsonData, 'error');
 
       expect(response).toBeTruthy();
+
+      expect(property.exists).toHaveBeenCalledTimes(1);
+      expect(property.exists).toHaveBeenCalledWith(packageJsonData, nodeName);
     });
   });
 });
