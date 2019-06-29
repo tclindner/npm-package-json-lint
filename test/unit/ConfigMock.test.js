@@ -1,7 +1,4 @@
-/* eslint max-lines: 'off', id-length: 'off' */
-
 const fs = require('fs');
-const os = require('os');
 const path = require('path');
 const isPathInside = require('is-path-inside');
 const Config = require('./../../src/Config');
