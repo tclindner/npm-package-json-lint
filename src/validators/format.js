@@ -6,6 +6,10 @@ const semver = require('semver');
  * @return {boolean}      True if the string is lowercase or is missing. False if it is not.
  */
 const isLowercase = name => {
+  if (typeof name === 'undefined') {
+    return true;
+  }
+
   return name === name.toLowerCase();
 };
 
