@@ -121,7 +121,7 @@ const configurationSchema = {
       }
     }
   },
-  additionalProperties: true,
+  additionalProperties: false,
   errorMessage: {
     type: 'npm-package-json-lint config should be an object.',
     additionalProperties:
