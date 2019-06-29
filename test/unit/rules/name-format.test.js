@@ -10,7 +10,7 @@ describe('name-format Unit Tests', () => {
   });
 
   describe('when package.json has node with incorrect format', () => {
-    test('LintIssue object should be returned', () => {
+    test('not lowercase - LintIssue object should be returned', () => {
       const packageJsonData = {
         name: 'ImNotLowercase'
       };
