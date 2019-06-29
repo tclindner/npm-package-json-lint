@@ -2,34 +2,19 @@ const format = require('./../../../src/validators/format');
 
 describe('format Unit Tests', () => {
   describe('isLowercase method', () => {
-    describe('when the node does not exist in the package.json file', () => {
+    describe('when the string is lowercase', () => {
       test('true should be returned', () => {
-        const packageJson = {
-          name: 'awesome-module'
-        };
-        const response = format.isLowercase(packageJson, 'devDependencies');
+        const string = 'awesome-module';
+        const response = format.isLowercase(string);
 
         expect(response).toBeTruthy();
       });
     });
 
-    describe('when the node exists in the package.json file and name is lowercase', () => {
-      test('true should be returned', () => {
-        const packageJson = {
-          name: 'awesome-module'
-        };
-        const response = format.isLowercase(packageJson, 'name');
-
-        expect(response).toBeTruthy();
-      });
-    });
-
-    describe('when the node exists in the package.json file, but name is not lowercase', () => {
+    describe('when the string is not lowercase', () => {
       test('false should be returned', () => {
-        const packageJson = {
-          name: 'aweSome-moDule'
-        };
-        const response = format.isLowercase(packageJson, 'name');
+        const string = 'aweSome-moDule';
+        const response = format.isLowercase(string);
 
         expect(response).toBeFalsy();
       });
