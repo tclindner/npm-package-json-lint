@@ -2,19 +2,6 @@ const alphabeticalSort = require('./../../../src/validators/alphabetical-sort');
 
 describe('alphabetical-sort Unit Tests', () => {
   describe('isInAlphabeticalOrder method', () => {
-    describe('when the node does not exist in the package.json file', () => {
-      test('true should be returned', () => {
-        const packageJson = {
-          name: 'awesome-module'
-        };
-        const response = alphabeticalSort.isInAlphabeticalOrder(packageJson, 'devDependencies');
-
-        expect(response.status).toBeTruthy();
-        expect(response.data.invalidNode).toBeNull();
-        expect(response.data.validNode).toBeNull();
-      });
-    });
-
     describe('when the node exists in the package.json file and dependencies are in alpahbetical order', () => {
       test('true should be returned', () => {
         const packageJson = {

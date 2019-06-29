@@ -1,6 +1,13 @@
 const ruleModule = require('./../../../src/rules/prefer-alphabetical-devDependencies');
+const alphabeticalSort = require('../../../src/validators/alphabetical-sort');
+const property = require('../../../src/validators/property');
 
 const {lint, ruleType} = ruleModule;
+
+jest.mock('../../../src/validators/alphabetical-sort');
+jest.mock('../../../src/validators/property');
+
+const nodeName = 'devDependencies';
 
 describe('prefer-alphabetical-devDependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -11,6 +18,15 @@ describe('prefer-alphabetical-devDependencies Unit Tests', () => {
 
   describe('when package.json has node with an invalid order', () => {
     test('LintIssue object should be returned', () => {
+      alphabeticalSort.isInAlphabeticalOrder.mockReturnValue({
+        status: false,
+        data: {
+          invalidNode: 'semver',
+          validNode: 'chalk'
+        }
+      });
+      property.exists.mockReturnValue(true);
+
       const packageJsonData = {
         devDependencies: {
           semver: '^5.3.0',
@@ -26,11 +42,22 @@ describe('prefer-alphabetical-devDependencies Unit Tests', () => {
       expect(response.lintMessage).toStrictEqual(
         'Your devDependencies are not in alphabetical order. Please move semver after chalk.'
       );
+
+      expect(property.exists).toHaveBeenCalledTimes(1);
+      expect(property.exists).toHaveBeenCalledWith(packageJsonData, nodeName);
+      expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledTimes(1);
+      expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledWith(packageJsonData, nodeName);
     });
   });
 
   describe('when package.json has node with a valid order', () => {
-    test('LintIssue object should be returned', () => {
+    test('true should be returned', () => {
+      alphabeticalSort.isInAlphabeticalOrder.mockReturnValue({
+        status: true,
+        data: {}
+      });
+      property.exists.mockReturnValue(true);
+
       const packageJsonData = {
         devDependencies: {
           chalk: '^1.1.3',
@@ -41,15 +68,25 @@ describe('prefer-alphabetical-devDependencies Unit Tests', () => {
       const response = lint(packageJsonData, 'error');
 
       expect(response).toBeTruthy();
+
+      expect(property.exists).toHaveBeenCalledTimes(1);
+      expect(property.exists).toHaveBeenCalledWith(packageJsonData, nodeName);
+      expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledTimes(1);
+      expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledWith(packageJsonData, nodeName);
     });
   });
 
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
+      property.exists.mockReturnValue(false);
+
       const packageJsonData = {};
       const response = lint(packageJsonData, 'error');
 
       expect(response).toBeTruthy();
+
+      expect(property.exists).toHaveBeenCalledTimes(1);
+      expect(property.exists).toHaveBeenCalledWith(packageJsonData, nodeName);
     });
   });
 });
