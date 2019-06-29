@@ -90,4 +90,6 @@ const isInPreferredOrder = (packageJsonData, userPreferredNodeOrder) => {
   };
 };
 
-module.exports.isInPreferredOrder = isInPreferredOrder;
+module.exports = {
+  isInPreferredOrder
+};
