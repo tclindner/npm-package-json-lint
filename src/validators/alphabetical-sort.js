@@ -7,16 +7,6 @@ const increment = 1;
  * @return {object}                 Object containing the status and the dependencies that are out of order, if applicable
  */
 const isInAlphabeticalOrder = (packageJsonData, nodeName) => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return {
-      status: true,
-      data: {
-        invalidNode: null,
-        validNode: null
-      }
-    };
-  }
-
   let isValid = true;
   let data = {
     invalidNode: null,
@@ -42,4 +32,6 @@ const isInAlphabeticalOrder = (packageJsonData, nodeName) => {
   };
 };
 
-module.exports.isInAlphabeticalOrder = isInAlphabeticalOrder;
+module.exports = {
+  isInAlphabeticalOrder
+};
