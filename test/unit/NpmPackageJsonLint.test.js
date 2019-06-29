@@ -146,6 +146,308 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
       });
     });
+
+    describe('validate that when object style rules is set to errror', () => {
+      test('one errors and zero warning expected', () => {
+        const packageJsonData = {
+          description: 'caitlin Snow'
+        };
+        const config = {
+          'description-format': ['error', {requireCapitalFirstLetter: true}]
+        };
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 1;
+        const expectedErrorCount = 1;
+        const expectedWarningCount = 0;
+
+        expect(response.issues.length).toStrictEqual(expectedIssues);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+      });
+    });
+
+    describe('validate that when object style rules is off', () => {
+      test('zero errors and zero warning expected', () => {
+        const packageJsonData = {
+          description: 'caitlin Snow'
+        };
+        const config = {
+          'description-format': ['off', {requireCapitalFirstLetter: true}]
+        };
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 0;
+        const expectedErrorCount = 0;
+        const expectedWarningCount = 0;
+
+        expect(response.issues.length).toStrictEqual(expectedIssues);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+      });
+    });
+
+    describe('validate that when object style rules have a value of off', () => {
+      test('zero errors and zero warnings expected', () => {
+        const packageJsonData = {
+          description: 'caitlin Snow'
+        };
+        const config = {
+          'description-format': 'off'
+        };
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 0;
+        const expectedErrorCount = 0;
+        const expectedWarningCount = 0;
+
+        expect(response.issues.length).toStrictEqual(expectedIssues);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+      });
+    });
+
+    describe('validate that when optionalObject style rules is set to error', () => {
+      test('one errors and zero warning expected', () => {
+        const packageJsonData = {
+          dependencies: {
+            'grunt-npm-package-json-lint': '2.0.0'
+          }
+        };
+        const config = {
+          'no-absolute-version-dependencies': 'error'
+        };
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 1;
+        const expectedErrorCount = 1;
+        const expectedWarningCount = 0;
+
+        expect(response.issues.length).toStrictEqual(expectedIssues);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+      });
+    });
+
+    describe('validate that when optionalObject style rules is set to error with exceptions (no match)', () => {
+      test('one errors and zero warning expected', () => {
+        const packageJsonData = {
+          dependencies: {
+            'grunt-npm-package-json-lint': '2.0.0'
+          }
+        };
+        const config = {
+          'no-absolute-version-dependencies': ['error', {exceptions: ['gulp-npm-package-json-lint']}]
+        };
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 1;
+        const expectedErrorCount = 1;
+        const expectedWarningCount = 0;
+
+        expect(response.issues.length).toStrictEqual(expectedIssues);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+      });
+    });
+
+    describe('validate that when optionalObject style rules is set to error with exceptions (match)', () => {
+      test('one errors and zero warning expected', () => {
+        const packageJsonData = {
+          dependencies: {
+            'grunt-npm-package-json-lint': '2.0.0'
+          }
+        };
+        const config = {
+          'no-absolute-version-dependencies': ['error', {exceptions: ['grunt-npm-package-json-lint']}]
+        };
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 0;
+        const expectedErrorCount = 0;
+        const expectedWarningCount = 0;
+
+        expect(response.issues.length).toStrictEqual(expectedIssues);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+      });
+    });
+
+    describe('validate that when optionalObject style rules is set to error with exceptions (match)', () => {
+      test('one errors and zero warning expected', () => {
+        const packageJsonData = {
+          dependencies: {
+            'grunt-npm-package-json-lint': '^2.0.0'
+          }
+        };
+        const config = {
+          'no-absolute-version-dependencies': 'error'
+        };
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 0;
+        const expectedErrorCount = 0;
+        const expectedWarningCount = 0;
+
+        expect(response.issues.length).toStrictEqual(expectedIssues);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+      });
+    });
+
+    describe('validate that when object style rules is off', () => {
+      test('zero errors and zero warning expected', () => {
+        const packageJsonData = {
+          dependencies: {
+            'grunt-npm-package-json-lint': '2.0.0'
+          }
+        };
+        const config = {
+          'no-absolute-version-dependencies': ['off', {exceptions: ['grunt-npm-package-json-lint']}]
+        };
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 0;
+        const expectedErrorCount = 0;
+        const expectedWarningCount = 0;
+
+        expect(response.issues.length).toStrictEqual(expectedIssues);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+      });
+    });
+
+    describe('validate that when object style rules have a value of off', () => {
+      test('zero errors and zero warnings expected', () => {
+        const packageJsonData = {
+          dependencies: {
+            'grunt-npm-package-json-lint': '2.0.0'
+          }
+        };
+        const config = {
+          'no-absolute-version-dependencies': 'off'
+        };
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 0;
+        const expectedErrorCount = 0;
+        const expectedWarningCount = 0;
+
+        expect(response.issues.length).toStrictEqual(expectedIssues);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+      });
+    });
+
+    describe('validate that when optionalObject style rules is set to error', () => {
+      test('zero errors and zero warning expected', () => {
+        const packageJsonData = {
+          dependencies: {
+            'grunt-npm-package-json-lint': '2.0.0'
+          }
+        };
+        const config = {
+          'prefer-absolute-version-dependencies': 'error'
+        };
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 0;
+        const expectedErrorCount = 0;
+        const expectedWarningCount = 0;
+
+        expect(response.issues.length).toStrictEqual(expectedIssues);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+      });
+    });
+
+    describe('validate that when optionalObject style rules is set to error', () => {
+      test('zero errors and zero warning expected', () => {
+        const packageJsonData = {
+          dependencies: {
+            'grunt-npm-package-json-lint': '^2.0.0'
+          }
+        };
+        const config = {
+          'prefer-absolute-version-dependencies': 'error'
+        };
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 1;
+        const expectedErrorCount = 1;
+        const expectedWarningCount = 0;
+
+        expect(response.issues.length).toStrictEqual(expectedIssues);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+      });
+    });
+
+    describe('validate that when optionalObject style rules is set to error with exceptions (no match)', () => {
+      test('zero errors and zero warning expected', () => {
+        const packageJsonData = {
+          dependencies: {
+            'grunt-npm-package-json-lint': '2.0.0'
+          }
+        };
+        const config = {
+          'prefer-absolute-version-dependencies': ['error', {exceptions: ['gulp-npm-package-json-lint']}]
+        };
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 0;
+        const expectedErrorCount = 0;
+        const expectedWarningCount = 0;
+
+        expect(response.issues.length).toStrictEqual(expectedIssues);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+      });
+    });
+
+    describe('validate that when optionalObject style rules is set to error with exceptions (match)', () => {
+      test('zero errors and zero warning expected', () => {
+        const packageJsonData = {
+          dependencies: {
+            'grunt-npm-package-json-lint': '^2.0.0'
+          }
+        };
+        const config = {
+          'prefer-absolute-version-dependencies': ['error', {exceptions: ['grunt-npm-package-json-lint']}]
+        };
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 0;
+        const expectedErrorCount = 0;
+        const expectedWarningCount = 0;
+
+        expect(response.issues.length).toStrictEqual(expectedIssues);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+      });
+    });
+
+    describe('validate that when optionalObject style rules is set to error', () => {
+      test('one errors and zero warning expected', () => {
+        const packageJsonData = {
+          dependencies: {
+            'grunt-npm-package-json-lint': '^2.0.0'
+          }
+        };
+        const config = {
+          'prefer-absolute-version-dependencies': 'error'
+        };
+        const npmPackageJsonLint = new NpmPackageJsonLint();
+        const response = npmPackageJsonLint.lint(packageJsonData, config);
+        const expectedIssues = 1;
+        const expectedErrorCount = 1;
+        const expectedWarningCount = 0;
+
+        expect(response.issues.length).toStrictEqual(expectedIssues);
+        expect(response.issues.filter(issue => issue.severity === 'error').length).toStrictEqual(expectedErrorCount);
+        expect(response.issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(expectedWarningCount);
+      });
+    });
   });
 
   describe('getRules method', () => {

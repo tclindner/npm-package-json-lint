@@ -1,18 +1,20 @@
-const {isVersionAbsolute} = require('./../validators/dependency-audit');
+const {areVersionsAbsolute} = require('./../validators/dependency-audit');
 const LintIssue = require('./../LintIssue');
 
 const lintId = 'no-absolute-version-devDependencies';
 const nodeName = 'devDependencies';
 const message = 'You are using an invalid version range. Please do not use absolute versions.';
-const ruleType = 'standard';
+const ruleType = 'optionalObject';
 
-const lint = (packageJsonData, severity) => {
-  if (packageJsonData.hasOwnProperty(nodeName) && isVersionAbsolute(packageJsonData, nodeName)) {
+const lint = (packageJsonData, severity, config) => {
+  if (packageJsonData.hasOwnProperty(nodeName) && areVersionsAbsolute(packageJsonData, nodeName, config)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }
 
   return true;
 };
 
-module.exports.lint = lint;
-module.exports.ruleType = ruleType;
+module.exports = {
+  lint,
+  ruleType
+};

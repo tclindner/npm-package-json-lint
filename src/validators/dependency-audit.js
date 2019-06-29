@@ -1,5 +1,9 @@
-/* eslint no-restricted-syntax: 'off', guard-for-in: 'off' */
+/* eslint no-restricted-syntax: 'off', guard-for-in: 'off', no-continue: 'off' */
 const semver = require('semver');
+
+const hasExceptions = config => {
+  return typeof config === 'object' && config.hasOwnProperty('exceptions');
+};
 
 /**
  * Determines whether or not the package has a given dependency
@@ -49,16 +53,17 @@ const hasDepPrereleaseVers = (packageJsonData, nodeName, depsToCheckFor) => {
 
 /**
  * Determines whether or not the package has a dependency with a major version of 0
- * @param  {object} packageJsonData         Valid JSON
- * @param  {string} nodeName                Name of a node in the package.json file
- * @return {boolean}                        True if the package has a dependency with version 0. False if it does not or the node is missing.
+ * @param  {object} packageJsonData   Valid JSON
+ * @param  {string} nodeName          Name of a node in the package.json file
+ * @param  {object} config            Rule configuration
+ * @return {boolean}                  True if the package has a dependency with version 0. False if it does not or the node is missing.
  */
-const hasDepVersZero = (packageJsonData, nodeName) => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return false;
-  }
-
+const hasDepVersZero = (packageJsonData, nodeName, config) => {
   for (const dependencyName in packageJsonData[nodeName]) {
+    if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
+      continue;
+    }
+
     const dependencyVersRange = packageJsonData[nodeName][dependencyName];
 
     if (semver.validRange(dependencyVersRange)) {
@@ -91,12 +96,13 @@ const doesVersStartsWithRange = (dependencyVersion, rangeSpecifier) => {
 
 /**
  * Determines whether or not all dependency version ranges match expected range
- * @param  {object} packageJsonData         Valid JSON
- * @param  {string} nodeName                Name of a node in the package.json file
- * @param  {string} rangeSpecifier          A version range specifier
- * @return {boolean}                        False if the package has an invalid range. True if it is not or the node is missing.
+ * @param  {object} packageJsonData  Valid JSON
+ * @param  {string} nodeName         Name of a node in the package.json file
+ * @param  {string} rangeSpecifier   A version range specifier
+ * @param  {object} config           Rule configuration
+ * @return {boolean}                 False if the package has an invalid range. True if it is not or the node is missing.
  */
-const areVersRangesValid = (packageJsonData, nodeName, rangeSpecifier) => {
+const areVersRangesValid = (packageJsonData, nodeName, rangeSpecifier, config) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
   }
@@ -104,6 +110,10 @@ const areVersRangesValid = (packageJsonData, nodeName, rangeSpecifier) => {
   let rangesValid = true;
 
   for (const dependencyName in packageJsonData[nodeName]) {
+    if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
+      continue;
+    }
+
     const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
     if (!doesVersStartsWithRange(dependencyVersion, rangeSpecifier)) {
@@ -116,12 +126,13 @@ const areVersRangesValid = (packageJsonData, nodeName, rangeSpecifier) => {
 
 /**
  * Determines if any dependencies have a version string that starts with the specified invalid range
- * @param  {object} packageJsonData         Valid JSON
- * @param  {string} nodeName                Name of a node in the package.json file
- * @param  {string} rangeSpecifier          A version range specifier
- * @return {Boolean}                        True if any dependencies versions start with the invalid range, false if they don't.
+ * @param  {object} packageJsonData  Valid JSON
+ * @param  {string} nodeName         Name of a node in the package.json file
+ * @param  {string} rangeSpecifier   A version range specifier
+ * @param  {object} config           Rule configuration
+ * @return {Boolean}                 True if any dependencies versions start with the invalid range, false if they don't.
  */
-const doVersContainInvalidRange = (packageJsonData, nodeName, rangeSpecifier) => {
+const doVersContainInvalidRange = (packageJsonData, nodeName, rangeSpecifier, config) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return false;
   }
@@ -129,6 +140,10 @@ const doVersContainInvalidRange = (packageJsonData, nodeName, rangeSpecifier) =>
   let containsInvalidVersion = false;
 
   for (const dependencyName in packageJsonData[nodeName]) {
+    if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
+      continue;
+    }
+
     const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
     if (doesVersStartsWithRange(dependencyVersion, rangeSpecifier)) {
@@ -141,20 +156,22 @@ const doVersContainInvalidRange = (packageJsonData, nodeName, rangeSpecifier) =>
 
 /**
  * Determines whether or not all dependency versions are absolut
- * @param  {object} packageJsonData         Valid JSON
- * @param  {string} nodeName                Name of a node in the package.json file
- * @return {boolean}                        False if the package has an non-absolute version. True if it is not or the node is missing.
+ * @param {object} packageJsonData    Valid JSON
+ * @param {string} nodeName           Name of a node in the package.json file
+ * @param {object} config             Rule configuration
+ * @return {boolean}                  False if the package has an non-absolute version. True if it is not or the node is missing.
  */
-const isVersionAbsolute = (packageJsonData, nodeName) => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return true;
-  }
-
-  const NOT_FOUND = -1;
+const absoluteVersionChecker = (packageJsonData, nodeName, config) => {
+  const notFound = -1;
   const firstCharOfStr = 0;
-  let rangesValid = true;
+  let onlyAbsoluteVersionDetected = true;
+  let dependenciesChecked = 0;
 
   for (const dependencyName in packageJsonData[nodeName]) {
+    if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
+      continue;
+    }
+
     const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
     if (
@@ -162,19 +179,53 @@ const isVersionAbsolute = (packageJsonData, nodeName) => {
       dependencyVersion.startsWith('~', firstCharOfStr) ||
       dependencyVersion.startsWith('>', firstCharOfStr) ||
       dependencyVersion.startsWith('<', firstCharOfStr) ||
-      dependencyVersion.indexOf('*') !== NOT_FOUND
+      dependencyVersion.indexOf('*') !== notFound
     ) {
-      rangesValid = false;
+      onlyAbsoluteVersionDetected = false;
     }
+
+    dependenciesChecked += 1;
   }
 
-  return rangesValid;
+  return {
+    onlyAbsoluteVersionDetected,
+    dependenciesChecked
+  };
 };
 
-module.exports.hasDependency = hasDependency;
-module.exports.hasDepPrereleaseVers = hasDepPrereleaseVers;
-module.exports.hasDepVersZero = hasDepVersZero;
-module.exports.doesVersStartsWithRange = doesVersStartsWithRange;
-module.exports.areVersRangesValid = areVersRangesValid;
-module.exports.doVersContainInvalidRange = doVersContainInvalidRange;
-module.exports.isVersionAbsolute = isVersionAbsolute;
+/**
+ * Determines whether or not all dependency versions are absolut
+ * @param {object} packageJsonData    Valid JSON
+ * @param {string} nodeName           Name of a node in the package.json file
+ * @param {object} config             Rule configuration
+ * @return {boolean}                  False if the package has an non-absolute version. True if it is not or the node is missing.
+ */
+const areVersionsAbsolute = (packageJsonData, nodeName, config) => {
+  const {onlyAbsoluteVersionDetected, dependenciesChecked} = absoluteVersionChecker(packageJsonData, nodeName, config);
+
+  return dependenciesChecked > 0 ? onlyAbsoluteVersionDetected : false;
+};
+
+/**
+ * Determines whether or not all dependency versions are absolut
+ * @param {object} packageJsonData    Valid JSON
+ * @param {string} nodeName           Name of a node in the package.json file
+ * @param {object} config             Rule configuration
+ * @return {boolean}                  False if the package has an non-absolute version. True if it is not or the node is missing.
+ */
+const doVersContainNonAbsolute = (packageJsonData, nodeName, config) => {
+  const {onlyAbsoluteVersionDetected, dependenciesChecked} = absoluteVersionChecker(packageJsonData, nodeName, config);
+
+  return dependenciesChecked > 0 ? !onlyAbsoluteVersionDetected : false;
+};
+
+module.exports = {
+  hasDependency,
+  hasDepPrereleaseVers,
+  hasDepVersZero,
+  doesVersStartsWithRange,
+  areVersRangesValid,
+  doVersContainInvalidRange,
+  areVersionsAbsolute,
+  doVersContainNonAbsolute
+};
