@@ -1,18 +1,16 @@
 const semver = require('semver');
-const validator = require('validator');
 
 /**
- * Determines whether or not the node's value is lowercase
- * @param  {object} packageJsonData Valid JSON
- * @param  {string} nodeName        Name of a node in the package.json file
- * @return {boolean}                True if the node is lowercase or is missing. False if it is not.
+ * Determines whether or not the string is lowercase
+ * @param  {string} name  Name
+ * @return {boolean}      True if the string is lowercase or is missing. False if it is not.
  */
-const isLowercase = (packageJsonData, nodeName) => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
+const isLowercase = name => {
+  if (typeof name !== 'string') {
     return true;
   }
 
-  return validator.isLowercase(packageJsonData[nodeName]);
+  return name === name.toLowerCase();
 };
 
 /**
@@ -29,5 +27,7 @@ const isValidVersionNumber = (packageJsonData, nodeName) => {
   return semver.valid(packageJsonData[nodeName]) !== null;
 };
 
-module.exports.isLowercase = isLowercase;
-module.exports.isValidVersionNumber = isValidVersionNumber;
+module.exports = {
+  isLowercase,
+  isValidVersionNumber
+};

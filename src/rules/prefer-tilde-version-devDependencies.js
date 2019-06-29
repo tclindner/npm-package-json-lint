@@ -1,20 +1,23 @@
 const {areVersRangesValid} = require('./../validators/dependency-audit');
+const {exists} = require('../validators/property');
 const LintIssue = require('./../LintIssue');
 
 const lintId = 'prefer-tilde-version-devDependencies';
 const nodeName = 'devDependencies';
 const message = 'You are using an invalid version range. Please use ~.';
-const ruleType = 'standard';
+const ruleType = 'optionalObject';
 
-const lint = (packageJsonData, severity) => {
+const lint = (packageJsonData, severity, config) => {
   const rangeSpecifier = '~';
 
-  if (!areVersRangesValid(packageJsonData, nodeName, rangeSpecifier)) {
+  if (exists(packageJsonData, nodeName) && !areVersRangesValid(packageJsonData, nodeName, rangeSpecifier, config)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }
 
   return true;
 };
 
-module.exports.lint = lint;
-module.exports.ruleType = ruleType;
+module.exports = {
+  lint,
+  ruleType
+};

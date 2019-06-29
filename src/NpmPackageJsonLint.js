@@ -1,4 +1,4 @@
-/* eslint class-methods-use-this: 'off', max-statements: 'off', guard-for-in: 'off', no-restricted-syntax: 'off' */
+/* eslint class-methods-use-this: 'off', max-statements: 'off', prefer-destructuring: 'off', guard-for-in: 'off', no-restricted-syntax: 'off' */
 
 const Rules = require('./Rules');
 const pkg = require('./../package.json');
@@ -25,28 +25,29 @@ class NpmPackageJsonLint {
 
     for (const rule in configObj) {
       const ruleModule = this.rules.get(rule);
+      let severity = 'off';
+      let ruleConfig = {};
 
       if (ruleModule.ruleType === 'array' || ruleModule.ruleType === 'object') {
-        const severity =
-          typeof configObj[rule] === 'string' && configObj[rule] === 'off' ? configObj[rule] : configObj[rule][0];
-        const ruleConfig = configObj[rule][1];
-
-        if (severity !== 'off') {
-          const lintResult = ruleModule.lint(packageJsonData, severity, ruleConfig);
-
-          if (typeof lintResult === 'object') {
-            lintIssues.push(lintResult);
-          }
+        severity = typeof configObj[rule] === 'string' && configObj[rule] === 'off' ? configObj[rule] : configObj[rule][0];
+        ruleConfig = typeof configObj[rule] === 'string' ? {} : configObj[rule][1];
+      } else if (ruleModule.ruleType === 'optionalObject') {
+        if (typeof configObj[rule] === 'string') {
+          severity = configObj[rule];
+          ruleConfig = {};
+        } else {
+          severity = configObj[rule][0];
+          ruleConfig = configObj[rule][1];
         }
       } else {
-        const severity = configObj[rule];
+        severity = configObj[rule];
+      }
 
-        if (severity !== 'off') {
-          const lintResult = ruleModule.lint(packageJsonData, severity);
+      if (severity !== 'off') {
+        const lintResult = ruleModule.lint(packageJsonData, severity, ruleConfig);
 
-          if (typeof lintResult === 'object') {
-            lintIssues.push(lintResult);
-          }
+        if (typeof lintResult === 'object') {
+          lintIssues.push(lintResult);
         }
       }
     }

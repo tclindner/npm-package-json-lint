@@ -4,8 +4,8 @@ const {lint, ruleType} = ruleModule;
 
 describe('no-absolute-version-dependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
-    test('it should equal "standard"', () => {
-      expect(ruleType).toStrictEqual('standard');
+    test('it should equal "optionalObject"', () => {
+      expect(ruleType).toStrictEqual('optionalObject');
     });
   });
 
@@ -16,7 +16,7 @@ describe('no-absolute-version-dependencies Unit Tests', () => {
           'npm-package-json-lint': '1.0.0'
         }
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
       expect(response.lintId).toStrictEqual('no-absolute-version-dependencies');
       expect(response.severity).toStrictEqual('error');
@@ -45,14 +45,40 @@ describe('no-absolute-version-dependencies Unit Tests', () => {
     });
   });
 
+  describe('when package.json has node with a invalid value and config exception', () => {
+    test('true should be returned', () => {
+      const packageJsonData = {
+        dependencies: {
+          'gulp-npm-package-json-lint': '=1.0.0'
+        }
+      };
+      const response = lint(packageJsonData, 'error', {exceptions: ['gulp-npm-package-json-lint']});
+
+      expect(response).toBeTruthy();
+    });
+  });
+
   describe('when package.json has node with a valid value', () => {
-    test('LintIssue object should be returned', () => {
+    test('true should be returned', () => {
       const packageJsonData = {
         dependencies: {
           'gulp-npm-package-json-lint': '~1.0.0'
         }
       };
       const response = lint(packageJsonData, 'error');
+
+      expect(response).toBeTruthy();
+    });
+  });
+
+  describe('when package.json has node with a valid value', () => {
+    test('true should be returned', () => {
+      const packageJsonData = {
+        dependencies: {
+          'gulp-npm-package-json-lint': '~1.0.0'
+        }
+      };
+      const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
       expect(response).toBeTruthy();
     });

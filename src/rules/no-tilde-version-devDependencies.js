@@ -4,17 +4,22 @@ const LintIssue = require('./../LintIssue');
 const lintId = 'no-tilde-version-devDependencies';
 const nodeName = 'devDependencies';
 const message = 'You are using an invalid version range. Please do not use ~.';
-const ruleType = 'standard';
+const ruleType = 'optionalObject';
 
-const lint = (packageJsonData, severity) => {
+const lint = (packageJsonData, severity, config) => {
   const rangeSpecifier = '~';
 
-  if (packageJsonData.hasOwnProperty(nodeName) && doVersContainInvalidRange(packageJsonData, nodeName, rangeSpecifier)) {
+  if (
+    packageJsonData.hasOwnProperty(nodeName) &&
+    doVersContainInvalidRange(packageJsonData, nodeName, rangeSpecifier, config)
+  ) {
     return new LintIssue(lintId, severity, nodeName, message);
   }
 
   return true;
 };
 
-module.exports.lint = lint;
-module.exports.ruleType = ruleType;
+module.exports = {
+  lint,
+  ruleType
+};
