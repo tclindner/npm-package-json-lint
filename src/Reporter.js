@@ -31,9 +31,13 @@ const printResultSetIssues = issues => {
  * @private
  */
 const printIndividualResultSet = (resultSet, quiet) => {
-  const {filePath, issues, errorCount, warningCount} = resultSet;
+  const {filePath, issues, ignored, errorCount, warningCount} = resultSet;
 
-  if (errorCount > zeroIssues || (!quiet && warningCount > zeroIssues)) {
+  if (ignored) {
+    console.log('');
+
+    console.log(`${chalk.yellow.underline(filePath)} - ignored`);
+  } else if (errorCount > zeroIssues || (!quiet && warningCount > zeroIssues)) {
     console.log('');
 
     console.log(chalk.underline(filePath));
@@ -54,17 +58,18 @@ const printIndividualResultSet = (resultSet, quiet) => {
 /**
  * Prints the overall total counts section
  *
- * @param {Object}  cliEngineOutput Full results from linting. Includes an array of results and overall counts
+ * @param {Object}  linterOutput Full results from linting. Includes an array of results and overall counts
  * @param {Boolean} quiet           True suppress warnings, false show warnings
  * @returns {Undefined} No results
  * @private
  */
-const printTotals = (cliEngineOutput, quiet) => {
-  const {errorCount, warningCount} = cliEngineOutput;
+const printTotals = (linterOutput, quiet) => {
+  const {errorCount, warningCount, ignoreCount} = linterOutput;
 
   if (errorCount > zeroIssues || warningCount > zeroIssues) {
     const errorCountMessage = `${errorCount} ${plur('error', errorCount)}`;
     const warningCountMessage = `${warningCount} ${plur('warning', warningCount)}`;
+    const ignoreCountMessage = `${ignoreCount} ${plur('file', ignoreCount)} ignored`;
 
     console.log('');
     console.log(chalk.underline('Totals'));
@@ -72,6 +77,7 @@ const printTotals = (cliEngineOutput, quiet) => {
 
     if (!quiet) {
       console.log(chalk.yellow.bold(warningCountMessage));
+      console.log(chalk.yellow.bold(ignoreCountMessage));
     }
   }
 };
@@ -84,18 +90,18 @@ class Reporter {
   /**
    * Print CLIEngine Output
    *
-   * @param  {Object}      cliEngineOutput    An array of LintIssues
+   * @param  {Object}      linterOutput    An array of LintIssues
    * @param  {boolean}     quiet Flag indicating whether to print warnings.
    * @return {undefined}            No return
    * @static
    */
-  static write(cliEngineOutput, quiet) {
-    for (const result of cliEngineOutput.results) {
+  static write(linterOutput, quiet) {
+    for (const result of linterOutput.results) {
       printIndividualResultSet(result, quiet);
     }
 
-    if (cliEngineOutput.results.length > oneFile) {
-      printTotals(cliEngineOutput, quiet);
+    if (linterOutput.results.length > oneFile) {
+      printTotals(linterOutput, quiet);
     }
   }
 }
