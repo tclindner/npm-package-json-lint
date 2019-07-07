@@ -1,4 +1,3 @@
-const path = require('path');
 const linter = require('../../../src/linter/linter');
 const Rules = require('../../../src/Rules');
 
@@ -173,6 +172,45 @@ describe('linter Unit Tests', () => {
         cwd: process.cwd(),
         packageJsonObj,
         filename: './test/fixtures/valid/package.json',
+        ignorer: mockIgnorer,
+        configHelper: mockConfigHelper,
+        rules
+      });
+
+      expect(results).toEqual(expected);
+    });
+
+    test('filename is absolute', () => {
+      const packageJsonObj = {
+        name: 'my-test-module'
+      };
+      const mockIgnorer = {
+        ignores: () => true
+      };
+      const mockConfigHelper = {
+        getConfigForFile: jest.fn()
+      };
+      const rules = new Rules();
+
+      const expected = {
+        errorCount: 0,
+        ignoreCount: 1,
+        results: [
+          {
+            errorCount: 0,
+            filePath: './test/fixtures/valid/package.json',
+            ignored: true,
+            issues: [],
+            warningCount: 0
+          }
+        ],
+        warningCount: 0
+      };
+
+      const results = linter.executeOnPackageJsonObject({
+        cwd: process.cwd(),
+        packageJsonObj,
+        filename: `${process.cwd()}/test/fixtures/valid/package.json`,
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
         rules
