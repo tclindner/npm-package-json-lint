@@ -94,12 +94,11 @@ const lint = (packageJsonData, configObj, rules) => {
  * @private
  */
 const processPackageJsonObject = (cwd, packageJsonObj, config, fileName, rules) => {
-  const effectiveFileName = fileName || '{}';
   const lintIssues = lint(packageJsonObj, config, rules);
   const counts = resultsHelper.aggregateCountsPerFile(lintIssues);
   const result = createResultObject({
     cwd,
-    fileName: effectiveFileName,
+    fileName,
     ignored: false,
     issues: lintIssues,
     errorCount: counts.errorCount,
@@ -149,7 +148,8 @@ const executeOnPackageJsonObject = ({cwd, packageJsonObj, filename, ignorer, con
   debug('executing on package.json object');
   const results = [];
 
-  const resolvedFilename = filename && !path.isAbsolute(filename) ? path.resolve(cwd, filename) : filename;
+  const filenameDefaulted = filename || '';
+  const resolvedFilename = path.isAbsolute(filenameDefaulted) ? filenameDefaulted : path.resolve(cwd, filenameDefaulted);
   const relativeFilePath = path.relative(cwd, resolvedFilename);
 
   if (ignorer.ignores(relativeFilePath)) {
