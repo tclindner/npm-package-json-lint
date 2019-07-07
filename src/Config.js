@@ -1,7 +1,7 @@
 const debug = require('debug')('npm-package-json-lint:Config');
 const cosmiconfig = require('cosmiconfig');
 
-// const ConfigValidator = require('./config/ConfigValidator');
+const ConfigValidator = require('./config/ConfigValidator');
 const cosmicConfigTransformer = require('./config/cosmicConfigTransformer');
 const applyExtendsIfSpecified = require('./config/applyExtendsIfSpecified');
 const applyOverrides = require('./config/applyOverrides');
@@ -30,7 +30,7 @@ class Config {
     this.configFile = configFile;
     this.configBaseDirectory = configBaseDirectory;
     this.explorer = cosmiconfig('npmpackagejsonlint', {
-      transform: cosmicConfigTransformer.transform(configBaseDirectory)
+      transform: cosmicConfigTransformer.transform(cwd, configBaseDirectory)
     });
   }
 
@@ -46,44 +46,40 @@ class Config {
     const filePathToSearch = filePath || this.cwd;
 
     debug(`filePathToSearch: ${filePathToSearch}`);
-    let configBeforeOverrides;
+    let config;
 
     if (typeof this.config === 'undefined') {
       debug(`User passed config is undefined.`);
       if (this.configFile) {
         debug(`Config file specified, loading it.`);
-        configBeforeOverrides = this.explorer.loadSync(this.configFile);
+        config = this.explorer.loadSync(this.configFile);
       } else {
         debug(`Config file wasn't specified, searching for config.`);
-        configBeforeOverrides = this.explorer.searchSync(filePathToSearch);
+        config = this.explorer.searchSync(filePathToSearch);
       }
     } else {
       debug(`User passed config is set, using it.`);
-      configBeforeOverrides = this.config;
+      const configBeforeOverrides = this.config;
+
+      debug(`Applying overrides to config for ${filePath}`);
+      config = applyOverrides(this.cwd, filePath, configBeforeOverrides.rules, configBeforeOverrides.overrides);
+
+      debug(`Overrides applied for ${filePath}`);
     }
 
-    if (!configBeforeOverrides) {
-      throw new Error(`No configuration provided for ${filePathToSearch}`);
+    if (!config) {
+      throw new Error(`No npm-package-json-lint configuration found.\n${filePathToSearch}`);
     }
 
-    debug(configBeforeOverrides);
-    if (!configBeforeOverrides.rules || configBeforeOverrides.rules.length === noRules) {
-      throw new Error(`Configuration has no rules specified for ${filePathToSearch}`);
+    if (Object.keys(config).length === noRules) {
+      throw new Error(`No rules specified in configuration.\n${filePathToSearch}`);
     }
-
-    debug(`Applying overrides to config for ${filePath}`);
-    const configWithOverrides = applyOverrides(
-      this.cwd,
-      filePath,
-      configBeforeOverrides.rules,
-      configBeforeOverrides.overrides
-    );
 
     debug(`Overrides applied for ${filePath}`);
 
-    // ConfigValidator.validate(configWithOverrides, '', rules);
+    // ConfigValidator.validateRules(config, 'cli', this.linter);
 
-    return configWithOverrides;
+    return config;
   }
 }
 
