@@ -9,9 +9,9 @@ const FILE_NOT_FOUND_ERROR_CODE = 'ENOENT';
 /**
  * Generates ignorer based on ignore file content.
  *
- * @param {string}    cwd        Current work directory.
- * @param {string}    ignorePath Ignore path.
- * @returns {Object}             Ignorer
+ * @param {string} cwd        Current work directory.
+ * @param {string} ignorePath Ignore path.
+ * @returns {Object}          Ignorer
  */
 const getIgnorer = (cwd, ignorePath) => {
   const ignoreFilePath = ignorePath || DEFAULT_IGNORE_FILENAME;

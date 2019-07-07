@@ -50,7 +50,7 @@ const aggregateOverallCounts = results => {
   return results.reduce(
     (counts, result) => {
       return {
-        ignoreCount: counts.ignoreCount + result.ignored,
+        ignoreCount: result.ignored ? counts.ignoreCount + 1 : counts.ignoreCount,
         errorCount: counts.errorCount + result.errorCount,
         warningCount: counts.warningCount + result.warningCount
       };
