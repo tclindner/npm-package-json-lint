@@ -1,7 +1,7 @@
 const debug = require('debug')('npm-package-json-lint:Config');
 const cosmiconfig = require('cosmiconfig');
 
-const ConfigValidator = require('./config/ConfigValidator');
+// const ConfigValidator = require('./config/ConfigValidator');
 const cosmicConfigTransformer = require('./config/cosmicConfigTransformer');
 const applyExtendsIfSpecified = require('./config/applyExtendsIfSpecified');
 const applyOverrides = require('./config/applyOverrides');
@@ -43,7 +43,7 @@ class Config {
    */
   getConfigForFile(filePath) {
     debug(`Getting config for ${filePath}`);
-    const filePathToSearch = filePath || this.cwd;
+    const filePathToSearch = filePath;
 
     debug(`filePathToSearch: ${filePathToSearch}`);
     let config;

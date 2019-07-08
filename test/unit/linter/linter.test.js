@@ -131,7 +131,7 @@ describe('linter Unit Tests', () => {
 
       const results = linter.executeOnPackageJsonObject({
         cwd: process.cwd(),
-        packageJsonObj,
+        packageJsonObject: packageJsonObj,
         filename: './test/fixtures/valid/package.json',
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
@@ -170,7 +170,7 @@ describe('linter Unit Tests', () => {
 
       const results = linter.executeOnPackageJsonObject({
         cwd: process.cwd(),
-        packageJsonObj,
+        packageJsonObject: packageJsonObj,
         filename: './test/fixtures/valid/package.json',
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
@@ -209,7 +209,7 @@ describe('linter Unit Tests', () => {
 
       const results = linter.executeOnPackageJsonObject({
         cwd: process.cwd(),
-        packageJsonObj,
+        packageJsonObject: packageJsonObj,
         filename: `${process.cwd()}/test/fixtures/valid/package.json`,
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
@@ -248,7 +248,7 @@ describe('linter Unit Tests', () => {
 
       const results = linter.executeOnPackageJsonObject({
         cwd: process.cwd(),
-        packageJsonObj,
+        packageJsonObject: packageJsonObj,
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
         rules
@@ -295,7 +295,7 @@ describe('linter Unit Tests', () => {
 
       const results = linter.executeOnPackageJsonObject({
         cwd: process.cwd(),
-        packageJsonObj,
+        packageJsonObject: packageJsonObj,
         filename: './test/fixtures/errors/package.json',
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
@@ -336,7 +336,7 @@ describe('linter Unit Tests', () => {
 
       const results = linter.executeOnPackageJsonObject({
         cwd: process.cwd(),
-        packageJsonObj,
+        packageJsonObject: packageJsonObj,
         filename: './test/fixtures/errors/package.json',
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
@@ -392,7 +392,7 @@ describe('linter Unit Tests', () => {
 
       const results = linter.executeOnPackageJsonObject({
         cwd: process.cwd(),
-        packageJsonObj,
+        packageJsonObject: packageJsonObj,
         filename: './test/fixtures/errors/package.json',
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
@@ -444,7 +444,7 @@ describe('linter Unit Tests', () => {
 
       const results = linter.executeOnPackageJsonObject({
         cwd: process.cwd(),
-        packageJsonObj,
+        packageJsonObject: packageJsonObj,
         filename: './test/fixtures/errors/package.json',
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
@@ -501,7 +501,7 @@ describe('linter Unit Tests', () => {
 
       const results = linter.executeOnPackageJsonObject({
         cwd: process.cwd(),
-        packageJsonObj,
+        packageJsonObject: packageJsonObj,
         filename: './test/fixtures/errors/package.json',
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,

@@ -144,7 +144,7 @@ const processPackageJsonFile = (cwd, fileName, config, rules) => {
  * @param {Object} rules An instance of `Rules`.
  * @returns {LinterResult} The results {@link LinterResult} from linting a collection of package.json files.
  */
-const executeOnPackageJsonObject = ({cwd, packageJsonObj, filename, ignorer, configHelper, rules}) => {
+const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ignorer, configHelper, rules}) => {
   debug('executing on package.json object');
   const results = [];
 
@@ -170,7 +170,7 @@ const executeOnPackageJsonObject = ({cwd, packageJsonObj, filename, ignorer, con
     const config = configHelper.getConfigForFile(resolvedFilename);
 
     debug(`Config fetched for ${resolvedFilename}`);
-    const result = processPackageJsonObject(cwd, packageJsonObj, config, resolvedFilename, rules);
+    const result = processPackageJsonObject(cwd, packageJsonObject, config, resolvedFilename, rules);
 
     results.push(result);
   }

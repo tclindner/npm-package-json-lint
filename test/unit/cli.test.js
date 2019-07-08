@@ -289,6 +289,7 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
 Totals
 4 errors
 4 warnings
+0 files ignored
 `;
 
       expect(cli.stdout.toString()).toStrictEqual(expected);
