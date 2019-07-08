@@ -39,7 +39,7 @@
     "chalk": "^2.4.2",
     "glob": "^7.1.4",
     "ignore": "^5.1.2",
-    "is-path-inside": "^2.1.0",
+    "is-path-inside": "^3.0.1",
     "is-plain-obj": "^2.0.0",
     "is-resolvable": "^1.1.0",
     "log-symbols": "^3.0.0",
