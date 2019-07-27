@@ -90,7 +90,6 @@ class NpmPackageJsonLint {
     fix
   }) {
     this.cwd = cwd || process.cwd();
-    this.configBaseDirectory = configBaseDirectory || process.cwd();
 
     this.packageJsonObject = packageJsonObject;
     this.packageJsonFilePath = packageJsonFilePath;
