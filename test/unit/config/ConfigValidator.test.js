@@ -2,6 +2,7 @@ const ConfigValidator = require('./../../../src/config/ConfigValidator');
 const NpmPackageJsonLint = require('./../../../src/NpmPackageJsonLint');
 
 // const linterContext = new NpmPackageJsonLint();
+const linterContext = null;
 
 describe.skip('ConfigValidator Unit Tests', () => {
   describe('validateRules method', () => {
