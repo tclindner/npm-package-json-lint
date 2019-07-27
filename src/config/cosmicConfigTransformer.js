@@ -10,7 +10,7 @@ const transform = (cwd, configBaseDirectory) => {
 
     const {config, filepath} = cosmiconfigResult;
 
-    /* eslint-disable-next-lint no-unused-vars */
+    /* eslint-disable no-unused-vars */
     const configDir = configBaseDirectory || path.dirname(filepath || '');
     const npmPackageJsonLintConfig = {...config};
 
