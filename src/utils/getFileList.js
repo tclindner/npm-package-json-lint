@@ -45,8 +45,6 @@ const getFileList = (patterns, cwd) => {
   debug('files');
   debug(files);
 
-  console.log(`files ${files}`);
-
   return files;
 };
 
