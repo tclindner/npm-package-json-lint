@@ -4,7 +4,6 @@ describe('NpmPackageJsonLint Unit Tests', () => {
   describe('lint method', () => {
     describe('validate that errors and warnings are set', () => {
       test('two errors and zero warnings expected', () => {
-        console.log(`tldr ${process.cwd()}`);
         const npmPackageJsonLint = new NpmPackageJsonLint({
           cwd: process.cwd(),
           patterns: ['./package.json']
