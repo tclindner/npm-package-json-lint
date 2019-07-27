@@ -63,9 +63,6 @@ describe('getIgnorer Unit Tests', () => {
     }).toThrow();
 
     expect(fs.readFileSync).toHaveBeenCalledTimes(1);
-    expect(fs.readFileSync).toHaveBeenCalledWith(
-      expect.stringContaining('npm-package-json-lint/.npmpackagejsonlintignore'),
-      'utf8'
-    );
+    expect(fs.readFileSync).toHaveBeenCalledWith(expect.stringContaining('/.npmpackagejsonlintignore'), 'utf8');
   });
 });

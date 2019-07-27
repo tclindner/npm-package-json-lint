@@ -3,7 +3,7 @@ const NpmPackageJsonLint = require('./../../../src/NpmPackageJsonLint');
 
 const linterContext = new NpmPackageJsonLint();
 
-describe('ConfigValidator Unit Tests', () => {
+describe.skip('ConfigValidator Unit Tests', () => {
   describe('validateRules method', () => {
     describe('when called with null rulesConfig', () => {
       test('undefined should be returned', () => {
