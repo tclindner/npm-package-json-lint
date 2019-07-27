@@ -1,6 +1,5 @@
-/* eslint global-require: 'off' */
+const NpmPackageJsonLint = require('./NpmPackageJsonLint');
 
 module.exports = {
-  NpmPackageJsonLint: require('./NpmPackageJsonLint'),
-  CLIEngine: require('./CLIEngine')
+  NpmPackageJsonLint
 };

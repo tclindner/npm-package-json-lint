@@ -4,12 +4,45 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+- Added exception support to the following rules:
+
+  - [`no-absolute-version-dependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/no-absolute-version-dependencies)
+  - [`no-absolute-version-devDependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/no-absolute-version-devDependencies)
+  - [`no-caret-version-dependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/no-caret-version-dependencies)
+  - [`no-caret-version-devDependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/no-caret-version-devDependencies)
+  - [`no-tilde-version-dependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/no-tilde-version-dependencies)
+  - [`no-tilde-version-devDependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/no-tilde-version-devDependencies)
+  - [`prefer-absolute-version-dependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-absolute-version-dependencies)
+  - [`prefer-absolute-version-devDependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-absolute-version-devDependencies)
+  - [`prefer-caret-version-dependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-caret-version-dependencies)
+  - [`prefer-caret-version-devDependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-caret-version-devDependencies)
+  - [`prefer-no-version-zero-dependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-no-version-zero-dependencies)
+  - [`prefer-no-version-zero-devDependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-no-version-zero-devDependencies)
+  - [`prefer-tilde-version-dependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-tilde-version-dependencies)
+  - [`prefer-tilde-version-devDependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-tilde-version-devDependencies)
+
+  > Addresses [#93](https://github.com/tclindner/npm-package-json-lint/issues/93)
 
 ### Changed
+- [`name-format`](https://github.com/tclindner/npm-package-json-lint/wiki/name-format) now checks the following things:
+
+  - Name is lowercase
+  - Name is less than 214 characters. This includes scope.
+  - Name doesn't start with a `.` or a `_`.
+
+  > Addresses [#115](https://github.com/tclindner/npm-package-json-lint/issues/115)
+
+- Improved schema validation that runs against npm-package-json-lint config files. Highlights include:
+
+  - Better error messages. Ex: `- severity must be either "off", "warning", or "error".`
+  - Array type rules now ensure at least one item is passed.
+  - Array type rules now validate unique items are passed.
 
 ### Fixed
 
 ### Removed
+- Dropped support for Node 6 and 7.
+
 
 ## [3.7.0] - 2019-06-16
 ### Added

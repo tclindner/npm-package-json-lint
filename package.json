@@ -29,7 +29,8 @@
   "main": "src/api.js",
   "scripts": {
     "eslint": "eslint . --format=node_modules/eslint-formatter-pretty",
-    "lint": "npm run eslint",
+    "npmpackagejsonlint": "node src/cli.js .",
+    "lint": "npm run eslint && npm run npmpackagejsonlint",
     "test": "jest",
     "test:ci": "jest --runInBand"
   },
@@ -37,11 +38,11 @@
     "ajv": "^6.10.0",
     "ajv-errors": "^1.0.1",
     "chalk": "^2.4.2",
-    "glob": "^7.1.4",
+    "cosmiconfig": "^5.2.1",
+    "debug": "^4.1.1",
+    "globby": "^10.0.1",
     "ignore": "^5.1.2",
-    "is-path-inside": "^2.1.0",
     "is-plain-obj": "^2.0.0",
-    "is-resolvable": "^1.1.0",
     "log-symbols": "^3.0.0",
     "meow": "^5.0.0",
     "plur": "^3.1.1",
@@ -50,13 +51,14 @@
   },
   "devDependencies": {
     "eslint": "^5.16.0",
-    "eslint-config-tc": "^6.4.0",
+    "eslint-config-tc": "^6.5.0",
     "eslint-formatter-pretty": "^2.1.1",
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-prettier": "^3.1.0",
     "figures": "^3.0.0",
     "jest": "^24.8.0",
     "npm-package-json-lint-config-default": "^2.0.0",
+    "npm-package-json-lint-config-tc": "^2.2.0",
     "prettier": "^1.18.2"
   },
   "engines": {
