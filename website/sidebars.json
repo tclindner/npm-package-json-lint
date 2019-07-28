@@ -1,0 +1,27 @@
+{
+  "docs": {
+    "About": [
+      "index",
+      "why"
+    ],
+    "Usage": [
+      "install",
+      "configuration",
+      "rcfile-example",
+      "cli",
+      "api",
+      "ignore"
+    ],
+    "Rules": [
+      "rules"
+    ],
+    "Misc": [
+      "related-projects"
+    ],
+    "Migration Guides": [
+      "v2-to-v3",
+      "v1-to-v2",
+      "v0-to-v1"
+    ]
+  }
+}

@@ -25,6 +25,7 @@ const getFileList = (patterns, cwd) => {
   const addedFiles = new Set();
 
   const globFiles = globby.sync(globPatterns, {
+    cwd,
     gitignore: true
   });
 
