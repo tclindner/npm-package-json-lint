@@ -3,14 +3,14 @@ id: require-license
 title: require-license
 ---
 
-Enabling this rule will result in an error being generated if `license` is missing from the package.json file.
+Enabling this rule will result in an error being generated if `license` field is missing from the `package.json` file.
 
 ## Example .npmpackagejsonlintrc configuration
 
 ```json
 {
   "rules": {
-    "required-license": "error"
+    "require-license": "error"
   }
 }
 ```
