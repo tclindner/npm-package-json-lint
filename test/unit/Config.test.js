@@ -2,6 +2,10 @@ const cosmiconfig = require('cosmiconfig');
 const Config = require('./../../src/Config');
 const applyOverrides = require('../../src/config/applyOverrides');
 const applyExtendsIfSpecified = require('../../src/config/applyExtendsIfSpecified');
+const Rules = require('../../src/Rules');
+
+const rules = new Rules();
+rules.load();
 
 jest.mock('cosmiconfig');
 jest.mock('../../src/config/applyOverrides');
@@ -17,11 +21,9 @@ describe('Config Unit Tests', () => {
         const configBaseDirectory = '';
 
         const loadSyncMock = jest.fn().mockReturnValue({
-          rules: {
-            'require-version': 'error',
-            'require-name': 'error',
-            'require-scripts': 'error'
-          }
+          'require-version': 'error',
+          'require-name': 'error',
+          'require-scripts': 'error'
         });
         const searchSyncMock = jest.fn();
 
@@ -32,14 +34,12 @@ describe('Config Unit Tests', () => {
           };
         });
 
-        const configObj = new Config(cwd, config, configFile, configBaseDirectory);
+        const configObj = new Config(cwd, config, configFile, configBaseDirectory, rules);
 
         const expectedConfigObj = {
-          rules: {
-            'require-version': 'error',
-            'require-name': 'error',
-            'require-scripts': 'error'
-          }
+          'require-version': 'error',
+          'require-name': 'error',
+          'require-scripts': 'error'
         };
         const filePath = './package.json';
         const result = configObj.getConfigForFile(filePath);
@@ -62,11 +62,9 @@ describe('Config Unit Tests', () => {
 
         const loadSyncMock = jest.fn();
         const searchSyncMock = jest.fn().mockReturnValue({
-          rules: {
-            'require-version': 'error',
-            'require-name': 'error',
-            'require-scripts': 'error'
-          }
+          'require-version': 'error',
+          'require-name': 'error',
+          'require-scripts': 'error'
         });
 
         cosmiconfig.mockImplementation(() => {
@@ -76,14 +74,12 @@ describe('Config Unit Tests', () => {
           };
         });
 
-        const configObj = new Config(cwd, config, configFile, configBaseDirectory);
+        const configObj = new Config(cwd, config, configFile, configBaseDirectory, rules);
 
         const expectedConfigObj = {
-          rules: {
-            'require-version': 'error',
-            'require-name': 'error',
-            'require-scripts': 'error'
-          }
+          'require-version': 'error',
+          'require-name': 'error',
+          'require-scripts': 'error'
         };
         const filePath = './package.json';
         const result = configObj.getConfigForFile(filePath);
@@ -114,7 +110,7 @@ describe('Config Unit Tests', () => {
           };
         });
 
-        const configObj = new Config(cwd, config, configFile, configBaseDirectory);
+        const configObj = new Config(cwd, config, configFile, configBaseDirectory, rules);
 
         const filePath = './package.json';
 
@@ -141,7 +137,7 @@ describe('Config Unit Tests', () => {
           };
         });
 
-        const configObj = new Config(cwd, config, configFile, configBaseDirectory);
+        const configObj = new Config(cwd, config, configFile, configBaseDirectory, rules);
 
         const filePath = './package.json';
 
@@ -202,7 +198,7 @@ describe('Config Unit Tests', () => {
           'require-scripts': 'error'
         });
 
-        const configObj = new Config(cwd, config, configFile, configBaseDirectory);
+        const configObj = new Config(cwd, config, configFile, configBaseDirectory, rules);
 
         const expectedConfigObj = {
           'require-version': 'error',
