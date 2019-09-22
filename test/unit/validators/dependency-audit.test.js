@@ -12,7 +12,7 @@ describe('dependency-audit Unit Tests', () => {
       test('false should be returned', () => {
         const response = dependencyAudit.hasDependency(packageJson, 'devDependencies', ['grunt-npm-package-json-lint']);
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -20,7 +20,7 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const response = dependencyAudit.hasDependency(packageJson, 'dependencies', ['grunt-npm-package-json-lint']);
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -28,7 +28,7 @@ describe('dependency-audit Unit Tests', () => {
       test('false should be returned', () => {
         const response = dependencyAudit.hasDependency(packageJson, 'dependencies', ['gulp-npm-package-json-lint']);
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
   });
@@ -48,7 +48,7 @@ describe('dependency-audit Unit Tests', () => {
           'grunt-npm-package-json-lint'
         ]);
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -56,7 +56,7 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const response = dependencyAudit.hasDepPrereleaseVers(packageJson, 'dependencies', ['grunt-npm-package-json-lint']);
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -64,7 +64,7 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const response = dependencyAudit.hasDepPrereleaseVers(packageJson, 'dependencies', ['gulp-npm-package-json-lint']);
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -72,7 +72,7 @@ describe('dependency-audit Unit Tests', () => {
       test('false should be returned', () => {
         const response = dependencyAudit.hasDepPrereleaseVers(packageJson, 'dependencies', ['npm-package-json-lint']);
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
   });
@@ -87,7 +87,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'devDependencies');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -100,7 +100,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -113,7 +113,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -126,7 +126,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -139,7 +139,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -152,7 +152,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -165,7 +165,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -178,7 +178,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -191,7 +191,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -204,7 +204,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -217,7 +217,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -232,7 +232,7 @@ describe('dependency-audit Unit Tests', () => {
           exceptions: ['npm-package-json-lint']
         });
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
   });
@@ -247,7 +247,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -260,7 +260,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -273,7 +273,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -286,7 +286,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -299,7 +299,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -312,7 +312,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -325,7 +325,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -338,7 +338,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -351,7 +351,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -364,7 +364,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -437,7 +437,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
   });
@@ -448,7 +448,7 @@ describe('dependency-audit Unit Tests', () => {
         const dependencyVersion = '^1.0.0';
         const response = dependencyAudit.doesVersStartsWithRange(dependencyVersion, '^');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -457,7 +457,7 @@ describe('dependency-audit Unit Tests', () => {
         const dependencyVersion = '^1.0.0';
         const response = dependencyAudit.doesVersStartsWithRange(dependencyVersion, '~');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
   });
@@ -474,7 +474,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.areVersRangesValid(packageJson, 'devDependencies', '~');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -489,7 +489,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -504,7 +504,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -521,7 +521,7 @@ describe('dependency-audit Unit Tests', () => {
           exceptions: ['gulp-npm-package-json-lint']
         });
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -536,7 +536,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~', {});
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
   });
@@ -553,7 +553,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'devDependencies', '~');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -568,7 +568,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -583,7 +583,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -600,7 +600,7 @@ describe('dependency-audit Unit Tests', () => {
           exceptions: ['npm-package-json-lint', 'grunt-npm-package-json-lint']
         });
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -615,7 +615,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~', {});
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
   });
@@ -631,7 +631,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
       test('with tilde versioning false should be returned', () => {
         const packageJson = {
@@ -642,7 +642,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
       test('with star versioning false should be returned', () => {
         const packageJson = {
@@ -653,7 +653,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
       test('with greater versioning false should be returned', () => {
         const packageJson = {
@@ -664,18 +664,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
 
-        expect(response).toBeFalsy();
-      });
-      test('with greater versioning false should be returned', () => {
-        const packageJson = {
-          dependencies: {
-            'npm-package-json-lint': '>1.0.0',
-            'gulp-npm-package-json-lint': '>=2.0.0'
-          }
-        };
-        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
-
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
       test('with less versioning false should be returned', () => {
         const packageJson = {
@@ -686,7 +675,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -701,7 +690,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -718,7 +707,7 @@ describe('dependency-audit Unit Tests', () => {
           exceptions: ['npm-package-json-lint']
         });
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -733,7 +722,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {});
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
   });
@@ -749,7 +738,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
       test('with tilde versioning true should be returned', () => {
         const packageJson = {
@@ -760,7 +749,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
       test('with star versioning true should be returned', () => {
         const packageJson = {
@@ -771,7 +760,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
       test('with greater versioning true should be returned', () => {
         const packageJson = {
@@ -782,18 +771,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
-      });
-      test('with greater versioning true should be returned', () => {
-        const packageJson = {
-          dependencies: {
-            'npm-package-json-lint': '>1.0.0',
-            'gulp-npm-package-json-lint': '>=2.0.0'
-          }
-        };
-        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
-
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
       test('with less versioning true should be returned', () => {
         const packageJson = {
@@ -804,7 +782,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -819,7 +797,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -836,7 +814,7 @@ describe('dependency-audit Unit Tests', () => {
           exceptions: ['npm-package-json-lint']
         });
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -851,7 +829,7 @@ describe('dependency-audit Unit Tests', () => {
         };
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
   });

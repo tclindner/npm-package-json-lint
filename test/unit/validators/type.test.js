@@ -9,7 +9,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isArray(packageJson, 'devDependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -20,7 +20,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isArray(packageJson, 'name');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -31,7 +31,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isArray(packageJson, 'name');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -42,7 +42,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isArray(packageJson, 'name');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -53,7 +53,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isArray(packageJson, 'name');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
   });
@@ -66,7 +66,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isBoolean(packageJson, 'devDependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -77,7 +77,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isBoolean(packageJson, 'name');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -88,7 +88,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isBoolean(packageJson, 'name');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -99,7 +99,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isBoolean(packageJson, 'name');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -110,7 +110,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isBoolean(packageJson, 'name');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
   });
@@ -123,7 +123,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isObject(packageJson, 'devDependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -134,7 +134,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isObject(packageJson, 'name');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -145,7 +145,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isObject(packageJson, 'name');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -156,7 +156,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isObject(packageJson, 'name');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -167,7 +167,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isObject(packageJson, 'name');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
   });
@@ -180,7 +180,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isString(packageJson, 'devDependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -191,7 +191,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isString(packageJson, 'name');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -202,7 +202,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isString(packageJson, 'name');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -213,7 +213,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isString(packageJson, 'name');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -224,7 +224,7 @@ describe('type Unit Tests', () => {
         };
         const response = type.isString(packageJson, 'name');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
   });

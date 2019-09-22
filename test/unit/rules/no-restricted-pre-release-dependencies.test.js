@@ -36,7 +36,7 @@ describe('no-restricted-pre-release-dependencies Unit Tests', () => {
       const invldPreReleaseDeps = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
       const response = lint(packageJsonData, 'error', invldPreReleaseDeps);
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 
@@ -46,7 +46,7 @@ describe('no-restricted-pre-release-dependencies Unit Tests', () => {
       const invldPreReleaseDeps = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
       const response = lint(packageJsonData, 'error', invldPreReleaseDeps);
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 });

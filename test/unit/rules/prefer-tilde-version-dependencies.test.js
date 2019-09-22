@@ -61,7 +61,7 @@ describe('prefer-tilde-version-dependencies Unit Tests', () => {
       };
       const response = lint(packageJsonData, severity, config);
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
 
       expect(property.exists).toHaveBeenCalledTimes(1);
       expect(property.exists).toHaveBeenCalledWith(packageJsonData, nodeName);
@@ -77,7 +77,7 @@ describe('prefer-tilde-version-dependencies Unit Tests', () => {
       const packageJsonData = {};
       const response = lint(packageJsonData, 'error');
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
 
       expect(property.exists).toHaveBeenCalledTimes(1);
       expect(property.exists).toHaveBeenCalledWith(packageJsonData, nodeName);

@@ -19,7 +19,7 @@ describe('prefer-property-order Unit Tests', () => {
       const preferredOrder = ['name', 'version', 'description'];
       const response = lint(packageJsonData, 'error', preferredOrder);
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 
@@ -32,7 +32,7 @@ describe('prefer-property-order Unit Tests', () => {
       const preferredOrder = ['name', 'version', 'description'];
       const response = lint(packageJsonData, 'error', preferredOrder);
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 

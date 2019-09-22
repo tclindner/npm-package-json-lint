@@ -35,7 +35,7 @@ describe('no-tilde-version-dependencies Unit Tests', () => {
       };
       const response = lint(packageJsonData, 'error', {exceptions: ['gulp-npm-package-json-lint']});
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 
@@ -49,7 +49,7 @@ describe('no-tilde-version-dependencies Unit Tests', () => {
       };
       const response = lint(packageJsonData, 'error');
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 
@@ -58,7 +58,7 @@ describe('no-tilde-version-dependencies Unit Tests', () => {
       const packageJsonData = {};
       const response = lint(packageJsonData, 'error');
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 });

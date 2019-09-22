@@ -12,7 +12,7 @@ describe('property-order Unit Tests', () => {
         const preferredOrder = ['name', 'version', 'description'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
-        expect(response.status).toBeTruthy();
+        expect(response.status).toBe(true);
         expect(response.msg).toBeNull();
       });
     });
@@ -27,7 +27,7 @@ describe('property-order Unit Tests', () => {
         const preferredOrder = [];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
-        expect(response.status).toBeTruthy();
+        expect(response.status).toBe(true);
         expect(response.msg).toBeNull();
       });
     });
@@ -41,7 +41,7 @@ describe('property-order Unit Tests', () => {
         const preferredOrder = ['name', 'version', 'description'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
-        expect(response.status).toBeTruthy();
+        expect(response.status).toBe(true);
         expect(response.msg).toBeNull();
       });
     });
@@ -56,7 +56,7 @@ describe('property-order Unit Tests', () => {
         const preferredOrder = ['name', 'version', 'description'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
-        expect(response.status).toBeFalsy();
+        expect(response.status).toBe(false);
         expect(response.msg).toStrictEqual('Please move "description" after "version".');
       });
     });
@@ -71,7 +71,7 @@ describe('property-order Unit Tests', () => {
         const preferredOrder = ['name', 'version', 'description'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
-        expect(response.status).toBeFalsy();
+        expect(response.status).toBe(false);
         expect(response.msg).toStrictEqual('Please move "version" after "name".');
       });
     });
@@ -86,7 +86,7 @@ describe('property-order Unit Tests', () => {
         const preferredOrder = ['name', 'version', 'homepage', 'description'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
-        expect(response.status).toBeTruthy();
+        expect(response.status).toBe(true);
         expect(response.msg).toBeNull();
       });
     });
@@ -102,7 +102,7 @@ describe('property-order Unit Tests', () => {
         const preferredOrder = ['name', 'version', 'description', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
-        expect(response.status).toBeTruthy();
+        expect(response.status).toBe(true);
         expect(response.msg).toBeNull();
       });
     });
@@ -118,7 +118,7 @@ describe('property-order Unit Tests', () => {
         const preferredOrder = ['name', 'version', 'description', 'scripts', 'bin', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
-        expect(response.status).toBeTruthy();
+        expect(response.status).toBe(true);
         expect(response.msg).toBeNull();
       });
     });
@@ -136,7 +136,7 @@ describe('property-order Unit Tests', () => {
         const preferredOrder = ['name', 'version', 'description', 'scripts', 'bin', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
-        expect(response.status).toBeFalsy();
+        expect(response.status).toBe(false);
         expect(response.msg).toStrictEqual('Please move "homepage" after "keywords".');
       });
     });
@@ -153,7 +153,7 @@ describe('property-order Unit Tests', () => {
         const preferredOrder = ['name', 'version', 'description', 'scripts', 'bin', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
-        expect(response.status).toBeFalsy();
+        expect(response.status).toBe(false);
         expect(response.msg).toStrictEqual('Please move "homepage" after "keywords".');
       });
     });
@@ -169,7 +169,7 @@ describe('property-order Unit Tests', () => {
         const preferredOrder = ['name', 'version', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
-        expect(response.status).toBeTruthy();
+        expect(response.status).toBe(true);
         expect(response.msg).toBeNull();
       });
     });
@@ -185,7 +185,7 @@ describe('property-order Unit Tests', () => {
         const preferredOrder = ['version', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
 
-        expect(response.status).toBeTruthy();
+        expect(response.status).toBe(true);
         expect(response.msg).toBeNull();
       });
     });

@@ -13,7 +13,7 @@ describe('alphabetical-sort Unit Tests', () => {
         };
         const response = alphabeticalSort.isInAlphabeticalOrder(packageJson, 'devDependencies');
 
-        expect(response.status).toBeTruthy();
+        expect(response.status).toBe(true);
         expect(response.data.invalidNode).toBeNull();
         expect(response.data.validNode).toBeNull();
       });
@@ -30,7 +30,7 @@ describe('alphabetical-sort Unit Tests', () => {
         };
         const response = alphabeticalSort.isInAlphabeticalOrder(packageJson, 'devDependencies');
 
-        expect(response.status).toBeFalsy();
+        expect(response.status).toBe(false);
         expect(response.data.invalidNode).toStrictEqual('semver');
         expect(response.data.validNode).toStrictEqual('chalk');
       });
