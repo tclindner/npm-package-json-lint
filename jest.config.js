@@ -1,13 +1,13 @@
 module.exports = {
   clearMocks: true,
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.js'],
+  collectCoverageFrom: ['src/**/*.js', '!src/cli.js'],
   coverageThreshold: {
     global: {
-      branches: 87,
-      functions: 91,
-      lines: 92,
-      statements: 92
+      branches: 97,
+      functions: 100,
+      lines: 99,
+      statements: 99
     }
   },
   restoreMocks: true,
