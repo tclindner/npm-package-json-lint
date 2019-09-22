@@ -104,7 +104,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 2)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -117,7 +117,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 3)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -130,7 +130,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 4)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -143,7 +143,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 5)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -156,7 +156,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 6)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -169,7 +169,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 7)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -182,7 +182,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 8)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -195,7 +195,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 9)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -208,7 +208,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 10)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -251,7 +251,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 2)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -264,7 +264,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 3)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -277,7 +277,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 4)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -290,7 +290,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 5)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -303,7 +303,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 6)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -316,7 +316,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 7)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -329,7 +329,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 8)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -342,7 +342,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 9)', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -355,7 +355,7 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file, not all versions are 1+', () => {
+    describe('when the node exists in the package.json file, not all versions are 1+ (scenario 10)', () => {
       test('false should be returned', () => {
         const packageJson = {
           dependencies: {

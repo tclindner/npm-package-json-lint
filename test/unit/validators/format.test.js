@@ -55,7 +55,7 @@ describe('format Unit Tests', () => {
       });
     });
 
-    describe('when the node exists in the package.json file and version is invalid', () => {
+    describe('when the node exists in the package.json file and version is invalid (scenario 2)', () => {
       test('false should be returned', () => {
         const packageJson = {
           version: '1.a.0'

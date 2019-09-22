@@ -24,8 +24,8 @@ describe('NpmPackageJsonLint Unit Tests', () => {
       });
     });
 
-    describe('validate that errors and warnings are set', () => {
-      test('one error and one warning expected', () => {
+    describe('validate that errors and warnings are set on output', () => {
+      test('ten errors and one warning expected', () => {
         const packageJsonData = {
           name: 'ALLCAPS'
         };

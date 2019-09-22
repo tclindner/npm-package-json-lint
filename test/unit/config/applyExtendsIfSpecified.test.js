@@ -70,7 +70,7 @@ describe('applyExtendsIfSpecified Unit Tests', () => {
 
     expect(() => {
       applyExtendsIfSpecified(passedConfig, filePath);
-    }).toThrow();
+    }).toThrow('');
   });
 
   test('when file has local extends (invalid extension type), a config object is returned', () => {
@@ -84,7 +84,7 @@ describe('applyExtendsIfSpecified Unit Tests', () => {
 
     expect(() => {
       applyExtendsIfSpecified(passedConfig, filePath);
-    }).toThrow();
+    }).toThrow('');
   });
 
   test('when file has module extends (valid), a config object is returned', () => {
@@ -145,6 +145,6 @@ describe('applyExtendsIfSpecified Unit Tests', () => {
 
     expect(() => {
       applyExtendsIfSpecified(passedConfig, filePath);
-    }).toThrow();
+    }).toThrow('');
   });
 });

@@ -61,7 +61,7 @@ describe('property-order Unit Tests', () => {
       });
     });
 
-    describe('when the actual node list is in a different order than desired', () => {
+    describe('when the actual node list is in a different order than desired (scenario 2)', () => {
       test('false should be returned', () => {
         const packageJson = {
           version: '1.0.0',
@@ -76,7 +76,7 @@ describe('property-order Unit Tests', () => {
       });
     });
 
-    describe('when the actual node list is in a different order than desired', () => {
+    describe('when the actual node list is in a different order than desired (scenario 3)', () => {
       test('true should be returned', () => {
         const packageJson = {
           name: 'awesome-module',
@@ -91,7 +91,7 @@ describe('property-order Unit Tests', () => {
       });
     });
 
-    describe('when the actual node list is in a different order than desired', () => {
+    describe('when the actual node list is in a different order than desired (scenario 4)', () => {
       test('true should be returned', () => {
         const packageJson = {
           name: 'awesome-module',
@@ -123,7 +123,7 @@ describe('property-order Unit Tests', () => {
       });
     });
 
-    describe('when the actual node list is in correct order, but has extra values in preferred order', () => {
+    describe('when the actual node list is in correct order, but has extra values in preferred order (scenario 2)', () => {
       test('false should be returned', () => {
         const packageJson = {
           name: 'awesome-module',
@@ -174,7 +174,7 @@ describe('property-order Unit Tests', () => {
       });
     });
 
-    describe('when node is not in the preferred node list', () => {
+    describe('when node is not in the preferred node list (scenario 2)', () => {
       test('true should be returned', () => {
         const packageJson = {
           name: 'awesome-module',

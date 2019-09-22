@@ -71,7 +71,7 @@ describe('no-absolute-version-dependencies Unit Tests', () => {
     });
   });
 
-  describe('when package.json has node with a valid value', () => {
+  describe('when package.json has node with an invalid value and an exception', () => {
     test('true should be returned', () => {
       const packageJsonData = {
         dependencies: {

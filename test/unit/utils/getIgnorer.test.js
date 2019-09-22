@@ -60,7 +60,7 @@ describe('getIgnorer Unit Tests', () => {
 
     expect(() => {
       getIgnorer(cwd, ignorePath);
-    }).toThrow();
+    }).toThrow('');
 
     expect(fs.readFileSync).toHaveBeenCalledTimes(1);
     expect(fs.readFileSync).toHaveBeenCalledWith(expect.stringContaining('/.npmpackagejsonlintignore'), 'utf8');
