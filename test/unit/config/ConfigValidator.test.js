@@ -1,4 +1,4 @@
-const configValidator = require('../../../src/config/configValidator');
+const configValidator = require('../../../src/config/ConfigValidator');
 const Rules = require('../../../src/Rules');
 
 const rules = new Rules();

@@ -1,7 +1,7 @@
 const debug = require('debug')('npm-package-json-lint:Config');
 const cosmiconfig = require('cosmiconfig');
 
-const configValidator = require('./config/configValidator');
+const configValidator = require('./config/ConfigValidator');
 const cosmicConfigTransformer = require('./config/cosmicConfigTransformer');
 const applyExtendsIfSpecified = require('./config/applyExtendsIfSpecified');
 const applyOverrides = require('./config/applyOverrides');
