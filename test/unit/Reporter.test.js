@@ -196,7 +196,7 @@ describe('Reporter Unit Tests', () => {
         consoleMock.mockRestore();
       });
 
-      test('and two errors, two warnings exist, and quiet is false. Spy should be 8', () => {
+      test('and zero errors, zero warnings exist, and ignore is true. Spy should be 2', () => {
         const results = {
           results: [
             {

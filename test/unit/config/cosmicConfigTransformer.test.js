@@ -20,7 +20,7 @@ describe('cosmicConfigTransformer Unit Tests', () => {
       });
     });
 
-    describe('valid cosmiconfigResult - no configBaseDirectory', () => {
+    describe('valid cosmiconfigResult - configBaseDirectory', () => {
       test('null should be returned', () => {
         path.dirname.mockReturnValue('./myConfig');
         applyExtendsIfSpecified.mockReturnValue({

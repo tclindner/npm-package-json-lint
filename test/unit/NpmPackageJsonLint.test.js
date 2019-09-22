@@ -16,16 +16,16 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         const expectedTotalWarningCount = 0;
         const expectedIssues = 0;
 
-        expect(response.results.length).toStrictEqual(expectedResults);
+        expect(response.results).toHaveLength(expectedResults);
         expect(response.ignoreCount).toStrictEqual(expectedTotalIgnoreCount);
         expect(response.errorCount).toStrictEqual(expectedTotalErrorCount);
         expect(response.warningCount).toStrictEqual(expectedTotalWarningCount);
-        expect(response.results[0].issues.length).toStrictEqual(expectedIssues);
+        expect(response.results[0].issues).toHaveLength(expectedIssues);
       });
     });
 
-    describe('validate that errors and warnings are set', () => {
-      test('one error and one warning expected', () => {
+    describe('validate that errors and warnings are set on output', () => {
+      test('ten errors and one warning expected', () => {
         const packageJsonData = {
           name: 'ALLCAPS'
         };
@@ -43,17 +43,13 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         const expectedErrorCount = 9;
         const expectedWarningCount = 1;
 
-        expect(response.results.length).toStrictEqual(expectedResults);
+        expect(response.results).toHaveLength(expectedResults);
         expect(response.ignoreCount).toStrictEqual(expectedTotalIgnoreCount);
         expect(response.errorCount).toStrictEqual(expectedTotalErrorCount);
         expect(response.warningCount).toStrictEqual(expectedTotalWarningCount);
-        expect(response.results[0].issues.length).toStrictEqual(expectedIssues);
-        expect(response.results[0].issues.filter(issue => issue.severity === 'error').length).toStrictEqual(
-          expectedErrorCount
-        );
-        expect(response.results[0].issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(
-          expectedWarningCount
-        );
+        expect(response.results[0].issues).toHaveLength(expectedIssues);
+        expect(response.results[0].issues.filter(issue => issue.severity === 'error')).toHaveLength(expectedErrorCount);
+        expect(response.results[0].issues.filter(issue => issue.severity === 'warning')).toHaveLength(expectedWarningCount);
       });
     });
 
@@ -105,17 +101,13 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         const expectedErrorCount = 9;
         const expectedWarningCount = 0;
 
-        expect(response.results.length).toStrictEqual(expectedResults);
+        expect(response.results).toHaveLength(expectedResults);
         expect(response.ignoreCount).toStrictEqual(expectedTotalIgnoreCount);
         expect(response.errorCount).toStrictEqual(expectedTotalErrorCount);
         expect(response.warningCount).toStrictEqual(expectedTotalWarningCount);
-        expect(response.results[0].issues.length).toStrictEqual(expectedIssues);
-        expect(response.results[0].issues.filter(issue => issue.severity === 'error').length).toStrictEqual(
-          expectedErrorCount
-        );
-        expect(response.results[0].issues.filter(issue => issue.severity === 'warning').length).toStrictEqual(
-          expectedWarningCount
-        );
+        expect(response.results[0].issues).toHaveLength(expectedIssues);
+        expect(response.results[0].issues.filter(issue => issue.severity === 'error')).toHaveLength(expectedErrorCount);
+        expect(response.results[0].issues.filter(issue => issue.severity === 'warning')).toHaveLength(expectedWarningCount);
       });
     });
 
@@ -149,7 +141,7 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         const expectedTotalErrorCount = 0;
         const expectedTotalWarningCount = 0;
 
-        expect(response.results.length).toStrictEqual(expectedResults);
+        expect(response.results).toHaveLength(expectedResults);
         expect(response.ignoreCount).toStrictEqual(expectedTotalIgnoreCount);
         expect(response.errorCount).toStrictEqual(expectedTotalErrorCount);
         expect(response.warningCount).toStrictEqual(expectedTotalWarningCount);

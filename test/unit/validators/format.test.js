@@ -7,7 +7,7 @@ describe('format Unit Tests', () => {
         const string = 'awesome-module';
         const response = format.isLowercase(string);
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -16,7 +16,7 @@ describe('format Unit Tests', () => {
         const string = 'aweSome-moDule';
         const response = format.isLowercase(string);
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
   });
@@ -29,7 +29,7 @@ describe('format Unit Tests', () => {
         };
         const response = format.isValidVersionNumber(packageJson, 'devDependencies');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -40,7 +40,7 @@ describe('format Unit Tests', () => {
         };
         const response = format.isValidVersionNumber(packageJson, 'version');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -51,18 +51,18 @@ describe('format Unit Tests', () => {
         };
         const response = format.isValidVersionNumber(packageJson, 'version');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
-    describe('when the node exists in the package.json file and version is invalid', () => {
+    describe('when the node exists in the package.json file and version is invalid (scenario 2)', () => {
       test('false should be returned', () => {
         const packageJson = {
           version: '1.a.0'
         };
         const response = format.isValidVersionNumber(packageJson, 'version');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
   });

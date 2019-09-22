@@ -26,10 +26,10 @@ const applyExtends = (config, parentName, originalFilePath) => {
       const extendsConfig = loadFromModule(moduleName, originalFilePath);
 
       // Merge base object
-      const mergedConfig = Object.assign({}, extendsConfig, previousConfig);
+      const mergedConfig = {...extendsConfig, ...previousConfig};
 
       // Merge rules
-      const rules = Object.assign({}, extendsConfig.rules, previousConfig.rules);
+      const rules = {...extendsConfig.rules, ...previousConfig.rules};
 
       // Merge plugins, if exist
       const extendsConfigPlugins = Array.isArray(extendsConfig.plugins) ? extendsConfig.plugins : [];

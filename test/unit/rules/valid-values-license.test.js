@@ -32,7 +32,7 @@ describe('valid-values-license Unit Tests', () => {
       const validValues = ['private', 'unlicensed'];
       const response = lint(packageJsonData, 'error', validValues);
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 
@@ -41,7 +41,7 @@ describe('valid-values-license Unit Tests', () => {
       const packageJsonData = {};
       const response = lint(packageJsonData, 'error');
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 });

@@ -9,7 +9,7 @@ describe('property Unit Tests', () => {
         };
         const response = property.exists(packageJson, 'devDependencies');
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
 
@@ -20,7 +20,7 @@ describe('property Unit Tests', () => {
         };
         const response = property.exists(packageJson, 'version');
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
   });

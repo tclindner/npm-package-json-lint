@@ -36,7 +36,7 @@ describe('valid-values-publishConfig Unit Tests', () => {
       const validValues = [{access: 'private'}, {access: 'public'}];
       const response = lint(packageJsonData, 'error', validValues);
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 
@@ -61,7 +61,7 @@ describe('valid-values-publishConfig Unit Tests', () => {
       const validValues = [{access: 'private'}, {access: 'protected'}];
       const response = lint(packageJsonData, 'error', validValues);
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 });

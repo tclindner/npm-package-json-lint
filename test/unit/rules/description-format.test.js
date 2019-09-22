@@ -74,7 +74,7 @@ describe('description-format Unit Tests', () => {
       };
       const response = lint(packageJsonData, 'error', config);
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 
@@ -86,7 +86,7 @@ describe('description-format Unit Tests', () => {
       const config = {};
       const response = lint(packageJsonData, 'error', config);
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 
@@ -99,7 +99,7 @@ describe('description-format Unit Tests', () => {
       };
       const response = lint(packageJsonData, 'error', config);
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 });

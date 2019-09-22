@@ -34,7 +34,7 @@ const applyOverrides = (cwd, filePath, rules, overrides) => {
         const globbedFilePath = path.resolve(cwd, globFile);
 
         if (filePath === globbedFilePath) {
-          finalRules = Object.assign({}, finalRules, override.rules);
+          finalRules = {...finalRules, ...override.rules};
         }
       });
     });

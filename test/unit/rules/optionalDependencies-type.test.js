@@ -28,7 +28,7 @@ describe('optionalDependencies-type Unit Tests', () => {
       const packageJsonData = {};
       const response = lint(packageJsonData, 'error');
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 });

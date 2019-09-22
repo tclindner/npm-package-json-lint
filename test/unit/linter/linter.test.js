@@ -1,5 +1,6 @@
 const linter = require('../../../src/linter/linter');
 const Rules = require('../../../src/Rules');
+const LintIssue = require('../../../src/LintIssue');
 
 describe('linter Unit Tests', () => {
   describe('executeOnPackageJsonFiles method tests', () => {
@@ -17,6 +18,7 @@ describe('linter Unit Tests', () => {
       const rules = new Rules();
       rules.load();
 
+      const lintIssue = new LintIssue('require-scripts', 'error', 'scripts', 'scripts is required');
       const expected = {
         errorCount: 1,
         ignoreCount: 0,
@@ -32,14 +34,7 @@ describe('linter Unit Tests', () => {
             errorCount: 1,
             filePath: './test/fixtures/errors/package.json',
             ignored: false,
-            issues: [
-              {
-                lintId: 'require-scripts',
-                lintMessage: 'scripts is required',
-                node: 'scripts',
-                severity: 'error'
-              }
-            ],
+            issues: [lintIssue],
             warningCount: 0
           }
         ],
@@ -54,7 +49,7 @@ describe('linter Unit Tests', () => {
         rules
       });
 
-      expect(results).toEqual(expected);
+      expect(results).toMatchObject(expected);
     });
 
     test('files ignored', () => {
@@ -97,7 +92,7 @@ describe('linter Unit Tests', () => {
         rules
       });
 
-      expect(results).toEqual(expected);
+      expect(results).toStrictEqual(expected);
     });
   });
 
@@ -138,7 +133,7 @@ describe('linter Unit Tests', () => {
         rules
       });
 
-      expect(results).toEqual(expected);
+      expect(results).toStrictEqual(expected);
     });
 
     test('pkg ignored', () => {
@@ -177,7 +172,7 @@ describe('linter Unit Tests', () => {
         rules
       });
 
-      expect(results).toEqual(expected);
+      expect(results).toStrictEqual(expected);
     });
 
     test('filename is absolute', () => {
@@ -216,7 +211,7 @@ describe('linter Unit Tests', () => {
         rules
       });
 
-      expect(results).toEqual(expected);
+      expect(results).toStrictEqual(expected);
     });
 
     test('no filename passed', () => {
@@ -254,7 +249,7 @@ describe('linter Unit Tests', () => {
         rules
       });
 
-      expect(results).toEqual(expected);
+      expect(results).toStrictEqual(expected);
     });
 
     test('array type rule', () => {
@@ -271,6 +266,7 @@ describe('linter Unit Tests', () => {
       const rules = new Rules();
       rules.load();
 
+      const lintIssue = new LintIssue('valid-values-author', 'error', 'author', 'Invalid value for author');
       const expected = {
         errorCount: 1,
         ignoreCount: 0,
@@ -279,14 +275,7 @@ describe('linter Unit Tests', () => {
             errorCount: 1,
             filePath: './test/fixtures/errors/package.json',
             ignored: false,
-            issues: [
-              {
-                lintId: 'valid-values-author',
-                lintMessage: 'Invalid value for author',
-                node: 'author',
-                severity: 'error'
-              }
-            ],
+            issues: [lintIssue],
             warningCount: 0
           }
         ],
@@ -302,7 +291,7 @@ describe('linter Unit Tests', () => {
         rules
       });
 
-      expect(results).toEqual(expected);
+      expect(results).toMatchObject(expected);
     });
 
     test('array type rule - off', () => {
@@ -343,7 +332,7 @@ describe('linter Unit Tests', () => {
         rules
       });
 
-      expect(results).toEqual(expected);
+      expect(results).toStrictEqual(expected);
     });
 
     test('object type rule', () => {
@@ -368,6 +357,12 @@ describe('linter Unit Tests', () => {
       const rules = new Rules();
       rules.load();
 
+      const lintIssue = new LintIssue(
+        'description-format',
+        'error',
+        'description',
+        'The description should end with a period.'
+      );
       const expected = {
         errorCount: 1,
         ignoreCount: 0,
@@ -376,14 +371,7 @@ describe('linter Unit Tests', () => {
             errorCount: 1,
             filePath: './test/fixtures/errors/package.json',
             ignored: false,
-            issues: [
-              {
-                lintId: 'description-format',
-                lintMessage: 'The description should end with a period.',
-                node: 'description',
-                severity: 'error'
-              }
-            ],
+            issues: [lintIssue],
             warningCount: 0
           }
         ],
@@ -399,7 +387,7 @@ describe('linter Unit Tests', () => {
         rules
       });
 
-      expect(results).toEqual(expected);
+      expect(results).toMatchObject(expected);
     });
 
     test('optional object type rule as string', () => {
@@ -420,6 +408,12 @@ describe('linter Unit Tests', () => {
       const rules = new Rules();
       rules.load();
 
+      const lintIssue = new LintIssue(
+        'no-caret-version-dependencies',
+        'error',
+        'dependencies',
+        'You are using an invalid version range. Please do not use ^.'
+      );
       const expected = {
         errorCount: 1,
         ignoreCount: 0,
@@ -428,14 +422,7 @@ describe('linter Unit Tests', () => {
             errorCount: 1,
             filePath: './test/fixtures/errors/package.json',
             ignored: false,
-            issues: [
-              {
-                lintId: 'no-caret-version-dependencies',
-                lintMessage: 'You are using an invalid version range. Please do not use ^.',
-                node: 'dependencies',
-                severity: 'error'
-              }
-            ],
+            issues: [lintIssue],
             warningCount: 0
           }
         ],
@@ -451,10 +438,10 @@ describe('linter Unit Tests', () => {
         rules
       });
 
-      expect(results).toEqual(expected);
+      expect(results).toMatchObject(expected);
     });
 
-    test('optional object type rule as string', () => {
+    test('optional object type rule as string (scenario 2)', () => {
       const packageJsonObj = {
         name: 'my-test-module',
         dependencies: {
@@ -477,6 +464,12 @@ describe('linter Unit Tests', () => {
       const rules = new Rules();
       rules.load();
 
+      const lintIssue = new LintIssue(
+        'no-caret-version-dependencies',
+        'error',
+        'dependencies',
+        'You are using an invalid version range. Please do not use ^.'
+      );
       const expected = {
         errorCount: 1,
         ignoreCount: 0,
@@ -485,14 +478,7 @@ describe('linter Unit Tests', () => {
             errorCount: 1,
             filePath: './test/fixtures/errors/package.json',
             ignored: false,
-            issues: [
-              {
-                lintId: 'no-caret-version-dependencies',
-                lintMessage: 'You are using an invalid version range. Please do not use ^.',
-                node: 'dependencies',
-                severity: 'error'
-              }
-            ],
+            issues: [lintIssue],
             warningCount: 0
           }
         ],
@@ -508,7 +494,7 @@ describe('linter Unit Tests', () => {
         rules
       });
 
-      expect(results).toEqual(expected);
+      expect(results).toMatchObject(expected);
     });
   });
 });

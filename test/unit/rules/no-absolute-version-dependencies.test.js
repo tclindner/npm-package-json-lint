@@ -54,7 +54,7 @@ describe('no-absolute-version-dependencies Unit Tests', () => {
       };
       const response = lint(packageJsonData, 'error', {exceptions: ['gulp-npm-package-json-lint']});
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 
@@ -67,11 +67,11 @@ describe('no-absolute-version-dependencies Unit Tests', () => {
       };
       const response = lint(packageJsonData, 'error');
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 
-  describe('when package.json has node with a valid value', () => {
+  describe('when package.json has node with an invalid value and an exception', () => {
     test('true should be returned', () => {
       const packageJsonData = {
         dependencies: {
@@ -80,7 +80,7 @@ describe('no-absolute-version-dependencies Unit Tests', () => {
       };
       const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 
@@ -89,7 +89,7 @@ describe('no-absolute-version-dependencies Unit Tests', () => {
       const packageJsonData = {};
       const response = lint(packageJsonData, 'error');
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
     });
   });
 });

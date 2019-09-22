@@ -42,7 +42,7 @@ describe('prefer-no-engineStrict Unit Tests', () => {
       const packageJsonData = {};
       const response = lint(packageJsonData, 'error');
 
-      expect(response).toBeTruthy();
+      expect(response).toBe(true);
 
       expect(property.exists).toHaveBeenCalledTimes(1);
       expect(property.exists).toHaveBeenCalledWith(packageJsonData, nodeName);

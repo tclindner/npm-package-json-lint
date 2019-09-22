@@ -25,33 +25,8 @@ describe('Parser Unit Tests', () => {
 
         expect(() => {
           Parser.parseJsonFile('missing.json');
-        }).toThrowError('Failed to read config file: missing.json. \nError: Error');
+        }).toThrow('Failed to read config file: missing.json. \nError: Error');
       });
     });
   });
-
-  // describe('parseJavaScriptFile method', () => {
-  //   describe('when file is present', () => {
-  //     test('an object should be returned', () => {
-  //       const packageJson = {
-  //         name: 'Marcel the Shell with Shoes On'
-  //       };
-  //       const stub = sinon.stub(fs, 'readFileSync').returns(packageJson);
-
-  //       Parser.parseJavaScriptFile('package.json').should.equal(packageJson);
-  //       fs.readFileSync.restore();
-  //     });
-  //   });
-
-  //   describe('when file is not present', () => {
-  //     test('an error should be thrown', () => {
-  //       const stub = sinon.stub(fs, 'readFileSync').throws();
-
-  //       (() => {
-  //         Parser.parseJavaScriptFile('missing.json');
-  //       }).should.throw('Failed to read config file: missing.json. \nError: Error');
-  //       fs.readFileSync.restore();
-  //     });
-  //   });
-  // });
 });

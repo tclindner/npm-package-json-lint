@@ -19,7 +19,7 @@ describe('value-values Unit Tests', () => {
         ];
         const response = validValuesObj.isValidValue(packageJson, 'authors', packageJson.author, validValues);
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -37,7 +37,7 @@ describe('value-values Unit Tests', () => {
         ];
         const response = validValuesObj.isValidValue(packageJson, 'author', packageJson.author, validValues);
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -54,7 +54,7 @@ describe('value-values Unit Tests', () => {
         ];
         const response = validValuesObj.isValidValue(packageJson, 'author', packageJson.author, validValues);
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
   });
@@ -69,7 +69,7 @@ describe('value-values Unit Tests', () => {
         const validRegexes = [/^@babel\//, /run$/, /[0-9]+/];
         const response = validValuesObj.matchValidValue(packageJson, 'names', packageJson.name, validRegexes);
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -78,7 +78,7 @@ describe('value-values Unit Tests', () => {
         const validRegexes = [/^@lerna\//, /^@babel\//, /run$/, /[0-9]+/];
         const response = validValuesObj.matchValidValue(packageJson, 'name', packageJson.name, validRegexes);
 
-        expect(response).toBeTruthy();
+        expect(response).toBe(true);
       });
     });
 
@@ -87,7 +87,7 @@ describe('value-values Unit Tests', () => {
         const validRegexes = [/^@babel\//, /run$/, /[0-9]+/];
         const response = validValuesObj.matchValidValue(packageJson, 'name', packageJson.name, validRegexes);
 
-        expect(response).toBeFalsy();
+        expect(response).toBe(false);
       });
     });
   });
