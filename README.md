@@ -8,6 +8,7 @@
 [![CircleCI](https://circleci.com/gh/tclindner/npm-package-json-lint.svg?style=svg)](https://circleci.com/gh/tclindner/npm-package-json-lint)
 [![Dependency Status](https://david-dm.org/tclindner/npm-package-json-lint.svg?style=flat-square)](https://david-dm.org/tclindner/npm-package-json-lint)
 [![devDependency Status](https://david-dm.org/tclindner/npm-package-json-lint/dev-status.svg?style=flat-square)](https://david-dm.org/tclindner/npm-package-json-lint#info=devDependencies)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e76a30d9-13f0-4691-a49b-454570589de2/deploy-status)](https://app.netlify.com/sites/npmpackagejsonlint/deploys)
 
 
 ## What is npm-package-json-lint?
