@@ -100,14 +100,10 @@ class NpmPackageJsonLint {
 
     this.version = pkg.version;
 
-    // if (this.options.rules && Object.keys(this.options.rules).length) {
-    //   ConfigValidator.validateRules(this.options.rules, 'cli', this.linter);
-    // }
-
-    this.configHelper = new Config(this.cwd, config, configFile, configBaseDirectory);
-
     this.rules = new Rules();
     this.rules.load();
+
+    this.configHelper = new Config(this.cwd, config, configFile, configBaseDirectory, this.rules);
   }
 
   /**

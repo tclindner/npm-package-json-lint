@@ -1,6 +1,6 @@
 {
   "name": "npm-package-json-lint",
-  "version": "4.0.0-beta.2",
+  "version": "4.0.0-beta.3",
   "description": "Configurable linter for package.json files.",
   "keywords": [
     "lint",
@@ -35,28 +35,28 @@
     "test:ci": "jest --runInBand"
   },
   "dependencies": {
-    "ajv": "^6.10.0",
+    "ajv": "^6.10.2",
     "ajv-errors": "^1.0.1",
     "chalk": "^2.4.2",
     "cosmiconfig": "^5.2.1",
     "debug": "^4.1.1",
     "globby": "^10.0.1",
-    "ignore": "^5.1.2",
+    "ignore": "^5.1.4",
     "is-plain-obj": "^2.0.0",
     "log-symbols": "^3.0.0",
     "meow": "^5.0.0",
     "plur": "^3.1.1",
-    "semver": "^6.1.1",
+    "semver": "^6.3.0",
     "strip-json-comments": "^3.0.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-config-tc": "^6.5.0",
     "eslint-formatter-pretty": "^2.1.1",
-    "eslint-plugin-import": "^2.17.3",
-    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
     "figures": "^3.0.0",
-    "jest": "^24.8.0",
+    "jest": "^24.9.0",
     "npm-package-json-lint-config-default": "^2.0.0",
     "npm-package-json-lint-config-tc": "^2.2.0",
     "prettier": "^1.18.2"

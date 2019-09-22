@@ -38,7 +38,7 @@ const threeRunTimeException = 3;
 const {env} = process;
 env.FORCE_COLOR = 0;
 
-describe('cli Unit Tests', () => {
+describe('cli Integration Tests', () => {
   describe('when the help command is run', () => {
     const expected = `
   Configurable linter for package.json files.

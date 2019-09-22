@@ -1,7 +1,7 @@
 const applyExtendsIfSpecified = require('../../../src/config/applyExtendsIfSpecified');
 
 describe('applyExtendsIfSpecified Unit Tests', () => {
-  test('when file has local extends (valid), a config object is returned', () => {
+  test('when file has local extends (valid - js), a config object is returned', () => {
     const expectedConfigObj = {
       extends: './test/fixtures/extendsLocal/npmpackagejsonlint.config.js',
       rules: {
@@ -30,9 +30,52 @@ describe('applyExtendsIfSpecified Unit Tests', () => {
     expect(result).toStrictEqual(expectedConfigObj);
   });
 
+  test('when file has local extends (valid - json), a config object is returned', () => {
+    const expectedConfigObj = {
+      extends: './test/fixtures/extendsLocal/.npmpackagejsonlintrc.json',
+      rules: {
+        'require-author': 'error',
+        'require-description': 'error'
+      },
+      overrides: [
+        {
+          patterns: ['**/package.json'],
+          rules: {
+            'require-author': 'warning'
+          }
+        }
+      ]
+    };
+    const passedConfig = {
+      extends: './test/fixtures/extendsLocal/.npmpackagejsonlintrc.json',
+      rules: {
+        'require-author': 'error'
+      }
+    };
+
+    const filePath = './test/fixtures/extendsLocal/package.json';
+    const result = applyExtendsIfSpecified(passedConfig, filePath);
+
+    expect(result).toStrictEqual(expectedConfigObj);
+  });
+
   test('when file has local extends (invalid), a config object is returned', () => {
     const passedConfig = {
       extends: './npmpackagejsonlint.config.js',
+      rules: {
+        'require-author': 'error'
+      }
+    };
+    const filePath = './test/fixtures/extendsLocalInvalid/package.json';
+
+    expect(() => {
+      applyExtendsIfSpecified(passedConfig, filePath);
+    }).toThrow();
+  });
+
+  test('when file has local extends (invalid extension type), a config object is returned', () => {
+    const passedConfig = {
+      extends: './npmpackagejsonlintrc.md',
       rules: {
         'require-author': 'error'
       }

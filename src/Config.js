@@ -1,7 +1,7 @@
 const debug = require('debug')('npm-package-json-lint:Config');
 const cosmiconfig = require('cosmiconfig');
 
-// const ConfigValidator = require('./config/ConfigValidator');
+const configValidator = require('./config/ConfigValidator');
 const cosmicConfigTransformer = require('./config/cosmicConfigTransformer');
 const applyExtendsIfSpecified = require('./config/applyExtendsIfSpecified');
 const applyOverrides = require('./config/applyOverrides');
@@ -20,8 +20,9 @@ class Config {
    * @param {Object} config     The user passed config object.
    * @param {string} configFile The user passed configFile path.
    * @param {string} configBaseDirectory The base directory that config should be pulled from.
+   * @param {Object} rules      Rules object
    */
-  constructor(cwd, config, configFile, configBaseDirectory) {
+  constructor(cwd, config, configFile, configBaseDirectory, rules) {
     if (config) {
       this.config = applyExtendsIfSpecified(config, 'PassedConfig');
     }
@@ -29,6 +30,7 @@ class Config {
     this.cwd = cwd;
     this.configFile = configFile;
     this.configBaseDirectory = configBaseDirectory;
+    this.rules = rules;
     this.explorer = cosmiconfig('npmpackagejsonlint', {
       transform: cosmicConfigTransformer.transform(cwd, configBaseDirectory)
     });
@@ -77,7 +79,7 @@ class Config {
 
     debug(`Overrides applied for ${filePath}`);
 
-    // ConfigValidator.validateRules(config, 'cli', this.linter);
+    configValidator.validateRules(config, 'cli', this.rules);
 
     return config;
   }

@@ -106,44 +106,41 @@ const validateRule = (ruleModule, ruleName, userConfig, source) => {
 };
 
 /**
- * Public ConfigValidator class
- * @class
+ * Validates only the rules of a config object
+ *
+ * @param {Object} rulesConfig The rules config object to validate.
+ * @param {String} source The name of the configuration source to report in any errors.
+ * @param {Object} rules  Rules object
+ * @returns {undefined} No return
+ * @static
  */
-class ConfigValidator {
-  /**
-   * Validates entire config object, including top-level properties.
-   *
-   * @param {Object} config The config object to validate.
-   * @param {String} source The name of the configuration source to report in any errors.
-   * @param {NpmPackageJsonLint} linterContext Linter context
-   * @returns {undefined} No return
-   * @static
-   */
-  static validate(config, source, linterContext) {
-    ConfigSchema.isConfigObjectSchemaValid(config, source);
-    ConfigValidator.validateRules(config.rules, source, linterContext);
+const validateRules = (rulesConfig, source, rules) => {
+  if (!rulesConfig) {
+    return;
   }
 
-  /**
-   * Validates only the rules of a config object
-   *
-   * @param {Object} rulesConfig The rules config object to validate.
-   * @param {String} source The name of the configuration source to report in any errors.
-   * @param {NpmPackageJsonLint} linterContext Linter context
-   * @returns {undefined} No return
-   * @static
-   */
-  static validateRules(rulesConfig, source, linterContext) {
-    if (!rulesConfig) {
-      return;
-    }
+  Object.keys(rulesConfig).forEach(ruleName => {
+    const ruleModule = rules.get(ruleName);
 
-    Object.keys(rulesConfig).forEach(ruleName => {
-      const ruleModule = linterContext.getRule(ruleName);
+    validateRule(ruleModule, ruleName, rulesConfig[ruleName], source);
+  });
+};
 
-      validateRule(ruleModule, ruleName, rulesConfig[ruleName], source);
-    });
-  }
-}
+/**
+ * Validates entire config object, including top-level properties.
+ *
+ * @param {Object} config The config object to validate.
+ * @param {String} source The name of the configuration source to report in any errors.
+ * @param {Object} rules  Rules object
+ * @returns {undefined} No return
+ * @static
+ */
+const validate = (config, source, rules) => {
+  ConfigSchema.isConfigObjectSchemaValid(config, source);
+  validateRules(config.rules, source, rules);
+};
 
-module.exports = ConfigValidator;
+module.exports = {
+  validate,
+  validateRules
+};
