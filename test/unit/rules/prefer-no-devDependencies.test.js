@@ -26,9 +26,7 @@ describe('prefer-no-devDependencies Unit Tests', () => {
       expect(response.lintId).toStrictEqual('prefer-no-devDependencies');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual(nodeName);
-      expect(response.lintMessage).toStrictEqual(
-        'devDependencies should not be defined'
-      );
+      expect(response.lintMessage).toStrictEqual('devDependencies should not be defined');
 
       expect(property.exists).toHaveBeenCalledTimes(1);
       expect(property.exists).toHaveBeenCalledWith(packageJsonData, nodeName);
