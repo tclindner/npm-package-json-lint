@@ -89,6 +89,9 @@
       "rules/dependencies/prefer-caret-version-devDependencies": {
         "title": "prefer-caret-version-devDependencies"
       },
+      "rules/dependencies/prefer-no-version-zero-dependencies": {
+        "title": "prefer-no-version-zero-dependencies"
+      },
       "rules/dependencies/prefer-no-version-zero-devDependencies": {
         "title": "prefer-no-version-zero-devDependencies"
       },
@@ -98,11 +101,11 @@
       "rules/dependencies/prefer-tilde-version-devDependencies": {
         "title": "prefer-tilde-version-devDependencies"
       },
-      "rules/disallowed-nodes/prefer-no-engineStrict": {
-        "title": "prefer-no-engineStrict"
-      },
       "rules/disallowed-nodes/prefer-no-devDependencies": {
         "title": "prefer-no-devDependencies"
+      },
+      "rules/disallowed-nodes/prefer-no-engineStrict": {
+        "title": "prefer-no-engineStrict"
       },
       "rules/format/description-format": {
         "title": "description-format"
@@ -619,6 +622,69 @@
       },
       "version-3.7.0/version-3.7.0-v2-to-v3": {
         "title": "v2 to v3 Migration Guide"
+      },
+      "version-4.0.0/version-4.0.0-api": {
+        "title": "Node.js API"
+      },
+      "version-4.0.0/version-4.0.0-cli": {
+        "title": "CLI"
+      },
+      "version-4.0.0/version-4.0.0-rules": {
+        "title": "Rules"
+      },
+      "version-4.0.0/rules/dependencies/version-4.0.0-no-absolute-version-dependencies": {
+        "title": "no-absolute-version-dependencies"
+      },
+      "version-4.0.0/rules/dependencies/version-4.0.0-no-absolute-version-devDependencies": {
+        "title": "no-absolute-version-devDependencies"
+      },
+      "version-4.0.0/rules/dependencies/version-4.0.0-no-caret-version-dependencies": {
+        "title": "no-caret-version-dependencies"
+      },
+      "version-4.0.0/rules/dependencies/version-4.0.0-no-caret-version-devDependencies": {
+        "title": "no-caret-version-devDependencies"
+      },
+      "version-4.0.0/rules/dependencies/version-4.0.0-no-tilde-version-dependencies": {
+        "title": "no-tilde-version-dependencies"
+      },
+      "version-4.0.0/rules/dependencies/version-4.0.0-no-tilde-version-devDependencies": {
+        "title": "no-tilde-version-devDependencies"
+      },
+      "version-4.0.0/rules/dependencies/version-4.0.0-prefer-absolute-version-dependencies": {
+        "title": "prefer-absolute-version-dependencies"
+      },
+      "version-4.0.0/rules/dependencies/version-4.0.0-prefer-absolute-version-devDependencies": {
+        "title": "prefer-absolute-version-devDependencies"
+      },
+      "version-4.0.0/rules/dependencies/version-4.0.0-prefer-caret-version-dependencies": {
+        "title": "prefer-caret-version-dependencies"
+      },
+      "version-4.0.0/rules/dependencies/version-4.0.0-prefer-caret-version-devDependencies": {
+        "title": "prefer-caret-version-devDependencies"
+      },
+      "version-4.0.0/rules/dependencies/version-4.0.0-prefer-no-version-zero-dependencies": {
+        "title": "prefer-no-version-zero-dependencies"
+      },
+      "version-4.0.0/rules/dependencies/version-4.0.0-prefer-no-version-zero-devDependencies": {
+        "title": "prefer-no-version-zero-devDependencies"
+      },
+      "version-4.0.0/rules/dependencies/version-4.0.0-prefer-tilde-version-dependencies": {
+        "title": "prefer-tilde-version-dependencies"
+      },
+      "version-4.0.0/rules/dependencies/version-4.0.0-prefer-tilde-version-devDependencies": {
+        "title": "prefer-tilde-version-devDependencies"
+      },
+      "version-4.0.0/rules/disallowed-nodes/version-4.0.0-prefer-no-devDependencies": {
+        "title": "prefer-no-devDependencies"
+      },
+      "version-4.0.0/rules/disallowed-nodes/version-4.0.0-prefer-no-engineStrict": {
+        "title": "prefer-no-engineStrict"
+      },
+      "version-4.0.0/rules/required-node/version-4.0.0-require-license": {
+        "title": "require-license"
+      },
+      "version-4.0.0/version-4.0.0-v3-to-v4": {
+        "title": "v3 to v4 Migration Guide"
       }
     },
     "links": {
