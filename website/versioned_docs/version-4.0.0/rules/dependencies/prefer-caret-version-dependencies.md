@@ -1,6 +1,7 @@
 ---
-id: prefer-caret-version-dependencies
+id: version-4.0.0-prefer-caret-version-dependencies
 title: prefer-caret-version-dependencies
+original_id: prefer-caret-version-dependencies
 ---
 
 Enabling this rule will result in an error being generated if one of the dependencies in `dependencies` is does not use a caret version range.

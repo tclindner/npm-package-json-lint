@@ -1,16 +1,17 @@
 ---
-id: prefer-absolute-version-dependencies
-title: prefer-absolute-version-dependencies
+id: version-4.0.0-prefer-absolute-version-devDependencies
+title: prefer-absolute-version-devDependencies
+original_id: prefer-absolute-version-devDependencies
 ---
 
-Enabling this rule will result in an error being generated if one of the dependencies in `dependencies` is does not use an absolute version range.
+Enabling this rule will result in an error being generated if one of the dependencies in `devDependencies` is does not use an absolute version range.
 
 ## Example .npmpackagejsonlintrc configuration
 
 ```json
 {
   "rules": {
-    "prefer-absolute-version-dependencies": "error"
+    "prefer-absolute-version-devDependencies": "error"
   }
 }
 ```
@@ -20,7 +21,7 @@ With exceptions
 ```json
 {
   "rules": {
-    "prefer-absolute-version-dependencies": ["error", {
+    "prefer-absolute-version-devDependencies": ["error", {
       "exceptions": ["myModule"]
     }]
   }
@@ -33,7 +34,7 @@ With exceptions
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "grunt-npm-package-json-lint": "~0.3.0"
   }
 }
@@ -41,7 +42,7 @@ With exceptions
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "grunt-npm-package-json-lint": "^0.3.0"
   }
 }
@@ -49,7 +50,7 @@ With exceptions
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "grunt-npm-package-json-lint": "0.3.*"
   }
 }
@@ -57,7 +58,7 @@ With exceptions
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "grunt-npm-package-json-lint": ">0.3.0"
   }
 }
@@ -65,7 +66,7 @@ With exceptions
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "grunt-npm-package-json-lint": "<0.3.0"
   }
 }
@@ -75,7 +76,7 @@ With exceptions
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "gulp-npm-package-json-lint": "0.3.0"
   }
 }
@@ -83,7 +84,7 @@ With exceptions
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "gulp-npm-package-json-lint": "=0.3.0"
   }
 }
@@ -91,8 +92,8 @@ With exceptions
 
 ## Related
 
-* [prefer-caret-version-dependencies](prefer-caret-version-dependencies.md)
-* [prefer-tilde-version-dependencies](prefer-tilde-version-dependencies.md)
+* [prefer-caret-version-devDependencies](prefer-caret-version-devDependencies.md)
+* [prefer-tilde-version-devDependencies](prefer-tilde-version-devDependencies.md)
 
 ## History
 

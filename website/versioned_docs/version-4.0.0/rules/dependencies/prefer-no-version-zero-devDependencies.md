@@ -1,6 +1,7 @@
 ---
-id: prefer-no-version-zero-devDependencies
+id: version-4.0.0-prefer-no-version-zero-devDependencies
 title: prefer-no-version-zero-devDependencies
+original_id: prefer-no-version-zero-devDependencies
 ---
 
 Enabling this rule will result in an error being generated if one of the dependencies in `devDependencies` has a major version of 0.

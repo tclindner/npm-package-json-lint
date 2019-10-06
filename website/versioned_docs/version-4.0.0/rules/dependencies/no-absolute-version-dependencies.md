@@ -1,6 +1,7 @@
 ---
-id: no-absolute-version-dependencies
+id: version-4.0.0-no-absolute-version-dependencies
 title: no-absolute-version-dependencies
+original_id: no-absolute-version-dependencies
 ---
 
 Enabling this rule will result in an error being generated if one of the dependencies in `dependencies` uses absolute versions.

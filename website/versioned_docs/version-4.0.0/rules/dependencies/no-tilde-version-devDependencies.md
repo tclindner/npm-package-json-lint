@@ -1,16 +1,17 @@
 ---
-id: no-caret-version-devDependencies
-title: no-caret-version-devDependencies
+id: version-4.0.0-no-tilde-version-devDependencies
+title: no-tilde-version-devDependencies
+original_id: no-tilde-version-devDependencies
 ---
 
-Enabling this rule will result in an error being generated if one of the dependencies in `devDependencies` uses caret versions.
+Enabling this rule will result in an error being generated if one of the dependencies in `devDependencies` uses tilde versions.
 
 ## Example .npmpackagejsonlintrc configuration
 
 ```json
 {
   "rules": {
-    "no-caret-version-devDependencies": "error"
+    "no-tilde-version-devDependencies": "error"
   }
 }
 ```
@@ -20,7 +21,7 @@ With exceptions
 ```json
 {
   "rules": {
-    "no-caret-version-devDependencies": ["error", {
+    "no-tilde-version-devDependencies": ["error", {
       "exceptions": ["myModule"]
     }]
   }
@@ -34,7 +35,7 @@ With exceptions
 ```json
 {
   "devDependencies": {
-    "gulp-npm-package-json-lint": "^0.3.0"
+    "gulp-npm-package-json-lint": "~0.3.0"
   }
 }
 ```
@@ -44,7 +45,7 @@ With exceptions
 ```json
 {
   "devDependencies": {
-    "gulp-npm-package-json-lint": "~0.3.0"
+    "gulp-npm-package-json-lint": "^0.3.0"
   }
 }
 ```
@@ -94,7 +95,7 @@ With exceptions
 ```json
 {
   "rules": {
-    "no-caret-version-devDependencies": "off"
+    "no-tilde-version-devDependencies": "off"
   }
 }
 ```

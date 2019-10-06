@@ -16,6 +16,19 @@ Enabling this rule will result in an error being generated if `devDependencies` 
 }
 ```
 
+With exceptions
+
+```json
+{
+  "rules": {
+    "prefer-no-devDependencies": ["error", {
+      "exceptions": ["myModule"]
+    }]
+  }
+}
+```
+
+
 ## Rule Details
 
 ### *Incorrect* example(s)

@@ -1,6 +1,7 @@
 ---
-id: prefer-absolute-version-dependencies
+id: version-4.0.0-prefer-absolute-version-dependencies
 title: prefer-absolute-version-dependencies
+original_id: prefer-absolute-version-dependencies
 ---
 
 Enabling this rule will result in an error being generated if one of the dependencies in `dependencies` is does not use an absolute version range.

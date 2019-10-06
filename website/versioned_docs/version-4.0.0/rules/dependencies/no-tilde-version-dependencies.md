@@ -1,16 +1,17 @@
 ---
-id: no-caret-version-devDependencies
-title: no-caret-version-devDependencies
+id: version-4.0.0-no-tilde-version-dependencies
+title: no-tilde-version-dependencies
+original_id: no-tilde-version-dependencies
 ---
 
-Enabling this rule will result in an error being generated if one of the dependencies in `devDependencies` uses caret versions.
+Enabling this rule will result in an error being generated if one of the dependencies in `dependencies` uses tilde versions.
 
 ## Example .npmpackagejsonlintrc configuration
 
 ```json
 {
   "rules": {
-    "no-caret-version-devDependencies": "error"
+    "no-tilde-version-dependencies": "error"
   }
 }
 ```
@@ -20,7 +21,7 @@ With exceptions
 ```json
 {
   "rules": {
-    "no-caret-version-devDependencies": ["error", {
+    "no-tilde-version-dependencies": ["error", {
       "exceptions": ["myModule"]
     }]
   }
@@ -33,8 +34,8 @@ With exceptions
 
 ```json
 {
-  "devDependencies": {
-    "gulp-npm-package-json-lint": "^0.3.0"
+  "dependencies": {
+    "gulp-npm-package-json-lint": "~0.3.0"
   }
 }
 ```
@@ -43,15 +44,15 @@ With exceptions
 
 ```json
 {
-  "devDependencies": {
-    "gulp-npm-package-json-lint": "~0.3.0"
+  "dependencies": {
+    "gulp-npm-package-json-lint": "^0.3.0"
   }
 }
 ```
 
 ```json
 {
-  "devDependencies": {
+  "dependencies": {
     "gulp-npm-package-json-lint": ">=0.3.0"
   }
 }
@@ -59,7 +60,7 @@ With exceptions
 
 ```json
 {
-  "devDependencies": {
+  "dependencies": {
     "gulp-npm-package-json-lint": "<=0.3.0"
   }
 }
@@ -67,7 +68,7 @@ With exceptions
 
 ```json
 {
-  "devDependencies": {
+  "dependencies": {
     "gulp-npm-package-json-lint": "*"
   }
 }
@@ -75,7 +76,7 @@ With exceptions
 
 ```json
 {
-  "devDependencies": {
+  "dependencies": {
     "grunt-npm-package-json-lint": "0.3.0"
   }
 }
@@ -83,7 +84,7 @@ With exceptions
 
 ```json
 {
-  "devDependencies": {
+  "dependencies": {
     "grunt-npm-package-json-lint": "=0.3.0"
   }
 }
@@ -94,7 +95,7 @@ With exceptions
 ```json
 {
   "rules": {
-    "no-caret-version-devDependencies": "off"
+    "no-tilde-version-dependencies": "off"
   }
 }
 ```

@@ -3,30 +3,32 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [4.0.0] - 2019-10-06
 ### Added
 - Added exception support to the following rules:
 
-  - [`no-absolute-version-dependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/no-absolute-version-dependencies)
-  - [`no-absolute-version-devDependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/no-absolute-version-devDependencies)
-  - [`no-caret-version-dependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/no-caret-version-dependencies)
-  - [`no-caret-version-devDependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/no-caret-version-devDependencies)
-  - [`no-tilde-version-dependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/no-tilde-version-dependencies)
-  - [`no-tilde-version-devDependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/no-tilde-version-devDependencies)
-  - [`prefer-absolute-version-dependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-absolute-version-dependencies)
-  - [`prefer-absolute-version-devDependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-absolute-version-devDependencies)
-  - [`prefer-caret-version-dependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-caret-version-dependencies)
-  - [`prefer-caret-version-devDependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-caret-version-devDependencies)
-  - [`prefer-no-version-zero-dependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-no-version-zero-dependencies)
-  - [`prefer-no-version-zero-devDependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-no-version-zero-devDependencies)
-  - [`prefer-tilde-version-dependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-tilde-version-dependencies)
-  - [`prefer-tilde-version-devDependencies`](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-tilde-version-devDependencies)
+  - [`no-absolute-version-dependencies`](https://npmpackagejsonlint.org/docs/en/rules/dependencies/no-absolute-version-dependencies)
+  - [`no-absolute-version-devDependencies`](https://npmpackagejsonlint.org/docs/en/rules/dependencies/no-absolute-version-devDependencies)
+  - [`no-caret-version-dependencies`](https://npmpackagejsonlint.org/docs/en/rules/dependencies/no-caret-version-dependencies)
+  - [`no-caret-version-devDependencies`](https://npmpackagejsonlint.org/docs/en/rules/dependencies/no-caret-version-devDependencies)
+  - [`no-tilde-version-dependencies`](https://npmpackagejsonlint.org/docs/en/rules/dependencies/no-tilde-version-dependencies)
+  - [`no-tilde-version-devDependencies`](https://npmpackagejsonlint.org/docs/en/rules/dependencies/no-tilde-version-devDependencies)
+  - [`prefer-absolute-version-dependencies`](https://npmpackagejsonlint.org/docs/en/rules/dependencies/prefer-absolute-version-dependencies)
+  - [`prefer-absolute-version-devDependencies`](https://npmpackagejsonlint.org/docs/en/rules/dependencies/prefer-absolute-version-devDependencies)
+  - [`prefer-caret-version-dependencies`](https://npmpackagejsonlint.org/docs/en/rules/dependencies/prefer-caret-version-dependencies)
+  - [`prefer-caret-version-devDependencies`](https://npmpackagejsonlint.org/docs/en/rules/dependencies/prefer-caret-version-devDependencies)
+  - [`prefer-no-version-zero-dependencies`](https://npmpackagejsonlint.org/docs/en/rules/dependencies/prefer-no-version-zero-dependencies)
+  - [`prefer-no-version-zero-devDependencies`](https://npmpackagejsonlint.org/docs/en/rules/dependencies/prefer-no-version-zero-devDependencies)
+  - [`prefer-tilde-version-dependencies`](https://npmpackagejsonlint.org/docs/en/rules/dependencies/prefer-tilde-version-dependencies)
+  - [`prefer-tilde-version-devDependencies`](https://npmpackagejsonlint.org/docs/en/rules/dependencies/prefer-tilde-version-devDependencies)
 
   > Addresses [#93](https://github.com/tclindner/npm-package-json-lint/issues/93)
 
-- New rule: [prefer-no-devDependencies](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-no-devDependencies)]
+- New rule: [prefer-no-devDependencies](https://npmpackagejsonlint.org/docs/en/rules/disallowed-nodes/prefer-no-devdependencies)]. Thank you, @simison
 
 ### Changed
-- [`name-format`](https://github.com/tclindner/npm-package-json-lint/wiki/name-format) now checks the following things:
+- [`name-format`](https://npmpackagejsonlint.org/docs/en/rules/format/name-format) now checks the following things:
 
   - Name is lowercase
   - Name is less than 214 characters. This includes scope.

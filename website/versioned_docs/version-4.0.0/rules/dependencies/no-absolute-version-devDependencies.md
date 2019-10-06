@@ -1,16 +1,17 @@
 ---
-id: no-absolute-version-dependencies
-title: no-absolute-version-dependencies
+id: version-4.0.0-no-absolute-version-devDependencies
+title: no-absolute-version-devDependencies
+original_id: no-absolute-version-devDependencies
 ---
 
-Enabling this rule will result in an error being generated if one of the dependencies in `dependencies` uses absolute versions.
+Enabling this rule will result in an error being generated if one of the dependencies in `devDependencies` uses absolute versions.
 
 ## Example .npmpackagejsonlintrc configuration
 
 ```json
 {
   "rules": {
-    "no-absolute-version-dependencies": "error"
+    "no-absolute-version-devDependencies": "error"
   }
 }
 ```
@@ -20,7 +21,7 @@ With exceptions
 ```json
 {
   "rules": {
-    "no-absolute-version-dependencies": ["error", {
+    "no-absolute-version-devDependencies": ["error", {
       "exceptions": ["myModule"]
     }]
   }
@@ -33,7 +34,7 @@ With exceptions
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "grunt-npm-package-json-lint": "0.3.0"
   }
 }
@@ -41,7 +42,7 @@ With exceptions
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "grunt-npm-package-json-lint": "=0.3.0"
   }
 }
@@ -51,7 +52,7 @@ With exceptions
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "gulp-npm-package-json-lint": "^0.3.0"
   }
 }
@@ -59,7 +60,7 @@ With exceptions
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "gulp-npm-package-json-lint": "~0.3.0"
   }
 }
@@ -67,7 +68,7 @@ With exceptions
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "gulp-npm-package-json-lint": ">=0.3.0"
   }
 }
@@ -75,7 +76,7 @@ With exceptions
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "gulp-npm-package-json-lint": "<=0.3.0"
   }
 }
@@ -83,7 +84,7 @@ With exceptions
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "gulp-npm-package-json-lint": "*"
   }
 }
@@ -94,7 +95,7 @@ With exceptions
 ```json
 {
   "rules": {
-    "no-absolute-version-dependencies": "off"
+    "no-absolute-version-devDependencies": "off"
   }
 }
 ```

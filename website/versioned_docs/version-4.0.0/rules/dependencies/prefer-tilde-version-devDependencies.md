@@ -1,6 +1,7 @@
 ---
-id: prefer-tilde-version-devDependencies
+id: version-4.0.0-prefer-tilde-version-devDependencies
 title: prefer-tilde-version-devDependencies
+original_id: prefer-tilde-version-devDependencies
 ---
 
 Enabling this rule will result in an error being generated if one of the dependencies in `devDependencies` is does not use a tilde version range.

@@ -1,6 +1,7 @@
 ---
-id: no-caret-version-devDependencies
+id: version-4.0.0-no-caret-version-devDependencies
 title: no-caret-version-devDependencies
+original_id: no-caret-version-devDependencies
 ---
 
 Enabling this rule will result in an error being generated if one of the dependencies in `devDependencies` uses caret versions.
