@@ -1,6 +1,7 @@
 ---
-id: cli
+id: version-4.0.0-cli
 title: CLI
+original_id: cli
 ---
 
 Run npm-package-json-lint through the CLI with this script.

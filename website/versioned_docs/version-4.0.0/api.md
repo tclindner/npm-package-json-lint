@@ -1,6 +1,7 @@
 ---
-id: api
+id: version-4.0.0-api
 title: Node.js API
+original_id: api
 ---
 
 npm-package-json-lint exports one object, `NpmPackageJsonLint`.

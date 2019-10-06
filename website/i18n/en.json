@@ -311,6 +311,9 @@
       "v2-to-v3": {
         "title": "v2 to v3 Migration Guide"
       },
+      "v3-to-v4": {
+        "title": "v3 to v4 Migration Guide"
+      },
       "why": {
         "title": "Why npm-package-json-lint?"
       },
@@ -616,9 +619,6 @@
       },
       "version-3.7.0/version-3.7.0-v2-to-v3": {
         "title": "v2 to v3 Migration Guide"
-      },
-      "version-3.7.0/version-3.7.0-why": {
-        "title": "Why npm-package-json-lint?"
       }
     },
     "links": {
