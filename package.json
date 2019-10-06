@@ -1,6 +1,6 @@
 {
   "name": "npm-package-json-lint",
-  "version": "4.0.0-beta.3",
+  "version": "4.0.0",
   "description": "Configurable linter for package.json files.",
   "keywords": [
     "lint",
@@ -50,7 +50,7 @@
     "strip-json-comments": "^3.0.1"
   },
   "devDependencies": {
-    "eslint": "^6.4.0",
+    "eslint": "^6.5.1",
     "eslint-config-tc": "^8.0.1",
     "eslint-formatter-pretty": "^2.1.1",
     "eslint-plugin-import": "^2.18.2",
