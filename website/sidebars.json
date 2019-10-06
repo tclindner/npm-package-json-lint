@@ -19,6 +19,7 @@
       "related-projects"
     ],
     "Migration Guides": [
+      "v3-to-v4",
       "v2-to-v3",
       "v1-to-v2",
       "v0-to-v1"

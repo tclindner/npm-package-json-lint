@@ -1,6 +1,7 @@
 ---
-id: configuration
+id: version-4.0.0-configuration
 title: Configuration
+original_id: configuration
 ---
 
 The following documentation outlines how to work with configuration.

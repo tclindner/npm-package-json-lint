@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [4.0.0] - 2019-10-06
 ### Added
+- Added configuration override support via glob patterns. This is especially useful for monorepos. Addresses [#96](https://github.com/tclindner/npm-package-json-lint/issues/96). Check out the [documentation](https://npmpackagejsonlint.org/docs/en/configuration) for more details.
 - Added exception support to the following rules:
 
   - [`no-absolute-version-dependencies`](https://npmpackagejsonlint.org/docs/en/rules/dependencies/no-absolute-version-dependencies)
@@ -35,6 +36,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Name doesn't start with a `.` or a `_`.
 
   > Addresses [#115](https://github.com/tclindner/npm-package-json-lint/issues/115)
+
+- Node.js API consolidated. NpmPackageJsonLint constructor now takes an options object and exposes one public method, `lint`. The linter automatically scans for relevant config. The CLIEngine has been removed. Addresses [#82](https://github.com/tclindner/npm-package-json-lint/issues/82). Check out the [documentation](https://npmpackagejsonlint.org/docs/en/api) for more details.
 
 - Improved schema validation that runs against npm-package-json-lint config files. Highlights include:
 
