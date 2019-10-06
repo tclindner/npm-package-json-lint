@@ -98,8 +98,11 @@
       "rules/dependencies/prefer-tilde-version-devDependencies": {
         "title": "prefer-tilde-version-devDependencies"
       },
-      "rules/deprecated-nodes/prefer-no-engineStrict": {
+      "rules/disallowed-nodes/prefer-no-engineStrict": {
         "title": "prefer-no-engineStrict"
+      },
+      "rules/disallowed-nodes/prefer-no-devDependencies": {
+        "title": "prefer-no-devDependencies"
       },
       "rules/format/description-format": {
         "title": "description-format"
