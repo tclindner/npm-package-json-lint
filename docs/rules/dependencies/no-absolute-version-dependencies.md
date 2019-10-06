@@ -15,6 +15,18 @@ Enabling this rule will result in an error being generated if one of the depende
 }
 ```
 
+With exceptions
+
+```json
+{
+  "rules": {
+    "no-absolute-version-dependencies": ["error", {
+      "exceptions": ["myModule"]
+    }]
+  }
+}
+```
+
 ## Rule Details
 
 ### *Incorrect* example(s)

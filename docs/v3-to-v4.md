@@ -11,4 +11,6 @@ v4.0.0 Migration Guide
 
 There is a new [Node.js API](api.md) available. Please see the docs.
 
+## Additional changes
+
 Please see the [release notes](https://github.com/tclindner/npm-package-json-lint/releases/tag/v4.0.0) for additional changes introduced in v4.0.0.

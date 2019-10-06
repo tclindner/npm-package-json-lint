@@ -1,16 +1,16 @@
 ---
-id: prefer-no-version-zero-devDependencies
-title: prefer-no-version-zero-devDependencies
+id: prefer-no-version-zero-dependencies
+title: prefer-no-version-zero-dependencies
 ---
 
-Enabling this rule will result in an error being generated if one of the dependencies in `devDependencies` has a major version of 0.
+Enabling this rule will result in an error being generated if one of the dependencies in `dependencies` has a major version of 0.
 
 ## Example .npmpackagejsonlintrc configuration
 
 ```json
 {
   "rules": {
-    "prefer-no-version-zero-devDependencies": "error"
+    "prefer-no-version-zero-dependencies": "error"
   }
 }
 ```
@@ -20,7 +20,7 @@ With exceptions
 ```json
 {
   "rules": {
-    "prefer-no-version-zero-devDependencies": ["error", {
+    "prefer-no-version-zero-dependencies": ["error", {
       "exceptions": ["myModule"]
     }]
   }
