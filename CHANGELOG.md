@@ -23,6 +23,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
   > Addresses [#93](https://github.com/tclindner/npm-package-json-lint/issues/93)
 
+- New rule: [prefer-no-devDependencies](https://github.com/tclindner/npm-package-json-lint/wiki/prefer-no-devDependencies)]
+
 ### Changed
 - [`name-format`](https://github.com/tclindner/npm-package-json-lint/wiki/name-format) now checks the following things:
 

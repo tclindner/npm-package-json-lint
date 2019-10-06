@@ -197,8 +197,9 @@ Add the following to your `.npmpackagejsonlintrc.json` file.
 * [prefer-property-order](rules/package-json-properties/prefer-property-order.md)
 
 
-## Deprecated node rules
+## Disallowed node rules
 
 > Generates an error if the node is present
 
-* [prefer-no-engineStrict](rules/deprecated-nodes/prefer-no-engineStrict)
+* [prefer-no-engineStrict](rules/disallowed-nodes/prefer-no-engineStrict)
+* [prefer-no-devDependencies](rules/disallowed-nodes/prefer-no-devDependencies)
