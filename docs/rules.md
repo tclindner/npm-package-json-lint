@@ -5,6 +5,10 @@ title: Rules
 
 Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lint will only run the rules supplied. As of v2.7.0, there are multiple ways to supply [configuration](configuration.md). One of the easiest way is via a [.npmpackagejsonlintrc.json](rcfile-example.md) file. The default configuration supplied in v1 is no longer provided in v2. Please see the new default config module, [npm-package-json-lint-config-default](https://github.com/tclindner/npm-package-json-lint-config-default) instead.
 
+> Migrating from v3.x.x to 4.x.x?
+
+Please see [migrating-from-v3-to-v4](v3-to-v4.md)
+
 > Migrating from v2.x.x to 3.x.x?
 
 Please see [migrating-from-v2-to-v3](v2-to-v3.md)
