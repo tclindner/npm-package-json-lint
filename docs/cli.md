@@ -80,3 +80,7 @@ $ npmPkgJsonLint . --ignorePath .gitignore
 ```
 
 > Looks for all `package.json` files in the project and exclude ignored paths. The CLI engine automatically looks for relevant config files for each package.json file that is found.
+
+## `--maxWarnings` (alias `-mw`)
+
+Max number of warnings that are allowed before an error is thrown. By default, npm-package-json-lint allows `10000000`.
