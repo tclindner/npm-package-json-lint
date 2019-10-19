@@ -14,7 +14,7 @@ describe('getFileList Unit Tests', () => {
     expect(results[3]).toContain('/test/fixtures/hierarchyWithoutRoot/package.json');
     expect(results[4]).toContain('/test/fixtures/ignorePath/package.json');
     expect(results[5]).toContain('/test/fixtures/invalidConfig/package.json');
-    expect(results[6]).toContain('/test/fixtures/monorepo/package.json')
+    expect(results[6]).toContain('/test/fixtures/monorepo/package.json');
     expect(results[7]).toContain('/test/fixtures/npmPackageJsonLintIgnore/package.json');
     expect(results[8]).toContain('/test/fixtures/overrides/package.json');
     expect(results[9]).toContain('/test/fixtures/packageJsonProperty/package.json');
