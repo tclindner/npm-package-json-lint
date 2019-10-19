@@ -5,6 +5,7 @@ const lintId = 'no-restricted-pre-release-devDependencies';
 const nodeName = 'devDependencies';
 const message = 'You are using a restricted pre-release dependency. Please remove it.';
 const ruleType = 'array';
+const minItems = 1;
 
 const lint = (packageJsonData, severity, invalidPreRelDeps) => {
   if (hasDepPrereleaseVers(packageJsonData, nodeName, invalidPreRelDeps)) {
@@ -16,5 +17,6 @@ const lint = (packageJsonData, severity, invalidPreRelDeps) => {
 
 module.exports = {
   lint,
-  ruleType
+  ruleType,
+  minItems
 };

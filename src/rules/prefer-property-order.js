@@ -5,6 +5,7 @@ const lintId = 'prefer-property-order';
 const nodeName = '';
 const message = 'Your package.json properties are not in the desired order.';
 const ruleType = 'array';
+const minItems = 0;
 
 const lint = (packageJsonData, severity, preferredOrder) => {
   const result = isInPreferredOrder(packageJsonData, preferredOrder);
@@ -18,5 +19,6 @@ const lint = (packageJsonData, severity, preferredOrder) => {
 
 module.exports = {
   lint,
-  ruleType
+  ruleType,
+  minItems
 };

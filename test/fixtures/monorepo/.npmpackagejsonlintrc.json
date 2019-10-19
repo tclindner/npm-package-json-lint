@@ -4,7 +4,8 @@
     {
       "patterns": ["packages/packageOne/**/package.json"],
       "rules": {
-        "license-type": "warning"
+        "license-type": "warning",
+        "prefer-property-order": ["error", []]
       }
     },
     {

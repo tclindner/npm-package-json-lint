@@ -46,10 +46,11 @@ const isOptionalObjRuleConfigValid = ruleConfig => {
  * Validates array rule config
  *
  * @param  {Array}     ruleConfig  Array rule
+ * @param  {number}    minItems    Min number of items in the array
  * @return {Boolean}               True if config is valid, false if not
  * @static
  */
-const isArrayRuleConfigValid = ruleConfig => {
+const isArrayRuleConfigValid = (ruleConfig, minItems) => {
   if (typeof ruleConfig === 'string' && ruleConfig === 'off') {
     return true;
   }
@@ -58,7 +59,7 @@ const isArrayRuleConfigValid = ruleConfig => {
     throw new Error('\t- is an array type rule. It must be set to "off" if an array is not supplied.');
   }
 
-  return ConfigSchema.isArrayRuleSchemaValid(ruleConfig);
+  return ConfigSchema.isArrayRuleSchemaValid(ruleConfig, minItems);
 };
 
 /**
@@ -85,7 +86,7 @@ const validateRule = (ruleModule, ruleName, userConfig, source) => {
   if (ruleModule) {
     try {
       if (ruleModule.ruleType === 'array') {
-        isArrayRuleConfigValid(userConfig);
+        isArrayRuleConfigValid(userConfig, ruleModule.minItems);
       } else if (ruleModule.ruleType === 'object') {
         isObjectRuleConfigValid(userConfig);
       } else if (ruleModule.ruleType === 'optionalObject') {

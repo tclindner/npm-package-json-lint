@@ -5,6 +5,7 @@ const lintId = 'valid-values-license';
 const nodeName = 'license';
 const message = 'Invalid value for license';
 const ruleType = 'array';
+const minItems = 1;
 
 /**
  * Lints package.json file to check for valid values in the license field
@@ -24,5 +25,6 @@ const lint = (packageJsonData, severity, validValues) => {
 
 module.exports = {
   lint,
-  ruleType
+  ruleType,
+  minItems
 };

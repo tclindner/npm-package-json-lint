@@ -7,6 +7,7 @@ const lintId = 'valid-values-author';
 const nodeName = 'author';
 const message = 'Invalid value for author';
 const ruleType = 'array';
+const minItems = 1;
 
 const lint = (packageJsonData, severity, validValues) => {
   let value;
@@ -32,5 +33,6 @@ const lint = (packageJsonData, severity, validValues) => {
 
 module.exports = {
   lint,
-  ruleType
+  ruleType,
+  minItems
 };

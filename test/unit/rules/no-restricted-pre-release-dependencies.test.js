@@ -1,11 +1,17 @@
 const ruleModule = require('./../../../src/rules/no-restricted-pre-release-dependencies');
 
-const {lint, ruleType} = ruleModule;
+const {lint, ruleType, minItems} = ruleModule;
 
 describe('no-restricted-pre-release-dependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
     test('it should equal "array"', () => {
       expect(ruleType).toStrictEqual('array');
+    });
+  });
+
+  describe('a minItems value should be exported', () => {
+    test('it should equal 1', () => {
+      expect(minItems).toStrictEqual(1);
     });
   });
 
