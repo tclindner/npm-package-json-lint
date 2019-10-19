@@ -1,11 +1,17 @@
 const ruleModule = require('./../../../src/rules/prefer-property-order');
 
-const {lint, ruleType} = ruleModule;
+const {lint, ruleType, minItems} = ruleModule;
 
 describe('prefer-property-order Unit Tests', () => {
   describe('a rule type value should be exported', () => {
     test('it should equal "array"', () => {
       expect(ruleType).toStrictEqual('array');
+    });
+  });
+
+  describe('a minItems value should be exported', () => {
+    test('it should equal 0', () => {
+      expect(minItems).toStrictEqual(0);
     });
   });
 
