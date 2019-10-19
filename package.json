@@ -1,6 +1,6 @@
 {
   "name": "npm-package-json-lint",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Configurable linter for package.json files.",
   "keywords": [
     "lint",
@@ -51,15 +51,15 @@
   },
   "devDependencies": {
     "eslint": "^6.5.1",
-    "eslint-config-tc": "^8.0.1",
+    "eslint-config-tc": "^8.1.0",
     "eslint-formatter-pretty": "^2.1.1",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^22.17.0",
+    "eslint-plugin-jest": "^22.19.0",
     "eslint-plugin-prettier": "^3.1.1",
     "figures": "^3.0.0",
     "jest": "^24.9.0",
     "npm-package-json-lint-config-default": "^2.0.0",
-    "npm-package-json-lint-config-tc": "^2.2.0",
+    "npm-package-json-lint-config-tc": "^3.0.0",
     "prettier": "^1.18.2"
   },
   "engines": {

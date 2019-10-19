@@ -13,8 +13,9 @@ describe('cosmicConfigTransformer Unit Tests', () => {
       test('null should be returned', () => {
         const cwd = 'cwd';
         const configBaseDirectory = 'configBaseDirectory';
+        const filePathBeingLinted = 'myLintedFilePath';
 
-        const transformer = cosmicConfigTransformer.transform(cwd, configBaseDirectory);
+        const transformer = cosmicConfigTransformer.transform(cwd, configBaseDirectory, filePathBeingLinted);
         const actual = transformer(null);
         expect(actual).toBeNull();
       });
@@ -31,8 +32,9 @@ describe('cosmicConfigTransformer Unit Tests', () => {
 
         const cwd = 'cwd';
         const configBaseDirectory = 'configBaseDirectory';
+        const filePathBeingLinted = 'myLintedFilePath';
 
-        const transformer = cosmicConfigTransformer.transform(cwd, configBaseDirectory);
+        const transformer = cosmicConfigTransformer.transform(cwd, configBaseDirectory, filePathBeingLinted);
         const cosmiconfigResult = {
           config: {
             property: 'value'
@@ -44,9 +46,9 @@ describe('cosmicConfigTransformer Unit Tests', () => {
 
         expect(path.dirname).toHaveBeenCalledTimes(0);
         expect(applyExtendsIfSpecified).toHaveBeenCalledTimes(1);
-        expect(applyExtendsIfSpecified).toHaveBeenCalledWith(cosmiconfigResult.config, cosmiconfigResult.filepath);
+        expect(applyExtendsIfSpecified).toHaveBeenCalledWith(cosmiconfigResult.config, filePathBeingLinted);
         expect(applyOverrides).toHaveBeenCalledTimes(1);
-        expect(applyOverrides).toHaveBeenCalledWith(cwd, cosmiconfigResult.filepath, 'rules', 'overrides');
+        expect(applyOverrides).toHaveBeenCalledWith(cwd, filePathBeingLinted, 'rules', 'overrides');
       });
     });
 
@@ -61,8 +63,9 @@ describe('cosmicConfigTransformer Unit Tests', () => {
 
         const cwd = 'cwd';
         const configBaseDirectory = null;
+        const filePathBeingLinted = 'myLintedFilePath';
 
-        const transformer = cosmicConfigTransformer.transform(cwd, configBaseDirectory);
+        const transformer = cosmicConfigTransformer.transform(cwd, configBaseDirectory, filePathBeingLinted);
         const cosmiconfigResult = {
           config: {
             property: 'value'
@@ -75,9 +78,9 @@ describe('cosmicConfigTransformer Unit Tests', () => {
         expect(path.dirname).toHaveBeenCalledTimes(1);
         expect(path.dirname).toHaveBeenCalledWith(cosmiconfigResult.filepath);
         expect(applyExtendsIfSpecified).toHaveBeenCalledTimes(1);
-        expect(applyExtendsIfSpecified).toHaveBeenCalledWith(cosmiconfigResult.config, cosmiconfigResult.filepath);
+        expect(applyExtendsIfSpecified).toHaveBeenCalledWith(cosmiconfigResult.config, filePathBeingLinted);
         expect(applyOverrides).toHaveBeenCalledTimes(1);
-        expect(applyOverrides).toHaveBeenCalledWith(cwd, cosmiconfigResult.filepath, 'rules', 'overrides');
+        expect(applyOverrides).toHaveBeenCalledWith(cwd, filePathBeingLinted, 'rules', 'overrides');
       });
     });
   });

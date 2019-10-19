@@ -31,9 +31,6 @@ class Config {
     this.configFile = configFile;
     this.configBaseDirectory = configBaseDirectory;
     this.rules = rules;
-    this.explorer = cosmiconfig('npmpackagejsonlint', {
-      transform: cosmicConfigTransformer.transform(cwd, configBaseDirectory)
-    });
   }
 
   /**
@@ -54,10 +51,14 @@ class Config {
       debug(`User passed config is undefined.`);
       if (this.configFile) {
         debug(`Config file specified, loading it.`);
-        config = this.explorer.loadSync(this.configFile);
+        config = cosmiconfig('npmpackagejsonlint', {
+          transform: cosmicConfigTransformer.transform(this.cwd, this.configBaseDirectory, this.configFile)
+        }).loadSync(this.configFile);
       } else {
         debug(`Config file wasn't specified, searching for config.`);
-        config = this.explorer.searchSync(filePathToSearch);
+        config = cosmiconfig('npmpackagejsonlint', {
+          transform: cosmicConfigTransformer.transform(this.cwd, this.configBaseDirectory, filePathToSearch)
+        }).searchSync(filePathToSearch);
       }
     } else {
       debug(`User passed config is set, using it.`);
@@ -78,6 +79,8 @@ class Config {
     }
 
     debug(`Overrides applied for ${filePath}`);
+    debug('Final Config');
+    debug(config);
 
     configValidator.validateRules(config, 'cli', this.rules);
 
