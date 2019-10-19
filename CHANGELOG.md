@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [4.0.1] - 2019-10-19
+### Fixed
+- Resolved an issue with applying override config. Please see [#123](https://github.com/tclindner/npm-package-json-lint/issues/123) for more details. Thank you @simison for reporting this issue.
+
 ## [4.0.0] - 2019-10-06
 ### Added
 - Added configuration override support via glob patterns. This is especially useful for monorepos. Addresses [#96](https://github.com/tclindner/npm-package-json-lint/issues/96). Check out the [documentation](https://npmpackagejsonlint.org/docs/en/configuration) for more details.
