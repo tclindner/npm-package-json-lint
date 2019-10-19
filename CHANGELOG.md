@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [4.0.2] - 2019-10-19
+### Fixed
+- Resolved an issue with config schema validation that caused `prefer-property-order` to fail with valid config. Addresses [#142](https://github.com/tclindner/npm-package-json-lint/issues/142) from @sakthivel-tw.
+
 ## [4.0.1] - 2019-10-19
 ### Fixed
 - Resolved an issue with applying override config. Please see [#123](https://github.com/tclindner/npm-package-json-lint/issues/123) for more details. Thank you @simison for reporting this issue.

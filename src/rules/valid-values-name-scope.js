@@ -5,6 +5,7 @@ const lintId = 'valid-values-name-scope';
 const nodeName = 'name';
 const message = 'Invalid value for name scope';
 const ruleType = 'array';
+const minItems = 1;
 
 /**
  * Lints package.json file to check for valid scope values in the name field
@@ -26,5 +27,6 @@ const lint = (packageJsonData, severity, validValues) => {
 
 module.exports = {
   lint,
-  ruleType
+  ruleType,
+  minItems
 };

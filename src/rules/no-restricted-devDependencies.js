@@ -5,6 +5,7 @@ const lintId = 'no-restricted-devDependencies';
 const nodeName = 'devDependencies';
 const message = 'You are using a restricted dependency. Please remove it.';
 const ruleType = 'array';
+const minItems = 1;
 
 const lint = (packageJsonData, severity, invalidDependencies) => {
   if (hasDependency(packageJsonData, nodeName, invalidDependencies)) {
@@ -16,5 +17,6 @@ const lint = (packageJsonData, severity, invalidDependencies) => {
 
 module.exports = {
   lint,
-  ruleType
+  ruleType,
+  minItems
 };

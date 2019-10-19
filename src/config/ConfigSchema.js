@@ -24,31 +24,33 @@ const standardRuleSchema = {
   }
 };
 
-const arrayRuleSchema = {
-  type: 'array',
-  items: [
-    standardRuleSchema,
-    {
-      type: 'array',
-      minItems: 1,
-      uniqueItems: true,
-      errorMessage: {
-        type: 'the second item in an array rule config must be an array.',
-        minItems: 'the second item in an array rule config must have at least 1 item.',
-        uniqueItems: 'the second item in an array rule config must have unique items.'
+const arrayRuleSchema = minItems => {
+  return {
+    type: 'array',
+    items: [
+      standardRuleSchema,
+      {
+        type: 'array',
+        minItems,
+        uniqueItems: true,
+        errorMessage: {
+          type: 'the second item in an array rule config must be an array.',
+          minItems: 'the second item in an array rule config must have at least 1 item.',
+          uniqueItems: 'the second item in an array rule config must have unique items.'
+        }
       }
+    ],
+    minItems: 2,
+    maxItems: 2,
+    additionalItems: false,
+    errorMessage: {
+      type: 'rule config must be an array, e.g. ["error", ["value1", "value2"]].',
+      minItems: 'array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].',
+      maxItems: 'array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].',
+      additionalItems:
+        'array rules are only allowed two items, severity and the list is values. e.g. ["error", ["value1", "value2"]].'
     }
-  ],
-  minItems: 2,
-  maxItems: 2,
-  additionalItems: false,
-  errorMessage: {
-    type: 'rule config must be an array, e.g. ["error", ["value1", "value2"]].',
-    minItems: 'array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].',
-    maxItems: 'array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].',
-    additionalItems:
-      'array rules are only allowed two items, severity and the list is values. e.g. ["error", ["value1", "value2"]].'
-  }
+  };
 };
 
 const objectRuleSchema = {
@@ -150,10 +152,11 @@ const isStandardRuleSchemaValid = ruleConfig => {
  * Validates array rules config.
  *
  * @param {Object} ruleConfig The ruleConfig object to validate.
+ * @param {number} minItems   Min number of items in the array
  * @returns {boolean} True if valid. Error if not.
  */
-const isArrayRuleSchemaValid = ruleConfig => {
-  const validate = ajv.compile(arrayRuleSchema);
+const isArrayRuleSchemaValid = (ruleConfig, minItems) => {
+  const validate = ajv.compile(arrayRuleSchema(minItems));
   const isValid = validate(ruleConfig);
 
   if (!isValid) {

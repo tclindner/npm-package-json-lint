@@ -6,6 +6,7 @@ const lintId = 'valid-values-publishConfig';
 const nodeName = 'publishConfig';
 const message = 'Invalid value for publishConfig';
 const ruleType = 'array';
+const minItems = 1;
 
 const lint = (packageJsonData, severity, validValues) => {
   if (packageJsonData.hasOwnProperty(nodeName)) {
@@ -26,5 +27,6 @@ const lint = (packageJsonData, severity, validValues) => {
 
 module.exports = {
   lint,
-  ruleType
+  ruleType,
+  minItems
 };

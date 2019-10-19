@@ -312,7 +312,8 @@ ${figures.cross} license-type - node: license - Type should be a string
 
 ./packages/packageOne/package.json
 ${figures.warning} license-type - node: license - Type should be a string
-0 errors
+${figures.cross} prefer-property-order - node:  - Your package.json properties are not in the desired order. Please move "author" after "license".
+1 error
 1 warning
 
 ./packages/packageTwo/package.json
@@ -322,7 +323,7 @@ ${figures.cross} valid-values-author - node: author - Invalid value for author
 1 warning
 
 Totals
-2 errors
+3 errors
 2 warnings
 0 files ignored
 `;

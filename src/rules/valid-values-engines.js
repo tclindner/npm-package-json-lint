@@ -9,6 +9,7 @@ const lintId = 'valid-values-engines';
 const nodeName = 'engines';
 const message = 'Invalid value for engines';
 const ruleType = 'array';
+const minItems = 1;
 
 const lint = (packageJsonData, severity, validValues) => {
   if (packageJsonData.hasOwnProperty(nodeName)) {
@@ -42,5 +43,6 @@ const lint = (packageJsonData, severity, validValues) => {
 
 module.exports = {
   lint,
-  ruleType
+  ruleType,
+  minItems
 };

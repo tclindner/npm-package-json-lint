@@ -5,6 +5,7 @@ const lintId = 'valid-values-private';
 const nodeName = 'private';
 const message = 'Invalid value for private';
 const ruleType = 'array';
+const minItems = 1;
 
 /**
  * [function description]
@@ -23,5 +24,6 @@ const lint = (packageJsonData, severity, validValues) => {
 
 module.exports = {
   lint,
-  ruleType
+  ruleType,
+  minItems
 };

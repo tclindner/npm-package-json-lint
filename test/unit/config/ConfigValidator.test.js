@@ -133,6 +133,17 @@ describe('configValidator Unit Tests', () => {
         });
       });
 
+      describe('when a valid array rule config is passed (scenario 2)', () => {
+        test('true should be returned', () => {
+          const ruleConfig = {
+            'prefer-property-order': ['error', []]
+          };
+          const source = 'cli';
+
+          configValidator.validateRules(ruleConfig, source, rules);
+        });
+      });
+
       describe('when a valid array rule config is passed with a value of off', () => {
         test('true should be returned', () => {
           const ruleConfig = {
