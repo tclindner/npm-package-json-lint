@@ -1,0 +1,18 @@
+{
+  "extends": "npm-package-json-lint-config-default",
+  "overrides": [
+    {
+      "patterns": ["packages/packageOne/**/package.json"],
+      "rules": {
+        "license-type": "warning"
+      }
+    },
+    {
+      "patterns": ["packages/packageTwo/**/package.json"],
+      "rules": {
+        "license-type": "warning",
+        "valid-values-author": ["error", ["TC"]]
+      }
+    }
+  ]
+}

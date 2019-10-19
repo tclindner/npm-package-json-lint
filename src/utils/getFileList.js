@@ -43,7 +43,7 @@ const getFileList = (patterns, cwd) => {
     files.push(filePath);
   });
 
-  debug('files');
+  debug('Final file list from `getFileList`');
   debug(files);
 
   return files;
