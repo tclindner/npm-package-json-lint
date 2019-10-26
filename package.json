@@ -29,7 +29,7 @@
   "main": "src/api.js",
   "scripts": {
     "eslint": "eslint . --format=node_modules/eslint-formatter-pretty",
-    "npmpackagejsonlint": "node src/cli.js .",
+    "npmpackagejsonlint": "node src/cli.js ./package.json",
     "lint": "npm run eslint && npm run npmpackagejsonlint",
     "test": "jest",
     "test:ci": "jest --runInBand"
