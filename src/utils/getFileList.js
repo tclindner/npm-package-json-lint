@@ -10,12 +10,18 @@ const globby = require('globby');
  * @returns {Array<string>} An array a files to lint.
  */
 const getFileList = (patterns, cwd) => {
+  debug('patterns');
+  debug(patterns);
+
   // step 1 - filter out empty entries
   const filteredPatterns = patterns.filter(pattern => pattern.length);
 
+  debug('filteredPatterns');
+  debug(filteredPatterns);
+
   // step 2 - convert directories to globs
   const globPatterns = filteredPatterns.map(pattern => {
-    return pattern.endsWith(`${path.sep}package.json`) ? pattern : `${pattern}${path.sep}package.json`;
+    return pattern.endsWith(`${path.sep}package.json`) ? pattern : `${pattern}${path.sep}**${path.sep}package.json`;
   });
 
   debug('globPatterns');
