@@ -53,7 +53,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Array type rules now ensure at least one item is passed.
   - Array type rules now validate unique items are passed.
 
-### Fixed
+- Change the property name that configuraton is pulled from package.json files. Property was `npmPackageJsonLintConfig`. It is now `npmpackagejsonlint`.
 
 ### Removed
 - Dropped support for Node 6 and 7.
