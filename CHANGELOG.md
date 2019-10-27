@@ -4,6 +4,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [4.0.3] - 2019-10-26
+### Fixed
+- Resolved an issue where package.json files were not recursively scanned for when the CLI/API pattern was a directory. Ex: `/packages` would only detect the package.json file in `/packages`.
+
 ## [4.0.2] - 2019-10-19
 ### Fixed
 - Resolved an issue with config schema validation that caused `prefer-property-order` to fail with valid config. Addresses [#142](https://github.com/tclindner/npm-package-json-lint/issues/142) from @sakthivel-tw.
@@ -53,7 +57,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
   - Array type rules now ensure at least one item is passed.
   - Array type rules now validate unique items are passed.
 
-### Fixed
+- Change the property name that configuraton is pulled from package.json files. Property was `npmPackageJsonLintConfig`. It is now `npmpackagejsonlint`.
 
 ### Removed
 - Dropped support for Node 6 and 7.

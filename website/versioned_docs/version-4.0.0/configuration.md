@@ -92,7 +92,7 @@ What is this doing?
 
 There are multiple ways to provide configuration. They include:
 
-  1. Add a `npmPackageJsonLintConfig` property in `package.json` file
+  1. Add a `npmpackagejsonlint` property in `package.json` file
   2. Add a `npmpackagejsonlint.config.js` file that exports a config object in the current working directory.
   3. Add a global `.npmpackagejsonlintrc.json` file in the root of your user directory
   4. Add a global `npmpackagejsonlint.config.js` file that exports a config object in the root of your user directory
@@ -158,7 +158,7 @@ There are multiple ways to provide configuration. They include:
 }
 ```
 
-#### npmPackageJsonLintConfig package.json property
+#### npmpackagejsonlint package.json property
 
 > Note: Only one rule included to keep the example concise
 
@@ -179,7 +179,7 @@ There are multiple ways to provide configuration. They include:
   "devDependencies": {
     "mocha": "^2.4.5"
   },
-  "npmPackageJsonLintConfig": {
+  "npmpackagejsonlint": {
     "rules": {
       "require-author": "error"
     }

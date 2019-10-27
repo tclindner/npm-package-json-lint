@@ -332,5 +332,41 @@ Totals
       expect(cli.stderr.toString()).toStrictEqual('');
       expect(cli.status).toStrictEqual(twoLintErrorsDetected);
     });
+
+    describe('when the cli is run against a monorepo without directory input', () => {
+      test('each file results and totals will be output', () => {
+        const cli = spawnSync('../../../src/cli.js', [`.`], {
+          env,
+          cwd: './test/fixtures/monorepo'
+        });
+        const expected = `
+./package.json
+${figures.cross} license-type - node: license - Type should be a string
+1 error
+0 warnings
+
+./packages/packageOne/package.json
+${figures.warning} license-type - node: license - Type should be a string
+${figures.cross} prefer-property-order - node:  - Your package.json properties are not in the desired order. Please move "author" after "license".
+1 error
+1 warning
+
+./packages/packageTwo/package.json
+${figures.warning} license-type - node: license - Type should be a string
+${figures.cross} valid-values-author - node: author - Invalid value for author
+1 error
+1 warning
+
+Totals
+3 errors
+2 warnings
+0 files ignored
+`;
+
+        expect(cli.stdout.toString()).toStrictEqual(expected);
+        expect(cli.stderr.toString()).toStrictEqual('');
+        expect(cli.status).toStrictEqual(twoLintErrorsDetected);
+      });
+    });
   });
 });
