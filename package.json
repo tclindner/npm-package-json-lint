@@ -54,7 +54,7 @@
     "eslint-config-tc": "^8.1.0",
     "eslint-formatter-pretty": "^2.1.1",
     "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^22.20.1",
+    "eslint-plugin-jest": "^23.0.0",
     "eslint-plugin-prettier": "^3.1.1",
     "figures": "^3.1.0",
     "jest": "^24.9.0",
