@@ -141,3 +141,4 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
 * [prefer-no-dependencies](rules/disallowed-nodes/prefer-no-dependencies)
 * [prefer-no-devDependencies](rules/disallowed-nodes/prefer-no-devDependencies)
 * [prefer-no-optionalDependencies](rules/disallowed-nodes/prefer-no-optionalDependencies)
+* [prefer-no-peerDependencies](rules/disallowed-nodes/prefer-no-peerDependencies)
