@@ -1,6 +1,7 @@
 ---
-id: prefer-no-devDependencies
+id: version-4.1.0-prefer-no-devDependencies
 title: prefer-no-devDependencies
+original_id: prefer-no-devDependencies
 ---
 
 Enabling this rule will result in an error being generated if `devDependencies` is present.

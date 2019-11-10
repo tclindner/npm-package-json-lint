@@ -9,8 +9,8 @@ const nodeName = 'dependencies';
 
 describe('prefer-no-dependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
-    test('it should equal "optionalObject"', () => {
-      expect(ruleType).toStrictEqual('optionalObject');
+    test('it should equal "standard"', () => {
+      expect(ruleType).toStrictEqual('standard');
     });
   });
 

@@ -16,26 +16,15 @@ Enabling this rule will result in an error being generated if `optionalDependenc
 }
 ```
 
-With exceptions
-
-```json
-{
-  "rules": {
-    "prefer-no-optionalDependencies": ["error", {
-      "exceptions": ["myModule"]
-    }]
-  }
-}
-```
-
-
 ## Rule Details
 
 ### *Incorrect* example(s)
 
 ```json
 {
-  "optionalDependencies": "dummy-value"
+  "optionalDependencies": {
+    "npm-package-json-lint-config-default": "^0.3.0"
+  }
 }
 ```
 
@@ -43,7 +32,7 @@ With exceptions
 
 ```json
 {
-  "prefer-no-optionalDependencies": "error"
+
 }
 ```
 

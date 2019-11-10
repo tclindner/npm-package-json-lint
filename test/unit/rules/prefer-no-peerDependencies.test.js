@@ -9,8 +9,8 @@ const nodeName = 'peerDependencies';
 
 describe('prefer-no-peerDependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
-    test('it should equal "optionalObject"', () => {
-      expect(ruleType).toStrictEqual('optionalObject');
+    test('it should equal "standard"', () => {
+      expect(ruleType).toStrictEqual('standard');
     });
   });
 

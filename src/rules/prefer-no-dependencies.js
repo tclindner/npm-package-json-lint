@@ -4,7 +4,7 @@ const LintIssue = require('../LintIssue');
 const lintId = 'prefer-no-dependencies';
 const nodeName = 'dependencies';
 const message = 'dependencies should not be defined';
-const ruleType = 'optionalObject';
+const ruleType = 'standard';
 
 const lint = (packageJsonData, severity) => {
   if (exists(packageJsonData, nodeName)) {

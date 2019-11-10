@@ -15,26 +15,15 @@ Enabling this rule will result in an error being generated if `dependencies` is 
 }
 ```
 
-With exceptions
-
-```json
-{
-  "rules": {
-    "prefer-no-dependencies": ["error", {
-      "exceptions": ["myModule"]
-    }]
-  }
-}
-```
-
-
 ## Rule Details
 
 ### *Incorrect* example(s)
 
 ```json
 {
-  "dependencies": "dummy-value"
+  "dependencies": {
+    "npm-package-json-lint-config-default": "^0.3.0"
+  }
 }
 ```
 
@@ -42,7 +31,7 @@ With exceptions
 
 ```json
 {
-  "prefer-no-dependencies": "error"
+
 }
 ```
 

@@ -16,18 +16,6 @@ Enabling this rule will result in an error being generated if `peerDependencies`
 }
 ```
 
-With exceptions
-
-```json
-{
-  "rules": {
-    "prefer-no-peerDependencies": ["error", {
-      "exceptions": ["myModule"]
-    }]
-  }
-}
-```
-
 
 ## Rule Details
 
@@ -35,7 +23,9 @@ With exceptions
 
 ```json
 {
-  "peerDependencies": "dummy-value"
+  "peerDependencies": {
+    "npm-package-json-lint-config-default": "^0.3.0"
+  }
 }
 ```
 
@@ -43,7 +33,7 @@ With exceptions
 
 ```json
 {
-  "prefer-no-peerDependencies": "error"
+
 }
 ```
 
