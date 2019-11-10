@@ -14,7 +14,7 @@
   "devDependencies": {
     "mocha": "^2.4.5"
   },
-  "npmPackageJsonLintConfig": {
+  "npmpackagejsonlint": {
     "require-author": "error",
     "require-description": "error",
     "require-devDependencies": "error",

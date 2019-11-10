@@ -64,7 +64,7 @@ If an empty array is provided (see example below) then the following list will b
     'babel',
     'eslintConfig',
     'stylelint',
-    'npmPackageJsonLintConfig',
+    'npmpackagejsonlint',
     'dependencies',
     'devDependencies',
     'peerDependencies',

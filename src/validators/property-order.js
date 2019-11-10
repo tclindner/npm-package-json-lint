@@ -36,7 +36,7 @@ const defaultPreferredNodeOrder = [
   'babel',
   'eslintConfig',
   'stylelint',
-  'npmPackageJsonLintConfig',
+  'npmpackagejsonlint',
   'dependencies',
   'devDependencies',
   'peerDependencies',
