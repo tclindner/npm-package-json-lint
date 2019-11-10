@@ -48,7 +48,7 @@ describe('cli Integration Tests', () => {
 
   Options
     --quiet, -q Report errors only
-    --noConfigFiles, -ncf Disables use of .npmpackagejsonlintrc.json files, npmpackagejsonlint.config.js files, and npmPackageJsonLintConfig object in package.json file.
+    --noConfigFiles, -ncf Disables use of .npmpackagejsonlintrc.json files, npmpackagejsonlint.config.js files, and npmpackagejsonlint object in package.json file.
     --configFile, -c File path of .npmpackagejsonlintrc.json
     --ignorePath, -i Path to a file containing patterns that describe files to ignore. The path can be absolute or relative to process.cwd(). By default, npm-package-json-lint looks for .npmpackagejsonlintignore in process.cwd().
     --maxWarnings, -mw Maximum number of warnings that can be detected before an error is thrown.

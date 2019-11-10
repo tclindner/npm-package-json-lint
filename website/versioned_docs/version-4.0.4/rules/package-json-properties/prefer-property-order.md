@@ -1,6 +1,7 @@
 ---
-id: prefer-property-order
+id: version-4.0.4-prefer-property-order
 title: prefer-property-order
+original_id: prefer-property-order
 ---
 
 Enabling this rule will result in an error being generated if the package.json properties are not in the specified order.

@@ -4,6 +4,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [4.0.4] - 2019-11-09
+### Fixed
+- Updated `npmpackagejsonlint` in `prefer-property-order`.
+
+### Docs
+- Adding missing link for [prefer-no-version-zero-dependencies](rules/dependencies/prefer-no-version-zero-dependencies.md).
+
 ## [4.0.3] - 2019-10-26
 ### Fixed
 - Resolved an issue where package.json files were not recursively scanned for when the CLI/API pattern was a directory. Ex: `/packages` would only detect the package.json file in `/packages`.
