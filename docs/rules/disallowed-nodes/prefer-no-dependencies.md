@@ -1,16 +1,16 @@
 ---
-id: prefer-no-devDependencies
-title: prefer-no-devDependencies
+id: prefer-no-dependencies
+title: prefer-no-dependencies
 ---
 
-Enabling this rule will result in an error being generated if `devDependencies` is present.
+Enabling this rule will result in an error being generated if `dependencies` is present.
 
 ## Example .npmpackagejsonlintrc configuration
 
 ```json
 {
   "rules": {
-    "prefer-no-devDependencies": "error"
+    "prefer-no-dependencies": "error"
   }
 }
 ```
@@ -21,7 +21,7 @@ Enabling this rule will result in an error being generated if `devDependencies` 
 
 ```json
 {
-  "devDependencies": {
+  "dependencies": {
     "npm-package-json-lint-config-default": "^0.3.0"
   }
 }
@@ -37,4 +37,4 @@ Enabling this rule will result in an error being generated if `devDependencies` 
 
 ## History
 
-* Introduced in version 4.0.0
+* Introduced in version 4.1.0
