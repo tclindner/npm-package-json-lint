@@ -21,7 +21,7 @@ const getFileList = (patterns, cwd) => {
 
   // step 2 - convert directories to globs
   const globPatterns = filteredPatterns.map(pattern => {
-    return pattern.endsWith(`${path.sep}package.json`) ? pattern : `${pattern}${path.sep}**${path.sep}package.json`;
+    return pattern.endsWith(`/package.json`) ? pattern : `${pattern}/**/package.json`;
   });
 
   debug('globPatterns');
