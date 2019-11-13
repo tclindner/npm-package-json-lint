@@ -52,7 +52,7 @@
   "devDependencies": {
     "eslint": "^6.6.0",
     "eslint-config-tc": "^9.0.0",
-    "eslint-formatter-pretty": "^2.1.1",
+    "eslint-formatter-pretty": "^3.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^23.0.3",
     "eslint-plugin-prettier": "^3.1.1",
