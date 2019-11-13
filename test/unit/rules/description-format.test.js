@@ -64,7 +64,7 @@ describe('description-format Unit Tests', () => {
   });
 
   describe('when package.json has node with correct format', () => {
-    test('LintIssue object should be returned', () => {
+    test('true should be returned', () => {
       const packageJsonData = {
         description: 'My description.'
       };
