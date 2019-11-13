@@ -19,6 +19,7 @@ const lint = (packageJsonData, severity, config) => {
   if (
     config.hasOwnProperty('requireCapitalFirstLetter') &&
     config.requireCapitalFirstLetter &&
+    description.length > 0 &&
     description[0] !== description[0].toUpperCase()
   ) {
     return new LintIssue(
