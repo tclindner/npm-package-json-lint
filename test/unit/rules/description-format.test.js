@@ -63,8 +63,22 @@ describe('description-format Unit Tests', () => {
     });
   });
 
+  describe('when package.json has empty node', () => {
+    test('true should be returned', () => {
+      const packageJsonData = {
+        description: ''
+      };
+      const config = {
+        requireCapitalFirstLetter: true
+      };
+      const response = lint(packageJsonData, 'error', config);
+
+      expect(response).toBe(true);
+    });
+  });
+
   describe('when package.json has node with correct format', () => {
-    test('LintIssue object should be returned', () => {
+    test('true should be returned', () => {
       const packageJsonData = {
         description: 'My description.'
       };
