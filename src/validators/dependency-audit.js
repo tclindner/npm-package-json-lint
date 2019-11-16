@@ -21,7 +21,9 @@ const hasDependency = (packageJsonData, nodeName, depsToCheckFor) => {
     for (const depToCheckFor of depsToCheckFor) {
       if (depToCheckFor === dependencyName) {
         return true;
-      } else if (depToCheckFor.endsWith('*') && dependencyName.startsWith(depToCheckFor.substring(0, depToCheckFor.length - 1))) {
+      }
+
+      if (depToCheckFor.endsWith('*') && dependencyName.startsWith(depToCheckFor.substring(0, depToCheckFor.length - 1))) {
         return true;
       }
     }
