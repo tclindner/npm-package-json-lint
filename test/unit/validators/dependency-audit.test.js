@@ -4,7 +4,8 @@ describe('dependency-audit Unit Tests', () => {
   describe('hasDependency method', () => {
     const packageJson = {
       dependencies: {
-        'grunt-npm-package-json-lint': '^1.0.0'
+        'grunt-npm-package-json-lint': '^1.0.0',
+        '@types/node': '^1.0.0'
       }
     };
 
@@ -21,6 +22,22 @@ describe('dependency-audit Unit Tests', () => {
         const response = dependencyAudit.hasDependency(packageJson, 'dependencies', ['grunt-npm-package-json-lint']);
 
         expect(response).toBe(true);
+      });
+    });
+
+    describe('when the node exists in the package.json file and the dependency pattern is present', () => {
+      test('true should be returned', () => {
+        const response = dependencyAudit.hasDependency(packageJson, 'dependencies', ['@types/*']);
+
+        expect(response).toBe(true);
+      });
+    });
+
+    describe('when the node exists in the package.json file and the dependency pattern is missing * (no accidental match).', () => {
+      test('false should be returned', () => {
+        const response = dependencyAudit.hasDependency(packageJson, 'dependencies', ['@types/']);
+
+        expect(response).toBe(false);
       });
     });
 

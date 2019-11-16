@@ -7,10 +7,10 @@ const hasExceptions = config => {
 
 /**
  * Determines whether or not the package has a given dependency
- * @param  {object} packageJsonData         Valid JSON
- * @param  {string} nodeName                Name of a node in the package.json file
- * @param  {string} depsToCheckFor  An array of packages to check for
- * @return {boolean}                        True if the package has a dependency. False if it is not or the node is missing.
+ * @param  {object} packageJsonData  Valid JSON
+ * @param  {string} nodeName         Name of a node in the package.json file
+ * @param  {string} depsToCheckFor   An array of packages to check for
+ * @return {boolean}                 True if the package has a dependency. False if it is not or the node is missing.
  */
 const hasDependency = (packageJsonData, nodeName, depsToCheckFor) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
@@ -18,8 +18,12 @@ const hasDependency = (packageJsonData, nodeName, depsToCheckFor) => {
   }
 
   for (const dependencyName in packageJsonData[nodeName]) {
-    if (depsToCheckFor.includes(dependencyName)) {
-      return true;
+    for (const depToCheckFor of depsToCheckFor) {
+      if (depToCheckFor === dependencyName) {
+        return true;
+      } else if (depToCheckFor.endsWith('*') && dependencyName.startsWith(depToCheckFor.substring(0, depToCheckFor.length - 1))) {
+        return true;
+      }
     }
   }
 
