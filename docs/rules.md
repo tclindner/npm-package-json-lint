@@ -87,6 +87,8 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
 
 > Generates an error if dependencies fail to meet the rules requirements
 
+* [no-repeated-dependencies](rules/dependencies/no-repeated-dependencies.md)
+
 * dependencies
   * [no-absolute-version-dependencies](rules/dependencies/no-absolute-version-dependencies.md)
   * [no-caret-version-dependencies](rules/dependencies/no-caret-version-dependencies.md)
