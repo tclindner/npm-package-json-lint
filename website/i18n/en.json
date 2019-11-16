@@ -101,11 +101,20 @@
       "rules/dependencies/prefer-tilde-version-devDependencies": {
         "title": "prefer-tilde-version-devDependencies"
       },
+      "rules/disallowed-nodes/prefer-no-dependencies": {
+        "title": "prefer-no-dependencies"
+      },
       "rules/disallowed-nodes/prefer-no-devDependencies": {
         "title": "prefer-no-devDependencies"
       },
       "rules/disallowed-nodes/prefer-no-engineStrict": {
         "title": "prefer-no-engineStrict"
+      },
+      "rules/disallowed-nodes/prefer-no-optionalDependencies": {
+        "title": "prefer-no-optionalDependencies"
+      },
+      "rules/disallowed-nodes/prefer-no-peerDependencies": {
+        "title": "prefer-no-peerDependencies"
       },
       "rules/format/description-format": {
         "title": "description-format"
@@ -316,9 +325,6 @@
       },
       "v3-to-v4": {
         "title": "v3 to v4 Migration Guide"
-      },
-      "why": {
-        "title": "Why npm-package-json-lint?"
       },
       "version-3.7.0/version-3.7.0-api": {
         "title": "Node.js API"
@@ -629,6 +635,9 @@
       "version-4.0.0/version-4.0.0-cli": {
         "title": "CLI"
       },
+      "version-4.0.0/version-4.0.0-configuration": {
+        "title": "Configuration"
+      },
       "version-4.0.0/version-4.0.0-rules": {
         "title": "Rules"
       },
@@ -685,6 +694,30 @@
       },
       "version-4.0.0/version-4.0.0-v3-to-v4": {
         "title": "v3 to v4 Migration Guide"
+      },
+      "version-4.0.4/version-4.0.4-index": {
+        "title": "What is npm-package-json-lint?"
+      },
+      "version-4.0.4/version-4.0.4-rules": {
+        "title": "Rules"
+      },
+      "version-4.0.4/rules/package-json-properties/version-4.0.4-prefer-property-order": {
+        "title": "prefer-property-order"
+      },
+      "version-4.1.0/version-4.1.0-rules": {
+        "title": "Rules"
+      },
+      "version-4.1.0/rules/disallowed-nodes/version-4.1.0-prefer-no-dependencies": {
+        "title": "prefer-no-dependencies"
+      },
+      "version-4.1.0/rules/disallowed-nodes/version-4.1.0-prefer-no-devDependencies": {
+        "title": "prefer-no-devDependencies"
+      },
+      "version-4.1.0/rules/disallowed-nodes/version-4.1.0-prefer-no-optionalDependencies": {
+        "title": "prefer-no-optionalDependencies"
+      },
+      "version-4.1.0/rules/disallowed-nodes/version-4.1.0-prefer-no-peerDependencies": {
+        "title": "prefer-no-peerDependencies"
       }
     },
     "links": {
