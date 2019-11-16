@@ -119,6 +119,12 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
 * peerDependencies
   * [prefer-alphabetical-peerDependencies](rules/dependencies/prefer-alphabetical-peerDependencies.md)
 
+## Scripts rules
+
+> Generates an error if scripts fail to meet the rules requirements
+
+* [prefer-alphabetical-scripts](rules/scripts/prefer-alphabetical-scripts.md)
+
 ## Format rules
 
 > Generates an error if node's value fails to meet the format requirements
