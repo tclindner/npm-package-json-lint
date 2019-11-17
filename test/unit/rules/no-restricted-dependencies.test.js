@@ -32,6 +32,23 @@ describe('no-restricted-dependencies Unit Tests', () => {
     });
   });
 
+  describe('when package.json has node with a restricted pattern', () => {
+    test('LintIssue object should be returned', () => {
+      const packageJsonData = {
+        dependencies: {
+          '@types/node': '^1.0.0'
+        }
+      };
+      const invalidDependencies = ['npm-package-json-lint', '@types/*'];
+      const response = lint(packageJsonData, 'error', invalidDependencies);
+
+      expect(response.lintId).toStrictEqual('no-restricted-dependencies');
+      expect(response.severity).toStrictEqual('error');
+      expect(response.node).toStrictEqual('dependencies');
+      expect(response.lintMessage).toStrictEqual('You are using a restricted dependency. Please remove it.');
+    });
+  });
+
   describe('when package.json has node with a valid value', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {

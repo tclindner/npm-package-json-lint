@@ -1,6 +1,7 @@
 ---
-id: no-restricted-dependencies
+id: version-4.2.0-no-restricted-dependencies
 title: no-restricted-dependencies
+original_id: no-restricted-dependencies
 ---
 
 Enabling this rule will result in an error being generated if one of the dependencies in `dependencies` is equal to one of the values in the array of restricted dependencies.
