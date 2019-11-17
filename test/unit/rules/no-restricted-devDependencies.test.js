@@ -39,7 +39,7 @@ describe('no-restricted-devDependencies Unit Tests', () => {
           '@types/node': '^1.0.0'
         }
       };
-      const invalidDependencies = ['npm-package-json-lint', '@types/node'];
+      const invalidDependencies = ['npm-package-json-lint', '@types/*'];
       const response = lint(packageJsonData, 'error', invalidDependencies);
 
       expect(response.lintId).toStrictEqual('no-restricted-devDependencies');
