@@ -44,6 +44,9 @@
       "rules/dependencies/no-caret-version-devDependencies": {
         "title": "no-caret-version-devDependencies"
       },
+      "rules/dependencies/no-repeated-dependencies": {
+        "title": "no-repeated-dependencies"
+      },
       "rules/dependencies/no-restricted-dependencies": {
         "title": "no-restricted-dependencies"
       },
@@ -223,6 +226,9 @@
       },
       "rules/required-node/require-version": {
         "title": "require-version"
+      },
+      "rules/scripts/prefer-alphabetical-scripts": {
+        "title": "prefer-alphabetical-scripts"
       },
       "rules/type/bin-type": {
         "title": "bin-type"
@@ -718,6 +724,21 @@
       },
       "version-4.1.0/rules/disallowed-nodes/version-4.1.0-prefer-no-peerDependencies": {
         "title": "prefer-no-peerDependencies"
+      },
+      "version-4.2.0/version-4.2.0-rules": {
+        "title": "Rules"
+      },
+      "version-4.2.0/rules/dependencies/version-4.2.0-no-repeated-dependencies": {
+        "title": "no-repeated-dependencies"
+      },
+      "version-4.2.0/rules/dependencies/version-4.2.0-no-restricted-dependencies": {
+        "title": "no-restricted-dependencies"
+      },
+      "version-4.2.0/rules/dependencies/version-4.2.0-no-restricted-devDependencies": {
+        "title": "no-restricted-devDependencies"
+      },
+      "version-4.2.0/rules/scripts/version-4.2.0-prefer-alphabetical-scripts": {
+        "title": "prefer-alphabetical-scripts"
       }
     },
     "links": {

@@ -71,31 +71,17 @@ const siteConfig = {
   users,
 
   /* path to images for header/footer */
-  // headerIcon: 'img/docusaurus.svg',
-  // footerIcon: 'img/docusaurus.svg',
+  headerIcon: 'img/logo.svg',
+  footerIcon: 'img/logo.svg',
   // favicon: 'img/favicon.png',
 
   /* Colors for website */
   colors: {
-    primaryColor: '#36454f',
-    secondaryColor: '#708090',
+    primaryColor: '#194769',
+    secondaryColor: '#f2855e',
     white: '#fff',
     lightGray: '#e6e6e6'
   },
-
-  /* Custom fonts for website */
-  /*
-  fonts: {
-    myFont: [
-      "Times New Roman",
-      "Serif"
-    ],
-    myOtherFont: [
-      "-apple-system",
-      "system-ui"
-    ]
-  },
-  */
 
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
   copyright: `Copyright © 2016-${new Date().getFullYear()} Thomas Lindner`,
@@ -125,10 +111,10 @@ const siteConfig = {
   // twitterImage: 'img/docusaurus.png',
 
   // Show documentation's last contributor's name.
-  // enableUpdateBy: true,
+  enableUpdateBy: true,
 
   // Show documentation's last update time.
-  // enableUpdateTime: true,
+  enableUpdateTime: true,
 
   scrollToTop: true,
   scrollToTopOptions: {
