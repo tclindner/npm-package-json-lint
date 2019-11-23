@@ -289,6 +289,29 @@ const isArchiveUrl = (version) => {
   return version.endsWith('.tar.gz') || version.endsWith('.zip');
 };
 
+/**
+ * Determines whether or not dependency versions contains archive url
+ * @param {object} packageJsonData    Valid JSON
+ * @param {string} nodeName           Name of a node in the package.json file
+ * @param {object} config             Rule configuration
+ * @return {boolean}                  True if the package contain archive url.
+ */
+const doVersContainArchiveUrl = (packageJsonData, nodeName, config) => {
+  for (const dependencyName in packageJsonData[nodeName]) {
+    if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
+      continue;
+    }
+
+    const dependencyVersion = packageJsonData[nodeName][dependencyName];
+
+    if (isArchiveUrl(dependencyVersion)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 const GITHUB_SHORTCUT_URL = /^(github:)?[^\/]+\/[^\/]+/;
 
 /**
@@ -300,7 +323,6 @@ const isGithubRepositoryShortcut = (version) => {
   return GITHUB_SHORTCUT_URL.test(version);
 };
 
-
 module.exports = {
   hasDependency,
   hasDepPrereleaseVers,
@@ -310,5 +332,6 @@ module.exports = {
   doVersContainInvalidRange,
   areVersionsAbsolute,
   doVersContainNonAbsolute,
-  doVersContainGitRepository
+  doVersContainGitRepository,
+  doVersContainArchiveUrl
 };

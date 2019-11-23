@@ -964,4 +964,64 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
   });
+
+  describe('doVersContainArchiveUrl method', () => {
+    describe('when the node exists in the package.json file, some versions are archive url', () => {
+      test('with github dependency true should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'my-module': 'https://github.com/miripiruni/repo/archive/v1.2.3.tar.gz'
+          }
+        };
+        const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('with github dependency true should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'my-module': 'https://github.com/miripiruni/repo/archive/v1.2.3.zip'
+          }
+        };
+        const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+    });
+
+    describe('when the node exists in the package.json file, all versions are non git', () => {
+      test('false should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'npm-package-json-lint': '1.0.0',
+            'grunt-npm-package-json-lint': '2.1.0',
+            'gulp-npm-package-json-lint': '=2.4.0',
+            'module-from-local': 'file:local-module',
+            'module-from-archive': 'https://github.com/user/repo.git'
+          }
+        };
+        const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies');
+
+        expect(response).toBe(false);
+      });
+    });
+
+    describe('when the node exists in the package.json file, one absolute version but has expection', () => {
+      test('false should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'module-from-archive': 'https://github.com/miripiruni/repo/archive/v1.2.3.zip',
+            'grunt-npm-package-json-lint': '2.0.0',
+            'gulp-npm-package-json-lint': '^2.0.0'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {
+          exceptions: ['module-from-archive']
+        });
+
+        expect(response).toBe(false);
+      });
+    });
+  });
 });
