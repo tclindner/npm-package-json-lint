@@ -323,6 +323,29 @@ const isGithubRepositoryShortcut = (version) => {
   return GITHUB_SHORTCUT_URL.test(version);
 };
 
+/**
+ * Determines whether or not dependency versions contains file url
+ * @param {object} packageJsonData    Valid JSON
+ * @param {string} nodeName           Name of a node in the package.json file
+ * @param {object} config             Rule configuration
+ * @return {boolean}                  True if the package contain file url.
+ */
+const doVersContainFileUrl = (packageJsonData, nodeName, config) => {
+  for (const dependencyName in packageJsonData[nodeName]) {
+    if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
+      continue;
+    }
+
+    const dependencyVersion = packageJsonData[nodeName][dependencyName];
+
+    if (dependencyVersion.startsWith('file:')) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 module.exports = {
   hasDependency,
   hasDepPrereleaseVers,
@@ -333,5 +356,6 @@ module.exports = {
   areVersionsAbsolute,
   doVersContainNonAbsolute,
   doVersContainGitRepository,
-  doVersContainArchiveUrl
+  doVersContainArchiveUrl,
+  doVersContainFileUrl
 };

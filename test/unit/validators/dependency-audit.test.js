@@ -1024,4 +1024,53 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
   });
+
+  describe('doVersContainFileUrl method', () => {
+    describe('when the node exists in the package.json file, some versions are url to file', () => {
+      test('with github dependency true should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'my-module': 'file:local-module'
+          }
+        };
+        const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+    });
+
+    describe('when the node exists in the package.json file, all versions are non file url', () => {
+      test('false should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'npm-package-json-lint': '1.0.0',
+            'grunt-npm-package-json-lint': '2.1.0',
+            'gulp-npm-package-json-lint': '=2.4.0',
+            'module-from-git': 'https://github.com/user/repo.git',
+            'module-from-archive': 'https://github.com/user/repo/archive/v1.2.3.tar.gz'
+          }
+        };
+        const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies');
+
+        expect(response).toBe(false);
+      });
+    });
+
+    describe('when the node exists in the package.json file, one absolute version but has expection', () => {
+      test('false should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'module-from-file': 'file:local-module',
+            'grunt-npm-package-json-lint': '2.0.0',
+            'gulp-npm-package-json-lint': '^2.0.0'
+          }
+        };
+        const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies', {
+          exceptions: ['module-from-file']
+        });
+
+        expect(response).toBe(false);
+      });
+    });
+  });
 });
