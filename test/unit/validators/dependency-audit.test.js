@@ -967,7 +967,7 @@ describe('dependency-audit Unit Tests', () => {
 
   describe('doVersContainArchiveUrl method', () => {
     describe('when the node exists in the package.json file, some versions are archive url', () => {
-      test('with github dependency true should be returned', () => {
+      test('with tar.gz dependency true should be returned', () => {
         const packageJson = {
           dependencies: {
             'my-module': 'https://github.com/miripiruni/repo/archive/v1.2.3.tar.gz'
@@ -978,7 +978,7 @@ describe('dependency-audit Unit Tests', () => {
         expect(response).toBe(true);
       });
 
-      test('with github dependency true should be returned', () => {
+      test('with zip dependency true should be returned', () => {
         const packageJson = {
           dependencies: {
             'my-module': 'https://github.com/miripiruni/repo/archive/v1.2.3.zip'

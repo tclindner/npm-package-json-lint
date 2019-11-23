@@ -225,6 +225,51 @@ const doVersContainNonAbsolute = (packageJsonData, nodeName, config) => {
   return dependenciesChecked > 0 ? !onlyAbsoluteVersionDetected : false;
 };
 
+const GITHUB_SHORTCUT_URL = /^(github:)?[^/]+\/[^/]+/;
+
+/**
+ * Determines whether or not version is a shortcut to github repository
+ * @param version       value of package's version
+ * @return {boolean}    True if the version is a shortcut to github repository
+ */
+const isGithubRepositoryShortcut = version => {
+  return GITHUB_SHORTCUT_URL.test(version);
+};
+
+/**
+ * Determines whether or not version is url to archive
+ * @param version       value of package's version
+ * @return {boolean}    True if the version is url to archive
+ */
+const isArchiveUrl = version => {
+  return version.endsWith('.tar.gz') || version.endsWith('.zip');
+};
+
+/**
+ * Determines whether or not version is git repository url
+ * @param version       value of package's version
+ * @return {boolean}    True if the version is an git repo url.
+ */
+const isGitRepositoryUrl = version => {
+  if (isArchiveUrl(version)) {
+    return false;
+  }
+
+  // based on https://github.com/npm/hosted-git-info
+  const protocols = new Set(['git@', 'git://', 'git+https://', 'git+ssh://', 'http://', 'https://']);
+
+  let match = false;
+
+  for (const protocol of protocols) {
+    if (version.startsWith(protocol)) {
+      match = true;
+      break;
+    }
+  }
+
+  return match;
+};
+
 /**
  * Determines whether or not dependency versions are git repository
  * @param {object} packageJsonData    Valid JSON
@@ -249,47 +294,6 @@ const doVersContainGitRepository = (packageJsonData, nodeName, config) => {
 };
 
 /**
- * Determines whether or not version is git repository url
- * @param version       value of package's version
- * @return {boolean}    True if the version is an git repo url.
- */
-const isGitRepositoryUrl = (version) => {
-  if (isArchiveUrl(version)) {
-    return false;
-  }
-
-  // based on https://github.com/npm/hosted-git-info
-  const protocols = new Set([
-    'git@',
-    'git://',
-    'git+https://',
-    'git+ssh://',
-    'http://',
-    'https://'
-  ]);
-
-  let match = false;
-
-  for (let protocol of protocols) {
-    if (version.startsWith(protocol)) {
-      match = true;
-      break;
-    }
-  }
-
-  return match;
-};
-
-/**
- * Determines whether or not version is url to archive
- * @param version       value of package's version
- * @return {boolean}    True if the version is url to archive
- */
-const isArchiveUrl = (version) => {
-  return version.endsWith('.tar.gz') || version.endsWith('.zip');
-};
-
-/**
  * Determines whether or not dependency versions contains archive url
  * @param {object} packageJsonData    Valid JSON
  * @param {string} nodeName           Name of a node in the package.json file
@@ -310,17 +314,6 @@ const doVersContainArchiveUrl = (packageJsonData, nodeName, config) => {
   }
 
   return false;
-};
-
-const GITHUB_SHORTCUT_URL = /^(github:)?[^\/]+\/[^\/]+/;
-
-/**
- * Determines whether or not version is a shortcut to github repository
- * @param version       value of package's version
- * @return {boolean}    True if the version is a shortcut to github repository
- */
-const isGithubRepositoryShortcut = (version) => {
-  return GITHUB_SHORTCUT_URL.test(version);
 };
 
 /**
