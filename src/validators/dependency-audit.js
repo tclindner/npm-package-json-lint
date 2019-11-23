@@ -225,6 +225,82 @@ const doVersContainNonAbsolute = (packageJsonData, nodeName, config) => {
   return dependenciesChecked > 0 ? !onlyAbsoluteVersionDetected : false;
 };
 
+/**
+ * Determines whether or not dependency versions are git repository
+ * @param {object} packageJsonData    Valid JSON
+ * @param {string} nodeName           Name of a node in the package.json file
+ * @param {object} config             Rule configuration
+ * @return {boolean}                  True if the package has an git repo.
+ */
+const doVersContainGitRepository = (packageJsonData, nodeName, config) => {
+  for (const dependencyName in packageJsonData[nodeName]) {
+    if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
+      continue;
+    }
+
+    const dependencyVersion = packageJsonData[nodeName][dependencyName];
+
+    if (isGitRepositoryUrl(dependencyVersion) || isGithubRepositoryShortcut(dependencyVersion)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
+/**
+ * Determines whether or not version is git repository url
+ * @param version       value of package's version
+ * @return {boolean}    True if the version is an git repo url.
+ */
+const isGitRepositoryUrl = (version) => {
+  if (isArchiveUrl(version)) {
+    return false;
+  }
+
+  // based on https://github.com/npm/hosted-git-info
+  const protocols = new Set([
+    'git@',
+    'git://',
+    'git+https://',
+    'git+ssh://',
+    'http://',
+    'https://'
+  ]);
+
+  let match = false;
+
+  for (let protocol of protocols) {
+    if (version.startsWith(protocol)) {
+      match = true;
+      break;
+    }
+  }
+
+  return match;
+};
+
+/**
+ * Determines whether or not version is url to archive
+ * @param version       value of package's version
+ * @return {boolean}    True if the version is url to archive
+ */
+const isArchiveUrl = (version) => {
+  return version.endsWith('.tar.gz') || version.endsWith('.zip');
+};
+
+const GITHUB_SHORTCUT_URL = /^(github:)?[^\/]+\/[^\/]+/;
+
+/**
+ * Determines whether or not version is a shortcut to github repository
+ * @param version       value of package's version
+ * @return {boolean}    True if the version is a shortcut to github repository
+ */
+const isGithubRepositoryShortcut = (version) => {
+  return GITHUB_SHORTCUT_URL.test(version);
+};
+
+
 module.exports = {
   hasDependency,
   hasDepPrereleaseVers,
@@ -233,5 +309,6 @@ module.exports = {
   areVersRangesValid,
   doVersContainInvalidRange,
   areVersionsAbsolute,
-  doVersContainNonAbsolute
+  doVersContainNonAbsolute,
+  doVersContainGitRepository
 };

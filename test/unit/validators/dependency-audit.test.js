@@ -744,6 +744,120 @@ describe('dependency-audit Unit Tests', () => {
     });
   });
 
+  describe('doVersContainGitRepository method', () => {
+    describe('when the node exists in the package.json file', () => {
+      test('true should be returned in case of git@ dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'git@github.com:username/repo.git'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of git:// dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'git://github.com/username/repo.git'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of git+https:// dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'git+https://github.com/username/repo.git'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of git+ssh:// dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'git+ssh://github.com/username/repo.git'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of http:// dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'http://github.com/username/repo.git'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of https:// dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'https://github.com/username/repo.git'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of github:… dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'github:username/repo'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of github shortcut url dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'username/repo'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of github shortcut url dependency with branch', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'org-name/repo#username/issue-42'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of github shortcut url dependency with tag', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'username/repo#v2.0.0-rc-1'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+    });
+  });
+
   describe('doVersContainNonAbsolute method', () => {
     describe('when the node exists in the package.json file, not all versions are absolute', () => {
       test('with caret versioning true should be returned', () => {
