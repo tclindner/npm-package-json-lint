@@ -52,6 +52,7 @@ describe('cli Integration Tests', () => {
     --configFile, -c File path of .npmpackagejsonlintrc.json
     --ignorePath, -i Path to a file containing patterns that describe files to ignore. The path can be absolute or relative to process.cwd(). By default, npm-package-json-lint looks for .npmpackagejsonlintignore in process.cwd().
     --maxWarnings, -mw Maximum number of warnings that can be detected before an error is thrown.
+    --allowEmptyTargets Do not throw an error when a list of targets is empty.
 
   Examples
     $ npmPkgJsonLint --version
@@ -97,6 +98,15 @@ describe('cli Integration Tests', () => {
       expect(cli.stdout.toString()).toStrictEqual(expected);
       expect(cli.stderr.toString()).toStrictEqual('');
       expect(cli.status).toStrictEqual(oneMissingTargets);
+    });
+
+    test('should exit with zero code when an empty targets is allowed', () => {
+      const cli = spawnSync(relativePathToCli, ['--allowEmptyTargets'], {env});
+      const expected = 'No lint targets provided\n';
+
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(zeroClean);
     });
   });
 
