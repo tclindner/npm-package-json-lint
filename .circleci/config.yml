@@ -46,6 +46,13 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: npm run test:ci
+  test-node13:
+    docker:
+      - image: circleci/node:13
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm run test:ci
   publish-beta:
     docker:
       - image: circleci/node:10
@@ -109,6 +116,12 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - test-node13:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/
       - publish-beta:
           requires:
             - test-node8
@@ -116,6 +129,7 @@ workflows:
             - test-node10
             - test-node11
             - test-node12
+            - test-node13
           filters:
             tags:
               only: /^v\d*\.\d*\.\d*-beta\.\d*$/
@@ -129,6 +143,7 @@ workflows:
             - test-node10
             - test-node11
             - test-node12
+            - test-node13
           filters:
             tags:
               only: /^v\d*\.\d*\.\d*$/
