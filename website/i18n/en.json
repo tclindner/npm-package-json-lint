@@ -38,11 +38,29 @@
       "rules/dependencies/no-absolute-version-devDependencies": {
         "title": "no-absolute-version-devDependencies"
       },
+      "rules/dependencies/no-archive-dependencies": {
+        "title": "no-archive-dependencies"
+      },
+      "rules/dependencies/no-archive-devDependencies": {
+        "title": "no-archive-devDependencies"
+      },
       "rules/dependencies/no-caret-version-dependencies": {
         "title": "no-caret-version-dependencies"
       },
       "rules/dependencies/no-caret-version-devDependencies": {
         "title": "no-caret-version-devDependencies"
+      },
+      "rules/dependencies/no-file-dependencies": {
+        "title": "no-file-dependencies"
+      },
+      "rules/dependencies/no-file-devDependencies": {
+        "title": "no-file-devDependencies"
+      },
+      "rules/dependencies/no-git-dependencies": {
+        "title": "no-git-dependencies"
+      },
+      "rules/dependencies/no-git-devDependencies": {
+        "title": "no-git-devDependencies"
       },
       "rules/dependencies/no-repeated-dependencies": {
         "title": "no-repeated-dependencies"
