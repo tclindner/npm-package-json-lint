@@ -744,6 +744,120 @@ describe('dependency-audit Unit Tests', () => {
     });
   });
 
+  describe('doVersContainGitRepository method', () => {
+    describe('when the node exists in the package.json file', () => {
+      test('true should be returned in case of git@ dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'git@github.com:username/repo.git'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of git:// dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'git://github.com/username/repo.git'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of git+https:// dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'git+https://github.com/username/repo.git'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of git+ssh:// dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'git+ssh://github.com/username/repo.git'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of http:// dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'http://github.com/username/repo.git'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of https:// dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'https://github.com/username/repo.git'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of github:… dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'github:username/repo'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of github shortcut url dependency', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'username/repo'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of github shortcut url dependency with branch', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'org-name/repo#username/issue-42'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('true should be returned in case of github shortcut url dependency with tag', () => {
+        const packageJson = {
+          dependencies: {
+            'module-name': 'username/repo#v2.0.0-rc-1'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+    });
+  });
+
   describe('doVersContainNonAbsolute method', () => {
     describe('when the node exists in the package.json file, not all versions are absolute', () => {
       test('with caret versioning true should be returned', () => {
@@ -847,6 +961,115 @@ describe('dependency-audit Unit Tests', () => {
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
+      });
+    });
+  });
+
+  describe('doVersContainArchiveUrl method', () => {
+    describe('when the node exists in the package.json file, some versions are archive url', () => {
+      test('with tar.gz dependency true should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'my-module': 'https://github.com/miripiruni/repo/archive/v1.2.3.tar.gz'
+          }
+        };
+        const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+
+      test('with zip dependency true should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'my-module': 'https://github.com/miripiruni/repo/archive/v1.2.3.zip'
+          }
+        };
+        const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+    });
+
+    describe('when the node exists in the package.json file, all versions are non git', () => {
+      test('false should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'npm-package-json-lint': '1.0.0',
+            'grunt-npm-package-json-lint': '2.1.0',
+            'gulp-npm-package-json-lint': '=2.4.0',
+            'module-from-local': 'file:local-module',
+            'module-from-archive': 'https://github.com/user/repo.git'
+          }
+        };
+        const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies');
+
+        expect(response).toBe(false);
+      });
+    });
+
+    describe('when the node exists in the package.json file, one absolute version but has expection', () => {
+      test('false should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'module-from-archive': 'https://github.com/miripiruni/repo/archive/v1.2.3.zip',
+            'grunt-npm-package-json-lint': '2.0.0',
+            'gulp-npm-package-json-lint': '^2.0.0'
+          }
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {
+          exceptions: ['module-from-archive']
+        });
+
+        expect(response).toBe(false);
+      });
+    });
+  });
+
+  describe('doVersContainFileUrl method', () => {
+    describe('when the node exists in the package.json file, some versions are url to file', () => {
+      test('with github dependency true should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'my-module': 'file:local-module'
+          }
+        };
+        const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies');
+
+        expect(response).toBe(true);
+      });
+    });
+
+    describe('when the node exists in the package.json file, all versions are non file url', () => {
+      test('false should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'npm-package-json-lint': '1.0.0',
+            'grunt-npm-package-json-lint': '2.1.0',
+            'gulp-npm-package-json-lint': '=2.4.0',
+            'module-from-git': 'https://github.com/user/repo.git',
+            'module-from-archive': 'https://github.com/user/repo/archive/v1.2.3.tar.gz'
+          }
+        };
+        const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies');
+
+        expect(response).toBe(false);
+      });
+    });
+
+    describe('when the node exists in the package.json file, one absolute version but has expection', () => {
+      test('false should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'module-from-file': 'file:local-module',
+            'grunt-npm-package-json-lint': '2.0.0',
+            'gulp-npm-package-json-lint': '^2.0.0'
+          }
+        };
+        const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies', {
+          exceptions: ['module-from-file']
+        });
+
+        expect(response).toBe(false);
       });
     });
   });
