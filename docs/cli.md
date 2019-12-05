@@ -84,3 +84,7 @@ $ npmPkgJsonLint . --ignorePath .gitignore
 ## `--maxWarnings` (alias `-mw`)
 
 Max number of warnings that are allowed before an error is thrown. By default, npm-package-json-lint allows `10000000`.
+
+## `--allowEmptyTargets`
+
+Do not throw an error when a list of targets is empty.
