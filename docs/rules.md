@@ -91,7 +91,10 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
 
 * dependencies
   * [no-absolute-version-dependencies](rules/dependencies/no-absolute-version-dependencies.md)
+  * [no-archive-dependencies](rules/dependencies/no-archive-dependencies.md)
   * [no-caret-version-dependencies](rules/dependencies/no-caret-version-dependencies.md)
+  * [no-file-dependencies](rules/dependencies/no-file-dependencies.md)
+  * [no-git-dependencies](rules/dependencies/no-git-dependencies.md)
   * [no-restricted-dependencies](rules/dependencies/no-restricted-dependencies.md)
   * [no-restricted-pre-release-dependencies](rules/dependencies/no-restricted-pre-release-dependencies.md)
   * [no-tilde-version-dependencies](rules/dependencies/no-tilde-version-dependencies.md)
@@ -102,7 +105,10 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
   * [prefer-tilde-version-dependencies](rules/dependencies/prefer-tilde-version-dependencies.md)
 * devDependencies
   * [no-absolute-version-devDependencies](rules/dependencies/no-absolute-version-devDependencies.md)
+  * [no-archive-devDependencies](rules/dependencies/no-archive-devDependencies.md)
   * [no-caret-version-devDependencies](rules/dependencies/no-caret-version-devDependencies.md)
+  * [no-file-devDependencies](rules/dependencies/no-file-devDependencies.md)
+  * [no-git-devDependencies](rules/dependencies/no-git-devDependencies.md)
   * [no-restricted-devDependencies](rules/dependencies/no-restricted-devDependencies.md)
   * [no-restricted-pre-release-devDependencies](rules/dependencies/no-restricted-pre-release-devDependencies.md)
   * [no-tilde-version-devDependencies](rules/dependencies/no-tilde-version-devDependencies.md)
