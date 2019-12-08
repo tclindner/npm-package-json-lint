@@ -24,4 +24,35 @@ describe('property Unit Tests', () => {
       });
     });
   });
+  describe('findDuplicatePropNames method', () => {
+    describe('when duplicates properties exists', () => {
+      test('list with names should be returnd', () => {
+        const packageJsonSource = `{
+          "version": "1.0.0",
+          "name": "package",
+          "version": "1.0.0",
+          "scripts": {
+            "test": "jest",
+            "test:ci": "jest --runInBand",
+            "test:ci": "jest --runInBand"
+          }
+        }`;
+        const response = property.findDuplicatePropNames(packageJsonSource);
+
+        expect(response).toStrictEqual(expect.arrayContaining(['version', 'test:ci']));
+      });
+    });
+
+    describe('when duplicates properties does not exists', () => {
+      test('empty list should be returned', () => {
+        const packageJsonSource = `{
+          "name": "package",
+          "version": "1.0.0"
+        }`;
+        const response = property.findDuplicatePropNames(packageJsonSource);
+
+        expect(response).toHaveLength(0);
+      });
+    });
+  });
 });
