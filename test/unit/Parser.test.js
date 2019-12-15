@@ -13,7 +13,9 @@ describe('Parser Unit Tests', () => {
         };
         fs.readFileSync.mockReturnValue(json);
 
-        expect(Parser.parseJsonFile('dummyFile.txt')).toStrictEqual(obj);
+        const parsedJson = Parser.parseJsonFile('dummyFile.txt');
+        expect(parsedJson).toStrictEqual(obj);
+        expect(parsedJson[Parser.sourceSymbol]).toStrictEqual(json);
       });
     });
 

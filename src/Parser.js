@@ -47,14 +47,22 @@ class Parser {
    */
   static parseJsonFile(fileName) {
     let json = {};
+    let fileContents = '';
 
     try {
-      const fileContents = readFile(fileName);
+      fileContents = readFile(fileName);
 
       json = JSON.parse(stripComments(fileContents));
     } catch (err) {
       handleError(fileName, err);
     }
+
+    Object.defineProperty(json, Parser.sourceSymbol, {
+      value: fileContents,
+      enumerable: false,
+      writable: false,
+      configurable: false
+    });
 
     return json;
   }
@@ -78,5 +86,7 @@ class Parser {
     return obj;
   }
 }
+
+Parser.sourceSymbol = Symbol('JSON source');
 
 module.exports = Parser;
