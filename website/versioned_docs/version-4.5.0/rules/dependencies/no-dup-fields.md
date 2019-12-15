@@ -1,6 +1,7 @@
 ---
-id: no-dup-fields
+id: version-4.5.0-no-dup-fields
 title: no-dup-fields
+original_id: no-dup-fields
 ---
 
 Enabling this rule will result in an error being generated if package.json has duplicate fields in block section.

@@ -5,15 +5,16 @@ const {lint, ruleType} = ruleModule;
 
 const parsePackageJson = source => {
   const json = JSON.parse(source);
-  json[Parser.sourceSymbol] = source; // eslint-disable-line
+
+  json[Parser.sourceSymbol] = source;
 
   return json;
 };
 
 describe('no-dup-fields Unit Tests', () => {
   describe('a rule type value should be exported', () => {
-    test('it should equal "optionalObject"', () => {
-      expect(ruleType).toStrictEqual('optionalObject');
+    test('it should equal "standard"', () => {
+      expect(ruleType).toStrictEqual('standard');
     });
   });
 
@@ -23,7 +24,7 @@ describe('no-dup-fields Unit Tests', () => {
         "name": "package1",
         "name": "package2"
       }`);
-      const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+      const response = lint(packageJsonData, 'error');
 
       expect(response.lintId).toStrictEqual('no-duplicate-fields');
       expect(response.severity).toStrictEqual('error');
@@ -41,7 +42,7 @@ describe('no-dup-fields Unit Tests', () => {
           "eslint": "6.7.2"
         }
       }`);
-      const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+      const response = lint(packageJsonData, 'error');
 
       expect(response.lintId).toStrictEqual('no-duplicate-fields');
       expect(response.severity).toStrictEqual('error');

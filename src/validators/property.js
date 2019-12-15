@@ -1,3 +1,5 @@
+const parser = require('jsonc-parser');
+
 /**
  * Determines whether or not the node exists in the package.json file
  * @param  {object} packageJsonData Valid JSON
@@ -14,7 +16,6 @@ const exists = (packageJsonData, nodeName) => {
  * @return {string[]}                  List of duplicate property names.
  */
 const findDuplicatePropNames = packageJsonSource => {
-  const parser = require("jsonc-parser"); // eslint-disable-line
   const tree = parser.parseTree(packageJsonSource);
 
   if (!tree) {
