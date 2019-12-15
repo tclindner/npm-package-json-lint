@@ -1,8 +1,8 @@
 const Parser = require('../Parser');
 const {findDuplicatePropNames} = require('../validators/property');
-const LintIssue = require('./../LintIssue');
+const LintIssue = require('../LintIssue');
 
-const lintId = 'no-duplicate-fields';
+const lintId = 'no-duplicate-properties';
 const nodeName = '';
 const ruleType = 'standard';
 
@@ -15,7 +15,7 @@ const lint = (packageJsonData, severity) => {
   const dupProps = findDuplicatePropNames(source);
 
   if (dupProps.length) {
-    const message = `You have duplicate field names: ${dupProps.join(', ')}. Please remove duplicates.`;
+    const message = `Duplicate properties detected. Please remove duplicates for: ${dupProps.join(', ')}.`;
 
     return new LintIssue(lintId, severity, nodeName, message);
   }

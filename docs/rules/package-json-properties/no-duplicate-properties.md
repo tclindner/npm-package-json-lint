@@ -1,16 +1,16 @@
 ---
-id: no-dup-fields
-title: no-dup-fields
+id: no-duplicate-properties
+title: no-duplicate-properties
 ---
 
-Enabling this rule will result in an error being generated if package.json has duplicate fields in block section.
+Enabling this rule will result in an error being generated if package.json has duplicate properties in block section.
 
 ## Example .npmpackagejsonlintrc configuration
 
 ```json
 {
   "rules": {
-    "no-dup-fields": "error"
+    "no-duplicate-properties": "error"
   }
 }
 ```
@@ -41,7 +41,7 @@ Enabling this rule will result in an error being generated if package.json has d
 ```json
 {
   "rules": {
-    "no-dup-fields": "off"
+    "no-duplicate-properties": "off"
   }
 }
 ```
