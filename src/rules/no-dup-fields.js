@@ -4,7 +4,7 @@ const LintIssue = require('./../LintIssue');
 
 const lintId = 'no-duplicate-fields';
 const nodeName = '';
-const ruleType = 'optionalObject';
+const ruleType = 'standard';
 
 const lint = (packageJsonData, severity) => {
   /**

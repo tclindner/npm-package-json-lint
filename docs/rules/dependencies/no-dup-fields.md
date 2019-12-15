@@ -15,18 +15,6 @@ Enabling this rule will result in an error being generated if package.json has d
 }
 ```
 
-With exceptions
-
-```json
-{
-  "rules": {
-    "no-dup-fields": ["error", {
-      "exceptions": ["myModule"]
-    }]
-  }
-}
-```
-
 ## Rule Details
 
 ### *Incorrect* examples
@@ -60,4 +48,4 @@ With exceptions
 
 ## History
 
-* Introduced in version 4.3.0
+* Introduced in version 4.5.0
