@@ -5,7 +5,8 @@ const {lint, ruleType} = ruleModule;
 
 const parsePackageJson = source => {
   const json = JSON.parse(source);
-  json[Parser.sourceSymbol] = source; // eslint-disable-line
+
+  json[Parser.sourceSymbol] = source;
 
   return json;
 };

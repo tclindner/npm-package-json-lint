@@ -11,7 +11,7 @@ const lint = (packageJsonData, severity) => {
    * If we send package json straight to npm-package-json-lint, fallback to empty string.
    * Because we already lose information about duplicate properties.
    */
-  const source = packageJsonData[Parser.sourceSymbol] || ''; // eslint-disable-line
+  const source = packageJsonData[Parser.sourceSymbol] || '';
   const dupProps = findDuplicatePropNames(source);
 
   if (dupProps.length) {
