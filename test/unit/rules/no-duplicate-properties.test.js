@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/no-dup-fields');
+const ruleModule = require('../../../src/rules/no-duplicate-properties');
 const Parser = require('../../../src/Parser');
 
 const {lint, ruleType} = ruleModule;
@@ -11,14 +11,14 @@ const parsePackageJson = source => {
   return json;
 };
 
-describe('no-dup-fields Unit Tests', () => {
+describe('no-duplicate-properties Unit Tests', () => {
   describe('a rule type value should be exported', () => {
     test('it should equal "standard"', () => {
       expect(ruleType).toStrictEqual('standard');
     });
   });
 
-  describe('when package.json has duplicate fields', () => {
+  describe('when package.json has duplicate properties', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = parsePackageJson(`{
         "name": "package1",
@@ -26,13 +26,13 @@ describe('no-dup-fields Unit Tests', () => {
       }`);
       const response = lint(packageJsonData, 'error');
 
-      expect(response.lintId).toStrictEqual('no-duplicate-fields');
+      expect(response.lintId).toStrictEqual('no-duplicate-properties');
       expect(response.severity).toStrictEqual('error');
-      expect(response.lintMessage).toStrictEqual('You have duplicate field names: name. Please remove duplicates.');
+      expect(response.lintMessage).toStrictEqual('Duplicate properties detected. Please remove duplicates for: name.');
     });
   });
 
-  describe('when package.json has nested duplicate fields', () => {
+  describe('when package.json has nested duplicate properties', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = parsePackageJson(`{
         "name": "package",
@@ -44,9 +44,9 @@ describe('no-dup-fields Unit Tests', () => {
       }`);
       const response = lint(packageJsonData, 'error');
 
-      expect(response.lintId).toStrictEqual('no-duplicate-fields');
+      expect(response.lintId).toStrictEqual('no-duplicate-properties');
       expect(response.severity).toStrictEqual('error');
-      expect(response.lintMessage).toStrictEqual('You have duplicate field names: eslint. Please remove duplicates.');
+      expect(response.lintMessage).toStrictEqual('Duplicate properties detected. Please remove duplicates for: eslint.');
     });
   });
 
