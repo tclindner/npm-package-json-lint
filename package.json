@@ -51,7 +51,7 @@
     "strip-json-comments": "^3.0.1"
   },
   "devDependencies": {
-    "eslint": "^6.7.2",
+    "eslint": "^6.8.0",
     "eslint-config-tc": "^9.0.0",
     "eslint-formatter-pretty": "^3.0.1",
     "eslint-plugin-import": "^2.18.2",
