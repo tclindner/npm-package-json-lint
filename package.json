@@ -48,6 +48,7 @@
     "meow": "^6.0.0",
     "plur": "^3.1.1",
     "semver": "^7.0.0",
+    "slash": "^3.0.0",
     "strip-json-comments": "^3.0.1"
   },
   "devDependencies": {

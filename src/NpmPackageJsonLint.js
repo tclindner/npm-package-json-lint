@@ -2,6 +2,7 @@
 
 const debug = require('debug')('npm-package-json-lint:NpmPackageJsonLint');
 const isPlainObj = require('is-plain-obj');
+const slash = require('slash');
 const Config = require('./Config');
 const pkg = require('../package.json');
 const Rules = require('./Rules');
@@ -89,10 +90,10 @@ class NpmPackageJsonLint {
     ignorePath,
     fix
   }) {
-    this.cwd = cwd || process.cwd();
+    this.cwd = slash(cwd || process.cwd());
 
     this.packageJsonObject = packageJsonObject;
-    this.packageJsonFilePath = packageJsonFilePath;
+    this.packageJsonFilePath = packageJsonFilePath ? slash(packageJsonFilePath) : packageJsonFilePath;
     this.patterns = patterns;
     this.quiet = quiet || false;
     this.ignorePath = ignorePath || '';
