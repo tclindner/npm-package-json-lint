@@ -1,6 +1,7 @@
 ---
-id: description-format
+id: version-4.6.0-description-format
 title: description-format
+original_id: description-format
 ---
 
 Enabling this rule will result in an error being generated if `description` doesn't meet the configured options. Two options exist:

@@ -46,6 +46,22 @@ describe('description-format Unit Tests', () => {
     });
   });
 
+  describe('when package.json has requireEndingPeriod and forbidEndingPeriod set', () => {
+    test('An exception should be thrown', () => {
+      const packageJsonData = {
+        description: 'My description'
+      };
+      const config = {
+        forbidEndingPeriod: true,
+        requireEndingPeriod: true
+      };
+
+      expect(() => {
+        lint(packageJsonData, 'error', config);
+      }).toThrow('description-format does not support `requireEndingPeriod` and `forbidEndingPeriod` being `true`.');
+    });
+  });
+
   describe('when package.json has node without period at end', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
@@ -60,6 +76,23 @@ describe('description-format Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('description');
       expect(response.lintMessage).toStrictEqual('The description should end with a period.');
+    });
+  });
+
+  describe('when package.json has node with period at end', () => {
+    test('LintIssue object should be returned', () => {
+      const packageJsonData = {
+        description: 'My description.'
+      };
+      const config = {
+        forbidEndingPeriod: true
+      };
+      const response = lint(packageJsonData, 'error', config);
+
+      expect(response.lintId).toStrictEqual('description-format');
+      expect(response.severity).toStrictEqual('error');
+      expect(response.node).toStrictEqual('description');
+      expect(response.lintMessage).toStrictEqual('The description should not end with a period.');
     });
   });
 
