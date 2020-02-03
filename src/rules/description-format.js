@@ -5,6 +5,7 @@ const lintId = 'description-format';
 const nodeName = 'description';
 const ruleType = 'object';
 
+// eslint-disable-next-line complexity
 const lint = (packageJsonData, severity, config) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
@@ -30,8 +31,16 @@ const lint = (packageJsonData, severity, config) => {
     );
   }
 
+  if (config.hasOwnProperty('requireEndingPeriod') && config.hasOwnProperty('forbidEndingPeriod')) {
+    throw new Error('description-format does not support `requireEndingPeriod` and `forbidEndingPeriod` being `true`.');
+  }
+
   if (config.hasOwnProperty('requireEndingPeriod') && config.requireEndingPeriod && !description.endsWith('.')) {
     return new LintIssue(lintId, severity, nodeName, 'The description should end with a period.');
+  }
+
+  if (config.hasOwnProperty('forbidEndingPeriod') && config.forbidEndingPeriod && description.endsWith('.')) {
+    return new LintIssue(lintId, severity, nodeName, 'The description should not end with a period.');
   }
 
   return true;
