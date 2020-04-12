@@ -35,4 +35,4 @@ Enabling this rule will result in an error being generated if `funding` is missi
 
 ## History
 
-* Introduced in version 1.0.0
+* Introduced in version 5.0.0

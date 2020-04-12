@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/require-funding');
+const ruleModule = require('../../../src/rules/require-funding');
 
 const {lint, ruleType} = ruleModule;
 
@@ -12,7 +12,7 @@ describe('require-funding Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        funding: 'funding'
+        funding: 'funding',
       };
       const response = lint(packageJsonData, 'error');
 

@@ -1,4 +1,4 @@
-const LintIssue = require('./../LintIssue');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'require-funding';
 const nodeName = 'funding';
@@ -15,5 +15,5 @@ const lint = (packageJsonData, severity) => {
 
 module.exports = {
   lint,
-  ruleType
+  ruleType,
 };
