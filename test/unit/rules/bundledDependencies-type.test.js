@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/bundledDependencies-type');
+const ruleModule = require('../../../src/rules/bundledDependencies-type');
 
 const {lint, ruleType} = ruleModule;
 

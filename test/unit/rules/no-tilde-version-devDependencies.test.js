@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/no-tilde-version-devDependencies');
+const ruleModule = require('../../../src/rules/no-tilde-version-devDependencies');
 
 const {lint, ruleType} = ruleModule;
 

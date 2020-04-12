@@ -1,6 +1,6 @@
-const {isInAlphabeticalOrder} = require('./../validators/alphabetical-sort');
+const {isInAlphabeticalOrder} = require('../validators/alphabetical-sort');
 const {exists} = require('../validators/property');
-const LintIssue = require('./../LintIssue');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'prefer-alphabetical-optionalDependencies';
 const nodeName = 'optionalDependencies';

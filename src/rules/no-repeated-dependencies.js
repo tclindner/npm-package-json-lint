@@ -1,5 +1,5 @@
 const {exists} = require('../validators/property');
-const LintIssue = require('./../LintIssue');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'no-repeated-dependencies';
 const ruleType = 'standard';

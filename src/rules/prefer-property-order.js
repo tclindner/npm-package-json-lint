@@ -1,5 +1,5 @@
-const {isInPreferredOrder} = require('./../validators/property-order');
-const LintIssue = require('./../LintIssue');
+const {isInPreferredOrder} = require('../validators/property-order');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'prefer-property-order';
 const nodeName = '';

@@ -1,5 +1,5 @@
 const fs = require('fs');
-const Parser = require('./../../src/Parser');
+const Parser = require('../../src/Parser');
 
 jest.mock('fs');
 

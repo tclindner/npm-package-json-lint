@@ -22,7 +22,7 @@ const applyExtends = (config, parentName, originalFilePath) => {
 
   return configExtends.reduceRight((previousConfig, moduleName) => {
     try {
-      /* eslint-disable no-use-before-define */
+      // eslint-disable-next-line no-use-before-define
       const extendsConfig = loadFromModule(moduleName, originalFilePath);
 
       // Merge base object
@@ -76,6 +76,7 @@ const loadFromModule = (moduleName, originalFilePath) => {
   if (moduleName.startsWith('./')) {
     // TODO: handle process.cwd() option
     adjustedModuleName = path.join(process.cwd(), moduleName);
+    // eslint-disable-next-line no-use-before-define
     config = loadConfigFile(adjustedModuleName);
   } else {
     const resolvedModule = require.resolve(adjustedModuleName, {paths: [path.dirname(originalFilePath)]});

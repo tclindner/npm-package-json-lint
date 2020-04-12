@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/prefer-no-version-zero-devDependencies');
+const ruleModule = require('../../../src/rules/prefer-no-version-zero-devDependencies');
 const dependencyAudit = require('../../../src/validators/dependency-audit');
 const property = require('../../../src/validators/property');
 

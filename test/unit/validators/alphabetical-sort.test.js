@@ -1,4 +1,4 @@
-const alphabeticalSort = require('./../../../src/validators/alphabetical-sort');
+const alphabeticalSort = require('../../../src/validators/alphabetical-sort');
 
 describe('alphabetical-sort Unit Tests', () => {
   describe('isInAlphabeticalOrder method', () => {

@@ -1,5 +1,5 @@
-const {areVersionsAbsolute} = require('./../validators/dependency-audit');
-const LintIssue = require('./../LintIssue');
+const {areVersionsAbsolute} = require('../validators/dependency-audit');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'no-absolute-version-dependencies';
 const nodeName = 'dependencies';

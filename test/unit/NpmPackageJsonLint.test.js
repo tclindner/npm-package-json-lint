@@ -1,4 +1,4 @@
-const NpmPackageJsonLint = require('./../../src/NpmPackageJsonLint');
+const NpmPackageJsonLint = require('../../src/NpmPackageJsonLint');
 
 describe('NpmPackageJsonLint Unit Tests', () => {
   describe('lint method', () => {

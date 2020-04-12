@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/no-absolute-version-dependencies');
+const ruleModule = require('../../../src/rules/no-absolute-version-dependencies');
 
 const {lint, ruleType} = ruleModule;
 

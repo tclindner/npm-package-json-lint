@@ -1,7 +1,7 @@
 /* eslint no-restricted-syntax: 'off' */
 
-const {isObject} = require('./../validators/type');
-const LintIssue = require('./../LintIssue');
+const {isObject} = require('../validators/type');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'scripts-type';
 const nodeName = 'scripts';

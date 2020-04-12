@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/require-peerDependencies');
+const ruleModule = require('../../../src/rules/require-peerDependencies');
 
 const {lint, ruleType} = ruleModule;
 

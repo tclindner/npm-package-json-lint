@@ -1,5 +1,5 @@
 const {cosmiconfigSync} = require('cosmiconfig');
-const Config = require('./../../src/Config');
+const Config = require('../../src/Config');
 const applyOverrides = require('../../src/config/applyOverrides');
 const applyExtendsIfSpecified = require('../../src/config/applyExtendsIfSpecified');
 const Rules = require('../../src/Rules');

@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/require-author');
+const ruleModule = require('../../../src/rules/require-author');
 
 const {lint, ruleType} = ruleModule;
 

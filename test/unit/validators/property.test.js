@@ -1,4 +1,4 @@
-const property = require('./../../../src/validators/property');
+const property = require('../../../src/validators/property');
 
 describe('property Unit Tests', () => {
   describe('exists method', () => {

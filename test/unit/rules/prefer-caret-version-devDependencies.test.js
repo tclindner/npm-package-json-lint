@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/prefer-caret-version-devDependencies');
+const ruleModule = require('../../../src/rules/prefer-caret-version-devDependencies');
 const dependencyAudit = require('../../../src/validators/dependency-audit');
 const property = require('../../../src/validators/property');
 

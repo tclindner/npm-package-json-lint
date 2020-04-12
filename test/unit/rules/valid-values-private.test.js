@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/valid-values-private');
+const ruleModule = require('../../../src/rules/valid-values-private');
 
 const {lint, ruleType, minItems} = ruleModule;
 

@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/require-repository-directory');
+const ruleModule = require('../../../src/rules/require-repository-directory');
 
 const {lint, ruleType} = ruleModule;
 

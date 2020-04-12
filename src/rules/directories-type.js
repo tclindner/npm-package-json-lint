@@ -1,5 +1,5 @@
-const {isObject} = require('./../validators/type');
-const LintIssue = require('./../LintIssue');
+const {isObject} = require('../validators/type');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'directories-type';
 const nodeName = 'directories';

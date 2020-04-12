@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/cpu-type');
+const ruleModule = require('../../../src/rules/cpu-type');
 
 const {lint, ruleType} = ruleModule;
 

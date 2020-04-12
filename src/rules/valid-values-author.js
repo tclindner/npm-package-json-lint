@@ -1,7 +1,7 @@
-const LintIssue = require('./../LintIssue');
-const {isString} = require('./../validators/type');
-const {isObject} = require('./../validators/type');
-const {isValidValue} = require('./../validators/valid-values');
+const LintIssue = require('../LintIssue');
+const {isString} = require('../validators/type');
+const {isObject} = require('../validators/type');
+const {isValidValue} = require('../validators/valid-values');
 
 const lintId = 'valid-values-author';
 const nodeName = 'author';

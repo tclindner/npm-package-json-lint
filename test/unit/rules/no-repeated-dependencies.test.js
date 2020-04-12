@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/no-repeated-dependencies');
+const ruleModule = require('../../../src/rules/no-repeated-dependencies');
 const property = require('../../../src/validators/property');
 
 const {lint, ruleType} = ruleModule;

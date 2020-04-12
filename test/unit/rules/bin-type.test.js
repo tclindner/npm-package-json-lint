@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/bin-type');
+const ruleModule = require('../../../src/rules/bin-type');
 
 const {lint, ruleType} = ruleModule;
 

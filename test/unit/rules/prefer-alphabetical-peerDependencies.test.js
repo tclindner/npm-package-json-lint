@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/prefer-alphabetical-peerDependencies');
+const ruleModule = require('../../../src/rules/prefer-alphabetical-peerDependencies');
 const alphabeticalSort = require('../../../src/validators/alphabetical-sort');
 const property = require('../../../src/validators/property');
 

@@ -1,5 +1,5 @@
-const LintIssue = require('./../LintIssue');
-const {isValidValue} = require('./../validators/valid-values');
+const LintIssue = require('../LintIssue');
+const {isValidValue} = require('../validators/valid-values');
 
 const lintId = 'valid-values-private';
 const nodeName = 'private';

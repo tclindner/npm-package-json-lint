@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/no-restricted-pre-release-devDependencies');
+const ruleModule = require('../../../src/rules/no-restricted-pre-release-devDependencies');
 
 const {lint, ruleType, minItems} = ruleModule;
 

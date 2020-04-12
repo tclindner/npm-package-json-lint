@@ -1,4 +1,4 @@
-const LintIssue = require('./../LintIssue');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'require-repository-directory';
 const nodeName = 'repository';

@@ -1,6 +1,6 @@
-const {isArray} = require('./../validators/type');
-const {isString} = require('./../validators/type');
-const LintIssue = require('./../LintIssue');
+const {isArray} = require('../validators/type');
+const {isString} = require('../validators/type');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'man-type';
 const nodeName = 'man';

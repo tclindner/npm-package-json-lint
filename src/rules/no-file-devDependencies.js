@@ -1,5 +1,5 @@
-const {doVersContainFileUrl} = require('./../validators/dependency-audit');
-const LintIssue = require('./../LintIssue');
+const {doVersContainFileUrl} = require('../validators/dependency-audit');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'no-file-devDependencies';
 const nodeName = 'devDependencies';
