@@ -54,6 +54,10 @@ Quick links
 
 [CLI commands and configuration](https://npmpackagejsonlint.org/docs/en/cli) | [Node.js API](https://npmpackagejsonlint.org/docs/en/api)
 
+## Migrating from v4.x.x to 5.x.x
+
+Please see the [migration guide](https://npmpackagejsonlint.org/docs/en/v4-to-v5).
+
 ## Migrating from v3.x.x to 4.x.x
 
 Please see the [migration guide](https://npmpackagejsonlint.org/docs/en/v3-to-v4).
