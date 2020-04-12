@@ -1,6 +1,7 @@
 ---
-id: v4-to-v5
+id: version-5.0.0-v4-to-v5
 title: v4 to v5 Migration Guide
+original_id: v4-to-v5
 ---
 
 v5.0.0 Migration Guide

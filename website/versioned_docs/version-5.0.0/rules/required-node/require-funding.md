@@ -1,6 +1,7 @@
 ---
-id: require-funding
+id: version-5.0.0-require-funding
 title: require-funding
+original_id: require-funding
 ---
 
 Enabling this rule will result in an error being generated if `funding` is missing from the package.json file.
