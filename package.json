@@ -40,7 +40,7 @@
     "chalk": "^4.0.0",
     "cosmiconfig": "^5.2.1",
     "debug": "^4.1.1",
-    "globby": "^10.0.1",
+    "globby": "^11.0.0",
     "ignore": "^5.1.4",
     "is-plain-obj": "^2.1.0",
     "jsonc-parser": "^2.2.1",
