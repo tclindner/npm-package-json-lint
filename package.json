@@ -49,7 +49,7 @@
     "plur": "^3.1.1",
     "semver": "^7.2.2",
     "slash": "^3.0.0",
-    "strip-json-comments": "^3.0.1"
+    "strip-json-comments": "^3.1.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
