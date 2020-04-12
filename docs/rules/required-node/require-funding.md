@@ -29,7 +29,7 @@ Enabling this rule will result in an error being generated if `funding` is missi
 
 ```json
 {
-  "funding": ["index.js"]
+  "funding": "https://github.com/ORG/REPO?sponsor=1"
 }
 ```
 
