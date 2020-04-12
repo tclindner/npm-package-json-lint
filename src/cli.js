@@ -11,7 +11,7 @@ const exitCodes = {
   oneMissingTarget: 1,
   twoLintErrorsDetected: 2,
   runTimeException: 3,
-  exceedMaxWarnings: 4
+  exceedMaxWarnings: 4,
 };
 
 // configure cli
@@ -47,33 +47,33 @@ const cli = meow(
       quiet: {
         type: 'boolean',
         alias: 'q',
-        default: false
+        default: false,
       },
       noConfigFiles: {
         type: 'boolean',
         alias: 'ncf',
-        default: false
+        default: false,
       },
       configFile: {
         type: 'string',
         alias: 'c',
-        default: ''
+        default: '',
       },
       ignorePath: {
         type: 'string',
         alias: 'i',
-        default: ''
+        default: '',
       },
       maxWarnings: {
         type: 'number',
         alias: 'mw',
-        default: 10000000
+        default: 10000000,
       },
       allowEmptyTargets: {
         type: 'boolean',
-        default: false
-      }
-    }
+        default: false,
+      },
+    },
   }
 );
 
@@ -104,7 +104,7 @@ try {
     configFile: cli.flags.configFile,
     patterns,
     ignorePath: cli.flags.ignorePath,
-    quiet: cli.flags.quiet
+    quiet: cli.flags.quiet,
   });
   const linterOutput = npmPackageJsonLint.lint();
 

@@ -3,7 +3,7 @@ const Parser = require('../../../src/Parser');
 
 const {lint, ruleType} = ruleModule;
 
-const parsePackageJson = source => {
+const parsePackageJson = (source) => {
   const json = JSON.parse(source);
 
   json[Parser.sourceSymbol] = source;

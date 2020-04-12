@@ -12,7 +12,7 @@ describe('require-description Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        description: 'description'
+        description: 'description',
       };
       const response = lint(packageJsonData, 'error');
 

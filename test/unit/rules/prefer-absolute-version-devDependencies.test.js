@@ -23,12 +23,12 @@ describe('prefer-absolute-version-devDependencies Unit Tests', () => {
 
       const packageJsonData = {
         devDependencies: {
-          'npm-package-json-lint': '~1.0.0'
-        }
+          'npm-package-json-lint': '~1.0.0',
+        },
       };
       const severity = 'error';
       const config = {
-        expections: ['grunt-npm-package-json-lint']
+        expections: ['grunt-npm-package-json-lint'],
       };
       const response = lint(packageJsonData, severity, config);
 
@@ -51,12 +51,12 @@ describe('prefer-absolute-version-devDependencies Unit Tests', () => {
 
       const packageJsonData = {
         devDependencies: {
-          'gulp-npm-package-json-lint': '1.0.0'
-        }
+          'gulp-npm-package-json-lint': '1.0.0',
+        },
       };
       const severity = 'error';
       const config = {
-        expections: ['grunt-npm-package-json-lint']
+        expections: ['grunt-npm-package-json-lint'],
       };
       const response = lint(packageJsonData, severity, config);
 
@@ -76,7 +76,7 @@ describe('prefer-absolute-version-devDependencies Unit Tests', () => {
       const packageJsonData = {};
       const severity = 'error';
       const config = {
-        expections: ['grunt-npm-package-json-lint']
+        expections: ['grunt-npm-package-json-lint'],
       };
       const response = lint(packageJsonData, severity, config);
 

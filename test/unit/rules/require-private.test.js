@@ -12,7 +12,7 @@ describe('require-private Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        private: 'private'
+        private: 'private',
       };
       const response = lint(packageJsonData, 'error');
 

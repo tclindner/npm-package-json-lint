@@ -20,7 +20,7 @@ describe('prefer-property-order Unit Tests', () => {
       const packageJsonData = {
         name: 'awesome-module',
         version: '1.0.0',
-        description: 'description'
+        description: 'description',
       };
       const preferredOrder = ['name', 'version', 'description'];
       const response = lint(packageJsonData, 'error', preferredOrder);
@@ -33,7 +33,7 @@ describe('prefer-property-order Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         name: 'awesome-module',
-        version: '1.0.0'
+        version: '1.0.0',
       };
       const preferredOrder = ['name', 'version', 'description'];
       const response = lint(packageJsonData, 'error', preferredOrder);
@@ -47,7 +47,7 @@ describe('prefer-property-order Unit Tests', () => {
       const packageJsonData = {
         name: 'awesome-module',
         description: 'description',
-        version: '1.0.0'
+        version: '1.0.0',
       };
       const preferredOrder = ['name', 'version', 'description'];
       const response = lint(packageJsonData, 'error', preferredOrder);

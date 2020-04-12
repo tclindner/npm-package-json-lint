@@ -26,7 +26,7 @@ describe('cosmicConfigTransformer Unit Tests', () => {
         path.dirname.mockReturnValue('./myConfig');
         applyExtendsIfSpecified.mockReturnValue({
           rules: 'rules',
-          overrides: 'overrides'
+          overrides: 'overrides',
         });
         applyOverrides.mockReturnValue('appliedOverrides');
 
@@ -37,9 +37,9 @@ describe('cosmicConfigTransformer Unit Tests', () => {
         const transformer = cosmicConfigTransformer.transform(cwd, configBaseDirectory, filePathBeingLinted);
         const cosmiconfigResult = {
           config: {
-            property: 'value'
+            property: 'value',
           },
-          filepath: 'myFilePath'
+          filepath: 'myFilePath',
         };
         const actual = transformer(cosmiconfigResult);
         expect(actual).toStrictEqual('appliedOverrides');
@@ -57,7 +57,7 @@ describe('cosmicConfigTransformer Unit Tests', () => {
         path.dirname.mockReturnValue('./myConfig');
         applyExtendsIfSpecified.mockReturnValue({
           rules: 'rules',
-          overrides: 'overrides'
+          overrides: 'overrides',
         });
         applyOverrides.mockReturnValue('appliedOverrides');
 
@@ -68,9 +68,9 @@ describe('cosmicConfigTransformer Unit Tests', () => {
         const transformer = cosmicConfigTransformer.transform(cwd, configBaseDirectory, filePathBeingLinted);
         const cosmiconfigResult = {
           config: {
-            property: 'value'
+            property: 'value',
           },
-          filepath: 'myFilePath'
+          filepath: 'myFilePath',
         };
         const actual = transformer(cosmiconfigResult);
         expect(actual).toStrictEqual('appliedOverrides');

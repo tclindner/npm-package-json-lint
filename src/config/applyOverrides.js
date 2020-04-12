@@ -18,19 +18,19 @@ const applyOverrides = (cwd, filePath, rules, overrides) => {
   debug(overrides);
 
   if (overrides) {
-    overrides.forEach(override => {
-      const filteredPatterns = override.patterns.filter(pattern => pattern.length);
-      const transformedPatterns = filteredPatterns.map(pattern => {
+    overrides.forEach((override) => {
+      const filteredPatterns = override.patterns.filter((pattern) => pattern.length);
+      const transformedPatterns = filteredPatterns.map((pattern) => {
         return pattern.endsWith(`/package.json`) ? pattern : `${pattern}/package.json`;
       });
 
       const globFiles = globby.sync(transformedPatterns, {
-        gitignore: true
+        gitignore: true,
       });
 
       debug('globFiles');
       debug(globFiles);
-      globFiles.forEach(globFile => {
+      globFiles.forEach((globFile) => {
         const globbedFilePath = path.resolve(cwd, globFile);
 
         if (filePath === globbedFilePath) {

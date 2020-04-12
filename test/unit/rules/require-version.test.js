@@ -12,7 +12,7 @@ describe('require-version Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        version: 'version'
+        version: 'version',
       };
       const response = lint(packageJsonData, 'error');
 

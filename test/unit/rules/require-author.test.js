@@ -12,7 +12,7 @@ describe('require-author Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        author: 'author'
+        author: 'author',
       };
       const response = lint(packageJsonData, 'error');
 

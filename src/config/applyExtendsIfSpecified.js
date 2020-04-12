@@ -99,7 +99,7 @@ const loadFromModule = (moduleName, originalFilePath) => {
  * @returns {Object} The configuration information.
  * @private
  */
-const loadConfigFile = filePath => {
+const loadConfigFile = (filePath) => {
   let config = {};
 
   switch (path.extname(filePath)) {

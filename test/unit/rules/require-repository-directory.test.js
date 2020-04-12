@@ -26,8 +26,8 @@ describe('require-repository-directory Unit Tests', () => {
       const packageJsonData = {
         repository: {
           url: 'https://github.com/packages/monorepo',
-          directory: 'packages/somepackage'
-        }
+          directory: 'packages/somepackage',
+        },
       };
       const response = lint(packageJsonData, 'error');
 
@@ -39,8 +39,8 @@ describe('require-repository-directory Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         repository: {
-          url: 'https://github.com/packages/monorepo'
-        }
+          url: 'https://github.com/packages/monorepo',
+        },
       };
       const response = lint(packageJsonData, 'error');
 

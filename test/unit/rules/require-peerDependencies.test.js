@@ -12,7 +12,7 @@ describe('require-peerDependencies Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        peerDependencies: 'peerDependencies'
+        peerDependencies: 'peerDependencies',
       };
       const response = lint(packageJsonData, 'error');
 

@@ -12,7 +12,7 @@ describe('homepage-type Unit Tests', () => {
   describe('when package.json has node with incorrect type', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        homepage: true
+        homepage: true,
       };
       const response = lint(packageJsonData, 'error');
 

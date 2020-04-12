@@ -12,7 +12,7 @@ describe('require-bugs Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        bugs: 'bugs'
+        bugs: 'bugs',
       };
       const response = lint(packageJsonData, 'error');
 

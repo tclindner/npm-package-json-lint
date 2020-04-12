@@ -20,11 +20,11 @@ describe('no-repeated-dependencies Unit Tests', () => {
         dependencies: {
           express: '^1.0.0',
           jest: '^1.0.0',
-          meow: '^1.0.0'
+          meow: '^1.0.0',
         },
         devDependencies: {
-          jest: '^1.0.0'
-        }
+          jest: '^1.0.0',
+        },
       };
       const response = lint(packageJsonData, 'error');
 
@@ -49,11 +49,11 @@ describe('no-repeated-dependencies Unit Tests', () => {
         dependencies: {
           express: '^1.0.0',
           jest: '^1.0.0',
-          meow: '^1.0.0'
+          meow: '^1.0.0',
         },
         devDependencies: {
-          mocha: '^1.0.0'
-        }
+          mocha: '^1.0.0',
+        },
       };
       const response = lint(packageJsonData, 'error');
 
@@ -67,8 +67,8 @@ describe('no-repeated-dependencies Unit Tests', () => {
 
       const packageJsonData = {
         devDependencies: {
-          mocha: '^1.0.0'
-        }
+          mocha: '^1.0.0',
+        },
       };
       const response = lint(packageJsonData, 'error');
 
@@ -86,8 +86,8 @@ describe('no-repeated-dependencies Unit Tests', () => {
 
       const packageJsonData = {
         dependencies: {
-          mocha: '^1.0.0'
-        }
+          mocha: '^1.0.0',
+        },
       };
       const response = lint(packageJsonData, 'error');
 

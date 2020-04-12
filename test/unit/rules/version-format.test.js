@@ -12,7 +12,7 @@ describe('version-format Unit Tests', () => {
   describe('when package.json has node with invalid version', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        version: '1.a.0'
+        version: '1.a.0',
       };
       const response = lint(packageJsonData, 'error');
 
@@ -26,7 +26,7 @@ describe('version-format Unit Tests', () => {
   describe('when package.json has node with valid version', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        version: '1.0.0'
+        version: '1.0.0',
       };
       const response = lint(packageJsonData, 'error');
 

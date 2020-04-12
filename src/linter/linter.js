@@ -33,7 +33,7 @@ const createResultObject = ({cwd, fileName, ignored, issues, errorCount, warning
     issues,
     ignored,
     errorCount,
-    warningCount
+    warningCount,
   };
 };
 
@@ -102,7 +102,7 @@ const processPackageJsonObject = (cwd, packageJsonObj, config, fileName, rules) 
     ignored: false,
     issues: lintIssues,
     errorCount: counts.errorCount,
-    warningCount: counts.warningCount
+    warningCount: counts.warningCount,
   });
 
   return result;
@@ -161,7 +161,7 @@ const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ignorer, 
       ignored: true,
       issues: [],
       errorCount: 0,
-      warningCount: 0
+      warningCount: 0,
     });
 
     results.push(result);
@@ -185,7 +185,7 @@ const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ignorer, 
     results,
     ignoreCount: stats.ignoreCount,
     errorCount: stats.errorCount,
-    warningCount: stats.warningCount
+    warningCount: stats.warningCount,
   };
 };
 
@@ -200,7 +200,7 @@ const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ignorer, 
  */
 const executeOnPackageJsonFiles = ({cwd, fileList, ignorer, configHelper, rules}) => {
   debug('executing on package.json files');
-  const results = fileList.map(filePath => {
+  const results = fileList.map((filePath) => {
     const relativeFilePath = path.relative(cwd, filePath);
 
     if (ignorer.ignores(relativeFilePath)) {
@@ -212,7 +212,7 @@ const executeOnPackageJsonFiles = ({cwd, fileList, ignorer, configHelper, rules}
         ignored: true,
         issues: [],
         errorCount: 0,
-        warningCount: 0
+        warningCount: 0,
       });
     }
 
@@ -234,11 +234,11 @@ const executeOnPackageJsonFiles = ({cwd, fileList, ignorer, configHelper, rules}
     results,
     ignoreCount: stats.ignoreCount,
     errorCount: stats.errorCount,
-    warningCount: stats.warningCount
+    warningCount: stats.warningCount,
   };
 };
 
 module.exports = {
   executeOnPackageJsonObject,
-  executeOnPackageJsonFiles
+  executeOnPackageJsonFiles,
 };

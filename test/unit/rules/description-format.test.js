@@ -12,11 +12,11 @@ describe('description-format Unit Tests', () => {
   describe('when package.json has node with incorrect format', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        description: true
+        description: true,
       };
       const config = {
         requireCapitalFirstLetter: true,
-        requireEndingPeriod: true
+        requireEndingPeriod: true,
       };
       const response = lint(packageJsonData, 'error', config);
 
@@ -30,10 +30,10 @@ describe('description-format Unit Tests', () => {
   describe('when package.json has node with lowercase first letter', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        description: 'lowercase'
+        description: 'lowercase',
       };
       const config = {
-        requireCapitalFirstLetter: true
+        requireCapitalFirstLetter: true,
       };
       const response = lint(packageJsonData, 'error', config);
 
@@ -49,11 +49,11 @@ describe('description-format Unit Tests', () => {
   describe('when package.json has requireEndingPeriod and forbidEndingPeriod set', () => {
     test('An exception should be thrown', () => {
       const packageJsonData = {
-        description: 'My description'
+        description: 'My description',
       };
       const config = {
         forbidEndingPeriod: true,
-        requireEndingPeriod: true
+        requireEndingPeriod: true,
       };
 
       expect(() => {
@@ -65,10 +65,10 @@ describe('description-format Unit Tests', () => {
   describe('when package.json has node without period at end', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        description: 'My description'
+        description: 'My description',
       };
       const config = {
-        requireEndingPeriod: true
+        requireEndingPeriod: true,
       };
       const response = lint(packageJsonData, 'error', config);
 
@@ -82,10 +82,10 @@ describe('description-format Unit Tests', () => {
   describe('when package.json has node with period at end', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        description: 'My description.'
+        description: 'My description.',
       };
       const config = {
-        forbidEndingPeriod: true
+        forbidEndingPeriod: true,
       };
       const response = lint(packageJsonData, 'error', config);
 
@@ -99,10 +99,10 @@ describe('description-format Unit Tests', () => {
   describe('when package.json has empty node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        description: ''
+        description: '',
       };
       const config = {
-        requireCapitalFirstLetter: true
+        requireCapitalFirstLetter: true,
       };
       const response = lint(packageJsonData, 'error', config);
 
@@ -113,11 +113,11 @@ describe('description-format Unit Tests', () => {
   describe('when package.json has node with correct format', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        description: 'My description.'
+        description: 'My description.',
       };
       const config = {
         requireCapitalFirstLetter: true,
-        requireEndingPeriod: true
+        requireEndingPeriod: true,
       };
       const response = lint(packageJsonData, 'error', config);
 
@@ -128,7 +128,7 @@ describe('description-format Unit Tests', () => {
   describe('when no rule config passed', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        description: 'lowercase'
+        description: 'lowercase',
       };
       const config = {};
       const response = lint(packageJsonData, 'error', config);
@@ -142,7 +142,7 @@ describe('description-format Unit Tests', () => {
       const packageJsonData = {};
       const config = {
         requireCapitalFirstLetter: true,
-        requireEndingPeriod: true
+        requireEndingPeriod: true,
       };
       const response = lint(packageJsonData, 'error', config);
 

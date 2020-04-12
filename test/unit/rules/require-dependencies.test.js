@@ -12,7 +12,7 @@ describe('require-dependencies Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        dependencies: 'dependencies'
+        dependencies: 'dependencies',
       };
       const response = lint(packageJsonData, 'error');
 

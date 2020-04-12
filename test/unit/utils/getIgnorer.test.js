@@ -13,7 +13,7 @@ describe('getIgnorer Unit Tests', () => {
     const addMock = jest.fn().mockReturnValue('done');
     ignore.mockImplementation(() => {
       return {
-        add: addMock
+        add: addMock,
       };
     });
     fs.readFileSync.mockReturnValue('ignore content');
@@ -33,7 +33,7 @@ describe('getIgnorer Unit Tests', () => {
     const addMock = jest.fn().mockReturnValue('done');
     ignore.mockImplementation(() => {
       return {
-        add: addMock
+        add: addMock,
       };
     });
     fs.readFileSync.mockReturnValue('ignore content');

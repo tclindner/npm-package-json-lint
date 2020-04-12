@@ -9,7 +9,7 @@ describe('Parser Unit Tests', () => {
       test('an object should be returned', () => {
         const json = '{"key": "value"}';
         const obj = {
-          key: 'value'
+          key: 'value',
         };
         fs.readFileSync.mockReturnValue(json);
 

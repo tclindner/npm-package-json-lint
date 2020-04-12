@@ -8,14 +8,14 @@ describe('resultsHelper Unit Tests', () => {
           lintId: 'require-name',
           severity: 'error',
           node: 'name',
-          lintMessage: 'dummyText'
+          lintMessage: 'dummyText',
         },
         {
           lintId: 'require-name',
           severity: 'warning',
           node: 'name',
-          lintMessage: 'dummyText'
-        }
+          lintMessage: 'dummyText',
+        },
       ];
       const result = resultsHelper.aggregateCountsPerFile(issues);
 
@@ -39,26 +39,26 @@ describe('resultsHelper Unit Tests', () => {
           issues: [],
           ignored: true,
           errorCount: 0,
-          warningCount: 0
+          warningCount: 0,
         },
         {
           issues: [],
           ignored: false,
           errorCount: 1,
-          warningCount: 1
+          warningCount: 1,
         },
         {
           issues: [],
           ignored: false,
           errorCount: 9,
-          warningCount: 0
+          warningCount: 0,
         },
         {
           issues: [],
           ignored: true,
           errorCount: 0,
-          warningCount: 0
-        }
+          warningCount: 0,
+        },
       ];
       const result = resultsHelper.aggregateOverallCounts(results);
 

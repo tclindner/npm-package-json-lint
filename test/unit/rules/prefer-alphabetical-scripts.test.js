@@ -22,8 +22,8 @@ describe('prefer-alphabetical-scripts Unit Tests', () => {
         status: false,
         data: {
           invalidNode: 'test',
-          validNode: 'start'
-        }
+          validNode: 'start',
+        },
       });
       property.exists.mockReturnValue(true);
 
@@ -31,8 +31,8 @@ describe('prefer-alphabetical-scripts Unit Tests', () => {
         scripts: {
           build: 'build script',
           test: 'jest',
-          start: 'node index.js'
-        }
+          start: 'node index.js',
+        },
       };
       const response = lint(packageJsonData, 'error');
 
@@ -54,7 +54,7 @@ describe('prefer-alphabetical-scripts Unit Tests', () => {
     test('true should be returned', () => {
       alphabeticalSort.isInAlphabeticalOrder.mockReturnValue({
         status: true,
-        data: {}
+        data: {},
       });
       property.exists.mockReturnValue(true);
 
@@ -62,8 +62,8 @@ describe('prefer-alphabetical-scripts Unit Tests', () => {
         scripts: {
           build: 'build script',
           start: 'node index.js',
-          test: 'jest'
-        }
+          test: 'jest',
+        },
       };
       const response = lint(packageJsonData, 'error');
 

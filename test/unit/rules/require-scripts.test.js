@@ -12,7 +12,7 @@ describe('require-scripts Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        scripts: 'scripts'
+        scripts: 'scripts',
       };
       const response = lint(packageJsonData, 'error');
 

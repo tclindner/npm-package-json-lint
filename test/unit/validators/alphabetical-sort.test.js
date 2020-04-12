@@ -8,8 +8,8 @@ describe('alphabetical-sort Unit Tests', () => {
           devDependencies: {
             chalk: '^1.1.3',
             semver: '^5.3.0',
-            'user-home': '^2.0.0'
-          }
+            'user-home': '^2.0.0',
+          },
         };
         const response = alphabeticalSort.isInAlphabeticalOrder(packageJson, 'devDependencies');
 
@@ -25,8 +25,8 @@ describe('alphabetical-sort Unit Tests', () => {
           devDependencies: {
             semver: '^5.3.0',
             chalk: '^1.1.3',
-            'user-home': '^2.0.0'
-          }
+            'user-home': '^2.0.0',
+          },
         };
         const response = alphabeticalSort.isInAlphabeticalOrder(packageJson, 'devDependencies');
 

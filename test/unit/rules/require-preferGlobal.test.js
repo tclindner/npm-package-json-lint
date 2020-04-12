@@ -12,7 +12,7 @@ describe('require-preferGlobal Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        preferGlobal: 'preferGlobal'
+        preferGlobal: 'preferGlobal',
       };
       const response = lint(packageJsonData, 'error');
 

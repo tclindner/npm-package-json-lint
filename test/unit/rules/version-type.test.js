@@ -12,7 +12,7 @@ describe('version-type Unit Tests', () => {
   describe('when package.json has node with incorrect type', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        version: true
+        version: true,
       };
       const response = lint(packageJsonData, 'error');
 

@@ -12,7 +12,7 @@ describe('require-optionalDependencies Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        optionalDependencies: 'optionalDependencies'
+        optionalDependencies: 'optionalDependencies',
       };
       const response = lint(packageJsonData, 'error');
 

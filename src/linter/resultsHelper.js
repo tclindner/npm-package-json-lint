@@ -11,7 +11,7 @@
  * @param {LintIssue[]} issues Array of {@link LintIssue} objects from a package.json file.
  * @returns {FileResultCounts} Counts object {@link FileResultCounts}.
  */
-const aggregateCountsPerFile = issues => {
+const aggregateCountsPerFile = (issues) => {
   const incrementOne = 1;
 
   return issues.reduce(
@@ -22,12 +22,12 @@ const aggregateCountsPerFile = issues => {
 
       return {
         errorCount: newErrorCount,
-        warningCount: newWarningCount
+        warningCount: newWarningCount,
       };
     },
     {
       errorCount: 0,
-      warningCount: 0
+      warningCount: 0,
     }
   );
 };
@@ -46,24 +46,24 @@ const aggregateCountsPerFile = issues => {
  * @param {FileLintResult[]} results Array of {@link FileLintResult} objects from all package.json files.
  * @returns {OverallResultCounts} Counts object {@link OverallResultCounts}
  */
-const aggregateOverallCounts = results => {
+const aggregateOverallCounts = (results) => {
   return results.reduce(
     (counts, result) => {
       return {
         ignoreCount: result.ignored ? counts.ignoreCount + 1 : counts.ignoreCount,
         errorCount: counts.errorCount + result.errorCount,
-        warningCount: counts.warningCount + result.warningCount
+        warningCount: counts.warningCount + result.warningCount,
       };
     },
     {
       ignoreCount: 0,
       errorCount: 0,
-      warningCount: 0
+      warningCount: 0,
     }
   );
 };
 
 module.exports = {
   aggregateCountsPerFile,
-  aggregateOverallCounts
+  aggregateOverallCounts,
 };

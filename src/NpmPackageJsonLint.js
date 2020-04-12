@@ -19,11 +19,11 @@ const noIssues = 0;
  * @returns {boolean} True if error, false if warning.
  * @private
  */
-const isIssueAnError = issue => {
+const isIssueAnError = (issue) => {
   return issue.severity === 'error';
 };
 
-const isPackageJsonObjectValid = packageJsonObject => isPlainObj(packageJsonObject);
+const isPackageJsonObjectValid = (packageJsonObject) => isPlainObj(packageJsonObject);
 
 const areRequiredOptionsValid = (packageJsonObject, patterns) => {
   return (
@@ -38,17 +38,17 @@ const areRequiredOptionsValid = (packageJsonObject, patterns) => {
  * @param {LintResult[]} results The results to filter.
  * @returns {LintResult[]} The filtered results.
  */
-const getErrorResults = results => {
+const getErrorResults = (results) => {
   const filtered = [];
 
-  results.forEach(result => {
+  results.forEach((result) => {
     const filteredIssues = result.issues.filter(isIssueAnError);
 
     if (filteredIssues.length > noIssues) {
       const filteredResult = {
         issues: filteredIssues,
         errorCount: filteredIssues.length,
-        warningCount: 0
+        warningCount: 0,
       };
 
       filtered.push(Object.assign(result, filteredResult));
@@ -88,7 +88,7 @@ class NpmPackageJsonLint {
     patterns,
     quiet,
     ignorePath,
-    fix
+    fix,
   }) {
     this.cwd = slash(cwd || process.cwd());
 
@@ -140,7 +140,7 @@ class NpmPackageJsonLint {
         fileList,
         ignorer,
         configHelper: this.configHelper,
-        rules: this.rules
+        rules: this.rules,
       });
     } else {
       debug('Linting using passed object.');
@@ -150,7 +150,7 @@ class NpmPackageJsonLint {
         ignorer,
         filename: this.packageJsonFilePath,
         configHelper: this.configHelper,
-        rules: this.rules
+        rules: this.rules,
       });
     }
 
@@ -161,7 +161,7 @@ class NpmPackageJsonLint {
         results: errorsOnly,
         ignoreCount: linterOutput.ignoreCount,
         errorCount: linterOutput.errorCount,
-        warningCount: linterOutput.warningCount
+        warningCount: linterOutput.warningCount,
       };
     }
 

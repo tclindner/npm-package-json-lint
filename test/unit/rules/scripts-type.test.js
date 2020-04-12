@@ -13,8 +13,8 @@ describe('scripts-type Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {
         scripts: {
-          myscript: 'echo hello'
-        }
+          myscript: 'echo hello',
+        },
       };
       const response = lint(packageJsonData, 'error');
 
@@ -25,7 +25,7 @@ describe('scripts-type Unit Tests', () => {
   describe('when package.json has node with incorrect type', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        scripts: 'scripts'
+        scripts: 'scripts',
       };
       const response = lint(packageJsonData, 'error');
 
@@ -40,8 +40,8 @@ describe('scripts-type Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         scripts: {
-          myscript: false
-        }
+          myscript: false,
+        },
       };
       const response = lint(packageJsonData, 'error');
 
@@ -57,9 +57,9 @@ describe('scripts-type Unit Tests', () => {
       const packageJsonData = {
         scripts: {
           myscript: {
-            hello: true
-          }
-        }
+            hello: true,
+          },
+        },
       };
       const response = lint(packageJsonData, 'error');
 

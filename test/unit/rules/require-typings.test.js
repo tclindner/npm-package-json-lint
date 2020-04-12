@@ -12,7 +12,7 @@ describe('require-typings Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        typings: './lib/main.d.ts'
+        typings: './lib/main.d.ts',
       };
       const response = lint(packageJsonData, 'error');
 

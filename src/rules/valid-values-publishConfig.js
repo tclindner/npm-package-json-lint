@@ -11,7 +11,7 @@ const minItems = 1;
 const lint = (packageJsonData, severity, validValues) => {
   if (packageJsonData.hasOwnProperty(nodeName)) {
     if (isObject(packageJsonData, nodeName)) {
-      const validValuesAsJson = validValues.map(validValue => JSON.stringify(validValue));
+      const validValuesAsJson = validValues.map((validValue) => JSON.stringify(validValue));
       const valueAsJson = JSON.stringify(packageJsonData[nodeName]);
 
       if (!isValidValue(packageJsonData, nodeName, valueAsJson, validValuesAsJson)) {
@@ -28,5 +28,5 @@ const lint = (packageJsonData, severity, validValues) => {
 module.exports = {
   lint,
   ruleType,
-  minItems
+  minItems,
 };

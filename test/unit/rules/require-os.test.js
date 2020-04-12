@@ -12,7 +12,7 @@ describe('require-os Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        os: 'os'
+        os: 'os',
       };
       const response = lint(packageJsonData, 'error');
 

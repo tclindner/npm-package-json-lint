@@ -16,7 +16,7 @@ const minItems = 1;
  * @return {Object|Boolean}             LintIssue object if invalid. True if valid
  */
 const lint = (packageJsonData, severity, validValues) => {
-  const validRegexes = validValues.map(scope => new RegExp(`^${scope}/`));
+  const validRegexes = validValues.map((scope) => new RegExp(`^${scope}/`));
 
   if (!matchValidValue(packageJsonData, nodeName, packageJsonData[nodeName], validRegexes)) {
     return new LintIssue(lintId, severity, nodeName, message);
@@ -28,5 +28,5 @@ const lint = (packageJsonData, severity, validValues) => {
 module.exports = {
   lint,
   ruleType,
-  minItems
+  minItems,
 };

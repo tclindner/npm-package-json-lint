@@ -20,5 +20,5 @@ const lint = (packageJsonData, severity, preferredOrder) => {
 module.exports = {
   lint,
   ruleType,
-  minItems
+  minItems,
 };

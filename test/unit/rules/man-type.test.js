@@ -12,7 +12,7 @@ describe('man-type Unit Tests', () => {
   describe('when package.json has node with incorrect type', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        man: true
+        man: true,
       };
       const response = lint(packageJsonData, 'error');
 

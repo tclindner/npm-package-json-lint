@@ -12,7 +12,7 @@ describe('require-bundledDependencies Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        bundledDependencies: 'bundledDependencies'
+        bundledDependencies: 'bundledDependencies',
       };
       const response = lint(packageJsonData, 'error');
 

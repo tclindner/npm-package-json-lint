@@ -12,7 +12,7 @@ describe('require-repository Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        repository: 'repository'
+        repository: 'repository',
       };
       const response = lint(packageJsonData, 'error');
 

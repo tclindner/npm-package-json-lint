@@ -12,7 +12,7 @@ describe('require-bin Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        bin: 'bin'
+        bin: 'bin',
       };
       const response = lint(packageJsonData, 'error');
 

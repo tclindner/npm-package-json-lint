@@ -48,5 +48,5 @@ const lint = (packageJsonData, severity, config) => {
 
 module.exports = {
   lint,
-  ruleType
+  ruleType,
 };

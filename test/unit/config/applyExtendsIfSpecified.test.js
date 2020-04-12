@@ -6,22 +6,22 @@ describe('applyExtendsIfSpecified Unit Tests', () => {
       extends: './test/fixtures/extendsLocal/npmpackagejsonlint.config.js',
       rules: {
         'require-author': 'error',
-        'require-description': 'error'
+        'require-description': 'error',
       },
       overrides: [
         {
           patterns: ['**/package.json'],
           rules: {
-            'require-author': 'warning'
-          }
-        }
-      ]
+            'require-author': 'warning',
+          },
+        },
+      ],
     };
     const passedConfig = {
       extends: './test/fixtures/extendsLocal/npmpackagejsonlint.config.js',
       rules: {
-        'require-author': 'error'
-      }
+        'require-author': 'error',
+      },
     };
 
     const filePath = './test/fixtures/extendsLocal/package.json';
@@ -35,22 +35,22 @@ describe('applyExtendsIfSpecified Unit Tests', () => {
       extends: './test/fixtures/extendsLocal/.npmpackagejsonlintrc.json',
       rules: {
         'require-author': 'error',
-        'require-description': 'error'
+        'require-description': 'error',
       },
       overrides: [
         {
           patterns: ['**/package.json'],
           rules: {
-            'require-author': 'warning'
-          }
-        }
-      ]
+            'require-author': 'warning',
+          },
+        },
+      ],
     };
     const passedConfig = {
       extends: './test/fixtures/extendsLocal/.npmpackagejsonlintrc.json',
       rules: {
-        'require-author': 'error'
-      }
+        'require-author': 'error',
+      },
     };
 
     const filePath = './test/fixtures/extendsLocal/package.json';
@@ -63,8 +63,8 @@ describe('applyExtendsIfSpecified Unit Tests', () => {
     const passedConfig = {
       extends: './npmpackagejsonlint.config.js',
       rules: {
-        'require-author': 'error'
-      }
+        'require-author': 'error',
+      },
     };
     const filePath = './test/fixtures/extendsLocalInvalid/package.json';
 
@@ -77,8 +77,8 @@ describe('applyExtendsIfSpecified Unit Tests', () => {
     const passedConfig = {
       extends: './npmpackagejsonlintrc.md',
       rules: {
-        'require-author': 'error'
-      }
+        'require-author': 'error',
+      },
     };
     const filePath = './test/fixtures/extendsLocalInvalid/package.json';
 
@@ -118,14 +118,14 @@ describe('applyExtendsIfSpecified Unit Tests', () => {
         'require-version': 'error',
         'scripts-type': 'error',
         'version-format': 'error',
-        'version-type': 'error'
-      }
+        'version-type': 'error',
+      },
     };
     const passedConfig = {
       extends: 'npm-package-json-lint-config-default',
       rules: {
-        'require-author': 'error'
-      }
+        'require-author': 'error',
+      },
     };
     const filePath = './test/fixtures/extendsModule/package.json';
     const result = applyExtendsIfSpecified(passedConfig, filePath);
@@ -139,8 +139,8 @@ describe('applyExtendsIfSpecified Unit Tests', () => {
     const passedConfig = {
       extends: 'npm-package-json-lint-config-awesome-module',
       rules: {
-        'require-author': 'error'
-      }
+        'require-author': 'error',
+      },
     };
 
     expect(() => {

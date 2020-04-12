@@ -12,7 +12,7 @@ describe('require-publishConfig Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        publishConfig: 'publishConfig'
+        publishConfig: 'publishConfig',
       };
       const response = lint(packageJsonData, 'error');
 

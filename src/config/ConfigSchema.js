@@ -11,8 +11,8 @@ ajvErrors(ajv);
  * @param {Array} errors An array of error messages to format.
  * @returns {String} Formatted error message
  */
-const formatSchemaErrors = errors => {
-  return errors.map(error => `\t- ${error.message}\n`).join('');
+const formatSchemaErrors = (errors) => {
+  return errors.map((error) => `\t- ${error.message}\n`).join('');
 };
 
 const standardRuleSchema = {
@@ -20,11 +20,11 @@ const standardRuleSchema = {
   enum: ['off', 'warning', 'error'],
   errorMessage: {
     type: 'severity must be a string.',
-    enum: 'severity must be either "off", "warning", or "error".'
-  }
+    enum: 'severity must be either "off", "warning", or "error".',
+  },
 };
 
-const arrayRuleSchema = minItems => {
+const arrayRuleSchema = (minItems) => {
   return {
     type: 'array',
     items: [
@@ -36,9 +36,9 @@ const arrayRuleSchema = minItems => {
         errorMessage: {
           type: 'the second item in an array rule config must be an array.',
           minItems: 'the second item in an array rule config must have at least 1 item.',
-          uniqueItems: 'the second item in an array rule config must have unique items.'
-        }
-      }
+          uniqueItems: 'the second item in an array rule config must have unique items.',
+        },
+      },
     ],
     minItems: 2,
     maxItems: 2,
@@ -48,8 +48,8 @@ const arrayRuleSchema = minItems => {
       minItems: 'array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].',
       maxItems: 'array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].',
       additionalItems:
-        'array rules are only allowed two items, severity and the list is values. e.g. ["error", ["value1", "value2"]].'
-    }
+        'array rules are only allowed two items, severity and the list is values. e.g. ["error", ["value1", "value2"]].',
+    },
   };
 };
 
@@ -60,9 +60,9 @@ const objectRuleSchema = {
     {
       type: 'object',
       errorMessage: {
-        type: 'the second item in an object rule config must be an object.'
-      }
-    }
+        type: 'the second item in an object rule config must be an object.',
+      },
+    },
   ],
   minItems: 2,
   maxItems: 2,
@@ -71,8 +71,8 @@ const objectRuleSchema = {
     type: 'rule config must be an array, e.g. ["error", {}].',
     minItems: 'object rules must have two items, severity and options object. e.g. ["error", {}].',
     maxItems: 'object rules must have two items, severity and options object. e.g. ["error", {}].',
-    additionalItems: 'object rules are only allowed two items, severity and options object. e.g. ["error", {}].'
-  }
+    additionalItems: 'object rules are only allowed two items, severity and options object. e.g. ["error", {}].',
+  },
 };
 
 const optionalObjExceptionsSchema = {
@@ -81,17 +81,17 @@ const optionalObjExceptionsSchema = {
     {
       type: 'string',
       errorMessage: {
-        type: 'each exception must be a string.'
-      }
-    }
+        type: 'each exception must be a string.',
+      },
+    },
   ],
   uniqueItems: true,
   minItems: 1,
   errorMessage: {
     type: 'expections must be an array.',
     minItems: 'expections must have at least 1 item.',
-    uniqueItems: 'expections must have unique items.'
-  }
+    uniqueItems: 'expections must have unique items.',
+  },
 };
 
 const configurationSchema = {
@@ -100,35 +100,35 @@ const configurationSchema = {
     extends: {
       type: ['string', 'array'],
       items: {
-        type: 'string'
+        type: 'string',
       },
       minItems: 1,
       uniqueItems: true,
       errorMessage: {
         type: 'extends must be either a string or an array of strings.',
         minItems: 'extends must have at least one item if it is an array.',
-        uniqueItems: 'extends must have unique items if it is an array.'
-      }
+        uniqueItems: 'extends must have unique items if it is an array.',
+      },
     },
     rules: {
       type: 'object',
       errorMessage: {
-        type: 'rules must be an object.'
-      }
+        type: 'rules must be an object.',
+      },
     },
     root: {
       type: 'boolean',
       errorMessage: {
-        type: 'root must be a boolean.'
-      }
-    }
+        type: 'root must be a boolean.',
+      },
+    },
   },
   additionalProperties: false,
   errorMessage: {
     type: 'npm-package-json-lint config should be an object.',
     additionalProperties:
-      'npm-package-json-lint config has unexpected top-level property. Valid properties include: `extends`, `rules`, and `root`.'
-  }
+      'npm-package-json-lint config has unexpected top-level property. Valid properties include: `extends`, `rules`, and `root`.',
+  },
 };
 
 /**
@@ -137,7 +137,7 @@ const configurationSchema = {
  * @param {Object} ruleConfig The ruleConfig object to validate.
  * @returns {boolean} True if valid. Error if not.
  */
-const isStandardRuleSchemaValid = ruleConfig => {
+const isStandardRuleSchemaValid = (ruleConfig) => {
   const validate = ajv.compile(standardRuleSchema);
   const isValid = validate(ruleConfig);
 
@@ -172,7 +172,7 @@ const isArrayRuleSchemaValid = (ruleConfig, minItems) => {
  * @param {Object} ruleConfig The ruleConfig object to validate.
  * @returns {boolean} True if valid. Error if not.
  */
-const isObjectRuleSchemaValid = ruleConfig => {
+const isObjectRuleSchemaValid = (ruleConfig) => {
   const validate = ajv.compile(objectRuleSchema);
   const isValid = validate(ruleConfig);
 
@@ -189,7 +189,7 @@ const isObjectRuleSchemaValid = ruleConfig => {
  * @param {Object} ruleConfig The ruleConfig object to validate.
  * @returns {boolean} True if valid. Error if not.
  */
-const isOptionalObjExceptSchemaValid = ruleConfig => {
+const isOptionalObjExceptSchemaValid = (ruleConfig) => {
   const validate = ajv.compile(optionalObjExceptionsSchema);
   const isValid = validate(ruleConfig);
 
@@ -223,5 +223,5 @@ module.exports = {
   isStandardRuleSchemaValid,
   isArrayRuleSchemaValid,
   isObjectRuleSchemaValid,
-  isOptionalObjExceptSchemaValid
+  isOptionalObjExceptSchemaValid,
 };

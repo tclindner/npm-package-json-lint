@@ -19,7 +19,7 @@ describe('prefer-no-optionalDependencies Unit Tests', () => {
       property.exists.mockReturnValue(true);
 
       const packageJsonData = {
-        optionalDependencies: 'dummy-value'
+        optionalDependencies: 'dummy-value',
       };
       const response = lint(packageJsonData, 'error');
 

@@ -12,7 +12,7 @@ describe('require-engines Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        engines: 'engines'
+        engines: 'engines',
       };
       const response = lint(packageJsonData, 'error');
 

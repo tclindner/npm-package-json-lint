@@ -15,7 +15,7 @@ const exists = (packageJsonData, nodeName) => {
  * @param  {string}  packageJsonSource JSON source string
  * @return {string[]}                  List of duplicate property names.
  */
-const findDuplicatePropNames = packageJsonSource => {
+const findDuplicatePropNames = (packageJsonSource) => {
   const tree = parser.parseTree(packageJsonSource);
 
   if (!tree) {
@@ -49,5 +49,5 @@ const findDuplicatePropNames = packageJsonSource => {
 
 module.exports = {
   exists,
-  findDuplicatePropNames
+  findDuplicatePropNames,
 };

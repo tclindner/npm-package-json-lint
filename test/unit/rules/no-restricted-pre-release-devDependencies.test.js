@@ -19,8 +19,8 @@ describe('no-restricted-pre-release-devDependencies Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         devDependencies: {
-          'npm-package-json-lint': '^1.0.0-beta'
-        }
+          'npm-package-json-lint': '^1.0.0-beta',
+        },
       };
       const invldPreReleaseDeps = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
       const response = lint(packageJsonData, 'error', invldPreReleaseDeps);
@@ -36,8 +36,8 @@ describe('no-restricted-pre-release-devDependencies Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         devDependencies: {
-          'grunt-npm-package-json-lint': '^1.0.0'
-        }
+          'grunt-npm-package-json-lint': '^1.0.0',
+        },
       };
       const invldPreReleaseDeps = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
       const response = lint(packageJsonData, 'error', invldPreReleaseDeps);
