@@ -19,8 +19,8 @@ describe('no-restricted-dependencies Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         dependencies: {
-          'npm-package-json-lint': '^1.0.0'
-        }
+          'npm-package-json-lint': '^1.0.0',
+        },
       };
       const invalidDependencies = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
       const response = lint(packageJsonData, 'error', invalidDependencies);
@@ -36,8 +36,8 @@ describe('no-restricted-dependencies Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         dependencies: {
-          '@types/node': '^1.0.0'
-        }
+          '@types/node': '^1.0.0',
+        },
       };
       const invalidDependencies = ['npm-package-json-lint', '@types/*'];
       const response = lint(packageJsonData, 'error', invalidDependencies);
@@ -53,8 +53,8 @@ describe('no-restricted-dependencies Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         dependencies: {
-          'gulp-npm-package-json-lint': '^1.0.0'
-        }
+          'gulp-npm-package-json-lint': '^1.0.0',
+        },
       };
       const invalidDependencies = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
       const response = lint(packageJsonData, 'error', invalidDependencies);

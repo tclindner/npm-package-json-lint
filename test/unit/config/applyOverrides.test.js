@@ -10,21 +10,21 @@ describe('applyOverrides Unit Tests', () => {
     const cwd = process.cwd();
     const filePath = './package.json';
     const rules = {
-      'require-name': 'error'
+      'require-name': 'error',
     };
     const overrides = [
       {
         patterns: ['**'],
         rules: {
-          'require-name': 'off'
-        }
+          'require-name': 'off',
+        },
       },
       {
         patterns: ['*/package.json'],
         rules: {
-          'require-name': 'warning'
-        }
-      }
+          'require-name': 'warning',
+        },
+      },
     ];
 
     globby.sync.mockReturnValue(['./package.json']);
@@ -33,7 +33,7 @@ describe('applyOverrides Unit Tests', () => {
     const results = applyOverrides(cwd, filePath, rules, overrides);
 
     expect(results).toStrictEqual({
-      'require-name': 'warning'
+      'require-name': 'warning',
     });
   });
 
@@ -41,21 +41,21 @@ describe('applyOverrides Unit Tests', () => {
     const cwd = process.cwd();
     const filePath = './test/package.json';
     const rules = {
-      'require-name': 'error'
+      'require-name': 'error',
     };
     const overrides = [
       {
         patterns: ['**'],
         rules: {
-          'require-name': 'off'
-        }
+          'require-name': 'off',
+        },
       },
       {
         patterns: ['*/package.json'],
         rules: {
-          'require-name': 'warning'
-        }
-      }
+          'require-name': 'warning',
+        },
+      },
     ];
 
     globby.sync.mockReturnValue(['./package.json']);
@@ -64,7 +64,7 @@ describe('applyOverrides Unit Tests', () => {
     const results = applyOverrides(cwd, filePath, rules, overrides);
 
     expect(results).toStrictEqual({
-      'require-name': 'error'
+      'require-name': 'error',
     });
   });
 
@@ -72,12 +72,12 @@ describe('applyOverrides Unit Tests', () => {
     const cwd = process.cwd();
     const filePath = './test/package.json';
     const rules = {
-      'require-name': 'error'
+      'require-name': 'error',
     };
     const results = applyOverrides(cwd, filePath, rules);
 
     expect(results).toStrictEqual({
-      'require-name': 'error'
+      'require-name': 'error',
     });
   });
 });

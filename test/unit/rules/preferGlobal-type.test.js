@@ -12,7 +12,7 @@ describe('preferGlobal-type Unit Tests', () => {
   describe('when package.json has node with incorrect type', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        preferGlobal: 'string'
+        preferGlobal: 'string',
       };
       const response = lint(packageJsonData, 'error');
 

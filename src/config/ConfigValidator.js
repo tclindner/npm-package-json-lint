@@ -7,7 +7,7 @@ const ConfigSchema = require('./ConfigSchema');
  * @return {Boolean}               True if config is valid, false if not
  * @static
  */
-const isObjectRuleConfigValid = ruleConfig => {
+const isObjectRuleConfigValid = (ruleConfig) => {
   if (typeof ruleConfig === 'string' && ruleConfig === 'off') {
     return true;
   }
@@ -26,7 +26,7 @@ const isObjectRuleConfigValid = ruleConfig => {
  * @return {Boolean}              True if config is valid, false if not
  * @static
  */
-const isOptionalObjRuleConfigValid = ruleConfig => {
+const isOptionalObjRuleConfigValid = (ruleConfig) => {
   const object = 1;
 
   if (typeof ruleConfig === 'string') {
@@ -69,7 +69,7 @@ const isArrayRuleConfigValid = (ruleConfig, minItems) => {
  * @return {Boolean}                True if config is valid, error if not
  * @static
  */
-const isStandardRuleConfigValid = ruleConfig => {
+const isStandardRuleConfigValid = (ruleConfig) => {
   return ConfigSchema.isStandardRuleSchemaValid(ruleConfig);
 };
 
@@ -120,7 +120,7 @@ const validateRules = (rulesConfig, source, rules) => {
     return;
   }
 
-  Object.keys(rulesConfig).forEach(ruleName => {
+  Object.keys(rulesConfig).forEach((ruleName) => {
     const ruleModule = rules.get(ruleName);
 
     validateRule(ruleModule, ruleName, rulesConfig[ruleName], source);
@@ -143,5 +143,5 @@ const validate = (config, source, rules) => {
 
 module.exports = {
   validate,
-  validateRules
+  validateRules,
 };

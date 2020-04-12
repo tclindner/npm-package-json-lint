@@ -12,7 +12,7 @@ describe('require-directories Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        directories: 'directories'
+        directories: 'directories',
       };
       const response = lint(packageJsonData, 'error');
 

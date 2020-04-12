@@ -22,8 +22,8 @@ describe('prefer-alphabetical-peerDependencies Unit Tests', () => {
         status: false,
         data: {
           invalidNode: 'semver',
-          validNode: 'chalk'
-        }
+          validNode: 'chalk',
+        },
       });
       property.exists.mockReturnValue(true);
 
@@ -31,8 +31,8 @@ describe('prefer-alphabetical-peerDependencies Unit Tests', () => {
         peerDependencies: {
           semver: '^5.3.0',
           chalk: '^1.1.3',
-          'user-home': '^2.0.0'
-        }
+          'user-home': '^2.0.0',
+        },
       };
       const response = lint(packageJsonData, 'error');
 
@@ -54,7 +54,7 @@ describe('prefer-alphabetical-peerDependencies Unit Tests', () => {
     test('true should be returned', () => {
       alphabeticalSort.isInAlphabeticalOrder.mockReturnValue({
         status: true,
-        data: {}
+        data: {},
       });
       property.exists.mockReturnValue(true);
 
@@ -62,8 +62,8 @@ describe('prefer-alphabetical-peerDependencies Unit Tests', () => {
         peerDependencies: {
           chalk: '^1.1.3',
           semver: '^5.3.0',
-          'user-home': '^2.0.0'
-        }
+          'user-home': '^2.0.0',
+        },
       };
       const response = lint(packageJsonData, 'error');
 

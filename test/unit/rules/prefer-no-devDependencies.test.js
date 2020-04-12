@@ -19,7 +19,7 @@ describe('prefer-no-devDependencies Unit Tests', () => {
       property.exists.mockReturnValue(true);
 
       const packageJsonData = {
-        devDependencies: 'dummy-value'
+        devDependencies: 'dummy-value',
       };
       const response = lint(packageJsonData, 'error');
 

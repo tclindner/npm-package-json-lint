@@ -6,7 +6,7 @@ describe('NpmPackageJsonLint Unit Tests', () => {
       test('two errors and zero warnings expected', () => {
         const npmPackageJsonLint = new NpmPackageJsonLint({
           cwd: process.cwd(),
-          patterns: ['./package.json']
+          patterns: ['./package.json'],
         });
         const response = npmPackageJsonLint.lint();
 
@@ -27,11 +27,11 @@ describe('NpmPackageJsonLint Unit Tests', () => {
     describe('validate that errors and warnings are set on output', () => {
       test('ten errors and one warning expected', () => {
         const packageJsonData = {
-          name: 'ALLCAPS'
+          name: 'ALLCAPS',
         };
         const npmPackageJsonLint = new NpmPackageJsonLint({
           packageJsonObject: packageJsonData,
-          packageJsonFilePath: './test/fixtures/errorsAndWarnings/package.json'
+          packageJsonFilePath: './test/fixtures/errorsAndWarnings/package.json',
         });
         const response = npmPackageJsonLint.lint();
 
@@ -48,8 +48,10 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         expect(response.errorCount).toStrictEqual(expectedTotalErrorCount);
         expect(response.warningCount).toStrictEqual(expectedTotalWarningCount);
         expect(response.results[0].issues).toHaveLength(expectedIssues);
-        expect(response.results[0].issues.filter(issue => issue.severity === 'error')).toHaveLength(expectedErrorCount);
-        expect(response.results[0].issues.filter(issue => issue.severity === 'warning')).toHaveLength(expectedWarningCount);
+        expect(response.results[0].issues.filter((issue) => issue.severity === 'error')).toHaveLength(expectedErrorCount);
+        expect(response.results[0].issues.filter((issue) => issue.severity === 'warning')).toHaveLength(
+          expectedWarningCount
+        );
       });
     });
 
@@ -57,7 +59,7 @@ describe('NpmPackageJsonLint Unit Tests', () => {
       test('an error is thrown', () => {
         const npmPackageJsonLint = new NpmPackageJsonLint({
           cwd: process.cwd(),
-          patterns: './package.json'
+          patterns: './package.json',
         });
         expect(() => {
           npmPackageJsonLint.lint();
@@ -70,7 +72,7 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         const npmPackageJsonLint = new NpmPackageJsonLint({
           cwd: process.cwd(),
           packageJsonObject: {},
-          patterns: './package.json'
+          patterns: './package.json',
         });
         expect(() => {
           npmPackageJsonLint.lint();
@@ -83,13 +85,13 @@ describe('NpmPackageJsonLint Unit Tests', () => {
     describe('validate that when quiet is set', () => {
       test('warnings are suppressed', () => {
         const packageJsonData = {
-          name: 'ALLCAPS'
+          name: 'ALLCAPS',
         };
         const npmPackageJsonLint = new NpmPackageJsonLint({
           cwd: process.cwd(),
           packageJsonObject: packageJsonData,
           packageJsonFilePath: './test/fixtures/errorsAndWarnings/package.json',
-          quiet: true
+          quiet: true,
         });
         const response = npmPackageJsonLint.lint();
 
@@ -106,8 +108,10 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         expect(response.errorCount).toStrictEqual(expectedTotalErrorCount);
         expect(response.warningCount).toStrictEqual(expectedTotalWarningCount);
         expect(response.results[0].issues).toHaveLength(expectedIssues);
-        expect(response.results[0].issues.filter(issue => issue.severity === 'error')).toHaveLength(expectedErrorCount);
-        expect(response.results[0].issues.filter(issue => issue.severity === 'warning')).toHaveLength(expectedWarningCount);
+        expect(response.results[0].issues.filter((issue) => issue.severity === 'error')).toHaveLength(expectedErrorCount);
+        expect(response.results[0].issues.filter((issue) => issue.severity === 'warning')).toHaveLength(
+          expectedWarningCount
+        );
       });
     });
 
@@ -122,17 +126,17 @@ describe('NpmPackageJsonLint Unit Tests', () => {
           author: 'Thomas Lindner',
           repository: {
             type: 'git',
-            url: 'https://github.com/tclindner/npm-package-json-lint'
+            url: 'https://github.com/tclindner/npm-package-json-lint',
           },
           devDependencies: {
-            mocha: '^2.4.5'
-          }
+            mocha: '^2.4.5',
+          },
         };
         const npmPackageJsonLint = new NpmPackageJsonLint({
           cwd: process.cwd(),
           packageJsonObject: packageJsonData,
           packageJsonFilePath: './test/fixtures/valid/package.json',
-          quiet: true
+          quiet: true,
         });
         const response = npmPackageJsonLint.lint();
 

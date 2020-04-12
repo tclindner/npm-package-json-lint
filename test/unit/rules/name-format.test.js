@@ -12,7 +12,7 @@ describe('name-format Unit Tests', () => {
   describe('when package.json has node with incorrect format', () => {
     test('not lowercase - LintIssue object should be returned', () => {
       const packageJsonData = {
-        name: 'ImNotLowercase'
+        name: 'ImNotLowercase',
       };
       const response = lint(packageJsonData, 'error');
 
@@ -24,7 +24,7 @@ describe('name-format Unit Tests', () => {
 
     test('exceeds max length - LintIssue object should be returned', () => {
       const packageJsonData = {
-        name: 'a'.padStart(215)
+        name: 'a'.padStart(215),
       };
       const response = lint(packageJsonData, 'error');
 
@@ -36,7 +36,7 @@ describe('name-format Unit Tests', () => {
 
     test('starts with . - LintIssue object should be returned', () => {
       const packageJsonData = {
-        name: '.lowercase'
+        name: '.lowercase',
       };
       const response = lint(packageJsonData, 'error');
 
@@ -48,7 +48,7 @@ describe('name-format Unit Tests', () => {
 
     test('starts with _ - LintIssue object should be returned', () => {
       const packageJsonData = {
-        name: '_lowercase'
+        name: '_lowercase',
       };
       const response = lint(packageJsonData, 'error');
 

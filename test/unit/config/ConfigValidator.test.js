@@ -20,7 +20,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an array rule and the first key is not equal to error, warning, or off', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'valid-values-author': [true, ['Thomas', 'Lindner', 'Thomas Lindner']]
+            'valid-values-author': [true, ['Thomas', 'Lindner', 'Thomas Lindner']],
           };
           const source = 'cli';
 
@@ -35,7 +35,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an array rule and the second key is not an Array', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'valid-values-author': ['error', 'Thomas']
+            'valid-values-author': ['error', 'Thomas'],
           };
           const source = 'cli';
 
@@ -50,7 +50,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an array rule and the second key is an Array with no items', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'valid-values-author': ['error', []]
+            'valid-values-author': ['error', []],
           };
           const source = 'cli';
 
@@ -65,7 +65,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an array rule and the second key is an Array with duplicate items', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'valid-values-author': ['error', ['item1', 'item2', 'item1']]
+            'valid-values-author': ['error', ['item1', 'item2', 'item1']],
           };
           const source = 'cli';
 
@@ -80,7 +80,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an array rule and it is set to false', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'valid-values-author': false
+            'valid-values-author': false,
           };
           const source = 'cli';
 
@@ -95,7 +95,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an array rule and the array is empty', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'valid-values-author': []
+            'valid-values-author': [],
           };
           const source = 'cli';
 
@@ -110,7 +110,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an array rule and the array has too many items', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'valid-values-author': ['error', ['test'], 'extra']
+            'valid-values-author': ['error', ['test'], 'extra'],
           };
           const source = 'cli';
 
@@ -125,7 +125,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a valid array rule config is passed', () => {
         test('true should be returned', () => {
           const ruleConfig = {
-            'prefer-property-order': ['error', ['name', 'version']]
+            'prefer-property-order': ['error', ['name', 'version']],
           };
           const source = 'cli';
 
@@ -138,7 +138,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a valid array rule config is passed (scenario 2)', () => {
         test('true should be returned', () => {
           const ruleConfig = {
-            'prefer-property-order': ['error', []]
+            'prefer-property-order': ['error', []],
           };
           const source = 'cli';
 
@@ -151,7 +151,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a valid array rule config is passed with a value of off', () => {
         test('true should be returned', () => {
           const ruleConfig = {
-            'prefer-property-order': 'off'
+            'prefer-property-order': 'off',
           };
           const source = 'cli';
 
@@ -164,7 +164,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a invalid array rule config is passed with a value of error', () => {
         test('true should be returned', () => {
           const ruleConfig = {
-            'valid-values-author': 'error'
+            'valid-values-author': 'error',
           };
           const source = 'cli';
 
@@ -181,7 +181,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an object rule and the first key is not equal to error, warning, or off', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'description-format': [true, {requireCapitalFirstLetter: true, requireEndingPeriod: true}]
+            'description-format': [true, {requireCapitalFirstLetter: true, requireEndingPeriod: true}],
           };
           const source = 'cli';
 
@@ -196,7 +196,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an object rule and the second key is not an Object', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'description-format': ['error', 'Thomas']
+            'description-format': ['error', 'Thomas'],
           };
           const source = 'cli';
 
@@ -211,7 +211,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an object rule and it is set to false', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'description-format': false
+            'description-format': false,
           };
           const source = 'cli';
 
@@ -226,7 +226,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an object rule and the array is empty', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'description-format': []
+            'description-format': [],
           };
           const source = 'cli';
 
@@ -241,7 +241,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an object rule and the array has too many items', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'description-format': ['error', {}, 'extra']
+            'description-format': ['error', {}, 'extra'],
           };
           const source = 'cli';
 
@@ -256,7 +256,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a valid object rule config is passed', () => {
         test('true should be returned', () => {
           const ruleConfig = {
-            'description-format': ['error', {requireCapitalFirstLetter: true, requireEndingPeriod: true}]
+            'description-format': ['error', {requireCapitalFirstLetter: true, requireEndingPeriod: true}],
           };
           const source = 'cli';
 
@@ -269,7 +269,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a valid object rule config is passed with a value of off', () => {
         test('true should be returned', () => {
           const ruleConfig = {
-            'description-format': 'off'
+            'description-format': 'off',
           };
           const source = 'cli';
 
@@ -282,7 +282,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a invalid object rule config is passed with a value of error', () => {
         test('true should be returned', () => {
           const ruleConfig = {
-            'description-format': 'error'
+            'description-format': 'error',
           };
           const source = 'cli';
 
@@ -299,7 +299,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an optionalObject rule, is standard format, and the value is not equal to error, warning, or off', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'prefer-no-version-zero-dependencies': 'true'
+            'prefer-no-version-zero-dependencies': 'true',
           };
           const source = 'cli';
 
@@ -314,7 +314,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an optionalObject rule, object is passed, and the first key is not equal to error, warning, or off', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'prefer-no-version-zero-dependencies': ['true', {}]
+            'prefer-no-version-zero-dependencies': ['true', {}],
           };
           const source = 'cli';
 
@@ -329,7 +329,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an optionalObject rule and the second key is not an Object', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'prefer-no-version-zero-dependencies': ['error', 'Thomas']
+            'prefer-no-version-zero-dependencies': ['error', 'Thomas'],
           };
           const source = 'cli';
 
@@ -344,7 +344,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an optionalObject rule, exceptions is not an array', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'prefer-no-version-zero-dependencies': ['error', {exceptions: 'module1'}]
+            'prefer-no-version-zero-dependencies': ['error', {exceptions: 'module1'}],
           };
           const source = 'cli';
 
@@ -359,7 +359,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an optionalObject rule, exceptions is empty array', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'prefer-no-version-zero-dependencies': ['error', {exceptions: []}]
+            'prefer-no-version-zero-dependencies': ['error', {exceptions: []}],
           };
           const source = 'cli';
 
@@ -374,7 +374,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an optionalObject rule, exceptions array has dups', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'prefer-no-version-zero-dependencies': ['error', {exceptions: ['module1', 'module1']}]
+            'prefer-no-version-zero-dependencies': ['error', {exceptions: ['module1', 'module1']}],
           };
           const source = null;
 
@@ -389,7 +389,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an optionalObject rule, exceptions array has invalid items', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'prefer-no-version-zero-dependencies': ['error', {exceptions: [1]}]
+            'prefer-no-version-zero-dependencies': ['error', {exceptions: [1]}],
           };
           const source = 'cli';
 
@@ -404,7 +404,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an optionalObject rule and it is set to false', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'prefer-no-version-zero-dependencies': false
+            'prefer-no-version-zero-dependencies': false,
           };
           const source = 'cli';
 
@@ -419,7 +419,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an optionalObject rule and the array is empty', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'prefer-no-version-zero-dependencies': []
+            'prefer-no-version-zero-dependencies': [],
           };
           const source = 'cli';
 
@@ -434,7 +434,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is an optionalObject rule and the array has too many items', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'prefer-no-version-zero-dependencies': ['error', {}, 'extra']
+            'prefer-no-version-zero-dependencies': ['error', {}, 'extra'],
           };
           const source = 'cli';
 
@@ -449,7 +449,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a valid object rule config is passed with exceptions', () => {
         test('true should be returned', () => {
           const ruleConfig = {
-            'prefer-no-version-zero-dependencies': ['error', {exceptions: ['module1']}]
+            'prefer-no-version-zero-dependencies': ['error', {exceptions: ['module1']}],
           };
           const source = 'cli';
 
@@ -462,7 +462,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a valid object rule config is passed with a value of off', () => {
         test('true should be returned', () => {
           const ruleConfig = {
-            'prefer-no-version-zero-dependencies': 'off'
+            'prefer-no-version-zero-dependencies': 'off',
           };
           const source = 'cli';
 
@@ -475,7 +475,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a valid object rule config is passed with a value of error', () => {
         test('true should be returned', () => {
           const ruleConfig = {
-            'prefer-no-version-zero-dependencies': 'error'
+            'prefer-no-version-zero-dependencies': 'error',
           };
           const source = 'cli';
 
@@ -490,7 +490,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a standard rule is passed with a value of error', () => {
         test('true should be returned', () => {
           const ruleConfig = {
-            'require-author': 'error'
+            'require-author': 'error',
           };
           const source = 'cli';
 
@@ -503,7 +503,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a standard rule is passed with a value of warning', () => {
         test('true should be returned', () => {
           const ruleConfig = {
-            'require-author': 'warning'
+            'require-author': 'warning',
           };
           const source = 'cli';
 
@@ -516,7 +516,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a standard rule is passed with a value of off', () => {
         test('true should be returned', () => {
           const ruleConfig = {
-            'require-author': 'off'
+            'require-author': 'off',
           };
           const source = 'cli';
 
@@ -529,7 +529,7 @@ describe('configValidator Unit Tests', () => {
       describe('when a rule is set to a boolean', () => {
         test('an error should be thrown', () => {
           const ruleConfig = {
-            'require-author': true
+            'require-author': true,
           };
           const source = 'cli';
 
@@ -545,7 +545,7 @@ describe('configValidator Unit Tests', () => {
         test('an error should be thrown', () => {
           const dummyValue = 1;
           const ruleConfig = {
-            'require-author': dummyValue
+            'require-author': dummyValue,
           };
           const source = 'cli';
 
@@ -565,7 +565,7 @@ describe('configValidator Unit Tests', () => {
         const config = {
           extends: 'value',
           rules: {},
-          root: true
+          root: true,
         };
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);
@@ -578,7 +578,7 @@ describe('configValidator Unit Tests', () => {
       test('extends and rules only for top level items, an exception should not be thrown', () => {
         const config = {
           extends: 'value',
-          rules: {}
+          rules: {},
         };
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);
@@ -591,7 +591,7 @@ describe('configValidator Unit Tests', () => {
       test('extends and root only for top level items, an exception should not be thrown', () => {
         const config = {
           extends: 'value',
-          root: true
+          root: true,
         };
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);
@@ -604,7 +604,7 @@ describe('configValidator Unit Tests', () => {
       test('rules and root for top level items, an exception should not be thrown', () => {
         const config = {
           rules: {},
-          root: true
+          root: true,
         };
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);
@@ -618,7 +618,7 @@ describe('configValidator Unit Tests', () => {
         const config = {
           extends: ['value', 'value2'],
           rules: {},
-          root: true
+          root: true,
         };
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);
@@ -634,7 +634,7 @@ describe('configValidator Unit Tests', () => {
         const config = {
           extends: false,
           rules: {},
-          root: true
+          root: true,
         };
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);
@@ -650,7 +650,7 @@ describe('configValidator Unit Tests', () => {
         const config = {
           extends: [],
           rules: {},
-          root: true
+          root: true,
         };
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);
@@ -666,7 +666,7 @@ describe('configValidator Unit Tests', () => {
         const config = {
           extends: ['module1', 'module1'],
           rules: {},
-          root: true
+          root: true,
         };
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);
@@ -682,7 +682,7 @@ describe('configValidator Unit Tests', () => {
         const config = {
           extends: ['value', 'value2'],
           rules: false,
-          root: true
+          root: true,
         };
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);
@@ -696,7 +696,7 @@ describe('configValidator Unit Tests', () => {
         const config = {
           extends: ['value', 'value2'],
           rules: {},
-          root: 'true'
+          root: 'true',
         };
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);
@@ -723,7 +723,7 @@ describe('configValidator Unit Tests', () => {
           extends: 'module1',
           rules: {},
           root: true,
-          extraProp: true
+          extraProp: true,
         };
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);

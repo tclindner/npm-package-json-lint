@@ -13,8 +13,8 @@ describe('no-archive-devDependencies Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         devDependencies: {
-          'test-module': 'file:local-directory'
-        }
+          'test-module': 'file:local-directory',
+        },
       };
       const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
@@ -31,8 +31,8 @@ describe('no-archive-devDependencies Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {
         devDependencies: {
-          'my-module': 'file:local-directory'
-        }
+          'my-module': 'file:local-directory',
+        },
       };
       const response = lint(packageJsonData, 'error', {exceptions: ['my-module']});
 
@@ -45,8 +45,8 @@ describe('no-archive-devDependencies Unit Tests', () => {
       const packageJsonData = {
         devDependencies: {
           'my-module': 'username/repo',
-          'my-other-module': '1.2.3'
-        }
+          'my-other-module': '1.2.3',
+        },
       };
       const response = lint(packageJsonData, 'error');
 

@@ -12,7 +12,7 @@ describe('require-homepage Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        homepage: 'homepage'
+        homepage: 'homepage',
       };
       const response = lint(packageJsonData, 'error');
 

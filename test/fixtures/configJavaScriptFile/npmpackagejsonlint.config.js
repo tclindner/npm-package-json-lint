@@ -19,6 +19,6 @@ module.exports = {
     'version-type': 'error',
     'valid-values-author': ['error', ['Thomas Lindner']],
     'name-format': 'error',
-    'version-format': 'error'
-  }
+    'version-format': 'error',
+  },
 };

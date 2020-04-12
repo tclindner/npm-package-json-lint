@@ -13,8 +13,8 @@ describe('no-absolute-version-devDependencies Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         devDependencies: {
-          'npm-package-json-lint': '1.0.0'
-        }
+          'npm-package-json-lint': '1.0.0',
+        },
       };
       const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
@@ -31,8 +31,8 @@ describe('no-absolute-version-devDependencies Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         devDependencies: {
-          'npm-package-json-lint': '=1.0.0'
-        }
+          'npm-package-json-lint': '=1.0.0',
+        },
       };
       const response = lint(packageJsonData, 'error');
 
@@ -49,8 +49,8 @@ describe('no-absolute-version-devDependencies Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {
         dependencies: {
-          'gulp-npm-package-json-lint': '=1.0.0'
-        }
+          'gulp-npm-package-json-lint': '=1.0.0',
+        },
       };
       const response = lint(packageJsonData, 'error', {exceptions: ['gulp-npm-package-json-lint']});
 
@@ -62,8 +62,8 @@ describe('no-absolute-version-devDependencies Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {
         devDependencies: {
-          'gulp-npm-package-json-lint': '~1.0.0'
-        }
+          'gulp-npm-package-json-lint': '~1.0.0',
+        },
       };
       const response = lint(packageJsonData, 'error');
 
@@ -75,8 +75,8 @@ describe('no-absolute-version-devDependencies Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {
         dependencies: {
-          'gulp-npm-package-json-lint': '~1.0.0'
-        }
+          'gulp-npm-package-json-lint': '~1.0.0',
+        },
       };
       const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 

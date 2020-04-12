@@ -263,7 +263,7 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
           warningFixturesPath,
           errAndWarnsFixturesPath,
           configJsFileFixturesPath,
-          pkgJsonPropFixturePath
+          pkgJsonPropFixturePath,
         ],
         {env}
       );
@@ -312,7 +312,7 @@ Totals
     test('each file results and totals will be output', () => {
       const cli = spawnSync('../../../src/cli.js', [`**/package.json`], {
         env,
-        cwd: './test/fixtures/monorepo'
+        cwd: './test/fixtures/monorepo',
       });
       const expected = `
 ./package.json
@@ -347,7 +347,7 @@ Totals
       test('each file results and totals will be output', () => {
         const cli = spawnSync('../../../src/cli.js', [`.`], {
           env,
-          cwd: './test/fixtures/monorepo'
+          cwd: './test/fixtures/monorepo',
         });
         const expected = `
 ./package.json

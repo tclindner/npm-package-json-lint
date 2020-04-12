@@ -12,7 +12,7 @@ describe('require-keywords Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        keywords: 'keywords'
+        keywords: 'keywords',
       };
       const response = lint(packageJsonData, 'error');
 

@@ -5,8 +5,8 @@ describe('dependency-audit Unit Tests', () => {
     const packageJson = {
       dependencies: {
         'grunt-npm-package-json-lint': '^1.0.0',
-        '@types/node': '^1.0.0'
-      }
+        '@types/node': '^1.0.0',
+      },
     };
 
     describe('when the node does not exist in the package.json file', () => {
@@ -55,14 +55,14 @@ describe('dependency-audit Unit Tests', () => {
       dependencies: {
         'npm-package-json-lint': '^1.0.0',
         'grunt-npm-package-json-lint': '^2.0.0-beta1',
-        'gulp-npm-package-json-lint': '^2.0.0-rc1'
-      }
+        'gulp-npm-package-json-lint': '^2.0.0-rc1',
+      },
     };
 
     describe('when the node does not exist in the package.json file', () => {
       test('false should be returned', () => {
         const response = dependencyAudit.hasDepPrereleaseVers(packageJson, 'devDependencies', [
-          'grunt-npm-package-json-lint'
+          'grunt-npm-package-json-lint',
         ]);
 
         expect(response).toBe(false);
@@ -99,8 +99,8 @@ describe('dependency-audit Unit Tests', () => {
       test('false should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '~ 1.0'
-          }
+            'npm-package-json-lint': '~ 1.0',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'devDependencies');
 
@@ -112,8 +112,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '~0.6.1-1'
-          }
+            'npm-package-json-lint': '~0.6.1-1',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -125,8 +125,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '>=0.1.97'
-          }
+            'npm-package-json-lint': '>=0.1.97',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -138,8 +138,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '0.1.20 || 1.2.4'
-          }
+            'npm-package-json-lint': '0.1.20 || 1.2.4',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -151,8 +151,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '0.1.20 || >1.2.4'
-          }
+            'npm-package-json-lint': '0.1.20 || >1.2.4',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -164,8 +164,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '0.1.20 || 1.2.4'
-          }
+            'npm-package-json-lint': '0.1.20 || 1.2.4',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -177,8 +177,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '0.1.20 || 1.2.4'
-          }
+            'npm-package-json-lint': '0.1.20 || 1.2.4',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -190,8 +190,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '>=0.2.3 || <0.0.1'
-          }
+            'npm-package-json-lint': '>=0.2.3 || <0.0.1',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -203,8 +203,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '>=0.2.3 || <0.0.1'
-          }
+            'npm-package-json-lint': '>=0.2.3 || <0.0.1',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -216,8 +216,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '>=0.2.3 || <0.0.1'
-          }
+            'npm-package-json-lint': '>=0.2.3 || <0.0.1',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -229,8 +229,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '~v0.5.4-pre'
-          }
+            'npm-package-json-lint': '~v0.5.4-pre',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -242,11 +242,11 @@ describe('dependency-audit Unit Tests', () => {
       test('false should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '~v0.5.4-pre'
-          }
+            'npm-package-json-lint': '~v0.5.4-pre',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {
-          exceptions: ['npm-package-json-lint']
+          exceptions: ['npm-package-json-lint'],
         });
 
         expect(response).toBe(false);
@@ -259,8 +259,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '=0.7.x'
-          }
+            'npm-package-json-lint': '=0.7.x',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -272,8 +272,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '>=0.7.x'
-          }
+            'npm-package-json-lint': '>=0.7.x',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -285,8 +285,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '<=0.7.x'
-          }
+            'npm-package-json-lint': '<=0.7.x',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -298,8 +298,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '>0.2.3 >0.2.4 <=0.2.5'
-          }
+            'npm-package-json-lint': '>0.2.3 >0.2.4 <=0.2.5',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -311,8 +311,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '>=0.2.3 <=0.2.4'
-          }
+            'npm-package-json-lint': '>=0.2.3 <=0.2.4',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -324,8 +324,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '^0.1.0 || ~3.0.1 || 5.0.0'
-          }
+            'npm-package-json-lint': '^0.1.0 || ~3.0.1 || 5.0.0',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -337,8 +337,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '^0.1.0 || ~3.0.1 || 5.0.0'
-          }
+            'npm-package-json-lint': '^0.1.0 || ~3.0.1 || 5.0.0',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -350,8 +350,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '^0.1.0 || ~3.0.1 || 5.0.0'
-          }
+            'npm-package-json-lint': '^0.1.0 || ~3.0.1 || 5.0.0',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -363,8 +363,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '^0.1.0 || ~3.0.1 || >4 <=5.0.0'
-          }
+            'npm-package-json-lint': '^0.1.0 || ~3.0.1 || >4 <=5.0.0',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -376,8 +376,8 @@ describe('dependency-audit Unit Tests', () => {
       test('false should be returned', () => {
         const packageJson = {
           dependencies: {
-            'npm-package-json-lint': '=0.1.'
-          }
+            'npm-package-json-lint': '=0.1.',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -449,8 +449,8 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint80': '^1.0.0-alpha',
             'npm-package-json-lint81': '~1.0.0-alpha',
             'npm-package-json-lint82': '^1.0.0-alpha',
-            'npm-package-json-lint83': '~1.0.0-alpha'
-          }
+            'npm-package-json-lint83': '~1.0.0-alpha',
+          },
         };
         const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
 
@@ -486,8 +486,8 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '^1.0.0',
             'grunt-npm-package-json-lint': '~2.0.0-beta1',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.areVersRangesValid(packageJson, 'devDependencies', '~');
 
@@ -501,8 +501,8 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '^1.0.0',
             'grunt-npm-package-json-lint': '~2.0.0-beta1',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~');
 
@@ -516,8 +516,8 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '~1.0.0',
             'grunt-npm-package-json-lint': '~2.0.0-beta1',
-            'gulp-npm-package-json-lint': '~2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '~2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~');
 
@@ -531,11 +531,11 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '~1.0.0',
             'grunt-npm-package-json-lint': '~2.0.0-beta1',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~', {
-          exceptions: ['gulp-npm-package-json-lint']
+          exceptions: ['gulp-npm-package-json-lint'],
         });
 
         expect(response).toBe(true);
@@ -548,8 +548,8 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '~1.0.0',
             'grunt-npm-package-json-lint': '~2.0.0-beta1',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~', {});
 
@@ -565,8 +565,8 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '^1.0.0',
             'grunt-npm-package-json-lint': '~2.0.0-beta1',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'devDependencies', '~');
 
@@ -580,8 +580,8 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '^1.0.0',
             'grunt-npm-package-json-lint': '~2.0.0-beta1',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~');
 
@@ -595,8 +595,8 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '^1.0.0',
             'grunt-npm-package-json-lint': '^2.0.0-beta1',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~');
 
@@ -610,11 +610,11 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '~1.0.0',
             'grunt-npm-package-json-lint': '~2.0.0-beta1',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~', {
-          exceptions: ['npm-package-json-lint', 'grunt-npm-package-json-lint']
+          exceptions: ['npm-package-json-lint', 'grunt-npm-package-json-lint'],
         });
 
         expect(response).toBe(false);
@@ -627,8 +627,8 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '~1.0.0',
             'grunt-npm-package-json-lint': '~2.0.0-beta1',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~', {});
 
@@ -643,8 +643,8 @@ describe('dependency-audit Unit Tests', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '^1.0.0',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
 
@@ -654,8 +654,8 @@ describe('dependency-audit Unit Tests', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '~1.0.0',
-            'gulp-npm-package-json-lint': '~2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '~2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
 
@@ -665,8 +665,8 @@ describe('dependency-audit Unit Tests', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '1.0.*',
-            'gulp-npm-package-json-lint': '2.*'
-          }
+            'gulp-npm-package-json-lint': '2.*',
+          },
         };
         const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
 
@@ -676,8 +676,8 @@ describe('dependency-audit Unit Tests', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '>1.0.0',
-            'gulp-npm-package-json-lint': '>=2.0.0'
-          }
+            'gulp-npm-package-json-lint': '>=2.0.0',
+          },
         };
         const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
 
@@ -687,8 +687,8 @@ describe('dependency-audit Unit Tests', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '<1.0.0',
-            'gulp-npm-package-json-lint': '<=2.0.0'
-          }
+            'gulp-npm-package-json-lint': '<=2.0.0',
+          },
         };
         const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
 
@@ -702,8 +702,8 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '1.0.0',
             'grunt-npm-package-json-lint': '2.1.0',
-            'gulp-npm-package-json-lint': '=2.4.0'
-          }
+            'gulp-npm-package-json-lint': '=2.4.0',
+          },
         };
         const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
 
@@ -717,11 +717,11 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '1.0.0',
             'grunt-npm-package-json-lint': '~2.0.0-beta1',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {
-          exceptions: ['npm-package-json-lint']
+          exceptions: ['npm-package-json-lint'],
         });
 
         expect(response).toBe(false);
@@ -734,8 +734,8 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '1.0.0',
             'grunt-npm-package-json-lint': '~2.0.0-beta1',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {});
 
@@ -749,8 +749,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned in case of git@ dependency', () => {
         const packageJson = {
           dependencies: {
-            'module-name': 'git@github.com:username/repo.git'
-          }
+            'module-name': 'git@github.com:username/repo.git',
+          },
         };
         const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
 
@@ -760,8 +760,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned in case of git:// dependency', () => {
         const packageJson = {
           dependencies: {
-            'module-name': 'git://github.com/username/repo.git'
-          }
+            'module-name': 'git://github.com/username/repo.git',
+          },
         };
         const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
 
@@ -771,8 +771,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned in case of git+https:// dependency', () => {
         const packageJson = {
           dependencies: {
-            'module-name': 'git+https://github.com/username/repo.git'
-          }
+            'module-name': 'git+https://github.com/username/repo.git',
+          },
         };
         const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
 
@@ -782,8 +782,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned in case of git+ssh:// dependency', () => {
         const packageJson = {
           dependencies: {
-            'module-name': 'git+ssh://github.com/username/repo.git'
-          }
+            'module-name': 'git+ssh://github.com/username/repo.git',
+          },
         };
         const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
 
@@ -793,8 +793,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned in case of http:// dependency', () => {
         const packageJson = {
           dependencies: {
-            'module-name': 'http://github.com/username/repo.git'
-          }
+            'module-name': 'http://github.com/username/repo.git',
+          },
         };
         const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
 
@@ -804,8 +804,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned in case of https:// dependency', () => {
         const packageJson = {
           dependencies: {
-            'module-name': 'https://github.com/username/repo.git'
-          }
+            'module-name': 'https://github.com/username/repo.git',
+          },
         };
         const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
 
@@ -815,8 +815,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned in case of github:… dependency', () => {
         const packageJson = {
           dependencies: {
-            'module-name': 'github:username/repo'
-          }
+            'module-name': 'github:username/repo',
+          },
         };
         const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
 
@@ -826,8 +826,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned in case of github shortcut url dependency', () => {
         const packageJson = {
           dependencies: {
-            'module-name': 'username/repo'
-          }
+            'module-name': 'username/repo',
+          },
         };
         const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
 
@@ -837,8 +837,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned in case of github shortcut url dependency with branch', () => {
         const packageJson = {
           dependencies: {
-            'module-name': 'org-name/repo#username/issue-42'
-          }
+            'module-name': 'org-name/repo#username/issue-42',
+          },
         };
         const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
 
@@ -848,8 +848,8 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned in case of github shortcut url dependency with tag', () => {
         const packageJson = {
           dependencies: {
-            'module-name': 'username/repo#v2.0.0-rc-1'
-          }
+            'module-name': 'username/repo#v2.0.0-rc-1',
+          },
         };
         const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
 
@@ -864,8 +864,8 @@ describe('dependency-audit Unit Tests', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '^1.0.0',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
 
@@ -875,8 +875,8 @@ describe('dependency-audit Unit Tests', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '~1.0.0',
-            'gulp-npm-package-json-lint': '~2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '~2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
 
@@ -886,8 +886,8 @@ describe('dependency-audit Unit Tests', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '1.0.*',
-            'gulp-npm-package-json-lint': '2.*'
-          }
+            'gulp-npm-package-json-lint': '2.*',
+          },
         };
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
 
@@ -897,8 +897,8 @@ describe('dependency-audit Unit Tests', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '>1.0.0',
-            'gulp-npm-package-json-lint': '>=2.0.0'
-          }
+            'gulp-npm-package-json-lint': '>=2.0.0',
+          },
         };
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
 
@@ -908,8 +908,8 @@ describe('dependency-audit Unit Tests', () => {
         const packageJson = {
           dependencies: {
             'npm-package-json-lint': '<1.0.0',
-            'gulp-npm-package-json-lint': '<=2.0.0'
-          }
+            'gulp-npm-package-json-lint': '<=2.0.0',
+          },
         };
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
 
@@ -923,8 +923,8 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '1.0.0',
             'grunt-npm-package-json-lint': '2.1.0',
-            'gulp-npm-package-json-lint': '=2.4.0'
-          }
+            'gulp-npm-package-json-lint': '=2.4.0',
+          },
         };
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
 
@@ -938,11 +938,11 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '1.0.0',
             'grunt-npm-package-json-lint': '~2.0.0-beta1',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {
-          exceptions: ['npm-package-json-lint']
+          exceptions: ['npm-package-json-lint'],
         });
 
         expect(response).toBe(true);
@@ -955,8 +955,8 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'npm-package-json-lint': '1.0.0',
             'grunt-npm-package-json-lint': '~2.0.0-beta1',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
         };
         const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
 
@@ -970,8 +970,8 @@ describe('dependency-audit Unit Tests', () => {
       test('with tar.gz dependency true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'my-module': 'https://github.com/miripiruni/repo/archive/v1.2.3.tar.gz'
-          }
+            'my-module': 'https://github.com/miripiruni/repo/archive/v1.2.3.tar.gz',
+          },
         };
         const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies');
 
@@ -981,8 +981,8 @@ describe('dependency-audit Unit Tests', () => {
       test('with zip dependency true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'my-module': 'https://github.com/miripiruni/repo/archive/v1.2.3.zip'
-          }
+            'my-module': 'https://github.com/miripiruni/repo/archive/v1.2.3.zip',
+          },
         };
         const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies');
 
@@ -998,8 +998,8 @@ describe('dependency-audit Unit Tests', () => {
             'grunt-npm-package-json-lint': '2.1.0',
             'gulp-npm-package-json-lint': '=2.4.0',
             'module-from-local': 'file:local-module',
-            'module-from-archive': 'https://github.com/user/repo.git'
-          }
+            'module-from-archive': 'https://github.com/user/repo.git',
+          },
         };
         const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies');
 
@@ -1013,11 +1013,11 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'module-from-archive': 'https://github.com/miripiruni/repo/archive/v1.2.3.zip',
             'grunt-npm-package-json-lint': '2.0.0',
-            'gulp-npm-package-json-lint': '^2.0.0'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0',
+          },
         };
         const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {
-          exceptions: ['module-from-archive']
+          exceptions: ['module-from-archive'],
         });
 
         expect(response).toBe(false);
@@ -1030,8 +1030,8 @@ describe('dependency-audit Unit Tests', () => {
       test('with github dependency true should be returned', () => {
         const packageJson = {
           dependencies: {
-            'my-module': 'file:local-module'
-          }
+            'my-module': 'file:local-module',
+          },
         };
         const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies');
 
@@ -1047,8 +1047,8 @@ describe('dependency-audit Unit Tests', () => {
             'grunt-npm-package-json-lint': '2.1.0',
             'gulp-npm-package-json-lint': '=2.4.0',
             'module-from-git': 'https://github.com/user/repo.git',
-            'module-from-archive': 'https://github.com/user/repo/archive/v1.2.3.tar.gz'
-          }
+            'module-from-archive': 'https://github.com/user/repo/archive/v1.2.3.tar.gz',
+          },
         };
         const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies');
 
@@ -1062,11 +1062,11 @@ describe('dependency-audit Unit Tests', () => {
           dependencies: {
             'module-from-file': 'file:local-module',
             'grunt-npm-package-json-lint': '2.0.0',
-            'gulp-npm-package-json-lint': '^2.0.0'
-          }
+            'gulp-npm-package-json-lint': '^2.0.0',
+          },
         };
         const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies', {
-          exceptions: ['module-from-file']
+          exceptions: ['module-from-file'],
         });
 
         expect(response).toBe(false);

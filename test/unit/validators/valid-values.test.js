@@ -3,7 +3,7 @@ const validValuesObj = require('../../../src/validators/valid-values');
 describe('value-values Unit Tests', () => {
   describe('isValidValue method', () => {
     const packageJson = {
-      author: 'Malcolm Reynolds'
+      author: 'Malcolm Reynolds',
     };
 
     describe('when the node does not exist in the package.json file', () => {
@@ -15,7 +15,7 @@ describe('value-values Unit Tests', () => {
           'Jayne Cobb',
           'Kaylee Frye',
           'Simon Tam',
-          'River Tam'
+          'River Tam',
         ];
         const response = validValuesObj.isValidValue(packageJson, 'authors', packageJson.author, validValues);
 
@@ -33,7 +33,7 @@ describe('value-values Unit Tests', () => {
           'Jayne Cobb',
           'Kaylee Frye',
           'Simon Tam',
-          'River Tam'
+          'River Tam',
         ];
         const response = validValuesObj.isValidValue(packageJson, 'author', packageJson.author, validValues);
 
@@ -50,7 +50,7 @@ describe('value-values Unit Tests', () => {
           'Jayne Cobb',
           'Kaylee Frye',
           'Simon Tam',
-          'River Tam'
+          'River Tam',
         ];
         const response = validValuesObj.isValidValue(packageJson, 'author', packageJson.author, validValues);
 
@@ -61,7 +61,7 @@ describe('value-values Unit Tests', () => {
 
   describe('matchValidValue method', () => {
     const packageJson = {
-      name: '@lerna/publish'
+      name: '@lerna/publish',
     };
 
     describe('when the node does not exist in the package.json file', () => {

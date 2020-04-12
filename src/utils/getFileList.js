@@ -14,13 +14,13 @@ const getFileList = (patterns, cwd) => {
   debug(patterns);
 
   // step 1 - filter out empty entries
-  const filteredPatterns = patterns.filter(pattern => pattern.length);
+  const filteredPatterns = patterns.filter((pattern) => pattern.length);
 
   debug('filteredPatterns');
   debug(filteredPatterns);
 
   // step 2 - convert directories to globs
-  const globPatterns = filteredPatterns.map(pattern => {
+  const globPatterns = filteredPatterns.map((pattern) => {
     return pattern.endsWith(`/package.json`) ? pattern : `${pattern}/**/package.json`;
   });
 
@@ -34,13 +34,13 @@ const getFileList = (patterns, cwd) => {
 
   const globFiles = globby.sync(globPatterns, {
     cwd,
-    gitignore: true
+    gitignore: true,
   });
 
   debug('globFiles');
   debug(globFiles);
 
-  globFiles.forEach(globFile => {
+  globFiles.forEach((globFile) => {
     const filePath = path.resolve(cwd, globFile);
 
     if (addedFiles.has(filePath)) {

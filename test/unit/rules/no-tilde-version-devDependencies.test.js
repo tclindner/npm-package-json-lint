@@ -14,8 +14,8 @@ describe('no-tilde-version-devDependencies Unit Tests', () => {
       const packageJsonData = {
         devDependencies: {
           'npm-package-json-lint': '~1.0.0',
-          'gulp-npm-package-json-lint': '^2.0.0'
-        }
+          'gulp-npm-package-json-lint': '^2.0.0',
+        },
       };
       const response = lint(packageJsonData, 'error');
 
@@ -30,8 +30,8 @@ describe('no-tilde-version-devDependencies Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {
         devDependencies: {
-          'gulp-npm-package-json-lint': '~1.0.0'
-        }
+          'gulp-npm-package-json-lint': '~1.0.0',
+        },
       };
       const response = lint(packageJsonData, 'error', {exceptions: ['gulp-npm-package-json-lint']});
 
@@ -44,8 +44,8 @@ describe('no-tilde-version-devDependencies Unit Tests', () => {
       const packageJsonData = {
         devDependencies: {
           'npm-package-json-lint': '^1.0.0',
-          'gulp-npm-package-json-lint': '^1.0.0'
-        }
+          'gulp-npm-package-json-lint': '^1.0.0',
+        },
       };
       const response = lint(packageJsonData, 'error');
 

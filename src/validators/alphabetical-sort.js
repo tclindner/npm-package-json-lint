@@ -10,7 +10,7 @@ const isInAlphabeticalOrder = (packageJsonData, nodeName) => {
   let isValid = true;
   let data = {
     invalidNode: null,
-    validNode: null
+    validNode: null,
   };
   const nodeKeysOriginal = Object.keys(packageJsonData[nodeName]);
   const nodeKeysSorted = Object.keys(packageJsonData[nodeName]).sort();
@@ -20,7 +20,7 @@ const isInAlphabeticalOrder = (packageJsonData, nodeName) => {
       isValid = false;
       data = {
         invalidNode: nodeKeysOriginal[keyIndex],
-        validNode: nodeKeysSorted[keyIndex]
+        validNode: nodeKeysSorted[keyIndex],
       };
       break;
     }
@@ -28,10 +28,10 @@ const isInAlphabeticalOrder = (packageJsonData, nodeName) => {
 
   return {
     status: isValid,
-    data
+    data,
   };
 };
 
 module.exports = {
-  isInAlphabeticalOrder
+  isInAlphabeticalOrder,
 };

@@ -19,15 +19,15 @@ describe('valid-values-engines Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         engines: {
-          node: '^6.0.0'
-        }
+          node: '^6.0.0',
+        },
       };
       const validValues = [
         {
           node: '^6.0.0',
-          npm: '^3.0.0'
+          npm: '^3.0.0',
         },
-        {node: '^10.0.0'}
+        {node: '^10.0.0'},
       ];
       const response = lint(packageJsonData, 'error', validValues);
 
@@ -42,8 +42,8 @@ describe('valid-values-engines Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         engines: {
-          node: '^6.a.0'
-        }
+          node: '^6.a.0',
+        },
       };
       const validValues = [{node: '^6.a.0'}];
       const response = lint(packageJsonData, 'error', validValues);
@@ -60,18 +60,18 @@ describe('valid-values-engines Unit Tests', () => {
       const packageJsonData = {
         engines: {
           node: '^6.0.0',
-          npm: '^3.0.0'
-        }
+          npm: '^3.0.0',
+        },
       };
       const validValues = [
         {
           node: '^6.0.0',
-          npm: '^3.0.0'
+          npm: '^3.0.0',
         },
         {
           node: '^10.0.0',
-          npm: '^5.0.0'
-        }
+          npm: '^5.0.0',
+        },
       ];
       const response = lint(packageJsonData, 'error', validValues);
 
@@ -82,17 +82,17 @@ describe('valid-values-engines Unit Tests', () => {
   describe('when package.json has node but is invalid type', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        engines: true
+        engines: true,
       };
       const validValues = [
         {
           node: '^6.0.0',
-          npm: '^3.0.0'
+          npm: '^3.0.0',
         },
         {
           node: '^10.0.0',
-          npm: '^5.0.0'
-        }
+          npm: '^5.0.0',
+        },
       ];
       const response = lint(packageJsonData, 'error', validValues);
 
@@ -109,9 +109,9 @@ describe('valid-values-engines Unit Tests', () => {
       const validValues = [
         {
           node: '^6.0.0',
-          npm: '^3.0.0'
+          npm: '^3.0.0',
         },
-        {node: '^10.0.0'}
+        {node: '^10.0.0'},
       ];
       const response = lint(packageJsonData, 'error', validValues);
 

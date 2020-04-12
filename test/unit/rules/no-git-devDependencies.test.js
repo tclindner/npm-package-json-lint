@@ -14,8 +14,8 @@ describe('no-git-devDependencies Unit Tests', () => {
       test('LintIssue object should be returned', () => {
         const packageJsonData = {
           devDependencies: {
-            'my-module': 'github:username/repo'
-          }
+            'my-module': 'github:username/repo',
+          },
         };
         const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
@@ -32,8 +32,8 @@ describe('no-git-devDependencies Unit Tests', () => {
       test('LintIssue object should be returned', () => {
         const packageJsonData = {
           devDependencies: {
-            'my-module': 'username/repo'
-          }
+            'my-module': 'username/repo',
+          },
         };
         const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
@@ -50,8 +50,8 @@ describe('no-git-devDependencies Unit Tests', () => {
       test('LintIssue object should be returned', () => {
         const packageJsonData = {
           devDependencies: {
-            'my-module': 'username/repo#author/issue'
-          }
+            'my-module': 'username/repo#author/issue',
+          },
         };
         const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
@@ -68,8 +68,8 @@ describe('no-git-devDependencies Unit Tests', () => {
       test('LintIssue object should be returned', () => {
         const packageJsonData = {
           devDependencies: {
-            'my-module': 'username/repo#v1.0.0-rc-1'
-          }
+            'my-module': 'username/repo#v1.0.0-rc-1',
+          },
         };
         const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
@@ -86,8 +86,8 @@ describe('no-git-devDependencies Unit Tests', () => {
       test('LintIssue object should be returned', () => {
         const packageJsonData = {
           devDependencies: {
-            'my-module': 'username/repo#4f9012b132aa4d2d6097b516b31327c999b0a846'
-          }
+            'my-module': 'username/repo#4f9012b132aa4d2d6097b516b31327c999b0a846',
+          },
         };
         const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
@@ -104,8 +104,8 @@ describe('no-git-devDependencies Unit Tests', () => {
       test('LintIssue object should be returned', () => {
         const packageJsonData = {
           devDependencies: {
-            'my-module': 'git://github.com/user/repo.git'
-          }
+            'my-module': 'git://github.com/user/repo.git',
+          },
         };
         const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
@@ -122,8 +122,8 @@ describe('no-git-devDependencies Unit Tests', () => {
       test('LintIssue object should be returned', () => {
         const packageJsonData = {
           devDependencies: {
-            'my-module': 'git@github.com:user/repo.git'
-          }
+            'my-module': 'git@github.com:user/repo.git',
+          },
         };
         const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
@@ -140,8 +140,8 @@ describe('no-git-devDependencies Unit Tests', () => {
       test('LintIssue object should be returned', () => {
         const packageJsonData = {
           devDependencies: {
-            'my-module': 'git+https://github.com/user/repo.git'
-          }
+            'my-module': 'git+https://github.com/user/repo.git',
+          },
         };
         const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
@@ -158,8 +158,8 @@ describe('no-git-devDependencies Unit Tests', () => {
       test('LintIssue object should be returned', () => {
         const packageJsonData = {
           devDependencies: {
-            'my-module': 'git+ssh://github.com/user/repo.git'
-          }
+            'my-module': 'git+ssh://github.com/user/repo.git',
+          },
         };
         const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
@@ -176,8 +176,8 @@ describe('no-git-devDependencies Unit Tests', () => {
       test('LintIssue object should be returned', () => {
         const packageJsonData = {
           devDependencies: {
-            'my-module': 'http://github.com/user/repo.git'
-          }
+            'my-module': 'http://github.com/user/repo.git',
+          },
         };
         const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
@@ -194,8 +194,8 @@ describe('no-git-devDependencies Unit Tests', () => {
       test('LintIssue object should be returned', () => {
         const packageJsonData = {
           devDependencies: {
-            'my-module': 'https://github.com/user/repo.git'
-          }
+            'my-module': 'https://github.com/user/repo.git',
+          },
         };
         const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
@@ -213,8 +213,8 @@ describe('no-git-devDependencies Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {
         devDependencies: {
-          'my-module': 'username/repo'
-        }
+          'my-module': 'username/repo',
+        },
       };
       const response = lint(packageJsonData, 'error', {exceptions: ['my-module']});
 
@@ -226,8 +226,8 @@ describe('no-git-devDependencies Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {
         devDependencies: {
-          'my-module': '^1.2.3'
-        }
+          'my-module': '^1.2.3',
+        },
       };
       const response = lint(packageJsonData, 'error');
 

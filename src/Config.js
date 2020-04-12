@@ -52,12 +52,12 @@ class Config {
       if (this.configFile) {
         debug(`Config file specified, loading it.`);
         config = cosmiconfigSync('npmpackagejsonlint', {
-          transform: cosmicConfigTransformer.transform(this.cwd, this.configBaseDirectory, this.configFile)
+          transform: cosmicConfigTransformer.transform(this.cwd, this.configBaseDirectory, this.configFile),
         }).load(this.configFile);
       } else {
         debug(`Config file wasn't specified, searching for config.`);
         config = cosmiconfigSync('npmpackagejsonlint', {
-          transform: cosmicConfigTransformer.transform(this.cwd, this.configBaseDirectory, filePathToSearch)
+          transform: cosmicConfigTransformer.transform(this.cwd, this.configBaseDirectory, filePathToSearch),
         }).search(filePathToSearch);
       }
     } else {

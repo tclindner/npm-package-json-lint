@@ -18,7 +18,7 @@ describe('valid-values-name-scope Unit Tests', () => {
   describe('when package.json has node with invalid scope', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        name: '@great/awesome-package'
+        name: '@great/awesome-package',
       };
       const validValues = ['@cool', '@awesome'];
       const response = lint(packageJsonData, 'error', validValues);
@@ -33,7 +33,7 @@ describe('valid-values-name-scope Unit Tests', () => {
   describe('when package.json has node without scope', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        name: 'awesome-package'
+        name: 'awesome-package',
       };
       const validValues = ['@cool', '@awesome'];
       const response = lint(packageJsonData, 'error', validValues);
@@ -48,7 +48,7 @@ describe('valid-values-name-scope Unit Tests', () => {
   describe('when package.json has node with valid scope', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        name: '@cool/awesome-package'
+        name: '@cool/awesome-package',
       };
       const validValues = ['@cool', '@awesome'];
       const response = lint(packageJsonData, 'error', validValues);

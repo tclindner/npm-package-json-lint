@@ -12,7 +12,7 @@ describe('require-config Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        config: 'config'
+        config: 'config',
       };
       const response = lint(packageJsonData, 'error');
 

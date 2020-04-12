@@ -1,7 +1,7 @@
 /* eslint no-restricted-syntax: 'off', guard-for-in: 'off', no-continue: 'off' */
 const semver = require('semver');
 
-const hasExceptions = config => {
+const hasExceptions = (config) => {
   return typeof config === 'object' && config.hasOwnProperty('exceptions');
 };
 
@@ -195,7 +195,7 @@ const absoluteVersionChecker = (packageJsonData, nodeName, config) => {
 
   return {
     onlyAbsoluteVersionDetected,
-    dependenciesChecked
+    dependenciesChecked,
   };
 };
 
@@ -232,7 +232,7 @@ const GITHUB_SHORTCUT_URL = /^(github:)?[^/]+\/[^/]+/;
  * @param version       value of package's version
  * @return {boolean}    True if the version is a shortcut to github repository
  */
-const isGithubRepositoryShortcut = version => {
+const isGithubRepositoryShortcut = (version) => {
   return GITHUB_SHORTCUT_URL.test(version);
 };
 
@@ -241,7 +241,7 @@ const isGithubRepositoryShortcut = version => {
  * @param version       value of package's version
  * @return {boolean}    True if the version is url to archive
  */
-const isArchiveUrl = version => {
+const isArchiveUrl = (version) => {
   return version.endsWith('.tar.gz') || version.endsWith('.zip');
 };
 
@@ -250,7 +250,7 @@ const isArchiveUrl = version => {
  * @param version       value of package's version
  * @return {boolean}    True if the version is an git repo url.
  */
-const isGitRepositoryUrl = version => {
+const isGitRepositoryUrl = (version) => {
   if (isArchiveUrl(version)) {
     return false;
   }
@@ -350,5 +350,5 @@ module.exports = {
   doVersContainNonAbsolute,
   doVersContainGitRepository,
   doVersContainArchiveUrl,
-  doVersContainFileUrl
+  doVersContainFileUrl,
 };

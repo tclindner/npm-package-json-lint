@@ -5,7 +5,7 @@ const semver = require('semver');
  * @param  {string} name  Name
  * @return {boolean}      True if the string is lowercase or is missing. False if it is not.
  */
-const isLowercase = name => {
+const isLowercase = (name) => {
   return name === name.toLowerCase();
 };
 
@@ -25,5 +25,5 @@ const isValidVersionNumber = (packageJsonData, nodeName) => {
 
 module.exports = {
   isLowercase,
-  isValidVersionNumber
+  isValidVersionNumber,
 };

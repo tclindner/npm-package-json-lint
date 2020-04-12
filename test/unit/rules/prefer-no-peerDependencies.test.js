@@ -19,7 +19,7 @@ describe('prefer-no-peerDependencies Unit Tests', () => {
       property.exists.mockReturnValue(true);
 
       const packageJsonData = {
-        peerDependencies: 'dummy-value'
+        peerDependencies: 'dummy-value',
       };
       const response = lint(packageJsonData, 'error');
 

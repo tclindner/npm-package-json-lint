@@ -7,7 +7,7 @@ describe('property-order Unit Tests', () => {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
-          description: 'description'
+          description: 'description',
         };
         const preferredOrder = ['name', 'version', 'description'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
@@ -22,7 +22,7 @@ describe('property-order Unit Tests', () => {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
-          description: 'description'
+          description: 'description',
         };
         const preferredOrder = [];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
@@ -36,7 +36,7 @@ describe('property-order Unit Tests', () => {
       test('true should be returned', () => {
         const packageJson = {
           name: 'awesome-module',
-          version: '1.0.0'
+          version: '1.0.0',
         };
         const preferredOrder = ['name', 'version', 'description'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
@@ -51,7 +51,7 @@ describe('property-order Unit Tests', () => {
         const packageJson = {
           name: 'awesome-module',
           description: 'description',
-          version: '1.0.0'
+          version: '1.0.0',
         };
         const preferredOrder = ['name', 'version', 'description'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
@@ -66,7 +66,7 @@ describe('property-order Unit Tests', () => {
         const packageJson = {
           version: '1.0.0',
           name: 'awesome-module',
-          description: 'description'
+          description: 'description',
         };
         const preferredOrder = ['name', 'version', 'description'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
@@ -81,7 +81,7 @@ describe('property-order Unit Tests', () => {
         const packageJson = {
           name: 'awesome-module',
           version: '1.0.0',
-          description: 'description'
+          description: 'description',
         };
         const preferredOrder = ['name', 'version', 'homepage', 'description'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
@@ -97,7 +97,7 @@ describe('property-order Unit Tests', () => {
           name: 'awesome-module',
           version: '1.0.0',
           description: 'description',
-          homepage: 'https://github.com/tclindner/npm-package-json-lint'
+          homepage: 'https://github.com/tclindner/npm-package-json-lint',
         };
         const preferredOrder = ['name', 'version', 'description', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
@@ -113,7 +113,7 @@ describe('property-order Unit Tests', () => {
           name: 'awesome-module',
           version: '1.0.0',
           description: 'description',
-          homepage: 'https://github.com/tclindner/npm-package-json-lint'
+          homepage: 'https://github.com/tclindner/npm-package-json-lint',
         };
         const preferredOrder = ['name', 'version', 'description', 'scripts', 'bin', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
@@ -131,7 +131,7 @@ describe('property-order Unit Tests', () => {
           description: 'description',
           homepage: 'https://github.com/tclindner/npm-package-json-lint',
           license: 'MIT',
-          keywords: ['awesome']
+          keywords: ['awesome'],
         };
         const preferredOrder = ['name', 'version', 'description', 'scripts', 'bin', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
@@ -148,7 +148,7 @@ describe('property-order Unit Tests', () => {
           version: '1.0.0',
           description: 'description',
           homepage: 'https://github.com/tclindner/npm-package-json-lint',
-          keywords: ['word']
+          keywords: ['word'],
         };
         const preferredOrder = ['name', 'version', 'description', 'scripts', 'bin', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
@@ -164,7 +164,7 @@ describe('property-order Unit Tests', () => {
           name: 'awesome-module',
           version: '1.0.0',
           description: 'description',
-          homepage: 'https://github.com/tclindner/npm-package-json-lint'
+          homepage: 'https://github.com/tclindner/npm-package-json-lint',
         };
         const preferredOrder = ['name', 'version', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
@@ -180,7 +180,7 @@ describe('property-order Unit Tests', () => {
           name: 'awesome-module',
           version: '1.0.0',
           description: 'description',
-          homepage: 'https://github.com/tclindner/npm-package-json-lint'
+          homepage: 'https://github.com/tclindner/npm-package-json-lint',
         };
         const preferredOrder = ['version', 'keywords', 'homepage'];
         const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);

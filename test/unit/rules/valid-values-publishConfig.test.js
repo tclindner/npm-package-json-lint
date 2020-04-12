@@ -19,8 +19,8 @@ describe('valid-values-publishConfig Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         publishConfig: {
-          access: 'public'
-        }
+          access: 'public',
+        },
       };
       const validValues = [{access: 'private'}, {access: 'protected'}];
       const response = lint(packageJsonData, 'error', validValues);
@@ -36,8 +36,8 @@ describe('valid-values-publishConfig Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         publishConfig: {
-          access: 'public'
-        }
+          access: 'public',
+        },
       };
       const validValues = [{access: 'private'}, {access: 'public'}];
       const response = lint(packageJsonData, 'error', validValues);
@@ -49,7 +49,7 @@ describe('valid-values-publishConfig Unit Tests', () => {
   describe('when package.json has node but is invalid type', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        publishConfig: true
+        publishConfig: true,
       };
       const validValues = [{access: 'private'}, {access: 'protected'}];
       const response = lint(packageJsonData, 'error', validValues);

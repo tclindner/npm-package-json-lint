@@ -49,7 +49,7 @@ const defaultPreferredNodeOrder = [
   'cpu',
   'preferGlobal',
   'private',
-  'publishConfig'
+  'publishConfig',
 ];
 
 /**
@@ -63,9 +63,9 @@ const isInPreferredOrder = (packageJsonData, userPreferredNodeOrder) => {
   let msg = null;
   const preferredNodeOrder =
     userPreferredNodeOrder.length === empty ? Array.from(defaultPreferredNodeOrder) : Array.from(userPreferredNodeOrder);
-  const fltrdPreferredNodeOrder = preferredNodeOrder.filter(property => packageJsonData.hasOwnProperty(property));
+  const fltrdPreferredNodeOrder = preferredNodeOrder.filter((property) => packageJsonData.hasOwnProperty(property));
   const actualNodeList = Object.keys(packageJsonData);
-  const fltrdActualNodeList = actualNodeList.filter(property => preferredNodeOrder.indexOf(property) !== notFound);
+  const fltrdActualNodeList = actualNodeList.filter((property) => preferredNodeOrder.indexOf(property) !== notFound);
   const filteredPreferredOrderMap = new Map();
 
   fltrdPreferredNodeOrder.forEach((property, index) => {
@@ -86,10 +86,10 @@ const isInPreferredOrder = (packageJsonData, userPreferredNodeOrder) => {
 
   return {
     status: isValid,
-    msg
+    msg,
   };
 };
 
 module.exports = {
-  isInPreferredOrder
+  isInPreferredOrder,
 };

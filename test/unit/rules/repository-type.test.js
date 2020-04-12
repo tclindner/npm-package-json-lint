@@ -12,7 +12,7 @@ describe('repository-type Unit Tests', () => {
   describe('when package.json has node with incorrect type', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        repository: true
+        repository: true,
       };
       const response = lint(packageJsonData, 'error');
 

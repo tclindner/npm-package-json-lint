@@ -18,7 +18,7 @@ describe('valid-values-author Unit Tests', () => {
   describe('when package.json has string node with invalid value', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        author: 'LastName, FirstName'
+        author: 'LastName, FirstName',
       };
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName'];
       const response = lint(packageJsonData, 'error', validValues);
@@ -33,7 +33,7 @@ describe('valid-values-author Unit Tests', () => {
   describe('when package.json has string node with valid value', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        author: 'LastName, FirstName'
+        author: 'LastName, FirstName',
       };
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName', 'LastName, FirstName'];
       const response = lint(packageJsonData, 'error', validValues);
@@ -47,8 +47,8 @@ describe('valid-values-author Unit Tests', () => {
       const packageJsonData = {
         author: {
           name: 'LastName, FirstName',
-          url: 'http://www.example.com'
-        }
+          url: 'http://www.example.com',
+        },
       };
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName'];
       const response = lint(packageJsonData, 'error', validValues);
@@ -65,8 +65,8 @@ describe('valid-values-author Unit Tests', () => {
       const packageJsonData = {
         author: {
           name: 'LastName, FirstName',
-          url: 'http://www.example.com'
-        }
+          url: 'http://www.example.com',
+        },
       };
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName', 'LastName, FirstName'];
       const response = lint(packageJsonData, 'error', validValues);
@@ -80,8 +80,8 @@ describe('valid-values-author Unit Tests', () => {
       const packageJsonData = {
         author: {
           names: 'LastName, FirstName',
-          url: 'http://www.example.com'
-        }
+          url: 'http://www.example.com',
+        },
       };
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName'];
       const response = lint(packageJsonData, 'error', validValues);
@@ -96,7 +96,7 @@ describe('valid-values-author Unit Tests', () => {
   describe('when package.json has node but is invalid type', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        author: true
+        author: true,
       };
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName'];
       const response = lint(packageJsonData, 'error', validValues);

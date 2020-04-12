@@ -23,14 +23,14 @@ describe('Config Unit Tests', () => {
         const loadMock = jest.fn().mockReturnValue({
           'require-version': 'error',
           'require-name': 'error',
-          'require-scripts': 'error'
+          'require-scripts': 'error',
         });
         const searchMock = jest.fn();
 
         cosmiconfigSync.mockImplementation(() => {
           return {
             load: loadMock,
-            search: searchMock
+            search: searchMock,
           };
         });
 
@@ -39,7 +39,7 @@ describe('Config Unit Tests', () => {
         const expectedConfigObj = {
           'require-version': 'error',
           'require-name': 'error',
-          'require-scripts': 'error'
+          'require-scripts': 'error',
         };
         const filePath = './package.json';
         const result = configObj.getConfigForFile(filePath);
@@ -64,13 +64,13 @@ describe('Config Unit Tests', () => {
         const searchMock = jest.fn().mockReturnValue({
           'require-version': 'error',
           'require-name': 'error',
-          'require-scripts': 'error'
+          'require-scripts': 'error',
         });
 
         cosmiconfigSync.mockImplementation(() => {
           return {
             load: loadMock,
-            search: searchMock
+            search: searchMock,
           };
         });
 
@@ -79,7 +79,7 @@ describe('Config Unit Tests', () => {
         const expectedConfigObj = {
           'require-version': 'error',
           'require-name': 'error',
-          'require-scripts': 'error'
+          'require-scripts': 'error',
         };
         const filePath = './package.json';
         const result = configObj.getConfigForFile(filePath);
@@ -106,7 +106,7 @@ describe('Config Unit Tests', () => {
         cosmiconfigSync.mockImplementation(() => {
           return {
             load: loadMock,
-            search: searchMock
+            search: searchMock,
           };
         });
 
@@ -133,7 +133,7 @@ describe('Config Unit Tests', () => {
         cosmiconfigSync.mockImplementation(() => {
           return {
             load: loadMock,
-            search: searchMock
+            search: searchMock,
           };
         });
 
@@ -154,16 +154,16 @@ describe('Config Unit Tests', () => {
           rules: {
             'require-version': 'error',
             'require-name': 'error',
-            'require-scripts': 'error'
+            'require-scripts': 'error',
           },
           overrides: [
             {
               patterns: ['**/package.json'],
               rules: {
-                'require-name': 'warning'
-              }
-            }
-          ]
+                'require-name': 'warning',
+              },
+            },
+          ],
         };
         let configFile;
         const configBaseDirectory = '';
@@ -174,28 +174,28 @@ describe('Config Unit Tests', () => {
         cosmiconfigSync.mockImplementation(() => {
           return {
             load: loadMock,
-            search: searchMock
+            search: searchMock,
           };
         });
         applyExtendsIfSpecified.mockReturnValue({
           rules: {
             'require-version': 'error',
             'require-name': 'error',
-            'require-scripts': 'error'
+            'require-scripts': 'error',
           },
           overrides: [
             {
               patterns: ['**/package.json'],
               rules: {
-                'require-name': 'warning'
-              }
-            }
-          ]
+                'require-name': 'warning',
+              },
+            },
+          ],
         });
         applyOverrides.mockReturnValue({
           'require-version': 'error',
           'require-name': 'warning',
-          'require-scripts': 'error'
+          'require-scripts': 'error',
         });
 
         const configObj = new Config(cwd, config, configFile, configBaseDirectory, rules);
@@ -203,7 +203,7 @@ describe('Config Unit Tests', () => {
         const expectedConfigObj = {
           'require-version': 'error',
           'require-name': 'warning',
-          'require-scripts': 'error'
+          'require-scripts': 'error',
         };
         const filePath = './package.json';
         const result = configObj.getConfigForFile(filePath);

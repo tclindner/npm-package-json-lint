@@ -12,7 +12,7 @@ describe('require-cpu Unit Tests', () => {
   describe('when package.json has node', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        cpu: 'cpu'
+        cpu: 'cpu',
       };
       const response = lint(packageJsonData, 'error');
 

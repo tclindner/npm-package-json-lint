@@ -14,8 +14,8 @@ describe('no-archive-devDependencies Unit Tests', () => {
       test('LintIssue object should be returned', () => {
         const packageJsonData = {
           devDependencies: {
-            'test-module': 'https://github.com/org/repo/archive/v1.2.3.tar.gz'
-          }
+            'test-module': 'https://github.com/org/repo/archive/v1.2.3.tar.gz',
+          },
         };
         const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
@@ -32,8 +32,8 @@ describe('no-archive-devDependencies Unit Tests', () => {
       test('LintIssue object should be returned', () => {
         const packageJsonData = {
           devDependencies: {
-            'test-module': 'https://github.com/org/repo/archive/v1.2.3.zip'
-          }
+            'test-module': 'https://github.com/org/repo/archive/v1.2.3.zip',
+          },
         };
         const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
 
@@ -51,8 +51,8 @@ describe('no-archive-devDependencies Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {
         devDependencies: {
-          'my-module': 'https://github.com/org/repo/archive/v1.2.3.zip'
-        }
+          'my-module': 'https://github.com/org/repo/archive/v1.2.3.zip',
+        },
       };
       const response = lint(packageJsonData, 'error', {exceptions: ['my-module']});
 
@@ -65,8 +65,8 @@ describe('no-archive-devDependencies Unit Tests', () => {
       const packageJsonData = {
         devDependencies: {
           'my-module': 'username/repo',
-          'my-other-module': '1.2.3'
-        }
+          'my-other-module': '1.2.3',
+        },
       };
       const response = lint(packageJsonData, 'error');
 

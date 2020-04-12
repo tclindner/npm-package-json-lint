@@ -8,7 +8,7 @@ const transform = (cwd, configBaseDirectory, filePathBeingLinted) => {
   debug(`configBaseDirectory`);
   debug(configBaseDirectory);
 
-  return cosmiconfigResult => {
+  return (cosmiconfigResult) => {
     debug(`cosmiconfigResult`);
     debug(cosmiconfigResult);
 
@@ -40,5 +40,5 @@ const transform = (cwd, configBaseDirectory, filePathBeingLinted) => {
 };
 
 module.exports = {
-  transform
+  transform,
 };

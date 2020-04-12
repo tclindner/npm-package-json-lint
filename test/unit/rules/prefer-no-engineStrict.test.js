@@ -19,7 +19,7 @@ describe('prefer-no-engineStrict Unit Tests', () => {
       property.exists.mockReturnValue(true);
 
       const packageJsonData = {
-        engineStrict: 'dummy-value'
+        engineStrict: 'dummy-value',
       };
       const response = lint(packageJsonData, 'error');
 

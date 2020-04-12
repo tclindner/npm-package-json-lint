@@ -1,6 +1,6 @@
 module.exports = {
   rules: {
     'require-author': 'warning',
-    'require-description': 'error'
-  }
+    'require-description': 'error',
+  },
 };

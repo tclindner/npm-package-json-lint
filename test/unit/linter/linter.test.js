@@ -7,13 +7,13 @@ describe('linter Unit Tests', () => {
     test('files not ignored', () => {
       const patterns = ['./test/fixtures/valid/package.json', './test/fixtures/errors/package.json'];
       const mockIgnorer = {
-        ignores: () => false
+        ignores: () => false,
       };
       const mockConfigHelper = {
         getConfigForFile: jest
           .fn()
           .mockReturnValueOnce({'name-format': 'error'})
-          .mockReturnValueOnce({'require-scripts': 'error'})
+          .mockReturnValueOnce({'require-scripts': 'error'}),
       };
       const rules = new Rules();
       rules.load();
@@ -28,17 +28,17 @@ describe('linter Unit Tests', () => {
             filePath: './test/fixtures/valid/package.json',
             ignored: false,
             issues: [],
-            warningCount: 0
+            warningCount: 0,
           },
           {
             errorCount: 1,
             filePath: './test/fixtures/errors/package.json',
             ignored: false,
             issues: [lintIssue],
-            warningCount: 0
-          }
+            warningCount: 0,
+          },
         ],
-        warningCount: 0
+        warningCount: 0,
       };
 
       const results = linter.executeOnPackageJsonFiles({
@@ -46,7 +46,7 @@ describe('linter Unit Tests', () => {
         fileList: patterns,
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
-        rules
+        rules,
       });
 
       expect(results).toMatchObject(expected);
@@ -55,10 +55,10 @@ describe('linter Unit Tests', () => {
     test('files ignored', () => {
       const patterns = ['./test/fixtures/valid/package.json', './test/fixtures/errors/package.json'];
       const mockIgnorer = {
-        ignores: () => true
+        ignores: () => true,
       };
       const mockConfigHelper = {
-        getConfigForFile: jest.fn()
+        getConfigForFile: jest.fn(),
       };
       const rules = new Rules();
 
@@ -71,17 +71,17 @@ describe('linter Unit Tests', () => {
             filePath: './test/fixtures/valid/package.json',
             ignored: true,
             issues: [],
-            warningCount: 0
+            warningCount: 0,
           },
           {
             errorCount: 0,
             filePath: './test/fixtures/errors/package.json',
             ignored: true,
             issues: [],
-            warningCount: 0
-          }
+            warningCount: 0,
+          },
         ],
-        warningCount: 0
+        warningCount: 0,
       };
 
       const results = linter.executeOnPackageJsonFiles({
@@ -89,7 +89,7 @@ describe('linter Unit Tests', () => {
         fileList: patterns,
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
-        rules
+        rules,
       });
 
       expect(results).toStrictEqual(expected);
@@ -99,13 +99,13 @@ describe('linter Unit Tests', () => {
   describe('executeOnPackageJsonObject method tests', () => {
     test('pkg not ignored', () => {
       const packageJsonObj = {
-        name: 'my-test-module'
+        name: 'my-test-module',
       };
       const mockIgnorer = {
-        ignores: () => false
+        ignores: () => false,
       };
       const mockConfigHelper = {
-        getConfigForFile: jest.fn()
+        getConfigForFile: jest.fn(),
       };
       const rules = new Rules();
 
@@ -118,10 +118,10 @@ describe('linter Unit Tests', () => {
             filePath: './test/fixtures/valid/package.json',
             ignored: false,
             issues: [],
-            warningCount: 0
-          }
+            warningCount: 0,
+          },
         ],
-        warningCount: 0
+        warningCount: 0,
       };
 
       const results = linter.executeOnPackageJsonObject({
@@ -130,7 +130,7 @@ describe('linter Unit Tests', () => {
         filename: './test/fixtures/valid/package.json',
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
-        rules
+        rules,
       });
 
       expect(results).toStrictEqual(expected);
@@ -138,13 +138,13 @@ describe('linter Unit Tests', () => {
 
     test('pkg ignored', () => {
       const packageJsonObj = {
-        name: 'my-test-module'
+        name: 'my-test-module',
       };
       const mockIgnorer = {
-        ignores: () => true
+        ignores: () => true,
       };
       const mockConfigHelper = {
-        getConfigForFile: jest.fn()
+        getConfigForFile: jest.fn(),
       };
       const rules = new Rules();
 
@@ -157,10 +157,10 @@ describe('linter Unit Tests', () => {
             filePath: './test/fixtures/valid/package.json',
             ignored: true,
             issues: [],
-            warningCount: 0
-          }
+            warningCount: 0,
+          },
         ],
-        warningCount: 0
+        warningCount: 0,
       };
 
       const results = linter.executeOnPackageJsonObject({
@@ -169,7 +169,7 @@ describe('linter Unit Tests', () => {
         filename: './test/fixtures/valid/package.json',
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
-        rules
+        rules,
       });
 
       expect(results).toStrictEqual(expected);
@@ -177,13 +177,13 @@ describe('linter Unit Tests', () => {
 
     test('filename is absolute', () => {
       const packageJsonObj = {
-        name: 'my-test-module'
+        name: 'my-test-module',
       };
       const mockIgnorer = {
-        ignores: () => true
+        ignores: () => true,
       };
       const mockConfigHelper = {
-        getConfigForFile: jest.fn()
+        getConfigForFile: jest.fn(),
       };
       const rules = new Rules();
 
@@ -196,10 +196,10 @@ describe('linter Unit Tests', () => {
             filePath: './test/fixtures/valid/package.json',
             ignored: true,
             issues: [],
-            warningCount: 0
-          }
+            warningCount: 0,
+          },
         ],
-        warningCount: 0
+        warningCount: 0,
       };
 
       const results = linter.executeOnPackageJsonObject({
@@ -208,7 +208,7 @@ describe('linter Unit Tests', () => {
         filename: `${process.cwd()}/test/fixtures/valid/package.json`,
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
-        rules
+        rules,
       });
 
       expect(results).toStrictEqual(expected);
@@ -216,13 +216,13 @@ describe('linter Unit Tests', () => {
 
     test('no filename passed', () => {
       const packageJsonObj = {
-        name: 'my-test-module'
+        name: 'my-test-module',
       };
       const mockIgnorer = {
-        ignores: () => false
+        ignores: () => false,
       };
       const mockConfigHelper = {
-        getConfigForFile: jest.fn()
+        getConfigForFile: jest.fn(),
       };
       const rules = new Rules();
 
@@ -235,10 +235,10 @@ describe('linter Unit Tests', () => {
             filePath: './',
             ignored: false,
             issues: [],
-            warningCount: 0
-          }
+            warningCount: 0,
+          },
         ],
-        warningCount: 0
+        warningCount: 0,
       };
 
       const results = linter.executeOnPackageJsonObject({
@@ -246,7 +246,7 @@ describe('linter Unit Tests', () => {
         packageJsonObject: packageJsonObj,
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
-        rules
+        rules,
       });
 
       expect(results).toStrictEqual(expected);
@@ -255,13 +255,13 @@ describe('linter Unit Tests', () => {
     test('array type rule', () => {
       const packageJsonObj = {
         name: 'my-test-module',
-        author: 'Spiderman'
+        author: 'Spiderman',
       };
       const mockIgnorer = {
-        ignores: () => false
+        ignores: () => false,
       };
       const mockConfigHelper = {
-        getConfigForFile: jest.fn().mockReturnValue({'valid-values-author': ['error', ['Peter Parker']]})
+        getConfigForFile: jest.fn().mockReturnValue({'valid-values-author': ['error', ['Peter Parker']]}),
       };
       const rules = new Rules();
       rules.load();
@@ -276,10 +276,10 @@ describe('linter Unit Tests', () => {
             filePath: './test/fixtures/errors/package.json',
             ignored: false,
             issues: [lintIssue],
-            warningCount: 0
-          }
+            warningCount: 0,
+          },
         ],
-        warningCount: 0
+        warningCount: 0,
       };
 
       const results = linter.executeOnPackageJsonObject({
@@ -288,7 +288,7 @@ describe('linter Unit Tests', () => {
         filename: './test/fixtures/errors/package.json',
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
-        rules
+        rules,
       });
 
       expect(results).toMatchObject(expected);
@@ -297,13 +297,13 @@ describe('linter Unit Tests', () => {
     test('array type rule - off', () => {
       const packageJsonObj = {
         name: 'my-test-module',
-        author: 'Spiderman'
+        author: 'Spiderman',
       };
       const mockIgnorer = {
-        ignores: () => false
+        ignores: () => false,
       };
       const mockConfigHelper = {
-        getConfigForFile: jest.fn().mockReturnValue({'valid-values-author': 'off'})
+        getConfigForFile: jest.fn().mockReturnValue({'valid-values-author': 'off'}),
       };
       const rules = new Rules();
       rules.load();
@@ -317,10 +317,10 @@ describe('linter Unit Tests', () => {
             filePath: './test/fixtures/errors/package.json',
             ignored: false,
             issues: [],
-            warningCount: 0
-          }
+            warningCount: 0,
+          },
         ],
-        warningCount: 0
+        warningCount: 0,
       };
 
       const results = linter.executeOnPackageJsonObject({
@@ -329,7 +329,7 @@ describe('linter Unit Tests', () => {
         filename: './test/fixtures/errors/package.json',
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
-        rules
+        rules,
       });
 
       expect(results).toStrictEqual(expected);
@@ -338,10 +338,10 @@ describe('linter Unit Tests', () => {
     test('object type rule', () => {
       const packageJsonObj = {
         name: 'my-test-module',
-        description: 'Spiderman'
+        description: 'Spiderman',
       };
       const mockIgnorer = {
-        ignores: () => false
+        ignores: () => false,
       };
       const mockConfigHelper = {
         getConfigForFile: jest.fn().mockReturnValue({
@@ -349,10 +349,10 @@ describe('linter Unit Tests', () => {
             'error',
             {
               requireCapitalFirstLetter: true,
-              requireEndingPeriod: true
-            }
-          ]
-        })
+              requireEndingPeriod: true,
+            },
+          ],
+        }),
       };
       const rules = new Rules();
       rules.load();
@@ -372,10 +372,10 @@ describe('linter Unit Tests', () => {
             filePath: './test/fixtures/errors/package.json',
             ignored: false,
             issues: [lintIssue],
-            warningCount: 0
-          }
+            warningCount: 0,
+          },
         ],
-        warningCount: 0
+        warningCount: 0,
       };
 
       const results = linter.executeOnPackageJsonObject({
@@ -384,7 +384,7 @@ describe('linter Unit Tests', () => {
         filename: './test/fixtures/errors/package.json',
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
-        rules
+        rules,
       });
 
       expect(results).toMatchObject(expected);
@@ -394,16 +394,16 @@ describe('linter Unit Tests', () => {
       const packageJsonObj = {
         name: 'my-test-module',
         dependencies: {
-          myModule: '^1.0.0'
-        }
+          myModule: '^1.0.0',
+        },
       };
       const mockIgnorer = {
-        ignores: () => false
+        ignores: () => false,
       };
       const mockConfigHelper = {
         getConfigForFile: jest.fn().mockReturnValue({
-          'no-caret-version-dependencies': 'error'
-        })
+          'no-caret-version-dependencies': 'error',
+        }),
       };
       const rules = new Rules();
       rules.load();
@@ -423,10 +423,10 @@ describe('linter Unit Tests', () => {
             filePath: './test/fixtures/errors/package.json',
             ignored: false,
             issues: [lintIssue],
-            warningCount: 0
-          }
+            warningCount: 0,
+          },
         ],
-        warningCount: 0
+        warningCount: 0,
       };
 
       const results = linter.executeOnPackageJsonObject({
@@ -435,7 +435,7 @@ describe('linter Unit Tests', () => {
         filename: './test/fixtures/errors/package.json',
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
-        rules
+        rules,
       });
 
       expect(results).toMatchObject(expected);
@@ -445,21 +445,21 @@ describe('linter Unit Tests', () => {
       const packageJsonObj = {
         name: 'my-test-module',
         dependencies: {
-          myModule: '^1.0.0'
-        }
+          myModule: '^1.0.0',
+        },
       };
       const mockIgnorer = {
-        ignores: () => false
+        ignores: () => false,
       };
       const mockConfigHelper = {
         getConfigForFile: jest.fn().mockReturnValue({
           'no-caret-version-dependencies': [
             'error',
             {
-              exceptions: ['myModule2']
-            }
-          ]
-        })
+              exceptions: ['myModule2'],
+            },
+          ],
+        }),
       };
       const rules = new Rules();
       rules.load();
@@ -479,10 +479,10 @@ describe('linter Unit Tests', () => {
             filePath: './test/fixtures/errors/package.json',
             ignored: false,
             issues: [lintIssue],
-            warningCount: 0
-          }
+            warningCount: 0,
+          },
         ],
-        warningCount: 0
+        warningCount: 0,
       };
 
       const results = linter.executeOnPackageJsonObject({
@@ -491,7 +491,7 @@ describe('linter Unit Tests', () => {
         filename: './test/fixtures/errors/package.json',
         ignorer: mockIgnorer,
         configHelper: mockConfigHelper,
-        rules
+        rules,
       });
 
       expect(results).toMatchObject(expected);

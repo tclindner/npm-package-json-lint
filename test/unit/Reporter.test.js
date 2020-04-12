@@ -12,12 +12,12 @@ describe('Reporter Unit Tests', () => {
               issues: [],
               ignored: false,
               errorCount: 0,
-              warningCount: 0
-            }
+              warningCount: 0,
+            },
           ],
           ignoreCount: 0,
           errorCount: 0,
-          warningCount: 0
+          warningCount: 0,
         };
         const expectedCallCount = 0;
 
@@ -39,17 +39,17 @@ describe('Reporter Unit Tests', () => {
                   lintId: 'require-name',
                   severity: 'error',
                   node: 'name',
-                  lintMessage: 'dummyText'
-                }
+                  lintMessage: 'dummyText',
+                },
               ],
               ignored: false,
               errorCount: 1,
-              warningCount: 0
-            }
+              warningCount: 0,
+            },
           ],
           ignoreCount: 0,
           errorCount: 1,
-          warningCount: 0
+          warningCount: 0,
         };
         const expectedCallCount = 5;
 
@@ -75,23 +75,23 @@ describe('Reporter Unit Tests', () => {
                   lintId: 'require-name',
                   severity: 'error',
                   node: 'name',
-                  lintMessage: 'dummyText'
+                  lintMessage: 'dummyText',
                 },
                 {
                   lintId: 'require-name',
                   severity: 'warning',
                   node: 'name',
-                  lintMessage: 'dummyText'
-                }
+                  lintMessage: 'dummyText',
+                },
               ],
               ignored: false,
               errorCount: 1,
-              warningCount: 1
-            }
+              warningCount: 1,
+            },
           ],
           ignoreCount: 0,
           errorCount: 1,
-          warningCount: 1
+          warningCount: 1,
         };
         const expectedCallCount = 6;
 
@@ -117,17 +117,17 @@ describe('Reporter Unit Tests', () => {
                   lintId: 'require-name',
                   severity: 'error',
                   node: 'name',
-                  lintMessage: 'dummyText'
-                }
+                  lintMessage: 'dummyText',
+                },
               ],
               ignored: false,
               errorCount: 1,
-              warningCount: 0
-            }
+              warningCount: 0,
+            },
           ],
           ignoreCount: 0,
           errorCount: 1,
-          warningCount: 0
+          warningCount: 0,
         };
         const expectedCallCount = 4;
 
@@ -152,35 +152,35 @@ describe('Reporter Unit Tests', () => {
                   lintId: 'require-name',
                   severity: 'error',
                   node: 'name',
-                  lintMessage: 'dummyText'
+                  lintMessage: 'dummyText',
                 },
                 {
                   lintId: 'require-name',
                   severity: 'error',
                   node: 'name',
-                  lintMessage: 'dummyText'
+                  lintMessage: 'dummyText',
                 },
                 {
                   lintId: 'require-name',
                   severity: 'warning',
                   node: 'name',
-                  lintMessage: 'dummyText'
+                  lintMessage: 'dummyText',
                 },
                 {
                   lintId: 'require-name',
                   severity: 'warning',
                   node: 'name',
-                  lintMessage: 'dummyText'
-                }
+                  lintMessage: 'dummyText',
+                },
               ],
               ignored: false,
               errorCount: 2,
-              warningCount: 2
-            }
+              warningCount: 2,
+            },
           ],
           ignoreCount: 0,
           errorCount: 2,
-          warningCount: 2
+          warningCount: 2,
         };
         const expectedCallCount = 8;
 
@@ -204,12 +204,12 @@ describe('Reporter Unit Tests', () => {
               issues: [],
               ignored: true,
               errorCount: 0,
-              warningCount: 0
-            }
+              warningCount: 0,
+            },
           ],
           ignoreCount: 1,
           errorCount: 0,
-          warningCount: 0
+          warningCount: 0,
         };
         const expectedCallCount = 2;
 
@@ -235,12 +235,12 @@ describe('Reporter Unit Tests', () => {
                   lintId: 'require-name',
                   severity: 'error',
                   node: 'name',
-                  lintMessage: 'dummyText'
-                }
+                  lintMessage: 'dummyText',
+                },
               ],
               ignored: false,
               errorCount: 1,
-              warningCount: 0
+              warningCount: 0,
             },
             {
               filePath: 'dummyText2',
@@ -249,17 +249,17 @@ describe('Reporter Unit Tests', () => {
                   lintId: 'require-name',
                   severity: 'error',
                   node: 'name',
-                  lintMessage: 'dummyText'
-                }
+                  lintMessage: 'dummyText',
+                },
               ],
               ignored: false,
               errorCount: 1,
-              warningCount: 0
-            }
+              warningCount: 0,
+            },
           ],
           ignoreCount: 0,
           errorCount: 2,
-          warningCount: 0
+          warningCount: 0,
         };
         const expectedCallCount = 15;
 
@@ -295,12 +295,12 @@ describe('Reporter Unit Tests', () => {
                   lintId: 'require-name',
                   severity: 'error',
                   node: 'name',
-                  lintMessage: 'dummyText'
-                }
+                  lintMessage: 'dummyText',
+                },
               ],
               ignored: false,
               errorCount: 1,
-              warningCount: 0
+              warningCount: 0,
             },
             {
               filePath: 'dummyText2',
@@ -309,17 +309,17 @@ describe('Reporter Unit Tests', () => {
                   lintId: 'require-name',
                   severity: 'error',
                   node: 'name',
-                  lintMessage: 'dummyText'
-                }
+                  lintMessage: 'dummyText',
+                },
               ],
               ignored: false,
               errorCount: 1,
-              warningCount: 0
-            }
+              warningCount: 0,
+            },
           ],
           ignoreCount: 0,
           errorCount: 2,
-          warningCount: 0
+          warningCount: 0,
         };
         const expectedCallCount = 11;
 
@@ -348,7 +348,7 @@ describe('Reporter Unit Tests', () => {
               issues: [],
               ignored: true,
               errorCount: 0,
-              warningCount: 0
+              warningCount: 0,
             },
             {
               filePath: 'dummyText2',
@@ -357,17 +357,17 @@ describe('Reporter Unit Tests', () => {
                   lintId: 'require-name',
                   severity: 'error',
                   node: 'name',
-                  lintMessage: 'dummyText'
-                }
+                  lintMessage: 'dummyText',
+                },
               ],
               ignored: false,
               errorCount: 1,
-              warningCount: 0
-            }
+              warningCount: 0,
+            },
           ],
           ignoreCount: 1,
           errorCount: 1,
-          warningCount: 0
+          warningCount: 0,
         };
         const expectedCallCount = 12;
 
@@ -398,7 +398,7 @@ describe('Reporter Unit Tests', () => {
               issues: [],
               ignored: true,
               errorCount: 0,
-              warningCount: 0
+              warningCount: 0,
             },
             {
               filePath: 'dummyText2',
@@ -407,17 +407,17 @@ describe('Reporter Unit Tests', () => {
                   lintId: 'require-name',
                   severity: 'error',
                   node: 'name',
-                  lintMessage: 'dummyText'
-                }
+                  lintMessage: 'dummyText',
+                },
               ],
               ignored: false,
               errorCount: 1,
-              warningCount: 0
-            }
+              warningCount: 0,
+            },
           ],
           ignoreCount: 1,
           errorCount: 1,
-          warningCount: 0
+          warningCount: 0,
         };
         const expectedCallCount = 9;
 

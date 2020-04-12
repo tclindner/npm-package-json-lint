@@ -5,7 +5,7 @@ describe('type Unit Tests', () => {
     describe('when the node does not exist in the package.json file', () => {
       test('true should be returned', () => {
         const packageJson = {
-          name: ['awesome-module']
+          name: ['awesome-module'],
         };
         const response = type.isArray(packageJson, 'devDependencies');
 
@@ -16,7 +16,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is a string', () => {
       test('false should be returned', () => {
         const packageJson = {
-          name: 'awesome-module'
+          name: 'awesome-module',
         };
         const response = type.isArray(packageJson, 'name');
 
@@ -27,7 +27,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is a boolean', () => {
       test('false should be returned', () => {
         const packageJson = {
-          name: true
+          name: true,
         };
         const response = type.isArray(packageJson, 'name');
 
@@ -38,7 +38,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is an object', () => {
       test('false should be returned', () => {
         const packageJson = {
-          name: {}
+          name: {},
         };
         const response = type.isArray(packageJson, 'name');
 
@@ -49,7 +49,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is an array', () => {
       test('true should be returned', () => {
         const packageJson = {
-          name: ['awesome-module']
+          name: ['awesome-module'],
         };
         const response = type.isArray(packageJson, 'name');
 
@@ -62,7 +62,7 @@ describe('type Unit Tests', () => {
     describe('when the node does not exist in the package.json file', () => {
       test('true should be returned', () => {
         const packageJson = {
-          name: ['awesome-module']
+          name: ['awesome-module'],
         };
         const response = type.isBoolean(packageJson, 'devDependencies');
 
@@ -73,7 +73,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is a string', () => {
       test('false should be returned', () => {
         const packageJson = {
-          name: 'awesome-module'
+          name: 'awesome-module',
         };
         const response = type.isBoolean(packageJson, 'name');
 
@@ -84,7 +84,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is a boolean', () => {
       test('true should be returned', () => {
         const packageJson = {
-          name: true
+          name: true,
         };
         const response = type.isBoolean(packageJson, 'name');
 
@@ -95,7 +95,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is an object', () => {
       test('false should be returned', () => {
         const packageJson = {
-          name: {}
+          name: {},
         };
         const response = type.isBoolean(packageJson, 'name');
 
@@ -106,7 +106,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is an array', () => {
       test('false should be returned', () => {
         const packageJson = {
-          name: ['awesome-module']
+          name: ['awesome-module'],
         };
         const response = type.isBoolean(packageJson, 'name');
 
@@ -119,7 +119,7 @@ describe('type Unit Tests', () => {
     describe('when the node does not exist in the package.json file', () => {
       test('true should be returned', () => {
         const packageJson = {
-          name: ['awesome-module']
+          name: ['awesome-module'],
         };
         const response = type.isObject(packageJson, 'devDependencies');
 
@@ -130,7 +130,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is a string', () => {
       test('false should be returned', () => {
         const packageJson = {
-          name: 'awesome-module'
+          name: 'awesome-module',
         };
         const response = type.isObject(packageJson, 'name');
 
@@ -141,7 +141,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is a boolean', () => {
       test('false should be returned', () => {
         const packageJson = {
-          name: true
+          name: true,
         };
         const response = type.isObject(packageJson, 'name');
 
@@ -152,7 +152,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is an object', () => {
       test('true should be returned', () => {
         const packageJson = {
-          name: {}
+          name: {},
         };
         const response = type.isObject(packageJson, 'name');
 
@@ -163,7 +163,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is an array', () => {
       test('false should be returned', () => {
         const packageJson = {
-          name: ['awesome-module']
+          name: ['awesome-module'],
         };
         const response = type.isObject(packageJson, 'name');
 
@@ -176,7 +176,7 @@ describe('type Unit Tests', () => {
     describe('when the node does not exist in the package.json file', () => {
       test('true should be returned', () => {
         const packageJson = {
-          name: ['awesome-module']
+          name: ['awesome-module'],
         };
         const response = type.isString(packageJson, 'devDependencies');
 
@@ -187,7 +187,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is a string', () => {
       test('true should be returned', () => {
         const packageJson = {
-          name: 'awesome-module'
+          name: 'awesome-module',
         };
         const response = type.isString(packageJson, 'name');
 
@@ -198,7 +198,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is a boolean', () => {
       test('false should be returned', () => {
         const packageJson = {
-          name: true
+          name: true,
         };
         const response = type.isString(packageJson, 'name');
 
@@ -209,7 +209,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is an object', () => {
       test('false should be returned', () => {
         const packageJson = {
-          name: {}
+          name: {},
         };
         const response = type.isString(packageJson, 'name');
 
@@ -220,7 +220,7 @@ describe('type Unit Tests', () => {
     describe('when the node exists in the package.json file and it is an array', () => {
       test('false should be returned', () => {
         const packageJson = {
-          name: ['awesome-module']
+          name: ['awesome-module'],
         };
         const response = type.isString(packageJson, 'name');
 

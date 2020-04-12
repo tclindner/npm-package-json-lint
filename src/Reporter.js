@@ -13,7 +13,7 @@ const oneFile = 1;
  * @returns {Undefined} No return
  * @private
  */
-const printResultSetIssues = issues => {
+const printResultSetIssues = (issues) => {
   for (const issue of issues) {
     // eslint-disable-next-line no-console
     console.log(issue.toString());

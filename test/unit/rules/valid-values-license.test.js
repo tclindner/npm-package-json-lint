@@ -18,7 +18,7 @@ describe('valid-values-license Unit Tests', () => {
   describe('when package.json has node with incorrect value', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        license: 'MIT'
+        license: 'MIT',
       };
       const validValues = ['private', 'unlicensed'];
       const response = lint(packageJsonData, 'error', validValues);
@@ -33,7 +33,7 @@ describe('valid-values-license Unit Tests', () => {
   describe('when package.json has node with correct value', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        license: 'unlicensed'
+        license: 'unlicensed',
       };
       const validValues = ['private', 'unlicensed'];
       const response = lint(packageJsonData, 'error', validValues);
