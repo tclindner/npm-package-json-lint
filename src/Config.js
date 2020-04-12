@@ -1,5 +1,5 @@
 const debug = require('debug')('npm-package-json-lint:Config');
-const cosmiconfig = require('cosmiconfig');
+const {cosmiconfigSync} = require('cosmiconfig');
 
 const configValidator = require('./config/ConfigValidator');
 const cosmicConfigTransformer = require('./config/cosmicConfigTransformer');
@@ -51,14 +51,14 @@ class Config {
       debug(`User passed config is undefined.`);
       if (this.configFile) {
         debug(`Config file specified, loading it.`);
-        config = cosmiconfig('npmpackagejsonlint', {
+        config = cosmiconfigSync('npmpackagejsonlint', {
           transform: cosmicConfigTransformer.transform(this.cwd, this.configBaseDirectory, this.configFile)
-        }).loadSync(this.configFile);
+        }).load(this.configFile);
       } else {
         debug(`Config file wasn't specified, searching for config.`);
-        config = cosmiconfig('npmpackagejsonlint', {
+        config = cosmiconfigSync('npmpackagejsonlint', {
           transform: cosmicConfigTransformer.transform(this.cwd, this.configBaseDirectory, filePathToSearch)
-        }).searchSync(filePathToSearch);
+        }).search(filePathToSearch);
       }
     } else {
       debug(`User passed config is set, using it.`);

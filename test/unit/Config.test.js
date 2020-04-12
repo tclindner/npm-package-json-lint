@@ -1,4 +1,4 @@
-const cosmiconfig = require('cosmiconfig');
+const {cosmiconfigSync} = require('cosmiconfig');
 const Config = require('./../../src/Config');
 const applyOverrides = require('../../src/config/applyOverrides');
 const applyExtendsIfSpecified = require('../../src/config/applyExtendsIfSpecified');
@@ -20,17 +20,17 @@ describe('Config Unit Tests', () => {
         const configFile = './npmpackagejsonlintrc.json';
         const configBaseDirectory = '';
 
-        const loadSyncMock = jest.fn().mockReturnValue({
+        const loadMock = jest.fn().mockReturnValue({
           'require-version': 'error',
           'require-name': 'error',
           'require-scripts': 'error'
         });
-        const searchSyncMock = jest.fn();
+        const searchMock = jest.fn();
 
-        cosmiconfig.mockImplementation(() => {
+        cosmiconfigSync.mockImplementation(() => {
           return {
-            loadSync: loadSyncMock,
-            searchSync: searchSyncMock
+            load: loadMock,
+            search: searchMock
           };
         });
 
@@ -47,9 +47,9 @@ describe('Config Unit Tests', () => {
         expect(result).toStrictEqual(expectedConfigObj);
         expect(applyExtendsIfSpecified).toHaveBeenCalledTimes(0);
         expect(applyOverrides).toHaveBeenCalledTimes(0);
-        expect(loadSyncMock).toHaveBeenCalledTimes(1);
-        expect(loadSyncMock).toHaveBeenCalledWith(configFile);
-        expect(searchSyncMock).toHaveBeenCalledTimes(0);
+        expect(loadMock).toHaveBeenCalledTimes(1);
+        expect(loadMock).toHaveBeenCalledWith(configFile);
+        expect(searchMock).toHaveBeenCalledTimes(0);
       });
     });
 
@@ -60,17 +60,17 @@ describe('Config Unit Tests', () => {
         let configFile;
         const configBaseDirectory = '';
 
-        const loadSyncMock = jest.fn();
-        const searchSyncMock = jest.fn().mockReturnValue({
+        const loadMock = jest.fn();
+        const searchMock = jest.fn().mockReturnValue({
           'require-version': 'error',
           'require-name': 'error',
           'require-scripts': 'error'
         });
 
-        cosmiconfig.mockImplementation(() => {
+        cosmiconfigSync.mockImplementation(() => {
           return {
-            loadSync: loadSyncMock,
-            searchSync: searchSyncMock
+            load: loadMock,
+            search: searchMock
           };
         });
 
@@ -87,9 +87,9 @@ describe('Config Unit Tests', () => {
         expect(result).toStrictEqual(expectedConfigObj);
         expect(applyExtendsIfSpecified).toHaveBeenCalledTimes(0);
         expect(applyOverrides).toHaveBeenCalledTimes(0);
-        expect(searchSyncMock).toHaveBeenCalledTimes(1);
-        expect(searchSyncMock).toHaveBeenCalledWith(filePath);
-        expect(loadSyncMock).toHaveBeenCalledTimes(0);
+        expect(searchMock).toHaveBeenCalledTimes(1);
+        expect(searchMock).toHaveBeenCalledWith(filePath);
+        expect(loadMock).toHaveBeenCalledTimes(0);
       });
     });
 
@@ -100,13 +100,13 @@ describe('Config Unit Tests', () => {
         let configFile;
         const configBaseDirectory = '';
 
-        const loadSyncMock = jest.fn();
-        const searchSyncMock = jest.fn();
+        const loadMock = jest.fn();
+        const searchMock = jest.fn();
 
-        cosmiconfig.mockImplementation(() => {
+        cosmiconfigSync.mockImplementation(() => {
           return {
-            loadSync: loadSyncMock,
-            searchSync: searchSyncMock
+            load: loadMock,
+            search: searchMock
           };
         });
 
@@ -127,13 +127,13 @@ describe('Config Unit Tests', () => {
         let configFile;
         const configBaseDirectory = '';
 
-        const loadSyncMock = jest.fn();
-        const searchSyncMock = jest.fn().mockReturnValue({});
+        const loadMock = jest.fn();
+        const searchMock = jest.fn().mockReturnValue({});
 
-        cosmiconfig.mockImplementation(() => {
+        cosmiconfigSync.mockImplementation(() => {
           return {
-            loadSync: loadSyncMock,
-            searchSync: searchSyncMock
+            load: loadMock,
+            search: searchMock
           };
         });
 
@@ -168,13 +168,13 @@ describe('Config Unit Tests', () => {
         let configFile;
         const configBaseDirectory = '';
 
-        const loadSyncMock = jest.fn();
-        const searchSyncMock = jest.fn();
+        const loadMock = jest.fn();
+        const searchMock = jest.fn();
 
-        cosmiconfig.mockImplementation(() => {
+        cosmiconfigSync.mockImplementation(() => {
           return {
-            loadSync: loadSyncMock,
-            searchSync: searchSyncMock
+            load: loadMock,
+            search: searchMock
           };
         });
         applyExtendsIfSpecified.mockReturnValue({
@@ -213,8 +213,8 @@ describe('Config Unit Tests', () => {
         expect(applyExtendsIfSpecified).toHaveBeenCalledWith(config, 'PassedConfig');
         expect(applyOverrides).toHaveBeenCalledTimes(1);
         expect(applyOverrides).toHaveBeenCalledWith(cwd, filePath, config.rules, config.overrides);
-        expect(searchSyncMock).toHaveBeenCalledTimes(0);
-        expect(loadSyncMock).toHaveBeenCalledTimes(0);
+        expect(searchMock).toHaveBeenCalledTimes(0);
+        expect(loadMock).toHaveBeenCalledTimes(0);
       });
     });
   });
