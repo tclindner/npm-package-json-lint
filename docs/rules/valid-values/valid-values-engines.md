@@ -30,7 +30,7 @@ Enabling this rule will result in an error being generated if the value in `engi
 ```json
 {
   "engines": {
-    "node": "^8.0.0"
+    "node": "^10.0.0"
   }
 }
 ```

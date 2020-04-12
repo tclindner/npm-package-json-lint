@@ -27,7 +27,7 @@ describe('valid-values-engines Unit Tests', () => {
           node: '^6.0.0',
           npm: '^3.0.0'
         },
-        {node: '^8.0.0'}
+        {node: '^10.0.0'}
       ];
       const response = lint(packageJsonData, 'error', validValues);
 
@@ -69,7 +69,7 @@ describe('valid-values-engines Unit Tests', () => {
           npm: '^3.0.0'
         },
         {
-          node: '^8.0.0',
+          node: '^10.0.0',
           npm: '^5.0.0'
         }
       ];
@@ -90,7 +90,7 @@ describe('valid-values-engines Unit Tests', () => {
           npm: '^3.0.0'
         },
         {
-          node: '^8.0.0',
+          node: '^10.0.0',
           npm: '^5.0.0'
         }
       ];
@@ -111,7 +111,7 @@ describe('valid-values-engines Unit Tests', () => {
           node: '^6.0.0',
           npm: '^3.0.0'
         },
-        {node: '^8.0.0'}
+        {node: '^10.0.0'}
       ];
       const response = lint(packageJsonData, 'error', validValues);
 
