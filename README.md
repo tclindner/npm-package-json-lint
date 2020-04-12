@@ -33,7 +33,7 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 #### Node
 
-* [Node.js](https://nodejs.org/) - v8.0.0+
+* [Node.js](https://nodejs.org/) - v10.0.0+
 * [npm](http://npmjs.com) - v6.0.0+
 
 ### Use the cli
@@ -53,6 +53,10 @@ First thing first, let's make sure you have the necessary pre-requisites.
 Quick links
 
 [CLI commands and configuration](https://npmpackagejsonlint.org/docs/en/cli) | [Node.js API](https://npmpackagejsonlint.org/docs/en/api)
+
+## Migrating from v4.x.x to 5.x.x
+
+Please see the [migration guide](https://npmpackagejsonlint.org/docs/en/v4-to-v5).
 
 ## Migrating from v3.x.x to 4.x.x
 

@@ -1,6 +1,6 @@
 {
   "name": "npm-package-json-lint",
-  "version": "4.6.0",
+  "version": "5.0.0",
   "description": "Configurable linter for package.json files.",
   "keywords": [
     "lint",
@@ -46,7 +46,7 @@
     "jsonc-parser": "^2.2.1",
     "log-symbols": "^3.0.0",
     "meow": "^6.1.0",
-    "plur": "^3.1.1",
+    "plur": "^4.0.0",
     "semver": "^7.2.2",
     "slash": "^3.0.0",
     "strip-json-comments": "^3.1.0"
@@ -65,7 +65,7 @@
     "prettier": "^1.19.1"
   },
   "engines": {
-    "node": ">=8.0.0",
+    "node": ">=10.0.0",
     "npm": ">=6.0.0"
   },
   "license": "MIT"
