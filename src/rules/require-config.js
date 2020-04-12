@@ -1,4 +1,4 @@
-const LintIssue = require('./../LintIssue');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'require-config';
 const nodeName = 'config';

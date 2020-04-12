@@ -1,5 +1,5 @@
-const {isObject, isString} = require('./../validators/type');
-const LintIssue = require('./../LintIssue');
+const {isObject, isString} = require('../validators/type');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'bin-type';
 const nodeName = 'bin';

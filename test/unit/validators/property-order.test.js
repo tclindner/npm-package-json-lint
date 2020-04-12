@@ -1,4 +1,4 @@
-const propertyOrder = require('./../../../src/validators/property-order');
+const propertyOrder = require('../../../src/validators/property-order');
 
 describe('property-order Unit Tests', () => {
   describe('isInPreferredOrder method', () => {

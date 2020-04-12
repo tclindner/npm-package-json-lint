@@ -1,9 +1,9 @@
 /* eslint max-statements: 'off', no-restricted-syntax: 'off', guard-for-in: 'off' */
 
 const semver = require('semver');
-const LintIssue = require('./../LintIssue');
-const {isObject} = require('./../validators/type');
-const {isValidValue} = require('./../validators/valid-values');
+const LintIssue = require('../LintIssue');
+const {isObject} = require('../validators/type');
+const {isValidValue} = require('../validators/valid-values');
 
 const lintId = 'valid-values-engines';
 const nodeName = 'engines';

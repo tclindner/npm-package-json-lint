@@ -1,4 +1,4 @@
-const LintIssue = require('./../LintIssue');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'require-bin';
 const nodeName = 'bin';

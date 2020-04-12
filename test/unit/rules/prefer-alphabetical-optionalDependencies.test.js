@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/prefer-alphabetical-optionalDependencies');
+const ruleModule = require('../../../src/rules/prefer-alphabetical-optionalDependencies');
 const alphabeticalSort = require('../../../src/validators/alphabetical-sort');
 const property = require('../../../src/validators/property');
 

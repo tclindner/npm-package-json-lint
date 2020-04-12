@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-const Reporter = require('./../../src/Reporter');
+const Reporter = require('../../src/Reporter');
 
 describe('Reporter Unit Tests', () => {
   describe('write method', () => {

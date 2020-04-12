@@ -1,4 +1,4 @@
-const format = require('./../../../src/validators/format');
+const format = require('../../../src/validators/format');
 
 describe('format Unit Tests', () => {
   describe('isLowercase method', () => {

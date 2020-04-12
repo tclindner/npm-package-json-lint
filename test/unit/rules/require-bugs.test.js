@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/require-bugs');
+const ruleModule = require('../../../src/rules/require-bugs');
 
 const {lint, ruleType} = ruleModule;
 

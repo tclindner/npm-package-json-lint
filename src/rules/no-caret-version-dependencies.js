@@ -1,5 +1,5 @@
-const {doVersContainInvalidRange} = require('./../validators/dependency-audit');
-const LintIssue = require('./../LintIssue');
+const {doVersContainInvalidRange} = require('../validators/dependency-audit');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'no-caret-version-dependencies';
 const nodeName = 'dependencies';

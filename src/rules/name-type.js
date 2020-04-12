@@ -1,5 +1,5 @@
-const LintIssue = require('./../LintIssue');
-const {isString} = require('./../validators/type');
+const LintIssue = require('../LintIssue');
+const {isString} = require('../validators/type');
 
 const lintId = 'name-type';
 const nodeName = 'name';

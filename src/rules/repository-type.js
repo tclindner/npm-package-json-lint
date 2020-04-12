@@ -1,6 +1,6 @@
-const {isObject} = require('./../validators/type');
-const {isString} = require('./../validators/type');
-const LintIssue = require('./../LintIssue');
+const {isObject} = require('../validators/type');
+const {isString} = require('../validators/type');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'repository-type';
 const nodeName = 'repository';

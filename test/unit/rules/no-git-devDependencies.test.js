@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/no-git-devDependencies');
+const ruleModule = require('../../../src/rules/no-git-devDependencies');
 
 const {lint, ruleType} = ruleModule;
 

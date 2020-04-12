@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/no-caret-version-dependencies');
+const ruleModule = require('../../../src/rules/no-caret-version-dependencies');
 
 const {lint, ruleType} = ruleModule;
 

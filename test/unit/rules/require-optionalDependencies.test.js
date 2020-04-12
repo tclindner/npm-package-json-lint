@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/require-optionalDependencies');
+const ruleModule = require('../../../src/rules/require-optionalDependencies');
 
 const {lint, ruleType} = ruleModule;
 

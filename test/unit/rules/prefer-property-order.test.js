@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/prefer-property-order');
+const ruleModule = require('../../../src/rules/prefer-property-order');
 
 const {lint, ruleType, minItems} = ruleModule;
 

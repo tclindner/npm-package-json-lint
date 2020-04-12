@@ -1,5 +1,5 @@
-const {hasDepPrereleaseVers} = require('./../validators/dependency-audit');
-const LintIssue = require('./../LintIssue');
+const {hasDepPrereleaseVers} = require('../validators/dependency-audit');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'no-restricted-pre-release-devDependencies';
 const nodeName = 'devDependencies';

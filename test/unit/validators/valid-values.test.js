@@ -1,4 +1,4 @@
-const validValuesObj = require('./../../../src/validators/valid-values');
+const validValuesObj = require('../../../src/validators/valid-values');
 
 describe('value-values Unit Tests', () => {
   describe('isValidValue method', () => {

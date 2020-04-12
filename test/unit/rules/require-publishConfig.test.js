@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/require-publishConfig');
+const ruleModule = require('../../../src/rules/require-publishConfig');
 
 const {lint, ruleType} = ruleModule;
 

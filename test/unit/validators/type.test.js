@@ -1,4 +1,4 @@
-const type = require('./../../../src/validators/type');
+const type = require('../../../src/validators/type');
 
 describe('type Unit Tests', () => {
   describe('isArray method', () => {

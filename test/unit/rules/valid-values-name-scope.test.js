@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/valid-values-name-scope');
+const ruleModule = require('../../../src/rules/valid-values-name-scope');
 
 const {lint, ruleType, minItems} = ruleModule;
 

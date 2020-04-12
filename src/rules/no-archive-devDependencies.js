@@ -1,5 +1,5 @@
-const {doVersContainArchiveUrl} = require('./../validators/dependency-audit');
-const LintIssue = require('./../LintIssue');
+const {doVersContainArchiveUrl} = require('../validators/dependency-audit');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'no-archive-devDependencies';
 const nodeName = 'devDependencies';

@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/valid-values-engines');
+const ruleModule = require('../../../src/rules/valid-values-engines');
 
 const {lint, ruleType, minItems} = ruleModule;
 

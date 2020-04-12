@@ -1,5 +1,5 @@
-const {isValidVersionNumber} = require('./../validators/format');
-const LintIssue = require('./../LintIssue');
+const {isValidVersionNumber} = require('../validators/format');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'version-format';
 const nodeName = 'version';

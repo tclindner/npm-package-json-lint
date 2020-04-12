@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/require-directories');
+const ruleModule = require('../../../src/rules/require-directories');
 
 const {lint, ruleType} = ruleModule;
 

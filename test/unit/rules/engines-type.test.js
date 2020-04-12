@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/engines-type');
+const ruleModule = require('../../../src/rules/engines-type');
 
 const {lint, ruleType} = ruleModule;
 

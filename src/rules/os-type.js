@@ -1,5 +1,5 @@
-const {isArray} = require('./../validators/type');
-const LintIssue = require('./../LintIssue');
+const {isArray} = require('../validators/type');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'os-type';
 const nodeName = 'os';

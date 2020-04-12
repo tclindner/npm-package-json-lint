@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/preferGlobal-type');
+const ruleModule = require('../../../src/rules/preferGlobal-type');
 
 const {lint, ruleType} = ruleModule;
 

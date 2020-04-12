@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/valid-values-license');
+const ruleModule = require('../../../src/rules/valid-values-license');
 
 const {lint, ruleType, minItems} = ruleModule;
 

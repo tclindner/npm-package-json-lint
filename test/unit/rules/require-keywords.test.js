@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/require-keywords');
+const ruleModule = require('../../../src/rules/require-keywords');
 
 const {lint, ruleType} = ruleModule;
 

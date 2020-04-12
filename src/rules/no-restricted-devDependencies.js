@@ -1,5 +1,5 @@
-const {hasDependency} = require('./../validators/dependency-audit');
-const LintIssue = require('./../LintIssue');
+const {hasDependency} = require('../validators/dependency-audit');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'no-restricted-devDependencies';
 const nodeName = 'devDependencies';

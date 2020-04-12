@@ -1,5 +1,5 @@
-const {doVersContainGitRepository} = require('./../validators/dependency-audit');
-const LintIssue = require('./../LintIssue');
+const {doVersContainGitRepository} = require('../validators/dependency-audit');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'no-git-dependencies';
 const nodeName = 'dependencies';

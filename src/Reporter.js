@@ -6,8 +6,6 @@ const plur = require('plur');
 const zeroIssues = 0;
 const oneFile = 1;
 
-/* eslint-disable no-console */
-
 /**
  * Prints issues to console
  *
@@ -17,11 +15,11 @@ const oneFile = 1;
  */
 const printResultSetIssues = issues => {
   for (const issue of issues) {
+    // eslint-disable-next-line no-console
     console.log(issue.toString());
   }
 };
 
-/* eslint-disable max-statements */
 /**
  * Print results for an individual package.json file linting
  *

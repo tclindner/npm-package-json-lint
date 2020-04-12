@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const logSymbols = require('log-symbols');
-const LintIssue = require('./../../src/LintIssue');
+const LintIssue = require('../../src/LintIssue');
 
 describe('LintIssue Unit Tests', () => {
   describe('constructor', () => {

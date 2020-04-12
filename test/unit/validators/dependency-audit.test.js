@@ -1,4 +1,4 @@
-const dependencyAudit = require('./../../../src/validators/dependency-audit');
+const dependencyAudit = require('../../../src/validators/dependency-audit');
 
 describe('dependency-audit Unit Tests', () => {
   describe('hasDependency method', () => {

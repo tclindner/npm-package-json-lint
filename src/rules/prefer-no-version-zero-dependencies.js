@@ -1,6 +1,6 @@
-const {hasDepVersZero} = require('./../validators/dependency-audit');
+const {hasDepVersZero} = require('../validators/dependency-audit');
 const {exists} = require('../validators/property');
-const LintIssue = require('./../LintIssue');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'prefer-no-version-zero-dependencies';
 const nodeName = 'dependencies';

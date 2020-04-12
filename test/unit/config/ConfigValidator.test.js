@@ -129,7 +129,9 @@ describe('configValidator Unit Tests', () => {
           };
           const source = 'cli';
 
-          configValidator.validateRules(ruleConfig, source, rules);
+          expect(() => {
+            configValidator.validateRules(ruleConfig, source, rules);
+          }).not.toThrow();
         });
       });
 
@@ -140,7 +142,9 @@ describe('configValidator Unit Tests', () => {
           };
           const source = 'cli';
 
-          configValidator.validateRules(ruleConfig, source, rules);
+          expect(() => {
+            configValidator.validateRules(ruleConfig, source, rules);
+          }).not.toThrow();
         });
       });
 
@@ -151,7 +155,9 @@ describe('configValidator Unit Tests', () => {
           };
           const source = 'cli';
 
-          configValidator.validateRules(ruleConfig, source, rules);
+          expect(() => {
+            configValidator.validateRules(ruleConfig, source, rules);
+          }).not.toThrow();
         });
       });
 
@@ -254,7 +260,9 @@ describe('configValidator Unit Tests', () => {
           };
           const source = 'cli';
 
-          configValidator.validateRules(ruleConfig, source, rules);
+          expect(() => {
+            configValidator.validateRules(ruleConfig, source, rules);
+          }).not.toThrow();
         });
       });
 
@@ -265,7 +273,9 @@ describe('configValidator Unit Tests', () => {
           };
           const source = 'cli';
 
-          configValidator.validateRules(ruleConfig, source, rules);
+          expect(() => {
+            configValidator.validateRules(ruleConfig, source, rules);
+          }).not.toThrow();
         });
       });
 
@@ -443,7 +453,9 @@ describe('configValidator Unit Tests', () => {
           };
           const source = 'cli';
 
-          configValidator.validateRules(ruleConfig, source, rules);
+          expect(() => {
+            configValidator.validateRules(ruleConfig, source, rules);
+          }).not.toThrow();
         });
       });
 
@@ -454,7 +466,9 @@ describe('configValidator Unit Tests', () => {
           };
           const source = 'cli';
 
-          configValidator.validateRules(ruleConfig, source, rules);
+          expect(() => {
+            configValidator.validateRules(ruleConfig, source, rules);
+          }).not.toThrow();
         });
       });
 
@@ -465,7 +479,9 @@ describe('configValidator Unit Tests', () => {
           };
           const source = 'cli';
 
-          configValidator.validateRules(ruleConfig, source, rules);
+          expect(() => {
+            configValidator.validateRules(ruleConfig, source, rules);
+          }).not.toThrow();
         });
       });
     });
@@ -478,7 +494,9 @@ describe('configValidator Unit Tests', () => {
           };
           const source = 'cli';
 
-          configValidator.validateRules(ruleConfig, source, rules);
+          expect(() => {
+            configValidator.validateRules(ruleConfig, source, rules);
+          }).not.toThrow();
         });
       });
 
@@ -489,7 +507,9 @@ describe('configValidator Unit Tests', () => {
           };
           const source = 'cli';
 
-          configValidator.validateRules(ruleConfig, source, rules);
+          expect(() => {
+            configValidator.validateRules(ruleConfig, source, rules);
+          }).not.toThrow();
         });
       });
 
@@ -500,7 +520,9 @@ describe('configValidator Unit Tests', () => {
           };
           const source = 'cli';
 
-          configValidator.validateRules(ruleConfig, source, rules);
+          expect(() => {
+            configValidator.validateRules(ruleConfig, source, rules);
+          }).not.toThrow();
         });
       });
 
@@ -548,7 +570,9 @@ describe('configValidator Unit Tests', () => {
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);
 
-        configValidator.validate(config, source, rules);
+        expect(() => {
+          configValidator.validate(config, source, rules);
+        }).not.toThrow();
       });
 
       test('extends and rules only for top level items, an exception should not be thrown', () => {
@@ -559,7 +583,9 @@ describe('configValidator Unit Tests', () => {
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);
 
-        configValidator.validate(config, source, rules);
+        expect(() => {
+          configValidator.validate(config, source, rules);
+        }).not.toThrow();
       });
 
       test('extends and root only for top level items, an exception should not be thrown', () => {
@@ -570,7 +596,9 @@ describe('configValidator Unit Tests', () => {
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);
 
-        configValidator.validate(config, source, rules);
+        expect(() => {
+          configValidator.validate(config, source, rules);
+        }).not.toThrow();
       });
 
       test('rules and root for top level items, an exception should not be thrown', () => {
@@ -581,7 +609,9 @@ describe('configValidator Unit Tests', () => {
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);
 
-        configValidator.validate(config, source, rules);
+        expect(() => {
+          configValidator.validate(config, source, rules);
+        }).not.toThrow();
       });
 
       test('extends as array items, an exception should not be thrown', () => {
@@ -593,7 +623,9 @@ describe('configValidator Unit Tests', () => {
         const source = 'cli';
         jest.spyOn(configValidator, 'validateRules').mockReturnValue(true);
 
-        configValidator.validate(config, source, rules);
+        expect(() => {
+          configValidator.validate(config, source, rules);
+        }).not.toThrow();
       });
     });
 

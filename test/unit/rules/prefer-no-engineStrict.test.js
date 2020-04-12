@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/prefer-no-engineStrict');
+const ruleModule = require('../../../src/rules/prefer-no-engineStrict');
 const property = require('../../../src/validators/property');
 
 const {lint, ruleType} = ruleModule;

@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/prefer-absolute-version-dependencies');
+const ruleModule = require('../../../src/rules/prefer-absolute-version-dependencies');
 const dependencyAudit = require('../../../src/validators/dependency-audit');
 const property = require('../../../src/validators/property');
 

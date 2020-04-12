@@ -1,5 +1,5 @@
-const LintIssue = require('./../LintIssue');
-const {isBoolean} = require('./../validators/type');
+const LintIssue = require('../LintIssue');
+const {isBoolean} = require('../validators/type');
 
 const lintId = 'preferGlobal-type';
 const nodeName = 'preferGlobal';

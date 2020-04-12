@@ -1,5 +1,5 @@
-const LintIssue = require('./../LintIssue');
-const {matchValidValue} = require('./../validators/valid-values');
+const LintIssue = require('../LintIssue');
+const {matchValidValue} = require('../validators/valid-values');
 
 const lintId = 'valid-values-name-scope';
 const nodeName = 'name';

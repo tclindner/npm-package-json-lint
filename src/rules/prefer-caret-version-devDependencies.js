@@ -1,6 +1,6 @@
-const {areVersRangesValid} = require('./../validators/dependency-audit');
+const {areVersRangesValid} = require('../validators/dependency-audit');
 const {exists} = require('../validators/property');
-const LintIssue = require('./../LintIssue');
+const LintIssue = require('../LintIssue');
 
 const lintId = 'prefer-caret-version-devDependencies';
 const nodeName = 'devDependencies';

@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/no-archive-dependencies');
+const ruleModule = require('../../../src/rules/no-archive-dependencies');
 
 const {lint, ruleType} = ruleModule;
 

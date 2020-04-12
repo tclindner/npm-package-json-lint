@@ -25,7 +25,7 @@ const findDuplicatePropNames = packageJsonSource => {
   const traverse = (node, dups = []) => {
     const foundProps = new Map();
 
-    // eslint-disable-next-line
+    // eslint-disable-next-line no-restricted-syntax
     for (const child of node.children) {
       const [propNameNode, propValNode] = child.children;
       const propName = propNameNode.value;

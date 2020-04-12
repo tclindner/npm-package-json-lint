@@ -1,4 +1,4 @@
-const ruleModule = require('./../../../src/rules/require-private');
+const ruleModule = require('../../../src/rules/require-private');
 
 const {lint, ruleType} = ruleModule;
 
