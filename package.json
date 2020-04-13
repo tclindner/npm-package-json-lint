@@ -47,7 +47,7 @@
     "log-symbols": "^3.0.0",
     "meow": "^6.1.0",
     "plur": "^4.0.0",
-    "semver": "^7.2.2",
+    "semver": "^7.2.3",
     "slash": "^3.0.0",
     "strip-json-comments": "^3.1.0"
   },
