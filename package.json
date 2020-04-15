@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "eslint": "^6.8.0",
-    "eslint-config-tc": "^12.0.0",
+    "eslint-config-tc": "^12.1.0",
     "eslint-formatter-pretty": "^3.0.1",
     "eslint-plugin-eslint-comments": "^3.1.2",
     "eslint-plugin-import": "^2.20.2",
