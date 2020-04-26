@@ -19,8 +19,8 @@ describe('prefer-scripts Unit Tests', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         scripts: {
-          'lint': 'npmPkgJsonLint .',
-          'test': 'jest'
+          lint: 'npmPkgJsonLint .',
+          test: 'jest'
         },
       };
       const requiredScripts = ['lint', 'start', 'test'];
@@ -37,8 +37,8 @@ describe('prefer-scripts Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {
         scripts: {
-          'lint': 'npmPkgJsonLint .',
-          'test': 'jest'
+          lint: 'npmPkgJsonLint .',
+          test: 'jest'
         },
       };
       const requiredScripts = ['lint', 'test'];

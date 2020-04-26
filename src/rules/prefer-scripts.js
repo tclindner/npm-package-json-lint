@@ -10,7 +10,7 @@ const minItems = 1;
 const lint = (packageJsonData, severity, requiredScripts) => {
   if (exists(packageJsonData, 'scripts')) {
     const scripts = Object.keys(packageJsonData.scripts);
-    const allRequiredScriptsPresent = requiredScripts.every((requiredScript) => scripts.includes(requiredScript))
+    const allRequiredScriptsPresent = requiredScripts.every((requiredScript) => scripts.includes(requiredScript));
 
     if (!allRequiredScriptsPresent) {
       return new LintIssue(lintId, severity, nodeName, `${message} ${requiredScripts.join(', ')}.`);
