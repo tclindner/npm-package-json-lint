@@ -20,7 +20,7 @@ describe('prefer-scripts Unit Tests', () => {
       const packageJsonData = {
         scripts: {
           lint: 'npmPkgJsonLint .',
-          test: 'jest'
+          test: 'jest',
         },
       };
       const requiredScripts = ['lint', 'start', 'test'];
@@ -38,7 +38,7 @@ describe('prefer-scripts Unit Tests', () => {
       const packageJsonData = {
         scripts: {
           lint: 'npmPkgJsonLint .',
-          test: 'jest'
+          test: 'jest',
         },
       };
       const requiredScripts = ['lint', 'test'];
