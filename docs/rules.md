@@ -131,6 +131,7 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
 > Generates an error if scripts fail to meet the rules requirements
 
 * [prefer-alphabetical-scripts](rules/scripts/prefer-alphabetical-scripts.md)
+* [prefer-scripts](rules/scripts/prefer-scripts.md)
 
 ## Format rules
 
