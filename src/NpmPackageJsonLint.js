@@ -27,7 +27,7 @@ const isPackageJsonObjectValid = (packageJsonObject) => isPlainObj(packageJsonOb
 
 const areRequiredOptionsValid = (packageJsonObject, patterns) => {
   return (
-    (!patterns && !isPackageJsonObjectValid(packageJsonObject)) ||
+    (!patterns && isPackageJsonObjectValid(packageJsonObject)) ||
     (patterns && (packageJsonObject || isPackageJsonObjectValid(packageJsonObject)))
   );
 };
