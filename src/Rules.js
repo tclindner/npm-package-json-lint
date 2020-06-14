@@ -67,6 +67,7 @@ class Rules {
    * @param  {String}     ruleModule  Path to rule
    * @return {undefined}              No return
    */
+  // eslint-disable-next-line no-underscore-dangle
   _registerRule(ruleId, ruleModule) {
     this.rules[ruleId] = ruleModule;
   }

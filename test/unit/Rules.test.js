@@ -13,6 +13,7 @@ describe('Rules Unit Tests', () => {
         const rules = new Rules();
         const firstIndex = 0;
 
+        // eslint-disable-next-line no-underscore-dangle
         rules._registerRule('key', 'c/git/key.js');
         expect(Object.keys(rules.rules)[firstIndex]).toStrictEqual('key');
         expect(rules.rules.key).toStrictEqual('c/git/key.js');
@@ -50,7 +51,7 @@ describe('Rules Unit Tests', () => {
           .mockReturnValueOnce('c/git/rules/require-version.js');
 
         const rules = new Rules();
-        const result = rules.load();
+        rules.load();
 
         expect(rules.rules['version-type']).toStrictEqual('c/git/rules/version-type.js');
         expect(rules.rules['require-version']).toStrictEqual('c/git/rules/require-version.js');
@@ -76,6 +77,7 @@ describe('Rules Unit Tests', () => {
     describe('when getRules is called', () => {
       test('the rules object should be returned', () => {
         const rules = new Rules();
+        // eslint-disable-next-line no-underscore-dangle
         rules._registerRule('ruleId', 'ruleModule');
 
         expect(rules.getRules()).toStrictEqual({ruleId: 'ruleModule'});
