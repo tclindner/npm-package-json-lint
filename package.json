@@ -45,7 +45,7 @@
     "is-plain-obj": "^2.1.0",
     "jsonc-parser": "^2.3.0",
     "log-symbols": "^4.0.0",
-    "meow": "^6.1.1",
+    "meow": "^7.1.0",
     "plur": "^4.0.0",
     "semver": "^7.3.2",
     "slash": "^3.0.0",
