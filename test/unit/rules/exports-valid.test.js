@@ -84,6 +84,7 @@ describe('exports-valid Unit Tests', () => {
         title: 'some error in nested conditions',
         config: {conditions: ['node']},
         input: {node: {foo: './a.js'}},
+        message: 'condition `foo` not in supported conditions `node,default`',
       },
       {
         title: 'two valid values in fallback array',

@@ -54,90 +54,102 @@ const validateFallbacks = (fallbacks) => {
   return true;
 };
 
-// eslint-disable-next-line max-lines-per-function
-const lint = (packageJsonData, severity, config = {conditions: []}) => {
-  const conditions = [...(config.conditions || []), 'default'];
+const validateStringValue = (parentKey, value) => {
+  if (!isValidPath(value)) {
+    return {error: 'invalidPath', str: value};
+  }
+
+  if (parentKey.endsWith('/') && !value.endsWith('/')) {
+    return {error: 'folderMappedToFile', str: parentKey};
+  }
+
+  return true;
+};
+
+const validateObject = (parentKey, parentType, object, config) => {
+  // either a paths object or a conditions object
+  let objectType;
+
+  const entries = Object.entries(object);
+
+  for (let i = 0; i < entries.length; i += 1) {
+    const [key, value] = entries[i];
+
+    if (isValidPathKey(key)) {
+      if (objectType === 'conditions') {
+        return {error: 'pathInConditions', str: key};
+      }
+
+      if (parentType === 'paths') {
+        return {error: 'nestedPaths', str: parentKey};
+      }
+
+      objectType = 'paths';
+
+      // eslint-disable-next-line no-use-before-define
+      const result = traverse(key, objectType, value, config);
+
+      if (result !== true) return result;
+    } else {
+      // `key` interpreted as a condition
+      if (!config.conditions.includes(key)) {
+        return {error: 'unsupportedCondition', str: key};
+      }
+
+      if (objectType === 'paths') {
+        return {error: 'conditionInPaths', str: key};
+      }
+
+      objectType = 'conditions';
+      if (key === 'default' && i + 1 < entries.length) {
+        return {error: 'defaultConditionNotLast'};
+      }
+
+      // eslint-disable-next-line no-use-before-define
+      const result = traverse(key, objectType, value, config);
+
+      if (result !== true) return result;
+    }
+  }
+
+  return true;
+};
+
+const traverse = (parentKey, parentType, node, config) => {
+  if (typeof node === 'string') {
+    return validateStringValue(parentKey, node);
+  }
+
+  if (Array.isArray(node)) {
+    // https://nodejs.org/api/esm.html#esm_package_exports_fallbacks
+    return validateFallbacks(node);
+  }
+
+  if (!isPlainObj(node)) {
+    return {error: 'unexpectedType', str: typeof node};
+  }
+
+  return validateObject(parentKey, parentType, node, config);
+};
+
+const lint = (packageJsonData, severity, providedConfig) => {
+  const config = {
+    conditions: [],
+    ...providedConfig,
+  };
+
+  config.conditions.push('default');
 
   if (!exists(packageJsonData, nodeName)) return true;
 
-  // eslint-disable-next-line complexity,max-statements,max-lines-per-function
-  const traverse = (parentKey, parentType, exports) => {
-    if (typeof exports === 'string') {
-      if (!isValidPath(exports)) {
-        return {error: 'invalidPath', str: exports};
-      }
-
-      if (parentKey.endsWith('/') && !exports.endsWith('/')) {
-        return {error: 'folderMappedToFile', str: parentKey};
-      }
-
-      return true;
-    }
-
-    if (Array.isArray(exports)) {
-      // https://nodejs.org/api/esm.html#esm_package_exports_fallbacks
-      // eslint-disable-next-line no-restricted-syntax
-      return validateFallbacks(exports);
-    }
-
-    if (!isPlainObj(exports)) {
-      return {error: 'unexpectedType', str: typeof exports};
-    }
-
-    // either a paths object or a conditions object
-    let objectType;
-
-    const entries = Object.entries(exports);
-
-    for (let i = 0; i < entries.length; i += 1) {
-      const [key, value] = entries[i];
-
-      if (isValidPathKey(key)) {
-        if (objectType === 'conditions') {
-          return {error: 'pathInConditions', str: key};
-        }
-
-        if (parentType === 'paths') {
-          return {error: 'nestedPaths', str: parentKey};
-        }
-
-        objectType = 'paths';
-
-        const result = traverse(key, objectType, value);
-
-        if (result !== true) return result;
-      } else {
-        // `key` interpreted as a condition
-        if (!conditions.includes(key)) {
-          return {error: 'unsupportedCondition', str: key};
-        }
-
-        if (objectType === 'paths') {
-          return {error: 'conditionInPaths', str: key};
-        }
-
-        objectType = 'conditions';
-        if (key === 'default' && i + 1 < entries.length) {
-          return {error: 'defaultConditionNotLast'};
-        }
-
-        const result = traverse(key, objectType, value);
-
-        if (result !== true) return result;
-      }
-    }
-
-    return true;
-  };
-
-  const result = traverse(nodeName, 'root', packageJsonData[nodeName]);
+  const result = traverse(nodeName, 'root', packageJsonData[nodeName], config);
 
   if (result !== true) {
     const message = {
       invalidPath: `invalid path \`${result.str}\` must start with \`./\``,
       pathInConditions: `found path key \`${result.str}\` in a conditions object`,
       nestedPaths: `key \`${result.str}\` has paths object vaule but only conditions may be nested`,
-      unsupportedCondition: `condition \`${result.str}\` not in supported conditions \`${conditions}\``,
+      unsupportedCondition: `condition \`${result.str}\` not in supported conditions \`${config.conditions}\``,
       conditionInPaths: `found condition key \`${result.str}\` in a paths object`,
       unexpectedType: `unexpected \`${result.str}\``,
       defaultConditionNotLast: 'condition `default` must be the last key',
