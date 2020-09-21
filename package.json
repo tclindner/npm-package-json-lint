@@ -43,7 +43,7 @@
     "globby": "^11.0.1",
     "ignore": "^5.1.8",
     "is-plain-obj": "^2.1.0",
-    "jsonc-parser": "^2.3.0",
+    "jsonc-parser": "^2.3.1",
     "log-symbols": "^4.0.0",
     "meow": "^6.1.1",
     "plur": "^4.0.0",
