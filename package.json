@@ -56,7 +56,7 @@
     "eslint-config-tc": "^15.0.0",
     "eslint-formatter-pretty": "^4.0.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^24.0.2",
     "eslint-plugin-prettier": "^3.1.4",
     "figures": "^3.2.0",
