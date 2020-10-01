@@ -24,7 +24,7 @@ const getFileList = (patterns, cwd) => {
     return pattern.endsWith(`/package.json`) ? pattern : `${pattern}/**/package.json`;
   });
 
-  globPatterns.push('!node_modules');
+  globPatterns.push('!**/node_modules/**');
 
   debug('globPatterns');
   debug(globPatterns);
