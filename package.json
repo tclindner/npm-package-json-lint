@@ -39,7 +39,7 @@
     "ajv-errors": "^1.0.1",
     "chalk": "^4.1.0",
     "cosmiconfig": "^6.0.0",
-    "debug": "^4.2.0",
+    "debug": "^4.3.1",
     "globby": "^11.0.1",
     "ignore": "^5.1.8",
     "is-plain-obj": "^3.0.0",
