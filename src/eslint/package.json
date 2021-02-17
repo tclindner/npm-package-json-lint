@@ -1,0 +1,11 @@
+{
+  "name": "eslint-plugin-package-json",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "npm-package-json-lint": "file:../../"
+  },
+  "author": "",
+  "license": "ISC"
+}
