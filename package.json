@@ -35,7 +35,7 @@
     "test:ci": "jest --runInBand"
   },
   "dependencies": {
-    "ajv": "^6.12.6",
+    "ajv": "^7.2.1",
     "ajv-errors": "^1.0.1",
     "chalk": "^4.1.0",
     "cosmiconfig": "^6.0.0",
