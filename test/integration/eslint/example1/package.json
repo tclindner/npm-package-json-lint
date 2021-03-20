@@ -1,0 +1,10 @@
+{
+  "main": "index.js",
+  "scripts": {
+    "build": "build script",
+    "test": "jest",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
