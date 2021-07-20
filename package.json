@@ -27,6 +27,7 @@
     "CONTRIBUTING.md"
   ],
   "main": "src/api.js",
+  "types": "index.d.ts",
   "scripts": {
     "eslint": "eslint . --format=node_modules/eslint-formatter-pretty",
     "npmpackagejsonlint": "node src/cli.js ./package.json",
