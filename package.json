@@ -24,7 +24,8 @@
   },
   "files": [
     "src",
-    "CONTRIBUTING.md"
+    "CONTRIBUTING.md",
+    "index.d.ts"
   ],
   "main": "src/api.js",
   "types": "index.d.ts",
