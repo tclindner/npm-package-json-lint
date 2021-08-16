@@ -1,8 +1,8 @@
 interface LintIssue {
     lintId: string;
     severity: 'error' | 'warning';
-    node: 'string';
-    lintMessage: 'string';
+    node: string;
+    lintMessage: string;
 }
 
 interface FileLintResult {
@@ -23,7 +23,7 @@ interface LinterResult {
 type NpmPackageJsonLintOptions = {
     cwd?: string;
     config?: object;
-    configFile: string;
+    configFile?: string;
     configBaseDirectory?: string;
     quiet?: boolean;
     ignorePath?: string;
@@ -45,8 +45,11 @@ declare class NpmPackageJsonLint {
 }
 
 export {
+    NpmPackageJsonLint
+};
+
+export type {
     FileLintResult,
     LinterResult,
-    LintIssue,
-    NpmPackageJsonLint
+    LintIssue
 };
