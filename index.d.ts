@@ -20,9 +20,24 @@ interface LinterResult {
     warningCount: number;
 }
 
+type Severity = 'error' | 'warning' | 'off';
+
+type RuleConfig = Severity | [Severity, ...any[]];
+
+type RuleSet = Record<string, RuleConfig>;
+
+interface NpmPackageJsonLintConfig {
+    extends?: string | string[];
+    rules?: RuleSet;
+    overrides: {
+        patterns: string[];
+        rules: RuleSet;
+    }[];
+}
+
 type NpmPackageJsonLintOptions = {
     cwd?: string;
-    config?: object;
+    config?: NpmPackageJsonLintConfig;
     configFile?: string;
     configBaseDirectory?: string;
     quiet?: boolean;
@@ -51,5 +66,7 @@ export {
 export type {
     FileLintResult,
     LinterResult,
-    LintIssue
+    LintIssue,
+    Severity,
+    NpmPackageJsonLintConfig
 };
