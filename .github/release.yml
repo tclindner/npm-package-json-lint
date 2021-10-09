@@ -1,0 +1,30 @@
+changelog:
+  exclude:
+    labels:
+      - "ignore-for-release :zipper_mouth_face:"
+  categories:
+  - title: 💥 Breaking Changes
+    labels:
+    - "breaking change :boom:"
+  - title: 🔒 Security
+    labels:
+    - "security :lock:"
+  - title: 👑 Changed
+    labels:
+    - "enhancement :crown:"
+  - title: 🙈 Fixed
+    labels:
+    - "bug :beetle:"
+  - title: 🗑️ Removed
+    labels:
+    - "removed :wastebasket:"
+  - title: 📖 Docs
+    labels:
+    - "documentation :book:"
+  - title: 🧹 Chores
+    labels:
+    - "maintenance :construction:"
+    - "dependencies :package:"
+  - title: 🎁 Other
+    labels:
+       - "*"
