@@ -154,8 +154,9 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
 
 > Generates an error if the node is present
 
-* [prefer-no-engineStrict](rules/disallowed-nodes/prefer-no-engineStrict)
+* [prefer-no-contributors](rules/disallowed-nodes/prefer-no-contributors)
 * [prefer-no-dependencies](rules/disallowed-nodes/prefer-no-dependencies)
 * [prefer-no-devDependencies](rules/disallowed-nodes/prefer-no-devDependencies)
+* [prefer-no-engineStrict](rules/disallowed-nodes/prefer-no-engineStrict)
 * [prefer-no-optionalDependencies](rules/disallowed-nodes/prefer-no-optionalDependencies)
 * [prefer-no-peerDependencies](rules/disallowed-nodes/prefer-no-peerDependencies)
