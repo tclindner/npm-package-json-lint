@@ -14,7 +14,7 @@ jobs:
         node-version: '12.x'
         registry-url: 'https://registry.npmjs.org'
     - run: npm ci --no-progress --production
-    - run: npm version --no-push --no-git-tag-version --yes ${CIRCLE_TAG}
+    - run: npm version --no-push --no-git-tag-version --yes ${{ github.event.release.tag_name }}
     - run: npm publish --tag latest
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
