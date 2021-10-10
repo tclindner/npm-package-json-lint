@@ -50,4 +50,4 @@ Enabling this rule will result in an error being generated if `contributors` is 
 
 ## History
 
-* Introduced in version 5.2.5
+* Introduced in version 5.3.0
