@@ -61,7 +61,7 @@ As mentioned in the [README.md](https://github.com/tclindner/npm-package-json-li
     "no-restricted-pre-release-dependencies": ["error", [
       "gulping-npm-package-json-lint"
     ]],
-    "no-restricted-invalid-devDependencies": ["error", [
+    "no-restricted-devDependencies": ["error", [
       "gulping-npm-package-json-lint"
     ]],
     "no-restricted-pre-release-devDependencies": ["error", [
