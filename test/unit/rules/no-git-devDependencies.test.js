@@ -234,4 +234,18 @@ describe('no-git-devDependencies Unit Tests', () => {
       expect(response).toBe(true);
     });
   });
+
+  describe('when package.json has node with an archive URL', () => {
+    test('true should be returned', () => {
+      const packageJsonData = {
+        devDependencies: {
+          'my-module-v3':
+            'https://registry.npmjs.org/npm-package-json-lint-config-default/-/npm-package-json-lint-config-default-3.0.0.tgz',
+        },
+      };
+      const response = lint(packageJsonData, 'error');
+
+      expect(response).toBe(true);
+    });
+  });
 });

@@ -242,7 +242,7 @@ const isGithubRepositoryShortcut = (version) => {
  * @return {boolean}    True if the version is url to archive
  */
 const isArchiveUrl = (version) => {
-  return version.endsWith('.tar.gz') || version.endsWith('.zip');
+  return version.endsWith('.tgz') || version.endsWith('.tar.gz') || version.endsWith('.zip');
 };
 
 /**
