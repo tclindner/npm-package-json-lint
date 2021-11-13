@@ -62,7 +62,7 @@ const isInPreferredOrder = (packageJsonData, userPreferredNodeOrder) => {
   let isValid = true;
   let msg = null;
   const preferredNodeOrder =
-    userPreferredNodeOrder.length === empty ? Array.from(defaultPreferredNodeOrder) : Array.from(userPreferredNodeOrder);
+    userPreferredNodeOrder.length === empty ? [...defaultPreferredNodeOrder] : [...userPreferredNodeOrder];
   const fltrdPreferredNodeOrder = preferredNodeOrder.filter((property) => packageJsonData.hasOwnProperty(property));
   const actualNodeList = Object.keys(packageJsonData);
   const fltrdActualNodeList = actualNodeList.filter((property) => preferredNodeOrder.indexOf(property) !== notFound);
