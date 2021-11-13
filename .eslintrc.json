@@ -1,6 +1,7 @@
 {
   "extends": "eslint-config-tc",
   "rules": {
-    "no-prototype-builtins": "off"
+    "no-prototype-builtins": "off",
+    "unicorn/filename-case": "off"
   }
 }
