@@ -42,6 +42,7 @@ const getErrorResults = (results) => {
   const filtered = [];
 
   results.forEach((result) => {
+    // eslint-disable-next-line unicorn/no-array-callback-reference
     const filteredIssues = result.issues.filter(isIssueAnError);
 
     if (filteredIssues.length > noIssues) {
@@ -127,13 +128,12 @@ class NpmPackageJsonLint {
 
     if (this.patterns) {
       debug('Linting using patterns');
-      const {patterns} = this;
 
-      if (!Array.isArray(patterns)) {
-        throw new Error('Patterns must be an array.');
+      if (!Array.isArray(this.patterns)) {
+        throw new TypeError('Patterns must be an array.');
       }
 
-      const fileList = getFileList(patterns, this.cwd);
+      const fileList = getFileList(this.patterns, this.cwd);
 
       linterOutput = linter.executeOnPackageJsonFiles({
         cwd: this.cwd,
