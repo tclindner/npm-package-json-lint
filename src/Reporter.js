@@ -84,6 +84,7 @@ const printTotals = (linterOutput, quiet) => {
  * Public Reporter class
  * @class
  */
+// eslint-disable-next-line unicorn/no-static-only-class
 class Reporter {
   /**
    * Print CLIEngine Output
