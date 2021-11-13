@@ -81,23 +81,33 @@ const isStandardRuleConfigValid = (ruleConfig) => ConfigSchema.isStandardRuleSch
 const validateRule = (ruleModule, ruleName, userConfig, source) => {
   if (ruleModule) {
     try {
-      if (ruleModule.ruleType === 'array') {
-        isArrayRuleConfigValid(userConfig, ruleModule.minItems);
-      } else if (ruleModule.ruleType === 'object') {
-        isObjectRuleConfigValid(userConfig);
-      } else if (ruleModule.ruleType === 'optionalObject') {
-        isOptionalObjRuleConfigValid(userConfig);
-      } else {
-        isStandardRuleConfigValid(userConfig);
-      }
-    } catch (err) {
-      const modifiedErrorMessage = `Configuration for rule "${ruleName}" is invalid:\n${err.message}`;
+      switch (ruleModule.ruleType) {
+        case 'array': {
+          isArrayRuleConfigValid(userConfig, ruleModule.minItems);
 
-      if (typeof source === 'string') {
-        throw new Error(`${source}:\n\t${modifiedErrorMessage}`);
-      } else {
-        throw new Error(modifiedErrorMessage);
+          break;
+        }
+        case 'object': {
+          isObjectRuleConfigValid(userConfig);
+
+          break;
+        }
+        case 'optionalObject': {
+          isOptionalObjRuleConfigValid(userConfig);
+
+          break;
+        }
+        default: {
+          isStandardRuleConfigValid(userConfig);
+        }
       }
+    } catch (error_) {
+      const modifiedErrorMessage = `Configuration for rule "${ruleName}" is invalid:\n${error_.message}`;
+
+      const error =
+        typeof source === 'string' ? new Error(`${source}:\n\t${modifiedErrorMessage}`) : new Error(modifiedErrorMessage);
+
+      throw error;
     }
   }
 };
