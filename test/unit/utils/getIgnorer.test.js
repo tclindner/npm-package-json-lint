@@ -11,11 +11,9 @@ describe('getIgnorer Unit Tests', () => {
     const cwd = process.cwd();
 
     const addMock = jest.fn().mockReturnValue('done');
-    ignore.mockImplementation(() => {
-      return {
-        add: addMock,
-      };
-    });
+    ignore.mockImplementation(() => ({
+      add: addMock,
+    }));
     fs.readFileSync.mockReturnValue('ignore content');
 
     const actual = getIgnorer(cwd, ignorePath);
@@ -31,11 +29,9 @@ describe('getIgnorer Unit Tests', () => {
     const cwd = process.cwd();
 
     const addMock = jest.fn().mockReturnValue('done');
-    ignore.mockImplementation(() => {
-      return {
-        add: addMock,
-      };
-    });
+    ignore.mockImplementation(() => ({
+      add: addMock,
+    }));
     fs.readFileSync.mockReturnValue('ignore content');
 
     const actual = getIgnorer(cwd, ignorePath);

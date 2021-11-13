@@ -27,12 +27,10 @@ describe('Config Unit Tests', () => {
         });
         const searchMock = jest.fn();
 
-        cosmiconfigSync.mockImplementation(() => {
-          return {
-            load: loadMock,
-            search: searchMock,
-          };
-        });
+        cosmiconfigSync.mockImplementation(() => ({
+          load: loadMock,
+          search: searchMock,
+        }));
 
         const configObj = new Config(cwd, config, configFile, configBaseDirectory, rules);
 
@@ -67,12 +65,10 @@ describe('Config Unit Tests', () => {
           'require-scripts': 'error',
         });
 
-        cosmiconfigSync.mockImplementation(() => {
-          return {
-            load: loadMock,
-            search: searchMock,
-          };
-        });
+        cosmiconfigSync.mockImplementation(() => ({
+          load: loadMock,
+          search: searchMock,
+        }));
 
         const configObj = new Config(cwd, config, configFile, configBaseDirectory, rules);
 
@@ -103,12 +99,10 @@ describe('Config Unit Tests', () => {
         const loadMock = jest.fn();
         const searchMock = jest.fn();
 
-        cosmiconfigSync.mockImplementation(() => {
-          return {
-            load: loadMock,
-            search: searchMock,
-          };
-        });
+        cosmiconfigSync.mockImplementation(() => ({
+          load: loadMock,
+          search: searchMock,
+        }));
 
         const configObj = new Config(cwd, config, configFile, configBaseDirectory, rules);
 
@@ -130,12 +124,10 @@ describe('Config Unit Tests', () => {
         const loadMock = jest.fn();
         const searchMock = jest.fn().mockReturnValue({});
 
-        cosmiconfigSync.mockImplementation(() => {
-          return {
-            load: loadMock,
-            search: searchMock,
-          };
-        });
+        cosmiconfigSync.mockImplementation(() => ({
+          load: loadMock,
+          search: searchMock,
+        }));
 
         const configObj = new Config(cwd, config, configFile, configBaseDirectory, rules);
 
@@ -171,12 +163,10 @@ describe('Config Unit Tests', () => {
         const loadMock = jest.fn();
         const searchMock = jest.fn();
 
-        cosmiconfigSync.mockImplementation(() => {
-          return {
-            load: loadMock,
-            search: searchMock,
-          };
-        });
+        cosmiconfigSync.mockImplementation(() => ({
+          load: loadMock,
+          search: searchMock,
+        }));
         applyExtendsIfSpecified.mockReturnValue({
           rules: {
             'require-version': 'error',

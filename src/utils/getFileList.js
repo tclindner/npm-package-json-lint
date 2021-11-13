@@ -20,9 +20,9 @@ const getFileList = (patterns, cwd) => {
   debug(filteredPatterns);
 
   // step 2 - convert directories to globs
-  const globPatterns = filteredPatterns.map((pattern) => {
-    return pattern.endsWith(`/package.json`) ? pattern : `${pattern}/**/package.json`;
-  });
+  const globPatterns = filteredPatterns.map((pattern) =>
+    pattern.endsWith(`/package.json`) ? pattern : `${pattern}/**/package.json`
+  );
 
   globPatterns.push('!**/node_modules/**');
 

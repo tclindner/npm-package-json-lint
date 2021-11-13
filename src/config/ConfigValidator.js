@@ -33,10 +33,8 @@ const isOptionalObjRuleConfigValid = (ruleConfig) => {
     return ConfigSchema.isStandardRuleSchemaValid(ruleConfig);
   }
 
-  if (ConfigSchema.isObjectRuleSchemaValid(ruleConfig)) {
-    if (ruleConfig[object].hasOwnProperty('exceptions')) {
-      return ConfigSchema.isOptionalObjExceptSchemaValid(ruleConfig[object].exceptions);
-    }
+  if (ConfigSchema.isObjectRuleSchemaValid(ruleConfig) && ruleConfig[object].hasOwnProperty('exceptions')) {
+    return ConfigSchema.isOptionalObjExceptSchemaValid(ruleConfig[object].exceptions);
   }
 
   return true;
@@ -69,9 +67,7 @@ const isArrayRuleConfigValid = (ruleConfig, minItems) => {
  * @return {Boolean}                True if config is valid, error if not
  * @static
  */
-const isStandardRuleConfigValid = (ruleConfig) => {
-  return ConfigSchema.isStandardRuleSchemaValid(ruleConfig);
-};
+const isStandardRuleConfigValid = (ruleConfig) => ConfigSchema.isStandardRuleSchemaValid(ruleConfig);
 
 /**
  * Validates configuration of a rule

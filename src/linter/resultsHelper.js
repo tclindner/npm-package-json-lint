@@ -46,22 +46,20 @@ const aggregateCountsPerFile = (issues) => {
  * @param {FileLintResult[]} results Array of {@link FileLintResult} objects from all package.json files.
  * @returns {OverallResultCounts} Counts object {@link OverallResultCounts}
  */
-const aggregateOverallCounts = (results) => {
-  return results.reduce(
-    (counts, result) => {
-      return {
-        ignoreCount: result.ignored ? counts.ignoreCount + 1 : counts.ignoreCount,
-        errorCount: counts.errorCount + result.errorCount,
-        warningCount: counts.warningCount + result.warningCount,
-      };
-    },
+const aggregateOverallCounts = (results) =>
+  // eslint-disable-next-line unicorn/no-array-reduce
+  results.reduce(
+    (counts, result) => ({
+      ignoreCount: result.ignored ? counts.ignoreCount + 1 : counts.ignoreCount,
+      errorCount: counts.errorCount + result.errorCount,
+      warningCount: counts.warningCount + result.warningCount,
+    }),
     {
       ignoreCount: 0,
       errorCount: 0,
       warningCount: 0,
     }
   );
-};
 
 module.exports = {
   aggregateCountsPerFile,

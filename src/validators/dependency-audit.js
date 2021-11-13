@@ -1,9 +1,7 @@
 /* eslint no-restricted-syntax: 'off', guard-for-in: 'off', no-continue: 'off' */
 const semver = require('semver');
 
-const hasExceptions = (config) => {
-  return typeof config === 'object' && config.hasOwnProperty('exceptions');
-};
+const hasExceptions = (config) => typeof config === 'object' && config.hasOwnProperty('exceptions');
 
 /**
  * Determines whether or not the package has a given dependency
@@ -232,18 +230,14 @@ const GITHUB_SHORTCUT_URL = /^(github:)?[^/]+\/[^/]+/;
  * @param version       value of package's version
  * @return {boolean}    True if the version is a shortcut to github repository
  */
-const isGithubRepositoryShortcut = (version) => {
-  return GITHUB_SHORTCUT_URL.test(version);
-};
+const isGithubRepositoryShortcut = (version) => GITHUB_SHORTCUT_URL.test(version);
 
 /**
  * Determines whether or not version is url to archive
  * @param version       value of package's version
  * @return {boolean}    True if the version is url to archive
  */
-const isArchiveUrl = (version) => {
-  return version.endsWith('.tgz') || version.endsWith('.tar.gz') || version.endsWith('.zip');
-};
+const isArchiveUrl = (version) => version.endsWith('.tgz') || version.endsWith('.tar.gz') || version.endsWith('.zip');
 
 /**
  * Determines whether or not version is git repository url

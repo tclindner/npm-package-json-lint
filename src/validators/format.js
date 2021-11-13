@@ -5,9 +5,7 @@ const semver = require('semver');
  * @param  {string} name  Name
  * @return {boolean}      True if the string is lowercase or is missing. False if it is not.
  */
-const isLowercase = (name) => {
-  return name === name.toLowerCase();
-};
+const isLowercase = (name) => name === name.toLowerCase();
 
 /**
  * Determines whether or not the node's value is a valid semantic version
