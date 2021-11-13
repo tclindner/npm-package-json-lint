@@ -14,7 +14,7 @@ const lint = (packageJsonData, severity) => {
   const source = packageJsonData[Parser.sourceSymbol] || '';
   const dupProps = findDuplicatePropNames(source);
 
-  if (dupProps.length) {
+  if (dupProps.length > 0) {
     const message = `Duplicate properties detected. Please remove duplicates for: ${dupProps.join(', ')}.`;
 
     return new LintIssue(lintId, severity, nodeName, message);
