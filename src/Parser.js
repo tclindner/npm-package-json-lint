@@ -19,7 +19,7 @@ const requireFile = (fileName) => require(fileName);
  * @return {String}          File contents with BOM removed.
  * @throws {Error}           If the file cannot be read.
  */
-const readFile = (fileName) => fs.readFileSync(fileName, 'utf8').replace(/^\ufeff/, '');
+const readFile = (fileName) => fs.readFileSync(fileName, 'utf8').replace(/^\uFEFF/, '');
 
 /**
  * Helper method for throwing errors when file fails to load.
@@ -37,7 +37,7 @@ const handleError = (fileName, err) => {
  * Public Parser class
  * @class
  */
-class Parser {
+const Parser = {
   /**
    * Parse a JSON file
    *
@@ -45,7 +45,7 @@ class Parser {
    * @return {Object}          Valid JavaScript object
    * @static
    */
-  static parseJsonFile(fileName) {
+  parseJsonFile(fileName) {
     let json = {};
     let fileContents = '';
 
@@ -53,8 +53,8 @@ class Parser {
       fileContents = readFile(fileName);
 
       json = JSON.parse(stripComments(fileContents));
-    } catch (err) {
-      handleError(fileName, err);
+    } catch (error) {
+      handleError(fileName, error);
     }
 
     Object.defineProperty(json, Parser.sourceSymbol, {
@@ -65,7 +65,7 @@ class Parser {
     });
 
     return json;
-  }
+  },
 
   /**
    * Parse a JavaScript file
@@ -74,18 +74,18 @@ class Parser {
    * @return {Object}          Valid JavaScript object
    * @static
    */
-  static parseJavaScriptFile(fileName) {
+  parseJavaScriptFile(fileName) {
     let obj = {};
 
     try {
       obj = requireFile(fileName);
-    } catch (err) {
-      handleError(fileName, err);
+    } catch (error) {
+      handleError(fileName, error);
     }
 
     return obj;
-  }
-}
+  },
+};
 
 Parser.sourceSymbol = Symbol('JSON source');
 
