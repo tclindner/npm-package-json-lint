@@ -27,7 +27,7 @@ const matchValidValue = (packageJsonData, nodeName, value, validRegexes) => {
     return true;
   }
 
-  return validRegexes.filter((r) => r.test(value)).length > 0;
+  return validRegexes.some((r) => r.test(value));
 };
 
 module.exports.isValidValue = isValidValue;
