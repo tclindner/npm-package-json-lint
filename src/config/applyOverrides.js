@@ -25,6 +25,7 @@ const applyOverrides = (cwd, filePath, rules, overrides) => {
       });
 
       const globFiles = globby.sync(transformedPatterns, {
+        cwd,
         gitignore: true,
       });
 
