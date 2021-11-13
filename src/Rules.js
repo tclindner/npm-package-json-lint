@@ -31,8 +31,8 @@ class Rules {
       });
 
       return this.rules;
-    } catch (err) {
-      throw new Error(`Error while loading rules from rules directory - ${err.message}`);
+    } catch (error) {
+      throw new Error(`Error while loading rules from rules directory - ${error.message}`);
     }
   }
 
