@@ -21,7 +21,10 @@ const hasDependency = (packageJsonData, nodeName, depsToCheckFor) => {
         return true;
       }
 
-      if (depToCheckFor.endsWith('*') && dependencyName.startsWith(depToCheckFor.substring(0, depToCheckFor.length - 1))) {
+      if (
+        depToCheckFor.endsWith('*') &&
+        dependencyName.startsWith(depToCheckFor.slice(0, Math.max(0, depToCheckFor.length - 1)))
+      ) {
         return true;
       }
     }
@@ -73,7 +76,8 @@ const hasDepVersZero = (packageJsonData, nodeName, config) => {
     if (semver.validRange(dependencyVersRange)) {
       const startIndex = 0;
       const length = 1;
-      const dependencyVersion = dependencyVersRange.replace(/[\D]+/g, '');
+      const dependencyVersion = dependencyVersRange.replace(/\D+/g, '');
+      // eslint-disable-next-line unicorn/prefer-string-slice
       const dependencyMjrVersion = dependencyVersion.substr(startIndex, length);
 
       // if first char is 0 then major version is 0
