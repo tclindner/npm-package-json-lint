@@ -14,6 +14,7 @@
 const aggregateCountsPerFile = (issues) => {
   const incrementOne = 1;
 
+  // eslint-disable-next-line unicorn/no-array-reduce
   return issues.reduce(
     (counts, issue) => {
       const isErrorSeverity = issue.severity === 'error';
