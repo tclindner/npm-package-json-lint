@@ -6,9 +6,7 @@ const parser = require('jsonc-parser');
  * @param  {string} nodeName        Name of a node in the package.json file
  * @return {boolean}                True if the node exists. False if it is not.
  */
-const exists = (packageJsonData, nodeName) => {
-  return packageJsonData.hasOwnProperty(nodeName);
-};
+const exists = (packageJsonData, nodeName) => packageJsonData.hasOwnProperty(nodeName);
 
 /**
  * Search for duplicate properties in package.json file

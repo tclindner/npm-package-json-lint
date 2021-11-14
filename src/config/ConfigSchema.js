@@ -1,7 +1,7 @@
 const Ajv = require('ajv');
 const ajvErrors = require('ajv-errors');
 
-const ajv = new Ajv({allErrors: true, jsonPointers: true});
+const ajv = new Ajv({allErrors: true});
 
 ajvErrors(ajv);
 
@@ -11,9 +11,7 @@ ajvErrors(ajv);
  * @param {Array} errors An array of error messages to format.
  * @returns {String} Formatted error message
  */
-const formatSchemaErrors = (errors) => {
-  return errors.map((error) => `\t- ${error.message}\n`).join('');
-};
+const formatSchemaErrors = (errors) => errors.map((error) => `\t- ${error.message}\n`).join('');
 
 const standardRuleSchema = {
   type: 'string',
@@ -24,34 +22,32 @@ const standardRuleSchema = {
   },
 };
 
-const arrayRuleSchema = (minItems) => {
-  return {
-    type: 'array',
-    items: [
-      standardRuleSchema,
-      {
-        type: 'array',
-        minItems,
-        uniqueItems: true,
-        errorMessage: {
-          type: 'the second item in an array rule config must be an array.',
-          minItems: 'the second item in an array rule config must have at least 1 item.',
-          uniqueItems: 'the second item in an array rule config must have unique items.',
-        },
+const arrayRuleSchema = (minItems) => ({
+  type: 'array',
+  items: [
+    standardRuleSchema,
+    {
+      type: 'array',
+      minItems,
+      uniqueItems: true,
+      errorMessage: {
+        type: 'the second item in an array rule config must be an array.',
+        minItems: 'the second item in an array rule config must have at least 1 item.',
+        uniqueItems: 'the second item in an array rule config must have unique items.',
       },
-    ],
-    minItems: 2,
-    maxItems: 2,
-    additionalItems: false,
-    errorMessage: {
-      type: 'rule config must be an array, e.g. ["error", ["value1", "value2"]].',
-      minItems: 'array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].',
-      maxItems: 'array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].',
-      additionalItems:
-        'array rules are only allowed two items, severity and the list is values. e.g. ["error", ["value1", "value2"]].',
     },
-  };
-};
+  ],
+  minItems: 2,
+  maxItems: 2,
+  additionalItems: false,
+  errorMessage: {
+    type: 'rule config must be an array, e.g. ["error", ["value1", "value2"]].',
+    minItems: 'array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].',
+    maxItems: 'array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].',
+    additionalItems:
+      'array rules are only allowed two items, severity and the list is values. e.g. ["error", ["value1", "value2"]].',
+  },
+});
 
 const objectRuleSchema = {
   type: 'array',

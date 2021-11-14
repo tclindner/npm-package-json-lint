@@ -27,15 +27,13 @@ const resultsHelper = require('./resultsHelper');
  * @returns {FileLintResult} The lint results {@link FileLintResult} for the package.json file.
  * @private
  */
-const createResultObject = ({cwd, fileName, ignored, issues, errorCount, warningCount}) => {
-  return {
-    filePath: `./${path.relative(cwd, fileName)}`,
-    issues,
-    ignored,
-    errorCount,
-    warningCount,
-  };
-};
+const createResultObject = ({cwd, fileName, ignored, issues, errorCount, warningCount}) => ({
+  filePath: `./${path.relative(cwd, fileName)}`,
+  issues,
+  ignored,
+  errorCount,
+  warningCount,
+});
 
 /**
  * Runs configured rules against the provided package.json object.

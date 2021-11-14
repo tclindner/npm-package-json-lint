@@ -20,9 +20,9 @@ const applyOverrides = (cwd, filePath, rules, overrides) => {
   if (overrides) {
     overrides.forEach((override) => {
       const filteredPatterns = override.patterns.filter((pattern) => pattern.length);
-      const transformedPatterns = filteredPatterns.map((pattern) => {
-        return pattern.endsWith(`/package.json`) ? pattern : `${pattern}/package.json`;
-      });
+      const transformedPatterns = filteredPatterns.map((pattern) =>
+        pattern.endsWith(`/package.json`) ? pattern : `${pattern}/package.json`
+      );
 
       const globFiles = globby.sync(transformedPatterns, {
         cwd,

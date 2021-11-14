@@ -77,7 +77,7 @@ const cli = meow(
   }
 );
 
-const {input} = cli;
+const {input, flags} = cli;
 
 // Validate
 const noPatternsProvided = 0;
@@ -89,7 +89,7 @@ if (patterns.length === noPatternsProvided) {
   debug(`No lint targets provided`);
   console.log(chalk.red.bold('No lint targets provided'));
 
-  const exitCode = cli.flags.allowEmptyTargets ? exitCodes.zeroClean : exitCodes.oneMissingTarget;
+  const exitCode = flags.allowEmptyTargets ? exitCodes.zeroClean : exitCodes.oneMissingTarget;
 
   process.exit(exitCode);
 }
@@ -101,20 +101,20 @@ try {
   debug(`Creating NpmPackageJsonLint instance`);
   const npmPackageJsonLint = new NpmPackageJsonLint({
     cwd: process.cwd(),
-    configFile: cli.flags.configFile,
+    configFile: flags.configFile,
     patterns,
-    ignorePath: cli.flags.ignorePath,
-    quiet: cli.flags.quiet,
+    ignorePath: flags.ignorePath,
+    quiet: flags.quiet,
   });
   const linterOutput = npmPackageJsonLint.lint();
 
   debug(`NpmPackageJsonLint.lint complete`);
 
   debug(`Reporter.write starting`);
-  Reporter.write(linterOutput, cli.flags.quiet);
+  Reporter.write(linterOutput, flags.quiet);
   debug(`Reporter.write complete`);
 
-  if (linterOutput.warningCount > cli.flags.maxWarnings) {
+  if (linterOutput.warningCount > flags.maxWarnings) {
     debug(`Max warnings exceeded`);
     exitCode = exitCodes.exceedMaxWarnings;
   }
@@ -125,7 +125,7 @@ try {
   }
 
   process.exit(exitCode);
-} catch (err) {
-  console.log(chalk.red.bold(err.message));
+} catch (error) {
+  console.log(chalk.red.bold(error.message));
   process.exit(exitCodes.runTimeException);
 }

@@ -33,10 +33,8 @@ const isOptionalObjRuleConfigValid = (ruleConfig) => {
     return ConfigSchema.isStandardRuleSchemaValid(ruleConfig);
   }
 
-  if (ConfigSchema.isObjectRuleSchemaValid(ruleConfig)) {
-    if (ruleConfig[object].hasOwnProperty('exceptions')) {
-      return ConfigSchema.isOptionalObjExceptSchemaValid(ruleConfig[object].exceptions);
-    }
+  if (ConfigSchema.isObjectRuleSchemaValid(ruleConfig) && ruleConfig[object].hasOwnProperty('exceptions')) {
+    return ConfigSchema.isOptionalObjExceptSchemaValid(ruleConfig[object].exceptions);
   }
 
   return true;
@@ -69,9 +67,7 @@ const isArrayRuleConfigValid = (ruleConfig, minItems) => {
  * @return {Boolean}                True if config is valid, error if not
  * @static
  */
-const isStandardRuleConfigValid = (ruleConfig) => {
-  return ConfigSchema.isStandardRuleSchemaValid(ruleConfig);
-};
+const isStandardRuleConfigValid = (ruleConfig) => ConfigSchema.isStandardRuleSchemaValid(ruleConfig);
 
 /**
  * Validates configuration of a rule
@@ -85,23 +81,33 @@ const isStandardRuleConfigValid = (ruleConfig) => {
 const validateRule = (ruleModule, ruleName, userConfig, source) => {
   if (ruleModule) {
     try {
-      if (ruleModule.ruleType === 'array') {
-        isArrayRuleConfigValid(userConfig, ruleModule.minItems);
-      } else if (ruleModule.ruleType === 'object') {
-        isObjectRuleConfigValid(userConfig);
-      } else if (ruleModule.ruleType === 'optionalObject') {
-        isOptionalObjRuleConfigValid(userConfig);
-      } else {
-        isStandardRuleConfigValid(userConfig);
-      }
-    } catch (err) {
-      const modifiedErrorMessage = `Configuration for rule "${ruleName}" is invalid:\n${err.message}`;
+      switch (ruleModule.ruleType) {
+        case 'array': {
+          isArrayRuleConfigValid(userConfig, ruleModule.minItems);
 
-      if (typeof source === 'string') {
-        throw new Error(`${source}:\n\t${modifiedErrorMessage}`);
-      } else {
-        throw new Error(modifiedErrorMessage);
+          break;
+        }
+        case 'object': {
+          isObjectRuleConfigValid(userConfig);
+
+          break;
+        }
+        case 'optionalObject': {
+          isOptionalObjRuleConfigValid(userConfig);
+
+          break;
+        }
+        default: {
+          isStandardRuleConfigValid(userConfig);
+        }
       }
+    } catch (error_) {
+      const modifiedErrorMessage = `Configuration for rule "${ruleName}" is invalid:\n${error_.message}`;
+
+      const error =
+        typeof source === 'string' ? new Error(`${source}:\n\t${modifiedErrorMessage}`) : new Error(modifiedErrorMessage);
+
+      throw error;
     }
   }
 };

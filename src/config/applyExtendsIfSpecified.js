@@ -20,6 +20,7 @@ const applyExtends = (config, parentName, originalFilePath) => {
     configExtends = [config.extends];
   }
 
+  // eslint-disable-next-line unicorn/no-array-reduce
   return configExtends.reduceRight((previousConfig, moduleName) => {
     try {
       // eslint-disable-next-line no-use-before-define
@@ -54,9 +55,9 @@ const applyExtends = (config, parentName, originalFilePath) => {
       }
 
       return mergedConfig;
-    } catch (err) {
-      err.message += `\nReferenced from: ${parentName}`;
-      throw err;
+    } catch (error) {
+      error.message += `\nReferenced from: ${parentName}`;
+      throw error;
     }
   }, config);
 };
@@ -84,7 +85,7 @@ const loadFromModule = (moduleName, originalFilePath) => {
     config = require(resolvedModule);
   }
 
-  if (Object.keys(config).length && config.extends) {
+  if (Object.keys(config).length > 0 && config.extends) {
     config = applyExtends(config, adjustedModuleName, originalFilePath);
   }
 
