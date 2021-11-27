@@ -46,7 +46,7 @@ Follow these instructions for [publishing to npm](https://docs.npmjs.com/getting
 Please also add a dependency on npm-package-json-lint using [peerdependencies](https://docs.npmjs.com/files/package.json#peerdependencies). Example
 
 ```json
-peerDependencies: {
+"peerDependencies": {
   "npm-package-json-lint": ">= 2"
 }
 ```
