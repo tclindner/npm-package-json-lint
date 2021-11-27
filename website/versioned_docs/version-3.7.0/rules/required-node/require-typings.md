@@ -40,7 +40,7 @@ Enabling this rule will result in an error being generated if `typings` is missi
 
 ## Notes
 
-See https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html for more details.
+See <https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html> for more details.
 
 ## History
 

@@ -104,7 +104,6 @@ With exceptions
 }
 ```
 
-
 ```json
 {
   "dependencies": {
@@ -120,8 +119,6 @@ With exceptions
   }
 }
 ```
-
-
 
 ### *Correct* example(s)
 

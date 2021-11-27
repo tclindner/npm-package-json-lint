@@ -16,7 +16,6 @@ Enabling this rule will result in an error being generated if `peerDependencies`
 }
 ```
 
-
 ## Rule Details
 
 ### *Incorrect* example(s)

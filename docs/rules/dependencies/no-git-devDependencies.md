@@ -103,7 +103,6 @@ With exceptions
 }
 ```
 
-
 ```json
 {
   "devDependencies": {
@@ -119,8 +118,6 @@ With exceptions
   }
 }
 ```
-
-
 
 ### *Correct* example(s)
 

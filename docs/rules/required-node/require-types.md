@@ -39,7 +39,7 @@ Enabling this rule will result in an error being generated if `types` is missing
 
 ## Notes
 
-See https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html for more details.
+See <https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html> for more details.
 
 ## History
 

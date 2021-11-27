@@ -48,7 +48,7 @@ Enabling this rule will result in an error being generated if the value in `pref
 
 ### *Correct* example(s)
 
-```
+```json
 {
   "preferGlobal": true
 }

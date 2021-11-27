@@ -26,9 +26,7 @@ Enabling this rule will result in an error being generated if package.json has d
 }
 ```
 
-
 ### *Correct* examples
-
 
 ```json
 {

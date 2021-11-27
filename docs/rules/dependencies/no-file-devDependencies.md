@@ -39,9 +39,7 @@ With exceptions
 }
 ```
 
-
 ### *Correct* examples
-
 
 ```json
 {

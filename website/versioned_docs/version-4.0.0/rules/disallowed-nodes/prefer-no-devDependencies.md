@@ -28,7 +28,6 @@ With exceptions
 }
 ```
 
-
 ## Rule Details
 
 ### *Incorrect* example(s)

@@ -66,7 +66,6 @@ If you run this command the version will increase the minor number (ie 0.1.0)
 
 If you run this command the version will increase the major number (ie 1.0.0)
 
-
 ## EditorConfig
 
 EditorConfig helps maintain consistent file formatting between different editors and developers. Please [install the plugin for you editor of choice](https://editorconfig.org/#download). Please see the `.editorconfig` file at the root of this repo to see what settings are enforced.

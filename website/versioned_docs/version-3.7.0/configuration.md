@@ -119,4 +119,4 @@ module.exports = {
 
 ## Configuration Schema
 
-A JSON schema is available here to validate your configuration. http://json.schemastore.org/npmpackagejsonlintrc.
+A JSON schema is available here to validate your configuration. <http://json.schemastore.org/npmpackagejsonlintrc>.

@@ -42,7 +42,6 @@ Enabling this rule will result in an error being generated if the value in `cpu`
 
 ### *Correct* example(s)
 
-
 ```json
 {
   "cpu": ["x64"]

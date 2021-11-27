@@ -2,14 +2,12 @@
 
 > A package.json linter for Node projects
 
-
 [![license](https://img.shields.io/github/license/tclindner/npm-package-json-lint.svg?maxAge=2592000&style=flat-square)](https://github.com/tclindner/npm-package-json-lint/blob/master/LICENSE)
 [![npm](https://img.shields.io/npm/v/npm-package-json-lint.svg?maxAge=2592000?style=flat-square)](https://www.npmjs.com/package/npm-package-json-lint)
 ![ci](https://github.com/tclindner/npm-package-json-lint/workflows/ci/badge.svg?branch=master)
 [![Dependency Status](https://david-dm.org/tclindner/npm-package-json-lint.svg?style=flat-square)](https://david-dm.org/tclindner/npm-package-json-lint)
 [![devDependency Status](https://david-dm.org/tclindner/npm-package-json-lint/dev-status.svg?style=flat-square)](https://david-dm.org/tclindner/npm-package-json-lint#info=devDependencies)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/e76a30d9-13f0-4691-a49b-454570589de2/deploy-status)](https://app.netlify.com/sites/npmpackagejsonlint/deploys)
-
 
 ## What is npm-package-json-lint?
 

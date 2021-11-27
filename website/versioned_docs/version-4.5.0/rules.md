@@ -72,7 +72,6 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
 * [scripts-type](rules/type/scripts-type.md)
 * [version-type](rules/type/version-type.md)
 
-
 ## Valid value rules
 
 > Generates an error if node's value doesn't match one of the values in the supplied array
@@ -140,14 +139,12 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
 * [name-format](rules/format/name-format.md)
 * [version-format](rules/format/version-format.md)
 
-
 ## Package.json property rules
 
 > Generates an error if the package.json properties fail to meet the desired requirements
 
 * [prefer-property-order](rules/package-json-properties/prefer-property-order.md)
 * [no-duplicate-properties](rules/package-json-properties/no-duplicate-properties.md)
-
 
 ## Disallowed node rules
 

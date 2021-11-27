@@ -10,43 +10,43 @@ v3.0.0 Migration Guide
 npm-package-json-lint's cli has been renamed from `pjl-cli` to `npmPkgJsonLint`. The cli interface has also changed. Multiple patterns can now specified. Please use the following examples to help get started.
 
 ```bash
-$ npmPkgJsonLint .
+npmPkgJsonLint .
 ```
 
 > Looks for all `package.json` files in the project. The CLI engine automatically looks for relevant config files for each package.json file that is found.
 
 ```bash
-$ npmPkgJsonLint ./packages
+npmPkgJsonLint ./packages
 ```
 
 > Looks for all `package.json` files in the `packages` directory. The CLI engine automatically looks for relevant config files for each package.json file that is found.
 
 ```bash
-$ npmPkgJsonLint ./package1 ./package2
+npmPkgJsonLint ./package1 ./package2
 ```
 
 > Looks for all `package.json` files in the `package1` and `package2` directories. The CLI engine automatically looks for relevant config files for each package.json file that is found.
 
 ```bash
-$ npmPkgJsonLint -c ./config/.npmpackagejsonlintrc.json .
+npmPkgJsonLint -c ./config/.npmpackagejsonlintrc.json .
 ```
 
 > Looks for all `package.json` files in the project. The CLI engine automatically looks for relevant config files for each package.json file that is found. The CLI also merges the config found in `./config/.npmpackagejsonlintrc.json`
 
 ```bash
-$ npmPkgJsonLint --configFile ./config/npmpackagejsonlint.config.json .
+npmPkgJsonLint --configFile ./config/npmpackagejsonlint.config.json .
 ```
 
 > Same as above using the long form for specifying config files.
 
 ```bash
-$ npmPkgJsonLint -q .
+npmPkgJsonLint -q .
 ```
 
 > Looks for all `package.json` files in the project. The CLI engine automatically looks for relevant config files for each package.json file that is found. Removes any warnings from the output.
 
 ```bash
-$ npmPkgJsonLint --quiet ./packages
+npmPkgJsonLint --quiet ./packages
 ```
 
 > Looks for all `package.json` files in the `packages` directory. The CLI engine automatically looks for relevant config files for each package.json file that is found. Removes any warnings from the output using the long form for quieting output.

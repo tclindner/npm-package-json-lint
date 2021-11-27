@@ -15,19 +15,19 @@ npm-package-json-lint ignores files located in `node_modules` directory.
 ### Examples
 
 ```bash
-$ npmPkgJsonLint .
+npmPkgJsonLint .
 ```
 
 > Looks for all `package.json` files in the project. The CLI engine automatically looks for relevant config files for each package.json file that is found.
 
 ```bash
-$ npmPkgJsonLint ./packages
+npmPkgJsonLint ./packages
 ```
 
 > Looks for all `package.json` files in the `packages` directory. The CLI engine automatically looks for relevant config files for each package.json file that is found.
 
 ```bash
-$ npmPkgJsonLint ./package1 ./package2
+npmPkgJsonLint ./package1 ./package2
 ```
 
 > Looks for all `package.json` files in the `package1` and `package2` directories. The CLI engine automatically looks for relevant config files for each package.json file that is found.
@@ -39,13 +39,13 @@ File path to local config file or module name. Please see [configuration](config
 ### Examples
 
 ```bash
-$ npmPkgJsonLint -c ./config/.npmpackagejsonlintrc.json .
+npmPkgJsonLint -c ./config/.npmpackagejsonlintrc.json .
 ```
 
 > Looks for all `package.json` files in the project. The CLI engine automatically looks for relevant config files for each package.json file that is found. The CLI also merges the config found in `./config/.npmpackagejsonlintrc.json`
 
 ```bash
-$ npmPkgJsonLint --configFile ./config/npmpackagejsonlint.config.json .
+npmPkgJsonLint --configFile ./config/npmpackagejsonlint.config.json .
 ```
 
 ## `--quiet` (alias `-q`)
@@ -55,13 +55,13 @@ Report errors only.
 ### Examples
 
 ```bash
-$ npmPkgJsonLint -q .
+npmPkgJsonLint -q .
 ```
 
 > Looks for all `package.json` files in the project. The CLI engine automatically looks for relevant config files for each package.json file that is found. Removes any warnings from the output.
 
 ```bash
-$ npmPkgJsonLint --quiet ./packages
+npmPkgJsonLint --quiet ./packages
 ```
 
 > Looks for all `package.json` files in the `packages` directory. The CLI engine automatically looks for relevant config files for each package.json file that is found. Removes any warnings from the output using the long form for quieting output.
@@ -77,7 +77,7 @@ Path to a file containing patterns that describe files to ignore. By default, np
 ### Examples
 
 ```bash
-$ npmPkgJsonLint . --ignorePath .gitignore
+npmPkgJsonLint . --ignorePath .gitignore
 ```
 
 > Looks for all `package.json` files in the project and exclude ignored paths. The CLI engine automatically looks for relevant config files for each package.json file that is found.

@@ -53,7 +53,6 @@ Enabling this rule will result in an error being generated if the value in `engi
 }
 ```
 
-
 ## Shorthand for disabling the rule in .npmpackagejsonlintrc configuration
 
 ```json

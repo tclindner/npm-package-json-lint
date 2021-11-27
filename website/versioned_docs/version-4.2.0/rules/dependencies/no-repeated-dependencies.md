@@ -31,7 +31,6 @@ Enabling this rule will result in an error being generated if a dependency exist
 }
 ```
 
-
 ### *Correct* example(s)
 
 ```json

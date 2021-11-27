@@ -19,6 +19,7 @@ Please see [migrating-from-v1-to-v2](v1-to-v2.md)
 Please see [migrating-from-v0-to-v1](v0-to-v1.md)
 
 ### Configuring rules
+
 npm-package-json-lint rules can either be run as an `error`, `warning`, or `off`.
 
 * "warning" - run the rule as a warning
@@ -32,12 +33,14 @@ Ex: `"require-author": "error"`
 Please see [.npmpackagejsonlintrc.json](rcfile-example.md) file.
 
 ### Shareable config
+
 v2 added support for shareable npm-package-json-lint config! If you would like to use your .npmpackagejsonlintrc.json file in multiple projects you can create a npm module that exports your config.
 
 #### How to create shared config
+
 Create a new npm module that exports the desired npm-package-json-lint configuration. The module name must start with `npm-package-json-lint-config-`. Add the desired configuration to the index.js file.
 
-```
+```js
 const config = {
   'rules': {
     'require-name': 'error'
@@ -50,20 +53,22 @@ module.exports = config;
 For a complete example, please see [npm-package-json-lint-config-default](https://github.com/tclindner/npm-package-json-lint-config-default)
 
 #### How to publish a shared config module
+
 Follow these instructions for [publishing to npm](https://docs.npmjs.com/getting-started/publishing-npm-packages).  Please add the following keywords for discoverability, `npm-package-json-lint`, `npm-package-json-lintconfig`, and `npm-package-json-lint-config`.
 
 Please also add a dependency on npm-package-json-lint using [peerdependencies](https://docs.npmjs.com/files/package.json#peerdependencies). Example
 
-```
+```json
 peerDependencies: {
   "npm-package-json-lint": ">= 2"
 }
 ```
 
 #### How to use a shared config module
+
 Add the following to your `.npmpackagejsonlintrc.json` file.
 
-```
+```json
 {
   "extends": "npm-package-json-lint-config-default"
 }
@@ -137,7 +142,6 @@ Add the following to your `.npmpackagejsonlintrc.json` file.
 * [scripts-type](rules/type/scripts-type.md)
 * [version-type](rules/type/version-type.md)
 
-
 ## Valid value rules
 
 > Generates an error if node's value doesn't match one of the values in the supplied array
@@ -190,13 +194,11 @@ Add the following to your `.npmpackagejsonlintrc.json` file.
 * [name-format](rules/format/name-format.md)
 * [version-format](rules/format/version-format.md)
 
-
 ## Package.json property rules
 
 > Generates an error if the package.json properties fail to meet the desired requirements
 
 * [prefer-property-order](rules/package-json-properties/prefer-property-order.md)
-
 
 ## Deprecated node rules
 

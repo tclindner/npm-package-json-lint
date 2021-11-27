@@ -39,7 +39,6 @@ Enabling this rule will result in an error being generated if one of the depende
 }
 ```
 
-
 ### *Correct* example(s)
 
 ```json

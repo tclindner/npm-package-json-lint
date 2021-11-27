@@ -12,7 +12,7 @@ Creates an instance of NpmPackageJsonLint
 
 `NpmPackageJsonLint` has one public method, `lint`. `lint` takes a `NpmPackageJsonLintOptions` object.
 
-#### options
+### options
 
 Type: `Object`
 

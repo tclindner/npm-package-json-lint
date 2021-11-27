@@ -42,7 +42,6 @@ Enabling this rule will result in an error being generated if the value in `os` 
 
 ### *Correct* example(s)
 
-
 ```json
 {
   "os": ["linux"]
