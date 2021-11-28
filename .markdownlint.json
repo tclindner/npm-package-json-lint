@@ -1,6 +1,6 @@
 {
+    "first-line-h1": false,
     "line-length": false,
     "no-duplicate-header": false,
-    "first-line-h1": false,
     "ol-prefix": false
   }
