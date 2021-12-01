@@ -44,7 +44,7 @@
     "debug": "^4.3.3",
     "globby": "^11.0.4",
     "ignore": "^5.1.9",
-    "is-plain-obj": "^3.0.0",
+    "is-plain-obj": "^4.0.0",
     "jsonc-parser": "^3.0.0",
     "log-symbols": "^4.1.0",
     "meow": "^6.1.1",
