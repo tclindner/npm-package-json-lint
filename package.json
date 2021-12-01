@@ -41,7 +41,7 @@
     "ajv-errors": "^3.0.0",
     "chalk": "^4.1.2",
     "cosmiconfig": "^7.0.1",
-    "debug": "^4.3.2",
+    "debug": "^4.3.3",
     "globby": "^11.0.4",
     "ignore": "^5.1.9",
     "is-plain-obj": "^3.0.0",
