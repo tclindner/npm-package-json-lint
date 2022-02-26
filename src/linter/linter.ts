@@ -71,7 +71,7 @@ const lint = (packageJsonData, configObj, rules) => {
     if (severity !== Severity.Off) {
       const lintResult = ruleModule.lint(packageJsonData, severity, ruleConfig);
 
-      if (typeof lintResult === 'object') {
+      if (lintResult !== null) {
         lintIssues.push(lintResult);
       }
     }

@@ -1,4 +1,4 @@
-const getNameError = require('../../../src/utils/getNameError');
+import {getNameError} from '../../../src/utils/getNameError';
 
 const genericErrorMessage = 'name invalid';
 const getResults = (includeErrors = true, includeWarnings = true) => {

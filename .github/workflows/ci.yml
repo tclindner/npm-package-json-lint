@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3.0.0
         with:
-          node-version: '12.x'
+          node-version: '14'
       - run: npm ci --no-progress
       - run: npm run lint
 
@@ -27,7 +27,7 @@ jobs:
 
     strategy:
       matrix:
-        node: [10, 12, 14]
+        node: [12, 14, 16]
         # TODO: Add windows-latest
         os: [ubuntu-latest, macos-latest]
 
