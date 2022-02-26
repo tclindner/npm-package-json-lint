@@ -7,6 +7,7 @@ import {Rules} from './Rules';
 import {executeOnPackageJsonFiles, executeOnPackageJsonObject} from './linter/linter';
 import {getFileList} from './utils/getFileList';
 import {getIgnorer} from './utils/getIgnorer';
+import { Severity } from './types/severity';
 
 const noIssues = 0;
 
@@ -18,7 +19,7 @@ const noIssues = 0;
  * @private
  */
 const isIssueAnError = (issue) => {
-  return issue.severity === 'error';
+  return issue.severity === Severity.Error;
 };
 
 const isPackageJsonObjectValid = (packageJsonObject) => isPlainObj(packageJsonObject);
@@ -67,28 +68,55 @@ const getErrorResults = (results) => {
  * @property {Object<string,*>} rules   An object of rules to use.
  */
 
+export interface NpmPackageJsonLintOptions {
+  cwd?: string,
+  packageJsonObject?: any,
+  packageJsonFilePath?: string,
+  config?: any,
+  configFile?: any,
+  configBaseDirectory?: any,
+  patterns?: any,
+  quiet?: boolean,
+  ignorePath?: string,
+  fix?: boolean,
+}
+
 /**
  * Public CLIEngine class
  * @class
  */
 export class NpmPackageJsonLint {
+  cwd: string;
+  packageJsonObject: any;
+  packageJsonFilePath: string;
+  patterns: any;
+  quiet: boolean;
+  ignorePath: string;
+  fix: boolean;
+  version: string;
+  rules: Rules;
+  configHelper: Config;
+
+
   /**
    * constructor
    * @param {NpmPackageJsonLint} options The options for the CLIEngine.
    * @constructor
    */
-  constructor({
-    cwd,
-    packageJsonObject,
-    packageJsonFilePath,
-    config,
-    configFile,
-    configBaseDirectory,
-    patterns,
-    quiet,
-    ignorePath,
-    fix,
-  }) {
+  constructor(options: NpmPackageJsonLintOptions) {
+    const {
+      cwd,
+      packageJsonObject,
+      packageJsonFilePath,
+      config,
+      configFile,
+      configBaseDirectory,
+      patterns,
+      quiet,
+      ignorePath,
+      fix,
+    } = options;
+
     this.cwd = slash(cwd || process.cwd());
 
     this.packageJsonObject = packageJsonObject;

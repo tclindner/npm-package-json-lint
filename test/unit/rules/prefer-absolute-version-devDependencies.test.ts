@@ -1,8 +1,6 @@
 import {lint, ruleType} from '../../../src/rules/prefer-absolute-version-devDependencies';
 import {Severity} from '../../../src/types/severity';
 
-jest.mock('../../../src/validators/dependency-audit');
-
 const nodeName = 'devDependencies';
 
 describe('prefer-absolute-version-devDependencies Unit Tests', () => {
@@ -45,7 +43,7 @@ describe('prefer-absolute-version-devDependencies Unit Tests', () => {
       };
       const response = lint(packageJsonData, severity, config);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
@@ -58,7 +56,7 @@ describe('prefer-absolute-version-devDependencies Unit Tests', () => {
       };
       const response = lint(packageJsonData, severity, config);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 });

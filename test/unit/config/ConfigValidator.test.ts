@@ -1,4 +1,4 @@
-import {validateRules} from '../../../src/config/ConfigValidator';
+import * as configValidator from '../../../src/config/ConfigValidator';
 import {Rules} from '../../../src/Rules';
 
 const rules = new Rules();
@@ -11,7 +11,7 @@ describe('configValidator Unit Tests', () => {
         const ruleConfig = null;
         const source = 'cli';
 
-        const actual = validateRules(ruleConfig, source, rules);
+        const actual = configValidator.validateRules(ruleConfig, source, rules);
         expect(actual).toBeUndefined();
       });
     });
@@ -25,7 +25,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- severity must be a string.\n\t- severity must be either "off", "warning", or "error".'
           );
@@ -40,7 +40,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- the second item in an array rule config must be an array.'
           );
@@ -55,7 +55,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- the second item in an array rule config must have at least 1 item.'
           );
@@ -70,7 +70,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- the second item in an array rule config must have unique items.'
           );
@@ -85,7 +85,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- rule config must be an array, e.g. ["error", ["value1", "value2"]].'
           );
@@ -100,7 +100,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].'
           );
@@ -115,7 +115,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].\n\t- array rules are only allowed two items, severity and the list is values. e.g. ["error", ["value1", "value2"]].'
           );
@@ -130,7 +130,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).not.toThrow();
         });
       });
@@ -143,7 +143,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).not.toThrow();
         });
       });
@@ -156,7 +156,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).not.toThrow();
         });
       });
@@ -169,7 +169,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- is an array type rule. It must be set to "off" if an array is not supplied.'
           );
@@ -186,7 +186,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- severity must be a string.\n\t- severity must be either "off", "warning", or "error".'
           );
@@ -201,7 +201,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- the second item in an object rule config must be an object.'
           );
@@ -216,7 +216,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- rule config must be an array, e.g. ["error", {}].'
           );
@@ -231,7 +231,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- object rules must have two items, severity and options object. e.g. ["error", {}].'
           );
@@ -246,7 +246,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- object rules must have two items, severity and options object. e.g. ["error", {}].\n\t- object rules are only allowed two items, severity and options object. e.g. ["error", {}].'
           );
@@ -261,7 +261,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).not.toThrow();
         });
       });
@@ -274,7 +274,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).not.toThrow();
         });
       });
@@ -287,7 +287,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- is an object type rule. It must be set to "off" if an object is not supplied.'
           );
@@ -304,7 +304,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- severity must be either "off", "warning", or "error".'
           );
@@ -319,7 +319,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- severity must be either "off", "warning", or "error".'
           );
@@ -334,7 +334,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- the second item in an object rule config must be an object.'
           );
@@ -349,7 +349,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- expections must be an array.'
           );
@@ -364,7 +364,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- expections must have at least 1 item.'
           );
@@ -379,7 +379,7 @@ describe('configValidator Unit Tests', () => {
           const source = null;
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'Configuration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- expections must have unique items.'
           );
@@ -394,7 +394,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- each exception must be a string.'
           );
@@ -409,7 +409,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- rule config must be an array, e.g. ["error", {}].'
           );
@@ -424,7 +424,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- object rules must have two items, severity and options object. e.g. ["error", {}].'
           );
@@ -439,7 +439,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- object rules must have two items, severity and options object. e.g. ["error", {}].\n\t- object rules are only allowed two items, severity and options object. e.g. ["error", {}].'
           );
@@ -454,7 +454,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).not.toThrow();
         });
       });
@@ -467,7 +467,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).not.toThrow();
         });
       });
@@ -480,7 +480,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).not.toThrow();
         });
       });
@@ -495,7 +495,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).not.toThrow();
         });
       });
@@ -508,7 +508,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).not.toThrow();
         });
       });
@@ -521,7 +521,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).not.toThrow();
         });
       });
@@ -534,7 +534,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "require-author" is invalid:\n\t- severity must be a string.\n\t- severity must be either "off", "warning", or "error".'
           );
@@ -550,7 +550,7 @@ describe('configValidator Unit Tests', () => {
           const source = 'cli';
 
           expect(() => {
-            validateRules(ruleConfig, source, rules);
+            configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
             'cli:\n\tConfiguration for rule "require-author" is invalid:\n\t- severity must be a string.\n\t- severity must be either "off", "warning", or "error".'
           );

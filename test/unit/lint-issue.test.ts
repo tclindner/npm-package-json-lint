@@ -1,18 +1,19 @@
 import chalk from 'chalk';
 import logSymbols from 'log-symbols';
 import {LintIssue} from '../../src/lint-issue';
+import { Severity } from '../../src/types/severity';
 
 describe('LintIssue Unit Tests', () => {
   describe('constructor', () => {
     describe('when a new object is created', () => {
-      const lintIssue = new LintIssue('lintId', 'severity', 'node', 'lintMessage');
+      const lintIssue = new LintIssue('lintId', Severity.Error, 'node', 'lintMessage');
 
       test('the lintId should be set', () => {
         expect(lintIssue.lintId).toStrictEqual('lintId');
       });
 
       test('the severity should be set', () => {
-        expect(lintIssue.severity).toStrictEqual('severity');
+        expect(lintIssue.severity).toStrictEqual('error');
       });
 
       test('the node should be set', () => {
@@ -32,7 +33,7 @@ describe('LintIssue Unit Tests', () => {
         const formattedNode = chalk.gray.bold('node');
         const formattedMessage = chalk.bold.red('lintMessage');
         const output = `${logSymbols.error} ${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
-        const lintIssue = new LintIssue('lintId', 'error', 'node', 'lintMessage');
+        const lintIssue = new LintIssue('lintId', Severity.Error, 'node', 'lintMessage');
 
         expect(lintIssue.toString()).toStrictEqual(output);
       });
@@ -42,7 +43,7 @@ describe('LintIssue Unit Tests', () => {
         const formattedNode = chalk.gray.bold('node');
         const formattedMessage = chalk.yellow('lintMessage');
         const output = `${logSymbols.warning} ${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
-        const lintIssue = new LintIssue('lintId', 'warning', 'node', 'lintMessage');
+        const lintIssue = new LintIssue('lintId', Severity.Warning, 'node', 'lintMessage');
 
         expect(lintIssue.toString()).toStrictEqual(output);
       });

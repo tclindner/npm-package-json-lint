@@ -1,5 +1,5 @@
 import fs from 'fs';
-import Parser from '../../src/Parser';
+import {Parser} from '../../src/Parser';
 
 jest.mock('fs');
 
@@ -11,6 +11,7 @@ describe('Parser Unit Tests', () => {
         const obj = {
           key: 'value',
         };
+        // @ts-ignore-error
         fs.readFileSync.mockReturnValue(json);
 
         const parsedJson = Parser.parseJsonFile('dummyFile.txt');
@@ -21,6 +22,7 @@ describe('Parser Unit Tests', () => {
 
     describe('when file is not present', () => {
       test('an error should be thrown', () => {
+        // @ts-ignore-error
         fs.readFileSync.mockImplementation(() => {
           throw new Error('Failed to read config file: missing.json. \nError: Error');
         });

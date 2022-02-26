@@ -1,7 +1,7 @@
 import path from 'path';
 import {transform} from '../../../src/config/cosmicConfigTransformer';
-import {applyExtendsIfSpecified} from '../../../src/config/applyExtendsIfSpecified';
-import {applyOverrides} from '../../../src/config/applyOverrides';
+import * as applyExtendsIfSpecified from '../../../src/config/applyExtendsIfSpecified';
+import * as applyOverrides from '../../../src/config/applyOverrides';
 
 jest.mock('path');
 jest.mock('../../../src/config/applyExtendsIfSpecified');
@@ -23,12 +23,12 @@ describe('cosmicConfigTransformer Unit Tests', () => {
 
     describe('valid cosmiconfigResult - configBaseDirectory', () => {
       test('null should be returned', () => {
-        path.dirname.mockReturnValue('./myConfig');
-        applyExtendsIfSpecified.mockReturnValue({
+        jest.spyOn(path, 'dirname').mockReturnValue('./myConfig');
+        jest.spyOn(applyExtendsIfSpecified, 'applyExtendsIfSpecified').mockReturnValue({
           rules: 'rules',
           overrides: 'overrides',
         });
-        applyOverrides.mockReturnValue('appliedOverrides');
+        jest.spyOn(applyOverrides, 'applyOverrides').mockReturnValue('appliedOverrides');
 
         const cwd = 'cwd';
         const configBaseDirectory = 'configBaseDirectory';
@@ -45,21 +45,21 @@ describe('cosmicConfigTransformer Unit Tests', () => {
         expect(actual).toStrictEqual('appliedOverrides');
 
         expect(path.dirname).toHaveBeenCalledTimes(0);
-        expect(applyExtendsIfSpecified).toHaveBeenCalledTimes(1);
-        expect(applyExtendsIfSpecified).toHaveBeenCalledWith(cosmiconfigResult.config, filePathBeingLinted);
-        expect(applyOverrides).toHaveBeenCalledTimes(1);
-        expect(applyOverrides).toHaveBeenCalledWith(cwd, filePathBeingLinted, 'rules', 'overrides');
+        expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledTimes(1);
+        expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledWith(cosmiconfigResult.config, filePathBeingLinted);
+        expect(applyOverrides.applyOverrides).toHaveBeenCalledTimes(1);
+        expect(applyOverrides.applyOverrides).toHaveBeenCalledWith(cwd, filePathBeingLinted, 'rules', 'overrides');
       });
     });
 
     describe('valid cosmiconfigResult - no configBaseDirectory', () => {
       test('null should be returned', () => {
-        path.dirname.mockReturnValue('./myConfig');
-        applyExtendsIfSpecified.mockReturnValue({
+        jest.spyOn(path, 'dirname').mockReturnValue('./myConfig');
+        jest.spyOn(applyExtendsIfSpecified, 'applyExtendsIfSpecified').mockReturnValue({
           rules: 'rules',
           overrides: 'overrides',
         });
-        applyOverrides.mockReturnValue('appliedOverrides');
+        jest.spyOn(applyOverrides, 'applyOverrides').mockReturnValue('appliedOverrides');
 
         const cwd = 'cwd';
         const configBaseDirectory = null;
@@ -77,10 +77,10 @@ describe('cosmicConfigTransformer Unit Tests', () => {
 
         expect(path.dirname).toHaveBeenCalledTimes(1);
         expect(path.dirname).toHaveBeenCalledWith(cosmiconfigResult.filepath);
-        expect(applyExtendsIfSpecified).toHaveBeenCalledTimes(1);
-        expect(applyExtendsIfSpecified).toHaveBeenCalledWith(cosmiconfigResult.config, filePathBeingLinted);
-        expect(applyOverrides).toHaveBeenCalledTimes(1);
-        expect(applyOverrides).toHaveBeenCalledWith(cwd, filePathBeingLinted, 'rules', 'overrides');
+        expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledTimes(1);
+        expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledWith(cosmiconfigResult.config, filePathBeingLinted);
+        expect(applyOverrides.applyOverrides).toHaveBeenCalledTimes(1);
+        expect(applyOverrides.applyOverrides).toHaveBeenCalledWith(cwd, filePathBeingLinted, 'rules', 'overrides');
       });
     });
   });

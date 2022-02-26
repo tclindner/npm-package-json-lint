@@ -43,7 +43,7 @@ describe('prefer-absolute-version-dependencies Unit Tests', () => {
       };
       const response = lint(packageJsonData, severity, config);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
@@ -56,7 +56,7 @@ describe('prefer-absolute-version-dependencies Unit Tests', () => {
       };
       const response = lint(packageJsonData, severity, config);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 });

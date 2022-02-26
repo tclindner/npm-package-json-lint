@@ -52,7 +52,7 @@ describe('valid-values-name-scope Unit Tests', () => {
       const validValues = ['@cool', '@awesome'];
       const response = lint(packageJsonData,Severity.Error, validValues);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
@@ -62,7 +62,7 @@ describe('valid-values-name-scope Unit Tests', () => {
       const validValues = ['@cool', '@awesome'];
       const response = lint(packageJsonData, Severity.Error, validValues);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 });

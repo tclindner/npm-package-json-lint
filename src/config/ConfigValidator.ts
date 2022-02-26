@@ -7,7 +7,7 @@ import {isArrayRuleSchemaValid, isConfigObjectSchemaValid, isObjectRuleSchemaVal
  * @return {Boolean}               True if config is valid, false if not
  * @static
  */
-const isObjectRuleConfigValid = (ruleConfig) => {
+const isObjectRuleConfigValid = (ruleConfig: any ): any  => {
   if (typeof ruleConfig === 'string' && ruleConfig === 'off') {
     return true;
   }
@@ -26,7 +26,7 @@ const isObjectRuleConfigValid = (ruleConfig) => {
  * @return {Boolean}              True if config is valid, false if not
  * @static
  */
-const isOptionalObjRuleConfigValid = (ruleConfig) => {
+const isOptionalObjRuleConfigValid = (ruleConfig: any ): any  => {
   const object = 1;
 
   if (typeof ruleConfig === 'string') {
@@ -48,7 +48,7 @@ const isOptionalObjRuleConfigValid = (ruleConfig) => {
  * @return {Boolean}               True if config is valid, false if not
  * @static
  */
-const isArrayRuleConfigValid = (ruleConfig, minItems) => {
+const isArrayRuleConfigValid = (ruleConfig: any , minItems: any ): any  => {
   if (typeof ruleConfig === 'string' && ruleConfig === 'off') {
     return true;
   }
@@ -67,7 +67,7 @@ const isArrayRuleConfigValid = (ruleConfig, minItems) => {
  * @return {Boolean}                True if config is valid, error if not
  * @static
  */
-const isStandardRuleConfigValid = (ruleConfig) => isStandardRuleSchemaValid(ruleConfig);
+const isStandardRuleConfigValid = (ruleConfig: any ): any  => isStandardRuleSchemaValid(ruleConfig);
 
 /**
  * Validates configuration of a rule
@@ -78,7 +78,7 @@ const isStandardRuleConfigValid = (ruleConfig) => isStandardRuleSchemaValid(rule
  * @param {String|null} source The name of the configuration source to report in any errors.
  * @returns {undefined} No return
  */
-const validateRule = (ruleModule, ruleName, userConfig, source) => {
+const validateRule = (ruleModule: any , ruleName: any , userConfig: any , source: any ): any  => {
   if (ruleModule) {
     try {
       switch (ruleModule.ruleType) {
@@ -121,7 +121,7 @@ const validateRule = (ruleModule, ruleName, userConfig, source) => {
  * @returns {undefined} No return
  * @static
  */
-export const validateRules = (rulesConfig, source, rules) => {
+export const validateRules = (rulesConfig: any , source: any , rules: any ): any  => {
   if (!rulesConfig) {
     return;
   }
@@ -142,7 +142,7 @@ export const validateRules = (rulesConfig, source, rules) => {
  * @returns {undefined} No return
  * @static
  */
-export const validate = (config, source, rules) => {
+export const validate = (config: any , source: any , rules: any ): any  => {
   isConfigObjectSchemaValid(config, source);
   validateRules(config.rules, source, rules);
 };

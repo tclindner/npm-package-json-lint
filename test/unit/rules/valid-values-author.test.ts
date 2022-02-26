@@ -37,7 +37,7 @@ describe('valid-values-author Unit Tests', () => {
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName', 'LastName, FirstName'];
       const response = lint(packageJsonData, Severity.Error, validValues);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
@@ -70,7 +70,7 @@ describe('valid-values-author Unit Tests', () => {
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName', 'LastName, FirstName'];
       const response = lint(packageJsonData, Severity.Error, validValues);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
@@ -113,7 +113,7 @@ describe('valid-values-author Unit Tests', () => {
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName', 'LastName, FirstName'];
       const response = lint(packageJsonData, Severity.Error, validValues);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 });

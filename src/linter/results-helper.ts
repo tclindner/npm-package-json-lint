@@ -1,3 +1,5 @@
+import { Severity } from "../types/severity";
+
 /**
  * A result count object for a files.
  * @typedef {Object} FileResultCounts
@@ -17,7 +19,7 @@ export const aggregateCountsPerFile = (issues) => {
   // eslint-disable-next-line unicorn/no-array-reduce
   return issues.reduce(
     (counts, issue) => {
-      const isErrorSeverity = issue.severity === 'error';
+      const isErrorSeverity = issue.severity === Severity.Error;
       const newErrorCount = isErrorSeverity ? counts.errorCount + incrementOne : counts.errorCount;
       const newWarningCount = isErrorSeverity ? counts.warningCount : counts.warningCount + incrementOne;
 

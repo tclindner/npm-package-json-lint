@@ -1,8 +1,8 @@
-import {cosmiconfigSync} from 'cosmiconfig';
-import * as Config from '../../src/Config';
-import applyOverrides from '../../src/config/applyOverrides';
-import applyExtendsIfSpecified from '../../src/config/applyExtendsIfSpecified';
-import Rules from '../../src/Rules';
+import * as cosmiconfig from 'cosmiconfig';
+import {Config} from '../../src/Config';
+import * as applyOverrides from '../../src/config/applyOverrides';
+import * as applyExtendsIfSpecified from '../../src/config/applyExtendsIfSpecified';
+import {Rules} from '../../src/Rules';
 
 const rules = new Rules();
 rules.load();
@@ -27,7 +27,8 @@ describe('Config Unit Tests', () => {
         });
         const searchMock = jest.fn();
 
-        cosmiconfigSync.mockImplementation(() => ({
+        // @ts-ignore-error
+        jest.spyOn(cosmiconfig, 'cosmiconfigSync').mockImplementation(() => ({
           load: loadMock,
           search: searchMock,
         }));
@@ -43,8 +44,8 @@ describe('Config Unit Tests', () => {
         const result = configObj.getConfigForFile(filePath);
 
         expect(result).toStrictEqual(expectedConfigObj);
-        expect(applyExtendsIfSpecified).toHaveBeenCalledTimes(0);
-        expect(applyOverrides).toHaveBeenCalledTimes(0);
+        expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledTimes(0);
+        expect(applyOverrides.applyOverrides).toHaveBeenCalledTimes(0);
         expect(loadMock).toHaveBeenCalledTimes(1);
         expect(loadMock).toHaveBeenCalledWith(configFile);
         expect(searchMock).toHaveBeenCalledTimes(0);
@@ -65,7 +66,8 @@ describe('Config Unit Tests', () => {
           'require-scripts': 'error',
         });
 
-        cosmiconfigSync.mockImplementation(() => ({
+        // @ts-ignore-error
+        jest.spyOn(cosmiconfig, 'cosmiconfigSync').mockImplementation(() => ({
           load: loadMock,
           search: searchMock,
         }));
@@ -81,8 +83,8 @@ describe('Config Unit Tests', () => {
         const result = configObj.getConfigForFile(filePath);
 
         expect(result).toStrictEqual(expectedConfigObj);
-        expect(applyExtendsIfSpecified).toHaveBeenCalledTimes(0);
-        expect(applyOverrides).toHaveBeenCalledTimes(0);
+        expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledTimes(0);
+        expect(applyOverrides.applyOverrides).toHaveBeenCalledTimes(0);
         expect(searchMock).toHaveBeenCalledTimes(1);
         expect(searchMock).toHaveBeenCalledWith(filePath);
         expect(loadMock).toHaveBeenCalledTimes(0);
@@ -99,7 +101,8 @@ describe('Config Unit Tests', () => {
         const loadMock = jest.fn();
         const searchMock = jest.fn();
 
-        cosmiconfigSync.mockImplementation(() => ({
+        // @ts-ignore-error
+        jest.spyOn(cosmiconfig, 'cosmiconfigSync').mockImplementation(() => ({
           load: loadMock,
           search: searchMock,
         }));
@@ -124,7 +127,8 @@ describe('Config Unit Tests', () => {
         const loadMock = jest.fn();
         const searchMock = jest.fn().mockReturnValue({});
 
-        cosmiconfigSync.mockImplementation(() => ({
+        // @ts-ignore-error
+        jest.spyOn(cosmiconfig, 'cosmiconfigSync').mockImplementation(() => ({
           load: loadMock,
           search: searchMock,
         }));
@@ -163,11 +167,12 @@ describe('Config Unit Tests', () => {
         const loadMock = jest.fn();
         const searchMock = jest.fn();
 
-        cosmiconfigSync.mockImplementation(() => ({
+        // @ts-ignore-error
+        jest.spyOn(cosmiconfig, 'cosmiconfigSync').mockImplementation(() => ({
           load: loadMock,
           search: searchMock,
         }));
-        applyExtendsIfSpecified.mockReturnValue({
+        jest.spyOn(applyExtendsIfSpecified, 'applyExtendsIfSpecified').mockReturnValue({
           rules: {
             'require-version': 'error',
             'require-name': 'error',
@@ -182,7 +187,7 @@ describe('Config Unit Tests', () => {
             },
           ],
         });
-        applyOverrides.mockReturnValue({
+        jest.spyOn(applyOverrides, 'applyOverrides').mockReturnValue({
           'require-version': 'error',
           'require-name': 'warning',
           'require-scripts': 'error',
@@ -199,10 +204,10 @@ describe('Config Unit Tests', () => {
         const result = configObj.getConfigForFile(filePath);
 
         expect(result).toStrictEqual(expectedConfigObj);
-        expect(applyExtendsIfSpecified).toHaveBeenCalledTimes(1);
-        expect(applyExtendsIfSpecified).toHaveBeenCalledWith(config, 'PassedConfig');
-        expect(applyOverrides).toHaveBeenCalledTimes(1);
-        expect(applyOverrides).toHaveBeenCalledWith(cwd, filePath, config.rules, config.overrides);
+        expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledTimes(1);
+        expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledWith(config, 'PassedConfig');
+        expect(applyOverrides.applyOverrides).toHaveBeenCalledTimes(1);
+        expect(applyOverrides.applyOverrides).toHaveBeenCalledWith(cwd, filePath, config.rules, config.overrides);
         expect(searchMock).toHaveBeenCalledTimes(0);
         expect(loadMock).toHaveBeenCalledTimes(0);
       });

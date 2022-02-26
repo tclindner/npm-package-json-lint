@@ -37,16 +37,16 @@ describe('valid-values-private Unit Tests', () => {
       const validValues = [false];
       const response = lint(packageJsonData, Severity.Error, validValues);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
-      const response = lint(packageJsonData, Severity.Error);
+      const response = lint(packageJsonData, Severity.Error, 'valid');
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 });

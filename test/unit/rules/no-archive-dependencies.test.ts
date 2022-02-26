@@ -55,7 +55,7 @@ describe('no-archive-dependencies Unit Tests', () => {
       };
       const response = lint(packageJsonData, Severity.Error, {exceptions: ['my-module']});
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
@@ -67,9 +67,9 @@ describe('no-archive-dependencies Unit Tests', () => {
           'my-other-module': '1.2.3',
         },
       };
-      const response = lint(packageJsonData, Severity.Error);
+      const response = lint(packageJsonData, Severity.Error, {});
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 });

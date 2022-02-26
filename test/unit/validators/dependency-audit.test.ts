@@ -1,5 +1,4 @@
 import * as dependencyAudit from '../../../src/validators/dependency-audit';
-import {Severity} from '../../../src/types/severity';
 
 describe('dependency-audit Unit Tests', () => {
   describe('hasDependency method', () => {
@@ -103,7 +102,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '~ 1.0',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'devDependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'devDependencies', {});
 
         expect(response).toBe(false);
       });
@@ -116,7 +115,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '~0.6.1-1',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -129,7 +128,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '>=0.1.97',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -142,7 +141,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '0.1.20 || 1.2.4',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -155,7 +154,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '0.1.20 || >1.2.4',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -168,7 +167,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '0.1.20 || 1.2.4',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -181,7 +180,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '0.1.20 || 1.2.4',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -194,7 +193,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '>=0.2.3 || <0.0.1',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -207,7 +206,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '>=0.2.3 || <0.0.1',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -220,7 +219,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '>=0.2.3 || <0.0.1',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -233,7 +232,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '~v0.5.4-pre',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -263,7 +262,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '=0.7.x',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -276,7 +275,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '>=0.7.x',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -289,7 +288,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '<=0.7.x',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -302,7 +301,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '>0.2.3 >0.2.4 <=0.2.5',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -315,7 +314,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '>=0.2.3 <=0.2.4',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -328,7 +327,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '^0.1.0 || ~3.0.1 || 5.0.0',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -341,7 +340,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '^0.1.0 || ~3.0.1 || 5.0.0',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -354,7 +353,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '^0.1.0 || ~3.0.1 || 5.0.0',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -367,7 +366,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '^0.1.0 || ~3.0.1 || >4 <=5.0.0',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -380,7 +379,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '=0.1.',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(false);
       });
@@ -453,7 +452,7 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint83': '~1.0.0-alpha',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies');
+        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
 
         expect(response).toBe(false);
       });
@@ -490,7 +489,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.areVersRangesValid(packageJson, 'devDependencies', '~');
+        const response = dependencyAudit.areVersRangesValid(packageJson, 'devDependencies', '~', {});
 
         expect(response).toBe(true);
       });
@@ -505,7 +504,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~');
+        const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~', {});
 
         expect(response).toBe(false);
       });
@@ -520,7 +519,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '~2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~');
+        const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~', {});
 
         expect(response).toBe(true);
       });
@@ -569,7 +568,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'devDependencies', '~');
+        const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'devDependencies', '~', {});
 
         expect(response).toBe(false);
       });
@@ -584,7 +583,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~');
+        const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~', {});
 
         expect(response).toBe(true);
       });
@@ -599,7 +598,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~');
+        const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~', {});
 
         expect(response).toBe(false);
       });
@@ -647,7 +646,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
+        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {});
 
         expect(response).toBe(false);
       });
@@ -658,7 +657,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '~2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
+        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {});
 
         expect(response).toBe(false);
       });
@@ -669,7 +668,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '2.*',
           },
         };
-        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
+        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {});
 
         expect(response).toBe(false);
       });
@@ -680,7 +679,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '>=2.0.0',
           },
         };
-        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
+        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {});
 
         expect(response).toBe(false);
       });
@@ -691,7 +690,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '<=2.0.0',
           },
         };
-        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
+        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {});
 
         expect(response).toBe(false);
       });
@@ -706,7 +705,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '=2.4.0',
           },
         };
-        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies');
+        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -753,7 +752,7 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'git@github.com:username/repo.git',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -764,7 +763,7 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'git://github.com/username/repo.git',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -775,7 +774,7 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'git+https://github.com/username/repo.git',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -786,7 +785,7 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'git+ssh://github.com/username/repo.git',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -797,7 +796,7 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'http://github.com/username/repo.git',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -808,7 +807,7 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'https://github.com/username/repo.git',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -819,7 +818,7 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'github:username/repo',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -830,7 +829,7 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'username/repo',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -841,7 +840,7 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'org-name/repo#username/issue-42',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -852,7 +851,7 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'username/repo#v2.0.0-rc-1',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -868,7 +867,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -879,7 +878,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '~2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -890,7 +889,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '2.*',
           },
         };
-        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -901,7 +900,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '>=2.0.0',
           },
         };
-        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -912,7 +911,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '<=2.0.0',
           },
         };
-        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -927,7 +926,7 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '=2.4.0',
           },
         };
-        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
 
         expect(response).toBe(false);
       });
@@ -974,7 +973,7 @@ describe('dependency-audit Unit Tests', () => {
             'my-module': 'https://github.com/miripiruni/repo/archive/v1.2.3.tar.gz',
           },
         };
-        const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -985,7 +984,7 @@ describe('dependency-audit Unit Tests', () => {
             'my-module': 'https://github.com/miripiruni/repo/archive/v1.2.3.zip',
           },
         };
-        const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -1002,7 +1001,7 @@ describe('dependency-audit Unit Tests', () => {
             'module-from-archive': 'https://github.com/user/repo.git',
           },
         };
-        const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies', {});
 
         expect(response).toBe(false);
       });
@@ -1034,7 +1033,7 @@ describe('dependency-audit Unit Tests', () => {
             'my-module': 'file:local-module',
           },
         };
-        const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies', {});
 
         expect(response).toBe(true);
       });
@@ -1051,7 +1050,7 @@ describe('dependency-audit Unit Tests', () => {
             'module-from-archive': 'https://github.com/user/repo/archive/v1.2.3.tar.gz',
           },
         };
-        const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies');
+        const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies', {});
 
         expect(response).toBe(false);
       });

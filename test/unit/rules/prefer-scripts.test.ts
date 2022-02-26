@@ -43,7 +43,7 @@ describe('prefer-scripts Unit Tests', () => {
       const requiredScripts = ['lint', 'test'];
       const response = lint(packageJsonData, Severity.Error, requiredScripts);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
@@ -53,7 +53,7 @@ describe('prefer-scripts Unit Tests', () => {
       const requiredScripts = ['lint', 'test'];
       const response = lint(packageJsonData, Severity.Error, requiredScripts);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 });

@@ -1,6 +1,6 @@
 import path from 'path';
 import globby from 'globby';
-import applyOverrides from '../../../src/config/applyOverrides';
+import {applyOverrides} from '../../../src/config/applyOverrides';
 
 jest.mock('globby');
 jest.mock('path');
@@ -27,8 +27,8 @@ describe('applyOverrides Unit Tests', () => {
       },
     ];
 
-    globby.sync.mockReturnValue(['./package.json']);
-    path.resolve.mockReturnValue('./package.json');
+    jest.spyOn(globby, 'sync').mockReturnValue(['./package.json']);
+    jest.spyOn(path, 'resolve').mockReturnValue('./package.json');
 
     const results = applyOverrides(cwd, filePath, rules, overrides);
 
@@ -58,8 +58,8 @@ describe('applyOverrides Unit Tests', () => {
       },
     ];
 
-    globby.sync.mockReturnValue(['./package.json']);
-    path.resolve.mockReturnValue('./package.json');
+    jest.spyOn(globby, 'sync').mockReturnValue(['./package.json']);
+    jest.spyOn(path, 'resolve').mockReturnValue('./package.json');
 
     const results = applyOverrides(cwd, filePath, rules, overrides);
 

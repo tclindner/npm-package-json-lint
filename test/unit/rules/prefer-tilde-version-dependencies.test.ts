@@ -44,16 +44,16 @@ describe('prefer-tilde-version-dependencies Unit Tests', () => {
       };
       const response = lint(packageJsonData, severity, config);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
-      const response = lint(packageJsonData, Severity.Error);
+      const response = lint(packageJsonData, Severity.Error, {});
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 });

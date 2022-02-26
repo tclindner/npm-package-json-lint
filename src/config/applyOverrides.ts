@@ -11,7 +11,7 @@ import globby from 'globby';
  * @returns {Object} A new configuration object with all of the 'overrides' applied.
  * @private
  */
-export const applyOverrides = (cwd: string, filePath: string, rules: any, overrides: any): any => {
+export const applyOverrides = (cwd: string, filePath: string, rules: any, overrides?: any[]): any => {
   let finalRules = {...rules};
 
   debug('overrides');
