@@ -1,4 +1,4 @@
-/* eslint max-statements: 'off' */
+import {PackageJson} from 'type-fest';
 
 const notFound = -1;
 const empty = 0;
@@ -52,13 +52,19 @@ const defaultPreferredNodeOrder = [
   'publishConfig',
 ];
 
+export interface IsInPreferredOrderResult {
+  status: boolean,
+  msg: string | null
+}
+
 /**
  * Determines whether an array is in the specified order
- * @param  {Object} packageJsonData         Valid JSON
- * @param  {Array}  userPreferredNodeOrder  Preferred order of nodes
- * @return {Object}                         Object containing the status and the node that is out of order, if applicable
+ *
+ * @param packageJsonData         Valid JSON
+ * @param userPreferredNodeOrder Preferred order of nodes
+ * @return Object containing the status and the node that is out of order, if applicable
  */
-const isInPreferredOrder = (packageJsonData, userPreferredNodeOrder) => {
+export const isInPreferredOrder = (packageJsonData: PackageJson, userPreferredNodeOrder: string[]): IsInPreferredOrderResult => {
   let isValid = true;
   let msg = null;
   const preferredNodeOrder =
@@ -88,8 +94,4 @@ const isInPreferredOrder = (packageJsonData, userPreferredNodeOrder) => {
     status: isValid,
     msg,
   };
-};
-
-module.exports = {
-  isInPreferredOrder,
 };

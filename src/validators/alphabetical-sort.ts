@@ -1,12 +1,23 @@
+import {PackageJson} from 'type-fest';
+
 const increment = 1;
+
+export interface IsInAlphabeticalOrderResult {
+  status: boolean;
+  data: {
+    invalidNode: string | null;
+    validNode: string | null;
+  }
+}
 
 /**
  * Determines whether an array is in alphabetical order
- * @param  {object} packageJsonData Valid JSON
- * @param  {string} nodeName        Name of a node in the package.json file
- * @return {object}                 Object containing the status and the dependencies that are out of order, if applicable
+ *
+ * @param packageJsonData Valid JSON
+ * @param nodeName Name of a node in the package.json file
+ * @return Object containing the status and the dependencies that are out of order, if applicable
  */
-const isInAlphabeticalOrder = (packageJsonData, nodeName) => {
+export const isInAlphabeticalOrder = (packageJsonData: PackageJson, nodeName: string): IsInAlphabeticalOrderResult => {
   let isValid = true;
   let data = {
     invalidNode: null,
@@ -30,8 +41,4 @@ const isInAlphabeticalOrder = (packageJsonData, nodeName) => {
     status: isValid,
     data,
   };
-};
-
-module.exports = {
-  isInAlphabeticalOrder,
 };

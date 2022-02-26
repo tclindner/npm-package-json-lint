@@ -1,19 +1,22 @@
-const parser = require('jsonc-parser');
+import parser from 'jsonc-parser';
+import {PackageJson} from 'type-fest';
 
 /**
  * Determines whether or not the node exists in the package.json file
- * @param  {object} packageJsonData Valid JSON
- * @param  {string} nodeName        Name of a node in the package.json file
- * @return {boolean}                True if the node exists. False if it is not.
+ *
+ * @param packageJsonData Valid JSON
+ * @param nodeName Name of a node in the package.json file
+ * @return True if the node exists. False if it is not.
  */
-const exists = (packageJsonData, nodeName) => packageJsonData.hasOwnProperty(nodeName);
+ export const exists = (packageJsonData: PackageJson, nodeName: string): boolean => packageJsonData.hasOwnProperty(nodeName);
 
 /**
  * Search for duplicate properties in package.json file
- * @param  {string}  packageJsonSource JSON source string
- * @return {string[]}                  List of duplicate property names.
+ *
+ * @param packageJsonSource JSON source string
+ * @return List of duplicate property names.
  */
-const findDuplicatePropNames = (packageJsonSource) => {
+export const findDuplicatePropNames = (packageJsonSource: PackageJson): string[] => {
   const tree = parser.parseTree(packageJsonSource);
 
   if (!tree) {
@@ -43,9 +46,4 @@ const findDuplicatePropNames = (packageJsonSource) => {
   };
 
   return traverse(tree);
-};
-
-module.exports = {
-  exists,
-  findDuplicatePropNames,
 };
