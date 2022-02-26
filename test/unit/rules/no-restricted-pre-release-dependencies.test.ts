@@ -1,5 +1,5 @@
 import {lint, ruleType, minItems} from '../../../src/rules/no-restricted-pre-release-dependencies';
-import { Severity } from '../../../src/types/severity';
+import {Severity} from '../../../src/types/severity';
 
 describe('no-restricted-pre-release-dependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {

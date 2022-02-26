@@ -1,6 +1,7 @@
 import {getNameError} from '../../../src/utils/getNameError';
 
 const genericErrorMessage = 'name invalid';
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const getResults = (includeErrors = true, includeWarnings = true) => {
   const results = {
     validForNewPackages: false,

@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import logSymbols from 'log-symbols';
 import {LintIssue} from '../../src/lint-issue';
-import { Severity } from '../../src/types/severity';
+import {Severity} from '../../src/types/severity';
 
 describe('LintIssue Unit Tests', () => {
   describe('constructor', () => {

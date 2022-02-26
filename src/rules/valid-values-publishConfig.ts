@@ -1,16 +1,19 @@
+import {PackageJson} from 'type-fest';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
-import {PackageJson} from 'type-fest';
 import {isObject} from '../validators/type';
 import {isValidValue} from '../validators/valid-values';
 
 const lintId = 'valid-values-publishConfig';
 const nodeName = 'publishConfig';
 const message = 'Invalid value for publishConfig';
+
 export const ruleType = RuleType.Array;
+
 export const minItems = 1;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const lint = (packageJsonData: PackageJson | any, severity: Severity, validValues: any): LintIssue | null => {
   if (packageJsonData.hasOwnProperty(nodeName)) {
     if (isObject(packageJsonData, nodeName)) {

@@ -1,9 +1,11 @@
-const debug = require('debug')('npm-package-json-lint:Config');
 import {cosmiconfigSync} from 'cosmiconfig';
-import {validate, validateRules} from './config/ConfigValidator';
+import {validateRules} from './config/ConfigValidator';
 import {transform} from './config/cosmicConfigTransformer';
 import {applyExtendsIfSpecified} from './config/applyExtendsIfSpecified';
 import {applyOverrides} from './config/applyOverrides';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const debug = require('debug')('npm-package-json-lint:Config');
 
 const noRules = 0;
 
@@ -12,10 +14,18 @@ const noRules = 0;
  * @class
  */
 export class Config {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   config: any;
+
   cwd: string;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   configFile: any;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   configBaseDirectory: any;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rules: any;
 
   /**
@@ -45,6 +55,7 @@ export class Config {
    * @returns {Object} A config object.
    * @memberof Config
    */
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   getConfigForFile(filePath) {
     debug(`Getting config for ${filePath}`);
     const filePathToSearch = filePath;

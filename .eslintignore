@@ -1,3 +1,4 @@
 website
 coverage/
 index.d.ts
+dist/

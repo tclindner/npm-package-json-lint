@@ -11,6 +11,7 @@ ajvErrors(ajv);
  * @param {Array} errors An array of error messages to format.
  * @returns {String} Formatted error message
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const formatSchemaErrors = (errors) => errors.map((error) => `\t- ${error.message}\n`).join('');
 
 const standardRuleSchema = {
@@ -22,7 +23,8 @@ const standardRuleSchema = {
   },
 };
 
-const arrayRuleSchema = (minItems: any ): any  => ({
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const arrayRuleSchema = (minItems: any): any => ({
   type: 'array',
   items: [
     standardRuleSchema,
@@ -133,7 +135,8 @@ const configurationSchema = {
  * @param {Object} ruleConfig The ruleConfig object to validate.
  * @returns {boolean} True if valid. Error if not.
  */
-export const isStandardRuleSchemaValid = (ruleConfig: any ): any  => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isStandardRuleSchemaValid = (ruleConfig: any): any => {
   const validate = ajv.compile(standardRuleSchema);
   const isValid = validate(ruleConfig);
 
@@ -151,7 +154,8 @@ export const isStandardRuleSchemaValid = (ruleConfig: any ): any  => {
  * @param {number} minItems   Min number of items in the array
  * @returns {boolean} True if valid. Error if not.
  */
-export const isArrayRuleSchemaValid = (ruleConfig: any , minItems: any ): any  => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isArrayRuleSchemaValid = (ruleConfig: any, minItems: any): any => {
   const validate = ajv.compile(arrayRuleSchema(minItems));
   const isValid = validate(ruleConfig);
 
@@ -168,7 +172,8 @@ export const isArrayRuleSchemaValid = (ruleConfig: any , minItems: any ): any  =
  * @param {Object} ruleConfig The ruleConfig object to validate.
  * @returns {boolean} True if valid. Error if not.
  */
-export const isObjectRuleSchemaValid = (ruleConfig: any ): any  => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isObjectRuleSchemaValid = (ruleConfig: any): any => {
   const validate = ajv.compile(objectRuleSchema);
   const isValid = validate(ruleConfig);
 
@@ -185,7 +190,8 @@ export const isObjectRuleSchemaValid = (ruleConfig: any ): any  => {
  * @param {Object} ruleConfig The ruleConfig object to validate.
  * @returns {boolean} True if valid. Error if not.
  */
-export const isOptionalObjExceptSchemaValid = (ruleConfig: any ): any  => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isOptionalObjExceptSchemaValid = (ruleConfig: any): any => {
   const validate = ajv.compile(optionalObjExceptionsSchema);
   const isValid = validate(ruleConfig);
 
@@ -203,7 +209,8 @@ export const isOptionalObjExceptSchemaValid = (ruleConfig: any ): any  => {
  * @param {string} source The name of the configuration source to report in any errors.
  * @returns {boolean} True if valid. Error if not.
  */
-export const isConfigObjectSchemaValid = (config: any , source: any ): any  => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isConfigObjectSchemaValid = (config: any, source: any): any => {
   const validate = ajv.compile(configurationSchema);
   const isValid = validate(config);
 

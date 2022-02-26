@@ -1,4 +1,10 @@
-import {isArrayRuleSchemaValid, isConfigObjectSchemaValid, isObjectRuleSchemaValid, isOptionalObjExceptSchemaValid, isStandardRuleSchemaValid} from './ConfigSchema';
+import {
+  isArrayRuleSchemaValid,
+  isConfigObjectSchemaValid,
+  isObjectRuleSchemaValid,
+  isOptionalObjExceptSchemaValid,
+  isStandardRuleSchemaValid,
+} from './ConfigSchema';
 
 /**
  * Validates object rule config
@@ -7,7 +13,8 @@ import {isArrayRuleSchemaValid, isConfigObjectSchemaValid, isObjectRuleSchemaVal
  * @return {Boolean}               True if config is valid, false if not
  * @static
  */
-const isObjectRuleConfigValid = (ruleConfig: any ): any  => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isObjectRuleConfigValid = (ruleConfig: any): any => {
   if (typeof ruleConfig === 'string' && ruleConfig === 'off') {
     return true;
   }
@@ -26,7 +33,8 @@ const isObjectRuleConfigValid = (ruleConfig: any ): any  => {
  * @return {Boolean}              True if config is valid, false if not
  * @static
  */
-const isOptionalObjRuleConfigValid = (ruleConfig: any ): any  => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isOptionalObjRuleConfigValid = (ruleConfig: any): any => {
   const object = 1;
 
   if (typeof ruleConfig === 'string') {
@@ -48,7 +56,8 @@ const isOptionalObjRuleConfigValid = (ruleConfig: any ): any  => {
  * @return {Boolean}               True if config is valid, false if not
  * @static
  */
-const isArrayRuleConfigValid = (ruleConfig: any , minItems: any ): any  => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isArrayRuleConfigValid = (ruleConfig: any, minItems: any): any => {
   if (typeof ruleConfig === 'string' && ruleConfig === 'off') {
     return true;
   }
@@ -67,7 +76,8 @@ const isArrayRuleConfigValid = (ruleConfig: any , minItems: any ): any  => {
  * @return {Boolean}                True if config is valid, error if not
  * @static
  */
-const isStandardRuleConfigValid = (ruleConfig: any ): any  => isStandardRuleSchemaValid(ruleConfig);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isStandardRuleConfigValid = (ruleConfig: any): any => isStandardRuleSchemaValid(ruleConfig);
 
 /**
  * Validates configuration of a rule
@@ -78,7 +88,8 @@ const isStandardRuleConfigValid = (ruleConfig: any ): any  => isStandardRuleSche
  * @param {String|null} source The name of the configuration source to report in any errors.
  * @returns {undefined} No return
  */
-const validateRule = (ruleModule: any , ruleName: any , userConfig: any , source: any ): any  => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const validateRule = (ruleModule: any, ruleName: any, userConfig: any, source: any): any => {
   if (ruleModule) {
     try {
       switch (ruleModule.ruleType) {
@@ -121,7 +132,8 @@ const validateRule = (ruleModule: any , ruleName: any , userConfig: any , source
  * @returns {undefined} No return
  * @static
  */
-export const validateRules = (rulesConfig: any , source: any , rules: any ): any  => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const validateRules = (rulesConfig: any, source: any, rules: any): any => {
   if (!rulesConfig) {
     return;
   }
@@ -142,7 +154,8 @@ export const validateRules = (rulesConfig: any , source: any , rules: any ): any
  * @returns {undefined} No return
  * @static
  */
-export const validate = (config: any , source: any , rules: any ): any  => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const validate = (config: any, source: any, rules: any): any => {
   isConfigObjectSchemaValid(config, source);
   validateRules(config.rules, source, rules);
 };

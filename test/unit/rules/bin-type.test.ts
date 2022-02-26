@@ -1,4 +1,4 @@
-import {lint, ruleType} from  '../../../src/rules/bin-type';
+import {lint, ruleType} from '../../../src/rules/bin-type';
 import {Severity} from '../../../src/types/severity';
 
 describe('bin-type Unit Tests', () => {

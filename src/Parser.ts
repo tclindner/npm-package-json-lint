@@ -8,6 +8,7 @@ import stripComments from 'strip-json-comments';
  * @return {Object}          Config object from file.
  * @throws {Error}           If the file cannot be read.
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, import/no-dynamic-require, global-require
 const requireFile = (fileName) => require(fileName);
 
 /**
@@ -17,6 +18,7 @@ const requireFile = (fileName) => require(fileName);
  * @return {String}          File contents with BOM removed.
  * @throws {Error}           If the file cannot be read.
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const readFile = (fileName) => fs.readFileSync(fileName, 'utf8').replace(/^\uFEFF/, '');
 
 /**
@@ -27,6 +29,7 @@ const readFile = (fileName) => fs.readFileSync(fileName, 'utf8').replace(/^\uFEF
  * @returns {Undefined} No return
  * @throws {Error}
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const handleError = (fileName, err) => {
   throw new Error(`Failed to read config file: ${fileName}. \nError: ${err.message}`);
 };
@@ -45,6 +48,7 @@ export const Parser = {
    * @return {Object}          Valid JavaScript object
    * @static
    */
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   parseJsonFile(fileName) {
     let json = {};
     let fileContents = '';
@@ -74,6 +78,7 @@ export const Parser = {
    * @return {Object}          Valid JavaScript object
    * @static
    */
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   parseJavaScriptFile(fileName) {
     let obj = {};
 
@@ -86,4 +91,3 @@ export const Parser = {
     return obj;
   },
 };
-

@@ -1,7 +1,9 @@
-const debug = require('debug')('npm-package-json-lint:getIgnorer');
 import fs from 'fs';
 import path from 'path';
 import ignore from 'ignore';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const debug = require('debug')('npm-package-json-lint:getIgnorer');
 
 const DEFAULT_IGNORE_FILENAME = '.npmpackagejsonlintignore';
 const FILE_NOT_FOUND_ERROR_CODE = 'ENOENT';
@@ -13,6 +15,7 @@ const FILE_NOT_FOUND_ERROR_CODE = 'ENOENT';
  * @param {string} ignorePath Ignore path.
  * @returns {Object}          Ignorer
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const getIgnorer = (cwd, ignorePath) => {
   const ignoreFilePath = ignorePath || DEFAULT_IGNORE_FILENAME;
 

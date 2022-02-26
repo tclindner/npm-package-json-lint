@@ -1,9 +1,6 @@
 import {lint, ruleType} from '../../../src/rules/prefer-caret-version-dependencies';
 import {Severity} from '../../../src/types/severity';
 
-const rangeSpecifier = '^';
-const nodeName = 'dependencies';
-
 describe('prefer-caret-version-dependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
     test('it should equal "optionalObject"', () => {

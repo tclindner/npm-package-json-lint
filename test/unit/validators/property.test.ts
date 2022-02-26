@@ -1,5 +1,4 @@
 import * as property from '../../../src/validators/property';
-import {Severity} from '../../../src/types/severity';
 
 describe('property Unit Tests', () => {
   describe('exists method', () => {

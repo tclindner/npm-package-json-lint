@@ -1,6 +1,8 @@
-const debug = require('debug')('npm-package-json-lint:getFileList');
 import path from 'path';
 import globby from 'globby';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const debug = require('debug')('npm-package-json-lint:getFileList');
 
 /**
  * Generates a list of files to lint based on a list of provided patterns
@@ -9,6 +11,7 @@ import globby from 'globby';
  * @param {string}        cwd      The current working directory.
  * @returns {Array<string>} An array a files to lint.
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const getFileList = (patterns, cwd) => {
   debug('patterns');
   debug(patterns);

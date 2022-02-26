@@ -8,6 +8,7 @@ import {PackageJson} from 'type-fest';
  * @param nodeName Name of a node in the package.json file
  * @return True if the node is a valid version number or is missing. False if it is not.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isValidVersionNumber = (packageJsonData: PackageJson | any, nodeName: string): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;

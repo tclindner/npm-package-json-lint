@@ -1,5 +1,5 @@
 import {lint, ruleType, minItems} from '../../../src/rules/prefer-scripts';
-import { Severity } from '../../../src/types/severity';
+import {Severity} from '../../../src/types/severity';
 
 describe('prefer-scripts Unit Tests', () => {
   describe('a rule type value should be exported', () => {

@@ -1,5 +1,5 @@
 import {lint, ruleType} from '../../../src/rules/no-repeated-dependencies';
-import { Severity } from '../../../src/types/severity';
+import {Severity} from '../../../src/types/severity';
 
 describe('no-repeated-dependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {

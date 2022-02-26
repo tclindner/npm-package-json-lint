@@ -8,6 +8,7 @@ import {PackageJson} from 'type-fest';
  * @param nodeName Name of a node in the package.json file
  * @return True if the node is an array or is missing. False if it is not.
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-explicit-any
 export const isArray = (packageJsonData: PackageJson | any, nodeName: string) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
@@ -23,6 +24,7 @@ export const isArray = (packageJsonData: PackageJson | any, nodeName: string) =>
  * @param nodeName Name of a node in the package.json file
  * @return True if the node is a boolean or is missing. False if it is not.
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-explicit-any
 export const isBoolean = (packageJsonData: PackageJson | any, nodeName: string) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
@@ -38,6 +40,7 @@ export const isBoolean = (packageJsonData: PackageJson | any, nodeName: string) 
  * @param nodeName Name of a node in the package.json file
  * @return True if the node is an object or is missing. False if it is not.
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-explicit-any
 export const isObject = (packageJsonData: PackageJson | any, nodeName: string) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
@@ -53,6 +56,7 @@ export const isObject = (packageJsonData: PackageJson | any, nodeName: string) =
  * @param nodeName Name of a node in the package.json file
  * @return True if the node is a string or is missing. False if it is not.
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-explicit-any
 export const isString = (packageJsonData: PackageJson | any, nodeName: string) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;

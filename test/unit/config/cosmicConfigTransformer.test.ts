@@ -46,7 +46,10 @@ describe('cosmicConfigTransformer Unit Tests', () => {
 
         expect(path.dirname).toHaveBeenCalledTimes(0);
         expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledTimes(1);
-        expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledWith(cosmiconfigResult.config, filePathBeingLinted);
+        expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledWith(
+          cosmiconfigResult.config,
+          filePathBeingLinted
+        );
         expect(applyOverrides.applyOverrides).toHaveBeenCalledTimes(1);
         expect(applyOverrides.applyOverrides).toHaveBeenCalledWith(cwd, filePathBeingLinted, 'rules', 'overrides');
       });
@@ -78,7 +81,10 @@ describe('cosmicConfigTransformer Unit Tests', () => {
         expect(path.dirname).toHaveBeenCalledTimes(1);
         expect(path.dirname).toHaveBeenCalledWith(cosmiconfigResult.filepath);
         expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledTimes(1);
-        expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledWith(cosmiconfigResult.config, filePathBeingLinted);
+        expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledWith(
+          cosmiconfigResult.config,
+          filePathBeingLinted
+        );
         expect(applyOverrides.applyOverrides).toHaveBeenCalledTimes(1);
         expect(applyOverrides.applyOverrides).toHaveBeenCalledWith(cwd, filePathBeingLinted, 'rules', 'overrides');
       });

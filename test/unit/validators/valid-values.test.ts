@@ -1,5 +1,4 @@
 import * as validValuesObj from '../../../src/validators/valid-values';
-import {Severity} from '../../../src/types/severity';
 
 describe('value-values Unit Tests', () => {
   describe('isValidValue method', () => {
