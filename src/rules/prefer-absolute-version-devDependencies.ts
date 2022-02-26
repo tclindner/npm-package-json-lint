@@ -1,4 +1,4 @@
-import {doVersContainNonAbsolute} from '../validators/dependency-audit';
+const {doVersContainNonAbsolute} = require('../validators/dependency-audit');
 import {exists} from '../validators/property';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';

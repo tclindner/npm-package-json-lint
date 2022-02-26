@@ -1,4 +1,4 @@
-import {isInPreferredOrder} from '../validators/property-order';
+const {isInPreferredOrder} = require('../validators/property-order');
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';

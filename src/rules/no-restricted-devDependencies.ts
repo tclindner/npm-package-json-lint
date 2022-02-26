@@ -1,4 +1,4 @@
-import {hasDependency} from '../validators/dependency-audit';
+const {hasDependency} = require('../validators/dependency-audit');
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';

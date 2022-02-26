@@ -1,4 +1,4 @@
-import {hasDepPrereleaseVers} from '../validators/dependency-audit';
+const {hasDepPrereleaseVers} = require('../validators/dependency-audit');
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';

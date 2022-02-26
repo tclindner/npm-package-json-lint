@@ -1,5 +1,3 @@
-/* eslint no-restricted-syntax: 'off' */
-
 import {isObject} from '../validators/type';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
