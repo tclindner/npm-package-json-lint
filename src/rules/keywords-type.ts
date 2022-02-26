@@ -9,10 +9,10 @@ const nodeName = 'keywords';
 const message = 'Type should be an Array';
 export const ruleType = RuleType.Standard;
 
-export const lint = (packageJsonData: PackageJson, severity: Severity): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity): LintIssue | null => {
   if (!isArray(packageJsonData, nodeName)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }
 
-  return true;
+  return null;
 };

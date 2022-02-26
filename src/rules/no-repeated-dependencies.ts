@@ -10,13 +10,13 @@ export const ruleType = RuleType.Standard;
 const dependenciesNode = 'dependencies';
 const devDependenciesNode = 'devDependencies';
 
-export const lint = (packageJsonData: PackageJson, severity: Severity): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity): LintIssue | null => {
   if (!exists(packageJsonData, dependenciesNode)) {
-    return true;
+    return null;
   }
 
   if (!exists(packageJsonData, devDependenciesNode)) {
-    return true;
+    return null;
   }
 
   const dependencies = Object.keys(packageJsonData[dependenciesNode]);
@@ -34,5 +34,5 @@ export const lint = (packageJsonData: PackageJson, severity: Severity): LintIssu
     }
   }
 
-  return true;
+  return null;
 };

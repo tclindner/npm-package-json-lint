@@ -16,7 +16,7 @@ describe('no-archive-dependencies Unit Tests', () => {
             'test-module': 'https://github.com/org/repo/archive/v1.2.3.tar.gz',
           },
         };
-        const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+        const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
         expect(response.lintId).toStrictEqual('no-archive-dependencies');
         expect(response.severity).toStrictEqual('error');
@@ -34,7 +34,7 @@ describe('no-archive-dependencies Unit Tests', () => {
             'test-module': 'https://github.com/org/repo/archive/v1.2.3.zip',
           },
         };
-        const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+        const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
         expect(response.lintId).toStrictEqual('no-archive-dependencies');
         expect(response.severity).toStrictEqual('error');
@@ -53,7 +53,7 @@ describe('no-archive-dependencies Unit Tests', () => {
           'my-module': 'https://github.com/org/repo/archive/v1.2.3.zip',
         },
       };
-      const response = lint(packageJsonData, 'error', {exceptions: ['my-module']});
+      const response = lint(packageJsonData, Severity.Error, {exceptions: ['my-module']});
 
       expect(response).toBe(true);
     });

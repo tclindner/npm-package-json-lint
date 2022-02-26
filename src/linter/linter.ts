@@ -1,6 +1,6 @@
 const debug = require('debug')('npm-package-json-lint:linter');
 import path from 'path';
-import Parser from '../Parser';
+import {Parser} from '../Parser';
 import {resultsHelper} from './results-helper';
 
 /**
@@ -194,7 +194,7 @@ export const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ig
  * @param {Object} rules An instance of `Rules`.
  * @returns {LinterResult} The results {@link LinterResult} from linting a collection of package.json files.
  */
-export const  = ({cwd, fileList, ignorer, configHelper, rules}) => {
+export const executeOnPackageJsonFiles = ({cwd, fileList, ignorer, configHelper, rules}) => {
   debug('executing on package.json files');
   const results = fileList.map((filePath) => {
     const relativeFilePath = path.relative(cwd, filePath);
@@ -233,4 +233,3 @@ export const  = ({cwd, fileList, ignorer, configHelper, rules}) => {
     warningCount: stats.warningCount,
   };
 };
-

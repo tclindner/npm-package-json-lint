@@ -1,6 +1,6 @@
 const debug = require('debug')('npm-package-json-lint:applyExtendsIfSpecified');
 import path from 'path';
-import Parser from '../Parser';
+import {Parser} from '../Parser';
 
 /**
  * Applies values from the 'extends' field in a configuration file.

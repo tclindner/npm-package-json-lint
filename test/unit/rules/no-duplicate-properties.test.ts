@@ -1,5 +1,6 @@
 import {lint, ruleType} from '../../../src/rules/no-duplicate-properties';
-import Parser from '../../../src/Parser';
+import {Parser} from '../../../src/Parser';
+import { Severity } from '../../../src/types/severity';
 
 const parsePackageJson = (source) => {
   const json = JSON.parse(source);

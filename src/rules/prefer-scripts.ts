@@ -10,7 +10,7 @@ const message = 'Your package.json scripts object must include:';
 export const ruleType = RuleType.Array;
 export const minItems = 1;
 
-export const lint = (packageJsonData: PackageJson, severity: Severity, requiredScripts: any): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity, requiredScripts: any): LintIssue | null => {
   if (exists(packageJsonData, 'scripts')) {
     const scripts = Object.keys(packageJsonData.scripts);
     const allRequiredScriptsPresent = requiredScripts.every((requiredScript) => scripts.includes(requiredScript));
@@ -20,5 +20,5 @@ export const lint = (packageJsonData: PackageJson, severity: Severity, requiredS
     }
   }
 
-  return true;
+  return null;
 };

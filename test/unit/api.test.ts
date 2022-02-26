@@ -1,4 +1,4 @@
-import api from '../../src/api';
+import * as api from '../../src/api';
 
 jest.mock('../../src/NpmPackageJsonLint');
 

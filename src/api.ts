@@ -1,1 +1,1 @@
-export NpmPackageJsonLint from './NpmPackageJsonLint';
+export {NpmPackageJsonLint} from './NpmPackageJsonLint';

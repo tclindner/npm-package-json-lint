@@ -1,7 +1,7 @@
 import path from 'path';
-import cosmicConfigTransformer from '../../../src/config/cosmicConfigTransformer';
-import applyExtendsIfSpecified from '../../../src/config/applyExtendsIfSpecified';
-import applyOverrides from '../../../src/config/applyOverrides';
+import {transform} from '../../../src/config/cosmicConfigTransformer';
+import {applyExtendsIfSpecified} from '../../../src/config/applyExtendsIfSpecified';
+import {applyOverrides} from '../../../src/config/applyOverrides';
 
 jest.mock('path');
 jest.mock('../../../src/config/applyExtendsIfSpecified');
@@ -15,7 +15,7 @@ describe('cosmicConfigTransformer Unit Tests', () => {
         const configBaseDirectory = 'configBaseDirectory';
         const filePathBeingLinted = 'myLintedFilePath';
 
-        const transformer = cosmicConfigTransformer.transform(cwd, configBaseDirectory, filePathBeingLinted);
+        const transformer = transform(cwd, configBaseDirectory, filePathBeingLinted);
         const actual = transformer(null);
         expect(actual).toBeNull();
       });
@@ -34,7 +34,7 @@ describe('cosmicConfigTransformer Unit Tests', () => {
         const configBaseDirectory = 'configBaseDirectory';
         const filePathBeingLinted = 'myLintedFilePath';
 
-        const transformer = cosmicConfigTransformer.transform(cwd, configBaseDirectory, filePathBeingLinted);
+        const transformer = transform(cwd, configBaseDirectory, filePathBeingLinted);
         const cosmiconfigResult = {
           config: {
             property: 'value',
@@ -65,7 +65,7 @@ describe('cosmicConfigTransformer Unit Tests', () => {
         const configBaseDirectory = null;
         const filePathBeingLinted = 'myLintedFilePath';
 
-        const transformer = cosmicConfigTransformer.transform(cwd, configBaseDirectory, filePathBeingLinted);
+        const transformer = transform(cwd, configBaseDirectory, filePathBeingLinted);
         const cosmiconfigResult = {
           config: {
             property: 'value',

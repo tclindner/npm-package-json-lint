@@ -12,7 +12,7 @@ const message = 'Invalid value for author';
 export const ruleType = RuleType.Array;
 export const minItems = 1;
 
-export const lint = (packageJsonData: PackageJson, severity: Severity, validValues: any): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity, validValues: any): LintIssue | null => {
   let value;
 
   if (isString(packageJsonData, nodeName)) {
@@ -31,5 +31,5 @@ export const lint = (packageJsonData: PackageJson, severity: Severity, validValu
     return new LintIssue(lintId, severity, nodeName, message);
   }
 
-  return true;
+  return null;
 };

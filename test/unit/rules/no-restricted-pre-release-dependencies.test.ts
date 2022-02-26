@@ -1,4 +1,5 @@
-import {lint, ruleType, minItems} from '../../../src/rules/no-restricted-pre-release-dependencies');
+import {lint, ruleType, minItems} from '../../../src/rules/no-restricted-pre-release-dependencies';
+import { Severity } from '../../../src/types/severity';
 
 describe('no-restricted-pre-release-dependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -21,7 +22,7 @@ describe('no-restricted-pre-release-dependencies Unit Tests', () => {
         },
       };
       const invldPreReleaseDeps = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
-      const response = lint(packageJsonData, 'error', invldPreReleaseDeps);
+      const response = lint(packageJsonData, Severity.Error, invldPreReleaseDeps);
 
       expect(response.lintId).toStrictEqual('no-restricted-pre-release-dependencies');
       expect(response.severity).toStrictEqual('error');
@@ -38,7 +39,7 @@ describe('no-restricted-pre-release-dependencies Unit Tests', () => {
         },
       };
       const invldPreReleaseDeps = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
-      const response = lint(packageJsonData, 'error', invldPreReleaseDeps);
+      const response = lint(packageJsonData, Severity.Error, invldPreReleaseDeps);
 
       expect(response).toBe(true);
     });
@@ -48,7 +49,7 @@ describe('no-restricted-pre-release-dependencies Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
       const invldPreReleaseDeps = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
-      const response = lint(packageJsonData, 'error', invldPreReleaseDeps);
+      const response = lint(packageJsonData, Severity.Error, invldPreReleaseDeps);
 
       expect(response).toBe(true);
     });

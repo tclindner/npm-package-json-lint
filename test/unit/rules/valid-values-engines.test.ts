@@ -1,4 +1,5 @@
-import {lint, ruleType, minItems} from '../../../src/rules/valid-values-engines');
+import {lint, ruleType, minItems} from '../../../src/rules/valid-values-engines';
+import { Severity } from '../../../src/types/severity';
 
 describe('valid-values-engines Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -27,7 +28,7 @@ describe('valid-values-engines Unit Tests', () => {
         },
         {node: '^10.0.0'},
       ];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-engines');
       expect(response.severity).toStrictEqual('error');
@@ -44,7 +45,7 @@ describe('valid-values-engines Unit Tests', () => {
         },
       };
       const validValues = [{node: '^6.a.0'}];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-engines');
       expect(response.severity).toStrictEqual('error');
@@ -71,7 +72,7 @@ describe('valid-values-engines Unit Tests', () => {
           npm: '^5.0.0',
         },
       ];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response).toBe(true);
     });
@@ -92,7 +93,7 @@ describe('valid-values-engines Unit Tests', () => {
           npm: '^5.0.0',
         },
       ];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-engines');
       expect(response.severity).toStrictEqual('error');
@@ -111,7 +112,7 @@ describe('valid-values-engines Unit Tests', () => {
         },
         {node: '^10.0.0'},
       ];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response).toBe(true);
     });

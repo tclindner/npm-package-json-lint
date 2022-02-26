@@ -1,7 +1,9 @@
+const {defaults: tsjPreset} = require('ts-jest/presets');
+
 module.exports = {
   clearMocks: true,
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.js', '!src/cli.js'],
+  collectCoverageFrom: ['src/**/*.ts', '!src/cli.ts'],
   coverageThreshold: {
     global: {
       branches: 97,
@@ -10,9 +12,15 @@ module.exports = {
       statements: 99,
     },
   },
+  moduleFileExtensions: ['js', 'ts'],
   restoreMocks: true,
   resetMocks: true,
   resetModules: true,
   testEnvironment: 'node',
   testPathIgnorePatterns: ['<rootDir>/node_modules/'],
+  transform: {
+    ...tsjPreset.transform,
+  },
+  transformIgnorePatterns: ['/node_modules'],
+  testMatch: ['<rootDir>/**/*.test.(js|ts)'],
 };

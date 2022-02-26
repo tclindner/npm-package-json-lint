@@ -1,7 +1,5 @@
 import {lint, ruleType} from '../../../src/rules/no-repeated-dependencies';
-import * as property from '../../../src/validators/property';
-
-jest.mock('../../../src/validators/property');
+import { Severity } from '../../../src/types/severity';
 
 describe('no-repeated-dependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -12,8 +10,6 @@ describe('no-repeated-dependencies Unit Tests', () => {
 
   describe('when package.json has both nodes with duplicate dependencies', () => {
     test('LintIssue object should be returned', () => {
-      property.exists.mockReturnValue(true);
-
       const packageJsonData = {
         dependencies: {
           express: '^1.0.0',
@@ -32,17 +28,11 @@ describe('no-repeated-dependencies Unit Tests', () => {
       expect(response.lintMessage).toStrictEqual(
         'jest exists in both dependencies and devDependencies. Please remove it from one of the dependency lists.'
       );
-
-      expect(property.exists).toHaveBeenCalledTimes(2);
-      expect(property.exists).toHaveBeenNthCalledWith(1, packageJsonData, 'dependencies');
-      expect(property.exists).toHaveBeenNthCalledWith(2, packageJsonData, 'devDependencies');
     });
   });
 
   describe('when package.json has both nodes with no duplicate dependencies', () => {
     test('LintIssue object should be returned', () => {
-      property.exists.mockReturnValue(true);
-
       const packageJsonData = {
         dependencies: {
           express: '^1.0.0',
@@ -61,8 +51,6 @@ describe('no-repeated-dependencies Unit Tests', () => {
 
   describe('when package.json does not have dependencies node', () => {
     test('true should be returned', () => {
-      property.exists.mockReturnValueOnce(false);
-
       const packageJsonData = {
         devDependencies: {
           mocha: '^1.0.0',
@@ -71,17 +59,11 @@ describe('no-repeated-dependencies Unit Tests', () => {
       const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
-
-      expect(property.exists).toHaveBeenCalledTimes(1);
-      expect(property.exists).toHaveBeenCalledWith(packageJsonData, 'dependencies');
     });
   });
 
   describe('when package.json does not have devDependencies node', () => {
     test('true should be returned', () => {
-      property.exists.mockReturnValueOnce(true);
-      property.exists.mockReturnValueOnce(false);
-
       const packageJsonData = {
         dependencies: {
           mocha: '^1.0.0',
@@ -90,24 +72,15 @@ describe('no-repeated-dependencies Unit Tests', () => {
       const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
-
-      expect(property.exists).toHaveBeenCalledTimes(2);
-      expect(property.exists).toHaveBeenNthCalledWith(1, packageJsonData, 'dependencies');
-      expect(property.exists).toHaveBeenNthCalledWith(2, packageJsonData, 'devDependencies');
     });
   });
 
   describe('when package.json does not have dependencies or devDependencies', () => {
     test('true should be returned', () => {
-      property.exists.mockReturnValue(false);
-
       const packageJsonData = {};
       const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
-
-      expect(property.exists).toHaveBeenCalledTimes(1);
-      expect(property.exists).toHaveBeenCalledWith(packageJsonData, 'dependencies');
     });
   });
 });

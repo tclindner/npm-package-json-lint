@@ -17,7 +17,7 @@ export interface IsInAlphabeticalOrderResult {
  * @param nodeName Name of a node in the package.json file
  * @return Object containing the status and the dependencies that are out of order, if applicable
  */
-export const isInAlphabeticalOrder = (packageJsonData: PackageJson, nodeName: string): IsInAlphabeticalOrderResult => {
+export const isInAlphabeticalOrder = (packageJsonData: PackageJson | any, nodeName: string): IsInAlphabeticalOrderResult => {
   let isValid = true;
   let data = {
     invalidNode: null,

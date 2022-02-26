@@ -9,10 +9,10 @@ const nodeName = 'bin';
 const message = 'Type should be either a string or an Object';
 export const ruleType = RuleType.Standard;
 
-export const lint = (packageJsonData: PackageJson, severity: Severity): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity): LintIssue | null => {
   if (!isString(packageJsonData, nodeName) && !isObject(packageJsonData, nodeName)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }
 
-  return true;
+  return null;
 };

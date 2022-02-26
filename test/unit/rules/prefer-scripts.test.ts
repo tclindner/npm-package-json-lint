@@ -1,4 +1,5 @@
-import {lint, ruleType, minItems} from '../../../src/rules/prefer-scripts');
+import {lint, ruleType, minItems} from '../../../src/rules/prefer-scripts';
+import { Severity } from '../../../src/types/severity';
 
 describe('prefer-scripts Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -22,7 +23,7 @@ describe('prefer-scripts Unit Tests', () => {
         },
       };
       const requiredScripts = ['lint', 'start', 'test'];
-      const response = lint(packageJsonData, 'error', requiredScripts);
+      const response = lint(packageJsonData, Severity.Error, requiredScripts);
 
       expect(response.lintId).toStrictEqual('prefer-scripts');
       expect(response.severity).toStrictEqual('error');
@@ -40,7 +41,7 @@ describe('prefer-scripts Unit Tests', () => {
         },
       };
       const requiredScripts = ['lint', 'test'];
-      const response = lint(packageJsonData, 'error', requiredScripts);
+      const response = lint(packageJsonData, Severity.Error, requiredScripts);
 
       expect(response).toBe(true);
     });
@@ -50,7 +51,7 @@ describe('prefer-scripts Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
       const requiredScripts = ['lint', 'test'];
-      const response = lint(packageJsonData, 'error', requiredScripts);
+      const response = lint(packageJsonData, Severity.Error, requiredScripts);
 
       expect(response).toBe(true);
     });

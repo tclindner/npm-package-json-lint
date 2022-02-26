@@ -10,10 +10,10 @@ const nodeName = 'devDependencies';
 const message = 'You have invalid version 0 dependencies. Please use modules with a major version >= 1.';
 export const ruleType = RuleType.OptionalObject;
 
-export const lint = (packageJsonData: PackageJson, severity: Severity, config: any): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity, config: any): LintIssue | null => {
   if (exists(packageJsonData, nodeName) && hasDepVersZero(packageJsonData, nodeName, config)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }
 
-  return true;
+  return null;
 };

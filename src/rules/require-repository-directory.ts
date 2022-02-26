@@ -9,7 +9,7 @@ const parentNodeMessage = 'repository is required';
 const message = 'repository object missing directory property';
 export const ruleType = RuleType.Standard;
 
-export const lint = (packageJsonData: PackageJson, severity: Severity): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity): LintIssue | null => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return new LintIssue(lintId, severity, nodeName, parentNodeMessage);
   }
@@ -18,5 +18,5 @@ export const lint = (packageJsonData: PackageJson, severity: Severity): LintIssu
     return new LintIssue(lintId, severity, nodeName, message);
   }
 
-  return true;
+  return null;
 };

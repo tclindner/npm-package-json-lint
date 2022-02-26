@@ -1,6 +1,5 @@
 import chalk from 'chalk';
-import Reporter from '../../src/Reporter';
-import {Severity} from '../../../src/types/severity';
+import {Reporter} from '../../src/Reporter';
 
 describe('Reporter Unit Tests', () => {
   describe('write method', () => {

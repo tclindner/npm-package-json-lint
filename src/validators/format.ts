@@ -16,7 +16,7 @@ export const isLowercase = (name: string): boolean => name === name.toLowerCase(
  * @param nodeName Name of a node in the package.json file
  * @return True if the node is a valid version number or is missing. False if it is not.
  */
-export const isValidVersionNumber = (packageJsonData: PackageJson, nodeName: string): boolean => {
+export const isValidVersionNumber = (packageJsonData: PackageJson | any, nodeName: string): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
   }

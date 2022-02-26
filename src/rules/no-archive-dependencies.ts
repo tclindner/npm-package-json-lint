@@ -9,10 +9,10 @@ const nodeName = 'dependencies';
 const message = 'You are using dependencies via url to archive file. Please use dependencies from npm.';
 export const ruleType = RuleType.OptionalObject;
 
-export const lint = (packageJsonData: PackageJson, severity: Severity, config: any): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity, config: any): LintIssue | null => {
   if (packageJsonData.hasOwnProperty(nodeName) && doVersContainArchiveUrl(packageJsonData, nodeName, config)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }
 
-  return true;
+  return null;
 };

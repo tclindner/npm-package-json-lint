@@ -4,7 +4,7 @@ import isPlainObj from 'is-plain-obj';
 import slash from 'slash';
 import {Config} from './Config';
 import {Rules} from './Rules';
-import {linter} from './linter/linter';
+import {executeOnPackageJsonFiles, executeOnPackageJsonObject} from './linter/linter';
 import {getFileList} from './utils/getFileList';
 import {getIgnorer} from './utils/getIgnorer';
 
@@ -133,7 +133,7 @@ export class NpmPackageJsonLint {
 
       const fileList = getFileList(this.patterns, this.cwd);
 
-      linterOutput = linter.executeOnPackageJsonFiles({
+      linterOutput = executeOnPackageJsonFiles({
         cwd: this.cwd,
         fileList,
         ignorer,
@@ -142,7 +142,7 @@ export class NpmPackageJsonLint {
       });
     } else {
       debug('Linting using passed object.');
-      linterOutput = linter.executeOnPackageJsonObject({
+      linterOutput = executeOnPackageJsonObject({
         cwd: this.cwd,
         packageJsonObject: this.packageJsonObject,
         ignorer,

@@ -10,10 +10,10 @@ const nodeName = 'dependencies';
 const message = 'You are using an invalid version range. Please use absolute versions.';
 export const ruleType = RuleType.OptionalObject;
 
-export const lint = (packageJsonData: PackageJson, severity: Severity, config: any): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity, config: any): LintIssue | null => {
   if (exists(packageJsonData, nodeName) && doVersContainNonAbsolute(packageJsonData, nodeName, config)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }
 
-  return true;
+  return null;
 };

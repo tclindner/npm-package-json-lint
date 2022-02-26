@@ -16,7 +16,7 @@ describe('no-git-dependencies Unit Tests', () => {
             'my-module': 'github:username/repo',
           },
         };
-        const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+        const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
         expect(response.lintId).toStrictEqual('no-git-dependencies');
         expect(response.severity).toStrictEqual('error');
@@ -34,7 +34,7 @@ describe('no-git-dependencies Unit Tests', () => {
             'my-module': 'username/repo',
           },
         };
-        const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+        const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
         expect(response.lintId).toStrictEqual('no-git-dependencies');
         expect(response.severity).toStrictEqual('error');
@@ -52,7 +52,7 @@ describe('no-git-dependencies Unit Tests', () => {
             'my-module': 'username/repo#author/issue',
           },
         };
-        const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+        const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
         expect(response.lintId).toStrictEqual('no-git-dependencies');
         expect(response.severity).toStrictEqual('error');
@@ -70,7 +70,7 @@ describe('no-git-dependencies Unit Tests', () => {
             'my-module': 'username/repo#v1.0.0-rc-1',
           },
         };
-        const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+        const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
         expect(response.lintId).toStrictEqual('no-git-dependencies');
         expect(response.severity).toStrictEqual('error');
@@ -88,7 +88,7 @@ describe('no-git-dependencies Unit Tests', () => {
             'my-module': 'username/repo#4f9012b132aa4d2d6097b516b31327c999b0a846',
           },
         };
-        const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+        const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
         expect(response.lintId).toStrictEqual('no-git-dependencies');
         expect(response.severity).toStrictEqual('error');
@@ -106,7 +106,7 @@ describe('no-git-dependencies Unit Tests', () => {
             'my-module': 'git://github.com/user/repo.git',
           },
         };
-        const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+        const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
         expect(response.lintId).toStrictEqual('no-git-dependencies');
         expect(response.severity).toStrictEqual('error');
@@ -124,7 +124,7 @@ describe('no-git-dependencies Unit Tests', () => {
             'my-module': 'git@github.com:user/repo.git',
           },
         };
-        const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+        const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
         expect(response.lintId).toStrictEqual('no-git-dependencies');
         expect(response.severity).toStrictEqual('error');
@@ -142,7 +142,7 @@ describe('no-git-dependencies Unit Tests', () => {
             'my-module': 'git+https://github.com/user/repo.git',
           },
         };
-        const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+        const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
         expect(response.lintId).toStrictEqual('no-git-dependencies');
         expect(response.severity).toStrictEqual('error');
@@ -160,7 +160,7 @@ describe('no-git-dependencies Unit Tests', () => {
             'my-module': 'git+ssh://github.com/user/repo.git',
           },
         };
-        const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+        const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
         expect(response.lintId).toStrictEqual('no-git-dependencies');
         expect(response.severity).toStrictEqual('error');
@@ -178,7 +178,7 @@ describe('no-git-dependencies Unit Tests', () => {
             'my-module': 'http://github.com/user/repo.git',
           },
         };
-        const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+        const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
         expect(response.lintId).toStrictEqual('no-git-dependencies');
         expect(response.severity).toStrictEqual('error');
@@ -196,7 +196,7 @@ describe('no-git-dependencies Unit Tests', () => {
             'my-module': 'https://github.com/user/repo.git',
           },
         };
-        const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+        const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
         expect(response.lintId).toStrictEqual('no-git-dependencies');
         expect(response.severity).toStrictEqual('error');
@@ -215,7 +215,7 @@ describe('no-git-dependencies Unit Tests', () => {
           'my-module': 'username/repo',
         },
       };
-      const response = lint(packageJsonData, 'error', {exceptions: ['my-module']});
+      const response = lint(packageJsonData, Severity.Error, {exceptions: ['my-module']});
 
       expect(response).toBe(true);
     });

@@ -64,7 +64,7 @@ export interface IsInPreferredOrderResult {
  * @param userPreferredNodeOrder Preferred order of nodes
  * @return Object containing the status and the node that is out of order, if applicable
  */
-export const isInPreferredOrder = (packageJsonData: PackageJson, userPreferredNodeOrder: string[]): IsInPreferredOrderResult => {
+export const isInPreferredOrder = (packageJsonData: PackageJson | any, userPreferredNodeOrder: string[]): IsInPreferredOrderResult => {
   let isValid = true;
   let msg = null;
   const preferredNodeOrder =

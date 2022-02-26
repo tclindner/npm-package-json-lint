@@ -1,4 +1,4 @@
-import ConfigSchema from './ConfigSchema';
+import {isArrayRuleSchemaValid, isConfigObjectSchemaValid, isObjectRuleSchemaValid, isOptionalObjExceptSchemaValid, isStandardRuleSchemaValid} from './ConfigSchema';
 
 /**
  * Validates object rule config
@@ -16,7 +16,7 @@ const isObjectRuleConfigValid = (ruleConfig) => {
     throw new Error('\t- is an object type rule. It must be set to "off" if an object is not supplied.');
   }
 
-  return ConfigSchema.isObjectRuleSchemaValid(ruleConfig);
+  return isObjectRuleSchemaValid(ruleConfig);
 };
 
 /**
@@ -30,11 +30,11 @@ const isOptionalObjRuleConfigValid = (ruleConfig) => {
   const object = 1;
 
   if (typeof ruleConfig === 'string') {
-    return ConfigSchema.isStandardRuleSchemaValid(ruleConfig);
+    return isStandardRuleSchemaValid(ruleConfig);
   }
 
-  if (ConfigSchema.isObjectRuleSchemaValid(ruleConfig) && ruleConfig[object].hasOwnProperty('exceptions')) {
-    return ConfigSchema.isOptionalObjExceptSchemaValid(ruleConfig[object].exceptions);
+  if (isObjectRuleSchemaValid(ruleConfig) && ruleConfig[object].hasOwnProperty('exceptions')) {
+    return isOptionalObjExceptSchemaValid(ruleConfig[object].exceptions);
   }
 
   return true;
@@ -57,7 +57,7 @@ const isArrayRuleConfigValid = (ruleConfig, minItems) => {
     throw new Error('\t- is an array type rule. It must be set to "off" if an array is not supplied.');
   }
 
-  return ConfigSchema.isArrayRuleSchemaValid(ruleConfig, minItems);
+  return isArrayRuleSchemaValid(ruleConfig, minItems);
 };
 
 /**
@@ -67,7 +67,7 @@ const isArrayRuleConfigValid = (ruleConfig, minItems) => {
  * @return {Boolean}                True if config is valid, error if not
  * @static
  */
-const isStandardRuleConfigValid = (ruleConfig) => ConfigSchema.isStandardRuleSchemaValid(ruleConfig);
+const isStandardRuleConfigValid = (ruleConfig) => isStandardRuleSchemaValid(ruleConfig);
 
 /**
  * Validates configuration of a rule
@@ -143,6 +143,6 @@ export const validateRules = (rulesConfig, source, rules) => {
  * @static
  */
 export const validate = (config, source, rules) => {
-  ConfigSchema.isConfigObjectSchemaValid(config, source);
+  isConfigObjectSchemaValid(config, source);
   validateRules(config.rules, source, rules);
 };

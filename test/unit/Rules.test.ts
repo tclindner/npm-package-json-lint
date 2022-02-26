@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
-import Rules from '../../src/Rules';
+import {Rules} from '../../src/Rules';
 
 jest.mock('fs');
 jest.mock('path');

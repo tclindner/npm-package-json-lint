@@ -1,4 +1,5 @@
-import {lint, ruleType, minItems} from '../../../src/rules/no-restricted-devDependencies');
+import {lint, ruleType, minItems} from '../../../src/rules/no-restricted-devDependencies';
+import { Severity } from '../../../src/types/severity';
 
 describe('no-restricted-devDependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -21,7 +22,7 @@ describe('no-restricted-devDependencies Unit Tests', () => {
         },
       };
       const invalidDependencies = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
-      const response = lint(packageJsonData, 'error', invalidDependencies);
+      const response = lint(packageJsonData, Severity.Error, invalidDependencies);
 
       expect(response.lintId).toStrictEqual('no-restricted-devDependencies');
       expect(response.severity).toStrictEqual('error');
@@ -38,7 +39,7 @@ describe('no-restricted-devDependencies Unit Tests', () => {
         },
       };
       const invalidDependencies = ['npm-package-json-lint', '@types/*'];
-      const response = lint(packageJsonData, 'error', invalidDependencies);
+      const response = lint(packageJsonData, Severity.Error, invalidDependencies);
 
       expect(response.lintId).toStrictEqual('no-restricted-devDependencies');
       expect(response.severity).toStrictEqual('error');
@@ -55,7 +56,7 @@ describe('no-restricted-devDependencies Unit Tests', () => {
         },
       };
       const invalidDependencies = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
-      const response = lint(packageJsonData, 'error', invalidDependencies);
+      const response = lint(packageJsonData, Severity.Error, invalidDependencies);
 
       expect(response).toBe(true);
     });
@@ -65,7 +66,7 @@ describe('no-restricted-devDependencies Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
       const invalidDependencies = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
-      const response = lint(packageJsonData, 'error', invalidDependencies);
+      const response = lint(packageJsonData, Severity.Error, invalidDependencies);
 
       expect(response).toBe(true);
     });

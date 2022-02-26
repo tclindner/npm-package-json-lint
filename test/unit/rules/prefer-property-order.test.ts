@@ -1,4 +1,5 @@
-import {lint, ruleType, minItems} from '../../../src/rules/prefer-property-order');
+import {lint, ruleType, minItems} from '../../../src/rules/prefer-property-order'import { Severity } from '../../../src/types/severity';
+);
 
 describe('prefer-property-order Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -21,7 +22,7 @@ describe('prefer-property-order Unit Tests', () => {
         description: 'description',
       };
       const preferredOrder = ['name', 'version', 'description'];
-      const response = lint(packageJsonData, 'error', preferredOrder);
+      const response = lint(packageJsonData, Severity.Error, preferredOrder);
 
       expect(response).toBe(true);
     });
@@ -34,7 +35,7 @@ describe('prefer-property-order Unit Tests', () => {
         version: '1.0.0',
       };
       const preferredOrder = ['name', 'version', 'description'];
-      const response = lint(packageJsonData, 'error', preferredOrder);
+      const response = lint(packageJsonData, Severity.Error, preferredOrder);
 
       expect(response).toBe(true);
     });
@@ -48,7 +49,7 @@ describe('prefer-property-order Unit Tests', () => {
         version: '1.0.0',
       };
       const preferredOrder = ['name', 'version', 'description'];
-      const response = lint(packageJsonData, 'error', preferredOrder);
+      const response = lint(packageJsonData, Severity.Error, preferredOrder);
 
       expect(response.lintId).toStrictEqual('prefer-property-order');
       expect(response.severity).toStrictEqual('error');

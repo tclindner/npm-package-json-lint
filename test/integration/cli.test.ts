@@ -1,6 +1,6 @@
-const {spawnSync} = require('child_process');
-const figures = require('figures');
 const pkg = require('../../package.json');
+import {spawnSync} from 'child_process';
+import figures from 'figures';
 
 const relativePathToCli = './src/cli.js';
 
