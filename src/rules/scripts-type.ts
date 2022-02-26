@@ -1,6 +1,6 @@
 /* eslint no-restricted-syntax: 'off' */
 
-const {isObject} = require('../validators/type');
+import {isObject} from '../validators/type';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';

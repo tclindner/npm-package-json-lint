@@ -1,4 +1,4 @@
-const {doVersContainGitRepository} = require('../validators/dependency-audit');
+import {doVersContainGitRepository} from '../validators/dependency-audit';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';

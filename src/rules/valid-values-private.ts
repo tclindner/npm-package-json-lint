@@ -2,7 +2,7 @@ import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
 import {PackageJson} from 'type-fest';
-const {isValidValue} = require('../validators/valid-values');
+import {isValidValue} from '../validators/valid-values';
 
 const lintId = 'valid-values-private';
 const nodeName = 'private';

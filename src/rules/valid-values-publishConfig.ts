@@ -2,8 +2,8 @@ import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
 import {PackageJson} from 'type-fest';
-const {isObject} = require('../validators/type');
-const {isValidValue} = require('../validators/valid-values');
+import {isObject} from '../validators/type';
+import {isValidValue} from '../validators/valid-values';
 
 const lintId = 'valid-values-publishConfig';
 const nodeName = 'publishConfig';

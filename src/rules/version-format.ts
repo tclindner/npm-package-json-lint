@@ -1,4 +1,4 @@
-const {isValidVersionNumber} = require('../validators/format');
+import {isValidVersionNumber} from '../validators/format';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';

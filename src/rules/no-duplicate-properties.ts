@@ -1,5 +1,5 @@
-const Parser = require('../Parser');
-const {findDuplicatePropNames} = require('../validators/property');
+import Parser from '../Parser';
+import {findDuplicatePropNames} from '../validators/property';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';

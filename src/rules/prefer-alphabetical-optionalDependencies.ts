@@ -1,4 +1,4 @@
-const {isInAlphabeticalOrder} = require('../validators/alphabetical-sort');
+import {isInAlphabeticalOrder} from '../validators/alphabetical-sort';
 import {exists} from '../validators/property';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';

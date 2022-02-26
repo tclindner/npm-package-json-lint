@@ -1,4 +1,4 @@
-const {isString} = require('../validators/type');
+import {isString} from '../validators/type';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
