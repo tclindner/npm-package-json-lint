@@ -1,10 +1,9 @@
 const debug = require('debug')('npm-package-json-lint:Config');
-const {cosmiconfigSync} = require('cosmiconfig');
-
-const configValidator = require('./config/ConfigValidator');
-const cosmicConfigTransformer = require('./config/cosmicConfigTransformer');
-const applyExtendsIfSpecified = require('./config/applyExtendsIfSpecified');
-const applyOverrides = require('./config/applyOverrides');
+import {cosmiconfigSync} from 'cosmiconfig';
+import {configValidator} from './config/ConfigValidator';
+import {cosmicConfigTransformer} from './config/cosmicConfigTransformer';
+import {applyExtendsIfSpecified} from './config/applyExtendsIfSpecified';
+import {applyOverrides} from './config/applyOverrides';
 
 const noRules = 0;
 

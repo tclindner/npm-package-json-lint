@@ -1,6 +1,6 @@
 const debug = require('debug')('npm-package-json-lint:getFileList');
-const path = require('path');
-const globby = require('globby');
+import path from 'path';
+import globby from 'globby';
 
 /**
  * Generates a list of files to lint based on a list of provided patterns
@@ -9,7 +9,7 @@ const globby = require('globby');
  * @param {string}        cwd      The current working directory.
  * @returns {Array<string>} An array a files to lint.
  */
-const getFileList = (patterns, cwd) => {
+export const getFileList = (patterns, cwd) => {
   debug('patterns');
   debug(patterns);
 
@@ -56,5 +56,3 @@ const getFileList = (patterns, cwd) => {
 
   return files;
 };
-
-module.exports = getFileList;

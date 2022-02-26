@@ -1,8 +1,6 @@
-/* eslint global-require: 'off', import/no-dynamic-require: 'off' */
-
 const debug = require('debug')('npm-package-json-lint:applyExtendsIfSpecified');
-const path = require('path');
-const Parser = require('../Parser');
+import path from 'path';
+import Parser from '../Parser';
 
 /**
  * Applies values from the 'extends' field in a configuration file.
@@ -127,7 +125,7 @@ const loadConfigFile = (filePath) => {
  * @returns {Object} the parsed config object (empty object if there was a parse error)
  * @private
  */
-const applyExtendsIfSpecified = (npmPackageJsonLintConfig, filepath) => {
+export const applyExtendsIfSpecified = (npmPackageJsonLintConfig, filepath) => {
   let config = {...npmPackageJsonLintConfig};
 
   debug('Loading extends, if applicable');
@@ -140,5 +138,3 @@ const applyExtendsIfSpecified = (npmPackageJsonLintConfig, filepath) => {
 
   return config;
 };
-
-module.exports = applyExtendsIfSpecified;

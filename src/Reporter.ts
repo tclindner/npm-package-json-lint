@@ -1,7 +1,5 @@
-/* eslint no-restricted-syntax: 'off' */
-
-const chalk = require('chalk');
-const plur = require('plur');
+import chalk from 'chalk';
+import plur from 'plur';
 
 const zeroIssues = 0;
 const oneFile = 1;
@@ -85,7 +83,7 @@ const printTotals = (linterOutput, quiet) => {
  * @class
  */
 // eslint-disable-next-line unicorn/no-static-only-class
-class Reporter {
+export class Reporter {
   /**
    * Print CLIEngine Output
    *
@@ -104,5 +102,3 @@ class Reporter {
     }
   }
 }
-
-module.exports = Reporter;

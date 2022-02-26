@@ -1,9 +1,7 @@
-/* eslint guard-for-in: 'off', no-restricted-syntax: 'off', prefer-destructuring: 'off' */
-
 const debug = require('debug')('npm-package-json-lint:linter');
-const path = require('path');
-const Parser = require('../Parser');
-const resultsHelper = require('./resultsHelper');
+import path from 'path';
+import Parser from '../Parser';
+import {resultsHelper} from './results-helper';
 
 /**
  * A package.json file linting result.
@@ -142,7 +140,7 @@ const processPackageJsonFile = (cwd, fileName, config, rules) => {
  * @param {Object} rules An instance of `Rules`.
  * @returns {LinterResult} The results {@link LinterResult} from linting a collection of package.json files.
  */
-const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ignorer, configHelper, rules}) => {
+export const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ignorer, configHelper, rules}) => {
   debug('executing on package.json object');
   const results = [];
 
@@ -196,7 +194,7 @@ const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ignorer, 
  * @param {Object} rules An instance of `Rules`.
  * @returns {LinterResult} The results {@link LinterResult} from linting a collection of package.json files.
  */
-const executeOnPackageJsonFiles = ({cwd, fileList, ignorer, configHelper, rules}) => {
+export const  = ({cwd, fileList, ignorer, configHelper, rules}) => {
   debug('executing on package.json files');
   const results = fileList.map((filePath) => {
     const relativeFilePath = path.relative(cwd, filePath);
@@ -236,7 +234,3 @@ const executeOnPackageJsonFiles = ({cwd, fileList, ignorer, configHelper, rules}
   };
 };
 
-module.exports = {
-  executeOnPackageJsonObject,
-  executeOnPackageJsonFiles,
-};

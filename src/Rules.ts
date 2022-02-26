@@ -1,10 +1,8 @@
-/* eslint global-require: 'off', import/no-dynamic-require: 'off' */
+import chalk  from 'chalk';
+import fs from 'fs';
+import path from 'path';
 
-const chalk = require('chalk');
-const fs = require('fs');
-const path = require('path');
-
-class Rules {
+export class Rules {
   /**
    * Constructor
    */
@@ -73,5 +71,3 @@ class Rules {
     this.rules[ruleId] = ruleModule;
   }
 }
-
-module.exports = Rules;

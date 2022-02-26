@@ -1,7 +1,5 @@
-/* eslint class-methods-use-this: 'off', global-require: 'off', import/no-dynamic-require: 'off' */
-
-const fs = require('fs');
-const stripComments = require('strip-json-comments');
+import fs from 'fs';
+import stripComments from 'strip-json-comments';
 
 /**
  * Require JavaScript file
@@ -37,7 +35,7 @@ const handleError = (fileName, err) => {
  * Public Parser class
  * @class
  */
-const Parser = {
+export const Parser = {
   /**
    * Parse a JSON file
    *
@@ -88,5 +86,3 @@ const Parser = {
 };
 
 Parser.sourceSymbol = Symbol('JSON source');
-
-module.exports = Parser;
