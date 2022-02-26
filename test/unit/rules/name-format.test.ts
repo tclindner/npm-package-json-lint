@@ -25,7 +25,7 @@ describe('name-format Unit Tests', () => {
       const packageJsonData = {
         name: 'contains space',
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('name-format');
       expect(response.severity).toStrictEqual('error');
@@ -75,27 +75,27 @@ describe('name-format Unit Tests', () => {
       const packageJsonData = {
         name: 'lowercase-name',
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
 
     test('starts with . and has scope - true should be returned', () => {
       const packageJsonData = {
         name: '@foo/.lowercase',
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
 
     test('starts with _ and has scope - true should be returned', () => {
       const packageJsonData = {
         name: '@foo/_lowercase',
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 

@@ -13,8 +13,8 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         const expectedResults = 1;
         const expectedTotalIgnoreCount = 0;
         const expectedTotalErrorCount = 0;
-        const expectedTotalWarningCount = 0;
-        const expectedIssues = 0;
+        const expectedTotalWarningCount = 1;
+        const expectedIssues = 1;
 
         expect(response.results).toHaveLength(expectedResults);
         expect(response.ignoreCount).toStrictEqual(expectedTotalIgnoreCount);
