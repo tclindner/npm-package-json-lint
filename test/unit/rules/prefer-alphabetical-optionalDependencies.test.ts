@@ -6,6 +6,7 @@ jest.mock('../../../src/validators/alphabetical-sort');
 jest.mock('../../../src/validators/property');
 
 const nodeName = 'optionalDependencies';
+import {Severity} from '../../../src/types/severity';
 
 describe('prefer-alphabetical-optionalDependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -32,7 +33,7 @@ describe('prefer-alphabetical-optionalDependencies Unit Tests', () => {
           'user-home': '^2.0.0',
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('prefer-alphabetical-optionalDependencies');
       expect(response.severity).toStrictEqual('error');
@@ -63,7 +64,7 @@ describe('prefer-alphabetical-optionalDependencies Unit Tests', () => {
           'user-home': '^2.0.0',
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
 
@@ -79,7 +80,7 @@ describe('prefer-alphabetical-optionalDependencies Unit Tests', () => {
       property.exists.mockReturnValue(false);
 
       const packageJsonData = {};
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
 

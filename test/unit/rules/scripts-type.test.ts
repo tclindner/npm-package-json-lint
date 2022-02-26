@@ -1,4 +1,5 @@
 import {lint, ruleType} from '../../../src/rules/scripts-type';
+import {Severity} from '../../../src/types/severity';
 
 describe('scripts-type Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -14,7 +15,7 @@ describe('scripts-type Unit Tests', () => {
           myscript: 'echo hello',
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
     });
@@ -25,7 +26,7 @@ describe('scripts-type Unit Tests', () => {
       const packageJsonData = {
         scripts: 'scripts',
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('scripts-type');
       expect(response.severity).toStrictEqual('error');
@@ -41,7 +42,7 @@ describe('scripts-type Unit Tests', () => {
           myscript: false,
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('scripts-type');
       expect(response.severity).toStrictEqual('error');
@@ -59,7 +60,7 @@ describe('scripts-type Unit Tests', () => {
           },
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('scripts-type');
       expect(response.severity).toStrictEqual('error');
@@ -71,7 +72,7 @@ describe('scripts-type Unit Tests', () => {
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
     });

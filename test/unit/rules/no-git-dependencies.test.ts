@@ -1,4 +1,5 @@
 import {lint, ruleType} from '../../../src/rules/no-git-dependencies';
+import {Severity} from '../../../src/types/severity';
 
 describe('no-git-dependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -227,7 +228,7 @@ describe('no-git-dependencies Unit Tests', () => {
           'my-module': '^1.2.3',
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
     });
@@ -241,7 +242,7 @@ describe('no-git-dependencies Unit Tests', () => {
             'https://registry.npmjs.org/npm-package-json-lint-config-default/-/npm-package-json-lint-config-default-3.0.0.tgz',
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
     });

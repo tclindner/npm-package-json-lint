@@ -1,4 +1,5 @@
 import {lint, ruleType} from '../../../src/rules/no-file-devDependencies';
+import {Severity} from '../../../src/types/severity';
 
 describe('no-archive-devDependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -46,7 +47,7 @@ describe('no-archive-devDependencies Unit Tests', () => {
           'my-other-module': '1.2.3',
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
     });

@@ -1,4 +1,5 @@
 import * as propertyOrder from '../../../src/validators/property-order';
+import {Severity} from '../../../src/types/severity';
 
 describe('property-order Unit Tests', () => {
   describe('isInPreferredOrder method', () => {

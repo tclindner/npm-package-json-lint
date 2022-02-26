@@ -1,4 +1,5 @@
 import {lint, ruleType} from '../../../src/rules/description-format';
+import {Severity} from '../../../src/types/severity';
 
 describe('description-format Unit Tests', () => {
   describe('a rule type value should be exported', () => {

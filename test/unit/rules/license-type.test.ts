@@ -1,4 +1,5 @@
 import {lint, ruleType} from '../../../src/rules/license-type';
+import {Severity} from '../../../src/types/severity';
 
 describe('license-type Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -12,7 +13,7 @@ describe('license-type Unit Tests', () => {
       const packageJsonData = {
         license: true,
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('license-type');
       expect(response.severity).toStrictEqual('error');
@@ -24,7 +25,7 @@ describe('license-type Unit Tests', () => {
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
     });

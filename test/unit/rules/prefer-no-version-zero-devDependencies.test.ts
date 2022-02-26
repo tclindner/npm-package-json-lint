@@ -6,6 +6,7 @@ jest.mock('../../../src/validators/dependency-audit');
 jest.mock('../../../src/validators/property');
 
 const nodeName = 'devDependencies';
+import {Severity} from '../../../src/types/severity';
 
 describe('prefer-no-version-zero-devDependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -74,7 +75,7 @@ describe('prefer-no-version-zero-devDependencies Unit Tests', () => {
       property.exists.mockReturnValue(false);
 
       const packageJsonData = {};
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
 

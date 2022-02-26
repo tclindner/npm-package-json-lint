@@ -7,6 +7,7 @@ jest.mock('../../../src/validators/property');
 
 const nodeName = 'dependencies';
 const rangeSpecifier = '^';
+import {Severity} from '../../../src/types/severity';
 
 describe('prefer-caret-version-dependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -73,7 +74,7 @@ describe('prefer-caret-version-dependencies Unit Tests', () => {
       property.exists.mockReturnValue(false);
 
       const packageJsonData = {};
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
 

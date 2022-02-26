@@ -1,4 +1,5 @@
 import {lint, ruleType} from '../../../src/rules/name-format';
+import {Severity} from '../../../src/types/severity';
 
 describe('name-format Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -12,7 +13,7 @@ describe('name-format Unit Tests', () => {
       const packageJsonData = {
         name: 'ImNotLowercase',
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('name-format');
       expect(response.severity).toStrictEqual('error');
@@ -24,7 +25,7 @@ describe('name-format Unit Tests', () => {
       const packageJsonData = {
         name: 'a'.padStart(215),
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('name-format');
       expect(response.severity).toStrictEqual('error');
@@ -36,7 +37,7 @@ describe('name-format Unit Tests', () => {
       const packageJsonData = {
         name: '.lowercase',
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('name-format');
       expect(response.severity).toStrictEqual('error');
@@ -48,7 +49,7 @@ describe('name-format Unit Tests', () => {
       const packageJsonData = {
         name: '_lowercase',
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('name-format');
       expect(response.severity).toStrictEqual('error');
@@ -60,7 +61,7 @@ describe('name-format Unit Tests', () => {
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
     });

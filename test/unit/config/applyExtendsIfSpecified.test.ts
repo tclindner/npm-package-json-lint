@@ -1,4 +1,5 @@
 import applyExtendsIfSpecified from '../../../src/config/applyExtendsIfSpecified';
+import {Severity} from '../../../src/types/severity';
 
 describe('applyExtendsIfSpecified Unit Tests', () => {
   test('when file has local extends (valid - js), a config object is returned', () => {

@@ -1,4 +1,5 @@
 import {lint, ruleType} from '../../../src/rules/no-caret-version-dependencies';
+import {Severity} from '../../../src/types/severity';
 
 describe('no-caret-version-dependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -15,7 +16,7 @@ describe('no-caret-version-dependencies Unit Tests', () => {
           'gulp-npm-package-json-lint': '~2.0.0',
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('no-caret-version-dependencies');
       expect(response.severity).toStrictEqual('error');
@@ -45,7 +46,7 @@ describe('no-caret-version-dependencies Unit Tests', () => {
           'gulp-npm-package-json-lint': '~1.0.0',
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
     });
@@ -54,7 +55,7 @@ describe('no-caret-version-dependencies Unit Tests', () => {
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
     });

@@ -4,6 +4,7 @@ import * as property from '../../../src/validators/property';
 jest.mock('../../../src/validators/property');
 
 const nodeName = 'devDependencies';
+import {Severity} from '../../../src/types/severity';
 
 describe('prefer-no-devDependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -19,7 +20,7 @@ describe('prefer-no-devDependencies Unit Tests', () => {
       const packageJsonData = {
         devDependencies: 'dummy-value',
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('prefer-no-devDependencies');
       expect(response.severity).toStrictEqual('error');
@@ -36,7 +37,7 @@ describe('prefer-no-devDependencies Unit Tests', () => {
       property.exists.mockReturnValue(false);
 
       const packageJsonData = {};
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
 

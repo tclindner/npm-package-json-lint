@@ -1,4 +1,5 @@
 import {lint, ruleType} from '../../../src/rules/require-repository-directory';
+import {Severity} from '../../../src/types/severity';
 
 describe('require-repository-directory Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -10,7 +11,7 @@ describe('require-repository-directory Unit Tests', () => {
   describe('when package.json does not have parent node', () => {
     test('false should be returned', () => {
       const packageJsonData = {};
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('require-repository-directory');
       expect(response.severity).toStrictEqual('error');
@@ -27,7 +28,7 @@ describe('require-repository-directory Unit Tests', () => {
           directory: 'packages/somepackage',
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
     });
@@ -40,7 +41,7 @@ describe('require-repository-directory Unit Tests', () => {
           url: 'https://github.com/packages/monorepo',
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('require-repository-directory');
       expect(response.severity).toStrictEqual('error');
