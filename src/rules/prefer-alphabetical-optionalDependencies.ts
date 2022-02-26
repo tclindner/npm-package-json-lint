@@ -1,13 +1,16 @@
 const {isInAlphabeticalOrder} = require('../validators/alphabetical-sort');
-const {exists} = require('../validators/property');
-const LintIssue = require('../LintIssue');
+import {exists} from '../validators/property';
+import {LintIssue} from '../lint-issue';
+import {RuleType} from '../types/rule-type';
+import {Severity} from '../types/severity';
+import {PackageJson} from 'type-fest';
 
 const lintId = 'prefer-alphabetical-optionalDependencies';
 const nodeName = 'optionalDependencies';
 const message = 'Your optionalDependencies are not in alphabetical order.';
-const ruleType = 'standard';
+export const ruleType = RuleType.Standard;
 
-const lint = (packageJsonData, severity) => {
+export const lint = (packageJsonData: PackageJson, severity: Severity): LintIssue | boolean => {
   if (!exists(packageJsonData, nodeName)) {
     return true;
   }
@@ -24,9 +27,4 @@ const lint = (packageJsonData, severity) => {
   }
 
   return true;
-};
-
-module.exports = {
-  lint,
-  ruleType,
 };
