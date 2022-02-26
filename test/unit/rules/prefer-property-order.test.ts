@@ -1,5 +1,5 @@
-import {lint, ruleType, minItems} from '../../../src/rules/prefer-property-order'import { Severity } from '../../../src/types/severity';
-);
+import {lint, ruleType, minItems} from '../../../src/rules/prefer-property-order';
+import { Severity } from '../../../src/types/severity';
 
 describe('prefer-property-order Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -24,7 +24,7 @@ describe('prefer-property-order Unit Tests', () => {
       const preferredOrder = ['name', 'version', 'description'];
       const response = lint(packageJsonData, Severity.Error, preferredOrder);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
@@ -37,7 +37,7 @@ describe('prefer-property-order Unit Tests', () => {
       const preferredOrder = ['name', 'version', 'description'];
       const response = lint(packageJsonData, Severity.Error, preferredOrder);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 

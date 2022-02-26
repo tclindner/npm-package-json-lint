@@ -29,7 +29,7 @@ describe('prefer-no-devDependencies Unit Tests', () => {
       const packageJsonData = {};
       const response = lint(packageJsonData, Severity.Error);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 });

@@ -105,7 +105,7 @@ describe('description-format Unit Tests', () => {
       };
       const response = lint(packageJsonData, Severity.Error, config);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
@@ -120,7 +120,7 @@ describe('description-format Unit Tests', () => {
       };
       const response = lint(packageJsonData, Severity.Error, config);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
@@ -132,7 +132,7 @@ describe('description-format Unit Tests', () => {
       const config = {};
       const response = lint(packageJsonData, Severity.Error, config);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
@@ -145,7 +145,7 @@ describe('description-format Unit Tests', () => {
       };
       const response = lint(packageJsonData, Severity.Error, config);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 });

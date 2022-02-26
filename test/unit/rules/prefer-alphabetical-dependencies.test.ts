@@ -15,7 +15,7 @@ describe('prefer-alphabetical-dependencies Unit Tests', () => {
 
   describe('when package.json has node with an invalid order', () => {
     test('LintIssue object should be returned', () => {
-      alphabeticalSort.isInAlphabeticalOrder.mockReturnValue({
+      jest.spyOn(alphabeticalSort, 'isInAlphabeticalOrder').mockReturnValue({
         status: false,
         data: {
           invalidNode: 'semver',
@@ -46,9 +46,12 @@ describe('prefer-alphabetical-dependencies Unit Tests', () => {
 
   describe('when package.json has node with a valid order', () => {
     test('true should be returned', () => {
-      alphabeticalSort.isInAlphabeticalOrder.mockReturnValue({
+      jest.spyOn(alphabeticalSort, 'isInAlphabeticalOrder').mockReturnValue({
         status: true,
-        data: {},
+        data: {
+          invalidNode: null,
+          validNode: null,
+        },
       });
 
       const packageJsonData = {
@@ -60,7 +63,7 @@ describe('prefer-alphabetical-dependencies Unit Tests', () => {
       };
       const response = lint(packageJsonData, Severity.Error);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
 
       expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledTimes(1);
       expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledWith(packageJsonData, nodeName);
@@ -72,7 +75,7 @@ describe('prefer-alphabetical-dependencies Unit Tests', () => {
       const packageJsonData = {};
       const response = lint(packageJsonData, Severity.Error);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 });

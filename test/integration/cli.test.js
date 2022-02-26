@@ -1,8 +1,8 @@
+const {spawnSync} = require('child_process');
+const figures = require('figures');
 const pkg = require('../../package.json');
-import {spawnSync} from 'child_process';
-import figures from 'figures';
 
-const relativePathToCli = './src/cli.js';
+const relativePathToCli = './dist/cli.js';
 
 // Paths to config file and package.json fixtures
 const fixturesPath = './test/fixtures';
@@ -36,6 +36,8 @@ const threeRunTimeException = 3;
 
 // Force child process to run without colors
 const {env} = process;
+
+// @ts-ignore-error
 env.FORCE_COLOR = 0;
 
 describe('cli Integration Tests', () => {

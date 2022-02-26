@@ -1,4 +1,4 @@
-import Parser from '../Parser';
+import {Parser} from '../Parser';
 import {findDuplicatePropNames} from '../validators/property';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';

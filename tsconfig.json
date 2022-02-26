@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
+    "downlevelIteration": true,
     "emitDeclarationOnly": true,
     "declaration": true,
+    "esModuleInterop": true
   }
 }

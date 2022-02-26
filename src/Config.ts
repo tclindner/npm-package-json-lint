@@ -1,6 +1,6 @@
 const debug = require('debug')('npm-package-json-lint:Config');
 import {cosmiconfigSync} from 'cosmiconfig';
-import {validate} from './config/ConfigValidator';
+import {validate, validateRules} from './config/ConfigValidator';
 import {transform} from './config/cosmicConfigTransformer';
 import {applyExtendsIfSpecified} from './config/applyExtendsIfSpecified';
 import {applyOverrides} from './config/applyOverrides';
@@ -11,7 +11,13 @@ const noRules = 0;
  * Config class
  * @class
  */
-class Config {
+export class Config {
+  config: any;
+  cwd: string;
+  configFile: any;
+  configBaseDirectory: any;
+  rules: any;
+
   /**
    * Constructor
    *
@@ -81,10 +87,8 @@ class Config {
     debug('Final Config');
     debug(config);
 
-    validate(config, 'cli', this.rules);
+    validateRules(config, 'cli', this.rules);
 
     return config;
   }
 }
-
-module.exports = Config;

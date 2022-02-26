@@ -1,7 +1,9 @@
 const debug = require('debug')('npm-package-json-lint:linter');
 import path from 'path';
 import {Parser} from '../Parser';
-import {resultsHelper} from './results-helper';
+import { RuleType } from '../types/rule-type';
+import { Severity } from '../types/severity';
+import {aggregateCountsPerFile, aggregateOverallCounts} from './results-helper';
 
 /**
  * A package.json file linting result.
@@ -48,13 +50,13 @@ const lint = (packageJsonData, configObj, rules) => {
   for (const rule in configObj) {
     const ruleModule = rules.get(rule);
 
-    let severity = 'off';
+    let severity = Severity.Off;
     let ruleConfig = {};
 
-    if (ruleModule.ruleType === 'array' || ruleModule.ruleType === 'object') {
+    if (ruleModule.ruleType === RuleType.Array || ruleModule.ruleType === RuleType.Object) {
       severity = typeof configObj[rule] === 'string' && configObj[rule] === 'off' ? configObj[rule] : configObj[rule][0];
       ruleConfig = typeof configObj[rule] === 'string' ? {} : configObj[rule][1];
-    } else if (ruleModule.ruleType === 'optionalObject') {
+    } else if (ruleModule.ruleType === RuleType.OptionalObject) {
       if (typeof configObj[rule] === 'string') {
         severity = configObj[rule];
         ruleConfig = {};
@@ -66,7 +68,7 @@ const lint = (packageJsonData, configObj, rules) => {
       severity = configObj[rule];
     }
 
-    if (severity !== 'off') {
+    if (severity !== Severity.Off) {
       const lintResult = ruleModule.lint(packageJsonData, severity, ruleConfig);
 
       if (typeof lintResult === 'object') {
@@ -91,7 +93,7 @@ const lint = (packageJsonData, configObj, rules) => {
  */
 const processPackageJsonObject = (cwd, packageJsonObj, config, fileName, rules) => {
   const lintIssues = lint(packageJsonObj, config, rules);
-  const counts = resultsHelper.aggregateCountsPerFile(lintIssues);
+  const counts = aggregateCountsPerFile(lintIssues);
   const result = createResultObject({
     cwd,
     fileName,
@@ -140,7 +142,7 @@ const processPackageJsonFile = (cwd, fileName, config, rules) => {
  * @param {Object} rules An instance of `Rules`.
  * @returns {LinterResult} The results {@link LinterResult} from linting a collection of package.json files.
  */
-export const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ignorer, configHelper, rules}) => {
+export const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ignorer, configHelper, rules}): any => {
   debug('executing on package.json object');
   const results = [];
 
@@ -172,7 +174,7 @@ export const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ig
   }
 
   debug('Aggregating overall counts');
-  const stats = resultsHelper.aggregateOverallCounts(results);
+  const stats = aggregateOverallCounts(results);
 
   debug('stats');
   debug(stats);
@@ -194,7 +196,7 @@ export const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ig
  * @param {Object} rules An instance of `Rules`.
  * @returns {LinterResult} The results {@link LinterResult} from linting a collection of package.json files.
  */
-export const executeOnPackageJsonFiles = ({cwd, fileList, ignorer, configHelper, rules}) => {
+export const executeOnPackageJsonFiles = ({cwd, fileList, ignorer, configHelper, rules}): any => {
   debug('executing on package.json files');
   const results = fileList.map((filePath) => {
     const relativeFilePath = path.relative(cwd, filePath);
@@ -221,7 +223,7 @@ export const executeOnPackageJsonFiles = ({cwd, fileList, ignorer, configHelper,
   });
 
   debug('Aggregating overall counts');
-  const stats = resultsHelper.aggregateOverallCounts(results);
+  const stats = aggregateOverallCounts(results);
 
   debug('stats');
   debug(stats);

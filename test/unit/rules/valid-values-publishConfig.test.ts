@@ -22,7 +22,7 @@ describe('valid-values-publishConfig Unit Tests', () => {
         },
       };
       const validValues = [{access: 'private'}, {access: 'protected'}];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-publishConfig');
       expect(response.severity).toStrictEqual('error');
@@ -39,9 +39,9 @@ describe('valid-values-publishConfig Unit Tests', () => {
         },
       };
       const validValues = [{access: 'private'}, {access: 'public'}];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
@@ -51,7 +51,7 @@ describe('valid-values-publishConfig Unit Tests', () => {
         publishConfig: true,
       };
       const validValues = [{access: 'private'}, {access: 'protected'}];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-publishConfig');
       expect(response.severity).toStrictEqual('error');
@@ -66,7 +66,7 @@ describe('valid-values-publishConfig Unit Tests', () => {
       const validValues = [{access: 'private'}, {access: 'protected'}];
       const response = lint(packageJsonData, Severity.Error, validValues);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 });

@@ -15,7 +15,7 @@ describe('require-directories Unit Tests', () => {
       };
       const response = lint(packageJsonData, Severity.Error);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 

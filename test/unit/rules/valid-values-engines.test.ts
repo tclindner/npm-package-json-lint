@@ -74,7 +74,7 @@ describe('valid-values-engines Unit Tests', () => {
       ];
       const response = lint(packageJsonData, Severity.Error, validValues);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
@@ -114,7 +114,7 @@ describe('valid-values-engines Unit Tests', () => {
       ];
       const response = lint(packageJsonData, Severity.Error, validValues);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 });

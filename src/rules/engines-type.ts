@@ -14,5 +14,5 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity): Li
     return new LintIssue(lintId, severity, nodeName, message);
   }
 
-  return true;
+  return null;
 };

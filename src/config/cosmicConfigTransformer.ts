@@ -3,7 +3,7 @@ const debug = require('debug')('npm-package-json-lint:cosmicConfigTransformer');
 import {applyExtendsIfSpecified} from './applyExtendsIfSpecified';
 import {applyOverrides} from './applyOverrides';
 
-export const transform = (cwd, configBaseDirectory, filePathBeingLinted) => {
+export const transform = (cwd: any , configBaseDirectory: any , filePathBeingLinted: any ): any  => {
   debug(`cwd: ${cwd}`);
   debug(`configBaseDirectory`);
   debug(configBaseDirectory);

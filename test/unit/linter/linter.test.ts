@@ -1,5 +1,5 @@
 import {executeOnPackageJsonFiles, executeOnPackageJsonObject} from '../../../src/linter/linter';
-import Rules from '../../../src/Rules';
+import {Rules} from '../../../src/Rules';
 import {LintIssue} from '../../../src/lint-issue';
 import { Severity } from '../../../src/types/severity';
 
@@ -242,6 +242,7 @@ describe('linter Unit Tests', () => {
         warningCount: 0,
       };
 
+      // @ts-ignore-error
       const results = executeOnPackageJsonObject({
         cwd: process.cwd(),
         packageJsonObject: packageJsonObj,
@@ -267,7 +268,7 @@ describe('linter Unit Tests', () => {
       const rules = new Rules();
       rules.load();
 
-      const lintIssue = new LintIssue('valid-values-author', 'error', 'author', 'Invalid value for author');
+      const lintIssue = new LintIssue('valid-values-author', Severity.Error, 'author', 'Invalid value for author');
       const expected = {
         errorCount: 1,
         ignoreCount: 0,

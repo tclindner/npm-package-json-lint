@@ -22,7 +22,7 @@ const standardRuleSchema = {
   },
 };
 
-const arrayRuleSchema = (minItems) => ({
+const arrayRuleSchema = (minItems: any ): any  => ({
   type: 'array',
   items: [
     standardRuleSchema,
@@ -133,7 +133,7 @@ const configurationSchema = {
  * @param {Object} ruleConfig The ruleConfig object to validate.
  * @returns {boolean} True if valid. Error if not.
  */
-export const isStandardRuleSchemaValid = (ruleConfig) => {
+export const isStandardRuleSchemaValid = (ruleConfig: any ): any  => {
   const validate = ajv.compile(standardRuleSchema);
   const isValid = validate(ruleConfig);
 
@@ -151,7 +151,7 @@ export const isStandardRuleSchemaValid = (ruleConfig) => {
  * @param {number} minItems   Min number of items in the array
  * @returns {boolean} True if valid. Error if not.
  */
-export const isArrayRuleSchemaValid = (ruleConfig, minItems) => {
+export const isArrayRuleSchemaValid = (ruleConfig: any , minItems: any ): any  => {
   const validate = ajv.compile(arrayRuleSchema(minItems));
   const isValid = validate(ruleConfig);
 
@@ -168,7 +168,7 @@ export const isArrayRuleSchemaValid = (ruleConfig, minItems) => {
  * @param {Object} ruleConfig The ruleConfig object to validate.
  * @returns {boolean} True if valid. Error if not.
  */
-export const isObjectRuleSchemaValid = (ruleConfig) => {
+export const isObjectRuleSchemaValid = (ruleConfig: any ): any  => {
   const validate = ajv.compile(objectRuleSchema);
   const isValid = validate(ruleConfig);
 
@@ -185,7 +185,7 @@ export const isObjectRuleSchemaValid = (ruleConfig) => {
  * @param {Object} ruleConfig The ruleConfig object to validate.
  * @returns {boolean} True if valid. Error if not.
  */
-export const isOptionalObjExceptSchemaValid = (ruleConfig) => {
+export const isOptionalObjExceptSchemaValid = (ruleConfig: any ): any  => {
   const validate = ajv.compile(optionalObjExceptionsSchema);
   const isValid = validate(ruleConfig);
 
@@ -203,7 +203,7 @@ export const isOptionalObjExceptSchemaValid = (ruleConfig) => {
  * @param {string} source The name of the configuration source to report in any errors.
  * @returns {boolean} True if valid. Error if not.
  */
-export const isConfigObjectSchemaValid = (config, source) => {
+export const isConfigObjectSchemaValid = (config: any , source: any ): any  => {
   const validate = ajv.compile(configurationSchema);
   const isValid = validate(config);
 

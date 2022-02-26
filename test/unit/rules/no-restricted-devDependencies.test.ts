@@ -58,7 +58,7 @@ describe('no-restricted-devDependencies Unit Tests', () => {
       const invalidDependencies = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
       const response = lint(packageJsonData, Severity.Error, invalidDependencies);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 
@@ -68,7 +68,7 @@ describe('no-restricted-devDependencies Unit Tests', () => {
       const invalidDependencies = ['npm-package-json-lint', 'grunt-npm-package-json-lint'];
       const response = lint(packageJsonData, Severity.Error, invalidDependencies);
 
-      expect(response).toBe(true);
+      expect(response).toBeNull();
     });
   });
 });

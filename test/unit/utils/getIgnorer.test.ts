@@ -1,6 +1,6 @@
 import fs from 'fs';
 import ignore from 'ignore';
-import getIgnorer from '../../../src/utils/getIgnorer';
+import {getIgnorer} from '../../../src/utils/getIgnorer';
 
 jest.mock('fs');
 jest.mock('ignore');
@@ -11,9 +11,11 @@ describe('getIgnorer Unit Tests', () => {
     const cwd = process.cwd();
 
     const addMock = jest.fn().mockReturnValue('done');
+    // @ts-ignore-error
     ignore.mockImplementation(() => ({
       add: addMock,
     }));
+    // @ts-ignore-error
     fs.readFileSync.mockReturnValue('ignore content');
 
     const actual = getIgnorer(cwd, ignorePath);
@@ -29,9 +31,11 @@ describe('getIgnorer Unit Tests', () => {
     const cwd = process.cwd();
 
     const addMock = jest.fn().mockReturnValue('done');
+    // @ts-ignore-error
     ignore.mockImplementation(() => ({
       add: addMock,
     }));
+    // @ts-ignore-error
     fs.readFileSync.mockReturnValue('ignore content');
 
     const actual = getIgnorer(cwd, ignorePath);
@@ -46,9 +50,11 @@ describe('getIgnorer Unit Tests', () => {
     let ignorePath;
     const cwd = process.cwd();
 
+    // @ts-ignore-error
     fs.readFileSync.mockImplementation(() => {
       const error = new Error('Failed to read config file: missing.json. \nError: Error');
 
+      // @ts-ignore-error
       error.code = 'ENOENT';
       throw error;
     });

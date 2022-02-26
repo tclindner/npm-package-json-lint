@@ -1,4 +1,4 @@
-import semver from 'semver';
+const semver = require('semver');
 import {PackageJson} from 'type-fest';
 
 const hasExceptions = (config: any): boolean => typeof config === 'object' && config.hasOwnProperty('exceptions');

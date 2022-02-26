@@ -11,7 +11,7 @@ import {Parser} from '../Parser';
  * @returns {Object} A new configuration object with all of the 'extends' fields loaded and merged.
  * @private
  */
-const applyExtends = (config, parentName, originalFilePath) => {
+const applyExtends = (config: any , parentName: any , originalFilePath: any ): any => {
   let configExtends = config.extends;
 
   if (!Array.isArray(config.extends)) {
@@ -68,7 +68,7 @@ const applyExtends = (config, parentName, originalFilePath) => {
  * @return {Object}                  Configuration object
  * @private
  */
-const loadFromModule = (moduleName, originalFilePath) => {
+const loadFromModule = (moduleName: any , originalFilePath: any ): any  => {
   let config = {};
   let adjustedModuleName = moduleName;
 
@@ -83,6 +83,7 @@ const loadFromModule = (moduleName, originalFilePath) => {
     config = require(resolvedModule);
   }
 
+  // @ts-expect-error
   if (Object.keys(config).length > 0 && config.extends) {
     config = applyExtends(config, adjustedModuleName, originalFilePath);
   }
@@ -98,7 +99,7 @@ const loadFromModule = (moduleName, originalFilePath) => {
  * @returns {Object} The configuration information.
  * @private
  */
-const loadConfigFile = (filePath) => {
+const loadConfigFile = (filePath: any ): any  => {
   let config = {};
 
   switch (path.extname(filePath)) {
@@ -125,7 +126,7 @@ const loadConfigFile = (filePath) => {
  * @returns {Object} the parsed config object (empty object if there was a parse error)
  * @private
  */
-export const applyExtendsIfSpecified = (npmPackageJsonLintConfig, filepath) => {
+export const applyExtendsIfSpecified = (npmPackageJsonLintConfig: any , filepath: any ): any  => {
   let config = {...npmPackageJsonLintConfig};
 
   debug('Loading extends, if applicable');
