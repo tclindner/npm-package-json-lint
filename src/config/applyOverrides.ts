@@ -1,6 +1,6 @@
 const debug = require('debug')('npm-package-json-lint:applyOverrides');
-const path = require('path');
-const globby = require('globby');
+import path from 'path';
+import globby from 'globby';
 
 /**
  * Applies values from the 'overrides' field in a configuration file.
@@ -11,7 +11,7 @@ const globby = require('globby');
  * @returns {Object} A new configuration object with all of the 'overrides' applied.
  * @private
  */
-const applyOverrides = (cwd, filePath, rules, overrides) => {
+export const applyOverrides = (cwd: string, filePath: string, rules: any, overrides: any): any => {
   let finalRules = {...rules};
 
   debug('overrides');
@@ -46,5 +46,3 @@ const applyOverrides = (cwd, filePath, rules, overrides) => {
 
   return finalRules;
 };
-
-module.exports = applyOverrides;

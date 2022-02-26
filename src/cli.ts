@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const chalk = require('chalk');
+import chalk from 'chalk';
 const debug = require('debug')('npm-package-json-lint:cli');
-const meow = require('meow');
-const NpmPackageJsonLint = require('./NpmPackageJsonLint');
-const Reporter = require('./Reporter');
+import meow from 'meow';
+import NpmPackageJsonLint from './NpmPackageJsonLint';
+import Reporter from './Reporter';
 
 const exitCodes = {
   zeroClean: 0,

@@ -1,14 +1,12 @@
-/* eslint max-lines-per-function: 'off', no-param-reassign: 'off', arrow-body-style: 'off' */
-
 const debug = require('debug')('npm-package-json-lint:NpmPackageJsonLint');
-const isPlainObj = require('is-plain-obj');
-const slash = require('slash');
-const Config = require('./Config');
 const pkg = require('../package.json');
-const Rules = require('./Rules');
-const linter = require('./linter/linter');
-const getFileList = require('./utils/getFileList');
-const getIgnorer = require('./utils/getIgnorer');
+import isPlainObj from 'is-plain-obj';
+import slash from 'slash';
+import {Config} from './Config';
+import {Rules} from './Rules';
+import {linter} from './linter/linter';
+import {getFileList} from './utils/getFileList';
+import {getIgnorer} from './utils/getIgnorer';
 
 const noIssues = 0;
 
@@ -73,7 +71,7 @@ const getErrorResults = (results) => {
  * Public CLIEngine class
  * @class
  */
-class NpmPackageJsonLint {
+export class NpmPackageJsonLint {
   /**
    * constructor
    * @param {NpmPackageJsonLint} options The options for the CLIEngine.
@@ -170,5 +168,3 @@ class NpmPackageJsonLint {
     return linterOutput;
   }
 }
-
-module.exports = NpmPackageJsonLint;

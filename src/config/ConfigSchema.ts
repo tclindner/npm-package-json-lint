@@ -1,5 +1,5 @@
-const Ajv = require('ajv');
-const ajvErrors = require('ajv-errors');
+import Ajv from 'ajv';
+import ajvErrors from 'ajv-errors';
 
 const ajv = new Ajv({allErrors: true});
 
@@ -133,7 +133,7 @@ const configurationSchema = {
  * @param {Object} ruleConfig The ruleConfig object to validate.
  * @returns {boolean} True if valid. Error if not.
  */
-const isStandardRuleSchemaValid = (ruleConfig) => {
+export const isStandardRuleSchemaValid = (ruleConfig) => {
   const validate = ajv.compile(standardRuleSchema);
   const isValid = validate(ruleConfig);
 
@@ -151,7 +151,7 @@ const isStandardRuleSchemaValid = (ruleConfig) => {
  * @param {number} minItems   Min number of items in the array
  * @returns {boolean} True if valid. Error if not.
  */
-const isArrayRuleSchemaValid = (ruleConfig, minItems) => {
+export const isArrayRuleSchemaValid = (ruleConfig, minItems) => {
   const validate = ajv.compile(arrayRuleSchema(minItems));
   const isValid = validate(ruleConfig);
 
@@ -168,7 +168,7 @@ const isArrayRuleSchemaValid = (ruleConfig, minItems) => {
  * @param {Object} ruleConfig The ruleConfig object to validate.
  * @returns {boolean} True if valid. Error if not.
  */
-const isObjectRuleSchemaValid = (ruleConfig) => {
+export const isObjectRuleSchemaValid = (ruleConfig) => {
   const validate = ajv.compile(objectRuleSchema);
   const isValid = validate(ruleConfig);
 
@@ -185,7 +185,7 @@ const isObjectRuleSchemaValid = (ruleConfig) => {
  * @param {Object} ruleConfig The ruleConfig object to validate.
  * @returns {boolean} True if valid. Error if not.
  */
-const isOptionalObjExceptSchemaValid = (ruleConfig) => {
+export const isOptionalObjExceptSchemaValid = (ruleConfig) => {
   const validate = ajv.compile(optionalObjExceptionsSchema);
   const isValid = validate(ruleConfig);
 
@@ -203,7 +203,7 @@ const isOptionalObjExceptSchemaValid = (ruleConfig) => {
  * @param {string} source The name of the configuration source to report in any errors.
  * @returns {boolean} True if valid. Error if not.
  */
-const isConfigObjectSchemaValid = (config, source) => {
+export const isConfigObjectSchemaValid = (config, source) => {
   const validate = ajv.compile(configurationSchema);
   const isValid = validate(config);
 
@@ -212,12 +212,4 @@ const isConfigObjectSchemaValid = (config, source) => {
   }
 
   return true;
-};
-
-module.exports = {
-  isConfigObjectSchemaValid,
-  isStandardRuleSchemaValid,
-  isArrayRuleSchemaValid,
-  isObjectRuleSchemaValid,
-  isOptionalObjExceptSchemaValid,
 };

@@ -1,4 +1,4 @@
-const ConfigSchema = require('./ConfigSchema');
+import ConfigSchema from './ConfigSchema';
 
 /**
  * Validates object rule config
@@ -121,7 +121,7 @@ const validateRule = (ruleModule, ruleName, userConfig, source) => {
  * @returns {undefined} No return
  * @static
  */
-const validateRules = (rulesConfig, source, rules) => {
+export const validateRules = (rulesConfig, source, rules) => {
   if (!rulesConfig) {
     return;
   }
@@ -142,12 +142,7 @@ const validateRules = (rulesConfig, source, rules) => {
  * @returns {undefined} No return
  * @static
  */
-const validate = (config, source, rules) => {
+export const validate = (config, source, rules) => {
   ConfigSchema.isConfigObjectSchemaValid(config, source);
   validateRules(config.rules, source, rules);
-};
-
-module.exports = {
-  validate,
-  validateRules,
 };
