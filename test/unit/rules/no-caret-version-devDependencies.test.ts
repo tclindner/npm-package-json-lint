@@ -32,7 +32,7 @@ describe('no-caret-version-devDependencies Unit Tests', () => {
           'gulp-npm-package-json-lint': '^1.0.0',
         },
       };
-      const response = lint(packageJsonData, 'error', {exceptions: ['gulp-npm-package-json-lint']});
+      const response = lint(packageJsonData, Severity.Error, {exceptions: ['gulp-npm-package-json-lint']});
 
       expect(response).toBe(true);
     });

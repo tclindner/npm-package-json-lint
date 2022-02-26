@@ -17,7 +17,7 @@ describe('description-format Unit Tests', () => {
         requireCapitalFirstLetter: true,
         requireEndingPeriod: true,
       };
-      const response = lint(packageJsonData, 'error', config);
+      const response = lint(packageJsonData, Severity.Error, config);
 
       expect(response.lintId).toStrictEqual('description-format');
       expect(response.severity).toStrictEqual('error');
@@ -34,7 +34,7 @@ describe('description-format Unit Tests', () => {
       const config = {
         requireCapitalFirstLetter: true,
       };
-      const response = lint(packageJsonData, 'error', config);
+      const response = lint(packageJsonData, Severity.Error, config);
 
       expect(response.lintId).toStrictEqual('description-format');
       expect(response.severity).toStrictEqual('error');
@@ -56,7 +56,7 @@ describe('description-format Unit Tests', () => {
       };
 
       expect(() => {
-        lint(packageJsonData, 'error', config);
+        lint(packageJsonData, Severity.Error, config);
       }).toThrow('description-format does not support `requireEndingPeriod` and `forbidEndingPeriod` being `true`.');
     });
   });
@@ -69,7 +69,7 @@ describe('description-format Unit Tests', () => {
       const config = {
         requireEndingPeriod: true,
       };
-      const response = lint(packageJsonData, 'error', config);
+      const response = lint(packageJsonData, Severity.Error, config);
 
       expect(response.lintId).toStrictEqual('description-format');
       expect(response.severity).toStrictEqual('error');
@@ -86,7 +86,7 @@ describe('description-format Unit Tests', () => {
       const config = {
         forbidEndingPeriod: true,
       };
-      const response = lint(packageJsonData, 'error', config);
+      const response = lint(packageJsonData, Severity.Error, config);
 
       expect(response.lintId).toStrictEqual('description-format');
       expect(response.severity).toStrictEqual('error');
@@ -103,7 +103,7 @@ describe('description-format Unit Tests', () => {
       const config = {
         requireCapitalFirstLetter: true,
       };
-      const response = lint(packageJsonData, 'error', config);
+      const response = lint(packageJsonData, Severity.Error, config);
 
       expect(response).toBe(true);
     });
@@ -118,7 +118,7 @@ describe('description-format Unit Tests', () => {
         requireCapitalFirstLetter: true,
         requireEndingPeriod: true,
       };
-      const response = lint(packageJsonData, 'error', config);
+      const response = lint(packageJsonData, Severity.Error, config);
 
       expect(response).toBe(true);
     });
@@ -130,7 +130,7 @@ describe('description-format Unit Tests', () => {
         description: 'lowercase',
       };
       const config = {};
-      const response = lint(packageJsonData, 'error', config);
+      const response = lint(packageJsonData, Severity.Error, config);
 
       expect(response).toBe(true);
     });
@@ -143,7 +143,7 @@ describe('description-format Unit Tests', () => {
         requireCapitalFirstLetter: true,
         requireEndingPeriod: true,
       };
-      const response = lint(packageJsonData, 'error', config);
+      const response = lint(packageJsonData, Severity.Error, config);
 
       expect(response).toBe(true);
     });

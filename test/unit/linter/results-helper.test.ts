@@ -1,5 +1,4 @@
-import resultsHelper from '../../../src/linter/results-helper';
-import {Severity} from '../../../src/types/severity';
+import {aggregateCountsPerFile,aggregateOverallCounts} from '../../../src/linter/results-helper';
 
 describe('resultsHelper Unit Tests', () => {
   describe('aggregateCountsPerFile', () => {
@@ -18,7 +17,7 @@ describe('resultsHelper Unit Tests', () => {
           lintMessage: 'dummyText',
         },
       ];
-      const result = resultsHelper.aggregateCountsPerFile(issues);
+      const result = aggregateCountsPerFile(issues);
 
       expect(result.errorCount).toStrictEqual(1);
       expect(result.warningCount).toStrictEqual(1);
@@ -26,7 +25,7 @@ describe('resultsHelper Unit Tests', () => {
 
     test('no issues', () => {
       const issues = [];
-      const result = resultsHelper.aggregateCountsPerFile(issues);
+      const result = aggregateCountsPerFile(issues);
 
       expect(result.errorCount).toStrictEqual(0);
       expect(result.warningCount).toStrictEqual(0);
@@ -61,7 +60,7 @@ describe('resultsHelper Unit Tests', () => {
           warningCount: 0,
         },
       ];
-      const result = resultsHelper.aggregateOverallCounts(results);
+      const result = aggregateOverallCounts(results);
 
       expect(result.ignoreCount).toStrictEqual(2);
       expect(result.errorCount).toStrictEqual(10);
@@ -70,7 +69,7 @@ describe('resultsHelper Unit Tests', () => {
 
     test('no issues', () => {
       const results = [];
-      const result = resultsHelper.aggregateOverallCounts(results);
+      const result = aggregateOverallCounts(results);
 
       expect(result.ignoreCount).toStrictEqual(0);
       expect(result.errorCount).toStrictEqual(0);

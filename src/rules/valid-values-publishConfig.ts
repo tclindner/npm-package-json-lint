@@ -11,7 +11,7 @@ const message = 'Invalid value for publishConfig';
 export const ruleType = RuleType.Array;
 export const minItems = 1;
 
-export const lint = (packageJsonData: PackageJson, severity: Severity, validValues: any): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity, validValues: any): LintIssue | null => {
   if (packageJsonData.hasOwnProperty(nodeName)) {
     if (isObject(packageJsonData, nodeName)) {
       const validValuesAsJson = validValues.map((validValue) => JSON.stringify(validValue));
@@ -25,5 +25,5 @@ export const lint = (packageJsonData: PackageJson, severity: Severity, validValu
     }
   }
 
-  return true;
+  return null;
 };

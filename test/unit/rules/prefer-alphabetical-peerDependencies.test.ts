@@ -1,12 +1,10 @@
-import {lint, ruleType} from '../../../src/rules/prefer-alphabetical-peerDependencies');
+import {lint, ruleType} from '../../../src/rules/prefer-alphabetical-peerDependencies';
 import * as alphabeticalSort from '../../../src/validators/alphabetical-sort';
-import * as property from '../../../src/validators/property';
+import {Severity} from '../../../src/types/severity';
 
 jest.mock('../../../src/validators/alphabetical-sort');
-jest.mock('../../../src/validators/property');
 
 const nodeName = 'peerDependencies';
-import {Severity} from '../../../src/types/severity';
 
 describe('prefer-alphabetical-peerDependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -24,7 +22,6 @@ describe('prefer-alphabetical-peerDependencies Unit Tests', () => {
           validNode: 'chalk',
         },
       });
-      property.exists.mockReturnValue(true);
 
       const packageJsonData = {
         peerDependencies: {
@@ -42,8 +39,6 @@ describe('prefer-alphabetical-peerDependencies Unit Tests', () => {
         'Your peerDependencies are not in alphabetical order. Please move semver after chalk.'
       );
 
-      expect(property.exists).toHaveBeenCalledTimes(1);
-      expect(property.exists).toHaveBeenCalledWith(packageJsonData, nodeName);
       expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledTimes(1);
       expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledWith(packageJsonData, nodeName);
     });
@@ -55,7 +50,6 @@ describe('prefer-alphabetical-peerDependencies Unit Tests', () => {
         status: true,
         data: {},
       });
-      property.exists.mockReturnValue(true);
 
       const packageJsonData = {
         peerDependencies: {
@@ -68,8 +62,6 @@ describe('prefer-alphabetical-peerDependencies Unit Tests', () => {
 
       expect(response).toBe(true);
 
-      expect(property.exists).toHaveBeenCalledTimes(1);
-      expect(property.exists).toHaveBeenCalledWith(packageJsonData, nodeName);
       expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledTimes(1);
       expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledWith(packageJsonData, nodeName);
     });
@@ -77,15 +69,10 @@ describe('prefer-alphabetical-peerDependencies Unit Tests', () => {
 
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
-      property.exists.mockReturnValue(false);
-
       const packageJsonData = {};
       const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
-
-      expect(property.exists).toHaveBeenCalledTimes(1);
-      expect(property.exists).toHaveBeenCalledWith(packageJsonData, nodeName);
     });
   });
 });

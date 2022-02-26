@@ -18,12 +18,12 @@ export const minItems = 1;
  * @param  {Array}    validValues       An array of valid values
  * @return {Object|Boolean}             LintIssue object if invalid. True if valid
  */
-export const lint = (packageJsonData: PackageJson, severity: Severity, validValues: any): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity, validValues: any): LintIssue | null => {
   const validRegexes = validValues.map((scope) => new RegExp(`^${scope}/`));
 
   if (!matchValidValue(packageJsonData, nodeName, packageJsonData[nodeName], validRegexes)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }
 
-  return true;
+  return null;
 };

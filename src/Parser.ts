@@ -36,6 +36,8 @@ const handleError = (fileName, err) => {
  * @class
  */
 export const Parser = {
+  sourceSymbol: Symbol('JSON source'),
+
   /**
    * Parse a JSON file
    *
@@ -85,4 +87,3 @@ export const Parser = {
   },
 };
 
-Parser.sourceSymbol = Symbol('JSON source');

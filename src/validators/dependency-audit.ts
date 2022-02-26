@@ -10,7 +10,7 @@ const hasExceptions = (config: any): boolean => typeof config === 'object' && co
  * @param  {string} depsToCheckFor   An array of packages to check for
  * @return {boolean}                 True if the package has a dependency. False if it is not or the node is missing.
  */
-export const hasDependency = (packageJsonData: PackageJson, nodeName: string, depsToCheckFor: string[]): boolean => {
+export const hasDependency = (packageJsonData: PackageJson | any, nodeName: string, depsToCheckFor: string[]): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return false;
   }
@@ -40,7 +40,7 @@ export const hasDependency = (packageJsonData: PackageJson, nodeName: string, de
  * @param  {string} depsToCheckFor          An array of packages to check for
  * @return {boolean}                        True if the package has a pre-release version of a dependency. False if it is not or the node is missing.
  */
-export const hasDepPrereleaseVers = (packageJsonData: PackageJson, nodeName: string, depsToCheckFor: string[]): boolean => {
+export const hasDepPrereleaseVers = (packageJsonData: PackageJson | any, nodeName: string, depsToCheckFor: string[]): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return false;
   }
@@ -65,7 +65,7 @@ export const hasDepPrereleaseVers = (packageJsonData: PackageJson, nodeName: str
  * @param  {object} config            Rule configuration
  * @return {boolean}                  True if the package has a dependency with version 0. False if it does not or the node is missing.
  */
-export const hasDepVersZero = (packageJsonData: PackageJson, nodeName: string, config: any): boolean => {
+export const hasDepVersZero = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
   for (const dependencyName in packageJsonData[nodeName]) {
     if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
       continue;
@@ -110,7 +110,7 @@ export const doesVersStartsWithRange = (dependencyVersion: string, rangeSpecifie
  * @param  {object} config           Rule configuration
  * @return {boolean}                 False if the package has an invalid range. True if it is not or the node is missing.
  */
-export const areVersRangesValid = (packageJsonData: PackageJson, nodeName: string, rangeSpecifier: string, config: any): boolean => {
+export const areVersRangesValid = (packageJsonData: PackageJson | any, nodeName: string, rangeSpecifier: string, config: any): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
   }
@@ -140,7 +140,7 @@ export const areVersRangesValid = (packageJsonData: PackageJson, nodeName: strin
  * @param  {object} config           Rule configuration
  * @return {Boolean}                 True if any dependencies versions start with the invalid range, false if they don't.
  */
-export const doVersContainInvalidRange = (packageJsonData: PackageJson, nodeName: string, rangeSpecifier: string, config: any): boolean => {
+export const doVersContainInvalidRange = (packageJsonData: PackageJson | any, nodeName: string, rangeSpecifier: string, config: any): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return false;
   }
@@ -174,7 +174,7 @@ export interface AbsoluteVersionCheckerResult {
  * @param {object} config             Rule configuration
  * @return {boolean}                  False if the package has an non-absolute version. True if it is not or the node is missing.
  */
-const absoluteVersionChecker = (packageJsonData: PackageJson, nodeName: string, config: any): AbsoluteVersionCheckerResult => {
+const absoluteVersionChecker = (packageJsonData: PackageJson | any, nodeName: string, config: any): AbsoluteVersionCheckerResult => {
   const notFound = -1;
   const firstCharOfStr = 0;
   let onlyAbsoluteVersionDetected = true;
@@ -213,7 +213,7 @@ const absoluteVersionChecker = (packageJsonData: PackageJson, nodeName: string, 
  * @param {object} config             Rule configuration
  * @return {boolean}                  False if the package has an non-absolute version. True if it is not or the node is missing.
  */
-export const areVersionsAbsolute = (packageJsonData: PackageJson, nodeName: string, config: any): boolean => {
+export const areVersionsAbsolute = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
   const {onlyAbsoluteVersionDetected, dependenciesChecked} = absoluteVersionChecker(packageJsonData, nodeName, config);
 
   return dependenciesChecked > 0 ? onlyAbsoluteVersionDetected : false;
@@ -226,7 +226,7 @@ export const areVersionsAbsolute = (packageJsonData: PackageJson, nodeName: stri
  * @param {object} config             Rule configuration
  * @return {boolean}                  False if the package has an non-absolute version. True if it is not or the node is missing.
  */
-export const doVersContainNonAbsolute = (packageJsonData: PackageJson, nodeName: string, config: any): boolean => {
+export const doVersContainNonAbsolute = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
   const {onlyAbsoluteVersionDetected, dependenciesChecked} = absoluteVersionChecker(packageJsonData, nodeName, config);
 
   return dependenciesChecked > 0 ? !onlyAbsoluteVersionDetected : false;
@@ -280,7 +280,7 @@ const isGitRepositoryUrl = (version: string): boolean => {
  * @param {object} config             Rule configuration
  * @return {boolean}                  True if the package has an git repo.
  */
-export const doVersContainGitRepository = (packageJsonData: PackageJson, nodeName: string, config: any): boolean => {
+export const doVersContainGitRepository = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
   for (const dependencyName in packageJsonData[nodeName]) {
     if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
       continue;
@@ -303,7 +303,7 @@ export const doVersContainGitRepository = (packageJsonData: PackageJson, nodeNam
  * @param {object} config             Rule configuration
  * @return {boolean}                  True if the package contain archive url.
  */
-export const doVersContainArchiveUrl = (packageJsonData: PackageJson, nodeName: string, config: any): boolean => {
+export const doVersContainArchiveUrl = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
   for (const dependencyName in packageJsonData[nodeName]) {
     if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
       continue;
@@ -326,7 +326,7 @@ export const doVersContainArchiveUrl = (packageJsonData: PackageJson, nodeName: 
  * @param {object} config             Rule configuration
  * @return {boolean}                  True if the package contain file url.
  */
-export const doVersContainFileUrl = (packageJsonData: PackageJson, nodeName: string, config: any): boolean => {
+export const doVersContainFileUrl = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
   for (const dependencyName in packageJsonData[nodeName]) {
     if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
       continue;

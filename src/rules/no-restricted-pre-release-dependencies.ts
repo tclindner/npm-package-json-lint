@@ -10,10 +10,10 @@ const message = 'You are using a restricted pre-release dependency. Please remov
 export const ruleType = RuleType.Array;
 export const minItems = 1;
 
-export const lint = (packageJsonData: PackageJson, severity: Severity, invalidPreRelDeps: string[]): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity, invalidPreRelDeps: string[]): LintIssue | null => {
   if (hasDepPrereleaseVers(packageJsonData, nodeName, invalidPreRelDeps)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }
 
-  return true;
+  return null;
 };

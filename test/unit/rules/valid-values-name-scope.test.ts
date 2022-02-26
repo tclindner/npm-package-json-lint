@@ -1,4 +1,5 @@
-import {lint, ruleType, minItems} from '../../../src/rules/valid-values-name-scope');
+import {lint, ruleType, minItems} from '../../../src/rules/valid-values-name-scope';
+import { Severity } from '../../../src/types/severity';
 
 describe('valid-values-name-scope Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -19,7 +20,7 @@ describe('valid-values-name-scope Unit Tests', () => {
         name: '@great/awesome-package',
       };
       const validValues = ['@cool', '@awesome'];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-name-scope');
       expect(response.severity).toStrictEqual('error');
@@ -34,7 +35,7 @@ describe('valid-values-name-scope Unit Tests', () => {
         name: 'awesome-package',
       };
       const validValues = ['@cool', '@awesome'];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-name-scope');
       expect(response.severity).toStrictEqual('error');
@@ -49,7 +50,7 @@ describe('valid-values-name-scope Unit Tests', () => {
         name: '@cool/awesome-package',
       };
       const validValues = ['@cool', '@awesome'];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData,Severity.Error, validValues);
 
       expect(response).toBe(true);
     });
@@ -59,7 +60,7 @@ describe('valid-values-name-scope Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
       const validValues = ['@cool', '@awesome'];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response).toBe(true);
     });

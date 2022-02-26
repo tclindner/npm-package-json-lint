@@ -1,10 +1,7 @@
-import {lint, ruleType} from '../../../src/rules/prefer-no-optionalDependencies');
-import * as property from '../../../src/validators/property';
-
-jest.mock('../../../src/validators/property');
+import {lint, ruleType} from '../../../src/rules/prefer-no-optionalDependencies';
+import {Severity} from '../../../src/types/severity';
 
 const nodeName = 'optionalDependencies';
-import {Severity} from '../../../src/types/severity';
 
 describe('prefer-no-optionalDependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -15,8 +12,6 @@ describe('prefer-no-optionalDependencies Unit Tests', () => {
 
   describe('when package.json has optionalDependencies node', () => {
     test('LintIssue object should be returned', () => {
-      property.exists.mockReturnValue(true);
-
       const packageJsonData = {
         optionalDependencies: 'dummy-value',
       };
@@ -26,23 +21,15 @@ describe('prefer-no-optionalDependencies Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual(nodeName);
       expect(response.lintMessage).toStrictEqual('optionalDependencies should not be defined');
-
-      expect(property.exists).toHaveBeenCalledTimes(1);
-      expect(property.exists).toHaveBeenCalledWith(packageJsonData, nodeName);
     });
   });
 
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
-      property.exists.mockReturnValue(false);
-
       const packageJsonData = {};
       const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
-
-      expect(property.exists).toHaveBeenCalledTimes(1);
-      expect(property.exists).toHaveBeenCalledWith(packageJsonData, nodeName);
     });
   });
 });

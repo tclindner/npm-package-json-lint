@@ -10,9 +10,9 @@ const nodeName = 'dependencies';
 const message = 'Your dependencies are not in alphabetical order.';
 export const ruleType = RuleType.Standard;
 
-export const lint = (packageJsonData: PackageJson, severity: Severity): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity): LintIssue | null => {
   if (!exists(packageJsonData, nodeName)) {
-    return true;
+    return null;
   }
 
   const result = isInAlphabeticalOrder(packageJsonData, nodeName);
@@ -26,5 +26,5 @@ export const lint = (packageJsonData: PackageJson, severity: Severity): LintIssu
     );
   }
 
-  return true;
+  return null;
 };

@@ -1,4 +1,5 @@
-import {lint, ruleType, minItems} from '../../../src/rules/valid-values-license');
+import {lint, ruleType, minItems} from '../../../src/rules/valid-values-license';
+import { Severity } from '../../../src/types/severity';
 
 describe('valid-values-license Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -19,7 +20,7 @@ describe('valid-values-license Unit Tests', () => {
         license: 'MIT',
       };
       const validValues = ['private', 'unlicensed'];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-license');
       expect(response.severity).toStrictEqual('error');
@@ -34,7 +35,7 @@ describe('valid-values-license Unit Tests', () => {
         license: 'unlicensed',
       };
       const validValues = ['private', 'unlicensed'];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response).toBe(true);
     });

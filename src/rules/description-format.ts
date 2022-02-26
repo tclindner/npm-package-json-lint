@@ -9,9 +9,9 @@ const nodeName = 'description';
 export const ruleType = RuleType.Object;
 
 // eslint-disable-next-line complexity
-export const lint = (packageJsonData: PackageJson, severity: Severity, config: any): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity, config: any): LintIssue | null => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return true;
+    return null;
   }
 
   const {description} = packageJsonData;
@@ -46,5 +46,5 @@ export const lint = (packageJsonData: PackageJson, severity: Severity, config: a
     return new LintIssue(lintId, severity, nodeName, 'The description should not end with a period.');
   }
 
-  return true;
+  return null;
 };

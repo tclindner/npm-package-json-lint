@@ -1,4 +1,4 @@
-import applyExtendsIfSpecified from '../../../src/config/applyExtendsIfSpecified';
+import {applyExtendsIfSpecified} from '../../../src/config/applyExtendsIfSpecified';
 import {Severity} from '../../../src/types/severity';
 
 describe('applyExtendsIfSpecified Unit Tests', () => {

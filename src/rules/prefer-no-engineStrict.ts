@@ -9,10 +9,10 @@ const nodeName = 'engineStrict';
 const message = 'engineStrict was deprecated with npm v3.0.0. Please remove it from your package.json file';
 export const ruleType = RuleType.Standard;
 
-export const lint = (packageJsonData: PackageJson, severity: Severity): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity): LintIssue | null => {
   if (exists(packageJsonData, nodeName)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }
 
-  return true;
+  return null;
 };

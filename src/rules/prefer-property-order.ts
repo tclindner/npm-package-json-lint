@@ -10,12 +10,12 @@ const message = 'Your package.json properties are not in the desired order.';
 export const ruleType = RuleType.Array;
 export const minItems = 0;
 
-export const lint = (packageJsonData: PackageJson, severity: Severity, preferredOrder: string[]): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity, preferredOrder: string[]): LintIssue | null => {
   const result = isInPreferredOrder(packageJsonData, preferredOrder);
 
   if (!result.status) {
     return new LintIssue(lintId, severity, nodeName, `${message} ${result.msg}`);
   }
 
-  return true;
+  return null;
 };

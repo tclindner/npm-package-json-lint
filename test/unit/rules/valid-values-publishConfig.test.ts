@@ -1,4 +1,5 @@
-import {lint, ruleType, minItems} from '../../../src/rules/valid-values-publishConfig');
+import {lint, ruleType, minItems} from '../../../src/rules/valid-values-publishConfig';
+import { Severity } from '../../../src/types/severity';
 
 describe('valid-values-publishConfig Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -63,7 +64,7 @@ describe('valid-values-publishConfig Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
       const validValues = [{access: 'private'}, {access: 'protected'}];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response).toBe(true);
     });

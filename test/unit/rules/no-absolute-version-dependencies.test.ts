@@ -15,7 +15,7 @@ describe('no-absolute-version-dependencies Unit Tests', () => {
           'npm-package-json-lint': '1.0.0',
         },
       };
-      const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+      const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
       expect(response.lintId).toStrictEqual('no-absolute-version-dependencies');
       expect(response.severity).toStrictEqual('error');
@@ -51,7 +51,7 @@ describe('no-absolute-version-dependencies Unit Tests', () => {
           'gulp-npm-package-json-lint': '=1.0.0',
         },
       };
-      const response = lint(packageJsonData, 'error', {exceptions: ['gulp-npm-package-json-lint']});
+      const response = lint(packageJsonData, Severity.Error, {exceptions: ['gulp-npm-package-json-lint']});
 
       expect(response).toBe(true);
     });
@@ -77,7 +77,7 @@ describe('no-absolute-version-dependencies Unit Tests', () => {
           'gulp-npm-package-json-lint': '~1.0.0',
         },
       };
-      const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+      const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
       expect(response).toBe(true);
     });

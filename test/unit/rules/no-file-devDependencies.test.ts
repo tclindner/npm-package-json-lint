@@ -15,7 +15,7 @@ describe('no-archive-devDependencies Unit Tests', () => {
           'test-module': 'file:local-directory',
         },
       };
-      const response = lint(packageJsonData, 'error', {exceptions: ['grunt-npm-package-json-lint']});
+      const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
       expect(response.lintId).toStrictEqual('no-file-devDependencies');
       expect(response.severity).toStrictEqual('error');
@@ -33,7 +33,7 @@ describe('no-archive-devDependencies Unit Tests', () => {
           'my-module': 'file:local-directory',
         },
       };
-      const response = lint(packageJsonData, 'error', {exceptions: ['my-module']});
+      const response = lint(packageJsonData, Severity.Error, {exceptions: ['my-module']});
 
       expect(response).toBe(true);
     });

@@ -1,7 +1,7 @@
 const debug = require('debug')('npm-package-json-lint:Config');
 import {cosmiconfigSync} from 'cosmiconfig';
-import {configValidator} from './config/ConfigValidator';
-import {cosmicConfigTransformer} from './config/cosmicConfigTransformer';
+import {validate} from './config/ConfigValidator';
+import {transform} from './config/cosmicConfigTransformer';
 import {applyExtendsIfSpecified} from './config/applyExtendsIfSpecified';
 import {applyOverrides} from './config/applyOverrides';
 
@@ -51,12 +51,12 @@ class Config {
       if (this.configFile) {
         debug(`Config file specified, loading it.`);
         config = cosmiconfigSync('npmpackagejsonlint', {
-          transform: cosmicConfigTransformer.transform(this.cwd, this.configBaseDirectory, this.configFile),
+          transform: transform(this.cwd, this.configBaseDirectory, this.configFile),
         }).load(this.configFile);
       } else {
         debug(`Config file wasn't specified, searching for config.`);
         config = cosmiconfigSync('npmpackagejsonlint', {
-          transform: cosmicConfigTransformer.transform(this.cwd, this.configBaseDirectory, filePathToSearch),
+          transform: transform(this.cwd, this.configBaseDirectory, filePathToSearch),
         }).search(filePathToSearch);
       }
     } else {
@@ -81,7 +81,7 @@ class Config {
     debug('Final Config');
     debug(config);
 
-    configValidator.validateRules(config, 'cli', this.rules);
+    validate(config, 'cli', this.rules);
 
     return config;
   }

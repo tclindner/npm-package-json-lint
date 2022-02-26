@@ -9,7 +9,7 @@ const nodeName = 'devDependencies';
 const message = 'You are using an invalid version range. Please do not use ~.';
 export const ruleType = RuleType.OptionalObject;
 
-export const lint = (packageJsonData: PackageJson, severity: Severity, config: any): LintIssue | boolean => {
+export const lint = (packageJsonData: PackageJson | any, severity: Severity, config: any): LintIssue | null => {
   const rangeSpecifier = '~';
 
   if (
@@ -19,5 +19,5 @@ export const lint = (packageJsonData: PackageJson, severity: Severity, config: a
     return new LintIssue(lintId, severity, nodeName, message);
   }
 
-  return true;
+  return null;
 };

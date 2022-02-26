@@ -1,6 +1,7 @@
-import linter from '../../../src/linter/linter';
+import {executeOnPackageJsonFiles, executeOnPackageJsonObject} from '../../../src/linter/linter';
 import Rules from '../../../src/Rules';
 import {LintIssue} from '../../../src/lint-issue';
+import { Severity } from '../../../src/types/severity';
 
 describe('linter Unit Tests', () => {
   describe('executeOnPackageJsonFiles method tests', () => {
@@ -18,7 +19,7 @@ describe('linter Unit Tests', () => {
       const rules = new Rules();
       rules.load();
 
-      const lintIssue = new LintIssue('require-scripts', 'error', 'scripts', 'scripts is required');
+      const lintIssue = new LintIssue('require-scripts', Severity.Error, 'scripts', 'scripts is required');
       const expected = {
         errorCount: 1,
         ignoreCount: 0,
@@ -41,7 +42,7 @@ describe('linter Unit Tests', () => {
         warningCount: 0,
       };
 
-      const results = linter.executeOnPackageJsonFiles({
+      const results = executeOnPackageJsonFiles({
         cwd: process.cwd(),
         fileList: patterns,
         ignorer: mockIgnorer,
@@ -84,7 +85,7 @@ describe('linter Unit Tests', () => {
         warningCount: 0,
       };
 
-      const results = linter.executeOnPackageJsonFiles({
+      const results = executeOnPackageJsonFiles({
         cwd: process.cwd(),
         fileList: patterns,
         ignorer: mockIgnorer,
@@ -124,7 +125,7 @@ describe('linter Unit Tests', () => {
         warningCount: 0,
       };
 
-      const results = linter.executeOnPackageJsonObject({
+      const results = executeOnPackageJsonObject({
         cwd: process.cwd(),
         packageJsonObject: packageJsonObj,
         filename: './test/fixtures/valid/package.json',
@@ -163,7 +164,7 @@ describe('linter Unit Tests', () => {
         warningCount: 0,
       };
 
-      const results = linter.executeOnPackageJsonObject({
+      const results = executeOnPackageJsonObject({
         cwd: process.cwd(),
         packageJsonObject: packageJsonObj,
         filename: './test/fixtures/valid/package.json',
@@ -202,7 +203,7 @@ describe('linter Unit Tests', () => {
         warningCount: 0,
       };
 
-      const results = linter.executeOnPackageJsonObject({
+      const results = executeOnPackageJsonObject({
         cwd: process.cwd(),
         packageJsonObject: packageJsonObj,
         filename: `${process.cwd()}/test/fixtures/valid/package.json`,
@@ -241,7 +242,7 @@ describe('linter Unit Tests', () => {
         warningCount: 0,
       };
 
-      const results = linter.executeOnPackageJsonObject({
+      const results = executeOnPackageJsonObject({
         cwd: process.cwd(),
         packageJsonObject: packageJsonObj,
         ignorer: mockIgnorer,
@@ -282,7 +283,7 @@ describe('linter Unit Tests', () => {
         warningCount: 0,
       };
 
-      const results = linter.executeOnPackageJsonObject({
+      const results = executeOnPackageJsonObject({
         cwd: process.cwd(),
         packageJsonObject: packageJsonObj,
         filename: './test/fixtures/errors/package.json',
@@ -323,7 +324,7 @@ describe('linter Unit Tests', () => {
         warningCount: 0,
       };
 
-      const results = linter.executeOnPackageJsonObject({
+      const results = executeOnPackageJsonObject({
         cwd: process.cwd(),
         packageJsonObject: packageJsonObj,
         filename: './test/fixtures/errors/package.json',
@@ -359,7 +360,7 @@ describe('linter Unit Tests', () => {
 
       const lintIssue = new LintIssue(
         'description-format',
-        'error',
+        Severity.Error,
         'description',
         'The description should end with a period.'
       );
@@ -378,7 +379,7 @@ describe('linter Unit Tests', () => {
         warningCount: 0,
       };
 
-      const results = linter.executeOnPackageJsonObject({
+      const results = executeOnPackageJsonObject({
         cwd: process.cwd(),
         packageJsonObject: packageJsonObj,
         filename: './test/fixtures/errors/package.json',
@@ -410,7 +411,7 @@ describe('linter Unit Tests', () => {
 
       const lintIssue = new LintIssue(
         'no-caret-version-dependencies',
-        'error',
+        Severity.Error,
         'dependencies',
         'You are using an invalid version range. Please do not use ^.'
       );
@@ -429,7 +430,7 @@ describe('linter Unit Tests', () => {
         warningCount: 0,
       };
 
-      const results = linter.executeOnPackageJsonObject({
+      const results = executeOnPackageJsonObject({
         cwd: process.cwd(),
         packageJsonObject: packageJsonObj,
         filename: './test/fixtures/errors/package.json',
@@ -466,7 +467,7 @@ describe('linter Unit Tests', () => {
 
       const lintIssue = new LintIssue(
         'no-caret-version-dependencies',
-        'error',
+        Severity.Error,
         'dependencies',
         'You are using an invalid version range. Please do not use ^.'
       );
@@ -485,7 +486,7 @@ describe('linter Unit Tests', () => {
         warningCount: 0,
       };
 
-      const results = linter.executeOnPackageJsonObject({
+      const results = executeOnPackageJsonObject({
         cwd: process.cwd(),
         packageJsonObject: packageJsonObj,
         filename: './test/fixtures/errors/package.json',

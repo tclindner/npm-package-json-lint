@@ -1,6 +1,5 @@
 import path from 'path';
-import getFileList from '../../../src/utils/getFileList';
-import {Severity} from '../../../src/types/severity';
+import {getFileList} from '../../../src/utils/getFileList';
 
 describe('getFileList Unit Tests', () => {
   test('a config object should returned with all rules', () => {

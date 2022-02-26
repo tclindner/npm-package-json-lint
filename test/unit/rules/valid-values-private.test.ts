@@ -1,4 +1,5 @@
-import {lint, ruleType, minItems} from '../../../src/rules/valid-values-private');
+import {lint, ruleType, minItems} from '../../../src/rules/valid-values-private';
+import { Severity } from '../../../src/types/severity';
 
 describe('valid-values-private Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -19,7 +20,7 @@ describe('valid-values-private Unit Tests', () => {
         private: true,
       };
       const validValues = [false];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-private');
       expect(response.severity).toStrictEqual('error');
@@ -34,7 +35,7 @@ describe('valid-values-private Unit Tests', () => {
         private: false,
       };
       const validValues = [false];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response).toBe(true);
     });

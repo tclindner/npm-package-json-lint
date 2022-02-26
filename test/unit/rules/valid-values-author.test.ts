@@ -1,4 +1,5 @@
-import {lint, ruleType, minItems} from '../../../src/rules/valid-values-author');
+import {lint, ruleType, minItems} from '../../../src/rules/valid-values-author';
+import { Severity } from '../../../src/types/severity';
 
 describe('valid-values-author Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -19,7 +20,7 @@ describe('valid-values-author Unit Tests', () => {
         author: 'LastName, FirstName',
       };
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName'];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-author');
       expect(response.severity).toStrictEqual('error');
@@ -34,7 +35,7 @@ describe('valid-values-author Unit Tests', () => {
         author: 'LastName, FirstName',
       };
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName', 'LastName, FirstName'];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response).toBe(true);
     });
@@ -49,7 +50,7 @@ describe('valid-values-author Unit Tests', () => {
         },
       };
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName'];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-author');
       expect(response.severity).toStrictEqual('error');
@@ -67,7 +68,7 @@ describe('valid-values-author Unit Tests', () => {
         },
       };
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName', 'LastName, FirstName'];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response).toBe(true);
     });
@@ -82,7 +83,7 @@ describe('valid-values-author Unit Tests', () => {
         },
       };
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName'];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-author');
       expect(response.severity).toStrictEqual('error');
@@ -97,7 +98,7 @@ describe('valid-values-author Unit Tests', () => {
         author: true,
       };
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName'];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-author');
       expect(response.severity).toStrictEqual('error');
@@ -110,7 +111,7 @@ describe('valid-values-author Unit Tests', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName', 'LastName, FirstName'];
-      const response = lint(packageJsonData, 'error', validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response).toBe(true);
     });
