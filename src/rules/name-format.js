@@ -1,10 +1,10 @@
-const {isLowercase} = require('../validators/format');
+const validateName = require('validate-npm-package-name');
 const LintIssue = require('../LintIssue');
+const getNameError = require('../utils/getNameError');
 
 const lintId = 'name-format';
 const nodeName = 'name';
 const ruleType = 'standard';
-const maxLength = 214;
 
 const lint = (packageJsonData, severity) => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
@@ -12,17 +12,10 @@ const lint = (packageJsonData, severity) => {
   }
 
   const name = packageJsonData[nodeName];
+  const results = validateName(name);
 
-  if (!isLowercase(name)) {
-    return new LintIssue(lintId, severity, nodeName, 'Format should be all lowercase');
-  }
-
-  if (name.length > maxLength) {
-    return new LintIssue(lintId, severity, nodeName, `name should be less than or equal to ${maxLength} characters.`);
-  }
-
-  if (name.startsWith('.') || name.startsWith('_')) {
-    return new LintIssue(lintId, severity, nodeName, 'name should not start with . or _');
+  if (!results.validForNewPackages) {
+    return new LintIssue(lintId, severity, nodeName, getNameError(results));
   }
 
   return true;

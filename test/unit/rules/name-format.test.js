@@ -19,22 +19,34 @@ describe('name-format Unit Tests', () => {
       expect(response.lintId).toStrictEqual('name-format');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('name');
-      expect(response.lintMessage).toStrictEqual('Format should be all lowercase');
+      expect(response.lintMessage).toStrictEqual('name can no longer contain capital letters');
     });
 
-    test('exceeds max length - LintIssue object should be returned', () => {
+    test('contains space - LintIssue object should be returned', () => {
       const packageJsonData = {
-        name: 'a'.padStart(215),
+        name: 'contains space',
       };
       const response = lint(packageJsonData, 'error');
 
       expect(response.lintId).toStrictEqual('name-format');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('name');
-      expect(response.lintMessage).toStrictEqual('name should be less than or equal to 214 characters.');
+      expect(response.lintMessage).toStrictEqual('name can only contain URL-friendly characters');
     });
 
-    test('starts with . - LintIssue object should be returned', () => {
+    test('exceeds max length - LintIssue object should be returned', () => {
+      const packageJsonData = {
+        name: 'a'.padStart(215, 'a'),
+      };
+      const response = lint(packageJsonData, 'error');
+
+      expect(response.lintId).toStrictEqual('name-format');
+      expect(response.severity).toStrictEqual('error');
+      expect(response.node).toStrictEqual('name');
+      expect(response.lintMessage).toStrictEqual('name can no longer contain more than 214 characters');
+    });
+
+    test('starts with . and no scope - LintIssue object should be returned', () => {
       const packageJsonData = {
         name: '.lowercase',
       };
@@ -43,10 +55,10 @@ describe('name-format Unit Tests', () => {
       expect(response.lintId).toStrictEqual('name-format');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('name');
-      expect(response.lintMessage).toStrictEqual('name should not start with . or _');
+      expect(response.lintMessage).toStrictEqual('name cannot start with a period');
     });
 
-    test('starts with _ - LintIssue object should be returned', () => {
+    test('starts with _ and no scope - LintIssue object should be returned', () => {
       const packageJsonData = {
         name: '_lowercase',
       };
@@ -55,7 +67,36 @@ describe('name-format Unit Tests', () => {
       expect(response.lintId).toStrictEqual('name-format');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('name');
-      expect(response.lintMessage).toStrictEqual('name should not start with . or _');
+      expect(response.lintMessage).toStrictEqual('name cannot start with an underscore');
+    });
+  });
+
+  describe('when package.json has node with correct format', () => {
+    test('all valid characters - true should be returned', () => {
+      const packageJsonData = {
+        name: 'lowercase-name',
+      };
+      const response = lint(packageJsonData, 'error');
+
+      expect(response).toBe(true);
+    });
+
+    test('starts with . and has scope - true should be returned', () => {
+      const packageJsonData = {
+        name: '@foo/.lowercase',
+      };
+      const response = lint(packageJsonData, 'error');
+
+      expect(response).toBe(true);
+    });
+
+    test('starts with _ and has scope - true should be returned', () => {
+      const packageJsonData = {
+        name: '@foo/_lowercase',
+      };
+      const response = lint(packageJsonData, 'error');
+
+      expect(response).toBe(true);
     });
   });
 
