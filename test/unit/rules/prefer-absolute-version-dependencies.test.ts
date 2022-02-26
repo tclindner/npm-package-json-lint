@@ -6,6 +6,7 @@ jest.mock('../../../src/validators/dependency-audit');
 jest.mock('../../../src/validators/property');
 
 const nodeName = 'dependencies';
+import {Severity} from '../../../src/types/severity';
 
 describe('prefer-absolute-version-dependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {

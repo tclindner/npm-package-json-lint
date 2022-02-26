@@ -1,4 +1,5 @@
 import NpmPackageJsonLint from '../../src/NpmPackageJsonLint';
+import {Severity} from '../../../src/types/severity';
 
 describe('NpmPackageJsonLint Unit Tests', () => {
   describe('lint method', () => {

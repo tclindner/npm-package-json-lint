@@ -1,4 +1,5 @@
 import {lint, ruleType} from '../../../src/rules/os-type';
+import {Severity} from '../../../src/types/severity';
 
 describe('os-type Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -12,7 +13,7 @@ describe('os-type Unit Tests', () => {
       const packageJsonData = {
         os: true,
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('os-type');
       expect(response.severity).toStrictEqual('error');
@@ -24,7 +25,7 @@ describe('os-type Unit Tests', () => {
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
       const packageJsonData = {};
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
     });

@@ -22,7 +22,7 @@ describe('no-duplicate-properties Unit Tests', () => {
         "name": "package1",
         "name": "package2"
       }`);
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('no-duplicate-properties');
       expect(response.severity).toStrictEqual('error');
@@ -40,7 +40,7 @@ describe('no-duplicate-properties Unit Tests', () => {
           "eslint": "6.7.2"
         }
       }`);
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('no-duplicate-properties');
       expect(response.severity).toStrictEqual('error');
@@ -54,7 +54,7 @@ describe('no-duplicate-properties Unit Tests', () => {
         "name": "package1",
         "version": "0.1.0"
       }`);
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
     });

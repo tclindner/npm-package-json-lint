@@ -1,4 +1,5 @@
 import {lint, ruleType} from '../../../src/rules/require-contributors';
+import {Severity} from '../../../src/types/severity';
 
 describe('require-contributors Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -12,7 +13,7 @@ describe('require-contributors Unit Tests', () => {
       const packageJsonData = {
         contributors: 'contributors',
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
     });
@@ -21,7 +22,7 @@ describe('require-contributors Unit Tests', () => {
   describe('when package.json does not have node', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {};
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('require-contributors');
       expect(response.severity).toStrictEqual('error');

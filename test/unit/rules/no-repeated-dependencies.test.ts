@@ -24,7 +24,7 @@ describe('no-repeated-dependencies Unit Tests', () => {
           jest: '^1.0.0',
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response.lintId).toStrictEqual('no-repeated-dependencies');
       expect(response.severity).toStrictEqual('error');
@@ -53,7 +53,7 @@ describe('no-repeated-dependencies Unit Tests', () => {
           mocha: '^1.0.0',
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
     });
@@ -68,7 +68,7 @@ describe('no-repeated-dependencies Unit Tests', () => {
           mocha: '^1.0.0',
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
 
@@ -87,7 +87,7 @@ describe('no-repeated-dependencies Unit Tests', () => {
           mocha: '^1.0.0',
         },
       };
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
 
@@ -102,7 +102,7 @@ describe('no-repeated-dependencies Unit Tests', () => {
       property.exists.mockReturnValue(false);
 
       const packageJsonData = {};
-      const response = lint(packageJsonData, 'error');
+      const response = lint(packageJsonData, Severity.Error);
 
       expect(response).toBe(true);
 

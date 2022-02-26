@@ -1,4 +1,5 @@
 import * as type from '../../../src/validators/type';
+import {Severity} from '../../../src/types/severity';
 
 describe('type Unit Tests', () => {
   describe('isArray method', () => {

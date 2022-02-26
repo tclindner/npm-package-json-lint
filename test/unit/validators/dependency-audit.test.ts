@@ -1,4 +1,5 @@
 import * as dependencyAudit from '../../../src/validators/dependency-audit';
+import {Severity} from '../../../src/types/severity';
 
 describe('dependency-audit Unit Tests', () => {
   describe('hasDependency method', () => {

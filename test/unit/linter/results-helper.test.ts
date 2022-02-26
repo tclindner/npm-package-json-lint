@@ -1,4 +1,5 @@
 import resultsHelper from '../../../src/linter/results-helper';
+import {Severity} from '../../../src/types/severity';
 
 describe('resultsHelper Unit Tests', () => {
   describe('aggregateCountsPerFile', () => {

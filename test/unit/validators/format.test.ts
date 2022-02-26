@@ -1,4 +1,5 @@
 import * as format from '../../../src/validators/format';
+import {Severity} from '../../../src/types/severity';
 
 describe('format Unit Tests', () => {
   describe('isLowercase method', () => {
