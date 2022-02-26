@@ -1,13 +1,16 @@
-const {exists} = require('../validators/property');
-const LintIssue = require('../LintIssue');
+import {exists} from '../validators/property';
+import {LintIssue} from '../lint-issue';
+import {RuleType} from '../types/rule-type';
+import {Severity} from '../types/severity';
+import {PackageJson} from 'type-fest';
 
 const lintId = 'no-repeated-dependencies';
-const ruleType = 'standard';
+export const ruleType = RuleType.Standard;
 
 const dependenciesNode = 'dependencies';
 const devDependenciesNode = 'devDependencies';
 
-const lint = (packageJsonData, severity) => {
+export const lint = (packageJsonData: PackageJson, severity: Severity): LintIssue | boolean => {
   if (!exists(packageJsonData, dependenciesNode)) {
     return true;
   }
@@ -32,9 +35,4 @@ const lint = (packageJsonData, severity) => {
   }
 
   return true;
-};
-
-module.exports = {
-  lint,
-  ruleType,
 };
