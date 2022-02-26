@@ -8,7 +8,9 @@ import {PackageJson} from 'type-fest';
  * @param nodeName Name of a node in the package.json file
  * @return True if the node exists. False if it is not.
  */
- export const exists = (packageJsonData: PackageJson | any, nodeName: string): boolean => packageJsonData.hasOwnProperty(nodeName);
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-explicit-any
+export const exists = (packageJsonData: PackageJson | any, nodeName: string): boolean =>
+  packageJsonData.hasOwnProperty(nodeName);
 
 /**
  * Search for duplicate properties in package.json file
@@ -23,6 +25,7 @@ export const findDuplicatePropNames = (packageJsonSource: string): string[] => {
     return [];
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const traverse = (node, dups = []) => {
     const foundProps = new Map();
 

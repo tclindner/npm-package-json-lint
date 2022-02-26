@@ -1,6 +1,8 @@
-const debug = require('debug')('npm-package-json-lint:applyOverrides');
 import path from 'path';
 import globby from 'globby';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const debug = require('debug')('npm-package-json-lint:applyOverrides');
 
 /**
  * Applies values from the 'overrides' field in a configuration file.
@@ -11,6 +13,7 @@ import globby from 'globby';
  * @returns {Object} A new configuration object with all of the 'overrides' applied.
  * @private
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const applyOverrides = (cwd: string, filePath: string, rules: any, overrides?: any[]): any => {
   let finalRules = {...rules};
 

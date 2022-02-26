@@ -11,7 +11,7 @@ describe('Parser Unit Tests', () => {
         const obj = {
           key: 'value',
         };
-        // @ts-ignore-error
+        // @ts-expect-error-error
         fs.readFileSync.mockReturnValue(json);
 
         const parsedJson = Parser.parseJsonFile('dummyFile.txt');
@@ -22,7 +22,7 @@ describe('Parser Unit Tests', () => {
 
     describe('when file is not present', () => {
       test('an error should be thrown', () => {
-        // @ts-ignore-error
+        // @ts-expect-error-error
         fs.readFileSync.mockImplementation(() => {
           throw new Error('Failed to read config file: missing.json. \nError: Error');
         });

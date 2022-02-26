@@ -1,5 +1,5 @@
 import {lint, ruleType, minItems} from '../../../src/rules/valid-values-name-scope';
-import { Severity } from '../../../src/types/severity';
+import {Severity} from '../../../src/types/severity';
 
 describe('valid-values-name-scope Unit Tests', () => {
   describe('a rule type value should be exported', () => {
@@ -50,7 +50,7 @@ describe('valid-values-name-scope Unit Tests', () => {
         name: '@cool/awesome-package',
       };
       const validValues = ['@cool', '@awesome'];
-      const response = lint(packageJsonData,Severity.Error, validValues);
+      const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response).toBeNull();
     });

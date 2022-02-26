@@ -1,6 +1,9 @@
-const semver = require('semver');
 import {PackageJson} from 'type-fest';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const semver = require('semver');
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const hasExceptions = (config: any): boolean => typeof config === 'object' && config.hasOwnProperty('exceptions');
 
 /**
@@ -10,12 +13,15 @@ const hasExceptions = (config: any): boolean => typeof config === 'object' && co
  * @param  {string} depsToCheckFor   An array of packages to check for
  * @return {boolean}                 True if the package has a dependency. False if it is not or the node is missing.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const hasDependency = (packageJsonData: PackageJson | any, nodeName: string, depsToCheckFor: string[]): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return false;
   }
 
+  // eslint-disable-next-line no-restricted-syntax, guard-for-in
   for (const dependencyName in packageJsonData[nodeName]) {
+    // eslint-disable-next-line no-restricted-syntax
     for (const depToCheckFor of depsToCheckFor) {
       if (depToCheckFor === dependencyName) {
         return true;
@@ -40,11 +46,17 @@ export const hasDependency = (packageJsonData: PackageJson | any, nodeName: stri
  * @param  {string} depsToCheckFor          An array of packages to check for
  * @return {boolean}                        True if the package has a pre-release version of a dependency. False if it is not or the node is missing.
  */
-export const hasDepPrereleaseVers = (packageJsonData: PackageJson | any, nodeName: string, depsToCheckFor: string[]): boolean => {
+export const hasDepPrereleaseVers = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonData: PackageJson | any,
+  nodeName: string,
+  depsToCheckFor: string[]
+): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return false;
   }
 
+  // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
     if (depsToCheckFor.includes(dependencyName)) {
       const dependencyVersion = packageJsonData[nodeName][dependencyName];
@@ -65,9 +77,12 @@ export const hasDepPrereleaseVers = (packageJsonData: PackageJson | any, nodeNam
  * @param  {object} config            Rule configuration
  * @return {boolean}                  True if the package has a dependency with version 0. False if it does not or the node is missing.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const hasDepVersZero = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
+  // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
     if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
+      // eslint-disable-next-line no-continue
       continue;
     }
 
@@ -110,15 +125,24 @@ export const doesVersStartsWithRange = (dependencyVersion: string, rangeSpecifie
  * @param  {object} config           Rule configuration
  * @return {boolean}                 False if the package has an invalid range. True if it is not or the node is missing.
  */
-export const areVersRangesValid = (packageJsonData: PackageJson | any, nodeName: string, rangeSpecifier: string, config: any): boolean => {
+export const areVersRangesValid = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonData: PackageJson | any,
+  nodeName: string,
+  rangeSpecifier: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  config: any
+): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
   }
 
   let rangesValid = true;
 
+  // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
     if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
+      // eslint-disable-next-line no-continue
       continue;
     }
 
@@ -140,15 +164,24 @@ export const areVersRangesValid = (packageJsonData: PackageJson | any, nodeName:
  * @param  {object} config           Rule configuration
  * @return {Boolean}                 True if any dependencies versions start with the invalid range, false if they don't.
  */
-export const doVersContainInvalidRange = (packageJsonData: PackageJson | any, nodeName: string, rangeSpecifier: string, config: any): boolean => {
+export const doVersContainInvalidRange = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonData: PackageJson | any,
+  nodeName: string,
+  rangeSpecifier: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  config: any
+): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return false;
   }
 
   let containsInvalidVersion = false;
 
+  // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
     if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
+      // eslint-disable-next-line no-continue
       continue;
     }
 
@@ -174,14 +207,22 @@ export interface AbsoluteVersionCheckerResult {
  * @param {object} config             Rule configuration
  * @return {boolean}                  False if the package has an non-absolute version. True if it is not or the node is missing.
  */
-const absoluteVersionChecker = (packageJsonData: PackageJson | any, nodeName: string, config: any): AbsoluteVersionCheckerResult => {
+const absoluteVersionChecker = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonData: PackageJson | any,
+  nodeName: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  config: any
+): AbsoluteVersionCheckerResult => {
   const notFound = -1;
   const firstCharOfStr = 0;
   let onlyAbsoluteVersionDetected = true;
   let dependenciesChecked = 0;
 
+  // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
     if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
+      // eslint-disable-next-line no-continue
       continue;
     }
 
@@ -213,6 +254,7 @@ const absoluteVersionChecker = (packageJsonData: PackageJson | any, nodeName: st
  * @param {object} config             Rule configuration
  * @return {boolean}                  False if the package has an non-absolute version. True if it is not or the node is missing.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const areVersionsAbsolute = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
   const {onlyAbsoluteVersionDetected, dependenciesChecked} = absoluteVersionChecker(packageJsonData, nodeName, config);
 
@@ -226,6 +268,7 @@ export const areVersionsAbsolute = (packageJsonData: PackageJson | any, nodeName
  * @param {object} config             Rule configuration
  * @return {boolean}                  False if the package has an non-absolute version. True if it is not or the node is missing.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const doVersContainNonAbsolute = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
   const {onlyAbsoluteVersionDetected, dependenciesChecked} = absoluteVersionChecker(packageJsonData, nodeName, config);
 
@@ -246,7 +289,8 @@ const isGithubRepositoryShortcut = (version): boolean => GITHUB_SHORTCUT_URL.tes
  * @param version       value of package's version
  * @return {boolean}    True if the version is url to archive
  */
-const isArchiveUrl = (version: string): boolean => version.endsWith('.tgz') || version.endsWith('.tar.gz') || version.endsWith('.zip');
+const isArchiveUrl = (version: string): boolean =>
+  version.endsWith('.tgz') || version.endsWith('.tar.gz') || version.endsWith('.zip');
 
 /**
  * Determines whether or not version is git repository url
@@ -263,6 +307,7 @@ const isGitRepositoryUrl = (version: string): boolean => {
 
   let match = false;
 
+  // eslint-disable-next-line no-restricted-syntax
   for (const protocol of protocols) {
     if (version.startsWith(protocol)) {
       match = true;
@@ -280,9 +325,12 @@ const isGitRepositoryUrl = (version: string): boolean => {
  * @param {object} config             Rule configuration
  * @return {boolean}                  True if the package has an git repo.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const doVersContainGitRepository = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
+  // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
     if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
+      // eslint-disable-next-line no-continue
       continue;
     }
 
@@ -303,9 +351,12 @@ export const doVersContainGitRepository = (packageJsonData: PackageJson | any, n
  * @param {object} config             Rule configuration
  * @return {boolean}                  True if the package contain archive url.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const doVersContainArchiveUrl = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
+  // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
     if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
+      // eslint-disable-next-line no-continue
       continue;
     }
 
@@ -326,9 +377,12 @@ export const doVersContainArchiveUrl = (packageJsonData: PackageJson | any, node
  * @param {object} config             Rule configuration
  * @return {boolean}                  True if the package contain file url.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const doVersContainFileUrl = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
+  // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
     if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
+      // eslint-disable-next-line no-continue
       continue;
     }
 

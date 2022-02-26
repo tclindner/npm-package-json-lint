@@ -53,8 +53,8 @@ const defaultPreferredNodeOrder = [
 ];
 
 export interface IsInPreferredOrderResult {
-  status: boolean,
-  msg: string | null
+  status: boolean;
+  msg: string | null;
 }
 
 /**
@@ -64,7 +64,11 @@ export interface IsInPreferredOrderResult {
  * @param userPreferredNodeOrder Preferred order of nodes
  * @return Object containing the status and the node that is out of order, if applicable
  */
-export const isInPreferredOrder = (packageJsonData: PackageJson | any, userPreferredNodeOrder: string[]): IsInPreferredOrderResult => {
+export const isInPreferredOrder = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonData: PackageJson | any,
+  userPreferredNodeOrder: string[]
+): IsInPreferredOrderResult => {
   let isValid = true;
   let msg = null;
   const preferredNodeOrder =

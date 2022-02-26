@@ -1,4 +1,4 @@
-import { Severity } from "../types/severity";
+import {Severity} from '../types/severity';
 
 /**
  * A result count object for a files.
@@ -13,6 +13,7 @@ import { Severity } from "../types/severity";
  * @param {LintIssue[]} issues Array of {@link LintIssue} objects from a package.json file.
  * @returns {FileResultCounts} Counts object {@link FileResultCounts}.
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const aggregateCountsPerFile = (issues) => {
   const incrementOne = 1;
 
@@ -49,6 +50,7 @@ export const aggregateCountsPerFile = (issues) => {
  * @param {FileLintResult[]} results Array of {@link FileLintResult} objects from all package.json files.
  * @returns {OverallResultCounts} Counts object {@link OverallResultCounts}
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const aggregateOverallCounts = (results) =>
   // eslint-disable-next-line unicorn/no-array-reduce
   results.reduce(

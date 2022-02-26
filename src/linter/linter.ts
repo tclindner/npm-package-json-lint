@@ -1,9 +1,11 @@
-const debug = require('debug')('npm-package-json-lint:linter');
 import path from 'path';
 import {Parser} from '../Parser';
-import { RuleType } from '../types/rule-type';
-import { Severity } from '../types/severity';
+import {RuleType} from '../types/rule-type';
+import {Severity} from '../types/severity';
 import {aggregateCountsPerFile, aggregateOverallCounts} from './results-helper';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const debug = require('debug')('npm-package-json-lint:linter');
 
 /**
  * A package.json file linting result.
@@ -27,6 +29,7 @@ import {aggregateCountsPerFile, aggregateOverallCounts} from './results-helper';
  * @returns {FileLintResult} The lint results {@link FileLintResult} for the package.json file.
  * @private
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const createResultObject = ({cwd, fileName, ignored, issues, errorCount, warningCount}) => ({
   filePath: `./${path.relative(cwd, fileName)}`,
   issues,
@@ -44,9 +47,11 @@ const createResultObject = ({cwd, fileName, ignored, issues, errorCount, warning
  * @return {LintIssue[]} An array of {@link LintIssue} objects.
  * @private
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const lint = (packageJsonData, configObj, rules) => {
   const lintIssues = [];
 
+  // eslint-disable-next-line no-restricted-syntax, guard-for-in
   for (const rule in configObj) {
     const ruleModule = rules.get(rule);
 
@@ -61,7 +66,9 @@ const lint = (packageJsonData, configObj, rules) => {
         severity = configObj[rule];
         ruleConfig = {};
       } else {
+        // eslint-disable-next-line prefer-destructuring
         severity = configObj[rule][0];
+        // eslint-disable-next-line prefer-destructuring
         ruleConfig = configObj[rule][1];
       }
     } else {
@@ -91,6 +98,7 @@ const lint = (packageJsonData, configObj, rules) => {
  * @returns {FileLintResult} A {@link FileLintResult} object with the result of linting a package.json file.
  * @private
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const processPackageJsonObject = (cwd, packageJsonObj, config, fileName, rules) => {
   const lintIssues = lint(packageJsonObj, config, rules);
   const counts = aggregateCountsPerFile(lintIssues);
@@ -116,6 +124,7 @@ const processPackageJsonObject = (cwd, packageJsonObj, config, fileName, rules) 
  * @returns {FileLintResult} A {@link FileLintResult} object with the result of linting a package.json file.
  * @private
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const processPackageJsonFile = (cwd, fileName, config, rules) => {
   const packageJsonObj = Parser.parseJsonFile(path.resolve(fileName));
 
@@ -142,6 +151,7 @@ const processPackageJsonFile = (cwd, fileName, config, rules) => {
  * @param {Object} rules An instance of `Rules`.
  * @returns {LinterResult} The results {@link LinterResult} from linting a collection of package.json files.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ignorer, configHelper, rules}): any => {
   debug('executing on package.json object');
   const results = [];
@@ -196,6 +206,7 @@ export const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ig
  * @param {Object} rules An instance of `Rules`.
  * @returns {LinterResult} The results {@link LinterResult} from linting a collection of package.json files.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const executeOnPackageJsonFiles = ({cwd, fileList, ignorer, configHelper, rules}): any => {
   debug('executing on package.json files');
   const results = fileList.map((filePath) => {

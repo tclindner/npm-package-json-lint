@@ -1,6 +1,8 @@
-const debug = require('debug')('npm-package-json-lint:applyExtendsIfSpecified');
 import path from 'path';
 import {Parser} from '../Parser';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const debug = require('debug')('npm-package-json-lint:applyExtendsIfSpecified');
 
 /**
  * Applies values from the 'extends' field in a configuration file.
@@ -11,7 +13,8 @@ import {Parser} from '../Parser';
  * @returns {Object} A new configuration object with all of the 'extends' fields loaded and merged.
  * @private
  */
-const applyExtends = (config: any , parentName: any , originalFilePath: any ): any => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const applyExtends = (config: any, parentName: any, originalFilePath: any): any => {
   let configExtends = config.extends;
 
   if (!Array.isArray(config.extends)) {
@@ -21,7 +24,7 @@ const applyExtends = (config: any , parentName: any , originalFilePath: any ): a
   // eslint-disable-next-line unicorn/no-array-reduce
   return configExtends.reduceRight((previousConfig, moduleName) => {
     try {
-      // eslint-disable-next-line no-use-before-define
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       const extendsConfig = loadFromModule(moduleName, originalFilePath);
 
       // Merge base object
@@ -68,21 +71,24 @@ const applyExtends = (config: any , parentName: any , originalFilePath: any ): a
  * @return {Object}                  Configuration object
  * @private
  */
-const loadFromModule = (moduleName: any , originalFilePath: any ): any  => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const loadFromModule = (moduleName: any, originalFilePath: any): any => {
   let config = {};
   let adjustedModuleName = moduleName;
 
   if (moduleName.startsWith('./')) {
     // TODO: handle process.cwd() option
     adjustedModuleName = path.join(process.cwd(), moduleName);
-    // eslint-disable-next-line no-use-before-define
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     config = loadConfigFile(adjustedModuleName);
   } else {
     const resolvedModule = require.resolve(adjustedModuleName, {paths: [path.dirname(originalFilePath)]});
 
+    // eslint-disable-next-line import/no-dynamic-require, global-require
     config = require(resolvedModule);
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-expect-error
   if (Object.keys(config).length > 0 && config.extends) {
     config = applyExtends(config, adjustedModuleName, originalFilePath);
@@ -99,7 +105,8 @@ const loadFromModule = (moduleName: any , originalFilePath: any ): any  => {
  * @returns {Object} The configuration information.
  * @private
  */
-const loadConfigFile = (filePath: any ): any  => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const loadConfigFile = (filePath: any): any => {
   let config = {};
 
   switch (path.extname(filePath)) {
@@ -126,11 +133,12 @@ const loadConfigFile = (filePath: any ): any  => {
  * @returns {Object} the parsed config object (empty object if there was a parse error)
  * @private
  */
-export const applyExtendsIfSpecified = (npmPackageJsonLintConfig: any , filepath: any ): any  => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const applyExtendsIfSpecified = (npmPackageJsonLintConfig: any, filepath: any): any => {
   let config = {...npmPackageJsonLintConfig};
 
   debug('Loading extends, if applicable');
-  if (config && config.hasOwnProperty('extends') && config.extends) {
+  if (config?.hasOwnProperty('extends') && config.extends) {
     debug('extends property present, applying.');
     config = applyExtends(config, filepath, filepath);
   }

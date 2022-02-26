@@ -1,7 +1,4 @@
 import {lint, ruleType} from '../../../src/rules/prefer-tilde-version-dependencies';
-
-const nodeName = 'dependencies';
-const rangeSpecifier = '~';
 import {Severity} from '../../../src/types/severity';
 
 describe('prefer-tilde-version-dependencies Unit Tests', () => {

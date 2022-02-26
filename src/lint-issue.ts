@@ -13,6 +13,7 @@ export class LintIssue {
    * @memberof LintIssue
    */
   lintId: string;
+
   /**
    * 'error' or 'warning'
    *
@@ -20,20 +21,22 @@ export class LintIssue {
    * @memberof LintIssue
    */
   severity: Severity;
+
   /**
    * Name of the node in the JSON the lint audits
    *
    * @type {string}
    * @memberof LintIssue
    */
-  node: string
+  node: string;
+
   /**
    * Human-friendly message to users
    *
    * @type {string}
    * @memberof LintIssue
    */
-  lintMessage: string
+  lintMessage: string;
 
   /**
    * Creates an instance of LintIssue.
@@ -59,7 +62,8 @@ export class LintIssue {
     const logSymbol = this.severity === Severity.Error ? logSymbols.error : logSymbols.warning;
     const formattedLintId = chalk.gray.dim(this.lintId);
     const formattedNode = chalk.gray.bold(this.node);
-    const formattedMessage = this.severity === Severity.Error ? chalk.bold.red(this.lintMessage) : chalk.yellow(this.lintMessage);
+    const formattedMessage =
+      this.severity === Severity.Error ? chalk.bold.red(this.lintMessage) : chalk.yellow(this.lintMessage);
 
     return `${logSymbol} ${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
   }

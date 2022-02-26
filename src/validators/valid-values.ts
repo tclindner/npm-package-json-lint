@@ -9,7 +9,15 @@ import {PackageJson} from 'type-fest';
  * @param validValues Array of valid values to validate against
  * @return True if the node is equal to one of the valid values or is missing. False if it is not.
  */
-export const isValidValue = (packageJsonData: PackageJson | any, nodeName: string, value: any, validValues: any): boolean => {
+export const isValidValue = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonData: PackageJson | any,
+  nodeName: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  validValues: any
+): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
   }
@@ -26,7 +34,15 @@ export const isValidValue = (packageJsonData: PackageJson | any, nodeName: strin
  * @param validRegexes Array of regex to validate against
  * @return True if the node matches one of the valid regexes or is missing. False if it is not.
  */
-export const matchValidValue = (packageJsonData: PackageJson | any, nodeName: string, value: any, validRegexes: any): boolean => {
+export const matchValidValue = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonData: PackageJson | any,
+  nodeName: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value: any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  validRegexes: any
+): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
   }

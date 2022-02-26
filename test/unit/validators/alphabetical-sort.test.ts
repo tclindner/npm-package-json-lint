@@ -1,5 +1,4 @@
 import * as alphabeticalSort from '../../../src/validators/alphabetical-sort';
-import {Severity} from '../../../src/types/severity';
 
 describe('alphabetical-sort Unit Tests', () => {
   describe('isInAlphabeticalOrder method', () => {

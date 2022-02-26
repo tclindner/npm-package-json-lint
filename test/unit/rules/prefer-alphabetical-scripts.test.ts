@@ -1,5 +1,5 @@
 import {lint, ruleType} from '../../../src/rules/prefer-alphabetical-scripts';
-import { Severity } from '../../../src/types/severity';
+import {Severity} from '../../../src/types/severity';
 import * as alphabeticalSort from '../../../src/validators/alphabetical-sort';
 
 jest.mock('../../../src/validators/alphabetical-sort');

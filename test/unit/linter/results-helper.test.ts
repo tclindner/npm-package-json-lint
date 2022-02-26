@@ -1,4 +1,4 @@
-import {aggregateCountsPerFile,aggregateOverallCounts} from '../../../src/linter/results-helper';
+import {aggregateCountsPerFile, aggregateOverallCounts} from '../../../src/linter/results-helper';
 
 describe('resultsHelper Unit Tests', () => {
   describe('aggregateCountsPerFile', () => {

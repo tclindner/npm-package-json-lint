@@ -1,5 +1,3 @@
-const debug = require('debug')('npm-package-json-lint:NpmPackageJsonLint');
-const pkg = require('../package.json');
 import isPlainObj from 'is-plain-obj';
 import slash from 'slash';
 import {Config} from './Config';
@@ -7,7 +5,12 @@ import {Rules} from './Rules';
 import {executeOnPackageJsonFiles, executeOnPackageJsonObject} from './linter/linter';
 import {getFileList} from './utils/getFileList';
 import {getIgnorer} from './utils/getIgnorer';
-import { Severity } from './types/severity';
+import {Severity} from './types/severity';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const debug = require('debug')('npm-package-json-lint:NpmPackageJsonLint');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const pkg = require('../package.json');
 
 const noIssues = 0;
 
@@ -18,18 +21,16 @@ const noIssues = 0;
  * @returns {boolean} True if error, false if warning.
  * @private
  */
-const isIssueAnError = (issue) => {
-  return issue.severity === Severity.Error;
-};
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+const isIssueAnError = (issue) => issue.severity === Severity.Error;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const isPackageJsonObjectValid = (packageJsonObject) => isPlainObj(packageJsonObject);
 
-const areRequiredOptionsValid = (packageJsonObject, patterns) => {
-  return (
-    (!patterns && !isPackageJsonObjectValid(packageJsonObject)) ||
-    (patterns && (packageJsonObject || isPackageJsonObjectValid(packageJsonObject)))
-  );
-};
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+const areRequiredOptionsValid = (packageJsonObject, patterns) =>
+  (!patterns && !isPackageJsonObjectValid(packageJsonObject)) ||
+  (patterns && (packageJsonObject || isPackageJsonObjectValid(packageJsonObject)));
 
 /**
  * Filters results to only include errors.
@@ -37,6 +38,7 @@ const areRequiredOptionsValid = (packageJsonObject, patterns) => {
  * @param {LintResult[]} results The results to filter.
  * @returns {LintResult[]} The filtered results.
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const getErrorResults = (results) => {
   const filtered = [];
 
@@ -69,16 +71,21 @@ const getErrorResults = (results) => {
  */
 
 export interface NpmPackageJsonLintOptions {
-  cwd?: string,
-  packageJsonObject?: any,
-  packageJsonFilePath?: string,
-  config?: any,
-  configFile?: any,
-  configBaseDirectory?: any,
-  patterns?: any,
-  quiet?: boolean,
-  ignorePath?: string,
-  fix?: boolean,
+  cwd?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonObject?: any;
+  packageJsonFilePath?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  config?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  configFile?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  configBaseDirectory?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  patterns?: any;
+  quiet?: boolean;
+  ignorePath?: string;
+  fix?: boolean;
 }
 
 /**
@@ -87,16 +94,26 @@ export interface NpmPackageJsonLintOptions {
  */
 export class NpmPackageJsonLint {
   cwd: string;
-  packageJsonObject: any;
-  packageJsonFilePath: string;
-  patterns: any;
-  quiet: boolean;
-  ignorePath: string;
-  fix: boolean;
-  version: string;
-  rules: Rules;
-  configHelper: Config;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonObject: any;
+
+  packageJsonFilePath: string;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  patterns: any;
+
+  quiet: boolean;
+
+  ignorePath: string;
+
+  fix: boolean;
+
+  version: string;
+
+  rules: Rules;
+
+  configHelper: Config;
 
   /**
    * constructor
@@ -140,6 +157,7 @@ export class NpmPackageJsonLint {
    * @returns {LinterResult} The results {@link LinterResult} from linting a collection of package.json files.
    * @memberof NpmPackageJsonLint
    */
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   lint() {
     debug('Starting lint');
 

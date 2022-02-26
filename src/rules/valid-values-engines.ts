@@ -1,17 +1,20 @@
 import semver from 'semver';
+import {PackageJson} from 'type-fest';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
-import {PackageJson} from 'type-fest';
 import {isObject} from '../validators/type';
 import {isValidValue} from '../validators/valid-values';
 
 const lintId = 'valid-values-engines';
 const nodeName = 'engines';
 const message = 'Invalid value for engines';
+
 export const ruleType = RuleType.Array;
+
 export const minItems = 1;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const lint = (packageJsonData: PackageJson | any, severity: Severity, validValues: any): LintIssue | null => {
   if (packageJsonData.hasOwnProperty(nodeName)) {
     if (isObject(packageJsonData, nodeName)) {
@@ -22,6 +25,7 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity, val
         return new LintIssue(lintId, severity, nodeName, message);
       }
 
+      // eslint-disable-next-line no-restricted-syntax, guard-for-in
       for (const engineDefinition in packageJsonData[nodeName]) {
         const versionRange = packageJsonData[nodeName][engineDefinition];
 

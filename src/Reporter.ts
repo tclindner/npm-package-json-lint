@@ -11,7 +11,9 @@ const oneFile = 1;
  * @returns {Undefined} No return
  * @private
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const printResultSetIssues = (issues) => {
+  // eslint-disable-next-line no-restricted-syntax
   for (const issue of issues) {
     // eslint-disable-next-line no-console
     console.log(issue.toString());
@@ -26,6 +28,7 @@ const printResultSetIssues = (issues) => {
  * @returns {Undefined} No results
  * @private
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const printIndividualResultSet = (resultSet, quiet) => {
   const {filePath, issues, ignored, errorCount, warningCount} = resultSet;
 
@@ -59,6 +62,7 @@ const printIndividualResultSet = (resultSet, quiet) => {
  * @returns {Undefined} No results
  * @private
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const printTotals = (linterOutput, quiet) => {
   const {errorCount, warningCount, ignoreCount} = linterOutput;
 
@@ -92,7 +96,9 @@ export class Reporter {
    * @return {undefined}            No return
    * @static
    */
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   static write(linterOutput, quiet) {
+    // eslint-disable-next-line no-restricted-syntax
     for (const result of linterOutput.results) {
       printIndividualResultSet(result, quiet);
     }

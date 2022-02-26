@@ -1,14 +1,15 @@
+import {PackageJson} from 'type-fest';
 import {isString} from '../validators/type';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
-import {PackageJson} from 'type-fest';
 
 const lintId = 'description-format';
 const nodeName = 'description';
+
 export const ruleType = RuleType.Object;
 
-// eslint-disable-next-line complexity
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const lint = (packageJsonData: PackageJson | any, severity: Severity, config: any): LintIssue | null => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return null;

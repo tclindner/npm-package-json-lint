@@ -1,5 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const {spawnSync} = require('child_process');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const figures = require('figures');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../package.json');
 
 const relativePathToCli = './dist/cli.js';
@@ -37,7 +40,7 @@ const threeRunTimeException = 3;
 // Force child process to run without colors
 const {env} = process;
 
-// @ts-ignore-error
+// @ts-expect-error-error
 env.FORCE_COLOR = 0;
 
 describe('cli Integration Tests', () => {

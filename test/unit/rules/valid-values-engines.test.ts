@@ -1,5 +1,5 @@
 import {lint, ruleType, minItems} from '../../../src/rules/valid-values-engines';
-import { Severity } from '../../../src/types/severity';
+import {Severity} from '../../../src/types/severity';
 
 describe('valid-values-engines Unit Tests', () => {
   describe('a rule type value should be exported', () => {

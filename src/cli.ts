@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
 import chalk from 'chalk';
-const debug = require('debug')('npm-package-json-lint:cli');
 import meow from 'meow';
 import {NpmPackageJsonLint} from './NpmPackageJsonLint';
 import {Reporter} from './Reporter';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const debug = require('debug')('npm-package-json-lint:cli');
 
 const exitCodes = {
   zeroClean: 0,

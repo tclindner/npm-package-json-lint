@@ -1,9 +1,12 @@
 import path from 'path';
-const debug = require('debug')('npm-package-json-lint:cosmicConfigTransformer');
 import {applyExtendsIfSpecified} from './applyExtendsIfSpecified';
 import {applyOverrides} from './applyOverrides';
 
-export const transform = (cwd: any , configBaseDirectory: any , filePathBeingLinted: any ): any  => {
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const debug = require('debug')('npm-package-json-lint:cosmicConfigTransformer');
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const transform = (cwd: any, configBaseDirectory: any, filePathBeingLinted: any): any => {
   debug(`cwd: ${cwd}`);
   debug(`configBaseDirectory`);
   debug(configBaseDirectory);
@@ -23,7 +26,7 @@ export const transform = (cwd: any , configBaseDirectory: any , filePathBeingLin
     debug(`cosmiconfigResult.filepath`);
     debug(filepath);
 
-    /* eslint-disable-next-line no-unused-vars */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const configDir = configBaseDirectory || path.dirname(filepath || '');
     const npmPackageJsonLintConfig = {...config};
 
