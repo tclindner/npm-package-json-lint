@@ -2,26 +2,6 @@ import * as format from '../../../src/validators/format';
 import {Severity} from '../../../src/types/severity';
 
 describe('format Unit Tests', () => {
-  describe('isLowercase method', () => {
-    describe('when the string is lowercase', () => {
-      test('true should be returned', () => {
-        const string = 'awesome-module';
-        const response = format.isLowercase(string);
-
-        expect(response).toBe(true);
-      });
-    });
-
-    describe('when the string is not lowercase', () => {
-      test('false should be returned', () => {
-        const string = 'aweSome-moDule';
-        const response = format.isLowercase(string);
-
-        expect(response).toBe(false);
-      });
-    });
-  });
-
   describe('isValidVersionNumber method', () => {
     describe('when the node does not exist in the package.json file', () => {
       test('true should be returned', () => {
