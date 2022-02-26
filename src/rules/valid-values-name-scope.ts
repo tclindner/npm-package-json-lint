@@ -2,7 +2,7 @@ import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
 import {PackageJson} from 'type-fest';
-const {matchValidValue} = require('../validators/valid-values');
+import {matchValidValue} from '../validators/valid-values';
 
 const lintId = 'valid-values-name-scope';
 const nodeName = 'name';
