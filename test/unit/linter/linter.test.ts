@@ -1,3 +1,5 @@
+import {Ignore} from 'ignore';
+import {Config} from 'cosmiconfig/dist/types';
 import {executeOnPackageJsonFiles, executeOnPackageJsonObject} from '../../../src/linter/linter';
 import {Rules} from '../../../src/Rules';
 import {LintIssue} from '../../../src/lint-issue';
@@ -7,10 +9,14 @@ describe('linter Unit Tests', () => {
   describe('executeOnPackageJsonFiles method tests', () => {
     test('files not ignored', () => {
       const patterns = ['./test/fixtures/valid/package.json', './test/fixtures/errors/package.json'];
-      const mockIgnorer = {
+      const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
+        add: jest.fn(),
+        createFilter: jest.fn(),
+        filter: jest.fn(),
+        test: jest.fn(),
       };
-      const mockConfigHelper = {
+      const mockConfigHelper: Config = {
         getConfigForFile: jest
           .fn()
           .mockReturnValueOnce({'name-format': 'error'})
@@ -55,10 +61,14 @@ describe('linter Unit Tests', () => {
 
     test('files ignored', () => {
       const patterns = ['./test/fixtures/valid/package.json', './test/fixtures/errors/package.json'];
-      const mockIgnorer = {
+      const mockIgnorer: Ignore = {
         ignores: (): boolean => true,
+        add: jest.fn(),
+        createFilter: jest.fn(),
+        filter: jest.fn(),
+        test: jest.fn(),
       };
-      const mockConfigHelper = {
+      const mockConfigHelper: Config = {
         getConfigForFile: jest.fn(),
       };
       const rules = new Rules();
@@ -102,10 +112,14 @@ describe('linter Unit Tests', () => {
       const packageJsonObj = {
         name: 'my-test-module',
       };
-      const mockIgnorer = {
+      const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
+        add: jest.fn(),
+        createFilter: jest.fn(),
+        filter: jest.fn(),
+        test: jest.fn(),
       };
-      const mockConfigHelper = {
+      const mockConfigHelper: Config = {
         getConfigForFile: jest.fn(),
       };
       const rules = new Rules();
@@ -141,10 +155,14 @@ describe('linter Unit Tests', () => {
       const packageJsonObj = {
         name: 'my-test-module',
       };
-      const mockIgnorer = {
+      const mockIgnorer: Ignore = {
         ignores: (): boolean => true,
+        add: jest.fn(),
+        createFilter: jest.fn(),
+        filter: jest.fn(),
+        test: jest.fn(),
       };
-      const mockConfigHelper = {
+      const mockConfigHelper: Config = {
         getConfigForFile: jest.fn(),
       };
       const rules = new Rules();
@@ -180,10 +198,14 @@ describe('linter Unit Tests', () => {
       const packageJsonObj = {
         name: 'my-test-module',
       };
-      const mockIgnorer = {
+      const mockIgnorer: Ignore = {
         ignores: (): boolean => true,
+        add: jest.fn(),
+        createFilter: jest.fn(),
+        filter: jest.fn(),
+        test: jest.fn(),
       };
-      const mockConfigHelper = {
+      const mockConfigHelper: Config = {
         getConfigForFile: jest.fn(),
       };
       const rules = new Rules();
@@ -219,10 +241,14 @@ describe('linter Unit Tests', () => {
       const packageJsonObj = {
         name: 'my-test-module',
       };
-      const mockIgnorer = {
+      const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
+        add: jest.fn(),
+        createFilter: jest.fn(),
+        filter: jest.fn(),
+        test: jest.fn(),
       };
-      const mockConfigHelper = {
+      const mockConfigHelper: Config = {
         getConfigForFile: jest.fn(),
       };
       const rules = new Rules();
@@ -242,7 +268,6 @@ describe('linter Unit Tests', () => {
         warningCount: 0,
       };
 
-      // @ts-expect-error-error
       const results = executeOnPackageJsonObject({
         cwd: process.cwd(),
         packageJsonObject: packageJsonObj,
@@ -259,10 +284,14 @@ describe('linter Unit Tests', () => {
         name: 'my-test-module',
         author: 'Spiderman',
       };
-      const mockIgnorer = {
+      const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
+        add: jest.fn(),
+        createFilter: jest.fn(),
+        filter: jest.fn(),
+        test: jest.fn(),
       };
-      const mockConfigHelper = {
+      const mockConfigHelper: Config = {
         getConfigForFile: jest.fn().mockReturnValue({'valid-values-author': ['error', ['Peter Parker']]}),
       };
       const rules = new Rules();
@@ -301,10 +330,14 @@ describe('linter Unit Tests', () => {
         name: 'my-test-module',
         author: 'Spiderman',
       };
-      const mockIgnorer = {
+      const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
+        add: jest.fn(),
+        createFilter: jest.fn(),
+        filter: jest.fn(),
+        test: jest.fn(),
       };
-      const mockConfigHelper = {
+      const mockConfigHelper: Config = {
         getConfigForFile: jest.fn().mockReturnValue({'valid-values-author': 'off'}),
       };
       const rules = new Rules();
@@ -342,10 +375,14 @@ describe('linter Unit Tests', () => {
         name: 'my-test-module',
         description: 'Spiderman',
       };
-      const mockIgnorer = {
+      const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
+        add: jest.fn(),
+        createFilter: jest.fn(),
+        filter: jest.fn(),
+        test: jest.fn(),
       };
-      const mockConfigHelper = {
+      const mockConfigHelper: Config = {
         getConfigForFile: jest.fn().mockReturnValue({
           'description-format': [
             'error',
@@ -399,10 +436,14 @@ describe('linter Unit Tests', () => {
           myModule: '^1.0.0',
         },
       };
-      const mockIgnorer = {
+      const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
+        add: jest.fn(),
+        createFilter: jest.fn(),
+        filter: jest.fn(),
+        test: jest.fn(),
       };
-      const mockConfigHelper = {
+      const mockConfigHelper: Config = {
         getConfigForFile: jest.fn().mockReturnValue({
           'no-caret-version-dependencies': 'error',
         }),
@@ -450,10 +491,14 @@ describe('linter Unit Tests', () => {
           myModule: '^1.0.0',
         },
       };
-      const mockIgnorer = {
+      const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
+        add: jest.fn(),
+        createFilter: jest.fn(),
+        filter: jest.fn(),
+        test: jest.fn(),
       };
-      const mockConfigHelper = {
+      const mockConfigHelper: Config = {
         getConfigForFile: jest.fn().mockReturnValue({
           'no-caret-version-dependencies': [
             'error',

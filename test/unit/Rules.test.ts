@@ -1,19 +1,19 @@
 import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
-import {Rules} from '../../src/Rules';
+import {Rules} from '../../src/rules';
 
 jest.mock('fs');
 jest.mock('path');
 
 describe('Rules Unit Tests', () => {
-  describe('_registerRule method', () => {
+  describe('registerRule method', () => {
     describe('when a ruleId and ruleModule are passed in', () => {
       test('the rules object contains the rule as a key and the module path as a value', () => {
         const rules = new Rules();
         const firstIndex = 0;
 
-        rules._registerRule('key', 'c/git/key.js');
+        rules.registerRule('key', 'c/git/key.js');
         expect(Object.keys(rules.rules)[firstIndex]).toStrictEqual('key');
         expect(rules.rules.key).toStrictEqual('c/git/key.js');
       });
@@ -81,7 +81,7 @@ describe('Rules Unit Tests', () => {
     describe('when getRules is called', () => {
       test('the rules object should be returned', () => {
         const rules = new Rules();
-        rules._registerRule('ruleId', 'ruleModule');
+        rules.registerRule('ruleId', 'ruleModule');
 
         expect(rules.getRules()).toStrictEqual({ruleId: 'ruleModule'});
       });

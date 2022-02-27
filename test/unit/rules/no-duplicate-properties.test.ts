@@ -1,12 +1,12 @@
 import {lint, ruleType} from '../../../src/rules/no-duplicate-properties';
-import {Parser} from '../../../src/Parser';
+import {sourceSymbol} from '../../../src/file-parser';
 import {Severity} from '../../../src/types/severity';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const parsePackageJson = (source) => {
   const json = JSON.parse(source);
 
-  json[Parser.sourceSymbol] = source;
+  json[sourceSymbol] = source;
 
   return json;
 };
