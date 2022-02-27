@@ -1,11 +1,14 @@
 import isPlainObj from 'is-plain-obj';
 import slash from 'slash';
+import {PackageJson} from 'type-fest';
 import {Config} from './Config';
-import {Rules} from './Rules';
-import {executeOnPackageJsonFiles, executeOnPackageJsonObject} from './linter/linter';
+import {Rules} from './rules';
+import {executeOnPackageJsonFiles, executeOnPackageJsonObject, OverallLintingResult} from './linter/linter';
 import {getFileList} from './utils/getFileList';
 import {getIgnorer} from './utils/getIgnorer';
 import {Severity} from './types/severity';
+import {PackageJsonFileLintingResult} from './types/package-json-linting-result';
+import {LintIssue} from './lint-issue';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('npm-package-json-lint:NpmPackageJsonLint');
@@ -17,29 +20,27 @@ const noIssues = 0;
 /**
  * Checks if the given issue is an error issue.
  *
- * @param {LintIssue} issue npm-package-json-lint issue
- * @returns {boolean} True if error, false if warning.
+ * @param issue A {@link LintIssue} object
+ * @returns True if error, false if warning.
  * @private
  */
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const isIssueAnError = (issue) => issue.severity === Severity.Error;
+const isIssueAnError = (issue: LintIssue): boolean => issue.severity === Severity.Error;
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const isPackageJsonObjectValid = (packageJsonObject) => isPlainObj(packageJsonObject);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isPackageJsonObjectValid = (packageJsonObject: PackageJson | any): boolean => isPlainObj(packageJsonObject);
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const areRequiredOptionsValid = (packageJsonObject, patterns) =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const areRequiredOptionsValid = (packageJsonObject: PackageJson | any, patterns: string[]): boolean =>
   (!patterns && !isPackageJsonObjectValid(packageJsonObject)) ||
   (patterns && (packageJsonObject || isPackageJsonObjectValid(packageJsonObject)));
 
 /**
  * Filters results to only include errors.
  *
- * @param {LintResult[]} results The results to filter.
- * @returns {LintResult[]} The filtered results.
+ * @param results The results to filter.
+ * @returns The filtered results.
  */
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const getErrorResults = (results) => {
+const getErrorResults = (results: PackageJsonFileLintingResult[]): PackageJsonFileLintingResult[] => {
   const filtered = [];
 
   results.forEach((result) => {
@@ -60,16 +61,6 @@ const getErrorResults = (results) => {
   return filtered;
 };
 
-/**
- * CLIEngine configuration object
- *
- * @typedef {Object} NpmPackageJsonLint
- * @property {string}   configFile      The configuration file to use.
- * @property {string}   cwd             The value to use for the current working directory.
- * @property {boolean}  useConfigFiles  False disables use of .npmpackagejsonlintrc.json files, npmpackagejsonlint.config.js files, and npmPackageJsonLintConfig object in package.json file.
- * @property {Object<string,*>} rules   An object of rules to use.
- */
-
 export interface NpmPackageJsonLintOptions {
   cwd?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -88,10 +79,6 @@ export interface NpmPackageJsonLintOptions {
   fix?: boolean;
 }
 
-/**
- * Public CLIEngine class
- * @class
- */
 export class NpmPackageJsonLint {
   cwd: string;
 
@@ -117,7 +104,7 @@ export class NpmPackageJsonLint {
 
   /**
    * constructor
-   * @param {NpmPackageJsonLint} options The options for the CLIEngine.
+   * @param options An instance of the {@link NpmPackageJsonLintOptions} options object.
    * @constructor
    */
   constructor(options: NpmPackageJsonLintOptions) {
@@ -154,11 +141,9 @@ export class NpmPackageJsonLint {
   /**
    * Runs the linter using the config specified in the constructor
    *
-   * @returns {LinterResult} The results {@link LinterResult} from linting a collection of package.json files.
-   * @memberof NpmPackageJsonLint
+   * @returns The results {@link OverallLintingResult} from linting a collection of package.json files.
    */
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  lint() {
+  lint(): OverallLintingResult {
     debug('Starting lint');
 
     if (areRequiredOptionsValid(this.packageJsonObject, this.patterns)) {
@@ -168,7 +153,7 @@ export class NpmPackageJsonLint {
     }
 
     const ignorer = getIgnorer(this.cwd, this.ignorePath);
-    let linterOutput;
+    let linterOutput: OverallLintingResult;
 
     if (this.patterns) {
       debug('Linting using patterns');

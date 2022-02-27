@@ -1,3 +1,4 @@
+import {RuleType} from '../types/rule-type';
 import {
   isArrayRuleSchemaValid,
   isConfigObjectSchemaValid,
@@ -93,17 +94,17 @@ const validateRule = (ruleModule: any, ruleName: any, userConfig: any, source: a
   if (ruleModule) {
     try {
       switch (ruleModule.ruleType) {
-        case 'array': {
+        case RuleType.Array: {
           isArrayRuleConfigValid(userConfig, ruleModule.minItems);
 
           break;
         }
-        case 'object': {
+        case RuleType.Object: {
           isObjectRuleConfigValid(userConfig);
 
           break;
         }
-        case 'optionalObject': {
+        case RuleType.OptionalObject: {
           isOptionalObjRuleConfigValid(userConfig);
 
           break;

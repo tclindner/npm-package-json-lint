@@ -3,6 +3,7 @@ import {validateRules} from './config/ConfigValidator';
 import {transform} from './config/cosmicConfigTransformer';
 import {applyExtendsIfSpecified} from './config/applyExtendsIfSpecified';
 import {applyOverrides} from './config/applyOverrides';
+import {Rules} from './rules';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('npm-package-json-lint:Config');
@@ -14,30 +15,37 @@ const noRules = 0;
  * @class
  */
 export class Config {
+  /**
+   * The user passed config object.
+   */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   config: any;
 
+  /**
+   * The current working directory.
+   */
   cwd: string;
 
+  /**
+   * The user passed configFile path.
+   */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   configFile: any;
 
+  /**
+   * The base directory that config should be pulled from.
+   */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   configBaseDirectory: any;
 
+  /**
+   * Rules object
+   */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rules: any;
 
-  /**
-   * Constructor
-   *
-   * @param {string} cwd        The current working directory.
-   * @param {Object} config     The user passed config object.
-   * @param {string} configFile The user passed configFile path.
-   * @param {string} configBaseDirectory The base directory that config should be pulled from.
-   * @param {Object} rules      Rules object
-   */
-  constructor(cwd, config, configFile, configBaseDirectory, rules) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  constructor(cwd: string, config: any, configFile: any, configBaseDirectory: any, rules: Rules) {
     if (config) {
       this.config = applyExtendsIfSpecified(config, 'PassedConfig');
     }
@@ -51,12 +59,12 @@ export class Config {
   /**
    * Gets the config for a file.
    *
-   * @param {string} filePath File path of the file being linted.
+   * @param filePath File path of the file being linted.
    * @returns {Object} A config object.
    * @memberof Config
    */
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  getConfigForFile(filePath) {
+  getConfigForFile(filePath: string) {
     debug(`Getting config for ${filePath}`);
     const filePathToSearch = filePath;
 

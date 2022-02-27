@@ -1,4 +1,5 @@
 import {PackageJson} from 'type-fest';
+import {OptionalObjectRuleConfig} from '../types/lint-function';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const semver = require('semver');
@@ -211,8 +212,7 @@ const absoluteVersionChecker = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   nodeName: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  config: any
+  config: OptionalObjectRuleConfig
 ): AbsoluteVersionCheckerResult => {
   const notFound = -1;
   const firstCharOfStr = 0;
@@ -226,7 +226,7 @@ const absoluteVersionChecker = (
       continue;
     }
 
-    const dependencyVersion = packageJsonData[nodeName][dependencyName];
+    const dependencyVersion: string = packageJsonData[nodeName][dependencyName];
 
     if (
       dependencyVersion.startsWith('^', firstCharOfStr) ||

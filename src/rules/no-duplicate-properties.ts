@@ -1,5 +1,5 @@
 import {PackageJson} from 'type-fest';
-import {Parser} from '../Parser';
+import {sourceSymbol} from '../file-parser';
 import {findDuplicatePropNames} from '../validators/property';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
@@ -16,7 +16,7 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity): Li
    * If we send package json straight to npm-package-json-lint, fallback to empty string.
    * Because we already lose information about duplicate properties.
    */
-  const source = packageJsonData[Parser.sourceSymbol] || '';
+  const source = packageJsonData[sourceSymbol] || '';
   const dupProps = findDuplicatePropNames(source);
 
   if (dupProps.length > 0) {

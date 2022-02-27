@@ -3,14 +3,19 @@ import {isString} from '../validators/type';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
+import {LintResult} from '../types/lint-result';
 
 const lintId = 'description-format';
 const nodeName = 'description';
 
 export const ruleType = RuleType.Object;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const lint = (packageJsonData: PackageJson | any, severity: Severity, config: any): LintIssue | null => {
+export const lint = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonData: PackageJson | any,
+  severity: Severity,
+  config: Record<string, boolean>
+): LintResult => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return null;
   }
