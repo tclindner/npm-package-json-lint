@@ -30,12 +30,14 @@
   "main": "dist/api.js",
   "types": "index.d.ts",
   "scripts": {
-    "build": "node esbuild.config.js",
+    "build": "npm run esbuild && npm run tsc",
+    "esbuild": "node esbuild.config.js",
     "eslint": "eslint . --format=node_modules/eslint-formatter-pretty",
     "npmpackagejsonlint": "node src/cli.js ./package.json",
     "lint": "npm run eslint && npm run npmpackagejsonlint",
     "test": "jest",
-    "test:ci": "jest --runInBand"
+    "test:ci": "jest --runInBand",
+    "tsc": "tsc --project tsconfig.json"
   },
   "dependencies": {
     "ajv": "^8.10.0",
