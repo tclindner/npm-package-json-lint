@@ -3,7 +3,7 @@
 import chalk from 'chalk';
 import meow from 'meow';
 import {NpmPackageJsonLint} from './NpmPackageJsonLint';
-import {write} from './reporter';
+import {write} from './Reporter';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('npm-package-json-lint:cli');
