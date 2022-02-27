@@ -1,8 +1,8 @@
 import * as cosmiconfig from 'cosmiconfig';
-import {Config} from '../../src/Config';
+import {Config} from '../../src/configuration';
 import * as applyOverrides from '../../src/config/applyOverrides';
 import * as applyExtendsIfSpecified from '../../src/config/applyExtendsIfSpecified';
-import {Rules} from '../../src/rules';
+import {Rules} from '../../src/native-rules';
 
 const rules = new Rules();
 rules.load();

@@ -1,13 +1,13 @@
 import path from 'path';
 import {PackageJson} from 'type-fest';
 import {Ignore} from 'ignore';
-import {Rules} from '../rules';
+import {Rules} from '../native-rules';
 import {parseJsonFile} from '../file-parser';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
 import {aggregateCountsPerFile, aggregateOverallCounts, OverallAggregatedResultCounts} from './results-helper';
-import {Config} from '../Config';
+import {Config} from '../configuration';
 import {PackageJsonFileLintingResult} from '../types/package-json-linting-result';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
