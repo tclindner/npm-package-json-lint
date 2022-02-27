@@ -1,5 +1,6 @@
 import {PackageJson} from 'type-fest';
 import {LintIssue} from '../lint-issue';
+import {LintResult} from '../types/lint-result';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
 import {isString, isObject} from '../validators/type';
@@ -13,8 +14,14 @@ export const ruleType = RuleType.Array;
 
 export const minItems = 1;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const lint = (packageJsonData: PackageJson | any, severity: Severity, validValues: any): LintIssue | null => {
+export const arrayType = 'string';
+
+export const lint = <T>(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonData: PackageJson | any,
+  severity: Severity,
+  validValues: T[]
+): LintResult => {
   let value;
 
   if (isString(packageJsonData, nodeName)) {
@@ -29,7 +36,7 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity, val
     return new LintIssue(lintId, severity, nodeName, 'author node has invalid data type');
   }
 
-  if (!isValidValue(packageJsonData, nodeName, value, validValues)) {
+  if (!isValidValue<T>(packageJsonData, nodeName, value, validValues)) {
     return new LintIssue(lintId, severity, nodeName, message);
   }
 

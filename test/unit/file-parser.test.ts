@@ -1,5 +1,5 @@
 import fs from 'fs';
-import {Parser} from '../../src/Parser';
+import {parseJsonFile, sourceSymbol} from '../../src/file-parser';
 
 jest.mock('fs');
 
@@ -14,9 +14,11 @@ describe('Parser Unit Tests', () => {
         // @ts-expect-error-error
         fs.readFileSync.mockReturnValue(json);
 
-        const parsedJson = Parser.parseJsonFile('dummyFile.txt');
+        const parsedJson = parseJsonFile('dummyFile.txt');
         expect(parsedJson).toStrictEqual(obj);
-        expect(parsedJson[Parser.sourceSymbol]).toStrictEqual(json);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        expect(parsedJson[sourceSymbol]).toStrictEqual(json);
       });
     });
 
@@ -28,7 +30,7 @@ describe('Parser Unit Tests', () => {
         });
 
         expect(() => {
-          Parser.parseJsonFile('missing.json');
+          parseJsonFile('missing.json');
         }).toThrow('Failed to read config file: missing.json. \nError: Error');
       });
     });

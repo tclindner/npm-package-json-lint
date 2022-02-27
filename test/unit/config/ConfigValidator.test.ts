@@ -1,5 +1,5 @@
 import * as configValidator from '../../../src/config/ConfigValidator';
-import {Rules} from '../../../src/Rules';
+import {Rules} from '../../../src/rules';
 
 const rules = new Rules();
 rules.load();

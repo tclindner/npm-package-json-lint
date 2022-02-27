@@ -1,54 +1,75 @@
 import path from 'path';
-import {Parser} from '../Parser';
+import {PackageJson} from 'type-fest';
+import {Ignore} from 'ignore';
+import {Rules} from '../rules';
+import {parseJsonFile} from '../file-parser';
+import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
-import {aggregateCountsPerFile, aggregateOverallCounts} from './results-helper';
+import {aggregateCountsPerFile, aggregateOverallCounts, OverallAggregatedResultCounts} from './results-helper';
+import {Config} from '../Config';
+import {PackageJsonFileLintingResult} from '../types/package-json-linting-result';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('npm-package-json-lint:linter');
 
-/**
- * A package.json file linting result.
- * @typedef {Object} FileLintResult
- * @property {string}       filePath      The path to the file that was linted.
- * @property {LintIssue[]}  issues        An array of LintIssues from the run.
- * @property {boolean}      ignored       A flag indicated whether the file was ignored or not.
- * @property {number}       errorCount    Number of errors for the package.json file.
- * @property {number}       warningCount  Number of warnings for the package.json file.
- */
+export interface CreateResultObjectOptions {
+  /**
+   * The current working directory.
+   */
+  cwd: string;
+  /**
+   * An optional string representing the package.json file.
+   */
+  fileName: string;
+  /**
+   * A flag indicating that the file was skipped.
+   */
+  ignored: boolean;
+  /**
+   * A list of issues.
+   */
+  issues: LintIssue[];
+  /**
+   * Number of errors.
+   */
+  errorCount: number;
+  /**
+   * Number of warnings.
+   */
+  warningCount: number;
+}
 
 /**
  * Creates a results object.
  *
- * @param {string} cwd The current working directory.
- * @param {string} fileName An optional string representing the package.json file.
- * @param {boolean} ignored A flag indicating that the file was skipped.
- * @param {LintIssue[]} issues A list of issues.
- * @param {number} errorCount Number of errors.
- * @param {number} warningCount Number of warnings.
- * @returns {FileLintResult} The lint results {@link FileLintResult} for the package.json file.
- * @private
+ * @param options A {@link CreateResultObjectOptions} object
+ * @returns The lint results {@link PackageJsonFileLintingResult} for the package.json file.
+ * @internal
  */
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const createResultObject = ({cwd, fileName, ignored, issues, errorCount, warningCount}) => ({
-  filePath: `./${path.relative(cwd, fileName)}`,
-  issues,
-  ignored,
-  errorCount,
-  warningCount,
-});
+const createResultObject = (options: CreateResultObjectOptions): PackageJsonFileLintingResult => {
+  const {cwd, fileName, ignored, issues, errorCount, warningCount} = options;
+
+  return {
+    filePath: `./${path.relative(cwd, fileName)}`,
+    issues,
+    ignored,
+    errorCount,
+    warningCount,
+  };
+};
 
 /**
  * Runs configured rules against the provided package.json object.
  *
- * @param {Object} packageJsonData Valid package.json data
- * @param {Object} configObj       Configuration object
- * @param {Object} rules           Object of rule definitions
- * @return {LintIssue[]} An array of {@link LintIssue} objects.
- * @private
+ * @param packageJsonData Valid package.json data
+ * @param configObj Configuration object
+ * @param rules Object of rule definitions
+ * @return An array of {@link LintIssue} objects.
+ * @internal
  */
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const lint = (packageJsonData, configObj, rules) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const lint = (packageJsonData: any, configObj, rules: Rules): LintIssue[] => {
   const lintIssues = [];
 
   // eslint-disable-next-line no-restricted-syntax, guard-for-in
@@ -56,7 +77,7 @@ const lint = (packageJsonData, configObj, rules) => {
     const ruleModule = rules.get(rule);
 
     let severity = Severity.Off;
-    let ruleConfig = {};
+    let ruleConfig;
 
     if (ruleModule.ruleType === RuleType.Array || ruleModule.ruleType === RuleType.Object) {
       severity = typeof configObj[rule] === 'string' && configObj[rule] === 'off' ? configObj[rule] : configObj[rule][0];
@@ -90,16 +111,23 @@ const lint = (packageJsonData, configObj, rules) => {
 /**
  * Processes package.json object
  *
- * @param {string} cwd The current working directory.
- * @param {Object} packageJsonObj   An object representation of a package.json file.
- * @param {Object} config A config object.
- * @param {String} fileName An optional string representing the package.json file.
- * @param {Object} rules An instance of `Rules`.
- * @returns {FileLintResult} A {@link FileLintResult} object with the result of linting a package.json file.
- * @private
+ * @param cwd The current working directory.
+ * @param packageJsonObj   An object representation of a package.json file.
+ * @param config A config object.
+ * @param fileName An optional string representing the package.json file.
+ * @param rules An instance of `Rules`.
+ * @returns A {@link PackageJsonFileLintingResult} object with the result of linting a package.json file.
+ * @internal
  */
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const processPackageJsonObject = (cwd, packageJsonObj, config, fileName, rules) => {
+const processPackageJsonObject = (
+  cwd: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonObj: PackageJson | any,
+  // TODO: Type
+  config,
+  fileName: string,
+  rules: Rules
+): PackageJsonFileLintingResult => {
   const lintIssues = lint(packageJsonObj, config, rules);
   const counts = aggregateCountsPerFile(lintIssues);
   const result = createResultObject({
@@ -117,42 +145,74 @@ const processPackageJsonObject = (cwd, packageJsonObj, config, fileName, rules) 
 /**
  * Processes a package.json file.
  *
- * @param {string} cwd The current working directory.
- * @param {string} fileName The filename of the file being linted.
- * @param {Object} config A config object.
- * @param {Object} rules An instance of `Rules`.
- * @returns {FileLintResult} A {@link FileLintResult} object with the result of linting a package.json file.
- * @private
+ * @param cwd The current working directory.
+ * @param fileName The filename of the file being linted.
+ * @param config A config object.
+ * @param rules An instance of `Rules`.
+ * @returns A {@link PackageJsonFileLintingResult} object with the result of linting a package.json file.
+ * @internal
  */
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const processPackageJsonFile = (cwd, fileName, config, rules) => {
-  const packageJsonObj = Parser.parseJsonFile(path.resolve(fileName));
+// TODO: Type
+const processPackageJsonFile = (cwd: string, fileName: string, config, rules: Rules): PackageJsonFileLintingResult => {
+  const packageJsonObj = parseJsonFile(path.resolve(fileName));
 
   return processPackageJsonObject(cwd, packageJsonObj, config, fileName, rules);
 };
 
-/**
- * Linting results for a collection of package.json files.
- * @typedef {Object} LinterResult
- * @property {FileLintResult[]} results An array of LintIssues from the run.
- * @property {number} ignoreCount   A flag indicated whether the file was ignored or not.
- * @property {number} errorCount    Number of errors for the package.json file.
- * @property {number} warningCount  Number of warnings for the package.json file.
- */
+export interface LinterResult {
+  results: LintIssue[];
+  ignoreCount: number;
+  /**
+   * Number of errors for the package.json file.
+   */
+  errorCount: number;
+  /**
+   * Number of warnings for the package.json file.
+   */
+  warningCount: number;
+}
+
+export interface ExecuteOnPackageJsonObjectOptions {
+  /**
+   * The current working directory.
+   */
+  cwd: string;
+  /**
+   *  An object representation of a package.json file.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonObject: PackageJson | any;
+  /**
+   * An optional string representing the texts filename.
+   */
+  filename?: string;
+  /**
+   * An instance of the `ignore` module.
+   */
+  ignorer: Ignore;
+  /**
+   * An instance of {@Config}.
+   */
+  configHelper: Config;
+  /**
+   * An instance of {@link Rules}
+   */
+  rules: Rules;
+}
+
+export interface OverallLintingResult extends OverallAggregatedResultCounts {
+  results: PackageJsonFileLintingResult[];
+}
 
 /**
  * Executes linter on package.json object
  *
- * @param {string} cwd The current working directory.
- * @param {Object} packageJsonObj An object representation of a package.json file.
- * @param {string} filename An optional string representing the texts filename.
- * @param {Object} ignorer An instance of the `ignore` module.
- * @param {Object} configHelper An instance of `Config`.
- * @param {Object} rules An instance of `Rules`.
- * @returns {LinterResult} The results {@link LinterResult} from linting a collection of package.json files.
+ * @param options A {@link ExecuteOnPackageJsonObjectOptions} object
+ * @returns The results {@link OverallLintingResult} from linting a collection of package.json files.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ignorer, configHelper, rules}): any => {
+export const executeOnPackageJsonObject = (options: ExecuteOnPackageJsonObjectOptions): OverallLintingResult => {
+  const {cwd, packageJsonObject, filename, ignorer, configHelper, rules} = options;
+
   debug('executing on package.json object');
   const results = [];
 
@@ -197,17 +257,37 @@ export const executeOnPackageJsonObject = ({cwd, packageJsonObject, filename, ig
   };
 };
 
+export interface ExecuteOnPackageJsonFilesOptions {
+  /**
+   * The current working directory.
+   */
+  cwd: string;
+  /**
+   * An array of files and directory names.
+   */
+  fileList: string[];
+  /**
+   * An instance of the `ignore` module.
+   */
+  ignorer: Ignore;
+  /**
+   * An instance of {@Config}.
+   */
+  configHelper: Config;
+  /**
+   * An instance of {@link Rules}
+   */
+  rules: Rules;
+}
+
 /**
  * Executes the current configuration on an array of file and directory names.
- * @param {string} cwd The current working directory.
- * @param {string[]} fileList An array of files and directory names.
- * @param {Object} ignorer An instance of the `ignore` module.
- * @param {Object} configHelper An instance of `Config`.
- * @param {Object} rules An instance of `Rules`.
- * @returns {LinterResult} The results {@link LinterResult} from linting a collection of package.json files.
+ * @param options A {@link ExecuteOnPackageJsonFilesOptions} object
+ * @returns The results {@link OverallLintingResult} from linting a collection of package.json files.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const executeOnPackageJsonFiles = ({cwd, fileList, ignorer, configHelper, rules}): any => {
+export const executeOnPackageJsonFiles = (options: ExecuteOnPackageJsonFilesOptions): OverallLintingResult => {
+  const {cwd, fileList, ignorer, configHelper, rules} = options;
+
   debug('executing on package.json files');
   const results = fileList.map((filePath) => {
     const relativeFilePath = path.relative(cwd, filePath);

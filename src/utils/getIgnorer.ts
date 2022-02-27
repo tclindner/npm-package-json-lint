@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import ignore from 'ignore';
+import ignore, {Ignore} from 'ignore';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('npm-package-json-lint:getIgnorer');
@@ -11,12 +11,11 @@ const FILE_NOT_FOUND_ERROR_CODE = 'ENOENT';
 /**
  * Generates ignorer based on ignore file content.
  *
- * @param {string} cwd        Current work directory.
- * @param {string} ignorePath Ignore path.
- * @returns {Object}          Ignorer
+ * @param cwd Current work directory.
+ * @param ignorePath Ignore path.
+ * @returns An instance of an Ignorer
  */
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export const getIgnorer = (cwd, ignorePath) => {
+export const getIgnorer = (cwd: string, ignorePath: string): Ignore => {
   const ignoreFilePath = ignorePath || DEFAULT_IGNORE_FILENAME;
 
   debug(`ignoreFilePath: ${ignoreFilePath}`);

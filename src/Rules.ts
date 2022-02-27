@@ -1,35 +1,39 @@
 import chalk from 'chalk';
-import fs from 'fs';
+import {readdirSync} from 'fs';
 import path from 'path';
+import {LintFunction} from './types/lint-function';
+import {RuleType} from './types/rule-type';
+
+export interface Rule {
+  lint: LintFunction;
+  ruleType: RuleType;
+  minItems?: number;
+}
 
 export class Rules {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  rules: any;
+  rules: Record<string, string>;
 
-  /**
-   * Constructor
-   */
   constructor() {
     this.rules = {};
   }
 
   /**
    * Loads rules
-   * @return {Object} Set of rules
+   *
+   * @return Set of rules
    */
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  load() {
+  load(): Record<string, string> {
     const rulesDirectory = path.join(__dirname, 'rules');
 
     try {
-      fs.readdirSync(rulesDirectory).forEach((file) => {
+      readdirSync(rulesDirectory).forEach((filePath) => {
         const beginIndex = 0;
         const endIndex = -3;
-        const ruleId = file.slice(beginIndex, endIndex);
-        const ruleModule = path.join(rulesDirectory, file);
+        // remove the file extension, e.g. `.js`
+        const ruleId = filePath.slice(beginIndex, endIndex);
+        const filePathToRuleModule = path.join(rulesDirectory, filePath);
 
-        // eslint-disable-next-line no-underscore-dangle
-        this._registerRule(ruleId, ruleModule);
+        this.registerRule(ruleId, filePathToRuleModule);
       });
 
       return this.rules;
@@ -39,12 +43,12 @@ export class Rules {
   }
 
   /**
-   * Loads a rule
-   * @param  {String} ruleId Name of the rule
-   * @return {Object}        Rule
+   * Loads a rule module
+   *
+   * @param ruleId Name of the rule
+   * @return Rule module
    */
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  get(ruleId) {
+  get(ruleId: string): Rule {
     const rule = this.rules[ruleId];
 
     if (typeof rule === 'undefined') {
@@ -53,28 +57,28 @@ export class Rules {
       throw new Error(chalk.bold.red(errorMsg));
     }
 
-    // eslint-disable-next-line import/no-dynamic-require, global-require
-    return require(this.rules[ruleId]);
+    // eslint-disable-next-line import/no-dynamic-require, global-require, @typescript-eslint/no-var-requires
+    const ruleModule = require(this.rules[ruleId]);
+
+    return ruleModule;
   }
 
   /**
    * Gets entire rule set
    *
-   * @returns {Object} Rule set
+   * @returns Rule set
    */
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  getRules() {
+  getRules(): Record<string, string> {
     return this.rules;
   }
 
   /**
    * Registers a rule in the rules object
-   * @param  {String}     ruleId      Name of the rule
-   * @param  {String}     ruleModule  Path to rule
-   * @return {undefined}              No return
+   *
+   * @param ruleId Name of the rule
+   * @param filePathToRuleModule File path to rule
    */
-  // eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/explicit-function-return-type
-  _registerRule(ruleId, ruleModule) {
-    this.rules[ruleId] = ruleModule;
+  registerRule(ruleId: string, filePathToRuleModule: string): void {
+    this.rules[ruleId] = filePathToRuleModule;
   }
 }

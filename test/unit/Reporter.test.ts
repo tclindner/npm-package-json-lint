@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import {Reporter} from '../../src/Reporter';
+import {write} from '../../src/reporter';
 
 describe('Reporter Unit Tests', () => {
   describe('write method', () => {
@@ -23,7 +23,7 @@ describe('Reporter Unit Tests', () => {
 
         const consoleMock = jest.spyOn(console, 'log');
 
-        Reporter.write(results, false);
+        write(results, false);
         expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
 
         consoleMock.mockRestore();
@@ -55,7 +55,7 @@ describe('Reporter Unit Tests', () => {
 
         const consoleMock = jest.spyOn(console, 'log');
 
-        Reporter.write(results, false);
+        write(results, false);
         expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
         expect(console.log).toHaveBeenNthCalledWith(1, '');
         expect(console.log).toHaveBeenNthCalledWith(2, chalk.underline('dummyText'));
@@ -97,7 +97,7 @@ describe('Reporter Unit Tests', () => {
 
         const consoleMock = jest.spyOn(console, 'log');
 
-        Reporter.write(results, false);
+        write(results, false);
         expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
         expect(console.log).toHaveBeenNthCalledWith(1, '');
         expect(console.log).toHaveBeenNthCalledWith(2, chalk.underline('dummyText'));
@@ -133,7 +133,7 @@ describe('Reporter Unit Tests', () => {
 
         const consoleMock = jest.spyOn(console, 'log');
 
-        Reporter.write(results, true);
+        write(results, true);
         expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
         expect(console.log).toHaveBeenNthCalledWith(1, '');
         expect(console.log).toHaveBeenNthCalledWith(2, chalk.underline('dummyText'));
@@ -186,7 +186,7 @@ describe('Reporter Unit Tests', () => {
 
         const consoleMock = jest.spyOn(console, 'log');
 
-        Reporter.write(results, false);
+        write(results, false);
         expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
         expect(console.log).toHaveBeenNthCalledWith(1, '');
         expect(console.log).toHaveBeenNthCalledWith(2, chalk.underline('dummyText'));
@@ -215,7 +215,7 @@ describe('Reporter Unit Tests', () => {
 
         const consoleMock = jest.spyOn(console, 'log');
 
-        Reporter.write(results, false);
+        write(results, false);
         expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
         expect(console.log).toHaveBeenNthCalledWith(1, '');
         expect(console.log).toHaveBeenNthCalledWith(2, `${chalk.yellow.underline('dummyText')} - ignored`);
@@ -265,7 +265,7 @@ describe('Reporter Unit Tests', () => {
 
         const consoleMock = jest.spyOn(console, 'log');
 
-        Reporter.write(results, false);
+        write(results, false);
 
         expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
         expect(console.log).toHaveBeenNthCalledWith(1, '');
@@ -325,7 +325,7 @@ describe('Reporter Unit Tests', () => {
 
         const consoleMock = jest.spyOn(console, 'log');
 
-        Reporter.write(results, true);
+        write(results, true);
         expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
         expect(console.log).toHaveBeenNthCalledWith(1, '');
         expect(console.log).toHaveBeenNthCalledWith(2, chalk.underline('dummyText'));
@@ -373,7 +373,7 @@ describe('Reporter Unit Tests', () => {
 
         const consoleMock = jest.spyOn(console, 'log');
 
-        Reporter.write(results, false);
+        write(results, false);
         expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
         expect(console.log).toHaveBeenNthCalledWith(1, '');
         expect(console.log).toHaveBeenNthCalledWith(2, `${chalk.yellow.underline('dummyText')} - ignored`);
@@ -423,7 +423,7 @@ describe('Reporter Unit Tests', () => {
 
         const consoleMock = jest.spyOn(console, 'log');
 
-        Reporter.write(results, true);
+        write(results, true);
         expect(console.log).toHaveBeenCalledTimes(expectedCallCount);
         expect(console.log).toHaveBeenNthCalledWith(1, '');
         expect(console.log).toHaveBeenNthCalledWith(2, `${chalk.yellow.underline('dummyText')} - ignored`);

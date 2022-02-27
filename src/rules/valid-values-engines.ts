@@ -1,6 +1,7 @@
 import semver from 'semver';
 import {PackageJson} from 'type-fest';
 import {LintIssue} from '../lint-issue';
+import {LintResult} from '../types/lint-result';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
 import {isObject} from '../validators/type';
@@ -14,14 +15,18 @@ export const ruleType = RuleType.Array;
 
 export const minItems = 1;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const lint = (packageJsonData: PackageJson | any, severity: Severity, validValues: any): LintIssue | null => {
+export const lint = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonData: PackageJson | any,
+  severity: Severity,
+  validValues: object[]
+): LintResult => {
   if (packageJsonData.hasOwnProperty(nodeName)) {
     if (isObject(packageJsonData, nodeName)) {
-      const validValuesAsJson = validValues.map((validValue) => JSON.stringify(validValue));
-      const valueAsJson = JSON.stringify(packageJsonData[nodeName]);
+      const validValuesAsJsonString = validValues.map((validValue) => JSON.stringify(validValue));
+      const valueAsJsonString = JSON.stringify(packageJsonData[nodeName]);
 
-      if (!isValidValue(packageJsonData, nodeName, valueAsJson, validValuesAsJson)) {
+      if (!isValidValue<string>(packageJsonData, nodeName, valueAsJsonString, validValuesAsJsonString)) {
         return new LintIssue(lintId, severity, nodeName, message);
       }
 

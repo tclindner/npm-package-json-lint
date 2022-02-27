@@ -2,7 +2,7 @@ import * as cosmiconfig from 'cosmiconfig';
 import {Config} from '../../src/Config';
 import * as applyOverrides from '../../src/config/applyOverrides';
 import * as applyExtendsIfSpecified from '../../src/config/applyExtendsIfSpecified';
-import {Rules} from '../../src/Rules';
+import {Rules} from '../../src/rules';
 
 const rules = new Rules();
 rules.load();

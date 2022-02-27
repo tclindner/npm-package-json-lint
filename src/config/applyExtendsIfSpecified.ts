@@ -1,5 +1,5 @@
 import path from 'path';
-import {Parser} from '../Parser';
+import {parseJavaScriptFile, parseJsonFile} from '../file-parser';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('npm-package-json-lint:applyExtendsIfSpecified');
@@ -111,11 +111,11 @@ const loadConfigFile = (filePath: any): any => {
 
   switch (path.extname(filePath)) {
     case '.js':
-      config = Parser.parseJavaScriptFile(filePath);
+      config = parseJavaScriptFile(filePath);
       break;
 
     case '.json':
-      config = Parser.parseJsonFile(filePath);
+      config = parseJsonFile(filePath);
       break;
 
     default:

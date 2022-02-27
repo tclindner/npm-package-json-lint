@@ -38,4 +38,5 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: npm ci --no-progress
+      - run: npm run build
       - run: npm run test:ci

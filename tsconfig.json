@@ -1,8 +1,13 @@
 {
   "compilerOptions": {
+    // See https://github.com/microsoft/TypeScript/wiki/Node-Target-Mapping#node-12
+    "lib": ["ES2019"],
+    "module": "commonjs",
+    "target": "ES2019",
     "downlevelIteration": true,
     "emitDeclarationOnly": true,
     "declaration": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "outDir": "dist",
   }
 }

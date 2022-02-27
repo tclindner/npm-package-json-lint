@@ -1,20 +1,50 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-extraneous-dependencies
-const esbuild = require('esbuild');
+/* eslint-disable @typescript-eslint/no-var-requires, import/no-extraneous-dependencies */
 
+const esbuild = require('esbuild');
 // Automatically exclude all node_modules from the bundled version
-// eslint-disable-next-line import/no-extraneous-dependencies, @typescript-eslint/no-var-requires
 const {nodeExternalsPlugin} = require('esbuild-node-externals');
+const {readdirSync} = require('fs');
+const path = require('path');
+
+const rulesDirectory = path.join(__dirname, 'src', 'rules');
+const bundle = true;
+const minify = true;
+const platform = 'node';
+const sourcemap = true;
+const target = 'node12';
+const plugins = [nodeExternalsPlugin()];
+
+readdirSync(rulesDirectory).forEach((file) => {
+  const ruleFilePath = path.join(rulesDirectory, file);
+  const beginIndex = 0;
+  const endIndex = -3;
+  const ruleFileNameWithoutExtension = file.slice(beginIndex, endIndex);
+
+  esbuild
+    .build({
+      entryPoints: [ruleFilePath],
+      outfile: `dist/rules/${ruleFileNameWithoutExtension}.js`,
+      bundle,
+      minify,
+      platform,
+      sourcemap: false,
+      target,
+      plugins,
+    })
+    // eslint-disable-next-line unicorn/no-process-exit
+    .catch(() => process.exit(1));
+});
 
 esbuild
   .build({
     entryPoints: ['./src/api.ts'],
     outfile: 'dist/api.js',
-    bundle: true,
-    minify: true,
-    platform: 'node',
-    sourcemap: true,
-    target: 'node14',
-    plugins: [nodeExternalsPlugin()],
+    bundle,
+    minify,
+    platform,
+    sourcemap,
+    target,
+    plugins,
   })
   // eslint-disable-next-line unicorn/no-process-exit
   .catch(() => process.exit(1));
@@ -23,12 +53,12 @@ esbuild
   .build({
     entryPoints: ['./src/cli.ts'],
     outfile: 'dist/cli.js',
-    bundle: true,
-    minify: true,
-    platform: 'node',
-    sourcemap: true,
-    target: 'node14',
-    plugins: [nodeExternalsPlugin()],
+    bundle,
+    minify,
+    platform,
+    sourcemap,
+    target,
+    plugins,
   })
   // eslint-disable-next-line unicorn/no-process-exit
   .catch(() => process.exit(1));

@@ -9,14 +9,12 @@ import {PackageJson} from 'type-fest';
  * @param validValues Array of valid values to validate against
  * @return True if the node is equal to one of the valid values or is missing. False if it is not.
  */
-export const isValidValue = (
+export const isValidValue = <T>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   nodeName: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: any,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  validValues: any
+  value: T,
+  validValues: T[]
 ): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
@@ -38,10 +36,8 @@ export const matchValidValue = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   nodeName: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: any,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  validRegexes: any
+  value: string,
+  validRegexes: RegExp[]
 ): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;

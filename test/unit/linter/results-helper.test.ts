@@ -1,18 +1,21 @@
+import {LintIssue} from '../../../src/lint-issue';
 import {aggregateCountsPerFile, aggregateOverallCounts} from '../../../src/linter/results-helper';
+import {PackageJsonFileLintingResult} from '../../../src/types/package-json-linting-result';
+import {Severity} from '../../../src/types/severity';
 
 describe('resultsHelper Unit Tests', () => {
   describe('aggregateCountsPerFile', () => {
     test('multiple issues', () => {
-      const issues = [
+      const issues: LintIssue[] = [
         {
           lintId: 'require-name',
-          severity: 'error',
+          severity: Severity.Error,
           node: 'name',
           lintMessage: 'dummyText',
         },
         {
           lintId: 'require-name',
-          severity: 'warning',
+          severity: Severity.Warning,
           node: 'name',
           lintMessage: 'dummyText',
         },
@@ -34,27 +37,31 @@ describe('resultsHelper Unit Tests', () => {
 
   describe('aggregateOverallCounts', () => {
     test('multiple issues', () => {
-      const results = [
+      const results: PackageJsonFileLintingResult[] = [
         {
           issues: [],
+          filePath: '',
           ignored: true,
           errorCount: 0,
           warningCount: 0,
         },
         {
           issues: [],
+          filePath: '',
           ignored: false,
           errorCount: 1,
           warningCount: 1,
         },
         {
           issues: [],
+          filePath: '',
           ignored: false,
           errorCount: 9,
           warningCount: 0,
         },
         {
           issues: [],
+          filePath: '',
           ignored: true,
           errorCount: 0,
           warningCount: 0,

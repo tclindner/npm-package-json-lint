@@ -315,7 +315,7 @@ Totals
 
   describe('when the cli is run against a monorepo with overrides', () => {
     test('each file results and totals will be output', () => {
-      const cli = spawnSync('../../../src/cli.js', [`**/package.json`], {
+      const cli = spawnSync('../../../dist/cli.js', [`**/package.json`], {
         env,
         cwd: './test/fixtures/monorepo',
       });
@@ -350,7 +350,7 @@ Totals
 
     describe('when the cli is run against a monorepo without directory input', () => {
       test('each file results and totals will be output', () => {
-        const cli = spawnSync('../../../src/cli.js', [`.`], {
+        const cli = spawnSync('../../../dist/cli.js', [`.`], {
           env,
           cwd: './test/fixtures/monorepo',
         });
