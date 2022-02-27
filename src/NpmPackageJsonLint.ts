@@ -2,7 +2,7 @@ import isPlainObj from 'is-plain-obj';
 import slash from 'slash';
 import {PackageJson} from 'type-fest';
 import {Config} from './Config';
-import {Rules} from './rules';
+import {Rules} from './Rules';
 import {executeOnPackageJsonFiles, executeOnPackageJsonObject, OverallLintingResult} from './linter/linter';
 import {getFileList} from './utils/getFileList';
 import {getIgnorer} from './utils/getIgnorer';
