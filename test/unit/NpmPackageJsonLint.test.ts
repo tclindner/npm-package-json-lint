@@ -1,4 +1,4 @@
-import {NpmPackageJsonLint} from '../../src/NpmPackageJsonLint';
+import {NpmPackageJsonLint} from '../../src/npm-package-json-lint';
 
 describe('NpmPackageJsonLint Unit Tests', () => {
   describe('lint method', () => {

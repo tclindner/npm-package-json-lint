@@ -3,7 +3,7 @@ import {validateRules} from './config/ConfigValidator';
 import {transform} from './config/cosmicConfigTransformer';
 import {applyExtendsIfSpecified} from './config/applyExtendsIfSpecified';
 import {applyOverrides} from './config/applyOverrides';
-import {Rules} from './rules';
+import {Rules} from './native-rules';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('npm-package-json-lint:Config');

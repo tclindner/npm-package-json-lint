@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import {write} from '../../src/reporter';
+import {write} from '../../src/console-reporter';
 
 describe('Reporter Unit Tests', () => {
   describe('write method', () => {

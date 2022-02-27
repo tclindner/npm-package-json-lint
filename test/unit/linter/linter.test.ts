@@ -1,7 +1,7 @@
 import {Ignore} from 'ignore';
 import {Config} from 'cosmiconfig/dist/types';
 import {executeOnPackageJsonFiles, executeOnPackageJsonObject} from '../../../src/linter/linter';
-import {Rules} from '../../../src/Rules';
+import {Rules} from '../../../src/native-rules';
 import {LintIssue} from '../../../src/lint-issue';
 import {Severity} from '../../../src/types/severity';
 
