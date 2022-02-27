@@ -3,7 +3,7 @@
 import chalk from 'chalk';
 import meow from 'meow';
 import {NpmPackageJsonLint} from './NpmPackageJsonLint';
-import {Reporter} from './Reporter';
+import {write} from './reporter';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const debug = require('debug')('npm-package-json-lint:cli');
@@ -113,7 +113,7 @@ try {
   debug(`NpmPackageJsonLint.lint complete`);
 
   debug(`Reporter.write starting`);
-  Reporter.write(linterOutput, flags.quiet);
+  write(linterOutput, flags.quiet);
   debug(`Reporter.write complete`);
 
   if (linterOutput.warningCount > flags.maxWarnings) {

@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import plur from 'plur';
+import {LintIssue} from './lint-issue';
 
 const zeroIssues = 0;
 const oneFile = 1;
@@ -7,12 +8,10 @@ const oneFile = 1;
 /**
  * Prints issues to console
  *
- * @param {LintIssue[]} issues An array of LintIssues
- * @returns {Undefined} No return
- * @private
+ * @param issues An array of LintIssues
+ * @internal
  */
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const printResultSetIssues = (issues) => {
+const printResultSetIssues = (issues: LintIssue[]): void => {
   // eslint-disable-next-line no-restricted-syntax
   for (const issue of issues) {
     // eslint-disable-next-line no-console
@@ -23,13 +22,12 @@ const printResultSetIssues = (issues) => {
 /**
  * Print results for an individual package.json file linting
  *
- * @param {LintResult} resultSet  Result object from a given file's lint result
- * @param {Boolean}    quiet      True suppress warnings, false show warnings
- * @returns {Undefined} No results
- * @private
+ * @param resultSet Result object from a given file's lint result
+ * @param quiet True suppress warnings, false show warnings
+ * @internal
  */
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const printIndividualResultSet = (resultSet, quiet) => {
+const printIndividualResultSet = (resultSet, quiet: boolean): void => {
   const {filePath, issues, ignored, errorCount, warningCount} = resultSet;
 
   if (ignored) {
@@ -57,13 +55,12 @@ const printIndividualResultSet = (resultSet, quiet) => {
 /**
  * Prints the overall total counts section
  *
- * @param {Object}  linterOutput Full results from linting. Includes an array of results and overall counts
- * @param {Boolean} quiet           True suppress warnings, false show warnings
- * @returns {Undefined} No results
- * @private
+ * @param linterOutput Full results from linting. Includes an array of results and overall counts
+ * @param quiet True suppress warnings, false show warnings
+ * @internal
  */
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const printTotals = (linterOutput, quiet) => {
+const printTotals = (linterOutput, quiet: boolean): void => {
   const {errorCount, warningCount, ignoreCount} = linterOutput;
 
   if (errorCount > zeroIssues || warningCount > zeroIssues) {
@@ -83,28 +80,20 @@ const printTotals = (linterOutput, quiet) => {
 };
 
 /**
- * Public Reporter class
- * @class
+ * Print results to console
+ *
+ * @param linterOutput An array of LintIssues
+ * @param quiet Flag indicating whether to print warnings.
+ * @internal
  */
-// eslint-disable-next-line unicorn/no-static-only-class
-export class Reporter {
-  /**
-   * Print CLIEngine Output
-   *
-   * @param  {Object}      linterOutput    An array of LintIssues
-   * @param  {boolean}     quiet Flag indicating whether to print warnings.
-   * @return {undefined}            No return
-   * @static
-   */
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  static write(linterOutput, quiet) {
-    // eslint-disable-next-line no-restricted-syntax
-    for (const result of linterOutput.results) {
-      printIndividualResultSet(result, quiet);
-    }
-
-    if (linterOutput.results.length > oneFile) {
-      printTotals(linterOutput, quiet);
-    }
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export const write = (linterOutput, quiet: boolean): void => {
+  // eslint-disable-next-line no-restricted-syntax
+  for (const result of linterOutput.results) {
+    printIndividualResultSet(result, quiet);
   }
-}
+
+  if (linterOutput.results.length > oneFile) {
+    printTotals(linterOutput, quiet);
+  }
+};
