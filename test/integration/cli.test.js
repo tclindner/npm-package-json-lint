@@ -1,8 +1,11 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const {spawnSync} = require('child_process');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const figures = require('figures');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const pkg = require('../../package.json');
 
-const relativePathToCli = './src/cli.js';
+const relativePathToCli = './dist/cli.js';
 
 // Paths to config file and package.json fixtures
 const fixturesPath = './test/fixtures';
@@ -36,6 +39,8 @@ const threeRunTimeException = 3;
 
 // Force child process to run without colors
 const {env} = process;
+
+// @ts-expect-error-error
 env.FORCE_COLOR = 0;
 
 describe('cli Integration Tests', () => {
@@ -310,7 +315,7 @@ Totals
 
   describe('when the cli is run against a monorepo with overrides', () => {
     test('each file results and totals will be output', () => {
-      const cli = spawnSync('../../../src/cli.js', [`**/package.json`], {
+      const cli = spawnSync('../../../dist/cli.js', [`**/package.json`], {
         env,
         cwd: './test/fixtures/monorepo',
       });
@@ -345,7 +350,7 @@ Totals
 
     describe('when the cli is run against a monorepo without directory input', () => {
       test('each file results and totals will be output', () => {
-        const cli = spawnSync('../../../src/cli.js', [`.`], {
+        const cli = spawnSync('../../../dist/cli.js', [`.`], {
           env,
           cwd: './test/fixtures/monorepo',
         });

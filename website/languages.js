@@ -6,4 +6,4 @@ const languages = [
   }
 ];
 
-module.exports = languages;
+export default languages;

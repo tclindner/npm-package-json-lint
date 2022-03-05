@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    // See https://github.com/microsoft/TypeScript/wiki/Node-Target-Mapping#node-14
+    "lib": ["ES2020"],
+    "module": "commonjs",
+    "target": "ES2020",
+    "downlevelIteration": true,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "outDir": "dist",
+  }
+}
