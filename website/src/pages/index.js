@@ -48,7 +48,7 @@ const Index = () => {
 
             <Link
               className='button button--secondary button--lg'
-              to={useBaseUrl('docs/overview')}
+              to={useBaseUrl('docs/index')}
             >
               Get Started
             </Link>
