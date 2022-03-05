@@ -1,0 +1,67 @@
+.indexGitHubButton {
+  margin-bottom: 10px;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.highlightBanner {
+  background: #f2855e;
+  padding-top: 20px;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.highlightBanner a {
+  color: #fff;
+  font-weight: bold;
+}
+
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.featureImage {
+  height: 300px;
+  width: 300px;
+}
+
+@keyframes funRotate {
+  from {
+    opacity: 0;
+    transform: scale(0.1) rotate(30deg);
+    transform-origin: center bottom;
+  }
+
+  50% {
+    transform: rotate(-10deg);
+  }
+
+  70% {
+    transform: rotate(3deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.indexHeroLogo {
+  animation-duration: 2s;
+  animation-name: funRotate;
+  float: right;
+  margin-top: 20px;
+  padding: 20px;
+  padding-right: 0;
+  max-width: 350px;
+}
+
+.button--secondary {
+  color: white;
+}

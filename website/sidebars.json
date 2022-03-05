@@ -1,8 +1,7 @@
 {
   "docs": {
     "About": [
-      "index",
-      "why"
+      "index"
     ],
     "Usage": [
       "install",
