@@ -1,7 +1,5 @@
 // Docs: https://docusaurus.io/docs/en/site-config.html
 
-// const {version} = require('../package.json');
-
 const organizationName = 'tclindner';
 const projectName = 'npm-package-json-lint';
 const repoUrl = `https://github.com/${organizationName}/${projectName}`;
@@ -102,8 +100,3 @@ const users = [
     pinned: true
   }
 ];
-
-// const siteConfig = {
-//   currentVersion: `v${version}`,
-//   repoUrl,
-// };
