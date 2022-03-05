@@ -2,7 +2,7 @@ name: "Publish latest version to npm"
 
 on:
   release:
-    types: [published]
+    types: [released]
 
 jobs:
   build:
