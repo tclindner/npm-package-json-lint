@@ -23,12 +23,11 @@
     "npmPkgJsonLint": "dist/cli.js"
   },
   "files": [
-    "src",
     "CONTRIBUTING.md",
-    "index.d.ts"
+    "dist"
   ],
   "main": "dist/api.js",
-  "types": "index.d.ts",
+  "types": "dist/src/api.d.ts",
   "scripts": {
     "build": "npm run esbuild && npm run tsc",
     "esbuild": "node esbuild.config.js",
