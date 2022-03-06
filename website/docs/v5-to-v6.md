@@ -9,7 +9,7 @@ v6.0.0 Migration Guide
 
 ## Rule definition change
 
-[`name-format`](https://npmpackagejsonlint.org/docs/en/rules/format/name-format) was updated the use `validate-npm-package-name`. See [#537](https://github.com/tclindner/npm-package-json-lint/pull/537) for more details.
+[`name-format`](https://npmpackagejsonlint.org/docs/rules/format/name-format) was updated the use `validate-npm-package-name`. See [#537](https://github.com/tclindner/npm-package-json-lint/pull/537) for more details.
 
 ## TypeScript Support
 
