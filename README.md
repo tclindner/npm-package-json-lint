@@ -31,7 +31,7 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 #### Node
 
-* [Node.js](https://nodejs.org/) - v10.0.0+
+* [Node.js](https://nodejs.org/) - v14.0.0+
 * [npm](http://npmjs.com) - v6.0.0+
 
 ### Use the cli
@@ -50,27 +50,31 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 Quick links
 
-[CLI commands and configuration](https://npmpackagejsonlint.org/docs/en/cli) | [Node.js API](https://npmpackagejsonlint.org/docs/en/api)
+[CLI commands and configuration](https://npmpackagejsonlint.org/docs/cli) | [Node.js API](https://npmpackagejsonlint.org/docs/en/api)
+
+## Migrating from v5.x.x to 6.x.x
+
+Please see the [migration guide](https://npmpackagejsonlint.org/docs/v5-to-v6).
 
 ## Migrating from v4.x.x to 5.x.x
 
-Please see the [migration guide](https://npmpackagejsonlint.org/docs/en/v4-to-v5).
+Please see the [migration guide](https://npmpackagejsonlint.org/docs/v4-to-v5).
 
 ## Migrating from v3.x.x to 4.x.x
 
-Please see the [migration guide](https://npmpackagejsonlint.org/docs/en/v3-to-v4).
+Please see the [migration guide](https://npmpackagejsonlint.org/docs/v3-to-v4).
 
 ## Migrating from v2.x.x to 3.x.x
 
-Please see the [migration guide](https://npmpackagejsonlint.org/docs/en/v2-to-v3).
+Please see the [migration guide](https://npmpackagejsonlint.org/docs/v2-to-v3).
 
 ## Migrating from v1.x.x to 2.x.x
 
-Please see the [migration guide](https://npmpackagejsonlint.org/docs/en/v1-to-v2).
+Please see the [migration guide](https://npmpackagejsonlint.org/docs/v1-to-v2).
 
 ## Migrating from v0.x.x to 1.x.x
 
-Please see the [migration guide](https://npmpackagejsonlint.org/docs/en/v0-to-v1).
+Please see the [migration guide](https://npmpackagejsonlint.org/docs/v0-to-v1).
 
 ## Contributing
 
@@ -82,7 +86,6 @@ Please see [CHANGELOG.md](CHANGELOG.md).
 
 ## Related
 
-* [grunt-npm-package-json-lint](https://github.com/tclindner/grunt-npm-package-json-lint): Grunt Wrapper for npm-package-json-lint
 * [npm-package-json-lint-config-default](https://github.com/tclindner/npm-package-json-lint-config-default): Shared default configuration module for npm-package-json-lint
 
 ## License
