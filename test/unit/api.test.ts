@@ -34,4 +34,8 @@ describe('api Unit Tests', () => {
   test('OverallAggregatedResultCounts should be exported', () => {
     expect(api).not.toHaveProperty('OverallAggregatedResultCounts');
   });
+
+  test('Rules should be exported', () => {
+    expect(api).not.toHaveProperty('Rules');
+  });
 });
