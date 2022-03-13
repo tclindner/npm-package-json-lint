@@ -36,6 +36,6 @@ describe('api Unit Tests', () => {
   });
 
   test('Rules should be exported', () => {
-    expect(api).not.toHaveProperty('Rules');
+    expect(api).toHaveProperty('Rules');
   });
 });
