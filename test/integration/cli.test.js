@@ -313,6 +313,46 @@ Totals
     });
   });
 
+  describe('when the cli is run using a config file with overrides and nested packages', () => {
+    test('run for main pkg. results and totals will be output', () => {
+      const cli = spawnSync('../../../dist/cli.js', ['-c', '.npmpackagejsonlintrc.json', './package.json'], {
+        env,
+        cwd: './test/fixtures/config-file-with-overrides',
+      });
+      const expected = `
+./package.json
+${figures.cross} require-private - node: private - private is required
+1 error
+0 warnings
+`;
+
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(twoLintErrorsDetected);
+    });
+
+    test('run for sub pkg. results and totals will be output', () => {
+      const cli = spawnSync(
+        '../../../dist/cli.js',
+        ['-c', '.npmpackagejsonlintrc.json', './packages/my-package/package.json'],
+        {
+          env,
+          cwd: './test/fixtures/config-file-with-overrides',
+        }
+      );
+      const expected = `
+./packages/my-package/package.json
+${figures.cross} require-repository-directory - node: repository - repository object missing directory property
+1 error
+0 warnings
+`;
+
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(twoLintErrorsDetected);
+    });
+  });
+
   describe('when the cli is run against a monorepo with overrides', () => {
     test('each file results and totals will be output', () => {
       const cli = spawnSync('../../../dist/cli.js', [`**/package.json`], {
