@@ -60,7 +60,7 @@
   "devDependencies": {
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.21",
-    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
     "esbuild": "^0.14.25",
     "esbuild-node-externals": "^1.4.1",
     "eslint": "^8.11.0",
