@@ -76,7 +76,7 @@ export class Config {
       if (this.configFile) {
         debug(`Config file specified, loading it.`);
         config = cosmiconfigSync('npmpackagejsonlint', {
-          transform: transform(this.cwd, this.configBaseDirectory, this.configFile),
+          transform: transform(this.cwd, this.configBaseDirectory, filePath),
         }).load(this.configFile);
       } else {
         debug(`Config file wasn't specified, searching for config.`);
