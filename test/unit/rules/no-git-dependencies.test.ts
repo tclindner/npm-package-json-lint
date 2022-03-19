@@ -22,7 +22,7 @@ describe('no-git-dependencies Unit Tests', () => {
         expect(response.severity).toStrictEqual('error');
         expect(response.node).toStrictEqual('dependencies');
         expect(response.lintMessage).toStrictEqual(
-          'You are using dependencies from git repository. Please use dependencies from npm.'
+          'You are using dependencies from git repository. Please use dependencies from npm. Invalid dependencies include: my-module'
         );
       });
     });
@@ -40,7 +40,7 @@ describe('no-git-dependencies Unit Tests', () => {
         expect(response.severity).toStrictEqual('error');
         expect(response.node).toStrictEqual('dependencies');
         expect(response.lintMessage).toStrictEqual(
-          'You are using dependencies from git repository. Please use dependencies from npm.'
+          'You are using dependencies from git repository. Please use dependencies from npm. Invalid dependencies include: my-module'
         );
       });
     });
@@ -58,7 +58,7 @@ describe('no-git-dependencies Unit Tests', () => {
         expect(response.severity).toStrictEqual('error');
         expect(response.node).toStrictEqual('dependencies');
         expect(response.lintMessage).toStrictEqual(
-          'You are using dependencies from git repository. Please use dependencies from npm.'
+          'You are using dependencies from git repository. Please use dependencies from npm. Invalid dependencies include: my-module'
         );
       });
     });
@@ -76,7 +76,7 @@ describe('no-git-dependencies Unit Tests', () => {
         expect(response.severity).toStrictEqual('error');
         expect(response.node).toStrictEqual('dependencies');
         expect(response.lintMessage).toStrictEqual(
-          'You are using dependencies from git repository. Please use dependencies from npm.'
+          'You are using dependencies from git repository. Please use dependencies from npm. Invalid dependencies include: my-module'
         );
       });
     });
@@ -94,7 +94,7 @@ describe('no-git-dependencies Unit Tests', () => {
         expect(response.severity).toStrictEqual('error');
         expect(response.node).toStrictEqual('dependencies');
         expect(response.lintMessage).toStrictEqual(
-          'You are using dependencies from git repository. Please use dependencies from npm.'
+          'You are using dependencies from git repository. Please use dependencies from npm. Invalid dependencies include: my-module'
         );
       });
     });
@@ -112,7 +112,7 @@ describe('no-git-dependencies Unit Tests', () => {
         expect(response.severity).toStrictEqual('error');
         expect(response.node).toStrictEqual('dependencies');
         expect(response.lintMessage).toStrictEqual(
-          'You are using dependencies from git repository. Please use dependencies from npm.'
+          'You are using dependencies from git repository. Please use dependencies from npm. Invalid dependencies include: my-module'
         );
       });
     });
@@ -130,7 +130,7 @@ describe('no-git-dependencies Unit Tests', () => {
         expect(response.severity).toStrictEqual('error');
         expect(response.node).toStrictEqual('dependencies');
         expect(response.lintMessage).toStrictEqual(
-          'You are using dependencies from git repository. Please use dependencies from npm.'
+          'You are using dependencies from git repository. Please use dependencies from npm. Invalid dependencies include: my-module'
         );
       });
     });
@@ -148,7 +148,7 @@ describe('no-git-dependencies Unit Tests', () => {
         expect(response.severity).toStrictEqual('error');
         expect(response.node).toStrictEqual('dependencies');
         expect(response.lintMessage).toStrictEqual(
-          'You are using dependencies from git repository. Please use dependencies from npm.'
+          'You are using dependencies from git repository. Please use dependencies from npm. Invalid dependencies include: my-module'
         );
       });
     });
@@ -166,7 +166,7 @@ describe('no-git-dependencies Unit Tests', () => {
         expect(response.severity).toStrictEqual('error');
         expect(response.node).toStrictEqual('dependencies');
         expect(response.lintMessage).toStrictEqual(
-          'You are using dependencies from git repository. Please use dependencies from npm.'
+          'You are using dependencies from git repository. Please use dependencies from npm. Invalid dependencies include: my-module'
         );
       });
     });
@@ -184,7 +184,7 @@ describe('no-git-dependencies Unit Tests', () => {
         expect(response.severity).toStrictEqual('error');
         expect(response.node).toStrictEqual('dependencies');
         expect(response.lintMessage).toStrictEqual(
-          'You are using dependencies from git repository. Please use dependencies from npm.'
+          'You are using dependencies from git repository. Please use dependencies from npm. Invalid dependencies include: my-module'
         );
       });
     });
@@ -202,7 +202,7 @@ describe('no-git-dependencies Unit Tests', () => {
         expect(response.severity).toStrictEqual('error');
         expect(response.node).toStrictEqual('dependencies');
         expect(response.lintMessage).toStrictEqual(
-          'You are using dependencies from git repository. Please use dependencies from npm.'
+          'You are using dependencies from git repository. Please use dependencies from npm. Invalid dependencies include: my-module'
         );
       });
     });

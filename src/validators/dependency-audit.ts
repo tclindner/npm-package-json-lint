@@ -199,10 +199,12 @@ export const doVersContainInvalidRange = (
 export interface AbsoluteVersionCheckerResult {
   onlyAbsoluteVersionDetected: boolean;
   dependenciesChecked: number;
+  dependenciesWithAbsoluteVersion: string[];
+  dependenciesWithoutAbsoluteVersion: string[];
 }
 
 /**
- * Determines whether or not all dependency versions are absolut
+ * Determines whether or not all dependency versions are absolute
  * @param {object} packageJsonData    Valid JSON
  * @param {string} nodeName           Name of a node in the package.json file
  * @param {object} config             Rule configuration
@@ -218,6 +220,8 @@ const absoluteVersionChecker = (
   const firstCharOfStr = 0;
   let onlyAbsoluteVersionDetected = true;
   let dependenciesChecked = 0;
+  const dependenciesWithAbsoluteVersion = [];
+  const dependenciesWithoutAbsoluteVersion = [];
 
   // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
@@ -236,6 +240,9 @@ const absoluteVersionChecker = (
       dependencyVersion.indexOf('*') !== notFound
     ) {
       onlyAbsoluteVersionDetected = false;
+      dependenciesWithoutAbsoluteVersion.push(dependencyName);
+    } else {
+      dependenciesWithAbsoluteVersion.push(dependencyName);
     }
 
     dependenciesChecked += 1;
@@ -244,6 +251,8 @@ const absoluteVersionChecker = (
   return {
     onlyAbsoluteVersionDetected,
     dependenciesChecked,
+    dependenciesWithAbsoluteVersion,
+    dependenciesWithoutAbsoluteVersion,
   };
 };
 
@@ -263,10 +272,10 @@ export const areVersionsAbsolute = (packageJsonData: PackageJson | any, nodeName
 
 /**
  * Determines whether or not all dependency versions are absolut
- * @param {object} packageJsonData    Valid JSON
- * @param {string} nodeName           Name of a node in the package.json file
- * @param {object} config             Rule configuration
- * @return {boolean}                  False if the package has an non-absolute version. True if it is not or the node is missing.
+ * @param packageJsonData Valid JSON
+ * @param nodeName Name of a node in the package.json file
+ * @param config Rule configuration
+ * @return False if the package has an non-absolute version. True if it is not or the node is missing.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const doVersContainNonAbsolute = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
@@ -318,15 +327,30 @@ const isGitRepositoryUrl = (version: string): boolean => {
   return match;
 };
 
+export interface AuditDependenciesForGitRepositoryVersionResponse {
+  hasGitRepositoryVersions: boolean;
+  dependenciesWithGitRepositoryVersion: string[];
+  dependenciesWithoutGitRepositoryVersion: string[];
+}
+
 /**
  * Determines whether or not dependency versions are git repository
- * @param {object} packageJsonData    Valid JSON
- * @param {string} nodeName           Name of a node in the package.json file
- * @param {object} config             Rule configuration
- * @return {boolean}                  True if the package has an git repo.
+ * @param packageJsonData Valid JSON
+ * @param nodeName Name of a node in the package.json file
+ * @param config Rule configuration
+ * @return True if the package has an git repo.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const doVersContainGitRepository = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
+export const auditDependenciesForGitRepositoryVersion = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonData: PackageJson | any,
+  nodeName: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  config: any
+): AuditDependenciesForGitRepositoryVersionResponse => {
+  let hasGitRepositoryVersions = false;
+  const dependenciesWithGitRepositoryVersion = [];
+  const dependenciesWithoutGitRepositoryVersion = [];
+
   // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
     if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
@@ -337,11 +361,18 @@ export const doVersContainGitRepository = (packageJsonData: PackageJson | any, n
     const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
     if (isGitRepositoryUrl(dependencyVersion) || isGithubRepositoryShortcut(dependencyVersion)) {
-      return true;
+      hasGitRepositoryVersions = true;
+      dependenciesWithGitRepositoryVersion.push(dependencyName);
+    } else {
+      dependenciesWithoutGitRepositoryVersion.push(dependencyName);
     }
   }
 
-  return false;
+  return {
+    hasGitRepositoryVersions,
+    dependenciesWithGitRepositoryVersion,
+    dependenciesWithoutGitRepositoryVersion,
+  };
 };
 
 export interface AuditDependenciesForArchiveUrlVersionResponse {

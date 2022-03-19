@@ -744,7 +744,7 @@ describe('dependency-audit Unit Tests', () => {
     });
   });
 
-  describe('doVersContainGitRepository method', () => {
+  describe('auditDependenciesForGitRepositoryVersion method', () => {
     describe('when the node exists in the package.json file', () => {
       test('true should be returned in case of git@ dependency', () => {
         const packageJson = {
@@ -752,9 +752,13 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'git@github.com:username/repo.git',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForGitRepositoryVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasGitRepositoryVersions: true,
+          dependenciesWithGitRepositoryVersion: ['module-name'],
+          dependenciesWithoutGitRepositoryVersion: [],
+        });
       });
 
       test('true should be returned in case of git:// dependency', () => {
@@ -763,9 +767,13 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'git://github.com/username/repo.git',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForGitRepositoryVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasGitRepositoryVersions: true,
+          dependenciesWithGitRepositoryVersion: ['module-name'],
+          dependenciesWithoutGitRepositoryVersion: [],
+        });
       });
 
       test('true should be returned in case of git+https:// dependency', () => {
@@ -774,9 +782,13 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'git+https://github.com/username/repo.git',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForGitRepositoryVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasGitRepositoryVersions: true,
+          dependenciesWithGitRepositoryVersion: ['module-name'],
+          dependenciesWithoutGitRepositoryVersion: [],
+        });
       });
 
       test('true should be returned in case of git+ssh:// dependency', () => {
@@ -785,9 +797,13 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'git+ssh://github.com/username/repo.git',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForGitRepositoryVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasGitRepositoryVersions: true,
+          dependenciesWithGitRepositoryVersion: ['module-name'],
+          dependenciesWithoutGitRepositoryVersion: [],
+        });
       });
 
       test('true should be returned in case of http:// dependency', () => {
@@ -796,9 +812,13 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'http://github.com/username/repo.git',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForGitRepositoryVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasGitRepositoryVersions: true,
+          dependenciesWithGitRepositoryVersion: ['module-name'],
+          dependenciesWithoutGitRepositoryVersion: [],
+        });
       });
 
       test('true should be returned in case of https:// dependency', () => {
@@ -807,9 +827,13 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'https://github.com/username/repo.git',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForGitRepositoryVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasGitRepositoryVersions: true,
+          dependenciesWithGitRepositoryVersion: ['module-name'],
+          dependenciesWithoutGitRepositoryVersion: [],
+        });
       });
 
       test('true should be returned in case of github:… dependency', () => {
@@ -818,9 +842,13 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'github:username/repo',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForGitRepositoryVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasGitRepositoryVersions: true,
+          dependenciesWithGitRepositoryVersion: ['module-name'],
+          dependenciesWithoutGitRepositoryVersion: [],
+        });
       });
 
       test('true should be returned in case of github shortcut url dependency', () => {
@@ -829,9 +857,13 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'username/repo',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForGitRepositoryVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasGitRepositoryVersions: true,
+          dependenciesWithGitRepositoryVersion: ['module-name'],
+          dependenciesWithoutGitRepositoryVersion: [],
+        });
       });
 
       test('true should be returned in case of github shortcut url dependency with branch', () => {
@@ -840,9 +872,13 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'org-name/repo#username/issue-42',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForGitRepositoryVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasGitRepositoryVersions: true,
+          dependenciesWithGitRepositoryVersion: ['module-name'],
+          dependenciesWithoutGitRepositoryVersion: [],
+        });
       });
 
       test('true should be returned in case of github shortcut url dependency with tag', () => {
@@ -851,9 +887,13 @@ describe('dependency-audit Unit Tests', () => {
             'module-name': 'username/repo#v2.0.0-rc-1',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForGitRepositoryVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasGitRepositoryVersions: true,
+          dependenciesWithGitRepositoryVersion: ['module-name'],
+          dependenciesWithoutGitRepositoryVersion: [],
+        });
       });
     });
 
@@ -866,11 +906,15 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0',
           },
         };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {
+        const response = dependencyAudit.auditDependenciesForGitRepositoryVersion(packageJson, 'dependencies', {
           exceptions: ['module-from-archive'],
         });
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          hasGitRepositoryVersions: false,
+          dependenciesWithGitRepositoryVersion: [],
+          dependenciesWithoutGitRepositoryVersion: ['grunt-npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
     });
   });
