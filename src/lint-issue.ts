@@ -60,10 +60,10 @@ export class LintIssue {
    */
   toString(): string {
     const logSymbol = this.severity === Severity.Error ? logSymbols.error : logSymbols.warning;
-    const formattedLintId = chalk.gray.dim(this.lintId);
-    const formattedNode = chalk.gray.bold(this.node);
+    const formattedLintId = chalk.cyan.bold(this.lintId);
+    const formattedNode = chalk.magenta.bold(this.node);
     const formattedMessage =
-      this.severity === Severity.Error ? chalk.bold.red(this.lintMessage) : chalk.yellow(this.lintMessage);
+      this.severity === Severity.Error ? chalk.red.bold(this.lintMessage) : chalk.yellow(this.lintMessage);
 
     return `${logSymbol} ${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
   }
