@@ -408,7 +408,7 @@ ${figures.cross} prefer-property-order - node:  - Your package.json properties a
 
 ./packages/packageTwo/package.json
 ${figures.warning} license-type - node: license - Type should be a string
-${figures.cross} valid-values-author - node: author - Invalid value for author
+${figures.cross} valid-values-author - node: author - Invalid value for author. Current value is Thomas Lindner. Value values include: TC.
 1 error
 1 warning
 

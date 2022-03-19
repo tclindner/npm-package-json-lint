@@ -34,7 +34,7 @@
     "eslint": "eslint . --format=node_modules/eslint-formatter-pretty",
     "npmpackagejsonlint": "node dist/cli.js ./package.json",
     "lint": "npm run eslint && npm run npmpackagejsonlint",
-    "test": "jest",
+    "test": "npm run build && jest",
     "test:ci": "jest --runInBand",
     "tsc": "tsc --project tsconfig.json"
   },
