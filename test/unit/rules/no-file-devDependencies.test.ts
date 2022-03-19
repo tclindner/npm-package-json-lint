@@ -21,7 +21,7 @@ describe('no-archive-devDependencies Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('devDependencies');
       expect(response.lintMessage).toStrictEqual(
-        'You are using devDependencies via url to local file. Please use devDependencies from npm.'
+        'You are using devDependencies via url to local file. Please use devDependencies from npm. Invalid devDependencies include: test-module'
       );
     });
   });

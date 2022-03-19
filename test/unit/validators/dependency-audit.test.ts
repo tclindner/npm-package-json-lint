@@ -1025,7 +1025,7 @@ describe('dependency-audit Unit Tests', () => {
     });
   });
 
-  describe('doVersContainFileUrl method', () => {
+  describe('auditDependenciesForFileUrlVersion method', () => {
     describe('when the node exists in the package.json file, some versions are url to file', () => {
       test('with github dependency true should be returned', () => {
         const packageJson = {
@@ -1033,9 +1033,13 @@ describe('dependency-audit Unit Tests', () => {
             'my-module': 'file:local-module',
           },
         };
-        const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForFileUrlVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasFileUrlVersions: true,
+          dependenciesWithFileUrlVersion: ['my-module'],
+          dependenciesWithoutFileUrlVersion: [],
+        });
       });
     });
 
@@ -1050,9 +1054,19 @@ describe('dependency-audit Unit Tests', () => {
             'module-from-archive': 'https://github.com/user/repo/archive/v1.2.3.tar.gz',
           },
         };
-        const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForFileUrlVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          hasFileUrlVersions: false,
+          dependenciesWithFileUrlVersion: [],
+          dependenciesWithoutFileUrlVersion: [
+            'npm-package-json-lint',
+            'grunt-npm-package-json-lint',
+            'gulp-npm-package-json-lint',
+            'module-from-git',
+            'module-from-archive',
+          ],
+        });
       });
     });
 
@@ -1065,11 +1079,15 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0',
           },
         };
-        const response = dependencyAudit.doVersContainFileUrl(packageJson, 'dependencies', {
+        const response = dependencyAudit.auditDependenciesForFileUrlVersion(packageJson, 'dependencies', {
           exceptions: ['module-from-file'],
         });
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          hasFileUrlVersions: false,
+          dependenciesWithFileUrlVersion: [],
+          dependenciesWithoutFileUrlVersion: ['grunt-npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
     });
   });

@@ -370,15 +370,30 @@ export const doVersContainArchiveUrl = (packageJsonData: PackageJson | any, node
   return false;
 };
 
+export interface AuditDependenciesForFileUrlVersionResponse {
+  hasFileUrlVersions: boolean;
+  dependenciesWithFileUrlVersion: string[];
+  dependenciesWithoutFileUrlVersion: string[];
+}
+
 /**
  * Determines whether or not dependency versions contains file url
- * @param {object} packageJsonData    Valid JSON
- * @param {string} nodeName           Name of a node in the package.json file
- * @param {object} config             Rule configuration
- * @return {boolean}                  True if the package contain file url.
+ * @param packageJsonData Valid JSON
+ * @param nodeName Name of a node in the package.json file
+ * @param config Rule configuration
+ * @return True if the package contain file url.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const doVersContainFileUrl = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
+export const auditDependenciesForFileUrlVersion = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonData: PackageJson | any,
+  nodeName: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  config: any
+): AuditDependenciesForFileUrlVersionResponse => {
+  let hasFileUrlVersions = false;
+  const dependenciesWithFileUrlVersion = [];
+  const dependenciesWithoutFileUrlVersion = [];
+
   // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
     if (hasExceptions(config) && config.exceptions.includes(dependencyName)) {
@@ -389,9 +404,16 @@ export const doVersContainFileUrl = (packageJsonData: PackageJson | any, nodeNam
     const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
     if (dependencyVersion.startsWith('file:')) {
-      return true;
+      hasFileUrlVersions = true;
+      dependenciesWithFileUrlVersion.push(dependencyName);
+    } else {
+      dependenciesWithoutFileUrlVersion.push(dependencyName);
     }
   }
 
-  return false;
+  return {
+    hasFileUrlVersions,
+    dependenciesWithFileUrlVersion,
+    dependenciesWithoutFileUrlVersion,
+  };
 };
