@@ -256,13 +256,6 @@ const absoluteVersionChecker = (
   };
 };
 
-export interface AbsoluteVersionCheckerResult {
-  onlyAbsoluteVersionDetected: boolean;
-  dependenciesChecked: number;
-  dependenciesWithAbsoluteVersion: string[];
-  dependenciesWithoutAbsoluteVersion: string[];
-}
-
 /**
  * Determines whether or not all dependency versions are absolut
  * @param {object} packageJsonData    Valid JSON
