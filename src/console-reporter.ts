@@ -12,11 +12,9 @@ const oneFile = 1;
  * @internal
  */
 const printResultSetIssues = (issues: LintIssue[]): void => {
-  // eslint-disable-next-line no-restricted-syntax
-  for (const issue of issues) {
-    // eslint-disable-next-line no-console
+  issues.forEach((issue) => {
     console.log(issue.toString());
-  }
+  });
 };
 
 /**
@@ -26,7 +24,6 @@ const printResultSetIssues = (issues: LintIssue[]): void => {
  * @param quiet True suppress warnings, false show warnings
  * @internal
  */
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const printIndividualResultSet = (resultSet, quiet: boolean): void => {
   const {filePath, issues, ignored, errorCount, warningCount} = resultSet;
 
@@ -59,7 +56,6 @@ const printIndividualResultSet = (resultSet, quiet: boolean): void => {
  * @param quiet True suppress warnings, false show warnings
  * @internal
  */
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const printTotals = (linterOutput, quiet: boolean): void => {
   const {errorCount, warningCount, ignoreCount} = linterOutput;
 
@@ -86,12 +82,10 @@ const printTotals = (linterOutput, quiet: boolean): void => {
  * @param quiet Flag indicating whether to print warnings.
  * @internal
  */
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const write = (linterOutput, quiet: boolean): void => {
-  // eslint-disable-next-line no-restricted-syntax
-  for (const result of linterOutput.results) {
+  linterOutput.results.forEach((result) => {
     printIndividualResultSet(result, quiet);
-  }
+  });
 
   if (linterOutput.results.length > oneFile) {
     printTotals(linterOutput, quiet);
