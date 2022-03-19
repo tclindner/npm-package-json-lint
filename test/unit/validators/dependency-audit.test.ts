@@ -856,6 +856,23 @@ describe('dependency-audit Unit Tests', () => {
         expect(response).toBe(true);
       });
     });
+
+    describe('when the node exists in the package.json file, one absolute version but has expection', () => {
+      test('false should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'module-from-archive': 'https://github.com/miripiruni/repo/archive/v1.2.3.zip',
+            'grunt-npm-package-json-lint': '2.0.0',
+            'gulp-npm-package-json-lint': '^2.0.0',
+          },
+        };
+        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {
+          exceptions: ['module-from-archive'],
+        });
+
+        expect(response).toBe(false);
+      });
+    });
   });
 
   describe('doVersContainNonAbsolute method', () => {
@@ -965,7 +982,7 @@ describe('dependency-audit Unit Tests', () => {
     });
   });
 
-  describe('doVersContainArchiveUrl method', () => {
+  describe('auditDependenciesForArchiveUrlVersion method', () => {
     describe('when the node exists in the package.json file, some versions are archive url', () => {
       test('with tar.gz dependency true should be returned', () => {
         const packageJson = {
@@ -973,9 +990,13 @@ describe('dependency-audit Unit Tests', () => {
             'my-module': 'https://github.com/miripiruni/repo/archive/v1.2.3.tar.gz',
           },
         };
-        const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForArchiveUrlVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasArchiveUrlVersions: true,
+          dependenciesWithArchiveUrlVersion: ['my-module'],
+          dependenciesWithoutArchiveUrlVersion: [],
+        });
       });
 
       test('with zip dependency true should be returned', () => {
@@ -984,9 +1005,13 @@ describe('dependency-audit Unit Tests', () => {
             'my-module': 'https://github.com/miripiruni/repo/archive/v1.2.3.zip',
           },
         };
-        const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForArchiveUrlVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasArchiveUrlVersions: true,
+          dependenciesWithArchiveUrlVersion: ['my-module'],
+          dependenciesWithoutArchiveUrlVersion: [],
+        });
       });
     });
 
@@ -1001,26 +1026,19 @@ describe('dependency-audit Unit Tests', () => {
             'module-from-archive': 'https://github.com/user/repo.git',
           },
         };
-        const response = dependencyAudit.doVersContainArchiveUrl(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForArchiveUrlVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(false);
-      });
-    });
-
-    describe('when the node exists in the package.json file, one absolute version but has expection', () => {
-      test('false should be returned', () => {
-        const packageJson = {
-          dependencies: {
-            'module-from-archive': 'https://github.com/miripiruni/repo/archive/v1.2.3.zip',
-            'grunt-npm-package-json-lint': '2.0.0',
-            'gulp-npm-package-json-lint': '^2.0.0',
-          },
-        };
-        const response = dependencyAudit.doVersContainGitRepository(packageJson, 'dependencies', {
-          exceptions: ['module-from-archive'],
+        expect(response).toStrictEqual({
+          hasArchiveUrlVersions: false,
+          dependenciesWithArchiveUrlVersion: [],
+          dependenciesWithoutArchiveUrlVersion: [
+            'npm-package-json-lint',
+            'grunt-npm-package-json-lint',
+            'gulp-npm-package-json-lint',
+            'module-from-local',
+            'module-from-archive',
+          ],
         });
-
-        expect(response).toBe(false);
       });
     });
   });
