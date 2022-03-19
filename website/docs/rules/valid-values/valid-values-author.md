@@ -78,5 +78,6 @@ Enabling this rule will result in an error being generated if the value in `auth
 
 ## History
 
+* Improved messaging when an invalid configuration is detected in version 6.1.0
 * Renamed from author-valid-values to valid-values-author in version 1.0.0
 * Introduced in version 0.1.0

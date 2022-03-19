@@ -9,7 +9,6 @@ import {isValidValue} from '../validators/valid-values';
 
 const lintId = 'valid-values-engines';
 const nodeName = 'engines';
-const message = 'Invalid value for engines';
 
 export const ruleType = RuleType.Array;
 
@@ -27,7 +26,7 @@ export const lint = (
       const valueAsJsonString = JSON.stringify(packageJsonData[nodeName]);
 
       if (!isValidValue<string>(packageJsonData, nodeName, valueAsJsonString, validValuesAsJsonString)) {
-        return new LintIssue(lintId, severity, nodeName, message);
+        return new LintIssue(lintId, severity, nodeName, `Invalid value for engines. Current value is ${valueAsJsonString}. Value values include: ${validValuesAsJsonString.join(', ')}.`);
       }
 
       // eslint-disable-next-line no-restricted-syntax, guard-for-in

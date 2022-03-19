@@ -297,7 +297,12 @@ describe('linter Unit Tests', () => {
       const rules = new Rules();
       rules.load();
 
-      const lintIssue = new LintIssue('valid-values-author', Severity.Error, 'author', 'Invalid value for author');
+      const lintIssue = new LintIssue(
+        'valid-values-author',
+        Severity.Error,
+        'author',
+        'Invalid value for author. Current value is Spiderman. Value values include: Peter Parker.'
+      );
       const expected = {
         errorCount: 1,
         ignoreCount: 0,

@@ -33,7 +33,7 @@ describe('valid-values-engines Unit Tests', () => {
       expect(response.lintId).toStrictEqual('valid-values-engines');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('engines');
-      expect(response.lintMessage).toStrictEqual('Invalid value for engines');
+      expect(response.lintMessage).toStrictEqual('Invalid value for engines. Current value is {\"node\":\"^6.0.0\"}. Value values include: {\"node\":\"^6.0.0\",\"npm\":\"^3.0.0\"}, {\"node\":\"^10.0.0\"}.');
     });
   });
 

@@ -6,7 +6,6 @@ import {isValidValue} from '../validators/valid-values';
 
 const lintId = 'valid-values-license';
 const nodeName = 'license';
-const message = 'Invalid value for license';
 
 export const ruleType = RuleType.Array;
 
@@ -27,7 +26,14 @@ export const lint = (
   validValues: string[]
 ): LintIssue | null => {
   if (!isValidValue<string>(packageJsonData, nodeName, packageJsonData[nodeName], validValues)) {
-    return new LintIssue(lintId, severity, nodeName, message);
+    return new LintIssue(
+      lintId,
+      severity,
+      nodeName,
+      `Invalid value for license. Current value is ${packageJsonData[nodeName]}. Valid values include: ${validValues.join(
+        ', '
+      )}.`
+    );
   }
 
   return null;

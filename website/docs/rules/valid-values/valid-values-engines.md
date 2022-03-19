@@ -66,4 +66,5 @@ Enabling this rule will result in an error being generated if the value in `engi
 
 ## History
 
+* Improved messaging when an invalid configuration is detected in version 6.1.0
 * Introduced in version 3.1.0

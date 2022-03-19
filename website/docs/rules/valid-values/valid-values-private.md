@@ -78,5 +78,6 @@ N/A
 
 ## History
 
+* Improved messaging when an invalid configuration is detected in version 6.1.0
 * Renamed from private-valid-values to valid-values-private in version 1.0.0
 * Introduced in version 0.1.0
