@@ -8,7 +8,6 @@ import {isValidValue} from '../validators/valid-values';
 
 const lintId = 'valid-values-author';
 const nodeName = 'author';
-const message = 'Invalid value for author';
 
 export const ruleType = RuleType.Array;
 
@@ -37,7 +36,12 @@ export const lint = <T>(
   }
 
   if (!isValidValue<T>(packageJsonData, nodeName, value, validValues)) {
-    return new LintIssue(lintId, severity, nodeName, message);
+    return new LintIssue(
+      lintId,
+      severity,
+      nodeName,
+      `Invalid value for author. Current value is ${value}. Value values include: ${validValues.join(', ')}.`
+    );
   }
 
   return null;

@@ -54,4 +54,5 @@ Enabling this rule will result in an error being generated if the value in `lice
 
 ## History
 
+* Improved messaging when an invalid configuration is detected in version 6.1.0
 * Introduced in version 1.4.0

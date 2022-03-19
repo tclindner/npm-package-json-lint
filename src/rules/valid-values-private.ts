@@ -7,7 +7,6 @@ import {isValidValue} from '../validators/valid-values';
 
 const lintId = 'valid-values-private';
 const nodeName = 'private';
-const message = 'Invalid value for private';
 
 export const ruleType = RuleType.Array;
 
@@ -27,7 +26,14 @@ export const lint = (
   validValues: boolean[]
 ): LintResult => {
   if (!isValidValue<boolean>(packageJsonData, nodeName, packageJsonData[nodeName], validValues)) {
-    return new LintIssue(lintId, severity, nodeName, message);
+    return new LintIssue(
+      lintId,
+      severity,
+      nodeName,
+      `Invalid value for private. Current value is ${packageJsonData[nodeName]}. Valid values include: ${validValues.join(
+        ', '
+      )}.`
+    );
   }
 
   return null;

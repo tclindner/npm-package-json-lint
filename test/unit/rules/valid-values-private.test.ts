@@ -25,7 +25,9 @@ describe('valid-values-private Unit Tests', () => {
       expect(response.lintId).toStrictEqual('valid-values-private');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('private');
-      expect(response.lintMessage).toStrictEqual('Invalid value for private');
+      expect(response.lintMessage).toStrictEqual(
+        'Invalid value for private. Current value is true. Valid values include: false.'
+      );
     });
   });
 
