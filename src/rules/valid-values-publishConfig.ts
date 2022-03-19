@@ -25,7 +25,14 @@ export const lint = (
       const valueAsJsonString = JSON.stringify(packageJsonData[nodeName]);
 
       if (!isValidValue<string>(packageJsonData, nodeName, valueAsJsonString, validValuesAsJsonString)) {
-        return new LintIssue(lintId, severity, nodeName, `Invalid value for publishConfig. Current value is ${valueAsJsonString}. Value values include: ${validValuesAsJsonString.join(', ')}.`);
+        return new LintIssue(
+          lintId,
+          severity,
+          nodeName,
+          `Invalid value for publishConfig. Current value is ${valueAsJsonString}. Value values include: ${validValuesAsJsonString.join(
+            ', '
+          )}.`
+        );
       }
     } else {
       return new LintIssue(lintId, severity, nodeName, 'publishConfig node has invalid data type');

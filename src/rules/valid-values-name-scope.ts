@@ -29,7 +29,14 @@ export const lint = (
   const validRegexes = validValues.map((scope) => new RegExp(`^${scope}/`));
 
   if (!matchValidValue(packageJsonData, nodeName, packageJsonData[nodeName], validRegexes)) {
-    return new LintIssue(lintId, severity, nodeName, `Invalid value for name scope. Current value is ${packageJsonData[nodeName]}. Valid values include: ${validValues.join(', ')}.`);
+    return new LintIssue(
+      lintId,
+      severity,
+      nodeName,
+      `Invalid value for name scope. Current value is ${
+        packageJsonData[nodeName]
+      }. Valid values include: ${validValues.join(', ')}.`
+    );
   }
 
   return null;

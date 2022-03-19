@@ -25,7 +25,9 @@ describe('valid-values-name-scope Unit Tests', () => {
       expect(response.lintId).toStrictEqual('valid-values-name-scope');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('name');
-      expect(response.lintMessage).toStrictEqual('Invalid value for name scope. Current value is @great/awesome-package. Valid values include: @cool, @awesome.');
+      expect(response.lintMessage).toStrictEqual(
+        'Invalid value for name scope. Current value is @great/awesome-package. Valid values include: @cool, @awesome.'
+      );
     });
   });
 
@@ -40,7 +42,9 @@ describe('valid-values-name-scope Unit Tests', () => {
       expect(response.lintId).toStrictEqual('valid-values-name-scope');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('name');
-      expect(response.lintMessage).toStrictEqual('Invalid value for name scope. Current value is awesome-package. Valid values include: @cool, @awesome.');
+      expect(response.lintMessage).toStrictEqual(
+        'Invalid value for name scope. Current value is awesome-package. Valid values include: @cool, @awesome.'
+      );
     });
   });
 

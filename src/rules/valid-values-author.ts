@@ -36,7 +36,12 @@ export const lint = <T>(
   }
 
   if (!isValidValue<T>(packageJsonData, nodeName, value, validValues)) {
-    return new LintIssue(lintId, severity, nodeName, `Invalid value for author. Current value is ${value}. Value values include: ${validValues.join(', ')}.`);
+    return new LintIssue(
+      lintId,
+      severity,
+      nodeName,
+      `Invalid value for author. Current value is ${value}. Value values include: ${validValues.join(', ')}.`
+    );
   }
 
   return null;
