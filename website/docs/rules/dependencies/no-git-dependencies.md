@@ -184,4 +184,5 @@ With exceptions
 
 ## History
 
+* Improved messaging when an invalid configuration is detected in version 6.3.0
 * Introduced in version 4.3.0
