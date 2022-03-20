@@ -157,27 +157,40 @@ export const areVersRangesValid = (
   return rangesValid;
 };
 
+
+export interface AuditDependenciesForInvalidRangeResponse {
+  hasInvalidRangeVersions: boolean;
+  dependenciesWithInvalidVersionRange: string[];
+  dependenciesWithoutInvalidVersionRange: string[];
+}
+
 /**
  * Determines if any dependencies have a version string that starts with the specified invalid range
- * @param  {object} packageJsonData  Valid JSON
- * @param  {string} nodeName         Name of a node in the package.json file
- * @param  {string} rangeSpecifier   A version range specifier
- * @param  {object} config           Rule configuration
- * @return {Boolean}                 True if any dependencies versions start with the invalid range, false if they don't.
+ * @param packageJsonData Valid JSON
+ * @param nodeName Name of a node in the package.json file
+ * @param rangeSpecifier A version range specifier
+ * @param config Rule configuration
+ * @return True if any dependencies versions start with the invalid range, false if they don't.
  */
-export const doVersContainInvalidRange = (
+export const auditDependenciesForInvalidRange = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   nodeName: string,
   rangeSpecifier: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   config: any
-): boolean => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return false;
-  }
+): AuditDependenciesForInvalidRangeResponse => {
+  let hasInvalidRangeVersions = false;
+  const dependenciesWithInvalidVersionRange = [];
+  const dependenciesWithoutInvalidVersionRange = [];
 
-  let containsInvalidVersion = false;
+  if (!packageJsonData.hasOwnProperty(nodeName)) {
+    return {
+      hasInvalidRangeVersions,
+      dependenciesWithInvalidVersionRange,
+      dependenciesWithoutInvalidVersionRange,
+    };
+  }
 
   // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
@@ -189,11 +202,18 @@ export const doVersContainInvalidRange = (
     const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
     if (doesVersStartsWithRange(dependencyVersion, rangeSpecifier)) {
-      containsInvalidVersion = true;
+      hasInvalidRangeVersions = true;
+      dependenciesWithInvalidVersionRange.push(dependencyName);
+    } else {
+      dependenciesWithoutInvalidVersionRange.push(dependencyName);
     }
   }
 
-  return containsInvalidVersion;
+  return {
+    hasInvalidRangeVersions,
+    dependenciesWithInvalidVersionRange,
+    dependenciesWithoutInvalidVersionRange,
+  };
 };
 
 export interface AbsoluteVersionCheckerResult {

@@ -460,7 +460,7 @@ describe('linter Unit Tests', () => {
         'no-caret-version-dependencies',
         Severity.Error,
         'dependencies',
-        'You are using an invalid version range. Please do not use ^.'
+        'You are using an invalid version range. Please do not use ^. Invalid dependencies include: myModule'
       );
       const expected = {
         errorCount: 1,
@@ -520,7 +520,7 @@ describe('linter Unit Tests', () => {
         'no-caret-version-dependencies',
         Severity.Error,
         'dependencies',
-        'You are using an invalid version range. Please do not use ^.'
+        'You are using an invalid version range. Please do not use ^. Invalid dependencies include: myModule'
       );
       const expected = {
         errorCount: 1,

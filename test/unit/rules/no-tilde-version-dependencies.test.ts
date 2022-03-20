@@ -21,7 +21,9 @@ describe('no-tilde-version-dependencies Unit Tests', () => {
       expect(response.lintId).toStrictEqual('no-tilde-version-dependencies');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('dependencies');
-      expect(response.lintMessage).toStrictEqual('You are using an invalid version range. Please do not use ~.');
+      expect(response.lintMessage).toStrictEqual(
+        'You are using an invalid version range. Please do not use ~. Invalid dependencies include: npm-package-json-lint'
+      );
     });
   });
 
