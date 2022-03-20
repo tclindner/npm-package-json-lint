@@ -157,7 +157,6 @@ export const areVersRangesValid = (
   return rangesValid;
 };
 
-
 export interface AuditDependenciesForInvalidRangeResponse {
   hasInvalidRangeVersions: boolean;
   dependenciesWithInvalidVersionRange: string[];
