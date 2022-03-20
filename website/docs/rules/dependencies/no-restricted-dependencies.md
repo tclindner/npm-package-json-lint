@@ -61,6 +61,7 @@ Enabling this rule will result in an error being generated if one of the depende
 
 ## History
 
+* Improved messaging when an invalid configuration is detected in version 6.3.0
 * Allow for wildcard dependency restrictions. Add `*` to the end of the dependency string to indicate a wildcard search. This will result in a lint issue if the dependency starts with the string before the `*`. Added in 4.2.0.
 * Renamed from dependencies-invalid-dependencies to no-restricted-dependencies in version 1.0.0
 * Introduced in version 0.1.0

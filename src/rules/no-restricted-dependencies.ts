@@ -1,12 +1,11 @@
 import {PackageJson} from 'type-fest';
-import {hasDependency} from '../validators/dependency-audit';
+import {auditDependenciesWithRestrictedVersion} from '../validators/dependency-audit';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
 
 const lintId = 'no-restricted-dependencies';
 const nodeName = 'dependencies';
-const message = 'You are using a restricted dependency. Please remove it.';
 
 export const ruleType = RuleType.Array;
 
@@ -18,8 +17,17 @@ export const lint = (
   severity: Severity,
   invalidDependencies: string[]
 ): LintIssue | null => {
-  if (hasDependency(packageJsonData, nodeName, invalidDependencies)) {
-    return new LintIssue(lintId, severity, nodeName, message);
+  const auditResult = auditDependenciesWithRestrictedVersion(packageJsonData, nodeName, invalidDependencies);
+
+  if (auditResult.hasDependencyWithRestrictedVersion) {
+    return new LintIssue(
+      lintId,
+      severity,
+      nodeName,
+      `You are using a restricted dependency. Please remove it. Invalid ${nodeName} include: ${auditResult.dependenciesWithRestrictedVersion.join(
+        ', '
+      )}`
+    );
   }
 
   return null;
