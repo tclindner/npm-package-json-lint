@@ -96,5 +96,6 @@ With exceptions
 
 ## History
 
+* Improved messaging when an invalid configuration is detected in version 6.3.0
 * Enhanced in version 2.5.0. No longer requires the version to be prefixed with an equals sign, =
 * Introduced in version 2.4.0
