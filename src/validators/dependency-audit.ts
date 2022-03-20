@@ -112,33 +112,45 @@ export const hasDepVersZero = (packageJsonData: PackageJson | any, nodeName: str
  * @param  {String}   rangeSpecifier      A version range specifier
  * @return {Boolean}                      True if the version starts with the range, false if it doesn't.
  */
-export const doesVersStartsWithRange = (dependencyVersion: string, rangeSpecifier: string): boolean => {
+export const doesVersionStartWithRange = (dependencyVersion: string, rangeSpecifier: string): boolean => {
   const firstCharOfStr = 0;
 
   return dependencyVersion.startsWith(rangeSpecifier, firstCharOfStr);
 };
 
+export interface AuditDependenciesForValidRangeResponse {
+  onlyValidVersionsDetected: boolean;
+  dependenciesWithValidVersionRange: string[];
+  dependenciesWithoutValidVersionRange: string[];
+}
+
 /**
  * Determines whether or not all dependency version ranges match expected range
- * @param  {object} packageJsonData  Valid JSON
- * @param  {string} nodeName         Name of a node in the package.json file
- * @param  {string} rangeSpecifier   A version range specifier
- * @param  {object} config           Rule configuration
- * @return {boolean}                 False if the package has an invalid range. True if it is not or the node is missing.
+ * @param packageJsonData Valid JSON
+ * @param nodeName Name of a node in the package.json file
+ * @param rangeSpecifier A version range specifier
+ * @param config Rule configuration
+ * @return False if the package has an invalid range. True if it is not or the node is missing.
  */
-export const areVersRangesValid = (
+export const auditDependenciesForValidRangeVersions = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   nodeName: string,
   rangeSpecifier: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   config: any
-): boolean => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return true;
-  }
+): AuditDependenciesForValidRangeResponse => {
+  let onlyValidVersionsDetected = true;
+  const dependenciesWithValidVersionRange = [];
+  const dependenciesWithoutValidVersionRange = [];
 
-  let rangesValid = true;
+  if (!packageJsonData.hasOwnProperty(nodeName)) {
+    return {
+      onlyValidVersionsDetected,
+      dependenciesWithValidVersionRange: [],
+      dependenciesWithoutValidVersionRange: [],
+    };
+  }
 
   // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
@@ -149,12 +161,19 @@ export const areVersRangesValid = (
 
     const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
-    if (!doesVersStartsWithRange(dependencyVersion, rangeSpecifier)) {
-      rangesValid = false;
+    if (doesVersionStartWithRange(dependencyVersion, rangeSpecifier)) {
+      dependenciesWithValidVersionRange.push(dependencyName);
+    } else {
+      onlyValidVersionsDetected = false;
+      dependenciesWithoutValidVersionRange.push(dependencyName);
     }
   }
 
-  return rangesValid;
+  return {
+    onlyValidVersionsDetected,
+    dependenciesWithValidVersionRange,
+    dependenciesWithoutValidVersionRange,
+  };
 };
 
 export interface AuditDependenciesForInvalidRangeResponse {
@@ -200,7 +219,7 @@ export const auditDependenciesForInvalidRange = (
 
     const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
-    if (doesVersStartsWithRange(dependencyVersion, rangeSpecifier)) {
+    if (doesVersionStartWithRange(dependencyVersion, rangeSpecifier)) {
       hasInvalidRangeVersions = true;
       dependenciesWithInvalidVersionRange.push(dependencyName);
     } else {

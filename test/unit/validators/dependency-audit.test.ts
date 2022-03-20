@@ -459,11 +459,11 @@ describe('dependency-audit Unit Tests', () => {
     });
   });
 
-  describe('doesVersStartsWithRange method', () => {
+  describe('doesVersionStartWithRange method', () => {
     describe('when dependencyVersion begins with range specifier', () => {
       test('true should be returned', () => {
         const dependencyVersion = '^1.0.0';
-        const response = dependencyAudit.doesVersStartsWithRange(dependencyVersion, '^');
+        const response = dependencyAudit.doesVersionStartWithRange(dependencyVersion, '^');
 
         expect(response).toBe(true);
       });
@@ -472,14 +472,14 @@ describe('dependency-audit Unit Tests', () => {
     describe('when dependencyVersion does not begin with range specifier', () => {
       test('false should be returned', () => {
         const dependencyVersion = '^1.0.0';
-        const response = dependencyAudit.doesVersStartsWithRange(dependencyVersion, '~');
+        const response = dependencyAudit.doesVersionStartWithRange(dependencyVersion, '~');
 
         expect(response).toBe(false);
       });
     });
   });
 
-  describe('areVersRangesValid method', () => {
+  describe('auditDependenciesForValidRangeVersions method', () => {
     describe('when the node does not exist in the package.json file', () => {
       test('true should be returned', () => {
         const packageJson = {
@@ -489,9 +489,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.areVersRangesValid(packageJson, 'devDependencies', '~', {});
+        const response = dependencyAudit.auditDependenciesForValidRangeVersions(packageJson, 'devDependencies', '~', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          onlyValidVersionsDetected: true,
+          dependenciesWithValidVersionRange: [],
+          dependenciesWithoutValidVersionRange: [],
+        });
       });
     });
 
@@ -504,9 +508,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~', {});
+        const response = dependencyAudit.auditDependenciesForValidRangeVersions(packageJson, 'dependencies', '~', {});
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          onlyValidVersionsDetected: false,
+          dependenciesWithValidVersionRange: ['grunt-npm-package-json-lint'],
+          dependenciesWithoutValidVersionRange: ['npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
     });
 
@@ -519,9 +527,17 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '~2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~', {});
+        const response = dependencyAudit.auditDependenciesForValidRangeVersions(packageJson, 'dependencies', '~', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          onlyValidVersionsDetected: true,
+          dependenciesWithValidVersionRange: [
+            'npm-package-json-lint',
+            'grunt-npm-package-json-lint',
+            'gulp-npm-package-json-lint',
+          ],
+          dependenciesWithoutValidVersionRange: [],
+        });
       });
     });
 
@@ -534,11 +550,15 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~', {
+        const response = dependencyAudit.auditDependenciesForValidRangeVersions(packageJson, 'dependencies', '~', {
           exceptions: ['gulp-npm-package-json-lint'],
         });
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          onlyValidVersionsDetected: true,
+          dependenciesWithValidVersionRange: ['npm-package-json-lint', 'grunt-npm-package-json-lint'],
+          dependenciesWithoutValidVersionRange: [],
+        });
       });
     });
 
@@ -551,9 +571,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.areVersRangesValid(packageJson, 'dependencies', '~', {});
+        const response = dependencyAudit.auditDependenciesForValidRangeVersions(packageJson, 'dependencies', '~', {});
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          onlyValidVersionsDetected: false,
+          dependenciesWithValidVersionRange: ['npm-package-json-lint', 'grunt-npm-package-json-lint'],
+          dependenciesWithoutValidVersionRange: ['gulp-npm-package-json-lint'],
+        });
       });
     });
   });
