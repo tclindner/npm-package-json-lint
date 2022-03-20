@@ -7,17 +7,35 @@ const semver = require('semver');
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const hasExceptions = (config: any): boolean => typeof config === 'object' && config.hasOwnProperty('exceptions');
 
+export interface AuditDependenciesWithRestrictedVersionResponse {
+  hasDependencyWithRestrictedVersion: boolean;
+  dependenciesWithRestrictedVersion: string[];
+  dependenciesWithoutRestrictedVersion: string[];
+}
+
 /**
  * Determines whether or not the package has a given dependency
- * @param  {object} packageJsonData  Valid JSON
- * @param  {string} nodeName         Name of a node in the package.json file
- * @param  {string} depsToCheckFor   An array of packages to check for
- * @return {boolean}                 True if the package has a dependency. False if it is not or the node is missing.
+ * @param packageJsonData Valid JSON
+ * @param nodeName Name of a node in the package.json file
+ * @param depsToCheckFor An array of packages to check for
+ * @return True if the package has a dependency. False if it is not or the node is missing.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const hasDependency = (packageJsonData: PackageJson | any, nodeName: string, depsToCheckFor: string[]): boolean => {
+export const auditDependenciesWithRestrictedVersion = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonData: PackageJson | any,
+  nodeName: string,
+  depsToCheckFor: string[]
+): AuditDependenciesWithRestrictedVersionResponse => {
+  let hasDependencyWithRestrictedVersion = false;
+  const dependenciesWithRestrictedVersion = [];
+  const dependenciesWithoutRestrictedVersion = [];
+
   if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return false;
+    return {
+      hasDependencyWithRestrictedVersion,
+      dependenciesWithRestrictedVersion,
+      dependenciesWithoutRestrictedVersion,
+    };
   }
 
   // eslint-disable-next-line no-restricted-syntax, guard-for-in
@@ -25,36 +43,56 @@ export const hasDependency = (packageJsonData: PackageJson | any, nodeName: stri
     // eslint-disable-next-line no-restricted-syntax
     for (const depToCheckFor of depsToCheckFor) {
       if (depToCheckFor === dependencyName) {
-        return true;
-      }
-
-      if (
+        hasDependencyWithRestrictedVersion = true;
+        dependenciesWithRestrictedVersion.push(dependencyName);
+      } else if (
         depToCheckFor.endsWith('*') &&
         dependencyName.startsWith(depToCheckFor.slice(0, Math.max(0, depToCheckFor.length - 1)))
       ) {
-        return true;
+        hasDependencyWithRestrictedVersion = true;
+        dependenciesWithRestrictedVersion.push(dependencyName);
+      } else {
+        dependenciesWithoutRestrictedVersion.push(dependencyName);
       }
     }
   }
 
-  return false;
+  return {
+    hasDependencyWithRestrictedVersion,
+    dependenciesWithRestrictedVersion,
+    dependenciesWithoutRestrictedVersion,
+  };
 };
+
+export interface AuditDependenciesWithRestrictedPrereleaseVersionResponse {
+  hasDependencyWithRestrictedPrereleaseVersion: boolean;
+  dependenciesWithRestrictedPrereleaseVersion: string[];
+  dependenciesWithoutRestrictedPrereleaseVersion: string[];
+}
 
 /**
  * Determines whether or not the package has a pre-release version of a given dependency
- * @param  {object} packageJsonData         Valid JSON
- * @param  {string} nodeName                Name of a node in the package.json file
- * @param  {string} depsToCheckFor          An array of packages to check for
- * @return {boolean}                        True if the package has a pre-release version of a dependency. False if it is not or the node is missing.
+ * @param packageJsonData Valid JSON
+ * @param nodeName Name of a node in the package.json file
+ * @param depsToCheckFor An array of packages to check for
+ * @return True if the package has a pre-release version of a dependency. False if it is not or the node is missing.
  */
-export const hasDepPrereleaseVers = (
+export const auditDependenciesWithRestrictedPrereleaseVersion = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   nodeName: string,
   depsToCheckFor: string[]
-): boolean => {
+): AuditDependenciesWithRestrictedPrereleaseVersionResponse => {
+  let hasDependencyWithRestrictedPrereleaseVersion = false;
+  const dependenciesWithRestrictedPrereleaseVersion = [];
+  const dependenciesWithoutRestrictedPrereleaseVersion = [];
+
   if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return false;
+    return {
+      hasDependencyWithRestrictedPrereleaseVersion,
+      dependenciesWithRestrictedPrereleaseVersion,
+      dependenciesWithoutRestrictedPrereleaseVersion,
+    };
   }
 
   // eslint-disable-next-line no-restricted-syntax
@@ -63,12 +101,19 @@ export const hasDepPrereleaseVers = (
       const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
       if (dependencyVersion.includes('-beta') || dependencyVersion.includes('-rc')) {
-        return true;
+        hasDependencyWithRestrictedPrereleaseVersion = true;
+        dependenciesWithRestrictedPrereleaseVersion.push(dependencyName);
+      } else {
+        dependenciesWithoutRestrictedPrereleaseVersion.push(dependencyName);
       }
     }
   }
 
-  return false;
+  return {
+    hasDependencyWithRestrictedPrereleaseVersion,
+    dependenciesWithRestrictedPrereleaseVersion,
+    dependenciesWithoutRestrictedPrereleaseVersion,
+  };
 };
 
 export interface AuditDependenciesWithMajorVersionOfZeroResponse {

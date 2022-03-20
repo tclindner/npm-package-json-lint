@@ -27,7 +27,9 @@ describe('no-restricted-pre-release-devDependencies Unit Tests', () => {
       expect(response.lintId).toStrictEqual('no-restricted-pre-release-devDependencies');
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('devDependencies');
-      expect(response.lintMessage).toStrictEqual('You are using a restricted pre-release dependency. Please remove it.');
+      expect(response.lintMessage).toStrictEqual(
+        'You are using a restricted pre-release dependency. Please remove it. Invalid devDependencies include: npm-package-json-lint'
+      );
     });
   });
 

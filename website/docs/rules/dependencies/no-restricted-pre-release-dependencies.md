@@ -51,5 +51,6 @@ Enabling this rule will result in an error being generated if one of the depende
 
 ## History
 
+* Improved messaging when an invalid configuration is detected in version 6.3.0
 * Renamed from dependencies-invalid-pre-release-dependencies to no-restricted-pre-release-dependencies in version 1.0.0
 * Introduced in version 0.1.0
