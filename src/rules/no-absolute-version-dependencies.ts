@@ -1,5 +1,5 @@
 import {PackageJson} from 'type-fest';
-import {areVersionsAbsolute} from '../validators/dependency-audit';
+import {auditDependenciesForAbsoluteVersion} from '../validators/dependency-audit';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
@@ -8,7 +8,6 @@ import {LintResult} from '../types/lint-result';
 
 const lintId = 'no-absolute-version-dependencies';
 const nodeName = 'dependencies';
-const message = 'You are using an invalid version range. Please do not use absolute versions.';
 
 export const ruleType = RuleType.OptionalObject;
 
@@ -18,8 +17,17 @@ export const lint = (
   severity: Severity,
   config: OptionalObjectRuleConfig
 ): LintResult => {
-  if (packageJsonData.hasOwnProperty(nodeName) && areVersionsAbsolute(packageJsonData, nodeName, config)) {
-    return new LintIssue(lintId, severity, nodeName, message);
+  const auditResult = auditDependenciesForAbsoluteVersion(packageJsonData, nodeName, config);
+
+  if (packageJsonData.hasOwnProperty(nodeName) && auditResult.onlyAbsoluteVersionsDetected) {
+    return new LintIssue(
+      lintId,
+      severity,
+      nodeName,
+      `You are using an invalid version range. Please do not use absolute versions. Invalid ${nodeName} include: ${auditResult.dependenciesWithAbsoluteVersion.join(
+        ', '
+      )}`
+    );
   }
 
   return null;

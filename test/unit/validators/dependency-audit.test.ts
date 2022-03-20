@@ -637,7 +637,7 @@ describe('dependency-audit Unit Tests', () => {
     });
   });
 
-  describe('areVersionsAbsolute method', () => {
+  describe('auditDependenciesForAbsoluteVersion method', () => {
     describe('when the node exists in the package.json file, not all versions are absolute', () => {
       test('with caret versioning false should be returned', () => {
         const packageJson = {
@@ -646,9 +646,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: false,
+          dependenciesWithAbsoluteVersion: [],
+          dependenciesWithoutAbsoluteVersion: ['npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
       test('with tilde versioning false should be returned', () => {
         const packageJson = {
@@ -657,9 +661,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '~2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: false,
+          dependenciesWithAbsoluteVersion: [],
+          dependenciesWithoutAbsoluteVersion: ['npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
       test('with star versioning false should be returned', () => {
         const packageJson = {
@@ -668,9 +676,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '2.*',
           },
         };
-        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: false,
+          dependenciesWithAbsoluteVersion: [],
+          dependenciesWithoutAbsoluteVersion: ['npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
       test('with greater versioning false should be returned', () => {
         const packageJson = {
@@ -679,9 +691,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '>=2.0.0',
           },
         };
-        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: false,
+          dependenciesWithAbsoluteVersion: [],
+          dependenciesWithoutAbsoluteVersion: ['npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
       test('with less versioning false should be returned', () => {
         const packageJson = {
@@ -690,9 +706,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '<=2.0.0',
           },
         };
-        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: false,
+          dependenciesWithAbsoluteVersion: [],
+          dependenciesWithoutAbsoluteVersion: ['npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
     });
 
@@ -705,30 +725,21 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '=2.4.0',
           },
         };
-        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: true,
+          dependenciesWithAbsoluteVersion: [
+            'npm-package-json-lint',
+            'grunt-npm-package-json-lint',
+            'gulp-npm-package-json-lint',
+          ],
+          dependenciesWithoutAbsoluteVersion: [],
+        });
       });
     });
 
     describe('when the node exists in the package.json file, one absolute version but has expection', () => {
-      test('true should be returned', () => {
-        const packageJson = {
-          dependencies: {
-            'npm-package-json-lint': '1.0.0',
-            'grunt-npm-package-json-lint': '~2.0.0-beta1',
-            'gulp-npm-package-json-lint': '^2.0.0-rc1',
-          },
-        };
-        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {
-          exceptions: ['npm-package-json-lint'],
-        });
-
-        expect(response).toBe(false);
-      });
-    });
-
-    describe('when the node exists in the package.json file, one absolute version and does not have expection', () => {
       test('false should be returned', () => {
         const packageJson = {
           dependencies: {
@@ -737,9 +748,34 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.areVersionsAbsolute(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {
+          exceptions: ['npm-package-json-lint'],
+        });
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: false,
+          dependenciesWithAbsoluteVersion: [],
+          dependenciesWithoutAbsoluteVersion: ['grunt-npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
+      });
+    });
+
+    describe('when the node exists in the package.json file, one absolute version and does not have expection', () => {
+      test('true should be returned', () => {
+        const packageJson = {
+          dependencies: {
+            'npm-package-json-lint': '1.0.0',
+            'grunt-npm-package-json-lint': '~2.0.0-beta1',
+            'gulp-npm-package-json-lint': '^2.0.0-rc1',
+          },
+        };
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
+
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: false,
+          dependenciesWithAbsoluteVersion: ['npm-package-json-lint'],
+          dependenciesWithoutAbsoluteVersion: ['grunt-npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
     });
   });
@@ -919,7 +955,7 @@ describe('dependency-audit Unit Tests', () => {
     });
   });
 
-  describe('doVersContainNonAbsolute method', () => {
+  describe('auditDependenciesForNonAbsoluteVersion method', () => {
     describe('when the node exists in the package.json file, not all versions are absolute', () => {
       test('with caret versioning true should be returned', () => {
         const packageJson = {
@@ -928,9 +964,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForNonAbsoluteVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          onlyNonAbsoluteVersionsDetected: true,
+          dependenciesWithAbsoluteVersion: [],
+          dependenciesWithoutAbsoluteVersion: ['npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
       test('with tilde versioning true should be returned', () => {
         const packageJson = {
@@ -939,9 +979,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '~2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForNonAbsoluteVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          onlyNonAbsoluteVersionsDetected: true,
+          dependenciesWithAbsoluteVersion: [],
+          dependenciesWithoutAbsoluteVersion: ['npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
       test('with star versioning true should be returned', () => {
         const packageJson = {
@@ -950,9 +994,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '2.*',
           },
         };
-        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForNonAbsoluteVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          onlyNonAbsoluteVersionsDetected: true,
+          dependenciesWithAbsoluteVersion: [],
+          dependenciesWithoutAbsoluteVersion: ['npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
       test('with greater versioning true should be returned', () => {
         const packageJson = {
@@ -961,9 +1009,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '>=2.0.0',
           },
         };
-        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForNonAbsoluteVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          onlyNonAbsoluteVersionsDetected: true,
+          dependenciesWithAbsoluteVersion: [],
+          dependenciesWithoutAbsoluteVersion: ['npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
       test('with less versioning true should be returned', () => {
         const packageJson = {
@@ -972,9 +1024,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '<=2.0.0',
           },
         };
-        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForNonAbsoluteVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          onlyNonAbsoluteVersionsDetected: true,
+          dependenciesWithAbsoluteVersion: [],
+          dependenciesWithoutAbsoluteVersion: ['npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
     });
 
@@ -987,9 +1043,17 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '=2.4.0',
           },
         };
-        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForNonAbsoluteVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          onlyNonAbsoluteVersionsDetected: false,
+          dependenciesWithAbsoluteVersion: [
+            'npm-package-json-lint',
+            'grunt-npm-package-json-lint',
+            'gulp-npm-package-json-lint',
+          ],
+          dependenciesWithoutAbsoluteVersion: [],
+        });
       });
     });
 
@@ -1002,11 +1066,15 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {
+        const response = dependencyAudit.auditDependenciesForNonAbsoluteVersion(packageJson, 'dependencies', {
           exceptions: ['npm-package-json-lint'],
         });
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          onlyNonAbsoluteVersionsDetected: true,
+          dependenciesWithAbsoluteVersion: [],
+          dependenciesWithoutAbsoluteVersion: ['grunt-npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
     });
 
@@ -1019,9 +1087,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.doVersContainNonAbsolute(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesForNonAbsoluteVersion(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          onlyNonAbsoluteVersionsDetected: true,
+          dependenciesWithAbsoluteVersion: ['npm-package-json-lint'],
+          dependenciesWithoutAbsoluteVersion: ['grunt-npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
     });
   });

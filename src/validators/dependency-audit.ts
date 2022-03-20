@@ -205,12 +205,12 @@ export interface AbsoluteVersionCheckerResult {
 
 /**
  * Determines whether or not all dependency versions are absolute
- * @param {object} packageJsonData    Valid JSON
- * @param {string} nodeName           Name of a node in the package.json file
- * @param {object} config             Rule configuration
- * @return {boolean}                  False if the package has an non-absolute version. True if it is not or the node is missing.
+ * @param packageJsonData Valid JSON
+ * @param nodeName Name of a node in the package.json file
+ * @param config Rule configuration
+ * @return False if the package has an non-absolute version. True if it is not or the node is missing.
  */
-const absoluteVersionChecker = (
+const auditAbsoluteVersions = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   nodeName: string,
@@ -256,19 +256,11 @@ const absoluteVersionChecker = (
   };
 };
 
-/**
- * Determines whether or not all dependency versions are absolut
- * @param {object} packageJsonData    Valid JSON
- * @param {string} nodeName           Name of a node in the package.json file
- * @param {object} config             Rule configuration
- * @return {boolean}                  False if the package has an non-absolute version. True if it is not or the node is missing.
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const areVersionsAbsolute = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
-  const {onlyAbsoluteVersionDetected, dependenciesChecked} = absoluteVersionChecker(packageJsonData, nodeName, config);
-
-  return dependenciesChecked > 0 ? onlyAbsoluteVersionDetected : false;
-};
+export interface AuditDependenciesForAbsoluteVersionResponse {
+  onlyAbsoluteVersionsDetected: boolean;
+  dependenciesWithAbsoluteVersion: string[];
+  dependenciesWithoutAbsoluteVersion: string[];
+}
 
 /**
  * Determines whether or not all dependency versions are absolut
@@ -277,11 +269,59 @@ export const areVersionsAbsolute = (packageJsonData: PackageJson | any, nodeName
  * @param config Rule configuration
  * @return False if the package has an non-absolute version. True if it is not or the node is missing.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const doVersContainNonAbsolute = (packageJsonData: PackageJson | any, nodeName: string, config: any): boolean => {
-  const {onlyAbsoluteVersionDetected, dependenciesChecked} = absoluteVersionChecker(packageJsonData, nodeName, config);
+export const auditDependenciesForAbsoluteVersion = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonData: PackageJson | any,
+  nodeName: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  config: any
+): AuditDependenciesForAbsoluteVersionResponse => {
+  const {
+    onlyAbsoluteVersionDetected,
+    dependenciesChecked,
+    dependenciesWithAbsoluteVersion,
+    dependenciesWithoutAbsoluteVersion,
+  } = auditAbsoluteVersions(packageJsonData, nodeName, config);
 
-  return dependenciesChecked > 0 ? !onlyAbsoluteVersionDetected : false;
+  return {
+    onlyAbsoluteVersionsDetected: dependenciesChecked > 0 ? onlyAbsoluteVersionDetected : false,
+    dependenciesWithAbsoluteVersion,
+    dependenciesWithoutAbsoluteVersion,
+  };
+};
+
+export interface AuditDependenciesForNonAbsoluteVersionResponse {
+  onlyNonAbsoluteVersionsDetected: boolean;
+  dependenciesWithAbsoluteVersion: string[];
+  dependenciesWithoutAbsoluteVersion: string[];
+}
+
+/**
+ * Determines whether or not all dependency versions are absolut
+ * @param packageJsonData Valid JSON
+ * @param nodeName Name of a node in the package.json file
+ * @param config Rule configuration
+ * @return False if the package has an non-absolute version. True if it is not or the node is missing.
+ */
+export const auditDependenciesForNonAbsoluteVersion = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  packageJsonData: PackageJson | any,
+  nodeName: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  config: any
+): AuditDependenciesForNonAbsoluteVersionResponse => {
+  const {
+    onlyAbsoluteVersionDetected,
+    dependenciesChecked,
+    dependenciesWithAbsoluteVersion,
+    dependenciesWithoutAbsoluteVersion,
+  } = auditAbsoluteVersions(packageJsonData, nodeName, config);
+
+  return {
+    onlyNonAbsoluteVersionsDetected: dependenciesChecked > 0 ? !onlyAbsoluteVersionDetected : false,
+    dependenciesWithAbsoluteVersion,
+    dependenciesWithoutAbsoluteVersion,
+  };
 };
 
 const GITHUB_SHORTCUT_URL = /^(github:)?[^/]+\/[^/]+/;
