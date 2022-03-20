@@ -94,7 +94,7 @@ describe('dependency-audit Unit Tests', () => {
     });
   });
 
-  describe('hasDepVersZero method - part 1', () => {
+  describe('auditDependenciesWithMajorVersionOfZero method - part 1', () => {
     describe('when the node does not exist in the package.json file', () => {
       test('false should be returned', () => {
         const packageJson = {
@@ -102,9 +102,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '~ 1.0',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'devDependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'devDependencies', {});
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: false,
+          dependenciesWithMajorVersionOfZero: [],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -115,9 +119,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '~0.6.1-1',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -128,9 +136,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '>=0.1.97',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -141,9 +153,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '0.1.20 || 1.2.4',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -154,9 +170,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '0.1.20 || >1.2.4',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -167,9 +187,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '0.1.20 || 1.2.4',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -180,9 +204,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '0.1.20 || 1.2.4',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -193,9 +221,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '>=0.2.3 || <0.0.1',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -206,9 +238,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '>=0.2.3 || <0.0.1',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -219,9 +255,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '>=0.2.3 || <0.0.1',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -232,9 +272,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '~v0.5.4-pre',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -245,16 +289,20 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '~v0.5.4-pre',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {
           exceptions: ['npm-package-json-lint'],
         });
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: false,
+          dependenciesWithMajorVersionOfZero: [],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
   });
 
-  describe('hasDepVersZero method - part 2', () => {
+  describe('auditDependenciesWithMajorVersionOfZero method - part 2', () => {
     describe('when the node exists in the package.json file, not all versions are 1+', () => {
       test('true should be returned', () => {
         const packageJson = {
@@ -262,9 +310,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '=0.7.x',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -275,9 +327,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '>=0.7.x',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -288,9 +344,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '<=0.7.x',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -301,9 +361,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '>0.2.3 >0.2.4 <=0.2.5',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -314,9 +378,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '>=0.2.3 <=0.2.4',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -327,9 +395,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '^0.1.0 || ~3.0.1 || 5.0.0',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -340,9 +412,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '^0.1.0 || ~3.0.1 || 5.0.0',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -353,9 +429,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '^0.1.0 || ~3.0.1 || 5.0.0',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -366,9 +446,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '^0.1.0 || ~3.0.1 || >4 <=5.0.0',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: true,
+          dependenciesWithMajorVersionOfZero: ['npm-package-json-lint'],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -379,9 +463,13 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint': '=0.1.',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: false,
+          dependenciesWithMajorVersionOfZero: [],
+          dependenciesWithoutMajorVersionOfZero: [],
+        });
       });
     });
 
@@ -452,9 +540,73 @@ describe('dependency-audit Unit Tests', () => {
             'npm-package-json-lint83': '~1.0.0-alpha',
           },
         };
-        const response = dependencyAudit.hasDepVersZero(packageJson, 'dependencies', {});
+        const response = dependencyAudit.auditDependenciesWithMajorVersionOfZero(packageJson, 'dependencies', {});
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          hasDependencyWithMajorVersionOfZero: false,
+          dependenciesWithMajorVersionOfZero: [],
+          dependenciesWithoutMajorVersionOfZero: [
+            'npm-package-json-lint',
+            'npm-package-json-lint3',
+            'npm-package-json-lint4',
+            'npm-package-json-lint5',
+            'npm-package-json-lint6',
+            'npm-package-json-lint8',
+            'npm-package-json-lint9',
+            'npm-package-json-lint10',
+            'npm-package-json-lint11',
+            'npm-package-json-lint12',
+            'npm-package-json-lint13',
+            'npm-package-json-lint14',
+            'npm-package-json-lint15',
+            'npm-package-json-lint16',
+            'npm-package-json-lint17',
+            'npm-package-json-lint18',
+            'npm-package-json-lint19',
+            'npm-package-json-lint20',
+            'npm-package-json-lint21',
+            'npm-package-json-lint22',
+            'npm-package-json-lint23',
+            'npm-package-json-lint24',
+            'npm-package-json-lint25',
+            'npm-package-json-lint26',
+            'npm-package-json-lint27',
+            'npm-package-json-lint28',
+            'npm-package-json-lint38',
+            'npm-package-json-lint39',
+            'npm-package-json-lint40',
+            'npm-package-json-lint41',
+            'npm-package-json-lint42',
+            'npm-package-json-lint43',
+            'npm-package-json-lint44',
+            'npm-package-json-lint45',
+            'npm-package-json-lint46',
+            'npm-package-json-lint47',
+            'npm-package-json-lint48',
+            'npm-package-json-lint49',
+            'npm-package-json-lint50',
+            'npm-package-json-lint51',
+            'npm-package-json-lint52',
+            'npm-package-json-lint53',
+            'npm-package-json-lint54',
+            'npm-package-json-lint55',
+            'npm-package-json-lint56',
+            'npm-package-json-lint57',
+            'npm-package-json-lint58',
+            'npm-package-json-lint59',
+            'npm-package-json-lint60',
+            'npm-package-json-lint61',
+            'npm-package-json-lint62',
+            'npm-package-json-lint63',
+            'npm-package-json-lint71',
+            'npm-package-json-lint72',
+            'npm-package-json-lint73',
+            'npm-package-json-lint80',
+            'npm-package-json-lint81',
+            'npm-package-json-lint82',
+            'npm-package-json-lint83',
+          ],
+        });
       });
     });
   });
