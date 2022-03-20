@@ -558,7 +558,7 @@ describe('dependency-audit Unit Tests', () => {
     });
   });
 
-  describe('doVersContainInvalidRange method', () => {
+  describe('auditDependenciesForInvalidRange method', () => {
     describe('when the node does not exist in the package.json file', () => {
       test('false should be returned', () => {
         const packageJson = {
@@ -568,9 +568,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'devDependencies', '~', {});
+        const response = dependencyAudit.auditDependenciesForInvalidRange(packageJson, 'devDependencies', '~', {});
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          hasInvalidRangeVersions: false,
+          dependenciesWithInvalidVersionRange: [],
+          dependenciesWithoutInvalidVersionRange: [],
+        });
       });
     });
 
@@ -583,9 +587,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~', {});
+        const response = dependencyAudit.auditDependenciesForInvalidRange(packageJson, 'dependencies', '~', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasInvalidRangeVersions: true,
+          dependenciesWithInvalidVersionRange: ['grunt-npm-package-json-lint'],
+          dependenciesWithoutInvalidVersionRange: ['npm-package-json-lint', 'gulp-npm-package-json-lint'],
+        });
       });
     });
 
@@ -598,9 +606,17 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~', {});
+        const response = dependencyAudit.auditDependenciesForInvalidRange(packageJson, 'dependencies', '~', {});
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          hasInvalidRangeVersions: false,
+          dependenciesWithInvalidVersionRange: [],
+          dependenciesWithoutInvalidVersionRange: [
+            'npm-package-json-lint',
+            'grunt-npm-package-json-lint',
+            'gulp-npm-package-json-lint',
+          ],
+        });
       });
     });
 
@@ -613,11 +629,15 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~', {
+        const response = dependencyAudit.auditDependenciesForInvalidRange(packageJson, 'dependencies', '~', {
           exceptions: ['npm-package-json-lint', 'grunt-npm-package-json-lint'],
         });
 
-        expect(response).toBe(false);
+        expect(response).toStrictEqual({
+          hasInvalidRangeVersions: false,
+          dependenciesWithInvalidVersionRange: [],
+          dependenciesWithoutInvalidVersionRange: ['gulp-npm-package-json-lint'],
+        });
       });
     });
 
@@ -630,9 +650,13 @@ describe('dependency-audit Unit Tests', () => {
             'gulp-npm-package-json-lint': '^2.0.0-rc1',
           },
         };
-        const response = dependencyAudit.doVersContainInvalidRange(packageJson, 'dependencies', '~', {});
+        const response = dependencyAudit.auditDependenciesForInvalidRange(packageJson, 'dependencies', '~', {});
 
-        expect(response).toBe(true);
+        expect(response).toStrictEqual({
+          hasInvalidRangeVersions: true,
+          dependenciesWithInvalidVersionRange: ['npm-package-json-lint', 'grunt-npm-package-json-lint'],
+          dependenciesWithoutInvalidVersionRange: ['gulp-npm-package-json-lint'],
+        });
       });
     });
   });
