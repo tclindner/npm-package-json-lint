@@ -61,7 +61,7 @@
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.24",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
-    "esbuild": "^0.14.36",
+    "esbuild": "^0.14.38",
     "esbuild-node-externals": "^1.4.1",
     "eslint": "^8.13.0",
     "eslint-config-tc": "^22.0.0",
