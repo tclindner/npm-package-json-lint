@@ -113,7 +113,6 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
   * [no-restricted-devDependencies](rules/dependencies/no-restricted-devDependencies.md)
   * [no-restricted-pre-release-devDependencies](rules/dependencies/no-restricted-pre-release-devDependencies.md)
   * [no-tilde-version-devDependencies](rules/dependencies/no-tilde-version-devDependencies.md)
-  * [prefer-no-version-zero-devDependencies](rules/dependencies/prefer-no-version-zero-devDependencies.md)
   * [prefer-absolute-version-devDependencies](rules/dependencies/prefer-absolute-version-devDependencies.md)
   * [prefer-alphabetical-devDependencies](rules/dependencies/prefer-alphabetical-devDependencies.md)
   * [prefer-caret-version-devDependencies](rules/dependencies/prefer-caret-version-devDependencies.md)
