@@ -28,7 +28,7 @@ jobs:
 
     strategy:
       matrix:
-        node: [14, 16]
+        node: [14, 16, 18]
         # TODO: Add windows-latest
         os: [ubuntu-latest, macos-latest]
 
