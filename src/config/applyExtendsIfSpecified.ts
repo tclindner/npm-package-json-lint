@@ -110,16 +110,19 @@ const loadConfigFile = (filePath: any): any => {
   let config = {};
 
   switch (path.extname(filePath)) {
-    case '.js':
+    case '.js': {
       config = parseJavaScriptFile(filePath);
       break;
+    }
 
-    case '.json':
+    case '.json': {
       config = parseJsonFile(filePath);
       break;
+    }
 
-    default:
+    default: {
       throw new Error(`Unsupport config file extension. File path: ${filePath}`);
+    }
   }
 
   return config;
