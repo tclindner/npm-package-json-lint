@@ -50,7 +50,7 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 Quick links
 
-[CLI commands and configuration](https://npmpackagejsonlint.org/docs/cli) | [Node.js API](https://npmpackagejsonlint.org/docs/en/api)
+[CLI commands and configuration](https://npmpackagejsonlint.org/docs/cli) | [Node.js API](https://npmpackagejsonlint.org/docs/api)
 
 ## Migrating from v5.x.x to 6.x.x
 
