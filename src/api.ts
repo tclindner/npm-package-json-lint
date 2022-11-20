@@ -11,3 +11,5 @@ export {PackageJsonFileLintingResult} from './types/package-json-linting-result'
 export {PackageJsonFileAggregatedResultCounts, OverallAggregatedResultCounts} from './linter/results-helper';
 
 export {Rules, Rule} from './native-rules';
+
+export {write} from './console-reporter'
