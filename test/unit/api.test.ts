@@ -38,4 +38,8 @@ describe('api Unit Tests', () => {
   test('Rules should be exported', () => {
     expect(api).toHaveProperty('Rules');
   });
+
+  test('Report writer should be exported', () => {
+    expect(api).toHaveProperty('write');
+  });
 });
