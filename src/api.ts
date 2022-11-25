@@ -12,4 +12,4 @@ export {PackageJsonFileAggregatedResultCounts, OverallAggregatedResultCounts} fr
 
 export {Rules, Rule} from './native-rules';
 
-export {write} from './console-reporter'
+export {write} from './console-reporter';
