@@ -9,7 +9,8 @@
       "rcfile-example",
       "cli",
       "api",
-      "ignore"
+      "ignore",
+      "integrations"
     ],
     "Rules": [
       "rules"
