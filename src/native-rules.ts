@@ -51,6 +51,7 @@ export class Rules {
   get(ruleId: string): Rule {
     const rule = this.rules[ruleId];
 
+    // eslint-disable-next-line unicorn/no-typeof-undefined
     if (typeof rule === 'undefined') {
       const errorMsg = `Rule, ${ruleId}, is invalid. Please ensure it matches a valid option.`;
 
