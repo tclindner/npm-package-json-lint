@@ -23,6 +23,9 @@
       "install": {
         "title": "Install"
       },
+      "integrations": {
+        "title": "Integrations"
+      },
       "rcfile-example": {
         "title": ".npmpackagejsonlintrc.json example"
       },
