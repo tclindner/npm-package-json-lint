@@ -71,6 +71,7 @@ export class Config {
     debug(`filePathToSearch: ${filePathToSearch}`);
     let config;
 
+    // eslint-disable-next-line unicorn/no-typeof-undefined
     if (typeof this.config === 'undefined') {
       debug(`User passed config is undefined.`);
       if (this.configFile) {
