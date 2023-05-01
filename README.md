@@ -42,7 +42,7 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 #### Use cli in project
 
-* `npm install npm-package-json-lint`
+* `npm install npm-package-json-lint -D`
 
 ## Documentation
 
