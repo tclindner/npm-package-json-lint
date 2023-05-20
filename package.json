@@ -63,7 +63,7 @@
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "esbuild": "^0.17.18",
     "esbuild-node-externals": "^1.7.0",
-    "eslint": "^8.39.0",
+    "eslint": "^8.41.0",
     "eslint-config-tc": "^22.2.0",
     "eslint-config-typescript-tc": "^6.0.0",
     "eslint-formatter-pretty": "^5.0.0",
