@@ -11,7 +11,7 @@ const bundle = true;
 const minify = true;
 const platform = 'node';
 const sourcemap = true;
-const target = 'node14';
+const target = 'node16';
 const plugins = [nodeExternalsPlugin()];
 
 readdirSync(rulesDirectory).forEach((file) => {

@@ -152,6 +152,7 @@ export const auditDependenciesWithMajorVersionOfZero = (
     if (semver.validRange(dependencyVersRange)) {
       const startIndex = 0;
       const length = 1;
+      // eslint-disable-next-line unicorn/prefer-string-replace-all
       const dependencyVersion = dependencyVersRange.replace(/\D+/g, '');
       // eslint-disable-next-line unicorn/prefer-string-slice
       const dependencyMjrVersion = dependencyVersion.substr(startIndex, length);
