@@ -41,7 +41,7 @@
   "dependencies": {
     "ajv": "^6.12.6",
     "ajv-errors": "^1.0.1",
-    "chalk": "^4.1.2",
+    "chalk": "^5.3.0",
     "cosmiconfig": "^8.2.0",
     "debug": "^4.3.4",
     "globby": "^11.1.0",
