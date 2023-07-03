@@ -31,8 +31,8 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 #### Node
 
-* [Node.js](https://nodejs.org/) - v14.0.0+
-* [npm](http://npmjs.com) - v6.0.0+
+* [Node.js](https://nodejs.org/) - v16.0.0+
+* [npm](http://npmjs.com) - v8.0.0+
 
 ### Use the cli
 
@@ -90,4 +90,4 @@ Please see [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
-Copyright (c) 2016-2022 Thomas Lindner. Licensed under the MIT license.
+Copyright (c) 2016-2023 Thomas Lindner. Licensed under the MIT license.
