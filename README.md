@@ -117,6 +117,10 @@ Quick links
 
 [CLI commands and configuration](https://npmpackagejsonlint.org/docs/cli) | [Node.js API](https://npmpackagejsonlint.org/docs/api) | [Integrations](https://npmpackagejsonlint.org/docs/integrations)
 
+## Migrating from v6.x.x to 7.x.x
+
+Please see the [migration guide](https://npmpackagejsonlint.org/docs/v6-to-v7).
+
 ## Migrating from v5.x.x to 6.x.x
 
 Please see the [migration guide](https://npmpackagejsonlint.org/docs/v5-to-v6).
