@@ -17,9 +17,9 @@ describe('valid-values-type Unit Tests', () => {
   describe('when package.json has node with incorrect format', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        type: "type",
+        type: 'type',
       };
-      const validValues = ["commonjs", "module"];
+      const validValues = ['commonjs', 'module'];
       const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response.lintId).toStrictEqual('valid-values-type');
@@ -34,9 +34,9 @@ describe('valid-values-type Unit Tests', () => {
   describe('when package.json has node with correct format', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        type: "module",
+        type: 'module',
       };
-      const validValues = ["commonjs", "module"];
+      const validValues = ['commonjs', 'module'];
       const response = lint(packageJsonData, Severity.Error, validValues);
 
       expect(response).toBeNull();
