@@ -39,6 +39,7 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
 * [require-repository-directory](rules/required-node/require-repository-directory.md)
 * [require-repository](rules/required-node/require-repository.md)
 * [require-scripts](rules/required-node/require-scripts.md)
+* [require-type](rules/required-node/require-type.md)
 * [require-types](rules/required-node/require-types.md)
 * [require-typings](rules/required-node/require-typings.md)
 * [require-version](rules/required-node/require-version.md)
@@ -70,6 +71,7 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
 * [private-type](rules/type/private-type.md)
 * [repository-type](rules/type/repository-type.md)
 * [scripts-type](rules/type/scripts-type.md)
+* [type-type](rules/type/type-type.md)
 * [version-type](rules/type/version-type.md)
 
 
@@ -83,6 +85,7 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
 * [valid-values-name-scope](rules/valid-values/valid-values-name-scope.md)
 * [valid-values-private](rules/valid-values/valid-values-private.md)
 * [valid-values-publishConfig](rules/valid-values/valid-values-publishConfig.md)
+* [valid-values-type](rules/valid-values/valid-values-type.md)
 
 ## Dependency rules
 
