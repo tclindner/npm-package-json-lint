@@ -48,7 +48,7 @@
     "ignore": "^5.2.4",
     "is-plain-obj": "^3.0.0",
     "jsonc-parser": "^3.2.0",
-    "log-symbols": "^4.1.0",
+    "log-symbols": "^6.0.0",
     "meow": "^9.0.0",
     "plur": "^4.0.0",
     "semver": "^7.5.4",
