@@ -11,6 +11,9 @@ npmPkgJsonLint [opts] [fileGlobPatterns ...]
 
 npm-package-json-lint ignores files located in `node_modules` directory.
 
+> NOTE: Please leverage [`syncpack`](https://jamiemason.github.io/syncpack/) when using this package in a mono-repo. 
+> Run `npmPackageJsonLint . && syncpack lint`
+
 ### Examples
 
 ```bash
