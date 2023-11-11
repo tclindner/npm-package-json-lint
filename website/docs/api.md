@@ -19,14 +19,14 @@ A `NpmPackageJsonLint` options object.
 
 | Option | Type | Description | Default |
 | --- | --- | --- | --- |
-| `cwd` | {string} | The current working diretory for all file operations. | `process.cwd()` |
-| `packageJsonObject` | {Object} | A package.json object. This must be provided or a `patterns` should be provided. | -- |
-| `packageJsonFilePath` | {string} | If providing a package.json object, this option allows a file path to be assigned to it. | -- |
-| `config` | {object} | Allows for a config object to be passed as an object via code instead of a file. | -- |
-| `configFile` | {string} | Relative path to a configuration file. If provided, the config in the file will be used and npm-package-json-lint will not traverse the file system to find other config files. | -- |
-| `patterns` | {string[]} | An array of glob patterns used to find package.json files. This must be provided or a `packageJsonObject` should be provided. | -- |
-| `quiet` | {boolean} | A flag indicating whether to suppress warnings. | `false` |
-| `ignorePath` | {string} | File path to an ignore file. | `` |
+| `cwd` | `string` | The current working diretory for all file operations. | `process.cwd()` |
+| `packageJsonObject` | `object` | A package.json object. This must be provided or a `patterns` should be provided. | -- |
+| `packageJsonFilePath` | `string` | If providing a package.json object, this option allows a file path to be assigned to it. | -- |
+| `config` | `object` | Allows for a config object to be passed as an object via code instead of a file. | -- |
+| `configFile` | `string` | Relative path to a configuration file. If provided, the config in the file will be used and npm-package-json-lint will not traverse the file system to find other config files. | -- |
+| `patterns` | `string[]` | An array of glob patterns used to find package.json files. This must be provided or a `packageJsonObject` should be provided. | -- |
+| `quiet` | `boolean` | A flag indicating whether to suppress warnings. | `false` |
+| `ignorePath` | `string` | File path to an ignore file. | `` |
 
 #### Example
 
