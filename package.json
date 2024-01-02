@@ -66,7 +66,7 @@
     "eslint": "^8.56.0",
     "eslint-config-tc": "^23.0.0",
     "eslint-config-typescript-tc": "^7.0.0",
-    "eslint-formatter-pretty": "^5.0.0",
+    "eslint-formatter-pretty": "^6.0.1",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jest": "^27.6.0",
