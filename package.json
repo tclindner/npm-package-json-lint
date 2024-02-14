@@ -31,7 +31,7 @@
   "scripts": {
     "build": "npm run esbuild && npm run tsc",
     "esbuild": "node esbuild.config.js",
-    "eslint": "eslint . --format=node_modules/eslint-formatter-pretty",
+    "eslint": "eslint .",
     "npmpackagejsonlint": "node dist/cli.js ./package.json",
     "lint": "npm run eslint && npm run npmpackagejsonlint",
     "test": "npm run build && jest",
@@ -66,7 +66,6 @@
     "eslint": "^8.56.0",
     "eslint-config-tc": "^23.0.0",
     "eslint-config-typescript-tc": "^7.0.0",
-    "eslint-formatter-pretty": "^6.0.1",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jest": "^27.6.3",
