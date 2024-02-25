@@ -42,7 +42,7 @@
     "ajv": "^6.12.6",
     "ajv-errors": "^1.0.1",
     "chalk": "^4.1.2",
-    "cosmiconfig": "^8.3.6",
+    "cosmiconfig": "^9.0.0",
     "debug": "^4.3.4",
     "globby": "^11.1.0",
     "ignore": "^5.3.1",
