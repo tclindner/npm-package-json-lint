@@ -71,7 +71,7 @@
     "eslint-plugin-jest": "^27.9.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-unicorn": "^51.0.1",
-    "figures": "^3.2.0",
+    "figures": "^6.1.0",
     "jest": "^27.5.1",
     "npm-package-json-lint-config-default": "^6.0.0",
     "npm-package-json-lint-config-tc": "^7.0.0",
