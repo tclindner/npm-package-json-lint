@@ -20,8 +20,8 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity, con
       severity,
       nodeName,
       `You have invalid version 0 dependencies. Please use modules with a major version >= 1. Invalid ${nodeName} include: ${auditResult.dependenciesWithMajorVersionOfZero.join(
-        ', '
-      )}`
+        ', ',
+      )}`,
     );
   }
 

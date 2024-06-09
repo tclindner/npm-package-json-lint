@@ -36,7 +36,7 @@ describe('prefer-alphabetical-bundledDependencies Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('bundledDependencies');
       expect(response.lintMessage).toStrictEqual(
-        'Your bundledDependencies are not in alphabetical order. Please move semver after chalk.'
+        'Your bundledDependencies are not in alphabetical order. Please move semver after chalk.',
       );
 
       expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledTimes(1);

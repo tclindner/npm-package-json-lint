@@ -27,7 +27,7 @@ describe('Config Unit Tests', () => {
         });
         const searchMock = jest.fn();
 
-        // @ts-expect-error-error
+        // @ts-expect-error-error test
         jest.spyOn(cosmiconfig, 'cosmiconfigSync').mockImplementation(() => ({
           load: loadMock,
           search: searchMock,
@@ -66,7 +66,7 @@ describe('Config Unit Tests', () => {
           'require-scripts': 'error',
         });
 
-        // @ts-expect-error-error
+        // @ts-expect-error-error test
         jest.spyOn(cosmiconfig, 'cosmiconfigSync').mockImplementation(() => ({
           load: loadMock,
           search: searchMock,
@@ -101,7 +101,7 @@ describe('Config Unit Tests', () => {
         const loadMock = jest.fn();
         const searchMock = jest.fn();
 
-        // @ts-expect-error-error
+        // @ts-expect-error-error test
         jest.spyOn(cosmiconfig, 'cosmiconfigSync').mockImplementation(() => ({
           load: loadMock,
           search: searchMock,
@@ -127,7 +127,7 @@ describe('Config Unit Tests', () => {
         const loadMock = jest.fn();
         const searchMock = jest.fn().mockReturnValue({});
 
-        // @ts-expect-error-error
+        // @ts-expect-error-error test
         jest.spyOn(cosmiconfig, 'cosmiconfigSync').mockImplementation(() => ({
           load: loadMock,
           search: searchMock,
@@ -167,7 +167,7 @@ describe('Config Unit Tests', () => {
         const loadMock = jest.fn();
         const searchMock = jest.fn();
 
-        // @ts-expect-error-error
+        // @ts-expect-error-error test
         jest.spyOn(cosmiconfig, 'cosmiconfigSync').mockImplementation(() => ({
           load: loadMock,
           search: searchMock,

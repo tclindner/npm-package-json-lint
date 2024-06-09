@@ -31,7 +31,7 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity): Li
         lintId,
         severity,
         `${dependenciesNode}|${devDependenciesNode}`,
-        `${dependency} exists in both ${dependenciesNode} and ${devDependenciesNode}. Please remove it from one of the dependency lists.`
+        `${dependency} exists in both ${dependenciesNode} and ${devDependenciesNode}. Please remove it from one of the dependency lists.`,
       );
     }
   }

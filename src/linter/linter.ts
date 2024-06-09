@@ -126,7 +126,7 @@ const processPackageJsonObject = (
   // TODO: Type
   config,
   fileName: string,
-  rules: Rules
+  rules: Rules,
 ): PackageJsonFileLintingResult => {
   const lintIssues = lint(packageJsonObj, config, rules);
   const counts = aggregateCountsPerFile(lintIssues);

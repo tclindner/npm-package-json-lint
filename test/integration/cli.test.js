@@ -40,7 +40,7 @@ const threeRunTimeException = 3;
 // Force child process to run without colors
 const {env} = process;
 
-// @ts-expect-error-error
+// @ts-expect-error-error test
 env.FORCE_COLOR = 0;
 
 describe('cli Integration Tests', () => {
@@ -270,7 +270,7 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
           configJsFileFixturesPath,
           pkgJsonPropFixturePath,
         ],
-        {env}
+        {env},
       );
       const expected = `
 ${errorPkg}
@@ -338,7 +338,7 @@ ${figures.cross} require-private - node: private - private is required
         {
           env,
           cwd: './test/fixtures/config-file-with-overrides',
-        }
+        },
       );
       const expected = `
 ./packages/my-package/package.json

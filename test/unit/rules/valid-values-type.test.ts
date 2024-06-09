@@ -26,7 +26,7 @@ describe('valid-values-type Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('type');
       expect(response.lintMessage).toStrictEqual(
-        'Invalid value for type. Current value is type. Valid values include: commonjs, module.'
+        'Invalid value for type. Current value is type. Valid values include: commonjs, module.',
       );
     });
   });

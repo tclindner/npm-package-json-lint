@@ -26,7 +26,7 @@ describe('valid-values-license Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('license');
       expect(response.lintMessage).toStrictEqual(
-        'Invalid value for license. Current value is MIT. Valid values include: private, unlicensed.'
+        'Invalid value for license. Current value is MIT. Valid values include: private, unlicensed.',
       );
     });
   });

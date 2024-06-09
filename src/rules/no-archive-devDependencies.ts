@@ -19,8 +19,8 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity, con
       severity,
       nodeName,
       `You are using ${nodeName} via url to archive file. Please use ${nodeName} from npm. Invalid ${nodeName} include: ${auditResult.dependenciesWithArchiveUrlVersion.join(
-        ', '
-      )}`
+        ', ',
+      )}`,
     );
   }
 

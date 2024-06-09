@@ -22,7 +22,7 @@ describe('no-caret-version-dependencies Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('dependencies');
       expect(response.lintMessage).toStrictEqual(
-        'You are using an invalid version range. Please do not use ^. Invalid dependencies include: npm-package-json-lint'
+        'You are using an invalid version range. Please do not use ^. Invalid dependencies include: npm-package-json-lint',
       );
     });
   });

@@ -38,7 +38,7 @@ export const aggregateCountsPerFile = (issues: LintIssue[]): PackageJsonFileAggr
     {
       errorCount: 0,
       warningCount: 0,
-    }
+    },
   );
 };
 
@@ -75,5 +75,5 @@ export const aggregateOverallCounts = (results: PackageJsonFileLintingResult[]):
       ignoreCount: 0,
       errorCount: 0,
       warningCount: 0,
-    }
+    },
   );

@@ -23,7 +23,7 @@ export const lint = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   severity: Severity,
-  validValues: string[]
+  validValues: string[],
 ): LintResult => {
   if (!isValidValue<string>(packageJsonData, nodeName, packageJsonData[nodeName], validValues)) {
     return new LintIssue(
@@ -31,8 +31,8 @@ export const lint = (
       severity,
       nodeName,
       `Invalid value for type. Current value is ${packageJsonData[nodeName]}. Valid values include: ${validValues.join(
-        ', '
-      )}.`
+        ', ',
+      )}.`,
     );
   }
 

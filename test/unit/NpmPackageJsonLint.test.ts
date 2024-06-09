@@ -50,7 +50,7 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         expect(response.results[0].issues).toHaveLength(expectedIssues);
         expect(response.results[0].issues.filter((issue) => issue.severity === 'error')).toHaveLength(expectedErrorCount);
         expect(response.results[0].issues.filter((issue) => issue.severity === 'warning')).toHaveLength(
-          expectedWarningCount
+          expectedWarningCount,
         );
       });
     });
@@ -77,7 +77,7 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         expect(() => {
           npmPackageJsonLint.lint();
         }).toThrow(
-          'You must pass npm-package-json-lint a `patterns` glob or a `packageJsonObject` string, though not both.'
+          'You must pass npm-package-json-lint a `patterns` glob or a `packageJsonObject` string, though not both.',
         );
       });
     });
@@ -110,7 +110,7 @@ describe('NpmPackageJsonLint Unit Tests', () => {
         expect(response.results[0].issues).toHaveLength(expectedIssues);
         expect(response.results[0].issues.filter((issue) => issue.severity === 'error')).toHaveLength(expectedErrorCount);
         expect(response.results[0].issues.filter((issue) => issue.severity === 'warning')).toHaveLength(
-          expectedWarningCount
+          expectedWarningCount,
         );
       });
     });

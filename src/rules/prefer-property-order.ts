@@ -16,7 +16,7 @@ export const lint = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   severity: Severity,
-  preferredOrder: string[]
+  preferredOrder: string[],
 ): LintIssue | null => {
   const result = isInPreferredOrder(packageJsonData, preferredOrder);
 

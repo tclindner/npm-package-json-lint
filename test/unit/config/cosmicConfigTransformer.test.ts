@@ -48,7 +48,7 @@ describe('cosmicConfigTransformer Unit Tests', () => {
         expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledTimes(1);
         expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledWith(
           cosmiconfigResult.config,
-          filePathBeingLinted
+          filePathBeingLinted,
         );
         expect(applyOverrides.applyOverrides).toHaveBeenCalledTimes(1);
         expect(applyOverrides.applyOverrides).toHaveBeenCalledWith(cwd, filePathBeingLinted, 'rules', 'overrides');
@@ -83,7 +83,7 @@ describe('cosmicConfigTransformer Unit Tests', () => {
         expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledTimes(1);
         expect(applyExtendsIfSpecified.applyExtendsIfSpecified).toHaveBeenCalledWith(
           cosmiconfigResult.config,
-          filePathBeingLinted
+          filePathBeingLinted,
         );
         expect(applyOverrides.applyOverrides).toHaveBeenCalledTimes(1);
         expect(applyOverrides.applyOverrides).toHaveBeenCalledWith(cwd, filePathBeingLinted, 'rules', 'overrides');

@@ -76,7 +76,7 @@ const cli = meow(
         default: false,
       },
     },
-  }
+  },
 );
 
 const {input, flags} = cli;

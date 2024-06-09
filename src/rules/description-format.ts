@@ -14,7 +14,7 @@ export const lint = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   severity: Severity,
-  config: Record<string, boolean>
+  config: Record<string, boolean>,
 ): LintResult => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return null;
@@ -36,7 +36,7 @@ export const lint = (
       lintId,
       severity,
       nodeName,
-      `The description should start with a capital letter. It currently starts with ${description[0]}.`
+      `The description should start with a capital letter. It currently starts with ${description[0]}.`,
     );
   }
 

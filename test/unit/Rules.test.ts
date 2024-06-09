@@ -23,10 +23,10 @@ describe('Rules Unit Tests', () => {
   describe('get method', () => {
     describe('when get is called for an invalid ruleId', () => {
       test('an error should be thrown', () => {
-        // @ts-expect-error-error
+        // @ts-expect-error-error test
         jest.spyOn(fs, 'readdirSync').mockReturnValue(['version-type.js', 'require-version.js']);
         path.join
-          // @ts-expect-error-error
+          // @ts-expect-error-error test
           .mockReturnValueOnce('c/git/rules')
           .mockReturnValueOnce('c/git/rules/version-type.js')
           .mockReturnValueOnce('c/git/rules/require-version.js');
@@ -45,10 +45,10 @@ describe('Rules Unit Tests', () => {
   describe('load method', () => {
     describe('when load is called', () => {
       test('an object of rules should be returned', () => {
-        // @ts-expect-error-error
+        // @ts-expect-error-error test
         fs.readdirSync.mockReturnValue(['version-type.js', 'require-version.js']);
         path.join
-          // @ts-expect-error-error
+          // @ts-expect-error-error test
           .mockReturnValueOnce('c/git/rules')
           .mockReturnValueOnce('c/git/rules/version-type.js')
           .mockReturnValueOnce('c/git/rules/require-version.js');
@@ -63,7 +63,7 @@ describe('Rules Unit Tests', () => {
 
     describe('when load is called but a fs error occurs', () => {
       test('false is returned', () => {
-        // @ts-expect-error-error
+        // @ts-expect-error-error test
         fs.readdirSync.mockImplementation(() => {
           throw new Error('Error while loading rules from rules directory - ');
         });
@@ -89,7 +89,7 @@ describe('Rules Unit Tests', () => {
 
     describe('when load is called but a fs error occurs', () => {
       test('false is returned', () => {
-        // @ts-expect-error-error
+        // @ts-expect-error-error test
         fs.readdirSync.mockImplementation(() => {
           throw new Error('Error while loading rules from rules directory - ');
         });

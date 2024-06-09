@@ -19,8 +19,8 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity, con
       severity,
       nodeName,
       `You are using ${nodeName} from git repository. Please use ${nodeName} from npm. Invalid ${nodeName} include: ${auditResult.dependenciesWithGitRepositoryVersion.join(
-        ', '
-      )}`
+        ', ',
+      )}`,
     );
   }
 

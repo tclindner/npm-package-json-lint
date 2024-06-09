@@ -22,7 +22,7 @@ describe('no-archive-dependencies Unit Tests', () => {
         expect(response.severity).toStrictEqual('error');
         expect(response.node).toStrictEqual('dependencies');
         expect(response.lintMessage).toStrictEqual(
-          'You are using dependencies via url to archive file. Please use dependencies from npm. Invalid dependencies include: test-module'
+          'You are using dependencies via url to archive file. Please use dependencies from npm. Invalid dependencies include: test-module',
         );
       });
     });
@@ -40,7 +40,7 @@ describe('no-archive-dependencies Unit Tests', () => {
         expect(response.severity).toStrictEqual('error');
         expect(response.node).toStrictEqual('dependencies');
         expect(response.lintMessage).toStrictEqual(
-          'You are using dependencies via url to archive file. Please use dependencies from npm. Invalid dependencies include: test-module'
+          'You are using dependencies via url to archive file. Please use dependencies from npm. Invalid dependencies include: test-module',
         );
       });
     });

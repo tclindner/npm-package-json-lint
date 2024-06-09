@@ -55,7 +55,7 @@ describe('prefer-property-order Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('');
       expect(response.lintMessage).toStrictEqual(
-        'Your package.json properties are not in the desired order. Please move "description" after "version".'
+        'Your package.json properties are not in the desired order. Please move "description" after "version".',
       );
     });
   });

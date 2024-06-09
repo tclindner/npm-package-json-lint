@@ -19,7 +19,7 @@ export const lint = <T>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   severity: Severity,
-  validValues: T[]
+  validValues: T[],
 ): LintResult => {
   let value;
 
@@ -40,7 +40,7 @@ export const lint = <T>(
       lintId,
       severity,
       nodeName,
-      `Invalid value for author. Current value is ${value}. Value values include: ${validValues.join(', ')}.`
+      `Invalid value for author. Current value is ${value}. Value values include: ${validValues.join(', ')}.`,
     );
   }
 
