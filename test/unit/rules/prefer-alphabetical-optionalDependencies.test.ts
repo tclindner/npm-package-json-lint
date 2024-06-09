@@ -36,7 +36,7 @@ describe('prefer-alphabetical-optionalDependencies Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('optionalDependencies');
       expect(response.lintMessage).toStrictEqual(
-        'Your optionalDependencies are not in alphabetical order. Please move semver after chalk.'
+        'Your optionalDependencies are not in alphabetical order. Please move semver after chalk.',
       );
 
       expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledTimes(1);

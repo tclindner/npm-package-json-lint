@@ -27,7 +27,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- severity must be a string.\n\t- severity must be either "off", "warning", or "error".'
+            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- severity must be a string.\n\t- severity must be either "off", "warning", or "error".',
           );
         });
       });
@@ -42,7 +42,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- the second item in an array rule config must be an array.'
+            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- the second item in an array rule config must be an array.',
           );
         });
       });
@@ -57,7 +57,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- the second item in an array rule config must have at least 1 item.'
+            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- the second item in an array rule config must have at least 1 item.',
           );
         });
       });
@@ -72,7 +72,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- the second item in an array rule config must have unique items.'
+            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- the second item in an array rule config must have unique items.',
           );
         });
       });
@@ -87,7 +87,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- rule config must be an array, e.g. ["error", ["value1", "value2"]].'
+            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- rule config must be an array, e.g. ["error", ["value1", "value2"]].',
           );
         });
       });
@@ -102,7 +102,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].'
+            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].',
           );
         });
       });
@@ -117,7 +117,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].\n\t- array rules are only allowed two items, severity and the list is values. e.g. ["error", ["value1", "value2"]].'
+            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- array rules must have two items, severity and options array. e.g. ["error", ["value1", "value2"]].\n\t- array rules are only allowed two items, severity and the list is values. e.g. ["error", ["value1", "value2"]].',
           );
         });
       });
@@ -171,7 +171,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- is an array type rule. It must be set to "off" if an array is not supplied.'
+            'cli:\n\tConfiguration for rule "valid-values-author" is invalid:\n\t- is an array type rule. It must be set to "off" if an array is not supplied.',
           );
         });
       });
@@ -188,7 +188,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- severity must be a string.\n\t- severity must be either "off", "warning", or "error".'
+            'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- severity must be a string.\n\t- severity must be either "off", "warning", or "error".',
           );
         });
       });
@@ -203,7 +203,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- the second item in an object rule config must be an object.'
+            'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- the second item in an object rule config must be an object.',
           );
         });
       });
@@ -218,7 +218,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- rule config must be an array, e.g. ["error", {}].'
+            'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- rule config must be an array, e.g. ["error", {}].',
           );
         });
       });
@@ -233,7 +233,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- object rules must have two items, severity and options object. e.g. ["error", {}].'
+            'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- object rules must have two items, severity and options object. e.g. ["error", {}].',
           );
         });
       });
@@ -248,7 +248,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- object rules must have two items, severity and options object. e.g. ["error", {}].\n\t- object rules are only allowed two items, severity and options object. e.g. ["error", {}].'
+            'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- object rules must have two items, severity and options object. e.g. ["error", {}].\n\t- object rules are only allowed two items, severity and options object. e.g. ["error", {}].',
           );
         });
       });
@@ -289,7 +289,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- is an object type rule. It must be set to "off" if an object is not supplied.'
+            'cli:\n\tConfiguration for rule "description-format" is invalid:\n\t- is an object type rule. It must be set to "off" if an object is not supplied.',
           );
         });
       });
@@ -306,7 +306,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- severity must be either "off", "warning", or "error".'
+            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- severity must be either "off", "warning", or "error".',
           );
         });
       });
@@ -321,7 +321,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- severity must be either "off", "warning", or "error".'
+            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- severity must be either "off", "warning", or "error".',
           );
         });
       });
@@ -336,7 +336,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- the second item in an object rule config must be an object.'
+            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- the second item in an object rule config must be an object.',
           );
         });
       });
@@ -351,7 +351,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- expections must be an array.'
+            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- expections must be an array.',
           );
         });
       });
@@ -366,7 +366,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- expections must have at least 1 item.'
+            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- expections must have at least 1 item.',
           );
         });
       });
@@ -381,7 +381,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'Configuration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- expections must have unique items.'
+            'Configuration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- expections must have unique items.',
           );
         });
       });
@@ -396,7 +396,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- each exception must be a string.'
+            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- each exception must be a string.',
           );
         });
       });
@@ -411,7 +411,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- rule config must be an array, e.g. ["error", {}].'
+            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- rule config must be an array, e.g. ["error", {}].',
           );
         });
       });
@@ -426,7 +426,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- object rules must have two items, severity and options object. e.g. ["error", {}].'
+            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- object rules must have two items, severity and options object. e.g. ["error", {}].',
           );
         });
       });
@@ -441,7 +441,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- object rules must have two items, severity and options object. e.g. ["error", {}].\n\t- object rules are only allowed two items, severity and options object. e.g. ["error", {}].'
+            'cli:\n\tConfiguration for rule "prefer-no-version-zero-dependencies" is invalid:\n\t- object rules must have two items, severity and options object. e.g. ["error", {}].\n\t- object rules are only allowed two items, severity and options object. e.g. ["error", {}].',
           );
         });
       });
@@ -536,7 +536,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "require-author" is invalid:\n\t- severity must be a string.\n\t- severity must be either "off", "warning", or "error".'
+            'cli:\n\tConfiguration for rule "require-author" is invalid:\n\t- severity must be a string.\n\t- severity must be either "off", "warning", or "error".',
           );
         });
       });
@@ -552,7 +552,7 @@ describe('configValidator Unit Tests', () => {
           expect(() => {
             configValidator.validateRules(ruleConfig, source, rules);
           }).toThrow(
-            'cli:\n\tConfiguration for rule "require-author" is invalid:\n\t- severity must be a string.\n\t- severity must be either "off", "warning", or "error".'
+            'cli:\n\tConfiguration for rule "require-author" is invalid:\n\t- severity must be a string.\n\t- severity must be either "off", "warning", or "error".',
           );
         });
       });
@@ -642,7 +642,7 @@ describe('configValidator Unit Tests', () => {
         expect(() => {
           configValidator.validate(config, source, rules);
         }).toThrow(
-          'npm-package-json-lint configuration in cli is invalid:\n\t- extends must be either a string or an array of strings.\n'
+          'npm-package-json-lint configuration in cli is invalid:\n\t- extends must be either a string or an array of strings.\n',
         );
       });
 
@@ -658,7 +658,7 @@ describe('configValidator Unit Tests', () => {
         expect(() => {
           configValidator.validate(config, source, rules);
         }).toThrow(
-          'npm-package-json-lint configuration in cli is invalid:\n\t- extends must have at least one item if it is an array.\n'
+          'npm-package-json-lint configuration in cli is invalid:\n\t- extends must have at least one item if it is an array.\n',
         );
       });
 
@@ -674,7 +674,7 @@ describe('configValidator Unit Tests', () => {
         expect(() => {
           configValidator.validate(config, source, rules);
         }).toThrow(
-          'npm-package-json-lint configuration in cli is invalid:\n\t- extends must have unique items if it is an array.\n'
+          'npm-package-json-lint configuration in cli is invalid:\n\t- extends must have unique items if it is an array.\n',
         );
       });
 
@@ -714,7 +714,7 @@ describe('configValidator Unit Tests', () => {
         expect(() => {
           configValidator.validate(config, source, rules);
         }).toThrow(
-          'npm-package-json-lint configuration in cli is invalid:\n\t- npm-package-json-lint config should be an object.\n'
+          'npm-package-json-lint configuration in cli is invalid:\n\t- npm-package-json-lint config should be an object.\n',
         );
       });
 
@@ -731,7 +731,7 @@ describe('configValidator Unit Tests', () => {
         expect(() => {
           configValidator.validate(config, source, rules);
         }).toThrow(
-          'npm-package-json-lint configuration in cli is invalid:\n\t- npm-package-json-lint config has unexpected top-level property. Valid properties include: `extends`, `rules`, and `root`.\n'
+          'npm-package-json-lint configuration in cli is invalid:\n\t- npm-package-json-lint config has unexpected top-level property. Valid properties include: `extends`, `rules`, and `root`.\n',
         );
       });
     });

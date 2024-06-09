@@ -25,7 +25,7 @@ describe('prefer-no-version-zero-devDependencies Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('devDependencies');
       expect(response.lintMessage).toStrictEqual(
-        'You have invalid version 0 dependencies. Please use modules with a major version >= 1. Invalid devDependencies include: npm-package-json-lint'
+        'You have invalid version 0 dependencies. Please use modules with a major version >= 1. Invalid devDependencies include: npm-package-json-lint',
       );
     });
   });

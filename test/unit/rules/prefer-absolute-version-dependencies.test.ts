@@ -27,7 +27,7 @@ describe('prefer-absolute-version-dependencies Unit Tests', () => {
       expect(response.severity).toStrictEqual(severity);
       expect(response.node).toStrictEqual(nodeName);
       expect(response.lintMessage).toStrictEqual(
-        'You are using an invalid version range. Please use absolute versions. Invalid dependencies include: npm-package-json-lint'
+        'You are using an invalid version range. Please use absolute versions. Invalid dependencies include: npm-package-json-lint',
       );
     });
   });

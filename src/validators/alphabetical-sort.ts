@@ -20,7 +20,7 @@ export interface IsInAlphabeticalOrderResult {
 export const isInAlphabeticalOrder = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
-  nodeName: string
+  nodeName: string,
 ): IsInAlphabeticalOrderResult => {
   let isValid = true;
   let data = {

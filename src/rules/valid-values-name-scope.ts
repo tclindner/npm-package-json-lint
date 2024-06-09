@@ -24,7 +24,7 @@ export const lint = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   severity: Severity,
-  validValues: string[]
+  validValues: string[],
 ): LintResult => {
   const validRegexes = validValues.map((scope) => new RegExp(`^${scope}/`));
 
@@ -35,7 +35,7 @@ export const lint = (
       nodeName,
       `Invalid value for name scope. Current value is ${
         packageJsonData[nodeName]
-      }. Valid values include: ${validValues.join(', ')}.`
+      }. Valid values include: ${validValues.join(', ')}.`,
     );
   }
 

@@ -4,8 +4,8 @@
 
 ### Node
 
-* [Node.js](https://nodejs.org/) - v16.0.0+
-* [npm](https://www.npmjs.com/) - v8.0.0+
+* [Node.js](https://nodejs.org/) - v18.0.0+
+* [npm](https://www.npmjs.com/) - v9.0.0+
 
 ## Install project dependencies
 

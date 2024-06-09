@@ -36,7 +36,7 @@ describe('prefer-alphabetical-peerDependencies Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('peerDependencies');
       expect(response.lintMessage).toStrictEqual(
-        'Your peerDependencies are not in alphabetical order. Please move semver after chalk.'
+        'Your peerDependencies are not in alphabetical order. Please move semver after chalk.',
       );
 
       expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledTimes(1);

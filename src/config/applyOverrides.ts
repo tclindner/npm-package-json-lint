@@ -24,7 +24,7 @@ export const applyOverrides = (cwd: string, filePath: string, rules: any, overri
     overrides.forEach((override) => {
       const filteredPatterns = override.patterns.filter((pattern) => pattern.length);
       const transformedPatterns = filteredPatterns.map((pattern) =>
-        pattern.endsWith(`/package.json`) ? pattern : `${pattern}/package.json`
+        pattern.endsWith(`/package.json`) ? pattern : `${pattern}/package.json`,
       );
 
       const globFiles = globby.sync(transformedPatterns, {

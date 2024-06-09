@@ -24,7 +24,7 @@ export const auditDependenciesWithRestrictedVersion = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   nodeName: string,
-  depsToCheckFor: string[]
+  depsToCheckFor: string[],
 ): AuditDependenciesWithRestrictedVersionResponse => {
   let hasDependencyWithRestrictedVersion = false;
   const dependenciesWithRestrictedVersion = [];
@@ -81,7 +81,7 @@ export const auditDependenciesWithRestrictedPrereleaseVersion = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   nodeName: string,
-  depsToCheckFor: string[]
+  depsToCheckFor: string[],
 ): AuditDependenciesWithRestrictedPrereleaseVersionResponse => {
   let hasDependencyWithRestrictedPrereleaseVersion = false;
   const dependenciesWithRestrictedPrereleaseVersion = [];
@@ -134,7 +134,7 @@ export const auditDependenciesWithMajorVersionOfZero = (
   packageJsonData: PackageJson | any,
   nodeName: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  config: any
+  config: any,
 ): AuditDependenciesWithMajorVersionOfZeroResponse => {
   let hasDependencyWithMajorVersionOfZero = false;
   const dependenciesWithMajorVersionOfZero = [];
@@ -206,7 +206,7 @@ export const auditDependenciesForValidRangeVersions = (
   nodeName: string,
   rangeSpecifier: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  config: any
+  config: any,
 ): AuditDependenciesForValidRangeResponse => {
   let onlyValidVersionsDetected = true;
   const dependenciesWithValidVersionRange = [];
@@ -264,7 +264,7 @@ export const auditDependenciesForInvalidRange = (
   nodeName: string,
   rangeSpecifier: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  config: any
+  config: any,
 ): AuditDependenciesForInvalidRangeResponse => {
   let hasInvalidRangeVersions = false;
   const dependenciesWithInvalidVersionRange = [];
@@ -320,7 +320,7 @@ const auditAbsoluteVersions = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   nodeName: string,
-  config: OptionalObjectRuleConfig
+  config: OptionalObjectRuleConfig,
 ): AbsoluteVersionCheckerResult => {
   const notFound = -1;
   const firstCharOfStr = 0;
@@ -380,7 +380,7 @@ export const auditDependenciesForAbsoluteVersion = (
   packageJsonData: PackageJson | any,
   nodeName: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  config: any
+  config: any,
 ): AuditDependenciesForAbsoluteVersionResponse => {
   const {
     onlyAbsoluteVersionDetected,
@@ -414,7 +414,7 @@ export const auditDependenciesForNonAbsoluteVersion = (
   packageJsonData: PackageJson | any,
   nodeName: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  config: any
+  config: any,
 ): AuditDependenciesForNonAbsoluteVersionResponse => {
   const {
     onlyAbsoluteVersionDetected,
@@ -491,7 +491,7 @@ export const auditDependenciesForGitRepositoryVersion = (
   packageJsonData: PackageJson | any,
   nodeName: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  config: any
+  config: any,
 ): AuditDependenciesForGitRepositoryVersionResponse => {
   let hasGitRepositoryVersions = false;
   const dependenciesWithGitRepositoryVersion = [];
@@ -539,7 +539,7 @@ export const auditDependenciesForArchiveUrlVersion = (
   packageJsonData: PackageJson | any,
   nodeName: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  config: any
+  config: any,
 ): AuditDependenciesForArchiveUrlVersionResponse => {
   let hasArchiveUrlVersions = false;
   const dependenciesWithArchiveUrlVersion = [];
@@ -587,7 +587,7 @@ export const auditDependenciesForFileUrlVersion = (
   packageJsonData: PackageJson | any,
   nodeName: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  config: any
+  config: any,
 ): AuditDependenciesForFileUrlVersionResponse => {
   let hasFileUrlVersions = false;
   const dependenciesWithFileUrlVersion = [];

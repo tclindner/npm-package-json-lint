@@ -40,7 +40,7 @@ describe('description-format Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('description');
       expect(response.lintMessage).toStrictEqual(
-        'The description should start with a capital letter. It currently starts with l.'
+        'The description should start with a capital letter. It currently starts with l.',
       );
     });
   });

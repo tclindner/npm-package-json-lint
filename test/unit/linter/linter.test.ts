@@ -301,7 +301,7 @@ describe('linter Unit Tests', () => {
         'valid-values-author',
         Severity.Error,
         'author',
-        'Invalid value for author. Current value is Spiderman. Value values include: Peter Parker.'
+        'Invalid value for author. Current value is Spiderman. Value values include: Peter Parker.',
       );
       const expected = {
         errorCount: 1,
@@ -405,7 +405,7 @@ describe('linter Unit Tests', () => {
         'description-format',
         Severity.Error,
         'description',
-        'The description should end with a period.'
+        'The description should end with a period.',
       );
       const expected = {
         errorCount: 1,
@@ -460,7 +460,7 @@ describe('linter Unit Tests', () => {
         'no-caret-version-dependencies',
         Severity.Error,
         'dependencies',
-        'You are using an invalid version range. Please do not use ^. Invalid dependencies include: myModule'
+        'You are using an invalid version range. Please do not use ^. Invalid dependencies include: myModule',
       );
       const expected = {
         errorCount: 1,
@@ -520,7 +520,7 @@ describe('linter Unit Tests', () => {
         'no-caret-version-dependencies',
         Severity.Error,
         'dependencies',
-        'You are using an invalid version range. Please do not use ^. Invalid dependencies include: myModule'
+        'You are using an invalid version range. Please do not use ^. Invalid dependencies include: myModule',
       );
       const expected = {
         errorCount: 1,

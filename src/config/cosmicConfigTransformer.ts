@@ -35,7 +35,7 @@ export const transform = (cwd: any, configBaseDirectory: any, filePathBeingLinte
       cwd,
       filePathBeingLinted,
       configAfterExtends.rules,
-      configAfterExtends.overrides
+      configAfterExtends.overrides,
     );
 
     return configAfterOverrides;

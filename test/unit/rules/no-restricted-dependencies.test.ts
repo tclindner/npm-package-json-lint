@@ -28,7 +28,7 @@ describe('no-restricted-dependencies Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('dependencies');
       expect(response.lintMessage).toStrictEqual(
-        'You are using a restricted dependency. Please remove it. Invalid dependencies include: npm-package-json-lint'
+        'You are using a restricted dependency. Please remove it. Invalid dependencies include: npm-package-json-lint',
       );
     });
   });
@@ -47,7 +47,7 @@ describe('no-restricted-dependencies Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('dependencies');
       expect(response.lintMessage).toStrictEqual(
-        'You are using a restricted dependency. Please remove it. Invalid dependencies include: @types/node'
+        'You are using a restricted dependency. Please remove it. Invalid dependencies include: @types/node',
       );
     });
   });

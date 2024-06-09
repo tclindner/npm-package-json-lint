@@ -148,7 +148,7 @@ export class NpmPackageJsonLint {
 
     if (areRequiredOptionsValid(this.packageJsonObject, this.patterns)) {
       throw new Error(
-        'You must pass npm-package-json-lint a `patterns` glob or a `packageJsonObject` string, though not both.'
+        'You must pass npm-package-json-lint a `patterns` glob or a `packageJsonObject` string, though not both.',
       );
     }
 

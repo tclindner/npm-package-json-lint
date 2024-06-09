@@ -24,7 +24,7 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity): Li
       lintId,
       severity,
       nodeName,
-      `${message} Please move ${result.data.invalidNode} after ${result.data.validNode}.`
+      `${message} Please move ${result.data.invalidNode} after ${result.data.validNode}.`,
     );
   }
 

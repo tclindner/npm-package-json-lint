@@ -14,7 +14,7 @@ export const isValidValue = <T>(
   packageJsonData: PackageJson | any,
   nodeName: string,
   value: T,
-  validValues: T[]
+  validValues: T[],
 ): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;
@@ -37,7 +37,7 @@ export const matchValidValue = (
   packageJsonData: PackageJson | any,
   nodeName: string,
   value: string,
-  validRegexes: RegExp[]
+  validRegexes: RegExp[],
 ): boolean => {
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return true;

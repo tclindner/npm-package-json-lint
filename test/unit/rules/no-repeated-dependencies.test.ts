@@ -26,7 +26,7 @@ describe('no-repeated-dependencies Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('dependencies|devDependencies');
       expect(response.lintMessage).toStrictEqual(
-        'jest exists in both dependencies and devDependencies. Please remove it from one of the dependency lists.'
+        'jest exists in both dependencies and devDependencies. Please remove it from one of the dependency lists.',
       );
     });
   });

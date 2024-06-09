@@ -26,7 +26,7 @@ describe('valid-values-author Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('author');
       expect(response.lintMessage).toStrictEqual(
-        'Invalid value for author. Current value is LastName, FirstName. Value values include: FirstName LastName, FirstName MiddleName LastName.'
+        'Invalid value for author. Current value is LastName, FirstName. Value values include: FirstName LastName, FirstName MiddleName LastName.',
       );
     });
   });
@@ -58,7 +58,7 @@ describe('valid-values-author Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('author');
       expect(response.lintMessage).toStrictEqual(
-        'Invalid value for author. Current value is LastName, FirstName. Value values include: FirstName LastName, FirstName MiddleName LastName.'
+        'Invalid value for author. Current value is LastName, FirstName. Value values include: FirstName LastName, FirstName MiddleName LastName.',
       );
     });
   });

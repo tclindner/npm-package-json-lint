@@ -15,7 +15,7 @@ export const lint = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   severity: Severity,
-  invalidPreRelDeps: string[]
+  invalidPreRelDeps: string[],
 ): LintIssue | null => {
   const auditResult = auditDependenciesWithRestrictedPrereleaseVersion(packageJsonData, nodeName, invalidPreRelDeps);
 
@@ -25,8 +25,8 @@ export const lint = (
       severity,
       nodeName,
       `You are using a restricted pre-release dependency. Please remove it. Invalid ${nodeName} include: ${auditResult.dependenciesWithRestrictedPrereleaseVersion.join(
-        ', '
-      )}`
+        ', ',
+      )}`,
     );
   }
 

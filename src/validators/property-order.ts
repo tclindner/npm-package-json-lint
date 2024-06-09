@@ -74,7 +74,7 @@ export interface IsInPreferredOrderResult {
 export const isInPreferredOrder = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
-  userPreferredNodeOrder: string[]
+  userPreferredNodeOrder: string[],
 ): IsInPreferredOrderResult => {
   let isValid = true;
   let msg = null;

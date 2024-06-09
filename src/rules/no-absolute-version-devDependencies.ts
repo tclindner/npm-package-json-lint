@@ -19,8 +19,8 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity, con
       severity,
       nodeName,
       `You are using an invalid version range. Please do not use absolute versions. Invalid ${nodeName} include: ${auditResult.dependenciesWithAbsoluteVersion.join(
-        ', '
-      )}`
+        ', ',
+      )}`,
     );
   }
 

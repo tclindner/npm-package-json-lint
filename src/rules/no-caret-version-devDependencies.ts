@@ -20,8 +20,8 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity, con
       severity,
       nodeName,
       `You are using an invalid version range. Please do not use ^. Invalid ${nodeName} include: ${auditResult.dependenciesWithInvalidVersionRange.join(
-        ', '
-      )}`
+        ', ',
+      )}`,
     );
   }
 

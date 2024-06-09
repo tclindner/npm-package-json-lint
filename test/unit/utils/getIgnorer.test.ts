@@ -11,11 +11,11 @@ describe('getIgnorer Unit Tests', () => {
     const cwd = process.cwd();
 
     const addMock = jest.fn().mockReturnValue('done');
-    // @ts-expect-error-error
+    // @ts-expect-error-error test
     ignore.mockImplementation(() => ({
       add: addMock,
     }));
-    // @ts-expect-error-error
+    // @ts-expect-error-error test
     fs.readFileSync.mockReturnValue('ignore content');
 
     const actual = getIgnorer(cwd, ignorePath);
@@ -31,11 +31,11 @@ describe('getIgnorer Unit Tests', () => {
     const cwd = process.cwd();
 
     const addMock = jest.fn().mockReturnValue('done');
-    // @ts-expect-error-error
+    // @ts-expect-error-error test
     ignore.mockImplementation(() => ({
       add: addMock,
     }));
-    // @ts-expect-error-error
+    // @ts-expect-error-error test
     fs.readFileSync.mockReturnValue('ignore content');
 
     const actual = getIgnorer(cwd, ignorePath);
@@ -50,11 +50,11 @@ describe('getIgnorer Unit Tests', () => {
     let ignorePath;
     const cwd = process.cwd();
 
-    // @ts-expect-error-error
+    // @ts-expect-error-error test
     fs.readFileSync.mockImplementation(() => {
       const error = new Error('Failed to read config file: missing.json. \nError: Error');
 
-      // @ts-expect-error-error
+      // @ts-expect-error-error test
       error.code = 'ENOENT';
       throw error;
     });

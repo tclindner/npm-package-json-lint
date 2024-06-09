@@ -17,7 +17,7 @@ export const lint = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   severity: Severity,
-  validValues: object[]
+  validValues: object[],
 ): LintResult => {
   if (packageJsonData.hasOwnProperty(nodeName)) {
     if (isObject(packageJsonData, nodeName)) {
@@ -30,8 +30,8 @@ export const lint = (
           severity,
           nodeName,
           `Invalid value for publishConfig. Current value is ${valueAsJsonString}. Value values include: ${validValuesAsJsonString.join(
-            ', '
-          )}.`
+            ', ',
+          )}.`,
         );
       }
     } else {

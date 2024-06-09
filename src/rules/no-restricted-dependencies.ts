@@ -15,7 +15,7 @@ export const lint = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   severity: Severity,
-  invalidDependencies: string[]
+  invalidDependencies: string[],
 ): LintIssue | null => {
   const auditResult = auditDependenciesWithRestrictedVersion(packageJsonData, nodeName, invalidDependencies);
 
@@ -25,8 +25,8 @@ export const lint = (
       severity,
       nodeName,
       `You are using a restricted dependency. Please remove it. Invalid ${nodeName} include: ${auditResult.dependenciesWithRestrictedVersion.join(
-        ', '
-      )}`
+        ', ',
+      )}`,
     );
   }
 

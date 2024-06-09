@@ -21,7 +21,7 @@ describe('prefer-no-engineStrict Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual(nodeName);
       expect(response.lintMessage).toStrictEqual(
-        'engineStrict was deprecated with npm v3.0.0. Please remove it from your package.json file'
+        'engineStrict was deprecated with npm v3.0.0. Please remove it from your package.json file',
       );
     });
   });

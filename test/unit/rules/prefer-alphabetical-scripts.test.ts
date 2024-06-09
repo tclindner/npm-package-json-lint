@@ -36,7 +36,7 @@ describe('prefer-alphabetical-scripts Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('scripts');
       expect(response.lintMessage).toStrictEqual(
-        'Your scripts are not in alphabetical order. Please move test after start.'
+        'Your scripts are not in alphabetical order. Please move test after start.',
       );
 
       expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledTimes(1);

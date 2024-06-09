@@ -28,7 +28,7 @@ describe('valid-values-publishConfig Unit Tests', () => {
       expect(response.severity).toStrictEqual('error');
       expect(response.node).toStrictEqual('publishConfig');
       expect(response.lintMessage).toStrictEqual(
-        'Invalid value for publishConfig. Current value is {"access":"public"}. Value values include: {"access":"private"}, {"access":"protected"}.'
+        'Invalid value for publishConfig. Current value is {"access":"public"}. Value values include: {"access":"private"}, {"access":"protected"}.',
       );
     });
   });
