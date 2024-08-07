@@ -10,9 +10,9 @@ import {Severity} from './types/severity';
 import {PackageJsonFileLintingResult} from './types/package-json-linting-result';
 import {LintIssue} from './lint-issue';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const debug = require('debug')('npm-package-json-lint:NpmPackageJsonLint');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const pkg = require('../package.json');
 
 const noIssues = 0;
