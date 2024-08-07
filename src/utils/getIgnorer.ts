@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import ignore, {Ignore} from 'ignore';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const debug = require('debug')('npm-package-json-lint:getIgnorer');
 
 const DEFAULT_IGNORE_FILENAME = '.npmpackagejsonlintignore';

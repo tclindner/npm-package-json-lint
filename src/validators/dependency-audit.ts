@@ -1,7 +1,7 @@
 import {PackageJson} from 'type-fest';
 import {OptionalObjectRuleConfig} from '../types/lint-function';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const semver = require('semver');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires, import/no-extraneous-dependencies, unicorn/prefer-top-level-await */
+/* eslint-disable @typescript-eslint/no-require-imports, import/no-extraneous-dependencies, unicorn/prefer-top-level-await */
 
 const esbuild = require('esbuild');
 // Automatically exclude all node_modules from the bundled version

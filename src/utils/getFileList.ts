@@ -1,7 +1,7 @@
 import path from 'path';
 import globby from 'globby';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const debug = require('debug')('npm-package-json-lint:getFileList');
 
 /**

@@ -10,7 +10,7 @@ import {aggregateCountsPerFile, aggregateOverallCounts, OverallAggregatedResultC
 import {Config} from '../configuration';
 import {PackageJsonFileLintingResult} from '../types/package-json-linting-result';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const debug = require('debug')('npm-package-json-lint:linter');
 
 export interface CreateResultObjectOptions {

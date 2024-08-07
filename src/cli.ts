@@ -5,7 +5,7 @@ import meow from 'meow';
 import {NpmPackageJsonLint} from './npm-package-json-lint';
 import {write} from './console-reporter';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const debug = require('debug')('npm-package-json-lint:cli');
 
 const exitCodes = {
