@@ -5,7 +5,7 @@ import {applyExtendsIfSpecified} from './config/applyExtendsIfSpecified';
 import {applyOverrides} from './config/applyOverrides';
 import {Rules} from './native-rules';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const debug = require('debug')('npm-package-json-lint:Config');
 
 const noRules = 0;

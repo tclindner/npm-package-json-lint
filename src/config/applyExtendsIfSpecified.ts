@@ -1,7 +1,7 @@
 import path from 'path';
 import {parseJavaScriptFile, parseJsonFile} from '../file-parser';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const debug = require('debug')('npm-package-json-lint:applyExtendsIfSpecified');
 
 /**
@@ -84,7 +84,7 @@ const loadFromModule = (moduleName: any, originalFilePath: any): any => {
   } else {
     const resolvedModule = require.resolve(adjustedModuleName, {paths: [path.dirname(originalFilePath)]});
 
-    // eslint-disable-next-line import/no-dynamic-require, global-require
+    // eslint-disable-next-line import/no-dynamic-require, global-require, @typescript-eslint/no-require-imports
     config = require(resolvedModule);
   }
 
