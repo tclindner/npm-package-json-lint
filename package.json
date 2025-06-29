@@ -77,7 +77,7 @@
     "npm-package-json-lint-config-default": "^7.0.0",
     "npm-package-json-lint-config-tc": "^8.0.0",
     "prettier": "^3.3.3",
-    "ts-jest": "^29.2.4",
+    "ts-jest": "^29.3.2",
     "typescript": "^5.4.5"
   },
   "engines": {
