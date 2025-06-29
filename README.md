@@ -62,8 +62,8 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 #### Node
 
-* [Node.js](https://nodejs.org/) - v18.0.0+
-* [npm](http://npmjs.com) - v9.0.0+
+* [Node.js](https://nodejs.org/) - v20.0.0+
+* [npm](http://npmjs.com) - v10.0.0+
 
 ### Use the cli
 
@@ -116,6 +116,14 @@ Follow these steps to get your local environement set up to allow you to contrib
 Quick links
 
 [CLI commands and configuration](https://npmpackagejsonlint.org/docs/cli) | [Node.js API](https://npmpackagejsonlint.org/docs/api) | [Integrations](https://npmpackagejsonlint.org/docs/integrations)
+
+## Migrating from v8.x.x to 9.x.x
+
+Please see the [migration guide](https://npmpackagejsonlint.org/docs/v8-to-v9).
+
+## Migrating from v7.x.x to 8.x.x
+
+Please see the [migration guide](https://npmpackagejsonlint.org/docs/v7-to-v8).
 
 ## Migrating from v6.x.x to 7.x.x
 
