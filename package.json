@@ -45,7 +45,7 @@
     "cosmiconfig": "^8.3.6",
     "debug": "^4.3.6",
     "globby": "^11.1.0",
-    "ignore": "^5.3.2",
+    "ignore": "^7.0.5",
     "is-plain-obj": "^3.0.0",
     "jsonc-parser": "^3.3.1",
     "log-symbols": "^4.1.0",
