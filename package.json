@@ -64,7 +64,7 @@
     "@typescript-eslint/parser": "^8.35.0",
     "esbuild": "^0.25.5",
     "esbuild-node-externals": "^1.18.0",
-    "eslint": "^8.57.0",
+    "eslint": "^9.30.0",
     "eslint-config-tc": "^27.0.0",
     "eslint-config-typescript-tc": "^11.0.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
