@@ -53,7 +53,7 @@
     "plur": "^4.0.0",
     "semver": "^7.6.3",
     "slash": "^3.0.0",
-    "strip-json-comments": "^3.1.1",
+    "strip-json-comments": "^5.0.3",
     "type-fest": "^4.26.1",
     "validate-npm-package-name": "^6.0.0"
   },
