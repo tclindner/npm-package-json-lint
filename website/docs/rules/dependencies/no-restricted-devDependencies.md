@@ -23,12 +23,12 @@ Enabling this rule will result in an error being generated if one of the depende
   "rules": {
     "no-restricted-devDependencies": ["error", [
       {
-        name: "grunt-npm-package-json-lint",
-        replacement: "gulp-npm-package-json-lint"
+        "name": "grunt-npm-package-json-lint",
+        "replacement": "gulp-npm-package-json-lint"
       },
       {
-        name: "@types/*",
-        replacement: "@new-types/*"
+        "name": "@types/*",
+        "replacement": "@new-types/*"
       }
     ]]
   }
