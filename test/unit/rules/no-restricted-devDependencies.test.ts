@@ -66,7 +66,7 @@ describe('no-restricted-devDependencies Unit Tests', () => {
     });
   });
 
-  describe('when package.json has node with a restricted value', () => {
+  describe('when package.json has node with a restricted value w/ replacement', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         devDependencies: {
@@ -76,12 +76,12 @@ describe('no-restricted-devDependencies Unit Tests', () => {
       const invalidDependencies = [
         {
           name: 'npm-package-json-lint',
-          replacement: 'new-npm-package-json-lint'
-        }, 
+          replacement: 'new-npm-package-json-lint',
+        },
         {
           name: 'grunt-npm-package-json-lint',
-          replacement: 'gulp-npm-package-json-lint'
-        }
+          replacement: 'gulp-npm-package-json-lint',
+        },
       ];
       const response = lint(packageJsonData, Severity.Error, invalidDependencies);
 
@@ -94,7 +94,7 @@ describe('no-restricted-devDependencies Unit Tests', () => {
     });
   });
 
-  describe('when package.json has node with a restricted pattern', () => {
+  describe('when package.json has node with a restricted pattern w/ replacement', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         devDependencies: {
@@ -104,12 +104,12 @@ describe('no-restricted-devDependencies Unit Tests', () => {
       const invalidDependencies = [
         {
           name: 'npm-package-json-lint',
-          replacement: 'new-npm-package-json-lint'
+          replacement: 'new-npm-package-json-lint',
         },
         {
           name: '@types/*',
-          replacement: '@new-types/*'
-        }
+          replacement: '@new-types/*',
+        },
       ];
       const response = lint(packageJsonData, Severity.Error, invalidDependencies);
 
@@ -122,7 +122,7 @@ describe('no-restricted-devDependencies Unit Tests', () => {
     });
   });
 
-  describe('when package.json has node with a valid value', () => {
+  describe('when package.json has node with a valid value w/ replacement', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
         devDependencies: {
@@ -132,11 +132,12 @@ describe('no-restricted-devDependencies Unit Tests', () => {
       const invalidDependencies = [
         {
           name: 'npm-package-json-lint',
-          replacement: 'new-npm-package-json-lint'
-        }, {
+          replacement: 'new-npm-package-json-lint',
+        },
+        {
           name: 'grunt-npm-package-json-lint',
-          replacement: 'gulp-npm-package-json-lint'
-        }
+          replacement: 'gulp-npm-package-json-lint',
+        },
       ];
       const response = lint(packageJsonData, Severity.Error, invalidDependencies);
 

@@ -31,7 +31,7 @@ export const auditDependenciesWithRestrictedPackage = (
   packageJsonData: PackageJson | any,
   nodeName: string,
   // depsToCheckFor can be an array of strings or objects with shape { name: string, replacement?: string }
-  depsToCheckFor: Array<string> | Array<RestrictedDependencyWithReplacement>,
+  depsToCheckFor: string[] | RestrictedDependencyWithReplacement[],
 ): AuditDependenciesWithRestrictedPackageResponse => {
   let hasDependencyWithRestrictedPackage = false;
   const dependenciesWithRestrictedPackage = [];
@@ -61,10 +61,13 @@ export const auditDependenciesWithRestrictedPackage = (
       } else {
         depToCheckForName = depToCheckFor.name;
         replacement = depToCheckFor.replacement;
-      }      
+      }
 
-      if (depToCheckForName === dependencyName || (depToCheckForName.endsWith('*') &&
-        dependencyName.startsWith(depToCheckForName.slice(0, Math.max(0, depToCheckForName.length - 1))))) {
+      if (
+        depToCheckForName === dependencyName ||
+        (depToCheckForName.endsWith('*') &&
+          dependencyName.startsWith(depToCheckForName.slice(0, Math.max(0, depToCheckForName.length - 1))))
+      ) {
         hasDependencyWithRestrictedPackage = true;
         dependenciesWithRestrictedPackage.push(dependencyName);
         errorMessages.push(replacement ? `${dependencyName} (recommended replacement: ${replacement})` : dependencyName);
