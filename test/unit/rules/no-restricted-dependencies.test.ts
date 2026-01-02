@@ -66,6 +66,85 @@ describe('no-restricted-dependencies Unit Tests', () => {
     });
   });
 
+  describe('when package.json has node with a restricted value w/ replacement', () => {
+    test('LintIssue object should be returned', () => {
+      const packageJsonData = {
+        dependencies: {
+          'npm-package-json-lint': '^1.0.0',
+        },
+      };
+      const invalidDependencies = [
+        {
+          name: 'npm-package-json-lint',
+          replacement: 'new-npm-package-json-lint',
+        },
+        {
+          name: 'grunt-npm-package-json-lint',
+          replacement: 'gulp-npm-package-json-lint',
+        },
+      ];
+      const response = lint(packageJsonData, Severity.Error, invalidDependencies);
+
+      expect(response.lintId).toStrictEqual('no-restricted-dependencies');
+      expect(response.severity).toStrictEqual('error');
+      expect(response.node).toStrictEqual('dependencies');
+      expect(response.lintMessage).toStrictEqual(
+        'You are using a restricted dependency. Please remove it. Invalid dependencies include: npm-package-json-lint (recommended replacement: new-npm-package-json-lint)',
+      );
+    });
+  });
+
+  describe('when package.json has node with a restricted pattern w/ replacement', () => {
+    test('LintIssue object should be returned', () => {
+      const packageJsonData = {
+        dependencies: {
+          '@types/node': '^1.0.0',
+        },
+      };
+      const invalidDependencies = [
+        {
+          name: 'npm-package-json-lint',
+          replacement: 'new-npm-package-json-lint',
+        },
+        {
+          name: '@types/*',
+          replacement: '@new-types/*',
+        },
+      ];
+      const response = lint(packageJsonData, Severity.Error, invalidDependencies);
+
+      expect(response.lintId).toStrictEqual('no-restricted-dependencies');
+      expect(response.severity).toStrictEqual('error');
+      expect(response.node).toStrictEqual('dependencies');
+      expect(response.lintMessage).toStrictEqual(
+        'You are using a restricted dependency. Please remove it. Invalid dependencies include: @types/node (recommended replacement: @new-types/*)',
+      );
+    });
+  });
+
+  describe('when package.json has node with a valid value w/ replacement', () => {
+    test('LintIssue object should be returned', () => {
+      const packageJsonData = {
+        dependencies: {
+          'gulp-npm-package-json-lint': '^1.0.0',
+        },
+      };
+      const invalidDependencies = [
+        {
+          name: 'npm-package-json-lint',
+          replacement: 'new-npm-package-json-lint',
+        },
+        {
+          name: 'grunt-npm-package-json-lint',
+          replacement: 'gulp-npm-package-json-lint',
+        },
+      ];
+      const response = lint(packageJsonData, Severity.Error, invalidDependencies);
+
+      expect(response).toBeNull();
+    });
+  });
+
   describe('when package.json does not have node', () => {
     test('true should be returned', () => {
       const packageJsonData = {};

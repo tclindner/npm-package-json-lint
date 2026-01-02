@@ -1,7 +1,7 @@
 import * as dependencyAudit from '../../../src/validators/dependency-audit';
 
 describe('dependency-audit Unit Tests', () => {
-  describe('auditDependenciesWithRestrictedVersion method', () => {
+  describe('auditDependenciesWithRestrictedPackage method', () => {
     const packageJson = {
       dependencies: {
         'grunt-npm-package-json-lint': '^1.0.0',
@@ -11,66 +11,125 @@ describe('dependency-audit Unit Tests', () => {
 
     describe('when the node does not exist in the package.json file', () => {
       test('false should be returned', () => {
-        const response = dependencyAudit.auditDependenciesWithRestrictedVersion(packageJson, 'devDependencies', [
+        const response = dependencyAudit.auditDependenciesWithRestrictedPackage(packageJson, 'devDependencies', [
           'grunt-npm-package-json-lint',
         ]);
 
         expect(response).toStrictEqual({
-          hasDependencyWithRestrictedVersion: false,
-          dependenciesWithRestrictedVersion: [],
-          dependenciesWithoutRestrictedVersion: [],
+          hasDependencyWithRestrictedPackage: false,
+          dependenciesWithRestrictedPackage: [],
+          dependenciesWithoutRestrictedPackage: [],
+          errorMessage: '',
         });
       });
     });
 
     describe('when the node exists in the package.json file and the dependency is present', () => {
       test('true should be returned', () => {
-        const response = dependencyAudit.auditDependenciesWithRestrictedVersion(packageJson, 'dependencies', [
+        const response = dependencyAudit.auditDependenciesWithRestrictedPackage(packageJson, 'dependencies', [
           'grunt-npm-package-json-lint',
         ]);
 
         expect(response).toStrictEqual({
-          hasDependencyWithRestrictedVersion: true,
-          dependenciesWithRestrictedVersion: ['grunt-npm-package-json-lint'],
-          dependenciesWithoutRestrictedVersion: ['@types/node'],
+          hasDependencyWithRestrictedPackage: true,
+          dependenciesWithRestrictedPackage: ['grunt-npm-package-json-lint'],
+          dependenciesWithoutRestrictedPackage: ['@types/node'],
+          errorMessage: 'grunt-npm-package-json-lint',
         });
       });
     });
 
     describe('when the node exists in the package.json file and the dependency pattern is present', () => {
       test('true should be returned', () => {
-        const response = dependencyAudit.auditDependenciesWithRestrictedVersion(packageJson, 'dependencies', ['@types/*']);
+        const response = dependencyAudit.auditDependenciesWithRestrictedPackage(packageJson, 'dependencies', ['@types/*']);
 
         expect(response).toStrictEqual({
-          hasDependencyWithRestrictedVersion: true,
-          dependenciesWithRestrictedVersion: ['@types/node'],
-          dependenciesWithoutRestrictedVersion: ['grunt-npm-package-json-lint'],
+          hasDependencyWithRestrictedPackage: true,
+          dependenciesWithRestrictedPackage: ['@types/node'],
+          dependenciesWithoutRestrictedPackage: ['grunt-npm-package-json-lint'],
+          errorMessage: '@types/node',
         });
       });
     });
 
     describe('when the node exists in the package.json file and the dependency pattern is missing * (no accidental match).', () => {
       test('false should be returned', () => {
-        const response = dependencyAudit.auditDependenciesWithRestrictedVersion(packageJson, 'dependencies', ['@types/']);
+        const response = dependencyAudit.auditDependenciesWithRestrictedPackage(packageJson, 'dependencies', ['@types/']);
 
         expect(response).toStrictEqual({
-          hasDependencyWithRestrictedVersion: false,
-          dependenciesWithRestrictedVersion: [],
-          dependenciesWithoutRestrictedVersion: ['grunt-npm-package-json-lint', '@types/node'],
+          hasDependencyWithRestrictedPackage: false,
+          dependenciesWithRestrictedPackage: [],
+          dependenciesWithoutRestrictedPackage: ['grunt-npm-package-json-lint', '@types/node'],
+          errorMessage: '',
         });
       });
     });
 
     describe('when the node exists in the package.json file, but the dependency do not', () => {
       test('false should be returned', () => {
-        const response = dependencyAudit.auditDependenciesWithRestrictedVersion(packageJson, 'dependencies', [
+        const response = dependencyAudit.auditDependenciesWithRestrictedPackage(packageJson, 'dependencies', [
           'gulp-npm-package-json-lint',
         ]);
 
         expect(response).toStrictEqual({
-          hasDependencyWithRestrictedVersion: false,
-          dependenciesWithRestrictedVersion: [],
-          dependenciesWithoutRestrictedVersion: ['grunt-npm-package-json-lint', '@types/node'],
+          hasDependencyWithRestrictedPackage: false,
+          dependenciesWithRestrictedPackage: [],
+          dependenciesWithoutRestrictedPackage: ['grunt-npm-package-json-lint', '@types/node'],
+          errorMessage: '',
+        });
+      });
+    });
+
+    describe('when the node does not exist in the package.json file w/ replacement', () => {
+      test('false should be returned', () => {
+        const response = dependencyAudit.auditDependenciesWithRestrictedPackage(packageJson, 'devDependencies', [
+          {
+            name: 'grunt-npm-package-json-lint',
+            replacement: 'gulp-npm-package-json-lint',
+          },
+        ]);
+
+        expect(response).toStrictEqual({
+          hasDependencyWithRestrictedPackage: false,
+          dependenciesWithRestrictedPackage: [],
+          dependenciesWithoutRestrictedPackage: [],
+          errorMessage: '',
+        });
+      });
+    });
+
+    describe('when the node exists in the package.json file and the dependency is present w/ replacement', () => {
+      test('true should be returned', () => {
+        const response = dependencyAudit.auditDependenciesWithRestrictedPackage(packageJson, 'dependencies', [
+          {
+            name: 'grunt-npm-package-json-lint',
+            replacement: 'gulp-npm-package-json-lint',
+          },
+        ]);
+
+        expect(response).toStrictEqual({
+          hasDependencyWithRestrictedPackage: true,
+          dependenciesWithRestrictedPackage: ['grunt-npm-package-json-lint'],
+          dependenciesWithoutRestrictedPackage: ['@types/node'],
+          errorMessage: 'grunt-npm-package-json-lint (recommended replacement: gulp-npm-package-json-lint)',
+        });
+      });
+    });
+
+    describe('when the node exists in the package.json file and the dependency pattern is present w/ replacement', () => {
+      test('true should be returned', () => {
+        const response = dependencyAudit.auditDependenciesWithRestrictedPackage(packageJson, 'dependencies', [
+          {
+            name: '@types/*',
+            replacement: '@new-types/node',
+          },
+        ]);
+
+        expect(response).toStrictEqual({
+          hasDependencyWithRestrictedPackage: true,
+          dependenciesWithRestrictedPackage: ['@types/node'],
+          dependenciesWithoutRestrictedPackage: ['grunt-npm-package-json-lint'],
+          errorMessage: '@types/node (recommended replacement: @new-types/node)',
         });
       });
     });
