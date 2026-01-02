@@ -18,6 +18,23 @@ Enabling this rule will result in an error being generated if one of the depende
 }
 ```
 
+```json
+{
+  "rules": {
+    "no-restricted-devDependencies": ["error", [
+      {
+        name: "grunt-npm-package-json-lint",
+        replacement: "gulp-npm-package-json-lint"
+      },
+      {
+        name: "@types/*",
+        replacement: "@new-types/*"
+      }
+    ]]
+  }
+}
+```
+
 ## Rule Details
 
 ### *Incorrect* example(s)
@@ -60,6 +77,7 @@ Enabling this rule will result in an error being generated if one of the depende
 
 ## History
 
+* Allow for configurable replacement packages in version 9.1.0
 * Improved messaging when an invalid configuration is detected in version 6.3.0
 * Allow for wildcard dependency restrictions. Add `*` to the end of the dependency string to indicate a wildcard search. This will result in a lint issue if the dependency starts with the string before the `*`. Added in 4.2.0.
 * Renamed from devDependencies-invalid-dependencies to no-restricted-devDependencies in version 1.0.0

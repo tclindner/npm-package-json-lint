@@ -7,10 +7,16 @@ const semver = require('semver');
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const hasExceptions = (config: any): boolean => typeof config === 'object' && config.hasOwnProperty('exceptions');
 
-export interface AuditDependenciesWithRestrictedVersionResponse {
-  hasDependencyWithRestrictedVersion: boolean;
-  dependenciesWithRestrictedVersion: string[];
-  dependenciesWithoutRestrictedVersion: string[];
+export interface RestrictedDependencyWithReplacement {
+  name: string;
+  replacement: string;
+}
+
+export interface AuditDependenciesWithRestrictedPackageResponse {
+  hasDependencyWithRestrictedPackage: boolean;
+  dependenciesWithRestrictedPackage: string[];
+  dependenciesWithoutRestrictedPackage: string[];
+  errorMessage: string;
 }
 
 /**
@@ -20,21 +26,24 @@ export interface AuditDependenciesWithRestrictedVersionResponse {
  * @param depsToCheckFor An array of packages to check for
  * @return True if the package has a dependency. False if it is not or the node is missing.
  */
-export const auditDependenciesWithRestrictedVersion = (
+export const auditDependenciesWithRestrictedPackage = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   nodeName: string,
-  depsToCheckFor: string[],
-): AuditDependenciesWithRestrictedVersionResponse => {
-  let hasDependencyWithRestrictedVersion = false;
-  const dependenciesWithRestrictedVersion = [];
-  const dependenciesWithoutRestrictedVersion = [];
+  // depsToCheckFor can be an array of strings or objects with shape { name: string, replacement?: string }
+  depsToCheckFor: Array<string> | Array<RestrictedDependencyWithReplacement>,
+): AuditDependenciesWithRestrictedPackageResponse => {
+  let hasDependencyWithRestrictedPackage = false;
+  const dependenciesWithRestrictedPackage = [];
+  const dependenciesWithoutRestrictedPackage = [];
+  const errorMessages = [];
 
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return {
-      hasDependencyWithRestrictedVersion,
-      dependenciesWithRestrictedVersion,
-      dependenciesWithoutRestrictedVersion,
+      hasDependencyWithRestrictedPackage,
+      dependenciesWithRestrictedPackage,
+      dependenciesWithoutRestrictedPackage,
+      errorMessage: errorMessages.join(', '),
     };
   }
 
@@ -42,25 +51,34 @@ export const auditDependenciesWithRestrictedVersion = (
   for (const dependencyName in packageJsonData[nodeName]) {
     // eslint-disable-next-line no-restricted-syntax
     for (const depToCheckFor of depsToCheckFor) {
-      if (depToCheckFor === dependencyName) {
-        hasDependencyWithRestrictedVersion = true;
-        dependenciesWithRestrictedVersion.push(dependencyName);
-      } else if (
-        depToCheckFor.endsWith('*') &&
-        dependencyName.startsWith(depToCheckFor.slice(0, Math.max(0, depToCheckFor.length - 1)))
-      ) {
-        hasDependencyWithRestrictedVersion = true;
-        dependenciesWithRestrictedVersion.push(dependencyName);
+      // normalize depToCheckFor to string
+      let depToCheckForName;
+      let replacement;
+
+      if (typeof depToCheckFor === 'string') {
+        depToCheckForName = depToCheckFor;
+        replacement = '';
       } else {
-        dependenciesWithoutRestrictedVersion.push(dependencyName);
+        depToCheckForName = depToCheckFor.name;
+        replacement = depToCheckFor.replacement;
+      }      
+
+      if (depToCheckForName === dependencyName || (depToCheckForName.endsWith('*') &&
+        dependencyName.startsWith(depToCheckForName.slice(0, Math.max(0, depToCheckForName.length - 1))))) {
+        hasDependencyWithRestrictedPackage = true;
+        dependenciesWithRestrictedPackage.push(dependencyName);
+        errorMessages.push(replacement ? `${dependencyName} (recommended replacement: ${replacement})` : dependencyName);
+      } else {
+        dependenciesWithoutRestrictedPackage.push(dependencyName);
       }
     }
   }
 
   return {
-    hasDependencyWithRestrictedVersion,
-    dependenciesWithRestrictedVersion,
-    dependenciesWithoutRestrictedVersion,
+    hasDependencyWithRestrictedPackage,
+    dependenciesWithRestrictedPackage,
+    dependenciesWithoutRestrictedPackage,
+    errorMessage: errorMessages.join(', '),
   };
 };
 
