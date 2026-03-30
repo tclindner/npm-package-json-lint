@@ -1,4 +1,4 @@
-import {PackageJson} from 'type-fest';
+import type {PackageJson} from 'type-fest';
 import {sourceSymbol} from '../file-parser';
 import {findDuplicatePropNames} from '../validators/property';
 import {LintIssue} from '../lint-issue';

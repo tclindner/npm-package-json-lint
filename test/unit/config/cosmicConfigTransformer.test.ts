@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import {transform} from '../../../src/config/cosmicConfigTransformer';
 import * as applyExtendsIfSpecified from '../../../src/config/applyExtendsIfSpecified';
 import * as applyOverrides from '../../../src/config/applyOverrides';

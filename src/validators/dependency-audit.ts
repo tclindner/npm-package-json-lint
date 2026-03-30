@@ -1,4 +1,4 @@
-import {PackageJson} from 'type-fest';
+import type {PackageJson} from 'type-fest';
 import {OptionalObjectRuleConfig} from '../types/lint-function';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -26,6 +26,7 @@ export interface AuditDependenciesWithRestrictedPackageResponse {
  * @param depsToCheckFor An array of packages to check for
  * @return True if the package has a dependency. False if it is not or the node is missing.
  */
+// eslint-disable-next-line max-lines-per-function
 export const auditDependenciesWithRestrictedPackage = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,

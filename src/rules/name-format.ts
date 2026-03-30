@@ -1,5 +1,5 @@
 import validateName from 'validate-npm-package-name';
-import {PackageJson} from 'type-fest';
+import type {PackageJson} from 'type-fest';
 import {getNameError} from '../utils/getNameError';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';

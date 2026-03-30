@@ -16,7 +16,6 @@ describe('Config Unit Tests', () => {
     describe('when config is undefined, but configFile is', () => {
       test('a config object should returned with all rules', () => {
         const cwd = process.cwd();
-        let config;
         const configFile = './npmpackagejsonlintrc.json';
         const configBaseDirectory = '';
 
@@ -33,7 +32,7 @@ describe('Config Unit Tests', () => {
           search: searchMock,
         }));
 
-        const configObj = new Config(cwd, config, configFile, configBaseDirectory, rules);
+        const configObj = new Config(cwd, undefined, configFile, configBaseDirectory, rules);
 
         const expectedConfigObj = {
           'require-version': 'error',
@@ -55,8 +54,6 @@ describe('Config Unit Tests', () => {
     describe('when config and configFile are undefined', () => {
       test('a config object should returned with all rules', () => {
         const cwd = process.cwd();
-        let config;
-        let configFile;
         const configBaseDirectory = '';
 
         const loadMock = jest.fn();
@@ -72,7 +69,7 @@ describe('Config Unit Tests', () => {
           search: searchMock,
         }));
 
-        const configObj = new Config(cwd, config, configFile, configBaseDirectory, rules);
+        const configObj = new Config(cwd, undefined, undefined, configBaseDirectory, rules);
 
         const expectedConfigObj = {
           'require-version': 'error',
@@ -94,8 +91,6 @@ describe('Config Unit Tests', () => {
     describe('when config and configFile are undefined and no config found', () => {
       test('an error should be thrown', () => {
         const cwd = process.cwd();
-        let config;
-        let configFile;
         const configBaseDirectory = '';
 
         const loadMock = jest.fn();
@@ -107,7 +102,7 @@ describe('Config Unit Tests', () => {
           search: searchMock,
         }));
 
-        const configObj = new Config(cwd, config, configFile, configBaseDirectory, rules);
+        const configObj = new Config(cwd, undefined, undefined, configBaseDirectory, rules);
 
         const filePath = './package.json';
 
@@ -120,8 +115,6 @@ describe('Config Unit Tests', () => {
     describe('when config and configFile are undefined, config is found, but has no rules', () => {
       test('a config object should returned with all rules', () => {
         const cwd = process.cwd();
-        let config;
-        let configFile;
         const configBaseDirectory = '';
 
         const loadMock = jest.fn();
@@ -133,7 +126,7 @@ describe('Config Unit Tests', () => {
           search: searchMock,
         }));
 
-        const configObj = new Config(cwd, config, configFile, configBaseDirectory, rules);
+        const configObj = new Config(cwd, undefined, undefined, configBaseDirectory, rules);
 
         const filePath = './package.json';
 
@@ -161,7 +154,6 @@ describe('Config Unit Tests', () => {
             },
           ],
         };
-        let configFile;
         const configBaseDirectory = '';
 
         const loadMock = jest.fn();
@@ -193,7 +185,7 @@ describe('Config Unit Tests', () => {
           'require-scripts': 'error',
         });
 
-        const configObj = new Config(cwd, config, configFile, configBaseDirectory, rules);
+        const configObj = new Config(cwd, config, undefined, configBaseDirectory, rules);
 
         const expectedConfigObj = {
           'require-version': 'error',

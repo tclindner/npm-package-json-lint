@@ -1,4 +1,4 @@
-import {PackageJson} from 'type-fest';
+import type {PackageJson} from 'type-fest';
 import {isInPreferredOrder} from '../validators/property-order';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';

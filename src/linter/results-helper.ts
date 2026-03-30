@@ -1,6 +1,6 @@
 import {LintIssue} from '../lint-issue';
 import {Severity} from '../types/severity';
-import {PackageJsonFileLintingResult} from '../types/package-json-linting-result';
+import type {PackageJsonFileLintingResult} from '../types/package-json-linting-result';
 
 /**
  * A result count object for a files.

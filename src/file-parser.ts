@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import stripComments from 'strip-json-comments';
 
 /**
@@ -7,7 +7,7 @@ import stripComments from 'strip-json-comments';
  * @param fileName String file path of file to load
  * @internal
  */
-// eslint-disable-next-line import/no-dynamic-require, global-require, @typescript-eslint/no-require-imports
+// eslint-disable-next-line import-x/no-dynamic-require, global-require, @typescript-eslint/no-require-imports
 const requireFile = (fileName: string): NodeRequire => require(fileName);
 
 /**

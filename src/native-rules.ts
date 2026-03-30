@@ -1,6 +1,6 @@
 import chalk from 'chalk';
-import {readdirSync} from 'fs';
-import path from 'path';
+import {readdirSync} from 'node:fs';
+import path from 'node:path';
 import {LintFunction} from './types/lint-function';
 import {RuleType} from './types/rule-type';
 
@@ -38,7 +38,7 @@ export class Rules {
 
       return this.rules;
     } catch (error) {
-      throw new Error(`Error while loading rules from rules directory - ${error.message}`);
+      throw new Error(`Error while loading rules from rules directory - ${error.message}`, error);
     }
   }
 
@@ -58,7 +58,7 @@ export class Rules {
       throw new Error(chalk.bold.red(errorMsg));
     }
 
-    // eslint-disable-next-line import/no-dynamic-require, global-require, @typescript-eslint/no-require-imports
+    // eslint-disable-next-line import-x/no-dynamic-require, global-require, @typescript-eslint/no-require-imports
     const ruleModule = require(this.rules[ruleId]);
 
     return ruleModule;

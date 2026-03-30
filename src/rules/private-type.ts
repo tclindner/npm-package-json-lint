@@ -1,4 +1,4 @@
-import {PackageJson} from 'type-fest';
+import type {PackageJson} from 'type-fest';
 import {LintIssue} from '../lint-issue';
 import {isBoolean} from '../validators/type';
 import {RuleType} from '../types/rule-type';
