@@ -1,5 +1,5 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import ignore, {Ignore} from 'ignore';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports

@@ -1,4 +1,4 @@
-import {PackageJson} from 'type-fest';
+import type {PackageJson} from 'type-fest';
 import {auditDependenciesForNonAbsoluteVersion} from '../validators/dependency-audit';
 import {exists} from '../validators/property';
 import {LintIssue} from '../lint-issue';

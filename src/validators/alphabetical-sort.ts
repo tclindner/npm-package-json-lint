@@ -1,4 +1,4 @@
-import {PackageJson} from 'type-fest';
+import type {PackageJson} from 'type-fest';
 
 const increment = 1;
 
@@ -28,6 +28,7 @@ export const isInAlphabeticalOrder = (
     validNode: null,
   };
   const nodeKeysOriginal = Object.keys(packageJsonData[nodeName]);
+  // eslint-disable-next-line unicorn/no-array-sort
   const nodeKeysSorted = Object.keys(packageJsonData[nodeName]).sort();
 
   for (let keyIndex = 0; keyIndex < nodeKeysOriginal.length; keyIndex += increment) {

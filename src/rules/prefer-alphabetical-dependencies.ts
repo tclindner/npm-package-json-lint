@@ -1,4 +1,4 @@
-import {PackageJson} from 'type-fest';
+import type {PackageJson} from 'type-fest';
 import {isInAlphabeticalOrder} from '../validators/alphabetical-sort';
 import {exists} from '../validators/property';
 import {LintIssue} from '../lint-issue';

@@ -1,6 +1,6 @@
 import {LintIssue} from '../../../src/lint-issue';
 import {aggregateCountsPerFile, aggregateOverallCounts} from '../../../src/linter/results-helper';
-import {PackageJsonFileLintingResult} from '../../../src/types/package-json-linting-result';
+import type {PackageJsonFileLintingResult} from '../../../src/types/package-json-linting-result';
 import {Severity} from '../../../src/types/severity';
 
 describe('resultsHelper Unit Tests', () => {

@@ -1,6 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-require-imports
+// eslint-disable-next-line @typescript-eslint/no-require-imports, unicorn/prefer-module
 const {defaults: tsjPreset} = require('ts-jest/presets');
 
+// eslint-disable-next-line unicorn/prefer-module
 module.exports = {
   clearMocks: true,
   collectCoverage: true,

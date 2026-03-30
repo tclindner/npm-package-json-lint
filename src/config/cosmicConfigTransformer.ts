@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import {applyExtendsIfSpecified} from './applyExtendsIfSpecified';
 import {applyOverrides} from './applyOverrides';
 

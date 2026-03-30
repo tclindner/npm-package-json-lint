@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const {spawnSync} = require('child_process');
+const {spawnSync} = require('node:child_process');
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const figures = require('figures');
 // eslint-disable-next-line @typescript-eslint/no-require-imports

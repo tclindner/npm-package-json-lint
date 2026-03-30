@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import ignore from 'ignore';
 import {getIgnorer} from '../../../src/utils/getIgnorer';
 
@@ -47,6 +47,7 @@ describe('getIgnorer Unit Tests', () => {
   });
 
   test('ignore file not passed and not found', () => {
+    // eslint-disable-next-line no-unassigned-vars
     let ignorePath;
     const cwd = process.cwd();
 

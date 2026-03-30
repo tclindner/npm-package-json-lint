@@ -1,13 +1,13 @@
 import isPlainObj from 'is-plain-obj';
 import slash from 'slash';
-import {PackageJson} from 'type-fest';
+import type {PackageJson} from 'type-fest';
 import {Config} from './configuration';
 import {Rules} from './native-rules';
 import {executeOnPackageJsonFiles, executeOnPackageJsonObject, OverallLintingResult} from './linter/linter';
 import {getFileList} from './utils/getFileList';
 import {getIgnorer} from './utils/getIgnorer';
 import {Severity} from './types/severity';
-import {PackageJsonFileLintingResult} from './types/package-json-linting-result';
+import type {PackageJsonFileLintingResult} from './types/package-json-linting-result';
 import {LintIssue} from './lint-issue';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -143,6 +143,7 @@ export class NpmPackageJsonLint {
    *
    * @returns The results {@link OverallLintingResult} from linting a collection of package.json files.
    */
+  // eslint-disable-next-line max-lines-per-function
   lint(): OverallLintingResult {
     debug('Starting lint');
 
