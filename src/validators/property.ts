@@ -1,5 +1,5 @@
 import {parseTree} from 'jsonc-parser';
-import {PackageJson} from 'type-fest';
+import type {PackageJson} from 'type-fest';
 
 /**
  * Determines whether or not the node exists in the package.json file

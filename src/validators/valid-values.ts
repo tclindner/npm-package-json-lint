@@ -1,4 +1,4 @@
-import {PackageJson} from 'type-fest';
+import type {PackageJson} from 'type-fest';
 
 /**
  * Determines whether a node has a valid value

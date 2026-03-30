@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import globby from 'globby';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports

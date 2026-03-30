@@ -1,5 +1,5 @@
 import semver from 'semver';
-import {PackageJson} from 'type-fest';
+import type {PackageJson} from 'type-fest';
 
 /**
  * Determines whether or not the node's value is a valid semantic version

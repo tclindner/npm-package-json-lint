@@ -1,5 +1,5 @@
 import isPlainObj from 'is-plain-obj';
-import {PackageJson} from 'type-fest';
+import type {PackageJson} from 'type-fest';
 
 /**
  * Determines whether or not the node's value is an Array

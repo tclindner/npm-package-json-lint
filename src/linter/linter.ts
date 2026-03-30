@@ -1,5 +1,5 @@
-import path from 'path';
-import {PackageJson} from 'type-fest';
+import path from 'node:path';
+import type {PackageJson} from 'type-fest';
 import {Ignore} from 'ignore';
 import {Rules} from '../native-rules';
 import {parseJsonFile} from '../file-parser';
@@ -8,7 +8,7 @@ import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
 import {aggregateCountsPerFile, aggregateOverallCounts, OverallAggregatedResultCounts} from './results-helper';
 import {Config} from '../configuration';
-import {PackageJsonFileLintingResult} from '../types/package-json-linting-result';
+import type {PackageJsonFileLintingResult} from '../types/package-json-linting-result';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const debug = require('debug')('npm-package-json-lint:linter');
@@ -76,6 +76,7 @@ const lint = (packageJsonData: any, configObj, rules: Rules): LintIssue[] => {
   for (const rule in configObj) {
     const ruleModule = rules.get(rule);
 
+    // eslint-disable-next-line no-useless-assignment
     let severity = Severity.Off;
     let ruleConfig;
 

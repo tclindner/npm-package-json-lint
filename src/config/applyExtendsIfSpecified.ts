@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import {parseJavaScriptFile, parseJsonFile} from '../file-parser';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -73,7 +73,7 @@ const applyExtends = (config: any, parentName: any, originalFilePath: any): any 
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const loadFromModule = (moduleName: any, originalFilePath: any): any => {
-  let config = {};
+  let config;
   let adjustedModuleName = moduleName;
 
   if (moduleName.startsWith('./')) {
@@ -84,12 +84,11 @@ const loadFromModule = (moduleName: any, originalFilePath: any): any => {
   } else {
     const resolvedModule = require.resolve(adjustedModuleName, {paths: [path.dirname(originalFilePath)]});
 
-    // eslint-disable-next-line import/no-dynamic-require, global-require, @typescript-eslint/no-require-imports
+    // eslint-disable-next-line import-x/no-dynamic-require, global-require, @typescript-eslint/no-require-imports
     config = require(resolvedModule);
   }
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
   if (Object.keys(config).length > 0 && config.extends) {
     config = applyExtends(config, adjustedModuleName, originalFilePath);
   }
@@ -107,7 +106,7 @@ const loadFromModule = (moduleName: any, originalFilePath: any): any => {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const loadConfigFile = (filePath: any): any => {
-  let config = {};
+  let config;
 
   switch (path.extname(filePath)) {
     case '.js': {

@@ -1,10 +1,14 @@
-/* eslint-disable @typescript-eslint/no-require-imports, import/no-extraneous-dependencies, unicorn/prefer-top-level-await */
+/* eslint-disable @typescript-eslint/no-require-imports, import-x/no-extraneous-dependencies, unicorn/prefer-top-level-await */
 
+// eslint-disable-next-line unicorn/prefer-module
 const esbuild = require('esbuild');
 // Automatically exclude all node_modules from the bundled version
+// eslint-disable-next-line unicorn/prefer-module
 const {nodeExternalsPlugin} = require('esbuild-node-externals');
-const {readdirSync} = require('fs');
-const path = require('path');
+// eslint-disable-next-line unicorn/prefer-module
+const {readdirSync} = require('node:fs');
+// eslint-disable-next-line unicorn/prefer-module
+const path = require('node:path');
 
 const rulesDirectory = path.join(__dirname, 'src', 'rules');
 const bundle = true;
