@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import {parseJsonFile, sourceSymbol} from '../../src/file-parser';
 
 jest.mock('fs');
