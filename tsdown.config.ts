@@ -6,7 +6,6 @@ export default defineConfig([
     entry: './src/rules/*.ts',
     outDir: 'dist/rules/',
 
-
     // Formatting & Minification
     fixedExtension: false,
     format: ['cjs'],
