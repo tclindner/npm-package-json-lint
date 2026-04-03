@@ -1,4 +1,25 @@
 {
+  "name": "npm-package-json-lint-website",
+  "version": "0.0.0",
+  "description": "Website for npm-package-json-lint",
+  "keywords": [
+    "lint",
+    "linter",
+    "package.json",
+    "audit",
+    "auditor",
+    "npm-package-json-lint",
+    "website"
+  ],
+  "homepage": "https://github.com/tclindner/npm-package-json-lint",
+  "bugs": {
+    "url": "https://github.com/tclindner/npm-package-json-lint/issues"
+  },
+  "author": "Thomas Lindner",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tclindner/npm-package-json-lint.git"
+  },
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
@@ -38,5 +59,6 @@
   },
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "license": "MIT"
 }

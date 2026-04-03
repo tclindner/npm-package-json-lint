@@ -33,7 +33,6 @@ const invalidConfigJsFile = `${invalidFixturesPath}/npmpackagejsonlint.config.js
 
 // Exit codes
 const zeroClean = 0;
-const oneMissingTargets = 1;
 const twoLintErrorsDetected = 2;
 const threeRunTimeException = 3;
 
@@ -57,7 +56,6 @@ describe('cli Integration Tests', () => {
     --configFile, -c File path of .npmpackagejsonlintrc.json
     --ignorePath, -i Path to a file containing patterns that describe files to ignore. The path can be absolute or relative to process.cwd(). By default, npm-package-json-lint looks for .npmpackagejsonlintignore in process.cwd().
     --maxWarnings, -mw Maximum number of warnings that can be detected before an error is thrown.
-    --allowEmptyTargets Do not throw an error when a list of targets is empty.
 
   Examples
     $ npmPkgJsonLint --version
@@ -96,22 +94,101 @@ describe('cli Integration Tests', () => {
 
   // NOTE: also tests loading config and package.json files
   describe('when the cli is run without targets', () => {
-    test('an except should be thrown that no lint targets were provided', () => {
-      const cli = spawnSync(relativePathToCli, [], {env});
-      const expected = 'No lint targets provided\n';
+    test('patterns default to "."', () => {
+      const cli = spawnSync(relativePathToCli, ['--configFile', warningRcFile], {env});
+      const expected = `No lint targets provided, defaulting to the current working directory.
+
+./test/fixtures/config-file-with-overrides/package.json
+⚠ require-license - node: license - license is required
+0 errors
+1 warning
+
+./test/fixtures/configJavaScriptFile/package.json
+⚠ require-license - node: license - license is required
+0 errors
+1 warning
+
+${errorPkg}
+⚠ require-license - node: license - license is required
+0 errors
+1 warning
+
+${errorWarningPkg}
+⚠ require-license - node: license - license is required
+0 errors
+1 warning
+
+./test/fixtures/hierarchyWithoutRoot/package.json
+⚠ require-license - node: license - license is required
+0 errors
+1 warning
+
+./test/fixtures/ignorePath/package.json
+⚠ require-license - node: license - license is required
+0 errors
+1 warning
+
+./test/fixtures/invalidConfig/package.json
+⚠ require-license - node: license - license is required
+0 errors
+1 warning
+
+./test/fixtures/npmPackageJsonLintIgnore/package.json
+⚠ require-license - node: license - license is required
+0 errors
+1 warning
+
+./test/fixtures/overrides/package.json
+⚠ require-license - node: license - license is required
+0 errors
+1 warning
+
+${packageJsonPropertyPkg}
+⚠ require-license - node: license - license is required
+0 errors
+1 warning
+
+./test/fixtures/valid/package.json
+⚠ require-license - node: license - license is required
+0 errors
+1 warning
+
+${warningPkg}
+⚠ require-license - node: license - license is required
+0 errors
+1 warning
+
+./test/fixtures/hierarchyWithoutRoot/subdirectory/package.json
+⚠ require-license - node: license - license is required
+0 errors
+1 warning
+
+./test/fixtures/ignorePath/ignoredDirectory/package.json
+✖ require-author - node: author - author is required
+⚠ require-license - node: license - license is required
+1 error
+1 warning
+
+./test/fixtures/npmPackageJsonLintIgnore/ignoredDirectory/package.json
+✖ require-author - node: author - author is required
+⚠ require-license - node: license - license is required
+1 error
+1 warning
+
+./test/fixtures/config-file-with-overrides/packages/my-package/package.json
+⚠ require-license - node: license - license is required
+0 errors
+1 warning
+
+Totals
+2 errors
+16 warnings
+0 files ignored
+`;
 
       expect(cli.stdout.toString()).toStrictEqual(expected);
       expect(cli.stderr.toString()).toStrictEqual('');
-      expect(cli.status).toStrictEqual(oneMissingTargets);
-    });
-
-    test('should exit with zero code when an empty targets is allowed', () => {
-      const cli = spawnSync(relativePathToCli, ['--allowEmptyTargets'], {env});
-      const expected = 'No lint targets provided\n';
-
-      expect(cli.stdout.toString()).toStrictEqual(expected);
-      expect(cli.stderr.toString()).toStrictEqual('');
-      expect(cli.status).toStrictEqual(zeroClean);
+      expect(cli.status).toStrictEqual(twoLintErrorsDetected);
     });
   });
 
