@@ -10,6 +10,16 @@ updates:
   labels:
   - 'dependencies :package:'
   versioning-strategy: increase
+- package-ecosystem: npm
+  directory: "website/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  assignees:
+  - tclindner
+  labels:
+  - 'dependencies :package:'
+  versioning-strategy: increase
 - package-ecosystem: "github-actions"
   directory: "/"
   schedule:
