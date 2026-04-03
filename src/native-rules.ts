@@ -58,7 +58,7 @@ export class Rules {
       throw new Error(chalk.bold.red(errorMsg));
     }
 
-    // eslint-disable-next-line import-x/no-dynamic-require, global-require, @typescript-eslint/no-require-imports
+    // eslint-disable-next-line import-x/no-dynamic-require, @typescript-eslint/no-require-imports
     const ruleModule = require(this.rules[ruleId]);
 
     return ruleModule;

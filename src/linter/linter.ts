@@ -124,7 +124,6 @@ const processPackageJsonObject = (
   cwd: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonObj: PackageJson | any,
-  // TODO: Type
   config,
   fileName: string,
   rules: Rules,
@@ -153,7 +152,6 @@ const processPackageJsonObject = (
  * @returns A {@link PackageJsonFileLintingResult} object with the result of linting a package.json file.
  * @internal
  */
-// TODO: Type
 const processPackageJsonFile = (cwd: string, fileName: string, config, rules: Rules): PackageJsonFileLintingResult => {
   const packageJsonObj = parseJsonFile(path.resolve(fileName));
 

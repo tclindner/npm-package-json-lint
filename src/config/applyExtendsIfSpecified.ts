@@ -77,18 +77,16 @@ const loadFromModule = (moduleName: any, originalFilePath: any): any => {
   let adjustedModuleName = moduleName;
 
   if (moduleName.startsWith('./')) {
-    // TODO: handle process.cwd() option
     adjustedModuleName = path.join(process.cwd(), moduleName);
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     config = loadConfigFile(adjustedModuleName);
   } else {
     const resolvedModule = require.resolve(adjustedModuleName, {paths: [path.dirname(originalFilePath)]});
 
-    // eslint-disable-next-line import-x/no-dynamic-require, global-require, @typescript-eslint/no-require-imports
+    // eslint-disable-next-line import-x/no-dynamic-require, @typescript-eslint/no-require-imports
     config = require(resolvedModule);
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   if (Object.keys(config).length > 0 && config.extends) {
     config = applyExtends(config, adjustedModuleName, originalFilePath);
   }
