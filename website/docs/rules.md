@@ -126,7 +126,19 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
 * optionalDependencies
   * [prefer-alphabetical-optionalDependencies](rules/dependencies/prefer-alphabetical-optionalDependencies.md)
 * peerDependencies
+  * [no-absolute-version-peerDependencies](rules/dependencies/no-absolute-version-peerDependencies.md)
+  * [no-archive-peerDependencies](rules/dependencies/no-archive-peerDependencies.md)
+  * [no-caret-version-peerDependencies](rules/dependencies/no-caret-version-peerDependencies.md)
+  * [no-file-peerDependencies](rules/dependencies/no-file-peerDependencies.md)
+  * [no-git-peerDependencies](rules/dependencies/no-git-peerDependencies.md)
+  * [no-restricted-peerDependencies](rules/dependencies/no-restricted-peerDependencies.md)
+  * [no-restricted-pre-release-peerDependencies](rules/dependencies/no-restricted-pre-release-peerDependencies.md)
+  * [no-tilde-version-peerDependencies](rules/dependencies/no-tilde-version-peerDependencies.md)
+  * [prefer-absolute-version-peerDependencies](rules/dependencies/prefer-absolute-version-peerDependencies.md)
   * [prefer-alphabetical-peerDependencies](rules/dependencies/prefer-alphabetical-peerDependencies.md)
+  * [prefer-caret-version-peerDependencies](rules/dependencies/prefer-caret-version-peerDependencies.md)
+  * [prefer-no-version-zero-peerDependencies](rules/dependencies/prefer-no-version-zero-peerDependencies.md)
+  * [prefer-tilde-version-peerDependencies](rules/dependencies/prefer-tilde-version-peerDependencies.md)
 
 ## Scripts rules
 

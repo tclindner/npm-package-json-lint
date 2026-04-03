@@ -117,6 +117,10 @@ Quick links
 
 [CLI commands and configuration](https://npmpackagejsonlint.org/docs/cli) | [Node.js API](https://npmpackagejsonlint.org/docs/api) | [Integrations](https://npmpackagejsonlint.org/docs/integrations)
 
+## Migrating from v9.x.x to 10.x.x
+
+Please see the [migration guide](https://npmpackagejsonlint.org/docs/v9-to-v10).
+
 ## Migrating from v8.x.x to 9.x.x
 
 Please see the [migration guide](https://npmpackagejsonlint.org/docs/v8-to-v9).
