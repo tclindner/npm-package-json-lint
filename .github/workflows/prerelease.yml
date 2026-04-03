@@ -1,4 +1,6 @@
 name: "Publish next version to npm"
+permissions:
+  contents: read
 
 on:
   release:
