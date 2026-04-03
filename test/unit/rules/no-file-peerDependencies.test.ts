@@ -1,7 +1,7 @@
-import {lint, ruleType} from '../../../src/rules/no-file-devDependencies';
+import {lint, ruleType} from '../../../src/rules/no-file-peerDependencies';
 import {Severity} from '../../../src/types/severity';
 
-describe('no-file-devDependencies Unit Tests', () => {
+describe('no-file-peerDependencies Unit Tests', () => {
   describe('a rule type value should be exported', () => {
     test('it should equal "optionalObject"', () => {
       expect(ruleType).toStrictEqual('optionalObject');
@@ -11,17 +11,17 @@ describe('no-file-devDependencies Unit Tests', () => {
   describe('when package.json has node with an invalid value', () => {
     test('LintIssue object should be returned', () => {
       const packageJsonData = {
-        devDependencies: {
+        peerDependencies: {
           'test-module': 'file:local-directory',
         },
       };
       const response = lint(packageJsonData, Severity.Error, {exceptions: ['grunt-npm-package-json-lint']});
 
-      expect(response.lintId).toStrictEqual('no-file-devDependencies');
+      expect(response.lintId).toStrictEqual('no-file-peerDependencies');
       expect(response.severity).toStrictEqual('error');
-      expect(response.node).toStrictEqual('devDependencies');
+      expect(response.node).toStrictEqual('peerDependencies');
       expect(response.lintMessage).toStrictEqual(
-        'You are using devDependencies via url to local file. Please use devDependencies from npm. Invalid devDependencies include: test-module',
+        'You are using peerDependencies via url to local file. Please use peerDependencies from npm. Invalid peerDependencies include: test-module',
       );
     });
   });
@@ -29,7 +29,7 @@ describe('no-file-devDependencies Unit Tests', () => {
   describe('when package.json has node with a invalid value and config exception', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        devDependencies: {
+        peerDependencies: {
           'my-module': 'file:local-directory',
         },
       };
@@ -42,7 +42,7 @@ describe('no-file-devDependencies Unit Tests', () => {
   describe('when package.json has node with a valid value', () => {
     test('true should be returned', () => {
       const packageJsonData = {
-        devDependencies: {
+        peerDependencies: {
           'my-module': 'username/repo',
           'my-other-module': '1.2.3',
         },
