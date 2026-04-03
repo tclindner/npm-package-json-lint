@@ -81,12 +81,12 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 * Once npm-package-json-lint is installed either in the project or globally it can be run with the 
   following command, `npx npm-package-json-lint`. This will go through the process of linting/validating
-  your code to meet your desired specifications.
+  your code to meet your desired specifications. For an example configuration file, please see [configuration examples section  on the website](https://npmpackagejsonlint.org/docs/configuration/#config-examples).
   
 ##### In the program
 
 * The linter can also be used as a module in the program and the output be displayed via a log message.
-  Adding the following code to your file can accomplish this.
+  Adding the following code to your file can accomplish this. For an example configuration file, please see [configuration examples section  on the website](https://npmpackagejsonlint.org/docs/configuration/#config-examples).
 
   ```
   const npmPackageJsonLint = require("npm-package-json-lint");
@@ -96,9 +96,9 @@ First thing first, let's make sure you have the necessary pre-requisites.
  
 ## Custom Configuration
 
-  npm-package-json-lint has the ability to be constomly configured to match your desires.
+  npm-package-json-lint has the ability to be configured to match your desires.
   To configure the linter navigate to the .npmpackagejsonlintrc file in the repository and add
-  in or remove your desired rules.
+  in or remove your desired rules. For an example configuration file, please see [configuration examples section  on the website](https://npmpackagejsonlint.org/docs/configuration/#config-examples).
 
 ## Local Development
 Follow these steps to get your local environement set up to allow you to contribute to the repository
