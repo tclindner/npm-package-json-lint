@@ -64,7 +64,7 @@
     "@typescript-eslint/eslint-plugin": "8.58.0",
     "@typescript-eslint/parser": "8.58.0",
     "esbuild": "0.27.4",
-    "esbuild-node-externals": "1.20.1",
+    "esbuild-node-externals": "1.21.0",
     "eslint": "10.2.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-config-tc": "28.0.3",
