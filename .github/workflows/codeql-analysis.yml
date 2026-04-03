@@ -1,5 +1,8 @@
 name: "Code scanning"
 
+permissions:
+  contents: read
+
 on:
   pull_request:
   schedule:
