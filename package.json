@@ -29,14 +29,12 @@
   "main": "dist/api.js",
   "types": "dist/src/api.d.ts",
   "scripts": {
-    "build": "npm run esbuild && npm run tsc",
-    "esbuild": "node esbuild.config.js",
+    "build": "tsdown",
     "eslint": "eslint .",
     "npmpackagejsonlint": "node dist/cli.js ./package.json",
     "lint": "npm run eslint && npm run npmpackagejsonlint",
     "test": "npm run build && jest",
-    "test:ci": "jest --runInBand",
-    "tsc": "tsc --project tsconfig.json"
+    "test:ci": "jest --runInBand"
   },
   "dependencies": {
     "ajv": "6.12.6",
@@ -63,8 +61,6 @@
     "@types/node": "25.5.0",
     "@typescript-eslint/eslint-plugin": "8.58.0",
     "@typescript-eslint/parser": "8.58.0",
-    "esbuild": "0.27.4",
-    "esbuild-node-externals": "1.20.1",
     "eslint": "10.1.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-config-tc": "28.0.3",
@@ -80,6 +76,7 @@
     "npm-package-json-lint-config-tc": "10.0.2",
     "prettier": "3.8.1",
     "ts-jest": "29.4.9",
+    "tsdown": "0.21.7",
     "typescript": "5.4.5"
   },
   "engines": {
