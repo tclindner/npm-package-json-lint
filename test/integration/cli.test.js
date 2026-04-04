@@ -1,8 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const {spawnSync} = require('node:child_process');
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const figures = require('figures');
-// eslint-disable-next-line @typescript-eslint/no-require-imports
 const pkg = require('../../package.json');
 
 const relativePathToCli = './dist/cli.js';
@@ -120,7 +118,7 @@ describe('cli Integration Tests', () => {
       const cli = spawnSync(relativePathToCli, ['-c', errorRcFile, errorPkg], {env});
       const expected = `
 ${errorPkg}
-${figures.cross} require-scripts - node: scripts - scripts is required
+ERROR require-scripts - node: scripts - scripts is required
 1 error
 0 warnings
 `;
@@ -133,7 +131,7 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
       const cli = spawnSync(relativePathToCli, ['--configFile', warningRcFile, warningPkg], {env});
       const expected = `
 ${warningPkg}
-${figures.warning} require-license - node: license - license is required
+WARNING require-license - node: license - license is required
 0 errors
 1 warning
 `;
@@ -147,8 +145,8 @@ ${figures.warning} require-license - node: license - license is required
       const cli = spawnSync(relativePathToCli, ['-c', errorWarningRcFile, errorWarningPkg], {env});
       const expected = `
 ${errorWarningPkg}
-${figures.warning} require-license - node: license - license is required
-${figures.cross} require-scripts - node: scripts - scripts is required
+WARNING require-license - node: license - license is required
+ERROR require-scripts - node: scripts - scripts is required
 1 error
 1 warning
 `;
@@ -173,7 +171,7 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
       const cli = spawnSync(relativePathToCli, ['-c', errorRcFile, errorPkg, '-q'], {env});
       const expected = `
 ${errorPkg}
-${figures.cross} require-scripts - node: scripts - scripts is required
+ERROR require-scripts - node: scripts - scripts is required
 1 error
 `;
 
@@ -194,7 +192,7 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
       const cli = spawnSync(relativePathToCli, ['-c', errorWarningRcFile, errorWarningPkg, '--quiet'], {env});
       const expected = `
 ${errorWarningPkg}
-${figures.cross} require-scripts - node: scripts - scripts is required
+ERROR require-scripts - node: scripts - scripts is required
 1 error
 `;
 
@@ -209,8 +207,8 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
       const cli = spawnSync(relativePathToCli, [packageJsonPropertyPkg], {env});
       const expected = `
 ${packageJsonPropertyPkg}
-${figures.warning} require-license - node: license - license is required
-${figures.cross} require-scripts - node: scripts - scripts is required
+WARNING require-license - node: license - license is required
+ERROR require-scripts - node: scripts - scripts is required
 1 error
 1 warning
 `;
@@ -226,8 +224,8 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
       const cli = spawnSync(relativePathToCli, ['-c', configJavaScriptFile, configJavaScriptFilePkg], {env});
       const expected = `
 ${configJavaScriptFilePkg}
-${figures.warning} require-license - node: license - license is required
-${figures.cross} require-scripts - node: scripts - scripts is required
+WARNING require-license - node: license - license is required
+ERROR require-scripts - node: scripts - scripts is required
 1 error
 1 warning
 `;
@@ -274,30 +272,30 @@ ${figures.cross} require-scripts - node: scripts - scripts is required
       );
       const expected = `
 ${errorPkg}
-${figures.cross} require-scripts - node: scripts - scripts is required
+ERROR require-scripts - node: scripts - scripts is required
 1 error
 0 warnings
 
 ${warningPkg}
-${figures.warning} require-license - node: license - license is required
+WARNING require-license - node: license - license is required
 0 errors
 1 warning
 
 ${errorWarningPkg}
-${figures.warning} require-license - node: license - license is required
-${figures.cross} require-scripts - node: scripts - scripts is required
+WARNING require-license - node: license - license is required
+ERROR require-scripts - node: scripts - scripts is required
 1 error
 1 warning
 
 ${configJavaScriptFilePkg}
-${figures.warning} require-license - node: license - license is required
-${figures.cross} require-scripts - node: scripts - scripts is required
+WARNING require-license - node: license - license is required
+ERROR require-scripts - node: scripts - scripts is required
 1 error
 1 warning
 
 ${packageJsonPropertyPkg}
-${figures.warning} require-license - node: license - license is required
-${figures.cross} require-scripts - node: scripts - scripts is required
+WARNING require-license - node: license - license is required
+ERROR require-scripts - node: scripts - scripts is required
 1 error
 1 warning
 
@@ -321,7 +319,7 @@ Totals
       });
       const expected = `
 ./package.json
-${figures.cross} require-private - node: private - private is required
+ERROR require-private - node: private - private is required
 1 error
 0 warnings
 `;
@@ -342,7 +340,7 @@ ${figures.cross} require-private - node: private - private is required
       );
       const expected = `
 ./packages/my-package/package.json
-${figures.cross} require-repository-directory - node: repository - repository object missing directory property
+ERROR require-repository-directory - node: repository - repository object missing directory property
 1 error
 0 warnings
 `;
@@ -361,19 +359,19 @@ ${figures.cross} require-repository-directory - node: repository - repository ob
       });
       const expected = `
 ./package.json
-${figures.cross} license-type - node: license - Type should be a string
+ERROR license-type - node: license - Type should be a string
 1 error
 0 warnings
 
 ./packages/packageOne/package.json
-${figures.warning} license-type - node: license - Type should be a string
-${figures.cross} prefer-property-order - node:  - Your package.json properties are not in the desired order. Please move "author" after "license".
+WARNING license-type - node: license - Type should be a string
+ERROR prefer-property-order - node:  - Your package.json properties are not in the desired order. Please move "author" after "license".
 1 error
 1 warning
 
 ./packages/packageTwo/package.json
-${figures.warning} license-type - node: license - Type should be a string
-${figures.cross} valid-values-author - node: author - Invalid value for author. Current value is Thomas Lindner. Value values include: TC.
+WARNING license-type - node: license - Type should be a string
+ERROR valid-values-author - node: author - Invalid value for author. Current value is Thomas Lindner. Value values include: TC.
 1 error
 1 warning
 
@@ -396,19 +394,19 @@ Totals
         });
         const expected = `
 ./package.json
-${figures.cross} license-type - node: license - Type should be a string
+ERROR license-type - node: license - Type should be a string
 1 error
 0 warnings
 
 ./packages/packageOne/package.json
-${figures.warning} license-type - node: license - Type should be a string
-${figures.cross} prefer-property-order - node:  - Your package.json properties are not in the desired order. Please move "author" after "license".
+WARNING license-type - node: license - Type should be a string
+ERROR prefer-property-order - node:  - Your package.json properties are not in the desired order. Please move "author" after "license".
 1 error
 1 warning
 
 ./packages/packageTwo/package.json
-${figures.warning} license-type - node: license - Type should be a string
-${figures.cross} valid-values-author - node: author - Invalid value for author. Current value is Thomas Lindner. Value values include: TC.
+WARNING license-type - node: license - Type should be a string
+ERROR valid-values-author - node: author - Invalid value for author. Current value is Thomas Lindner. Value values include: TC.
 1 error
 1 warning
 

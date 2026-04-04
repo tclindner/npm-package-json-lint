@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-import logSymbols from 'log-symbols';
 import {LintIssue} from '../../src/lint-issue';
 import {Severity} from '../../src/types/severity';
 
@@ -29,20 +28,22 @@ describe('LintIssue Unit Tests', () => {
   describe('toString method', () => {
     describe('when the severity is an error', () => {
       test('the formattedMessage should equal', () => {
+        const formattedSeverity = chalk.bgRedBright('ERROR');
         const formattedLintId = chalk.cyan.bold('lintId');
         const formattedNode = chalk.magenta.bold('node');
         const formattedMessage = chalk.red.bold('lintMessage');
-        const output = `${logSymbols.error} ${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
+        const output = `${formattedSeverity} ${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
         const lintIssue = new LintIssue('lintId', Severity.Error, 'node', 'lintMessage');
 
         expect(lintIssue.toString()).toStrictEqual(output);
       });
 
       test('when an array with one error is passed a formatted message should be returned saying there is one error', () => {
+        const formattedSeverity = chalk.bgYellowBright('WARNING');
         const formattedLintId = chalk.cyan.bold('lintId');
         const formattedNode = chalk.magenta.bold('node');
         const formattedMessage = chalk.yellow('lintMessage');
-        const output = `${logSymbols.warning} ${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
+        const output = `${formattedSeverity} ${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
         const lintIssue = new LintIssue('lintId', Severity.Warning, 'node', 'lintMessage');
 
         expect(lintIssue.toString()).toStrictEqual(output);
