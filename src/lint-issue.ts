@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-import logSymbols from 'log-symbols';
 import {Severity} from './types/severity';
 
 /**
@@ -59,12 +58,15 @@ export class LintIssue {
    * @returns {string} Human-friendly message about the lint issue
    */
   toString(): string {
-    const logSymbol = this.severity === Severity.Error ? logSymbols.error : logSymbols.warning;
+    const formattedSeverity =
+      this.severity === Severity.Error
+        ? chalk.bgRedBright(this.severity.toUpperCase())
+        : chalk.bgYellowBright(this.severity.toUpperCase());
     const formattedLintId = chalk.cyan.bold(this.lintId);
     const formattedNode = chalk.magenta.bold(this.node);
     const formattedMessage =
       this.severity === Severity.Error ? chalk.red.bold(this.lintMessage) : chalk.yellow(this.lintMessage);
 
-    return `${logSymbol} ${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
+    return `${formattedSeverity} ${formattedLintId} - node: ${formattedNode} - ${formattedMessage}`;
   }
 }

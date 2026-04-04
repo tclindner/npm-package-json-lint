@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import plur from 'plur';
+import {plur} from './utils/plur';
 import {LintIssue} from './lint-issue';
 
 const zeroIssues = 0;
