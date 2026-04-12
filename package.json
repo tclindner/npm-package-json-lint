@@ -73,7 +73,7 @@
     "ts-jest": "29.4.9",
     "tsdown": "0.21.7",
     "typescript": "5.4.5",
-    "typescript-eslint": "8.58.0"
+    "typescript-eslint": "8.58.1"
   },
   "engines": {
     "node": ">=22.0.0",
