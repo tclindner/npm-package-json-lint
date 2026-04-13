@@ -71,7 +71,7 @@
     "npm-package-json-lint-config-tc": "10.0.2",
     "prettier": "3.8.2",
     "ts-jest": "29.4.9",
-    "tsdown": "0.21.7",
+    "tsdown": "0.21.8",
     "typescript": "5.4.5",
     "typescript-eslint": "8.58.1"
   },
