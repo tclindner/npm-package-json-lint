@@ -11,7 +11,7 @@
   "devDependencies": {
     "@babel/core": "7.29.0",
     "@docusaurus/module-type-aliases": "3.10.0",
-    "@docusaurus/types": "3.9.2"
+    "@docusaurus/types": "3.10.0"
   },
   "browserslist": {
     "production": [
