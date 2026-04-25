@@ -1,5 +1,5 @@
-import slash from 'slash';
 import type {PackageJson} from 'type-fest';
+import {slash} from './utils/slash';
 import {isPlainObj} from './utils/isPlainObj';
 import {Config} from './configuration';
 import {Rules} from './native-rules';
