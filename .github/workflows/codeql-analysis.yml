@@ -1,12 +1,12 @@
 name: "Code scanning"
 
-permissions:
-  contents: read
-
 on:
   pull_request:
   schedule:
     - cron: '0 21 * * 4'
+
+permissions:
+  contents: read
 
 jobs:
   CodeQL-Build:
