@@ -1,83 +1,78 @@
-import path from 'node:path';
-import globby from 'globby';
 import {applyOverrides} from '../../../src/config/applyOverrides';
 
-jest.mock('globby');
-jest.mock('path');
-
 describe('applyOverrides Unit Tests', () => {
-  test('pattern match', () => {
-    const cwd = process.cwd();
-    const filePath = './package.json';
-    const rules = {
-      'require-name': 'error',
-    };
+  const cwd = '/project';
+
+  test('applies rules from all matching overrides in order', () => {
+    const filePath = '/project/packages/config/package.json';
+    const rules = {'require-name': 'error'};
     const overrides = [
       {
         patterns: ['**'],
-        rules: {
-          'require-name': 'off',
-        },
+        rules: {'require-name': 'off'},
       },
       {
-        patterns: ['*/package.json'],
-        rules: {
-          'require-name': 'warning',
-        },
+        patterns: ['packages/config'],
+        rules: {'require-name': 'warning'},
       },
     ];
 
-    jest.spyOn(globby, 'sync').mockReturnValue(['./package.json']);
-    jest.spyOn(path, 'resolve').mockReturnValue('./package.json');
+    const result = applyOverrides(cwd, filePath, rules, overrides);
 
-    const results = applyOverrides(cwd, filePath, rules, overrides);
-
-    expect(results).toStrictEqual({
-      'require-name': 'warning',
-    });
+    expect(result).toStrictEqual({'require-name': 'warning'});
   });
 
-  test('pattern miss', () => {
-    const cwd = process.cwd();
-    const filePath = './test/package.json';
-    const rules = {
-      'require-name': 'error',
-    };
+  test('keeps original rules when no pattern matches', () => {
+    const filePath = '/project/apps/api/package.json';
+    const rules = {'require-name': 'error'};
     const overrides = [
       {
-        patterns: ['**'],
-        rules: {
-          'require-name': 'off',
-        },
-      },
-      {
-        patterns: ['*/package.json'],
-        rules: {
-          'require-name': 'warning',
-        },
+        patterns: ['packages/config'],
+        rules: {'require-name': 'warning'},
       },
     ];
 
-    jest.spyOn(globby, 'sync').mockReturnValue(['./package.json']);
-    jest.spyOn(path, 'resolve').mockReturnValue('./package.json');
+    const result = applyOverrides(cwd, filePath, rules, overrides);
 
-    const results = applyOverrides(cwd, filePath, rules, overrides);
-
-    expect(results).toStrictEqual({
-      'require-name': 'error',
-    });
+    expect(result).toStrictEqual({'require-name': 'error'});
   });
 
   test('no overrides', () => {
-    const cwd = process.cwd();
-    const filePath = './test/package.json';
-    const rules = {
-      'require-name': 'error',
-    };
-    const results = applyOverrides(cwd, filePath, rules);
+    const filePath = '/project/packages/config/package.json';
+    const rules = {'require-name': 'error'};
 
-    expect(results).toStrictEqual({
-      'require-name': 'error',
-    });
+    const result = applyOverrides(cwd, filePath, rules);
+
+    expect(result).toStrictEqual({'require-name': 'error'});
+  });
+
+  test('matches root package.json via ./ pattern', () => {
+    const filePath = '/project/package.json';
+    const rules = {'require-main': 'error'};
+    const overrides = [
+      {
+        patterns: ['./package.json'],
+        rules: {'require-main': 'off'},
+      },
+    ];
+
+    const result = applyOverrides(cwd, filePath, rules, overrides);
+
+    expect(result).toStrictEqual({'require-main': 'off'});
+  });
+
+  test('skips empty patterns', () => {
+    const filePath = '/project/packages/config/package.json';
+    const rules = {'require-name': 'error'};
+    const overrides = [
+      {
+        patterns: ['', 'packages/config'],
+        rules: {'require-name': 'warning'},
+      },
+    ];
+
+    const result = applyOverrides(cwd, filePath, rules, overrides);
+
+    expect(result).toStrictEqual({'require-name': 'warning'});
   });
 });
