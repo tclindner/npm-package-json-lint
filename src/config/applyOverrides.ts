@@ -23,7 +23,8 @@ export const applyOverrides = (cwd: string, filePath: string, rules: any, overri
   if (overrides) {
     // Compute the relative path once and reuse across all override checks.
     // Normalize to forward slashes so patterns work consistently across platforms.
-    const relativeFilePath = path.relative(cwd, filePath).replaceAll(/\\/g, '/');
+    // eslint-disable-next-line unicorn/prefer-string-replace-all
+    const relativeFilePath = path.relative(cwd, filePath).replace(/\\/g, '/');
 
     overrides.forEach((override) => {
       const filteredPatterns = override.patterns.filter((pattern: string) => pattern.length);
