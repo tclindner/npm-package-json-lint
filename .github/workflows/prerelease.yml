@@ -1,10 +1,11 @@
 name: "Publish next version to npm"
-permissions:
-  contents: read
 
 on:
   release:
     types: [prereleased]
+
+permissions:
+  contents: read
 
 jobs:
   build:
