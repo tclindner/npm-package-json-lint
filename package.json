@@ -58,7 +58,7 @@
     "@eslint/js": "10.0.1",
     "@types/jest": "30.0.0",
     "@types/node": "25.6.0",
-    "eslint": "10.2.0",
+    "eslint": "10.2.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-config-tc": "28.0.3",
     "eslint-config-typescript-tc": "12.1.0",
@@ -74,7 +74,7 @@
     "ts-jest": "29.4.9",
     "tsdown": "0.21.10",
     "typescript": "5.4.5",
-    "typescript-eslint": "8.58.2"
+    "typescript-eslint": "8.59.0"
   },
   "engines": {
     "node": ">=22.0.0",
