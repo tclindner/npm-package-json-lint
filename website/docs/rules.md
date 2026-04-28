@@ -161,6 +161,7 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
 > Generates an error if the package.json properties fail to meet the desired requirements
 
 * [prefer-property-order](rules/package-json-properties/prefer-property-order.md)
+* [prefer-provenance](rules/package-json-properties/prefer-provenance.md)
 * [no-duplicate-properties](rules/package-json-properties/no-duplicate-properties.md)
 
 
