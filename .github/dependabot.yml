@@ -4,6 +4,23 @@ updates:
   directory: "/"
   schedule:
     interval: daily
+  groups:
+    eslint-dependencies:
+      patterns:
+        - "eslint"
+        - "eslint-plugin-*"
+        - "@eslint/*"
+        - "typescript-eslint"
+        - "eslint-config-*"
+    jest-dependencies:
+      patterns:
+        - "jest"
+        - "@jest/*"
+        - "ts-jest"
+    npm-package-json-lint-dependencies:
+      patterns:
+        - "npm-package-json-lint"
+        - "npm-package-json-lint-config-*"
   open-pull-requests-limit: 10
   assignees:
   - tclindner
@@ -14,6 +31,14 @@ updates:
   directory: "website/"
   schedule:
     interval: daily
+  groups:
+    react-dependencies:
+      patterns:
+        - "react"
+        - "react-dom"
+    docusaurus-dependencies:
+      patterns:
+        - "@docusaurus/*"
   open-pull-requests-limit: 10
   assignees:
   - tclindner
