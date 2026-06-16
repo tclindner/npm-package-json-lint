@@ -27,7 +27,7 @@
     "dist"
   ],
   "main": "dist/api.js",
-  "types": "dist/src/api.d.ts",
+  "types": "dist/api.d.ts",
   "scripts": {
     "build": "tsdown",
     "eslint": "eslint .",
