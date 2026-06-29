@@ -9,7 +9,7 @@
     "clear": "docusaurus clear"
   },
   "devDependencies": {
-    "@babel/core": "7.29.7",
+    "@babel/core": "8.0.1",
     "@docusaurus/module-type-aliases": "3.10.1",
     "@docusaurus/types": "3.10.1"
   },
