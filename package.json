@@ -63,7 +63,7 @@
     "eslint-plugin-import-x": "4.17.1",
     "eslint-plugin-jest": "29.15.5",
     "eslint-plugin-prettier": "5.5.6",
-    "eslint-plugin-unicorn": "72.0.0",
+    "eslint-plugin-unicorn": "64.0.0",
     "globals": "17.7.0",
     "jest": "30.4.2",
     "npm-package-json-lint-config-default": "9.0.1",
