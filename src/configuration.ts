@@ -83,6 +83,7 @@ export class Config {
         debug(`Config file wasn't specified, searching for config.`);
         config = cosmiconfigSync('npmpackagejsonlint', {
           transform: transform(this.cwd, this.configBaseDirectory, filePathToSearch),
+          searchStrategy: 'global',
         }).search(filePathToSearch);
       }
     } else {
