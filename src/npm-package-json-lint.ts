@@ -43,6 +43,7 @@ const areRequiredOptionsValid = (packageJsonObject: PackageJson | any, patterns:
 const getErrorResults = (results: PackageJsonFileLintingResult[]): PackageJsonFileLintingResult[] => {
   const filtered = [];
 
+  // eslint-disable-next-line unicorn/no-for-each -- for...of is banned by no-restricted-syntax in this project
   results.forEach((result) => {
     // eslint-disable-next-line unicorn/no-array-callback-reference
     const filteredIssues = result.issues.filter(isIssueAnError);

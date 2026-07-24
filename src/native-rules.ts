@@ -26,6 +26,7 @@ export class Rules {
     const rulesDirectory = path.join(__dirname, 'rules');
 
     try {
+      // eslint-disable-next-line unicorn/no-for-each -- for...of is banned by no-restricted-syntax in this project
       readdirSync(rulesDirectory).forEach((filePath) => {
         const beginIndex = 0;
         const endIndex = -3;

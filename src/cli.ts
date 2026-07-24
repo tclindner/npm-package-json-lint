@@ -16,7 +16,7 @@ const exitCodes = {
   exceedMaxWarnings: 4,
 };
 
-// configure cli
+// configure CLI
 const cli = meow(
   `
       Usage
@@ -91,7 +91,7 @@ if (patterns.length === noPatternsProvided) {
   debug(`No lint targets provided`);
   console.log(chalk.red.bold('No lint targets provided'));
 
-  const exitCode = flags.allowEmptyTargets ? exitCodes.zeroClean : exitCodes.oneMissingTarget;
+  const exitCode = exitCodes[flags.allowEmptyTargets ? 'zeroClean' : 'oneMissingTarget'];
 
   process.exit(exitCode);
 }

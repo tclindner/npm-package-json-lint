@@ -12,6 +12,7 @@ const oneFile = 1;
  * @internal
  */
 const printResultSetIssues = (issues: LintIssue[]): void => {
+  // eslint-disable-next-line unicorn/no-for-each -- for...of is banned by no-restricted-syntax in this project
   issues.forEach((issue) => {
     console.log(issue.toString());
   });
@@ -83,6 +84,7 @@ const printTotals = (linterOutput, quiet: boolean): void => {
  * @internal
  */
 export const write = (linterOutput, quiet: boolean): void => {
+  // eslint-disable-next-line unicorn/no-for-each -- for...of is banned by no-restricted-syntax in this project
   linterOutput.results.forEach((result) => {
     printIndividualResultSet(result, quiet);
   });
