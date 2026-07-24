@@ -59,7 +59,7 @@ const defaultPreferredNodeOrder = [
   'workspaces',
 ];
 
-export interface IsInPreferredOrderResult {
+export interface PreferredOrderResult {
   status: boolean;
   msg: string | null;
 }
@@ -71,11 +71,11 @@ export interface IsInPreferredOrderResult {
  * @param userPreferredNodeOrder Preferred order of nodes
  * @return Object containing the status and the node that is out of order, if applicable
  */
-export const isInPreferredOrder = (
+export const checkPreferredOrder = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   userPreferredNodeOrder: string[],
-): IsInPreferredOrderResult => {
+): PreferredOrderResult => {
   let isValid = true;
   let msg = null;
   const preferredNodeOrder =

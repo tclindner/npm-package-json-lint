@@ -1,5 +1,5 @@
 import type {PackageJson} from 'type-fest';
-import {isInPreferredOrder} from '../validators/property-order';
+import {checkPreferredOrder} from '../validators/property-order';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
@@ -18,7 +18,7 @@ export const lint = (
   severity: Severity,
   preferredOrder: string[],
 ): LintIssue | null => {
-  const result = isInPreferredOrder(packageJsonData, preferredOrder);
+  const result = checkPreferredOrder(packageJsonData, preferredOrder);
 
   if (!result.status) {
     return new LintIssue(lintId, severity, nodeName, `${message} ${result.msg}`);

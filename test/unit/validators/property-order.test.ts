@@ -1,7 +1,7 @@
 import * as propertyOrder from '../../../src/validators/property-order';
 
 describe('property-order Unit Tests', () => {
-  describe('isInPreferredOrder method', () => {
+  describe('checkPreferredOrder method', () => {
     describe('when the properties in the package.json file are in the desired order', () => {
       test('true should be returned', () => {
         const packageJson = {
@@ -10,7 +10,7 @@ describe('property-order Unit Tests', () => {
           description: 'description',
         };
         const preferredOrder = ['name', 'version', 'description'];
-        const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
+        const response = propertyOrder.checkPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBe(true);
         expect(response.msg).toBeNull();
@@ -25,7 +25,7 @@ describe('property-order Unit Tests', () => {
           description: 'description',
         };
         const preferredOrder = [];
-        const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
+        const response = propertyOrder.checkPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBe(true);
         expect(response.msg).toBeNull();
@@ -39,7 +39,7 @@ describe('property-order Unit Tests', () => {
           version: '1.0.0',
         };
         const preferredOrder = ['name', 'version', 'description'];
-        const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
+        const response = propertyOrder.checkPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBe(true);
         expect(response.msg).toBeNull();
@@ -54,7 +54,7 @@ describe('property-order Unit Tests', () => {
           version: '1.0.0',
         };
         const preferredOrder = ['name', 'version', 'description'];
-        const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
+        const response = propertyOrder.checkPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBe(false);
         expect(response.msg).toStrictEqual('Please move "description" after "version".');
@@ -69,7 +69,7 @@ describe('property-order Unit Tests', () => {
           description: 'description',
         };
         const preferredOrder = ['name', 'version', 'description'];
-        const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
+        const response = propertyOrder.checkPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBe(false);
         expect(response.msg).toStrictEqual('Please move "version" after "name".');
@@ -84,7 +84,7 @@ describe('property-order Unit Tests', () => {
           description: 'description',
         };
         const preferredOrder = ['name', 'version', 'homepage', 'description'];
-        const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
+        const response = propertyOrder.checkPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBe(true);
         expect(response.msg).toBeNull();
@@ -100,7 +100,7 @@ describe('property-order Unit Tests', () => {
           homepage: 'https://github.com/tclindner/npm-package-json-lint',
         };
         const preferredOrder = ['name', 'version', 'description', 'keywords', 'homepage'];
-        const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
+        const response = propertyOrder.checkPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBe(true);
         expect(response.msg).toBeNull();
@@ -116,7 +116,7 @@ describe('property-order Unit Tests', () => {
           homepage: 'https://github.com/tclindner/npm-package-json-lint',
         };
         const preferredOrder = ['name', 'version', 'description', 'scripts', 'bin', 'keywords', 'homepage'];
-        const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
+        const response = propertyOrder.checkPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBe(true);
         expect(response.msg).toBeNull();
@@ -134,7 +134,7 @@ describe('property-order Unit Tests', () => {
           keywords: ['awesome'],
         };
         const preferredOrder = ['name', 'version', 'description', 'scripts', 'bin', 'keywords', 'homepage'];
-        const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
+        const response = propertyOrder.checkPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBe(false);
         expect(response.msg).toStrictEqual('Please move "homepage" after "keywords".');
@@ -151,7 +151,7 @@ describe('property-order Unit Tests', () => {
           keywords: ['word'],
         };
         const preferredOrder = ['name', 'version', 'description', 'scripts', 'bin', 'keywords', 'homepage'];
-        const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
+        const response = propertyOrder.checkPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBe(false);
         expect(response.msg).toStrictEqual('Please move "homepage" after "keywords".');
@@ -167,7 +167,7 @@ describe('property-order Unit Tests', () => {
           homepage: 'https://github.com/tclindner/npm-package-json-lint',
         };
         const preferredOrder = ['name', 'version', 'keywords', 'homepage'];
-        const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
+        const response = propertyOrder.checkPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBe(true);
         expect(response.msg).toBeNull();
@@ -183,7 +183,7 @@ describe('property-order Unit Tests', () => {
           homepage: 'https://github.com/tclindner/npm-package-json-lint',
         };
         const preferredOrder = ['version', 'keywords', 'homepage'];
-        const response = propertyOrder.isInPreferredOrder(packageJson, preferredOrder);
+        const response = propertyOrder.checkPreferredOrder(packageJson, preferredOrder);
 
         expect(response.status).toBe(true);
         expect(response.msg).toBeNull();

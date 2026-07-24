@@ -1,7 +1,7 @@
 import * as alphabeticalSort from '../../../src/validators/alphabetical-sort';
 
 describe('alphabetical-sort Unit Tests', () => {
-  describe('isInAlphabeticalOrder method', () => {
+  describe('checkAlphabeticalOrder method', () => {
     describe('when the node exists in the package.json file and dependencies are in alpahbetical order', () => {
       test('true should be returned', () => {
         const packageJson = {
@@ -11,7 +11,7 @@ describe('alphabetical-sort Unit Tests', () => {
             'user-home': '^2.0.0',
           },
         };
-        const response = alphabeticalSort.isInAlphabeticalOrder(packageJson, 'devDependencies');
+        const response = alphabeticalSort.checkAlphabeticalOrder(packageJson, 'devDependencies');
 
         expect(response.status).toBe(true);
         expect(response.data.invalidNode).toBeNull();
@@ -28,7 +28,7 @@ describe('alphabetical-sort Unit Tests', () => {
             'user-home': '^2.0.0',
           },
         };
-        const response = alphabeticalSort.isInAlphabeticalOrder(packageJson, 'devDependencies');
+        const response = alphabeticalSort.checkAlphabeticalOrder(packageJson, 'devDependencies');
 
         expect(response.status).toBe(false);
         expect(response.data.invalidNode).toStrictEqual('semver');
