@@ -22,12 +22,15 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity): Li
 
     // eslint-disable-next-line no-restricted-syntax
     for (const key in scripts) {
-      if (scripts.hasOwnProperty(key)) {
-        const value = scripts[key];
+      if (!scripts.hasOwnProperty(key)) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
 
-        if (typeof value !== 'string') {
-          return new LintIssue(lintId, severity, nodeName, `script, ${key}, in the "scripts" property is not a string.`);
-        }
+      const value = scripts[key];
+
+      if (typeof value !== 'string') {
+        return new LintIssue(lintId, severity, nodeName, `script, ${key}, in the "scripts" property is not a string.`);
       }
     }
   }

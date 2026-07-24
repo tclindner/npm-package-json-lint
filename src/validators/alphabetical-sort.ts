@@ -40,14 +40,17 @@ export const isInAlphabeticalOrder = (
   });
 
   for (let keyIndex = 0; keyIndex < nodeKeysOriginal.length; keyIndex += increment) {
-    if (nodeKeysOriginal[keyIndex] !== nodeKeysSorted[keyIndex]) {
-      isValid = false;
-      data = {
-        invalidNode: nodeKeysOriginal[keyIndex],
-        validNode: nodeKeysSorted[keyIndex],
-      };
-      break;
+    if (nodeKeysOriginal[keyIndex] === nodeKeysSorted[keyIndex]) {
+      // eslint-disable-next-line no-continue
+      continue;
     }
+
+    isValid = false;
+    data = {
+      invalidNode: nodeKeysOriginal[keyIndex],
+      validNode: nodeKeysSorted[keyIndex],
+    };
+    break;
   }
 
   return {

@@ -219,10 +219,12 @@ export const executeOnPackageJsonObject = (options: ExecuteOnPackageJsonObjectOp
   const resolvedFilename = path.isAbsolute(filenameDefaulted) ? filenameDefaulted : path.resolve(cwd, filenameDefaulted);
   const relativeFilePath = path.relative(cwd, resolvedFilename);
 
+  let result;
+
   if (ignorer.ignores(relativeFilePath)) {
     debug(`Ignored: ${relativeFilePath}`);
 
-    const result = createResultObject({
+    result = createResultObject({
       cwd,
       fileName: resolvedFilename,
       ignored: true,
@@ -230,17 +232,15 @@ export const executeOnPackageJsonObject = (options: ExecuteOnPackageJsonObjectOp
       errorCount: 0,
       warningCount: 0,
     });
-
-    results.push(result);
   } else {
     debug(`Getting config for ${resolvedFilename}`);
     const config = configHelper.getConfigForFile(resolvedFilename);
 
     debug(`Config fetched for ${resolvedFilename}`);
-    const result = processPackageJsonObject(cwd, packageJsonObject, config, resolvedFilename, rules);
-
-    results.push(result);
+    result = processPackageJsonObject(cwd, packageJsonObject, config, resolvedFilename, rules);
   }
+
+  results.push(result);
 
   debug('Aggregating overall counts');
   const stats = aggregateOverallCounts(results);

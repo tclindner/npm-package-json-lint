@@ -119,15 +119,18 @@ export const auditDependenciesWithRestrictedPrereleaseVersion = (
 
   // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
-    if (depsToCheckFor.includes(dependencyName)) {
-      const dependencyVersion = packageJsonData[nodeName][dependencyName];
+    if (!depsToCheckFor.includes(dependencyName)) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
 
-      if (dependencyVersion.includes('-beta') || dependencyVersion.includes('-rc')) {
-        hasDependencyWithRestrictedPrereleaseVersion = true;
-        dependenciesWithRestrictedPrereleaseVersion.push(dependencyName);
-      } else {
-        dependenciesWithoutRestrictedPrereleaseVersion.push(dependencyName);
-      }
+    const dependencyVersion = packageJsonData[nodeName][dependencyName];
+
+    if (dependencyVersion.includes('-beta') || dependencyVersion.includes('-rc')) {
+      hasDependencyWithRestrictedPrereleaseVersion = true;
+      dependenciesWithRestrictedPrereleaseVersion.push(dependencyName);
+    } else {
+      dependenciesWithoutRestrictedPrereleaseVersion.push(dependencyName);
     }
   }
 
@@ -487,10 +490,13 @@ const isGitRepositoryUrl = (version: string): boolean => {
 
   // eslint-disable-next-line no-restricted-syntax
   for (const protocol of protocols) {
-    if (version.startsWith(protocol)) {
-      isMatch = true;
-      break;
+    if (!version.startsWith(protocol)) {
+      // eslint-disable-next-line no-continue
+      continue;
     }
+
+    isMatch = true;
+    break;
   }
 
   return isMatch;
