@@ -36,11 +36,11 @@ const isObjectRuleConfigValid = (ruleConfig: any): any => {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isOptionalObjRuleConfigValid = (ruleConfig: any): any => {
-  const object = 1;
-
   if (typeof ruleConfig === 'string') {
     return isStandardRuleSchemaValid(ruleConfig);
   }
+
+  const object = 1;
 
   if (isObjectRuleSchemaValid(ruleConfig) && ruleConfig[object].hasOwnProperty('exceptions')) {
     return isOptionalObjExceptSchemaValid(ruleConfig[object].exceptions);
@@ -139,6 +139,7 @@ export const validateRules = (rulesConfig: any, source: any, rules: any): any =>
     return;
   }
 
+  // eslint-disable-next-line unicorn/no-for-each -- for...of is banned by no-restricted-syntax in this project
   Object.keys(rulesConfig).forEach((ruleName) => {
     const ruleModule = rules.get(ruleName);
 

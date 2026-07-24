@@ -10,13 +10,12 @@ const debug = require('debug')('npm-package-json-lint:cli');
 
 const exitCodes = {
   zeroClean: 0,
-  oneMissingTarget: 1,
   twoLintErrorsDetected: 2,
   runTimeException: 3,
   exceedMaxWarnings: 4,
 };
 
-// configure cli
+// configure CLI
 const cli = meow(
   `
       Usage

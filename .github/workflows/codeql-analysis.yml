@@ -1,12 +1,13 @@
 name: "Code scanning"
 
-permissions:
-  contents: read
-
 on:
   pull_request:
   schedule:
     - cron: '0 21 * * 4'
+
+permissions:
+  contents: read
+  security-events: read
 
 jobs:
   CodeQL-Build:
@@ -15,7 +16,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with:
         # We must fetch at least the immediate parents so that if this is
         # a pull request then we can checkout the head.

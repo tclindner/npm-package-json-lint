@@ -2,7 +2,7 @@ import type {PackageJson} from 'type-fest';
 
 const increment = 1;
 
-export interface IsInAlphabeticalOrderResult {
+export interface AlphabeticalOrderResult {
   status: boolean;
   data: {
     invalidNode: string | null;
@@ -17,29 +17,40 @@ export interface IsInAlphabeticalOrderResult {
  * @param nodeName Name of a node in the package.json file
  * @return Object containing the status and the dependencies that are out of order, if applicable
  */
-export const isInAlphabeticalOrder = (
+export const checkAlphabeticalOrder = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   nodeName: string,
-): IsInAlphabeticalOrderResult => {
+): AlphabeticalOrderResult => {
   let isValid = true;
   let data = {
     invalidNode: null,
     validNode: null,
   };
   const nodeKeysOriginal = Object.keys(packageJsonData[nodeName]);
-  // eslint-disable-next-line unicorn/no-array-sort
-  const nodeKeysSorted = Object.keys(packageJsonData[nodeName]).sort();
+  // Explicit compare function that reproduces the default string sort behavior (UTF-16 code unit order).
+  // `a - b` (this rule's suggested simplification) is invalid for string operands (produces NaN).
+  // eslint-disable-next-line unicorn/no-array-sort, unicorn/prefer-simple-sort-comparator
+  const nodeKeysSorted = Object.keys(packageJsonData[nodeName]).sort((a, b) => {
+    if (a < b) {
+      return -1;
+    }
+
+    return a > b ? 1 : 0;
+  });
 
   for (let keyIndex = 0; keyIndex < nodeKeysOriginal.length; keyIndex += increment) {
-    if (nodeKeysOriginal[keyIndex] !== nodeKeysSorted[keyIndex]) {
-      isValid = false;
-      data = {
-        invalidNode: nodeKeysOriginal[keyIndex],
-        validNode: nodeKeysSorted[keyIndex],
-      };
-      break;
+    if (nodeKeysOriginal[keyIndex] === nodeKeysSorted[keyIndex]) {
+      // eslint-disable-next-line no-continue
+      continue;
     }
+
+    isValid = false;
+    data = {
+      invalidNode: nodeKeysOriginal[keyIndex],
+      validNode: nodeKeysSorted[keyIndex],
+    };
+    break;
   }
 
   return {

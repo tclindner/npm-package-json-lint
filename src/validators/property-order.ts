@@ -59,7 +59,7 @@ const defaultPreferredNodeOrder = [
   'workspaces',
 ];
 
-export interface IsInPreferredOrderResult {
+export interface PreferredOrderResult {
   status: boolean;
   msg: string | null;
 }
@@ -71,11 +71,11 @@ export interface IsInPreferredOrderResult {
  * @param userPreferredNodeOrder Preferred order of nodes
  * @return Object containing the status and the node that is out of order, if applicable
  */
-export const isInPreferredOrder = (
+export const checkPreferredOrder = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   userPreferredNodeOrder: string[],
-): IsInPreferredOrderResult => {
+): PreferredOrderResult => {
   let isValid = true;
   let msg = null;
   const preferredNodeOrder =
@@ -85,6 +85,7 @@ export const isInPreferredOrder = (
   const fltrdActualNodeList = actualNodeList.filter((property) => preferredNodeOrder.indexOf(property) !== notFound);
   const filteredPreferredOrderMap = new Map();
 
+  // eslint-disable-next-line unicorn/no-for-each -- for...of is banned by no-restricted-syntax in this project
   fltrdPreferredNodeOrder.forEach((property, index) => {
     filteredPreferredOrderMap.set(property, index);
   });

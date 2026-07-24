@@ -1,9 +1,23 @@
 import Ajv from 'ajv';
 import ajvErrors from 'ajv-errors';
 
-const ajv = new Ajv({allErrors: true, jsonPointers: true});
+/**
+ * Lazily creates (and memoizes) the shared Ajv instance.
+ *
+ * @returns {Ajv} The shared Ajv instance.
+ */
+const getAjv = ((): (() => Ajv) => {
+  let ajvInstance: Ajv | undefined;
 
-ajvErrors(ajv);
+  return (): Ajv => {
+    if (!ajvInstance) {
+      ajvInstance = new Ajv({allErrors: true});
+      ajvErrors(ajvInstance);
+    }
+
+    return ajvInstance;
+  };
+})();
 
 /**
  * Formats an array of schema validation errors.
@@ -137,11 +151,11 @@ const configurationSchema = {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isStandardRuleSchemaValid = (ruleConfig: any): any => {
-  const validate = ajv.compile(standardRuleSchema);
+  const validate = getAjv().compile(standardRuleSchema);
   const isValid = validate(ruleConfig);
 
   if (!isValid) {
-    throw new Error(`${formatSchemaErrors(validate.errors)}`);
+    throw new Error(formatSchemaErrors(validate.errors));
   }
 
   return true;
@@ -156,11 +170,11 @@ export const isStandardRuleSchemaValid = (ruleConfig: any): any => {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isArrayRuleSchemaValid = (ruleConfig: any, minItems: any): any => {
-  const validate = ajv.compile(arrayRuleSchema(minItems));
+  const validate = getAjv().compile(arrayRuleSchema(minItems));
   const isValid = validate(ruleConfig);
 
   if (!isValid) {
-    throw new Error(`${formatSchemaErrors(validate.errors)}`);
+    throw new Error(formatSchemaErrors(validate.errors));
   }
 
   return true;
@@ -174,11 +188,11 @@ export const isArrayRuleSchemaValid = (ruleConfig: any, minItems: any): any => {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isObjectRuleSchemaValid = (ruleConfig: any): any => {
-  const validate = ajv.compile(objectRuleSchema);
+  const validate = getAjv().compile(objectRuleSchema);
   const isValid = validate(ruleConfig);
 
   if (!isValid) {
-    throw new Error(`${formatSchemaErrors(validate.errors)}`);
+    throw new Error(formatSchemaErrors(validate.errors));
   }
 
   return true;
@@ -192,11 +206,11 @@ export const isObjectRuleSchemaValid = (ruleConfig: any): any => {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isOptionalObjExceptSchemaValid = (ruleConfig: any): any => {
-  const validate = ajv.compile(optionalObjExceptionsSchema);
+  const validate = getAjv().compile(optionalObjExceptionsSchema);
   const isValid = validate(ruleConfig);
 
   if (!isValid) {
-    throw new Error(`${formatSchemaErrors(validate.errors)}`);
+    throw new Error(formatSchemaErrors(validate.errors));
   }
 
   return true;
@@ -211,7 +225,7 @@ export const isOptionalObjExceptSchemaValid = (ruleConfig: any): any => {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isConfigObjectSchemaValid = (config: any, source: any): any => {
-  const validate = ajv.compile(configurationSchema);
+  const validate = getAjv().compile(configurationSchema);
   const isValid = validate(config);
 
   if (!isValid) {

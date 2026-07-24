@@ -1,17 +1,18 @@
 name: "Publish next version to npm"
-permissions:
-  contents: read
 
 on:
   release:
     types: [prereleased]
 
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
-    - uses: actions/setup-node@v6
+    - uses: actions/checkout@v7
+    - uses: actions/setup-node@v7
       with:
         node-version: '22'
         registry-url: 'https://registry.npmjs.org'

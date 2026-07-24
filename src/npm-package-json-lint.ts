@@ -1,6 +1,6 @@
-import isPlainObj from 'is-plain-obj';
-import slash from 'slash';
 import type {PackageJson} from 'type-fest';
+import {slash} from './utils/slash';
+import {isPlainObj} from './utils/isPlainObj';
 import {Config} from './configuration';
 import {Rules} from './native-rules';
 import {executeOnPackageJsonFiles, executeOnPackageJsonObject, OverallLintingResult} from './linter/linter';
@@ -30,7 +30,7 @@ const isIssueAnError = (issue: LintIssue): boolean => issue.severity === Severit
 const isPackageJsonObjectValid = (packageJsonObject: PackageJson | any): boolean => isPlainObj(packageJsonObject);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const areRequiredOptionsValid = (packageJsonObject: PackageJson | any, patterns: string[]): boolean =>
+const isRequiredOptionsValid = (packageJsonObject: PackageJson | any, patterns: string[]): boolean =>
   (!patterns && !isPackageJsonObjectValid(packageJsonObject)) ||
   (patterns && (packageJsonObject || isPackageJsonObjectValid(packageJsonObject)));
 
@@ -43,6 +43,7 @@ const areRequiredOptionsValid = (packageJsonObject: PackageJson | any, patterns:
 const getErrorResults = (results: PackageJsonFileLintingResult[]): PackageJsonFileLintingResult[] => {
   const filtered = [];
 
+  // eslint-disable-next-line unicorn/no-for-each -- for...of is banned by no-restricted-syntax in this project
   results.forEach((result) => {
     // eslint-disable-next-line unicorn/no-array-callback-reference
     const filteredIssues = result.issues.filter(isIssueAnError);
@@ -147,7 +148,7 @@ export class NpmPackageJsonLint {
   lint(): OverallLintingResult {
     debug('Starting lint');
 
-    if (areRequiredOptionsValid(this.packageJsonObject, this.patterns)) {
+    if (isRequiredOptionsValid(this.packageJsonObject, this.patterns)) {
       throw new Error(
         'You must pass npm-package-json-lint a `patterns` glob or a `packageJsonObject` string, though not both.',
       );

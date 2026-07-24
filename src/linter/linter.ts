@@ -124,7 +124,6 @@ const processPackageJsonObject = (
   cwd: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonObj: PackageJson | any,
-  // TODO: Type
   config,
   fileName: string,
   rules: Rules,
@@ -153,7 +152,6 @@ const processPackageJsonObject = (
  * @returns A {@link PackageJsonFileLintingResult} object with the result of linting a package.json file.
  * @internal
  */
-// TODO: Type
 const processPackageJsonFile = (cwd: string, fileName: string, config, rules: Rules): PackageJsonFileLintingResult => {
   const packageJsonObj = parseJsonFile(path.resolve(fileName));
 
@@ -221,10 +219,12 @@ export const executeOnPackageJsonObject = (options: ExecuteOnPackageJsonObjectOp
   const resolvedFilename = path.isAbsolute(filenameDefaulted) ? filenameDefaulted : path.resolve(cwd, filenameDefaulted);
   const relativeFilePath = path.relative(cwd, resolvedFilename);
 
+  let result;
+
   if (ignorer.ignores(relativeFilePath)) {
     debug(`Ignored: ${relativeFilePath}`);
 
-    const result = createResultObject({
+    result = createResultObject({
       cwd,
       fileName: resolvedFilename,
       ignored: true,
@@ -232,17 +232,15 @@ export const executeOnPackageJsonObject = (options: ExecuteOnPackageJsonObjectOp
       errorCount: 0,
       warningCount: 0,
     });
-
-    results.push(result);
   } else {
     debug(`Getting config for ${resolvedFilename}`);
     const config = configHelper.getConfigForFile(resolvedFilename);
 
     debug(`Config fetched for ${resolvedFilename}`);
-    const result = processPackageJsonObject(cwd, packageJsonObject, config, resolvedFilename, rules);
-
-    results.push(result);
+    result = processPackageJsonObject(cwd, packageJsonObject, config, resolvedFilename, rules);
   }
+
+  results.push(result);
 
   debug('Aggregating overall counts');
   const stats = aggregateOverallCounts(results);

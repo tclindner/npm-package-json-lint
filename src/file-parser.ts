@@ -7,7 +7,7 @@ import stripComments from 'strip-json-comments';
  * @param fileName String file path of file to load
  * @internal
  */
-// eslint-disable-next-line import-x/no-dynamic-require, global-require, @typescript-eslint/no-require-imports
+// eslint-disable-next-line import-x/no-dynamic-require, @typescript-eslint/no-require-imports
 const requireFile = (fileName: string): NodeRequire => require(fileName);
 
 /**
@@ -16,7 +16,7 @@ const requireFile = (fileName: string): NodeRequire => require(fileName);
  * @param fileName String file path of file to load
  * @internal
  */
-const readFile = (fileName: string): string => fs.readFileSync(fileName, 'utf8').replace(/^\uFEFF/, '');
+const readFile = (fileName: string): string => fs.readFileSync(fileName, 'utf8').replace(/^\u{FEFF}/u, '');
 
 /**
  * Helper method for throwing errors when file fails to load.

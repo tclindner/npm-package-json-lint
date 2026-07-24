@@ -68,21 +68,24 @@ describe('name-format Unit Tests', () => {
       expect(response.node).toStrictEqual('name');
       expect(response.lintMessage).toStrictEqual('name cannot start with an underscore');
     });
+
+    test('starts with . and has scope - LintIssue object should be returned', () => {
+      const packageJsonData = {
+        name: '@foo/.lowercase',
+      };
+      const response = lint(packageJsonData, Severity.Error);
+
+      expect(response.lintId).toStrictEqual('name-format');
+      expect(response.severity).toStrictEqual('error');
+      expect(response.node).toStrictEqual('name');
+      expect(response.lintMessage).toStrictEqual('name cannot start with a period');
+    });
   });
 
   describe('when package.json has node with correct format', () => {
     test('all valid characters - true should be returned', () => {
       const packageJsonData = {
         name: 'lowercase-name',
-      };
-      const response = lint(packageJsonData, Severity.Error);
-
-      expect(response).toBeNull();
-    });
-
-    test('starts with . and has scope - true should be returned', () => {
-      const packageJsonData = {
-        name: '@foo/.lowercase',
       };
       const response = lint(packageJsonData, Severity.Error);
 

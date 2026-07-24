@@ -9,19 +9,18 @@ export default [
   ...tsconfig,
   {
     rules: {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       'no-prototype-builtins': 'off',
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       'unicorn/filename-case': 'off',
-      // TODO: remove after esm migration
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       'unicorn/prefer-module': 'off',
+      // This rule's abbreviation dictionary doesn't fit this codebase's domain vocabulary -- e.g. it wants
+      // `devDependencies` renamed to `developmentDependencies`, which is wrong since that's a literal npm
+      // package.json field name, not a generic abbreviation to expand.
+      'unicorn/name-replacements': 'off',
     },
   },
   {
     files: ['test/**/*.test.ts', 'test/fixtures/**'],
     rules: {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       '@typescript-eslint/naming-convention': 'off',
     },
   },
