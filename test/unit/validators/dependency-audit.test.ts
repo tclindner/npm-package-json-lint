@@ -718,11 +718,11 @@ describe('dependency-audit Unit Tests', () => {
     });
   });
 
-  describe('doesVersionStartWithRange method', () => {
+  describe('isVersionStartingWithRange method', () => {
     describe('when dependencyVersion begins with range specifier', () => {
       test('true should be returned', () => {
         const dependencyVersion = '^1.0.0';
-        const response = dependencyAudit.doesVersionStartWithRange(dependencyVersion, '^');
+        const response = dependencyAudit.isVersionStartingWithRange(dependencyVersion, '^');
 
         expect(response).toBe(true);
       });
@@ -731,7 +731,7 @@ describe('dependency-audit Unit Tests', () => {
     describe('when dependencyVersion does not begin with range specifier', () => {
       test('false should be returned', () => {
         const dependencyVersion = '^1.0.0';
-        const response = dependencyAudit.doesVersionStartWithRange(dependencyVersion, '~');
+        const response = dependencyAudit.isVersionStartingWithRange(dependencyVersion, '~');
 
         expect(response).toBe(false);
       });

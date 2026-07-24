@@ -1,21 +1,23 @@
 import Ajv from 'ajv';
 import ajvErrors from 'ajv-errors';
 
-let ajvInstance: Ajv | undefined;
-
 /**
  * Lazily creates (and memoizes) the shared Ajv instance.
  *
  * @returns {Ajv} The shared Ajv instance.
  */
-const getAjv = (): Ajv => {
-  if (!ajvInstance) {
-    ajvInstance = new Ajv({allErrors: true});
-    ajvErrors(ajvInstance);
-  }
+const getAjv = ((): (() => Ajv) => {
+  let ajvInstance: Ajv | undefined;
 
-  return ajvInstance;
-};
+  return (): Ajv => {
+    if (!ajvInstance) {
+      ajvInstance = new Ajv({allErrors: true});
+      ajvErrors(ajvInstance);
+    }
+
+    return ajvInstance;
+  };
+})();
 
 /**
  * Formats an array of schema validation errors.

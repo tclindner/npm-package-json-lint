@@ -8,7 +8,8 @@ import type {PackageJson} from 'type-fest';
  * @param nodeName Name of a node in the package.json file
  * @return True if the node exists. False if it is not.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// `exists` is used across 29 files; renaming risks colliding with unrelated string literals (e.g. no-repeated-dependencies.ts).
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, unicorn/consistent-boolean-name
 export const exists = (packageJsonData: PackageJson | any, nodeName: string): boolean =>
   packageJsonData.hasOwnProperty(nodeName);
 
