@@ -48,7 +48,7 @@ describe('valid-values-author Unit Tests', () => {
       const packageJsonData = {
         author: {
           name: 'LastName, FirstName',
-          url: 'http://www.example.com',
+          url: 'https://www.example.com',
         },
       };
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName'];
@@ -68,7 +68,7 @@ describe('valid-values-author Unit Tests', () => {
       const packageJsonData = {
         author: {
           name: 'LastName, FirstName',
-          url: 'http://www.example.com',
+          url: 'https://www.example.com',
         },
       };
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName', 'LastName, FirstName'];
@@ -83,7 +83,7 @@ describe('valid-values-author Unit Tests', () => {
       const packageJsonData = {
         author: {
           names: 'LastName, FirstName',
-          url: 'http://www.example.com',
+          url: 'https://www.example.com',
         },
       };
       const validValues = ['FirstName LastName', 'FirstName MiddleName LastName'];

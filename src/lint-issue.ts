@@ -58,10 +58,9 @@ export class LintIssue {
    * @returns {string} Human-friendly message about the lint issue
    */
   toString(): string {
-    const formattedSeverity =
-      this.severity === Severity.Error
-        ? chalk.bgRedBright(this.severity.toUpperCase())
-        : chalk.bgYellowBright(this.severity.toUpperCase());
+    const formattedSeverity = chalk[this.severity === Severity.Error ? 'bgRedBright' : 'bgYellowBright'](
+      this.severity.toUpperCase(),
+    );
     const formattedLintId = chalk.cyan.bold(this.lintId);
     const formattedNode = chalk.magenta.bold(this.node);
     const formattedMessage =

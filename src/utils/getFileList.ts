@@ -43,6 +43,7 @@ export const getFileList = (patterns, cwd) => {
   debug('globFiles');
   debug(globFiles);
 
+  // eslint-disable-next-line unicorn/no-for-each -- for...of is banned by no-restricted-syntax in this project
   globFiles.forEach((globFile) => {
     const filePath = path.resolve(cwd, globFile);
 

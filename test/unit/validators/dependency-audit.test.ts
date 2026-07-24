@@ -1152,6 +1152,7 @@ describe('dependency-audit Unit Tests', () => {
       test('true should be returned in case of http:// dependency', () => {
         const packageJson = {
           dependencies: {
+            // eslint-disable-next-line unicorn/prefer-https -- intentionally testing http:// scheme detection
             'module-name': 'http://github.com/username/repo.git',
           },
         };

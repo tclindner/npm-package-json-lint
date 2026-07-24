@@ -171,10 +171,12 @@ describe('no-git-peerDependencies Unit Tests', () => {
       });
     });
 
+    // eslint-disable-next-line unicorn/prefer-https -- intentionally testing http:// scheme detection
     describe('with http://github.com/user/repo.git', () => {
       test('LintIssue object should be returned', () => {
         const packageJsonData = {
           peerDependencies: {
+            // eslint-disable-next-line unicorn/prefer-https -- intentionally testing http:// scheme detection
             'my-module': 'http://github.com/user/repo.git',
           },
         };

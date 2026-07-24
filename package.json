@@ -37,20 +37,20 @@
     "test:ci": "jest --runInBand"
   },
   "dependencies": {
-    "ajv": "6.14.0",
-    "minimatch": "10.2.5",
-    "ajv-errors": "1.0.1",
+    "ajv": "8.20.0",
+    "ajv-errors": "3.0.0",
     "chalk": "4.1.2",
-    "cosmiconfig": "8.3.6",
+    "cosmiconfig": "9.0.2",
     "debug": "4.4.3",
     "globby": "11.1.0",
     "ignore": "5.3.2",
     "jsonc-parser": "3.3.1",
     "meow": "9.0.0",
+    "minimatch": "10.2.5",
     "semver": "7.8.5",
     "strip-json-comments": "3.1.1",
     "type-fest": "5.8.0",
-    "validate-npm-package-name": "6.0.0"
+    "validate-npm-package-name": "8.0.0"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
@@ -63,7 +63,7 @@
     "eslint-plugin-import-x": "4.17.1",
     "eslint-plugin-jest": "29.15.5",
     "eslint-plugin-prettier": "5.5.6",
-    "eslint-plugin-unicorn": "64.0.0",
+    "eslint-plugin-unicorn": "66.0.0",
     "globals": "17.7.0",
     "jest": "30.4.2",
     "npm-package-json-lint-config-default": "9.0.1",
