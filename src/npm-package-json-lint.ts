@@ -30,7 +30,7 @@ const isIssueAnError = (issue: LintIssue): boolean => issue.severity === Severit
 const isPackageJsonObjectValid = (packageJsonObject: PackageJson | any): boolean => isPlainObj(packageJsonObject);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const areRequiredOptionsValid = (packageJsonObject: PackageJson | any, patterns: string[]): boolean =>
+const isRequiredOptionsValid = (packageJsonObject: PackageJson | any, patterns: string[]): boolean =>
   (!patterns && !isPackageJsonObjectValid(packageJsonObject)) ||
   (patterns && (packageJsonObject || isPackageJsonObjectValid(packageJsonObject)));
 
@@ -148,7 +148,7 @@ export class NpmPackageJsonLint {
   lint(): OverallLintingResult {
     debug('Starting lint');
 
-    if (areRequiredOptionsValid(this.packageJsonObject, this.patterns)) {
+    if (isRequiredOptionsValid(this.packageJsonObject, this.patterns)) {
       throw new Error(
         'You must pass npm-package-json-lint a `patterns` glob or a `packageJsonObject` string, though not both.',
       );
