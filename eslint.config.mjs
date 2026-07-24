@@ -12,6 +12,10 @@ export default [
       'no-prototype-builtins': 'off',
       'unicorn/filename-case': 'off',
       'unicorn/prefer-module': 'off',
+      // This rule's abbreviation dictionary doesn't fit this codebase's domain vocabulary -- e.g. it wants
+      // `devDependencies` renamed to `developmentDependencies`, which is wrong since that's a literal npm
+      // package.json field name, not a generic abbreviation to expand.
+      'unicorn/name-replacements': 'off',
     },
   },
   {
