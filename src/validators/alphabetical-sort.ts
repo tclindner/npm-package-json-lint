@@ -2,7 +2,7 @@ import type {PackageJson} from 'type-fest';
 
 const increment = 1;
 
-export interface IsInAlphabeticalOrderResult {
+export interface AlphabeticalOrderResult {
   status: boolean;
   data: {
     invalidNode: string | null;
@@ -17,11 +17,11 @@ export interface IsInAlphabeticalOrderResult {
  * @param nodeName Name of a node in the package.json file
  * @return Object containing the status and the dependencies that are out of order, if applicable
  */
-export const isInAlphabeticalOrder = (
+export const checkAlphabeticalOrder = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   nodeName: string,
-): IsInAlphabeticalOrderResult => {
+): AlphabeticalOrderResult => {
   let isValid = true;
   let data = {
     invalidNode: null,

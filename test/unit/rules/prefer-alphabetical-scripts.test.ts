@@ -15,7 +15,7 @@ describe('prefer-alphabetical-scripts Unit Tests', () => {
 
   describe('when package.json has node with an invalid order', () => {
     test('LintIssue object should be returned', () => {
-      jest.spyOn(alphabeticalSort, 'isInAlphabeticalOrder').mockReturnValue({
+      jest.spyOn(alphabeticalSort, 'checkAlphabeticalOrder').mockReturnValue({
         status: false,
         data: {
           invalidNode: 'test',
@@ -39,14 +39,14 @@ describe('prefer-alphabetical-scripts Unit Tests', () => {
         'Your scripts are not in alphabetical order. Please move test after start.',
       );
 
-      expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledTimes(1);
-      expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledWith(packageJsonData, nodeName);
+      expect(alphabeticalSort.checkAlphabeticalOrder).toHaveBeenCalledTimes(1);
+      expect(alphabeticalSort.checkAlphabeticalOrder).toHaveBeenCalledWith(packageJsonData, nodeName);
     });
   });
 
   describe('when package.json has node with a valid order', () => {
     test('true should be returned', () => {
-      jest.spyOn(alphabeticalSort, 'isInAlphabeticalOrder').mockReturnValue({
+      jest.spyOn(alphabeticalSort, 'checkAlphabeticalOrder').mockReturnValue({
         status: true,
         data: {
           invalidNode: null,
@@ -65,8 +65,8 @@ describe('prefer-alphabetical-scripts Unit Tests', () => {
 
       expect(response).toBeNull();
 
-      expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledTimes(1);
-      expect(alphabeticalSort.isInAlphabeticalOrder).toHaveBeenCalledWith(packageJsonData, nodeName);
+      expect(alphabeticalSort.checkAlphabeticalOrder).toHaveBeenCalledTimes(1);
+      expect(alphabeticalSort.checkAlphabeticalOrder).toHaveBeenCalledWith(packageJsonData, nodeName);
     });
   });
 
