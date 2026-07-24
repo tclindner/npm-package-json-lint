@@ -26,6 +26,7 @@ export const applyOverrides = (cwd: string, filePath: string, rules: any, overri
     // eslint-disable-next-line unicorn/prefer-string-replace-all
     const relativeFilePath = path.relative(cwd, filePath).replace(/\\/g, '/');
 
+    // eslint-disable-next-line unicorn/no-for-each -- for...of is banned by no-restricted-syntax in this project
     overrides.forEach((override) => {
       const filteredPatterns = override.patterns.filter((pattern: string) => pattern.length);
       const transformedPatterns = filteredPatterns.map((pattern: string) =>

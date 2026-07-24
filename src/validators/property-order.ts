@@ -85,6 +85,7 @@ export const isInPreferredOrder = (
   const fltrdActualNodeList = actualNodeList.filter((property) => preferredNodeOrder.indexOf(property) !== notFound);
   const filteredPreferredOrderMap = new Map();
 
+  // eslint-disable-next-line unicorn/no-for-each -- for...of is banned by no-restricted-syntax in this project
   fltrdPreferredNodeOrder.forEach((property, index) => {
     filteredPreferredOrderMap.set(property, index);
   });

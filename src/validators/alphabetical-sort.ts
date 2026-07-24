@@ -28,8 +28,16 @@ export const isInAlphabeticalOrder = (
     validNode: null,
   };
   const nodeKeysOriginal = Object.keys(packageJsonData[nodeName]);
-  // eslint-disable-next-line unicorn/no-array-sort
-  const nodeKeysSorted = Object.keys(packageJsonData[nodeName]).sort();
+  // Explicit compare function that reproduces the default string sort behavior (UTF-16 code unit order).
+  // `a - b` (this rule's suggested simplification) is invalid for string operands (produces NaN).
+  // eslint-disable-next-line unicorn/no-array-sort, unicorn/prefer-simple-sort-comparator
+  const nodeKeysSorted = Object.keys(packageJsonData[nodeName]).sort((a, b) => {
+    if (a < b) {
+      return -1;
+    }
+
+    return a > b ? 1 : 0;
+  });
 
   for (let keyIndex = 0; keyIndex < nodeKeysOriginal.length; keyIndex += increment) {
     if (nodeKeysOriginal[keyIndex] !== nodeKeysSorted[keyIndex]) {

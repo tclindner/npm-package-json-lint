@@ -15,11 +15,7 @@ const debug = require('debug')('npm-package-json-lint:applyExtendsIfSpecified');
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const applyExtends = (config: any, parentName: any, originalFilePath: any): any => {
-  let configExtends = config.extends;
-
-  if (!Array.isArray(config.extends)) {
-    configExtends = [config.extends];
-  }
+  const configExtends = Array.isArray(config.extends) ? config.extends : [config.extends];
 
   // eslint-disable-next-line unicorn/no-array-reduce
   return configExtends.reduceRight((previousConfig, moduleName) => {

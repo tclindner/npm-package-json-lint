@@ -21,7 +21,7 @@ export default defineConfig([
       skipNodeModulesBundle: true,
     },
 
-    // This ensures rules stay in dist/rules/ and api/cli stay in dist/
+    // This ensures rules stay in dist/rules/ and API/CLI stay in dist/
     bundle: true,
   },
   {
@@ -42,7 +42,7 @@ export default defineConfig([
       skipNodeModulesBundle: true,
     },
 
-    // This ensures rules stay in dist/rules/ and api/cli stay in dist/
+    // This ensures rules stay in dist/rules/ and API/CLI stay in dist/
     bundle: true,
   },
   {
@@ -64,7 +64,7 @@ export default defineConfig([
       skipNodeModulesBundle: true,
     },
 
-    // This ensures rules stay in dist/rules/ and api/cli stay in dist/
+    // This ensures rules stay in dist/rules/ and API/CLI stay in dist/
     bundle: true,
   },
 ]);

@@ -231,8 +231,6 @@ export const auditDependenciesForValidRangeVersions = (
   config: any,
 ): AuditDependenciesForValidRangeResponse => {
   let onlyValidVersionsDetected = true;
-  const dependenciesWithValidVersionRange = [];
-  const dependenciesWithoutValidVersionRange = [];
 
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return {
@@ -241,6 +239,9 @@ export const auditDependenciesForValidRangeVersions = (
       dependenciesWithoutValidVersionRange: [],
     };
   }
+
+  const dependenciesWithValidVersionRange = [];
+  const dependenciesWithoutValidVersionRange = [];
 
   // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
@@ -455,24 +456,24 @@ export const auditDependenciesForNonAbsoluteVersion = (
 const GITHUB_SHORTCUT_URL = /^(github:)?[^/]+\/[^/]+/;
 
 /**
- * Determines whether or not version is a shortcut to github repository
+ * Determines whether or not version is a shortcut to GitHub repository
  * @param version       value of package's version
- * @return {boolean}    True if the version is a shortcut to github repository
+ * @return {boolean}    True if the version is a shortcut to GitHub repository
  */
 const isGithubRepositoryShortcut = (version): boolean => GITHUB_SHORTCUT_URL.test(version);
 
 /**
- * Determines whether or not version is url to archive
+ * Determines whether or not version is URL to archive
  * @param version       value of package's version
- * @return {boolean}    True if the version is url to archive
+ * @return {boolean}    True if the version is URL to archive
  */
 const isArchiveUrl = (version: string): boolean =>
   version.endsWith('.tgz') || version.endsWith('.tar.gz') || version.endsWith('.zip');
 
 /**
- * Determines whether or not version is git repository url
+ * Determines whether or not version is Git repository URL
  * @param version       value of package's version
- * @return {boolean}    True if the version is an git repo url.
+ * @return {boolean}    True if the version is an Git repo URL.
  */
 const isGitRepositoryUrl = (version: string): boolean => {
   if (isArchiveUrl(version)) {
@@ -502,11 +503,11 @@ export interface AuditDependenciesForGitRepositoryVersionResponse {
 }
 
 /**
- * Determines whether or not dependency versions are git repository
+ * Determines whether or not dependency versions are Git repository
  * @param packageJsonData Valid JSON
  * @param nodeName Name of a node in the package.json file
  * @param config Rule configuration
- * @return True if the package has an git repo.
+ * @return True if the package has an Git repo.
  */
 export const auditDependenciesForGitRepositoryVersion = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -550,11 +551,11 @@ export interface AuditDependenciesForArchiveUrlVersionResponse {
 }
 
 /**
- * Determines whether or not dependency versions contains archive url
+ * Determines whether or not dependency versions contains archive URL
  * @param packageJsonData Valid JSON
  * @param nodeName Name of a node in the package.json file
  * @param config Rule configuration
- * @return True if the package contain archive url.
+ * @return True if the package contain archive URL.
  */
 export const auditDependenciesForArchiveUrlVersion = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -598,11 +599,11 @@ export interface AuditDependenciesForFileUrlVersionResponse {
 }
 
 /**
- * Determines whether or not dependency versions contains file url
+ * Determines whether or not dependency versions contains file URL
  * @param packageJsonData Valid JSON
  * @param nodeName Name of a node in the package.json file
  * @param config Rule configuration
- * @return True if the package contain file url.
+ * @return True if the package contain file URL.
  */
 export const auditDependenciesForFileUrlVersion = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
