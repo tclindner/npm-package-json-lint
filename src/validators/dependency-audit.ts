@@ -119,15 +119,18 @@ export const auditDependenciesWithRestrictedPrereleaseVersion = (
 
   // eslint-disable-next-line no-restricted-syntax
   for (const dependencyName in packageJsonData[nodeName]) {
-    if (depsToCheckFor.includes(dependencyName)) {
-      const dependencyVersion = packageJsonData[nodeName][dependencyName];
+    if (!depsToCheckFor.includes(dependencyName)) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
 
-      if (dependencyVersion.includes('-beta') || dependencyVersion.includes('-rc')) {
-        hasDependencyWithRestrictedPrereleaseVersion = true;
-        dependenciesWithRestrictedPrereleaseVersion.push(dependencyName);
-      } else {
-        dependenciesWithoutRestrictedPrereleaseVersion.push(dependencyName);
-      }
+    const dependencyVersion = packageJsonData[nodeName][dependencyName];
+
+    if (dependencyVersion.includes('-beta') || dependencyVersion.includes('-rc')) {
+      hasDependencyWithRestrictedPrereleaseVersion = true;
+      dependenciesWithRestrictedPrereleaseVersion.push(dependencyName);
+    } else {
+      dependenciesWithoutRestrictedPrereleaseVersion.push(dependencyName);
     }
   }
 
@@ -202,7 +205,7 @@ export const auditDependenciesWithMajorVersionOfZero = (
  * @param  {String}   rangeSpecifier      A version range specifier
  * @return {Boolean}                      True if the version starts with the range, false if it doesn't.
  */
-export const doesVersionStartWithRange = (dependencyVersion: string, rangeSpecifier: string): boolean => {
+export const isVersionStartingWithRange = (dependencyVersion: string, rangeSpecifier: string): boolean => {
   const firstCharOfStr = 0;
 
   return dependencyVersion.startsWith(rangeSpecifier, firstCharOfStr);
@@ -230,11 +233,11 @@ export const auditDependenciesForValidRangeVersions = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   config: any,
 ): AuditDependenciesForValidRangeResponse => {
-  let onlyValidVersionsDetected = true;
+  let isOnlyValidVersionsDetected = true;
 
   if (!packageJsonData.hasOwnProperty(nodeName)) {
     return {
-      onlyValidVersionsDetected,
+      onlyValidVersionsDetected: isOnlyValidVersionsDetected,
       dependenciesWithValidVersionRange: [],
       dependenciesWithoutValidVersionRange: [],
     };
@@ -252,16 +255,16 @@ export const auditDependenciesForValidRangeVersions = (
 
     const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
-    if (doesVersionStartWithRange(dependencyVersion, rangeSpecifier)) {
+    if (isVersionStartingWithRange(dependencyVersion, rangeSpecifier)) {
       dependenciesWithValidVersionRange.push(dependencyName);
     } else {
-      onlyValidVersionsDetected = false;
+      isOnlyValidVersionsDetected = false;
       dependenciesWithoutValidVersionRange.push(dependencyName);
     }
   }
 
   return {
-    onlyValidVersionsDetected,
+    onlyValidVersionsDetected: isOnlyValidVersionsDetected,
     dependenciesWithValidVersionRange,
     dependenciesWithoutValidVersionRange,
   };
@@ -310,7 +313,7 @@ export const auditDependenciesForInvalidRange = (
 
     const dependencyVersion = packageJsonData[nodeName][dependencyName];
 
-    if (doesVersionStartWithRange(dependencyVersion, rangeSpecifier)) {
+    if (isVersionStartingWithRange(dependencyVersion, rangeSpecifier)) {
       hasInvalidRangeVersions = true;
       dependenciesWithInvalidVersionRange.push(dependencyName);
     } else {
@@ -347,7 +350,7 @@ const auditAbsoluteVersions = (
 ): AbsoluteVersionCheckerResult => {
   const notFound = -1;
   const firstCharOfStr = 0;
-  let onlyAbsoluteVersionDetected = true;
+  let isOnlyAbsoluteVersionDetected = true;
   let dependenciesChecked = 0;
   const dependenciesWithAbsoluteVersion = [];
   const dependenciesWithoutAbsoluteVersion = [];
@@ -368,7 +371,7 @@ const auditAbsoluteVersions = (
       dependencyVersion.startsWith('<', firstCharOfStr) ||
       dependencyVersion.indexOf('*') !== notFound
     ) {
-      onlyAbsoluteVersionDetected = false;
+      isOnlyAbsoluteVersionDetected = false;
       dependenciesWithoutAbsoluteVersion.push(dependencyName);
     } else {
       dependenciesWithAbsoluteVersion.push(dependencyName);
@@ -378,7 +381,7 @@ const auditAbsoluteVersions = (
   }
 
   return {
-    onlyAbsoluteVersionDetected,
+    onlyAbsoluteVersionDetected: isOnlyAbsoluteVersionDetected,
     dependenciesChecked,
     dependenciesWithAbsoluteVersion,
     dependenciesWithoutAbsoluteVersion,
@@ -483,17 +486,20 @@ const isGitRepositoryUrl = (version: string): boolean => {
   // based on https://github.com/npm/hosted-git-info
   const protocols = new Set(['git@', 'git://', 'git+https://', 'git+ssh://', 'http://', 'https://']);
 
-  let match = false;
+  let isMatch = false;
 
   // eslint-disable-next-line no-restricted-syntax
   for (const protocol of protocols) {
-    if (version.startsWith(protocol)) {
-      match = true;
-      break;
+    if (!version.startsWith(protocol)) {
+      // eslint-disable-next-line no-continue
+      continue;
     }
+
+    isMatch = true;
+    break;
   }
 
-  return match;
+  return isMatch;
 };
 
 export interface AuditDependenciesForGitRepositoryVersionResponse {

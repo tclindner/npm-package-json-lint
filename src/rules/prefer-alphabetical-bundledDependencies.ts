@@ -1,5 +1,5 @@
 import type {PackageJson} from 'type-fest';
-import {isInAlphabeticalOrder} from '../validators/alphabetical-sort';
+import {checkAlphabeticalOrder} from '../validators/alphabetical-sort';
 import {exists} from '../validators/property';
 import {LintIssue} from '../lint-issue';
 import {RuleType} from '../types/rule-type';
@@ -17,7 +17,7 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity): Li
     return null;
   }
 
-  const result = isInAlphabeticalOrder(packageJsonData, nodeName);
+  const result = checkAlphabeticalOrder(packageJsonData, nodeName);
 
   if (!result.status) {
     return new LintIssue(

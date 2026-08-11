@@ -32,7 +32,7 @@ export const isValidValue = <T>(
  * @param validRegexes Array of regex to validate against
  * @return True if the node matches one of the valid regexes or is missing. False if it is not.
  */
-export const matchValidValue = (
+export const isMatchingValidValue = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
   nodeName: string,

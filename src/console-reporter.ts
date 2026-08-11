@@ -22,17 +22,17 @@ const printResultSetIssues = (issues: LintIssue[]): void => {
  * Print results for an individual package.json file linting
  *
  * @param resultSet Result object from a given file's lint result
- * @param quiet True suppress warnings, false show warnings
+ * @param isQuiet True suppress warnings, false show warnings
  * @internal
  */
-const printIndividualResultSet = (resultSet, quiet: boolean): void => {
+const printIndividualResultSet = (resultSet, isQuiet: boolean): void => {
   const {filePath, issues, ignored, errorCount, warningCount} = resultSet;
 
   if (ignored) {
     console.log('');
 
     console.log(`${chalk.yellow.underline(filePath)} - ignored`);
-  } else if (errorCount > zeroIssues || (!quiet && warningCount > zeroIssues)) {
+  } else if (errorCount > zeroIssues || (!isQuiet && warningCount > zeroIssues)) {
     console.log('');
 
     console.log(chalk.underline(filePath));
@@ -44,7 +44,7 @@ const printIndividualResultSet = (resultSet, quiet: boolean): void => {
 
     console.log(chalk.red.bold(errorCountMessage));
 
-    if (!quiet) {
+    if (!isQuiet) {
       console.log(chalk.yellow.bold(warningCountMessage));
     }
   }
@@ -54,10 +54,10 @@ const printIndividualResultSet = (resultSet, quiet: boolean): void => {
  * Prints the overall total counts section
  *
  * @param linterOutput Full results from linting. Includes an array of results and overall counts
- * @param quiet True suppress warnings, false show warnings
+ * @param isQuiet True suppress warnings, false show warnings
  * @internal
  */
-const printTotals = (linterOutput, quiet: boolean): void => {
+const printTotals = (linterOutput, isQuiet: boolean): void => {
   const {errorCount, warningCount, ignoreCount} = linterOutput;
 
   if (errorCount > zeroIssues || warningCount > zeroIssues) {
@@ -69,7 +69,7 @@ const printTotals = (linterOutput, quiet: boolean): void => {
     console.log(chalk.underline('Totals'));
     console.log(chalk.red.bold(errorCountMessage));
 
-    if (!quiet) {
+    if (!isQuiet) {
       console.log(chalk.yellow.bold(warningCountMessage));
       console.log(chalk.yellow.bold(ignoreCountMessage));
     }
@@ -80,16 +80,16 @@ const printTotals = (linterOutput, quiet: boolean): void => {
  * Print results to console
  *
  * @param linterOutput An array of LintIssues
- * @param quiet Flag indicating whether to print warnings.
+ * @param isQuiet Flag indicating whether to print warnings.
  * @internal
  */
-export const write = (linterOutput, quiet: boolean): void => {
+export const write = (linterOutput, isQuiet: boolean): void => {
   // eslint-disable-next-line unicorn/no-for-each -- for...of is banned by no-restricted-syntax in this project
   linterOutput.results.forEach((result) => {
-    printIndividualResultSet(result, quiet);
+    printIndividualResultSet(result, isQuiet);
   });
 
   if (linterOutput.results.length > oneFile) {
-    printTotals(linterOutput, quiet);
+    printTotals(linterOutput, isQuiet);
   }
 };

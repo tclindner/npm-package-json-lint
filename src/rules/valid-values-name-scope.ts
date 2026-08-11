@@ -3,7 +3,7 @@ import {LintIssue} from '../lint-issue';
 import {LintResult} from '../types/lint-result';
 import {RuleType} from '../types/rule-type';
 import {Severity} from '../types/severity';
-import {matchValidValue} from '../validators/valid-values';
+import {isMatchingValidValue} from '../validators/valid-values';
 
 const lintId = 'valid-values-name-scope';
 const nodeName = 'name';
@@ -28,7 +28,7 @@ export const lint = (
 ): LintResult => {
   const validRegexes = validValues.map((scope) => new RegExp(`^${scope}/`));
 
-  if (!matchValidValue(packageJsonData, nodeName, packageJsonData[nodeName], validRegexes)) {
+  if (!isMatchingValidValue(packageJsonData, nodeName, packageJsonData[nodeName], validRegexes)) {
     return new LintIssue(
       lintId,
       severity,
