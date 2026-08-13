@@ -1,4 +1,8 @@
+// ajv and ajv-errors are bundled into dist/ by tsdown (see tsdown.config.ts) rather than
+// resolved from a consumer's node_modules at runtime, so they are devDependencies here.
+// eslint-disable-next-line import-x/no-extraneous-dependencies
 import Ajv from 'ajv';
+// eslint-disable-next-line import-x/no-extraneous-dependencies
 import ajvErrors from 'ajv-errors';
 
 /**
