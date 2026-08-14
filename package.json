@@ -37,8 +37,6 @@
     "test:ci": "jest --runInBand"
   },
   "dependencies": {
-    "ajv": "8.20.0",
-    "ajv-errors": "3.0.0",
     "chalk": "4.1.2",
     "cosmiconfig": "10.0.0",
     "debug": "4.4.3",
@@ -53,6 +51,8 @@
     "validate-npm-package-name": "8.0.0"
   },
   "devDependencies": {
+    "ajv": "8.20.0",
+    "ajv-errors": "3.0.0",
     "@eslint/js": "10.0.1",
     "@types/jest": "30.0.0",
     "@types/node": "26.2.0",
