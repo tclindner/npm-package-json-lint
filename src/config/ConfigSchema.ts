@@ -1,4 +1,7 @@
+// Ajv, ajv-errors, and their runtime dependency closure are bundled by tsdown.
+// eslint-disable-next-line import-x/no-extraneous-dependencies
 import Ajv from 'ajv';
+// eslint-disable-next-line import-x/no-extraneous-dependencies
 import ajvErrors from 'ajv-errors';
 
 /**
