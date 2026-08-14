@@ -18,10 +18,10 @@
       "error",
       [
         {
-          node: ">=22.0.0",
-          npm: ">=10.0.0",
-        },
-      ],
+          "node": ">=22.0.0",
+          "npm": ">=10.0.0"
+        }
+      ]
     ],
     "valid-values-private": ["error", [false]],
     "no-repeated-dependencies": "error",
