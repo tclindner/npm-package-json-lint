@@ -1,6 +1,8 @@
 // eslint-disable-next-line import-x/no-extraneous-dependencies
 import {defineConfig} from 'tsdown';
 
+const bundledAjvDependencies = [/^(?:ajv(?:-errors)?|fast-deep-equal|fast-uri|json-schema-traverse)(?:\/|$)/];
+
 export default defineConfig([
   {
     entry: './src/rules/*.ts',
@@ -44,11 +46,12 @@ export default defineConfig([
       // If a consumer's dependency tree resolves a different (but semver-
       // compatible) copy of ajv for ajv-errors than the one used to create
       // that instance, schema compilation silently produces malformed code.
-      // Bundling both removes any dependence on runtime module resolution.
-      // Match subpath imports too (e.g. `ajv/dist/compile/codegen`, which
-      // ajv-errors imports directly): a bare 'ajv'/'ajv-errors' entry only
-      // matches the package root and leaves those subpaths external.
-      alwaysBundle: [/^ajv(-errors)?(\/|$)/],
+      // Bundle both packages and Ajv's runtime dependency closure so the
+      // published artifact is independent of consumer module resolution.
+      // The regex also matches subpath imports such as Ajv's codegen modules.
+      alwaysBundle: bundledAjvDependencies,
+      // neverBundle already makes alwaysBundle the explicit bundled set.
+      onlyBundle: false,
     },
 
     // This ensures rules stay in dist/rules/ and API/CLI stay in dist/
@@ -72,7 +75,8 @@ export default defineConfig([
     deps: {
       neverBundle: true,
       // See the comment in the api.ts config above.
-      alwaysBundle: [/^ajv(-errors)?(\/|$)/],
+      alwaysBundle: bundledAjvDependencies,
+      onlyBundle: false,
     },
 
     // This ensures rules stay in dist/rules/ and API/CLI stay in dist/
