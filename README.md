@@ -167,7 +167,7 @@ Please see [CHANGELOG.md](CHANGELOG.md).
 
 ## Related
 
-* [npm-package-json-lint-config-default](https://github.com/tclindner/npm-package-json-lint-config-default) (deprecated): the default rule set is now built in — use `"extends": "npm-package-json-lint:default"` instead. See [Configuration](https://npmpackagejsonlint.org/docs/configuration/#built-in-default-config).
+* [npm-package-json-lint-config-default](https://github.com/tclindner/npm-package-json-lint-config-default) (deprecated): the default rule set is now built in — use `"extends": "npm-package-json-lint:default"` instead. It keeps working through v11.x. Starting in v12, it is no longer supported. See [Configuration](https://npmpackagejsonlint.org/docs/configuration/#built-in-default-config).
 
 ## License
 
