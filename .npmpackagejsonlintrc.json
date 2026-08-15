@@ -10,7 +10,6 @@
     "require-keywords": "error",
     "require-license": "error",
     "require-main": "error",
-    "require-peerDependencies": "error",
     "require-repository": "error",
     "require-scripts": "error",
     "valid-values-author": ["error", ["Thomas Lindner"]],
