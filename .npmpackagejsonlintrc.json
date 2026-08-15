@@ -1,7 +1,32 @@
 {
-  "extends": "npm-package-json-lint-config-tc",
+  "extends": "npm-package-json-lint-config-default",
   "rules": {
-    "require-peerDependencies": "off",
-    "valid-values-engines": "off"
+    "require-author": "error",
+    "require-bugs": "error",
+    "require-description": "error",
+    "require-devDependencies": "error",
+    "require-engines": "error",
+    "require-homepage": "error",
+    "require-keywords": "error",
+    "require-license": "error",
+    "require-main": "error",
+    "require-repository": "error",
+    "require-scripts": "error",
+    "valid-values-author": ["error", ["Thomas Lindner"]],
+    "valid-values-engines": [
+      "error",
+      [
+        {
+          "node": ">=22.0.0",
+          "npm": ">=10.0.0"
+        }
+      ]
+    ],
+    "valid-values-private": ["error", [false]],
+    "no-repeated-dependencies": "error",
+    "prefer-absolute-version-dependencies": "error",
+    "prefer-absolute-version-devDependencies": "error",
+    "prefer-no-version-zero-dependencies": "warning",
+    "prefer-no-version-zero-devDependencies": "warning"
   }
 }
