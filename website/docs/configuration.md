@@ -70,6 +70,8 @@ npm-package-json-lint ships with a default config built in, so you don't need to
 
 This is the same rule set previously published as [npm-package-json-lint-config-default](https://github.com/tclindner/npm-package-json-lint-config-default), which is now deprecated in favor of this built-in config. If you currently extend `npm-package-json-lint-config-default`, switch to `npm-package-json-lint:default` and remove the module from your dependencies.
 
+`npm-package-json-lint-config-default` will continue to work as-is throughout v11.x. Starting in v12, it is no longer supported, so please migrate before then.
+
 ### Configuration override
 
 v4+ added support for configuration overrides. This is great for monorepos. Please see an example below:
