@@ -35,7 +35,7 @@ Enabling this rule will result in an error being generated if `types` is missing
 
 ## Related
 
-[require-typings](rules/required-node/require-typings.md)
+[require-typings](require-typings.md)
 
 ## Notes
 
