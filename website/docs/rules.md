@@ -169,11 +169,11 @@ Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lin
 
 > Generates an error if the node is present
 
-* [prefer-no-bin](rules/disallowed-nodes/prefer-no-bin)
-* [prefer-no-contributors](rules/disallowed-nodes/prefer-no-contributors)
-* [prefer-no-dependencies](rules/disallowed-nodes/prefer-no-dependencies)
-* [prefer-no-devDependencies](rules/disallowed-nodes/prefer-no-devDependencies)
-* [prefer-no-engineStrict](rules/disallowed-nodes/prefer-no-engineStrict)
-* [prefer-no-main](rules/disallowed-nodes/prefer-no-main)
-* [prefer-no-optionalDependencies](rules/disallowed-nodes/prefer-no-optionalDependencies)
-* [prefer-no-peerDependencies](rules/disallowed-nodes/prefer-no-peerDependencies)
+* [prefer-no-bin](rules/disallowed-nodes/prefer-no-bin.md)
+* [prefer-no-contributors](rules/disallowed-nodes/prefer-no-contributors.md)
+* [prefer-no-dependencies](rules/disallowed-nodes/prefer-no-dependencies.md)
+* [prefer-no-devDependencies](rules/disallowed-nodes/prefer-no-devDependencies.md)
+* [prefer-no-engineStrict](rules/disallowed-nodes/prefer-no-engineStrict.md)
+* [prefer-no-main](rules/disallowed-nodes/prefer-no-main.md)
+* [prefer-no-optionalDependencies](rules/disallowed-nodes/prefer-no-optionalDependencies.md)
+* [prefer-no-peerDependencies](rules/disallowed-nodes/prefer-no-peerDependencies.md)

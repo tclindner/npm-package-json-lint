@@ -35,7 +35,7 @@ Enabling this rule will result in an error being generated if `typings` is missi
 
 ## Related
 
-[require-types](rules/required-node/require-typings.md)
+[require-types](require-types.md)
 
 ## Notes
 

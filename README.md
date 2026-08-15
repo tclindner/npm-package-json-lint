@@ -22,6 +22,11 @@
   * [Custom Configuration](#custom-configuration)
   * [Local Development](#local-development)
   * [Documentation](#documentation)
+  * [Migrating from v10.x.x to 11.x.x](#migrating-from-v10xx-to-11xx)
+  * [Migrating from v9.x.x to 10.x.x](#migrating-from-v9xx-to-10xx)
+  * [Migrating from v8.x.x to 9.x.x](#migrating-from-v8xx-to-9xx)
+  * [Migrating from v7.x.x to 8.x.x](#migrating-from-v7xx-to-8xx)
+  * [Migrating from v6.x.x to 7.x.x](#migrating-from-v6xx-to-7xx)
   * [Migrating from v5.x.x to 6.x.x](#migrating-from-v5xx-to-6xx)
   * [Migrating from v4.x.x to 5.x.x](#migrating-from-v4xx-to-5xx)
   * [Migrating from v3.x.x to 4.x.x](#migrating-from-v3xx-to-4xx)
@@ -62,7 +67,7 @@ First thing first, let's make sure you have the necessary pre-requisites.
 
 #### Node
 
-* [Node.js](https://nodejs.org/) - v20.0.0+
+* [Node.js](https://nodejs.org/) - v22.0.0+
 * [npm](http://npmjs.com) - v10.0.0+
 
 ### Use the cli
@@ -116,6 +121,10 @@ Follow these steps to get your local environement set up to allow you to contrib
 Quick links
 
 [CLI commands and configuration](https://npmpackagejsonlint.org/docs/cli) | [Node.js API](https://npmpackagejsonlint.org/docs/api) | [Integrations](https://npmpackagejsonlint.org/docs/integrations)
+
+## Migrating from v10.x.x to 11.x.x
+
+Please see the [migration guide](https://npmpackagejsonlint.org/docs/v10-to-v11).
 
 ## Migrating from v9.x.x to 10.x.x
 
