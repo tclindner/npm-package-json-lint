@@ -1,8 +1,15 @@
 import path from 'node:path';
 import {parseJavaScriptFile, parseJsonFile} from '../file-parser';
+import {defaultConfig} from './default';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const debug = require('debug')('npm-package-json-lint:applyExtendsIfSpecified');
+
+/**
+ * Built-in configs that can be extended without installing a separate module.
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const virtualConfigs = new Map<string, any>([['npm-package-json-lint:default', defaultConfig]]);
 
 /**
  * Applies values from the 'extends' field in a configuration file.
@@ -72,7 +79,11 @@ const loadFromModule = (moduleName: any, originalFilePath: any): any => {
   let config;
   let adjustedModuleName = moduleName;
 
-  if (moduleName.startsWith('./')) {
+  if (virtualConfigs.has(moduleName)) {
+    debug(`${moduleName} is a built-in config, loading it directly.`);
+    config = virtualConfigs.get(moduleName);
+  } else if (moduleName.startsWith('./')) {
+    // TODO: handle process.cwd() option
     adjustedModuleName = path.join(process.cwd(), moduleName);
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     config = loadConfigFile(adjustedModuleName);
