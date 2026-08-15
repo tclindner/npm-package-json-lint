@@ -133,6 +133,64 @@ describe('applyExtendsIfSpecified Unit Tests', () => {
     expect(result).toStrictEqual(expectedConfigObj);
   });
 
+  test('when file has built-in virtual extends (valid), a config object is returned', () => {
+    const expectedConfigObj = {
+      extends: 'npm-package-json-lint:default',
+      rules: {
+        'bin-type': 'error',
+        'config-type': 'error',
+        'cpu-type': 'error',
+        'dependencies-type': 'error',
+        'description-type': 'error',
+        'devDependencies-type': 'error',
+        'directories-type': 'error',
+        'engines-type': 'error',
+        'files-type': 'error',
+        'homepage-type': 'error',
+        'keywords-type': 'error',
+        'license-type': 'error',
+        'main-type': 'error',
+        'man-type': 'error',
+        'name-format': 'error',
+        'name-type': 'error',
+        'optionalDependencies-type': 'error',
+        'os-type': 'error',
+        'peerDependencies-type': 'error',
+        'preferGlobal-type': 'error',
+        'private-type': 'error',
+        'repository-type': 'error',
+        'require-author': 'error',
+        'require-name': 'error',
+        'require-version': 'error',
+        'scripts-type': 'error',
+        'version-format': 'error',
+        'version-type': 'error',
+      },
+    };
+    const passedConfig = {
+      extends: 'npm-package-json-lint:default',
+      rules: {
+        'require-author': 'error',
+      },
+    };
+    const filePath = './test/fixtures/extendsModule/package.json';
+    const result = applyExtendsIfSpecified(passedConfig, filePath);
+
+    expect(result).toStrictEqual(expectedConfigObj);
+  });
+
+  test('when file has built-in virtual extends, no module resolution is attempted', () => {
+    const passedConfig = {
+      extends: 'npm-package-json-lint:default',
+      rules: {},
+    };
+    const filePath = './test/fixtures/doesNotExist/package.json';
+
+    expect(() => {
+      applyExtendsIfSpecified(passedConfig, filePath);
+    }).not.toThrow();
+  });
+
   test('when file module extends (invalid), a config object is returned', () => {
     const filePath = './test/fixtures/extendsModuleInvalid/package.json';
 
