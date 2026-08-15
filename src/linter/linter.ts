@@ -85,7 +85,7 @@ const lint = (packageJsonData: any, configObj, rules: Rules): LintIssue[] => {
       ruleConfig = typeof configObj[rule] === 'string' ? {} : configObj[rule][1];
     } else if (ruleModule.ruleType === RuleType.OptionalObject) {
       if (typeof configObj[rule] === 'string') {
-        severity = configObj[rule];
+        severity = configObj[rule] as Severity;
         ruleConfig = {};
       } else {
         // eslint-disable-next-line prefer-destructuring

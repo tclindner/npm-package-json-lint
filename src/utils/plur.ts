@@ -6,7 +6,7 @@
  * @returns {string}              Pluralized word
  */
 export const plur = (singularWord: string, count: number): string => {
-  if (count > 1 || count === 0) {
+  if (count === 0 || count > 1) {
     return `${singularWord}s`;
   }
 

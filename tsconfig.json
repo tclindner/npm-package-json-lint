@@ -9,5 +9,9 @@
     "declaration": true,
     "esModuleInterop": true,
     "outDir": "dist",
+    "types": ["jest", "node"],
+    // TypeScript 6 enables `strict` by default; this project was never written against it.
+    // Pin it off explicitly to preserve pre-v6 behavior instead of taking on a strict-mode migration here.
+    "strict": false,
   }
 }
