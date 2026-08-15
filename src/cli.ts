@@ -10,7 +10,6 @@ const debug = require('debug')('npm-package-json-lint:cli');
 
 const exitCodes = {
   zeroClean: 0,
-  oneMissingTarget: 1,
   twoLintErrorsDetected: 2,
   runTimeException: 3,
   exceedMaxWarnings: 4,
@@ -28,7 +27,6 @@ const cli = meow(
         --configFile, -c File path of .npmpackagejsonlintrc.json
         --ignorePath, -i Path to a file containing patterns that describe files to ignore. The path can be absolute or relative to process.cwd(). By default, npm-package-json-lint looks for .npmpackagejsonlintignore in process.cwd().
         --maxWarnings, -mw Maximum number of warnings that can be detected before an error is thrown.
-        --allowEmptyTargets Do not throw an error when a list of targets is empty.
 
       Examples
         $ npmPkgJsonLint --version
@@ -71,10 +69,6 @@ const cli = meow(
         alias: 'mw',
         default: 10000000,
       },
-      allowEmptyTargets: {
-        type: 'boolean',
-        default: false,
-      },
     },
   },
 );
@@ -83,17 +77,15 @@ const {input, flags} = cli;
 
 // Validate
 const noPatternsProvided = 0;
-const patterns = input;
+let patterns = input;
 
 debug(`patterns: ${patterns}`);
 
 if (patterns.length === noPatternsProvided) {
-  debug(`No lint targets provided`);
-  console.log(chalk.red.bold('No lint targets provided'));
+  debug(`No lint targets provided, defaulting to "."`);
+  console.log(chalk.red.bold('No lint targets provided, defaulting to the current working directory.'));
 
-  const exitCode = exitCodes[flags.allowEmptyTargets ? 'zeroClean' : 'oneMissingTarget'];
-
-  process.exit(exitCode);
+  patterns = ['.'];
 }
 
 try {
