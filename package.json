@@ -55,7 +55,7 @@
     "ajv-errors": "3.0.0",
     "@eslint/js": "10.0.1",
     "@types/jest": "30.0.0",
-    "@types/node": "26.2.0",
+    "@types/node": "26.3.0",
     "eslint": "10.9.1",
     "eslint-config-prettier": "10.1.8",
     "eslint-config-tc": "28.0.3",
