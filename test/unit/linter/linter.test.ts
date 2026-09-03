@@ -12,6 +12,7 @@ describe('linter Unit Tests', () => {
       const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
         add: jest.fn(),
+        checkIgnore: jest.fn(),
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
@@ -64,6 +65,7 @@ describe('linter Unit Tests', () => {
       const mockIgnorer: Ignore = {
         ignores: (): boolean => true,
         add: jest.fn(),
+        checkIgnore: jest.fn(),
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
@@ -115,6 +117,7 @@ describe('linter Unit Tests', () => {
       const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
         add: jest.fn(),
+        checkIgnore: jest.fn(),
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
@@ -158,6 +161,7 @@ describe('linter Unit Tests', () => {
       const mockIgnorer: Ignore = {
         ignores: (): boolean => true,
         add: jest.fn(),
+        checkIgnore: jest.fn(),
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
@@ -201,6 +205,7 @@ describe('linter Unit Tests', () => {
       const mockIgnorer: Ignore = {
         ignores: (): boolean => true,
         add: jest.fn(),
+        checkIgnore: jest.fn(),
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
@@ -244,6 +249,7 @@ describe('linter Unit Tests', () => {
       const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
         add: jest.fn(),
+        checkIgnore: jest.fn(),
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
@@ -287,6 +293,7 @@ describe('linter Unit Tests', () => {
       const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
         add: jest.fn(),
+        checkIgnore: jest.fn(),
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
@@ -338,6 +345,7 @@ describe('linter Unit Tests', () => {
       const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
         add: jest.fn(),
+        checkIgnore: jest.fn(),
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
@@ -383,6 +391,7 @@ describe('linter Unit Tests', () => {
       const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
         add: jest.fn(),
+        checkIgnore: jest.fn(),
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
@@ -444,6 +453,7 @@ describe('linter Unit Tests', () => {
       const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
         add: jest.fn(),
+        checkIgnore: jest.fn(),
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
@@ -499,6 +509,7 @@ describe('linter Unit Tests', () => {
       const mockIgnorer: Ignore = {
         ignores: (): boolean => false,
         add: jest.fn(),
+        checkIgnore: jest.fn(),
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
