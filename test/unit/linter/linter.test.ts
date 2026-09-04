@@ -15,6 +15,7 @@ describe('linter Unit Tests', () => {
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
+        checkIgnore: jest.fn(),
       };
       const mockConfigHelper: Config = {
         getConfigForFile: jest
@@ -67,6 +68,7 @@ describe('linter Unit Tests', () => {
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
+        checkIgnore: jest.fn(),
       };
       const mockConfigHelper: Config = {
         getConfigForFile: jest.fn(),
@@ -118,6 +120,7 @@ describe('linter Unit Tests', () => {
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
+        checkIgnore: jest.fn(),
       };
       const mockConfigHelper: Config = {
         getConfigForFile: jest.fn(),
@@ -161,6 +164,7 @@ describe('linter Unit Tests', () => {
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
+        checkIgnore: jest.fn(),
       };
       const mockConfigHelper: Config = {
         getConfigForFile: jest.fn(),
@@ -204,6 +208,7 @@ describe('linter Unit Tests', () => {
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
+        checkIgnore: jest.fn(),
       };
       const mockConfigHelper: Config = {
         getConfigForFile: jest.fn(),
@@ -247,6 +252,7 @@ describe('linter Unit Tests', () => {
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
+        checkIgnore: jest.fn(),
       };
       const mockConfigHelper: Config = {
         getConfigForFile: jest.fn(),
@@ -290,6 +296,7 @@ describe('linter Unit Tests', () => {
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
+        checkIgnore: jest.fn(),
       };
       const mockConfigHelper: Config = {
         getConfigForFile: jest.fn().mockReturnValue({'valid-values-author': ['error', ['Peter Parker']]}),
@@ -341,6 +348,7 @@ describe('linter Unit Tests', () => {
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
+        checkIgnore: jest.fn(),
       };
       const mockConfigHelper: Config = {
         getConfigForFile: jest.fn().mockReturnValue({'valid-values-author': 'off'}),
@@ -386,6 +394,7 @@ describe('linter Unit Tests', () => {
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
+        checkIgnore: jest.fn(),
       };
       const mockConfigHelper: Config = {
         getConfigForFile: jest.fn().mockReturnValue({
@@ -447,6 +456,7 @@ describe('linter Unit Tests', () => {
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
+        checkIgnore: jest.fn(),
       };
       const mockConfigHelper: Config = {
         getConfigForFile: jest.fn().mockReturnValue({
@@ -502,6 +512,7 @@ describe('linter Unit Tests', () => {
         createFilter: jest.fn(),
         filter: jest.fn(),
         test: jest.fn(),
+        checkIgnore: jest.fn(),
       };
       const mockConfigHelper: Config = {
         getConfigForFile: jest.fn().mockReturnValue({
