@@ -30,7 +30,7 @@
     "clear": "docusaurus clear"
   },
   "devDependencies": {
-    "@babel/core": "8.0.1",
+    "@babel/core": "8.0.5",
     "@docusaurus/module-type-aliases": "3.10.2",
     "@docusaurus/types": "3.10.2"
   },
@@ -54,8 +54,8 @@
     "classnames": "2.5.1",
     "clsx": "2.1.1",
     "prism-react-renderer": "2.4.1",
-    "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
   },
   "engines": {
     "node": ">=22.0.0"
