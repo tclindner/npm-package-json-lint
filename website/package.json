@@ -30,7 +30,7 @@
     "clear": "docusaurus clear"
   },
   "devDependencies": {
-    "@babel/core": "8.0.5",
+    "@babel/core": "8.0.6",
     "@docusaurus/module-type-aliases": "3.10.2",
     "@docusaurus/types": "3.10.2"
   },
