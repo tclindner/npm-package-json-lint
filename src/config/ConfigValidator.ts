@@ -42,11 +42,9 @@ const isOptionalObjRuleConfigValid = (ruleConfig: any): any => {
 
   const object = 1;
 
-  if (isObjectRuleSchemaValid(ruleConfig) && ruleConfig[object].hasOwnProperty('exceptions')) {
-    return isOptionalObjExceptSchemaValid(ruleConfig[object].exceptions);
-  }
-
-  return true;
+  return isObjectRuleSchemaValid(ruleConfig) && ruleConfig[object].hasOwnProperty('exceptions')
+    ? isOptionalObjExceptSchemaValid(ruleConfig[object].exceptions)
+    : true;
 };
 
 /**
@@ -116,8 +114,7 @@ const validateRule = (ruleModule: any, ruleName: any, userConfig: any, source: a
     } catch (error_) {
       const modifiedErrorMessage = `Configuration for rule "${ruleName}" is invalid:\n${error_.message}`;
 
-      const error =
-        typeof source === 'string' ? new Error(`${source}:\n\t${modifiedErrorMessage}`) : new Error(modifiedErrorMessage);
+      const error = new Error(typeof source === 'string' ? `${source}:\n\t${modifiedErrorMessage}` : modifiedErrorMessage);
 
       throw error;
     }

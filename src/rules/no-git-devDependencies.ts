@@ -13,16 +13,14 @@ export const ruleType = RuleType.OptionalObject;
 export const lint = (packageJsonData: PackageJson | any, severity: Severity, config: any): LintIssue | null => {
   const auditResult = auditDependenciesForGitRepositoryVersion(packageJsonData, nodeName, config);
 
-  if (packageJsonData.hasOwnProperty(nodeName) && auditResult.hasGitRepositoryVersions) {
-    return new LintIssue(
-      lintId,
-      severity,
-      nodeName,
-      `You are using ${nodeName} from git repository. Please use ${nodeName} from npm. Invalid devDependencies include: ${auditResult.dependenciesWithGitRepositoryVersion.join(
-        ', ',
-      )}`,
-    );
-  }
-
-  return null;
+  return packageJsonData.hasOwnProperty(nodeName) && auditResult.hasGitRepositoryVersions
+    ? new LintIssue(
+        lintId,
+        severity,
+        nodeName,
+        `You are using ${nodeName} from git repository. Please use ${nodeName} from npm. Invalid devDependencies include: ${auditResult.dependenciesWithGitRepositoryVersion.join(
+          ', ',
+        )}`,
+      )
+    : null;
 };

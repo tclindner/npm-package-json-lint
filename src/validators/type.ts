@@ -9,13 +9,8 @@ import {isPlainObj} from '../utils/isPlainObj';
  * @return True if the node is an array or is missing. False if it is not.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const isArray = (packageJsonData: PackageJson | any, nodeName: string): boolean => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return true;
-  }
-
-  return Array.isArray(packageJsonData[nodeName]);
-};
+export const isArray = (packageJsonData: PackageJson | any, nodeName: string): boolean =>
+  packageJsonData.hasOwnProperty(nodeName) ? Array.isArray(packageJsonData[nodeName]) : true;
 
 /**
  * Determines whether or not the node's value is a boolean
@@ -25,13 +20,8 @@ export const isArray = (packageJsonData: PackageJson | any, nodeName: string): b
  * @return True if the node is a boolean or is missing. False if it is not.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const isBoolean = (packageJsonData: PackageJson | any, nodeName: string): boolean => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return true;
-  }
-
-  return typeof packageJsonData[nodeName] === 'boolean';
-};
+export const isBoolean = (packageJsonData: PackageJson | any, nodeName: string): boolean =>
+  packageJsonData.hasOwnProperty(nodeName) ? typeof packageJsonData[nodeName] === 'boolean' : true;
 
 /**
  * Determines whether or not the node's value is an object
@@ -41,13 +31,8 @@ export const isBoolean = (packageJsonData: PackageJson | any, nodeName: string):
  * @return True if the node is an object or is missing. False if it is not.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const isObject = (packageJsonData: PackageJson | any, nodeName: string): boolean => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return true;
-  }
-
-  return isPlainObj(packageJsonData[nodeName]);
-};
+export const isObject = (packageJsonData: PackageJson | any, nodeName: string): boolean =>
+  packageJsonData.hasOwnProperty(nodeName) ? isPlainObj(packageJsonData[nodeName]) : true;
 
 /**
  * Determines whether or not the node's value is a string
@@ -57,10 +42,5 @@ export const isObject = (packageJsonData: PackageJson | any, nodeName: string): 
  * @return True if the node is a string or is missing. False if it is not.
  */
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-explicit-any
-export const isString = (packageJsonData: PackageJson | any, nodeName: string) => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return true;
-  }
-
-  return typeof packageJsonData[nodeName] === 'string';
-};
+export const isString = (packageJsonData: PackageJson | any, nodeName: string) =>
+  packageJsonData.hasOwnProperty(nodeName) ? typeof packageJsonData[nodeName] === 'string' : true;

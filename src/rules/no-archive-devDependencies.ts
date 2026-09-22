@@ -13,16 +13,14 @@ export const ruleType = RuleType.OptionalObject;
 export const lint = (packageJsonData: PackageJson | any, severity: Severity, config: any): LintIssue | null => {
   const auditResult = auditDependenciesForArchiveUrlVersion(packageJsonData, nodeName, config);
 
-  if (packageJsonData.hasOwnProperty(nodeName) && auditResult.hasArchiveUrlVersions) {
-    return new LintIssue(
-      lintId,
-      severity,
-      nodeName,
-      `You are using ${nodeName} via url to archive file. Please use ${nodeName} from npm. Invalid ${nodeName} include: ${auditResult.dependenciesWithArchiveUrlVersion.join(
-        ', ',
-      )}`,
-    );
-  }
-
-  return null;
+  return packageJsonData.hasOwnProperty(nodeName) && auditResult.hasArchiveUrlVersions
+    ? new LintIssue(
+        lintId,
+        severity,
+        nodeName,
+        `You are using ${nodeName} via url to archive file. Please use ${nodeName} from npm. Invalid ${nodeName} include: ${auditResult.dependenciesWithArchiveUrlVersion.join(
+          ', ',
+        )}`,
+      )
+    : null;
 };

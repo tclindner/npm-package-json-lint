@@ -174,21 +174,24 @@ export const auditDependenciesWithMajorVersionOfZero = (
 
     const dependencyVersRange = packageJsonData[nodeName][dependencyName];
 
-    if (semver.validRange(dependencyVersRange)) {
-      const startIndex = 0;
-      const length = 1;
-      // eslint-disable-next-line unicorn/prefer-string-replace-all
-      const dependencyVersion = dependencyVersRange.replace(/\D+/g, '');
-      // eslint-disable-next-line unicorn/prefer-string-slice
-      const dependencyMjrVersion = dependencyVersion.substr(startIndex, length);
+    if (!semver.validRange(dependencyVersRange)) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
 
-      // if first char is 0 then major version is 0
-      if (dependencyMjrVersion === '0') {
-        hasDependencyWithMajorVersionOfZero = true;
-        dependenciesWithMajorVersionOfZero.push(dependencyName);
-      } else {
-        dependenciesWithoutMajorVersionOfZero.push(dependencyName);
-      }
+    const startIndex = 0;
+    const length = 1;
+    // eslint-disable-next-line unicorn/prefer-string-replace-all
+    const dependencyVersion = dependencyVersRange.replace(/\D+/g, '');
+    // eslint-disable-next-line unicorn/prefer-string-slice
+    const dependencyMjrVersion = dependencyVersion.substr(startIndex, length);
+
+    // if first char is 0 then major version is 0
+    if (dependencyMjrVersion === '0') {
+      hasDependencyWithMajorVersionOfZero = true;
+      dependenciesWithMajorVersionOfZero.push(dependencyName);
+    } else {
+      dependenciesWithoutMajorVersionOfZero.push(dependencyName);
     }
   }
 

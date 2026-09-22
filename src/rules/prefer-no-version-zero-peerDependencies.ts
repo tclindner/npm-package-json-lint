@@ -14,16 +14,14 @@ export const ruleType = RuleType.OptionalObject;
 export const lint = (packageJsonData: PackageJson | any, severity: Severity, config: any): LintIssue | null => {
   const auditResult = auditDependenciesWithMajorVersionOfZero(packageJsonData, nodeName, config);
 
-  if (exists(packageJsonData, nodeName) && auditResult.hasDependencyWithMajorVersionOfZero) {
-    return new LintIssue(
-      lintId,
-      severity,
-      nodeName,
-      `You have invalid version 0 dependencies. Please use modules with a major version >= 1. Invalid ${nodeName} include: ${auditResult.dependenciesWithMajorVersionOfZero.join(
-        ', ',
-      )}`,
-    );
-  }
-
-  return null;
+  return exists(packageJsonData, nodeName) && auditResult.hasDependencyWithMajorVersionOfZero
+    ? new LintIssue(
+        lintId,
+        severity,
+        nodeName,
+        `You have invalid version 0 dependencies. Please use modules with a major version >= 1. Invalid ${nodeName} include: ${auditResult.dependenciesWithMajorVersionOfZero.join(
+          ', ',
+        )}`,
+      )
+    : null;
 };

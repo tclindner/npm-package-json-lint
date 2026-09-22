@@ -19,16 +19,14 @@ export const lint = (
 ): LintIssue | null => {
   const auditResult = auditDependenciesWithRestrictedPrereleaseVersion(packageJsonData, nodeName, invalidPreRelDeps);
 
-  if (auditResult.hasDependencyWithRestrictedPrereleaseVersion) {
-    return new LintIssue(
-      lintId,
-      severity,
-      nodeName,
-      `You are using a restricted pre-release dependency. Please remove it. Invalid ${nodeName} include: ${auditResult.dependenciesWithRestrictedPrereleaseVersion.join(
-        ', ',
-      )}`,
-    );
-  }
-
-  return null;
+  return auditResult.hasDependencyWithRestrictedPrereleaseVersion
+    ? new LintIssue(
+        lintId,
+        severity,
+        nodeName,
+        `You are using a restricted pre-release dependency. Please remove it. Invalid ${nodeName} include: ${auditResult.dependenciesWithRestrictedPrereleaseVersion.join(
+          ', ',
+        )}`,
+      )
+    : null;
 };

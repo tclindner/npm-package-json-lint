@@ -24,17 +24,14 @@ export const lint = (
   packageJsonData: PackageJson | any,
   severity: Severity,
   validValues: string[],
-): LintResult => {
-  if (!isValidValue<string>(packageJsonData, nodeName, packageJsonData[nodeName], validValues)) {
-    return new LintIssue(
-      lintId,
-      severity,
-      nodeName,
-      `Invalid value for type. Current value is ${packageJsonData[nodeName]}. Valid values include: ${validValues.join(
-        ', ',
-      )}.`,
-    );
-  }
-
-  return null;
-};
+): LintResult =>
+  isValidValue<string>(packageJsonData, nodeName, packageJsonData[nodeName], validValues)
+    ? null
+    : new LintIssue(
+        lintId,
+        severity,
+        nodeName,
+        `Invalid value for type. Current value is ${packageJsonData[nodeName]}. Valid values include: ${validValues.join(
+          ', ',
+        )}.`,
+      );

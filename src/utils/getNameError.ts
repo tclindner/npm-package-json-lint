@@ -11,11 +11,6 @@ export const getNameError = (results: any): any => {
     return results.errors[0];
   }
 
-  // Warnings are returned for names that are no longer valid
-  if (results.warnings && results.warnings.length > 0) {
-    return results.warnings[0];
-  }
-
-  // Ensure that an error message is returned in any case
-  return 'name invalid';
+  // Warnings are returned for names that are no longer valid; otherwise ensure that an error message is returned in any case
+  return results.warnings && results.warnings.length > 0 ? results.warnings[0] : 'name invalid';
 };

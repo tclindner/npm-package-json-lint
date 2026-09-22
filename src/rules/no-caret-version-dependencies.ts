@@ -14,16 +14,14 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity, con
   const rangeSpecifier = '^';
   const auditResult = auditDependenciesForInvalidRange(packageJsonData, nodeName, rangeSpecifier, config);
 
-  if (packageJsonData.hasOwnProperty(nodeName) && auditResult.hasInvalidRangeVersions) {
-    return new LintIssue(
-      lintId,
-      severity,
-      nodeName,
-      `You are using an invalid version range. Please do not use ^. Invalid ${nodeName} include: ${auditResult.dependenciesWithInvalidVersionRange.join(
-        ', ',
-      )}`,
-    );
-  }
-
-  return null;
+  return packageJsonData.hasOwnProperty(nodeName) && auditResult.hasInvalidRangeVersions
+    ? new LintIssue(
+        lintId,
+        severity,
+        nodeName,
+        `You are using an invalid version range. Please do not use ^. Invalid ${nodeName} include: ${auditResult.dependenciesWithInvalidVersionRange.join(
+          ', ',
+        )}`,
+      )
+    : null;
 };

@@ -35,14 +35,12 @@ export const lint = <T>(
     return new LintIssue(lintId, severity, nodeName, 'author node has invalid data type');
   }
 
-  if (!isValidValue<T>(packageJsonData, nodeName, value, validValues)) {
-    return new LintIssue(
-      lintId,
-      severity,
-      nodeName,
-      `Invalid value for author. Current value is ${value}. Value values include: ${validValues.join(', ')}.`,
-    );
-  }
-
-  return null;
+  return isValidValue<T>(packageJsonData, nodeName, value, validValues)
+    ? null
+    : new LintIssue(
+        lintId,
+        severity,
+        nodeName,
+        `Invalid value for author. Current value is ${value}. Value values include: ${validValues.join(', ')}.`,
+      );
 };

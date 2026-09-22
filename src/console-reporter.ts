@@ -60,20 +60,24 @@ const printIndividualResultSet = (resultSet, isQuiet: boolean): void => {
 const printTotals = (linterOutput, isQuiet: boolean): void => {
   const {errorCount, warningCount, ignoreCount} = linterOutput;
 
-  if (errorCount > zeroIssues || warningCount > zeroIssues) {
-    const errorCountMessage = `${errorCount} ${plur('error', errorCount)}`;
-    const warningCountMessage = `${warningCount} ${plur('warning', warningCount)}`;
-    const ignoreCountMessage = `${ignoreCount} ${plur('file', ignoreCount)} ignored`;
-
-    console.log('');
-    console.log(chalk.underline('Totals'));
-    console.log(chalk.red.bold(errorCountMessage));
-
-    if (!isQuiet) {
-      console.log(chalk.yellow.bold(warningCountMessage));
-      console.log(chalk.yellow.bold(ignoreCountMessage));
-    }
+  if (errorCount <= zeroIssues && warningCount <= zeroIssues) {
+    return;
   }
+
+  const errorCountMessage = `${errorCount} ${plur('error', errorCount)}`;
+  const warningCountMessage = `${warningCount} ${plur('warning', warningCount)}`;
+  const ignoreCountMessage = `${ignoreCount} ${plur('file', ignoreCount)} ignored`;
+
+  console.log('');
+  console.log(chalk.underline('Totals'));
+  console.log(chalk.red.bold(errorCountMessage));
+
+  if (isQuiet) {
+    return;
+  }
+
+  console.log(chalk.yellow.bold(warningCountMessage));
+  console.log(chalk.yellow.bold(ignoreCountMessage));
 };
 
 /**

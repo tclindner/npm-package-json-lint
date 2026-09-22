@@ -13,16 +13,14 @@ export const ruleType = RuleType.OptionalObject;
 export const lint = (packageJsonData: PackageJson | any, severity: Severity, config: any): LintIssue | null => {
   const auditResult = auditDependenciesForFileUrlVersion(packageJsonData, nodeName, config);
 
-  if (packageJsonData.hasOwnProperty(nodeName) && auditResult.hasFileUrlVersions) {
-    return new LintIssue(
-      lintId,
-      severity,
-      nodeName,
-      `You are using ${nodeName} via url to local file. Please use ${nodeName} from npm. Invalid ${nodeName} include: ${auditResult.dependenciesWithFileUrlVersion.join(
-        ', ',
-      )}`,
-    );
-  }
-
-  return null;
+  return packageJsonData.hasOwnProperty(nodeName) && auditResult.hasFileUrlVersions
+    ? new LintIssue(
+        lintId,
+        severity,
+        nodeName,
+        `You are using ${nodeName} via url to local file. Please use ${nodeName} from npm. Invalid ${nodeName} include: ${auditResult.dependenciesWithFileUrlVersion.join(
+          ', ',
+        )}`,
+      )
+    : null;
 };

@@ -14,16 +14,14 @@ export const ruleType = RuleType.OptionalObject;
 export const lint = (packageJsonData: PackageJson | any, severity: Severity, config: any): LintIssue | null => {
   const auditResult = auditDependenciesForNonAbsoluteVersion(packageJsonData, nodeName, config);
 
-  if (exists(packageJsonData, nodeName) && auditResult.onlyNonAbsoluteVersionsDetected) {
-    return new LintIssue(
-      lintId,
-      severity,
-      nodeName,
-      `You are using an invalid version range. Please use absolute versions. Invalid ${nodeName} include: ${auditResult.dependenciesWithoutAbsoluteVersion.join(
-        ', ',
-      )}`,
-    );
-  }
-
-  return null;
+  return exists(packageJsonData, nodeName) && auditResult.onlyNonAbsoluteVersionsDetected
+    ? new LintIssue(
+        lintId,
+        severity,
+        nodeName,
+        `You are using an invalid version range. Please use absolute versions. Invalid ${nodeName} include: ${auditResult.dependenciesWithoutAbsoluteVersion.join(
+          ', ',
+        )}`,
+      )
+    : null;
 };
