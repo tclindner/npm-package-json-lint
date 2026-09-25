@@ -19,14 +19,12 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity): Li
 
   const result = checkAlphabeticalOrder(packageJsonData, nodeName);
 
-  if (!result.status) {
-    return new LintIssue(
-      lintId,
-      severity,
-      nodeName,
-      `${message} Please move ${result.data.invalidNode} after ${result.data.validNode}.`,
-    );
-  }
-
-  return null;
+  return result.status
+    ? null
+    : new LintIssue(
+        lintId,
+        severity,
+        nodeName,
+        `${message} Please move ${result.data.invalidNode} after ${result.data.validNode}.`,
+      );
 };

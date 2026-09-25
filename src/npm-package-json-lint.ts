@@ -48,15 +48,17 @@ const getErrorResults = (results: PackageJsonFileLintingResult[]): PackageJsonFi
     // eslint-disable-next-line unicorn/no-array-callback-reference
     const filteredIssues = result.issues.filter(isIssueAnError);
 
-    if (filteredIssues.length > noIssues) {
-      const filteredResult = {
-        issues: filteredIssues,
-        errorCount: filteredIssues.length,
-        warningCount: 0,
-      };
-
-      filtered.push(Object.assign(result, filteredResult));
+    if (filteredIssues.length <= noIssues) {
+      return;
     }
+
+    const filteredResult = {
+      issues: filteredIssues,
+      errorCount: filteredIssues.length,
+      warningCount: 0,
+    };
+
+    filtered.push(Object.assign(result, filteredResult));
   });
 
   return filtered;

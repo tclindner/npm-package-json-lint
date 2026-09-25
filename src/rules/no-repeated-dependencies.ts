@@ -13,11 +13,7 @@ const devDependenciesNode = 'devDependencies';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const lint = (packageJsonData: PackageJson | any, severity: Severity): LintIssue | null => {
-  if (!exists(packageJsonData, dependenciesNode)) {
-    return null;
-  }
-
-  if (!exists(packageJsonData, devDependenciesNode)) {
+  if (!exists(packageJsonData, dependenciesNode) || !exists(packageJsonData, devDependenciesNode)) {
     return null;
   }
 
