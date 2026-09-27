@@ -20,9 +20,5 @@ export const lint = (
 ): LintIssue | null => {
   const result = checkPreferredOrder(packageJsonData, preferredOrder);
 
-  if (!result.status) {
-    return new LintIssue(lintId, severity, nodeName, `${message} ${result.msg}`);
-  }
-
-  return null;
+  return result.status ? null : new LintIssue(lintId, severity, nodeName, `${message} ${result.msg}`);
 };

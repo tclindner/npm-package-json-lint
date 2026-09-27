@@ -11,10 +11,5 @@ const message = 'engineStrict was deprecated with npm v3.0.0. Please remove it f
 export const ruleType = RuleType.Standard;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const lint = (packageJsonData: PackageJson | any, severity: Severity): LintIssue | null => {
-  if (exists(packageJsonData, nodeName)) {
-    return new LintIssue(lintId, severity, nodeName, message);
-  }
-
-  return null;
-};
+export const lint = (packageJsonData: PackageJson | any, severity: Severity): LintIssue | null =>
+  exists(packageJsonData, nodeName) ? new LintIssue(lintId, severity, nodeName, message) : null;

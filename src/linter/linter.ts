@@ -97,12 +97,15 @@ const lint = (packageJsonData: any, configObj, rules: Rules): LintIssue[] => {
       severity = configObj[rule];
     }
 
-    if (severity !== Severity.Off) {
-      const lintResult = ruleModule.lint(packageJsonData, severity, ruleConfig);
+    if (severity === Severity.Off) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
 
-      if (lintResult !== null) {
-        lintIssues.push(lintResult);
-      }
+    const lintResult = ruleModule.lint(packageJsonData, severity, ruleConfig);
+
+    if (lintResult !== null) {
+      lintIssues.push(lintResult);
     }
   }
 

@@ -19,9 +19,5 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity): Li
   const name = packageJsonData[nodeName];
   const results = validateName(name);
 
-  if (!results.validForNewPackages) {
-    return new LintIssue(lintId, severity, nodeName, getNameError(results));
-  }
-
-  return null;
+  return results.validForNewPackages ? null : new LintIssue(lintId, severity, nodeName, getNameError(results));
 };

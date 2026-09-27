@@ -11,10 +11,5 @@ const message = 'Type should be an Object';
 export const ruleType = RuleType.Standard;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const lint = (packageJsonData: PackageJson | any, severity: Severity): LintIssue | null => {
-  if (!isObject(packageJsonData, nodeName)) {
-    return new LintIssue(lintId, severity, nodeName, message);
-  }
-
-  return null;
-};
+export const lint = (packageJsonData: PackageJson | any, severity: Severity): LintIssue | null =>
+  isObject(packageJsonData, nodeName) ? null : new LintIssue(lintId, severity, nodeName, message);

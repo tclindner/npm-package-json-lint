@@ -15,9 +15,5 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity): Li
     return null;
   }
 
-  if (packageJsonData.publishConfig?.provenance !== true) {
-    return new LintIssue(lintId, severity, nodeName, message);
-  }
-
-  return null;
+  return packageJsonData.publishConfig?.provenance === true ? null : new LintIssue(lintId, severity, nodeName, message);
 };

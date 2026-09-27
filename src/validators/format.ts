@@ -9,10 +9,5 @@ import type {PackageJson} from 'type-fest';
  * @return True if the node is a valid version number or is missing. False if it is not.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const isValidVersionNumber = (packageJsonData: PackageJson | any, nodeName: string): boolean => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return true;
-  }
-
-  return semver.valid(packageJsonData[nodeName]) !== null;
-};
+export const isValidVersionNumber = (packageJsonData: PackageJson | any, nodeName: string): boolean =>
+  !packageJsonData.hasOwnProperty(nodeName) || semver.valid(packageJsonData[nodeName]) !== null;

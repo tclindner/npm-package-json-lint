@@ -15,13 +15,7 @@ export const isValidValue = <T>(
   nodeName: string,
   value: T,
   validValues: T[],
-): boolean => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return true;
-  }
-
-  return validValues.includes(value);
-};
+): boolean => !packageJsonData.hasOwnProperty(nodeName) || validValues.includes(value);
 
 /**
  * Determines whether a node matches a valid value
@@ -38,10 +32,4 @@ export const isMatchingValidValue = (
   nodeName: string,
   value: string,
   validRegexes: RegExp[],
-): boolean => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return true;
-  }
-
-  return validRegexes.some((r) => r.test(value));
-};
+): boolean => !packageJsonData.hasOwnProperty(nodeName) || validRegexes.some((r) => r.test(value));

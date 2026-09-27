@@ -11,10 +11,7 @@ const message = 'Type should be either a string or an array';
 export const ruleType = RuleType.Standard;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const lint = (packageJsonData: PackageJson | any, severity: Severity): LintIssue | null => {
-  if (!isArray(packageJsonData, nodeName) && !isString(packageJsonData, nodeName)) {
-    return new LintIssue(lintId, severity, nodeName, message);
-  }
-
-  return null;
-};
+export const lint = (packageJsonData: PackageJson | any, severity: Severity): LintIssue | null =>
+  !isArray(packageJsonData, nodeName) && !isString(packageJsonData, nodeName)
+    ? new LintIssue(lintId, severity, nodeName, message)
+    : null;

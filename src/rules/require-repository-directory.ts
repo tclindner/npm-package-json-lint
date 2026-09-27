@@ -16,9 +16,5 @@ export const lint = (packageJsonData: PackageJson | any, severity: Severity): Li
     return new LintIssue(lintId, severity, nodeName, parentNodeMessage);
   }
 
-  if (!packageJsonData[nodeName].hasOwnProperty('directory')) {
-    return new LintIssue(lintId, severity, nodeName, message);
-  }
-
-  return null;
+  return packageJsonData[nodeName].hasOwnProperty('directory') ? null : new LintIssue(lintId, severity, nodeName, message);
 };
