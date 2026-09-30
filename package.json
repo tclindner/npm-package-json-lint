@@ -37,7 +37,7 @@
     "test:ci": "jest --runInBand"
   },
   "dependencies": {
-    "chalk": "4.1.2",
+    "chalk": "6.0.1",
     "cosmiconfig": "10.0.1",
     "debug": "4.4.3",
     "globby": "11.1.0",
