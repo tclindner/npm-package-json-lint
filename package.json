@@ -67,7 +67,7 @@
     "globals": "17.13.0",
     "jest": "30.5.2",
     "npm-package-json-lint-config-default": "10.0.0",
-    "prettier": "3.9.9",
+    "prettier": "3.9.10",
     "ts-jest": "29.4.14",
     "tsdown": "0.23.0",
     "typescript": "6.0.3",
