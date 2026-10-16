@@ -24,4 +24,12 @@ export default [
       '@typescript-eslint/naming-convention': 'off',
     },
   },
+  {
+    files: ['tsdown.config.ts'],
+    rules: {
+      // tsdown isn't in this rule's built-in list of known-pure config builders (unlike vite/vitest/rollup),
+      // so calling its `defineConfig` at the top level of this config file is otherwise flagged.
+      'unicorn/no-top-level-side-effects': ['error', {allow: {tsdown: ['defineConfig']}}],
+    },
+  },
 ];

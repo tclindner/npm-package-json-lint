@@ -18,12 +18,12 @@ const pkg = require('../package.json');
 const noIssues = 0;
 
 /**
- * Checks if the given issue is an error issue.
- *
- * @param issue A {@link LintIssue} object
- * @returns True if error, false if warning.
- * @private
- */
+Checks if the given issue is an error issue.
+
+@param issue A {@link LintIssue} object
+@returns True if error, false if warning.
+@private
+*/
 const isIssueAnError = (issue: LintIssue): boolean => issue.severity === Severity.Error;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -35,11 +35,11 @@ const isRequiredOptionsValid = (packageJsonObject: PackageJson | any, patterns: 
   (patterns && (packageJsonObject || isPackageJsonObjectValid(packageJsonObject)));
 
 /**
- * Filters results to only include errors.
- *
- * @param results The results to filter.
- * @returns The filtered results.
- */
+Filters results to only include errors.
+
+@param results The results to filter.
+@returns The filtered results.
+*/
 const getErrorResults = (results: PackageJsonFileLintingResult[]): PackageJsonFileLintingResult[] => {
   const filtered = [];
 
@@ -48,15 +48,17 @@ const getErrorResults = (results: PackageJsonFileLintingResult[]): PackageJsonFi
     // eslint-disable-next-line unicorn/no-array-callback-reference
     const filteredIssues = result.issues.filter(isIssueAnError);
 
-    if (filteredIssues.length > noIssues) {
-      const filteredResult = {
-        issues: filteredIssues,
-        errorCount: filteredIssues.length,
-        warningCount: 0,
-      };
-
-      filtered.push(Object.assign(result, filteredResult));
+    if (filteredIssues.length <= noIssues) {
+      return;
     }
+
+    const filteredResult = {
+      issues: filteredIssues,
+      errorCount: filteredIssues.length,
+      warningCount: 0,
+    };
+
+    filtered.push(Object.assign(result, filteredResult));
   });
 
   return filtered;
@@ -104,10 +106,10 @@ export class NpmPackageJsonLint {
   configHelper: Config;
 
   /**
-   * constructor
-   * @param options An instance of the {@link NpmPackageJsonLintOptions} options object.
-   * @constructor
-   */
+  constructor
+  @param options An instance of the {@link NpmPackageJsonLintOptions} options object.
+  @constructor
+  */
   constructor(options: NpmPackageJsonLintOptions) {
     const {
       cwd,
@@ -117,9 +119,9 @@ export class NpmPackageJsonLint {
       configFile,
       configBaseDirectory,
       patterns,
-      quiet,
-      ignorePath,
-      fix,
+      quiet = false,
+      ignorePath = '',
+      fix = false,
     } = options;
 
     this.cwd = slash(cwd || process.cwd());
@@ -127,9 +129,9 @@ export class NpmPackageJsonLint {
     this.packageJsonObject = packageJsonObject;
     this.packageJsonFilePath = packageJsonFilePath ? slash(packageJsonFilePath) : packageJsonFilePath;
     this.patterns = patterns;
-    this.quiet = quiet || false;
-    this.ignorePath = ignorePath || '';
-    this.fix = fix || false;
+    this.quiet = quiet;
+    this.ignorePath = ignorePath;
+    this.fix = fix;
 
     this.version = pkg.version;
 
@@ -140,10 +142,10 @@ export class NpmPackageJsonLint {
   }
 
   /**
-   * Runs the linter using the config specified in the constructor
-   *
-   * @returns The results {@link OverallLintingResult} from linting a collection of package.json files.
-   */
+  Runs the linter using the config specified in the constructor
+  
+  @returns The results {@link OverallLintingResult} from linting a collection of package.json files.
+  */
   // eslint-disable-next-line max-lines-per-function
   lint(): OverallLintingResult {
     debug('Starting lint');

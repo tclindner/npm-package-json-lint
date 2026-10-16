@@ -13,9 +13,9 @@ export const ruleType = RuleType.Standard;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const lint = (packageJsonData: PackageJson | any, severity: Severity): LintIssue | null => {
   /**
-   * If we send package JSON straight to npm-package-json-lint, fallback to empty string.
-   * Because we already lose information about duplicate properties.
-   */
+  If we send package JSON straight to npm-package-json-lint, fallback to empty string.
+  Because we already lose information about duplicate properties.
+  */
   const source = packageJsonData[sourceSymbol] || '';
   const dupProps = findDuplicatePropNames(source);
 
