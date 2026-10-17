@@ -3,11 +3,11 @@ import {Severity} from '../types/severity';
 import type {PackageJsonFileLintingResult} from '../types/package-json-linting-result';
 
 /**
- * A result count object for a files.
- * @typedef {Object} FileResultCounts
- * @property {number} errorCount    Number of errors for a file result.
- * @property {number} warningCount  Number of warnings for a file result.
- */
+A result count object for a files.
+@typedef {Object} FileResultCounts
+@property {number} errorCount    Number of errors for a file result.
+@property {number} warningCount  Number of warnings for a file result.
+*/
 
 export interface PackageJsonFileAggregatedResultCounts {
   errorCount: number;
@@ -15,11 +15,11 @@ export interface PackageJsonFileAggregatedResultCounts {
 }
 
 /**
- * Aggregates the count of errors and warning for a package.json file.
- *
- * @param issues Array of {@link LintIssue} objects from a package.json file.
- * @returns Counts object {@link PackageJsonFileAggregatedResultCounts}.
- */
+Aggregates the count of errors and warning for a package.json file.
+
+@param issues Array of {@link LintIssue} objects from a package.json file.
+@returns Counts object {@link PackageJsonFileAggregatedResultCounts}.
+*/
 export const aggregateCountsPerFile = (issues: LintIssue[]): PackageJsonFileAggregatedResultCounts => {
   const incrementOne = 1;
 
@@ -44,25 +44,25 @@ export const aggregateCountsPerFile = (issues: LintIssue[]): PackageJsonFileAggr
 
 export interface OverallAggregatedResultCounts {
   /**
-   * Total number of ignored files.
-   */
+  Total number of ignored files.
+  */
   ignoreCount: number;
   /**
-   * Total number of errors.
-   */
+  Total number of errors.
+  */
   errorCount: number;
   /**
-   * Total number of warnings.
-   */
+  Total number of warnings.
+  */
   warningCount: number;
 }
 
 /**
- * Aggregates the count of errors and warnings for all package.json files.
- *
- * @param results Array of {@link PackageJsonFileLintingResult} objects from all package.json files.
- * @returns Counts object {@link OverallAggregatedResultCounts}
- */
+Aggregates the count of errors and warnings for all package.json files.
+
+@param results Array of {@link PackageJsonFileLintingResult} objects from all package.json files.
+@returns Counts object {@link OverallAggregatedResultCounts}
+*/
 export const aggregateOverallCounts = (results: PackageJsonFileLintingResult[]): OverallAggregatedResultCounts =>
   // eslint-disable-next-line unicorn/no-array-reduce
   results.reduce(

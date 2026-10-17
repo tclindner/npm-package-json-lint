@@ -8,12 +8,12 @@ import {
 } from './ConfigSchema';
 
 /**
- * Validates object rule config
- *
- * @param  {Object}     ruleConfig  Object rule
- * @return {Boolean}               True if config is valid, false if not
- * @static
- */
+Validates object rule config
+
+@param  {Object}     ruleConfig  Object rule
+@return {Boolean}               True if config is valid, false if not
+@static
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isObjectRuleConfigValid = (ruleConfig: any): any => {
   if (typeof ruleConfig === 'string' && ruleConfig === 'off') {
@@ -28,12 +28,12 @@ const isObjectRuleConfigValid = (ruleConfig: any): any => {
 };
 
 /**
- * Validates optional object rule config
- *
- * @param  {Object}   ruleConfig  Object rule
- * @return {Boolean}              True if config is valid, false if not
- * @static
- */
+Validates optional object rule config
+
+@param  {Object}   ruleConfig  Object rule
+@return {Boolean}              True if config is valid, false if not
+@static
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isOptionalObjRuleConfigValid = (ruleConfig: any): any => {
   if (typeof ruleConfig === 'string') {
@@ -42,21 +42,19 @@ const isOptionalObjRuleConfigValid = (ruleConfig: any): any => {
 
   const object = 1;
 
-  if (isObjectRuleSchemaValid(ruleConfig) && ruleConfig[object].hasOwnProperty('exceptions')) {
-    return isOptionalObjExceptSchemaValid(ruleConfig[object].exceptions);
-  }
-
-  return true;
+  return isObjectRuleSchemaValid(ruleConfig) && ruleConfig[object].hasOwnProperty('exceptions')
+    ? isOptionalObjExceptSchemaValid(ruleConfig[object].exceptions)
+    : true;
 };
 
 /**
- * Validates array rule config
- *
- * @param  {Array}     ruleConfig  Array rule
- * @param  {number}    minItems    Min number of items in the array
- * @return {Boolean}               True if config is valid, false if not
- * @static
- */
+Validates array rule config
+
+@param  {Array}     ruleConfig  Array rule
+@param  {number}    minItems    Min number of items in the array
+@return {Boolean}               True if config is valid, false if not
+@static
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isArrayRuleConfigValid = (ruleConfig: any, minItems: any): any => {
   if (typeof ruleConfig === 'string' && ruleConfig === 'off') {
@@ -71,24 +69,24 @@ const isArrayRuleConfigValid = (ruleConfig: any, minItems: any): any => {
 };
 
 /**
- * Validates standard rule config
- *
- * @param {Object}      ruleConfig  Value for standard rule config
- * @return {Boolean}                True if config is valid, error if not
- * @static
- */
+Validates standard rule config
+
+@param {Object}      ruleConfig  Value for standard rule config
+@return {Boolean}                True if config is valid, error if not
+@static
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isStandardRuleConfigValid = (ruleConfig: any): any => isStandardRuleSchemaValid(ruleConfig);
 
 /**
- * Validates configuration of a rule
- *
- * @param {Object} ruleModule The rule object.
- * @param {string} ruleName The rule's unique name.
- * @param {Array|String} userConfig The user's configuration for a rule.
- * @param {String|null} source The name of the configuration source to report in any errors.
- * @returns {undefined} No return
- */
+Validates configuration of a rule
+
+@param {Object} ruleModule The rule object.
+@param {string} ruleName The rule's unique name.
+@param {Array|String} userConfig The user's configuration for a rule.
+@param {String|null} source The name of the configuration source to report in any errors.
+@returns {undefined} No return
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const validateRule = (ruleModule: any, ruleName: any, userConfig: any, source: any): any => {
   if (ruleModule) {
@@ -116,8 +114,7 @@ const validateRule = (ruleModule: any, ruleName: any, userConfig: any, source: a
     } catch (error_) {
       const modifiedErrorMessage = `Configuration for rule "${ruleName}" is invalid:\n${error_.message}`;
 
-      const error =
-        typeof source === 'string' ? new Error(`${source}:\n\t${modifiedErrorMessage}`) : new Error(modifiedErrorMessage);
+      const error = new Error(typeof source === 'string' ? `${source}:\n\t${modifiedErrorMessage}` : modifiedErrorMessage);
 
       throw error;
     }
@@ -125,14 +122,14 @@ const validateRule = (ruleModule: any, ruleName: any, userConfig: any, source: a
 };
 
 /**
- * Validates only the rules of a config object
- *
- * @param {Object} rulesConfig The rules config object to validate.
- * @param {String} source The name of the configuration source to report in any errors.
- * @param {Object} rules  Rules object
- * @returns {undefined} No return
- * @static
- */
+Validates only the rules of a config object
+
+@param {Object} rulesConfig The rules config object to validate.
+@param {String} source The name of the configuration source to report in any errors.
+@param {Object} rules  Rules object
+@returns {undefined} No return
+@static
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const validateRules = (rulesConfig: any, source: any, rules: any): any => {
   if (!rulesConfig) {
@@ -148,14 +145,14 @@ export const validateRules = (rulesConfig: any, source: any, rules: any): any =>
 };
 
 /**
- * Validates entire config object, including top-level properties.
- *
- * @param {Object} config The config object to validate.
- * @param {String} source The name of the configuration source to report in any errors.
- * @param {Object} rules  Rules object
- * @returns {undefined} No return
- * @static
- */
+Validates entire config object, including top-level properties.
+
+@param {Object} config The config object to validate.
+@param {String} source The name of the configuration source to report in any errors.
+@param {Object} rules  Rules object
+@returns {undefined} No return
+@static
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const validate = (config: any, source: any, rules: any): any => {
   isConfigObjectSchemaValid(config, source);
