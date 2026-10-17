@@ -2,65 +2,45 @@ import type {PackageJson} from 'type-fest';
 import {isPlainObj} from '../utils/isPlainObj';
 
 /**
- * Determines whether or not the node's value is an Array
- *
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @return True if the node is an array or is missing. False if it is not.
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const isArray = (packageJsonData: PackageJson | any, nodeName: string): boolean => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return true;
-  }
+Determines whether or not the node's value is an Array
 
-  return Array.isArray(packageJsonData[nodeName]);
-};
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@return True if the node is an array or is missing. False if it is not.
+*/
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isArray = (packageJsonData: PackageJson | any, nodeName: string): boolean =>
+  !packageJsonData.hasOwnProperty(nodeName) || Array.isArray(packageJsonData[nodeName]);
 
 /**
- * Determines whether or not the node's value is a boolean
- *
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @return True if the node is a boolean or is missing. False if it is not.
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const isBoolean = (packageJsonData: PackageJson | any, nodeName: string): boolean => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return true;
-  }
+Determines whether or not the node's value is a boolean
 
-  return typeof packageJsonData[nodeName] === 'boolean';
-};
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@return True if the node is a boolean or is missing. False if it is not.
+*/
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isBoolean = (packageJsonData: PackageJson | any, nodeName: string): boolean =>
+  !packageJsonData.hasOwnProperty(nodeName) || typeof packageJsonData[nodeName] === 'boolean';
 
 /**
- * Determines whether or not the node's value is an object
- *
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @return True if the node is an object or is missing. False if it is not.
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const isObject = (packageJsonData: PackageJson | any, nodeName: string): boolean => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return true;
-  }
+Determines whether or not the node's value is an object
 
-  return isPlainObj(packageJsonData[nodeName]);
-};
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@return True if the node is an object or is missing. False if it is not.
+*/
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isObject = (packageJsonData: PackageJson | any, nodeName: string): boolean =>
+  packageJsonData.hasOwnProperty(nodeName) ? isPlainObj(packageJsonData[nodeName]) : true;
 
 /**
- * Determines whether or not the node's value is a string
- *
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @return True if the node is a string or is missing. False if it is not.
- */
+Determines whether or not the node's value is a string
+
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@return True if the node is a string or is missing. False if it is not.
+*/
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-explicit-any
-export const isString = (packageJsonData: PackageJson | any, nodeName: string) => {
-  if (!packageJsonData.hasOwnProperty(nodeName)) {
-    return true;
-  }
-
-  return typeof packageJsonData[nodeName] === 'string';
-};
+export const isString = (packageJsonData: PackageJson | any, nodeName: string) =>
+  !packageJsonData.hasOwnProperty(nodeName) || typeof packageJsonData[nodeName] === 'string';

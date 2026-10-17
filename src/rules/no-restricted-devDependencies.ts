@@ -19,14 +19,12 @@ export const lint = (
 ): LintIssue | null => {
   const auditResult = auditDependenciesWithRestrictedPackage(packageJsonData, nodeName, invalidDependencies);
 
-  if (auditResult.hasDependencyWithRestrictedPackage) {
-    return new LintIssue(
-      lintId,
-      severity,
-      nodeName,
-      `You are using a restricted dependency. Please remove it. Invalid ${nodeName} include: ${auditResult.errorMessage}`,
-    );
-  }
-
-  return null;
+  return auditResult.hasDependencyWithRestrictedPackage
+    ? new LintIssue(
+        lintId,
+        severity,
+        nodeName,
+        `You are using a restricted dependency. Please remove it. Invalid ${nodeName} include: ${auditResult.errorMessage}`,
+      )
+    : null;
 };

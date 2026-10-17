@@ -5,14 +5,14 @@ import {minimatch} from 'minimatch';
 const debug = require('debug')('npm-package-json-lint:applyOverrides');
 
 /**
- * Applies values from the 'overrides' field in a configuration file.
- * @param {string} cwd       The current working directory.
- * @param {string} filePath  The file path of the file being linted.
- * @param {Object} rules     Rules object
- * @param {Object} overrides Overrides object
- * @returns {Object} A new configuration object with all of the 'overrides' applied.
- * @private
- */
+Applies values from the 'overrides' field in a configuration file.
+@param {string} cwd       The current working directory.
+@param {string} filePath  The file path of the file being linted.
+@param {Object} rules     Rules object
+@param {Object} overrides Overrides object
+@returns {Object} A new configuration object with all of the 'overrides' applied.
+@private
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const applyOverrides = (cwd: string, filePath: string, rules: any, overrides?: any[]): any => {
   let finalRules = {...rules};

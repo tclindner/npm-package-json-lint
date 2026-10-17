@@ -20,12 +20,12 @@ export interface AuditDependenciesWithRestrictedPackageResponse {
 }
 
 /**
- * Determines whether or not the package has a given dependency
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @param depsToCheckFor An array of packages to check for
- * @return True if the package has a dependency. False if it is not or the node is missing.
- */
+Determines whether or not the package has a given dependency
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@param depsToCheckFor An array of packages to check for
+@return True if the package has a dependency. False if it is not or the node is missing.
+*/
 export const auditDependenciesWithRestrictedPackage = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
@@ -93,12 +93,12 @@ export interface AuditDependenciesWithRestrictedPrereleaseVersionResponse {
 }
 
 /**
- * Determines whether or not the package has a pre-release version of a given dependency
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @param depsToCheckFor An array of packages to check for
- * @return True if the package has a pre-release version of a dependency. False if it is not or the node is missing.
- */
+Determines whether or not the package has a pre-release version of a given dependency
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@param depsToCheckFor An array of packages to check for
+@return True if the package has a pre-release version of a dependency. False if it is not or the node is missing.
+*/
 export const auditDependenciesWithRestrictedPrereleaseVersion = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
@@ -148,12 +148,12 @@ export interface AuditDependenciesWithMajorVersionOfZeroResponse {
 }
 
 /**
- * Determines whether or not the package has a dependency with a major version of 0
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @param config Rule configuration
- * @return True if the package has a dependency with version 0. False if it does not or the node is missing.
- */
+Determines whether or not the package has a dependency with a major version of 0
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@param config Rule configuration
+@return True if the package has a dependency with version 0. False if it does not or the node is missing.
+*/
 export const auditDependenciesWithMajorVersionOfZero = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
@@ -174,21 +174,24 @@ export const auditDependenciesWithMajorVersionOfZero = (
 
     const dependencyVersRange = packageJsonData[nodeName][dependencyName];
 
-    if (semver.validRange(dependencyVersRange)) {
-      const startIndex = 0;
-      const length = 1;
-      // eslint-disable-next-line unicorn/prefer-string-replace-all
-      const dependencyVersion = dependencyVersRange.replace(/\D+/g, '');
-      // eslint-disable-next-line unicorn/prefer-string-slice
-      const dependencyMjrVersion = dependencyVersion.substr(startIndex, length);
+    if (!semver.validRange(dependencyVersRange)) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
 
-      // if first char is 0 then major version is 0
-      if (dependencyMjrVersion === '0') {
-        hasDependencyWithMajorVersionOfZero = true;
-        dependenciesWithMajorVersionOfZero.push(dependencyName);
-      } else {
-        dependenciesWithoutMajorVersionOfZero.push(dependencyName);
-      }
+    const startIndex = 0;
+    const length = 1;
+    // eslint-disable-next-line unicorn/prefer-string-replace-all
+    const dependencyVersion = dependencyVersRange.replace(/\D+/g, '');
+    // eslint-disable-next-line unicorn/prefer-string-slice
+    const dependencyMjrVersion = dependencyVersion.substr(startIndex, length);
+
+    // if first char is 0 then major version is 0
+    if (dependencyMjrVersion === '0') {
+      hasDependencyWithMajorVersionOfZero = true;
+      dependenciesWithMajorVersionOfZero.push(dependencyName);
+    } else {
+      dependenciesWithoutMajorVersionOfZero.push(dependencyName);
     }
   }
 
@@ -200,11 +203,11 @@ export const auditDependenciesWithMajorVersionOfZero = (
 };
 
 /**
- * Determines if the dependencies version string starts with the specified range
- * @param  {String}   dependencyVersion   Dependency's version range
- * @param  {String}   rangeSpecifier      A version range specifier
- * @return {Boolean}                      True if the version starts with the range, false if it doesn't.
- */
+Determines if the dependencies version string starts with the specified range
+@param  {String}   dependencyVersion   Dependency's version range
+@param  {String}   rangeSpecifier      A version range specifier
+@return {Boolean}                      True if the version starts with the range, false if it doesn't.
+*/
 export const isVersionStartingWithRange = (dependencyVersion: string, rangeSpecifier: string): boolean => {
   const firstCharOfStr = 0;
 
@@ -218,13 +221,13 @@ export interface AuditDependenciesForValidRangeResponse {
 }
 
 /**
- * Determines whether or not all dependency version ranges match expected range
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @param rangeSpecifier A version range specifier
- * @param config Rule configuration
- * @return False if the package has an invalid range. True if it is not or the node is missing.
- */
+Determines whether or not all dependency version ranges match expected range
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@param rangeSpecifier A version range specifier
+@param config Rule configuration
+@return False if the package has an invalid range. True if it is not or the node is missing.
+*/
 export const auditDependenciesForValidRangeVersions = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
@@ -277,13 +280,13 @@ export interface AuditDependenciesForInvalidRangeResponse {
 }
 
 /**
- * Determines if any dependencies have a version string that starts with the specified invalid range
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @param rangeSpecifier A version range specifier
- * @param config Rule configuration
- * @return True if any dependencies versions start with the invalid range, false if they don't.
- */
+Determines if any dependencies have a version string that starts with the specified invalid range
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@param rangeSpecifier A version range specifier
+@param config Rule configuration
+@return True if any dependencies versions start with the invalid range, false if they don't.
+*/
 export const auditDependenciesForInvalidRange = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
@@ -336,12 +339,12 @@ export interface AbsoluteVersionCheckerResult {
 }
 
 /**
- * Determines whether or not all dependency versions are absolute
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @param config Rule configuration
- * @return False if the package has an non-absolute version. True if it is not or the node is missing.
- */
+Determines whether or not all dependency versions are absolute
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@param config Rule configuration
+@return False if the package has an non-absolute version. True if it is not or the node is missing.
+*/
 const auditAbsoluteVersions = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
@@ -395,12 +398,12 @@ export interface AuditDependenciesForAbsoluteVersionResponse {
 }
 
 /**
- * Determines whether or not all dependency versions are absolut
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @param config Rule configuration
- * @return False if the package has an non-absolute version. True if it is not or the node is missing.
- */
+Determines whether or not all dependency versions are absolut
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@param config Rule configuration
+@return False if the package has an non-absolute version. True if it is not or the node is missing.
+*/
 export const auditDependenciesForAbsoluteVersion = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
@@ -429,12 +432,12 @@ export interface AuditDependenciesForNonAbsoluteVersionResponse {
 }
 
 /**
- * Determines whether or not all dependency versions are absolut
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @param config Rule configuration
- * @return False if the package has an non-absolute version. True if it is not or the node is missing.
- */
+Determines whether or not all dependency versions are absolut
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@param config Rule configuration
+@return False if the package has an non-absolute version. True if it is not or the node is missing.
+*/
 export const auditDependenciesForNonAbsoluteVersion = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
@@ -450,7 +453,7 @@ export const auditDependenciesForNonAbsoluteVersion = (
   } = auditAbsoluteVersions(packageJsonData, nodeName, config);
 
   return {
-    onlyNonAbsoluteVersionsDetected: dependenciesChecked > 0 ? !onlyAbsoluteVersionDetected : false,
+    onlyNonAbsoluteVersionsDetected: dependenciesChecked > 0 && !onlyAbsoluteVersionDetected,
     dependenciesWithAbsoluteVersion,
     dependenciesWithoutAbsoluteVersion,
   };
@@ -459,25 +462,25 @@ export const auditDependenciesForNonAbsoluteVersion = (
 const GITHUB_SHORTCUT_URL = /^(github:)?[^/]+\/[^/]+/;
 
 /**
- * Determines whether or not version is a shortcut to GitHub repository
- * @param version       value of package's version
- * @return {boolean}    True if the version is a shortcut to GitHub repository
- */
+Determines whether or not version is a shortcut to GitHub repository
+@param version       value of package's version
+@return {boolean}    True if the version is a shortcut to GitHub repository
+*/
 const isGithubRepositoryShortcut = (version): boolean => GITHUB_SHORTCUT_URL.test(version);
 
 /**
- * Determines whether or not version is URL to archive
- * @param version       value of package's version
- * @return {boolean}    True if the version is URL to archive
- */
+Determines whether or not version is URL to archive
+@param version       value of package's version
+@return {boolean}    True if the version is URL to archive
+*/
 const isArchiveUrl = (version: string): boolean =>
   version.endsWith('.tgz') || version.endsWith('.tar.gz') || version.endsWith('.zip');
 
 /**
- * Determines whether or not version is Git repository URL
- * @param version       value of package's version
- * @return {boolean}    True if the version is an Git repo URL.
- */
+Determines whether or not version is Git repository URL
+@param version       value of package's version
+@return {boolean}    True if the version is an Git repo URL.
+*/
 const isGitRepositoryUrl = (version: string): boolean => {
   if (isArchiveUrl(version)) {
     return false;
@@ -509,12 +512,12 @@ export interface AuditDependenciesForGitRepositoryVersionResponse {
 }
 
 /**
- * Determines whether or not dependency versions are Git repository
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @param config Rule configuration
- * @return True if the package has an Git repo.
- */
+Determines whether or not dependency versions are Git repository
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@param config Rule configuration
+@return True if the package has an Git repo.
+*/
 export const auditDependenciesForGitRepositoryVersion = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
@@ -557,12 +560,12 @@ export interface AuditDependenciesForArchiveUrlVersionResponse {
 }
 
 /**
- * Determines whether or not dependency versions contains archive URL
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @param config Rule configuration
- * @return True if the package contain archive URL.
- */
+Determines whether or not dependency versions contains archive URL
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@param config Rule configuration
+@return True if the package contain archive URL.
+*/
 export const auditDependenciesForArchiveUrlVersion = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,
@@ -605,12 +608,12 @@ export interface AuditDependenciesForFileUrlVersionResponse {
 }
 
 /**
- * Determines whether or not dependency versions contains file URL
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @param config Rule configuration
- * @return True if the package contain file URL.
- */
+Determines whether or not dependency versions contains file URL
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@param config Rule configuration
+@return True if the package contain file URL.
+*/
 export const auditDependenciesForFileUrlVersion = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,

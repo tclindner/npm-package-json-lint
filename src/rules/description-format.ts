@@ -48,9 +48,7 @@ export const lint = (
     return new LintIssue(lintId, severity, nodeName, 'The description should end with a period.');
   }
 
-  if (config.hasOwnProperty('forbidEndingPeriod') && config.forbidEndingPeriod && description.endsWith('.')) {
-    return new LintIssue(lintId, severity, nodeName, 'The description should not end with a period.');
-  }
-
-  return null;
+  return config.hasOwnProperty('forbidEndingPeriod') && config.forbidEndingPeriod && description.endsWith('.')
+    ? new LintIssue(lintId, severity, nodeName, 'The description should not end with a period.')
+    : null;
 };
