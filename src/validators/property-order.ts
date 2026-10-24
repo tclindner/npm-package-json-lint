@@ -65,12 +65,12 @@ export interface PreferredOrderResult {
 }
 
 /**
- * Determines whether an array is in the specified order
- *
- * @param packageJsonData         Valid JSON
- * @param userPreferredNodeOrder Preferred order of nodes
- * @return Object containing the status and the node that is out of order, if applicable
- */
+Determines whether an array is in the specified order
+
+@param packageJsonData         Valid JSON
+@param userPreferredNodeOrder Preferred order of nodes
+@return Object containing the status and the node that is out of order, if applicable
+*/
 export const checkPreferredOrder = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,

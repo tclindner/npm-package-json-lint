@@ -5,14 +5,14 @@ import {parseJavaScriptFile, parseJsonFile} from '../file-parser';
 const debug = require('debug')('npm-package-json-lint:applyExtendsIfSpecified');
 
 /**
- * Applies values from the 'extends' field in a configuration file.
- *
- * @param {Object} config         The configuration information.
- * @param {string} parentName     Name of parent. For troubleshooting.
- * @param {Object} originalFilePath Base config file the extends originated from
- * @returns {Object} A new configuration object with all of the 'extends' fields loaded and merged.
- * @private
- */
+Applies values from the 'extends' field in a configuration file.
+
+@param {Object} config         The configuration information.
+@param {string} parentName     Name of parent. For troubleshooting.
+@param {Object} originalFilePath Base config file the extends originated from
+@returns {Object} A new configuration object with all of the 'extends' fields loaded and merged.
+@private
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const applyExtends = (config: any, parentName: any, originalFilePath: any): any => {
   const configExtends = Array.isArray(config.extends) ? config.extends : [config.extends];
@@ -60,13 +60,13 @@ const applyExtends = (config: any, parentName: any, originalFilePath: any): any 
 };
 
 /**
- * Gets configuration from a extends config module
- *
- * @param  {String} moduleName       Name of the configuration module
- * @param  {Object} originalFilePath Base config file the extends originated from
- * @return {Object}                  Configuration object
- * @private
- */
+Gets configuration from a extends config module
+
+@param  {String} moduleName       Name of the configuration module
+@param  {Object} originalFilePath Base config file the extends originated from
+@return {Object}                  Configuration object
+@private
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const loadFromModule = (moduleName: any, originalFilePath: any): any => {
   let config;
@@ -91,13 +91,13 @@ const loadFromModule = (moduleName: any, originalFilePath: any): any => {
 };
 
 /**
- * Loads a configuration file regardless of the source. Inspects the file path
- * to determine the correctly way to load the config file.
- *
- * @param {Object} filePath The path to the configuration.
- * @returns {Object} The configuration information.
- * @private
- */
+Loads a configuration file regardless of the source. Inspects the file path
+to determine the correctly way to load the config file.
+
+@param {Object} filePath The path to the configuration.
+@returns {Object} The configuration information.
+@private
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const loadConfigFile = (filePath: any): any => {
   let config;
@@ -122,13 +122,13 @@ const loadConfigFile = (filePath: any): any => {
 };
 
 /**
- * Loads a configuration file from the given file path.
- *
- * @param {Object} npmPackageJsonLintConfig Parsed config from cosmicconfig
- * @param {string} filepath the path to the config file
- * @returns {Object} the parsed config object (empty object if there was a parse error)
- * @private
- */
+Loads a configuration file from the given file path.
+
+@param {Object} npmPackageJsonLintConfig Parsed config from cosmicconfig
+@param {string} filepath the path to the config file
+@returns {Object} the parsed config object (empty object if there was a parse error)
+@private
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const applyExtendsIfSpecified = (npmPackageJsonLintConfig: any, filepath: any): any => {
   let config = {...npmPackageJsonLintConfig};

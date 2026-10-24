@@ -2,23 +2,23 @@ import {parseTree} from 'jsonc-parser';
 import type {PackageJson} from 'type-fest';
 
 /**
- * Determines whether or not the node exists in the package.json file
- *
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @return True if the node exists. False if it is not.
- */
+Determines whether or not the node exists in the package.json file
+
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@return True if the node exists. False if it is not.
+*/
 // `exists` is used across 29 files; renaming risks colliding with unrelated string literals (e.g. no-repeated-dependencies.ts).
 // eslint-disable-next-line @typescript-eslint/no-explicit-any, unicorn/consistent-boolean-name
 export const exists = (packageJsonData: PackageJson | any, nodeName: string): boolean =>
   packageJsonData.hasOwnProperty(nodeName);
 
 /**
- * Search for duplicate properties in package.json file
- *
- * @param packageJsonSource JSON source string
- * @return List of duplicate property names.
- */
+Search for duplicate properties in package.json file
+
+@param packageJsonSource JSON source string
+@return List of duplicate property names.
+*/
 export const findDuplicatePropNames = (packageJsonSource: string): string[] => {
   const tree = parseTree(packageJsonSource);
 
