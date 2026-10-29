@@ -40,10 +40,15 @@ const runNpm = (arguments_, cwd, npmUserConfig) =>
 
 const readPackageVersion = (packageJsonPath) => JSON.parse(readFileSync(packageJsonPath, 'utf8')).version;
 
-const runPackedCli = (consumerDirectory) =>
+const runPackedCli = (consumerDirectory, arguments_ = [], cliPath = '') =>
   spawnSync(
     process.execPath,
-    [path.join(consumerDirectory, 'node_modules', 'npm-package-json-lint', 'dist', 'cli.js'), '--quiet', './package.json'],
+    [
+      cliPath || path.join(consumerDirectory, 'node_modules', 'npm-package-json-lint', 'dist', 'cli.js'),
+      ...arguments_,
+      '--quiet',
+      './package.json',
+    ],
     {
       cwd: consumerDirectory,
       encoding: 'utf8',
@@ -54,14 +59,16 @@ const runPackedCli = (consumerDirectory) =>
     },
   );
 
-const runPackedApi = (consumerDirectory) =>
+const runPackedApi = (consumerDirectory, options) =>
   spawnSync(
     process.execPath,
     [
       '--eval',
       `const {NpmPackageJsonLint} = require('npm-package-json-lint');
-const result = new NpmPackageJsonLint({cwd: process.cwd(), patterns: ['./package.json']}).lint();
+const result = new NpmPackageJsonLint({...JSON.parse(process.argv[1]), cwd: process.cwd()}).lint();
+console.log(JSON.stringify(result));
 if (result.errorCount > 0) process.exitCode = 2;`,
+      JSON.stringify(options || {patterns: ['./package.json']}),
     ],
     {
       cwd: consumerDirectory,
@@ -140,4 +147,94 @@ describe('packed consumer', () => {
       rmSync(temporaryRoot, {recursive: true, force: true});
     }
   }, 120_000);
+});
+
+describe('built and packed consumer duplicate properties', () => {
+  let directory;
+
+  beforeAll(() => {
+    directory = mkdtempSync(path.join(tmpdir(), 'npm-package-json-lint-packed-duplicates-'));
+    const npmUserConfig = path.join(directory, '.npmrc');
+    writeFileSync(npmUserConfig, '');
+    writeFileSync(path.join(directory, 'package.json'), '{"name":"duplicate-properties-consumer","private":true}');
+
+    const packMetadata = JSON.parse(runNpm(['pack', '--json', '--pack-destination', directory], projectRoot));
+    const packEntries = Array.isArray(packMetadata) ? packMetadata : Object.values(packMetadata);
+    runNpm(
+      [
+        'install',
+        '--ignore-scripts',
+        '--no-audit',
+        '--no-fund',
+        '--package-lock=false',
+        path.join(directory, packEntries[0].filename),
+      ],
+      directory,
+      npmUserConfig,
+    );
+  }, 120_000);
+
+  afterAll(() => {
+    if (directory) {
+      rmSync(directory, {recursive: true, force: true});
+    }
+  });
+
+  test.each([
+    {description: 'valid JSON', source: '{"name":"a"}'},
+    {description: 'top-level duplicates', source: '{"name":"a","name":"b"}', duplicate: 'name'},
+    {description: 'nested duplicates', source: '{"scripts":{"build":"a","build":"b"}}', duplicate: 'build'},
+    {description: 'keys in separate objects', source: '{"scripts":{"build":"a"},"config":{"build":"b"}}'},
+    {description: 'disabled top-level duplicates', source: '{"name":"a","name":"b"}', severity: 'off'},
+    {description: 'disabled nested duplicates', source: '{"scripts":{"build":"a","build":"b"}}', severity: 'off'},
+  ])('$description', ({source, severity = 'error', duplicate}) => {
+    const config = {rules: {'no-duplicate-properties': severity}};
+    const configFile = path.join(directory, '.npmpackagejsonlintrc.json');
+    writeFileSync(configFile, JSON.stringify(config));
+    writeFileSync(path.join(directory, 'package.json'), source);
+
+    const expectedProcess = expect.objectContaining({status: duplicate ? 2 : 0, stderr: ''});
+    const arguments_ = ['--configFile', configFile];
+    const expectedCli = expect.objectContaining({
+      status: duplicate ? 2 : 0,
+      stderr: '',
+      stdout: expect.stringMatching(
+        duplicate ? new RegExp(`no-duplicate-properties.*Please remove duplicates for: ${duplicate}[.]`) : /^$/u,
+      ),
+    });
+    expect([
+      runPackedCli(directory, arguments_),
+      runPackedCli(directory, arguments_, path.join(projectRoot, 'dist', 'cli.js')),
+    ]).toStrictEqual([expectedCli, expectedCli]);
+    const api = runPackedApi(directory, {patterns: ['./package.json'], config});
+    expect(api).toStrictEqual(expectedProcess);
+    const errorCount = duplicate ? 1 : 0;
+    const expectedIssue = expect.objectContaining({
+      lintId: 'no-duplicate-properties',
+      severity: 'error',
+      lintMessage: `Duplicate properties detected. Please remove duplicates for: ${duplicate}.`,
+    });
+    expect(JSON.parse(api.stdout)).toStrictEqual(
+      expect.objectContaining({
+        errorCount,
+        results: [expect.objectContaining({ignored: false, errorCount, issues: duplicate ? [expectedIssue] : []})],
+      }),
+    );
+  });
+
+  test('object input without source metadata preserves the fallback', () => {
+    const api = runPackedApi(directory, {
+      packageJsonObject: JSON.parse('{"name":"a","name":"b"}'),
+      packageJsonFilePath: './package.json',
+      config: {rules: {'no-duplicate-properties': 'error'}},
+    });
+
+    expect(api).toStrictEqual(expect.objectContaining({status: 0, stderr: ''}));
+    expect(JSON.parse(api.stdout)).toStrictEqual(
+      expect.objectContaining({
+        errorCount: 0,
+        results: [expect.objectContaining({ignored: false, issues: []})],
+      }),
+    );
+  });
 });
