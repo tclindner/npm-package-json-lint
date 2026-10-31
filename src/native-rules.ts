@@ -18,10 +18,10 @@ export class Rules {
   }
 
   /**
-   * Loads rules
-   *
-   * @return Set of rules
-   */
+  Loads rules
+  
+  @return Set of rules
+  */
   load(): Record<string, string> {
     const rulesDirectory = path.join(__dirname, 'rules');
 
@@ -44,11 +44,11 @@ export class Rules {
   }
 
   /**
-   * Loads a rule module
-   *
-   * @param ruleId Name of the rule
-   * @return Rule module
-   */
+  Loads a rule module
+  
+  @param ruleId Name of the rule
+  @return Rule module
+  */
   get(ruleId: string): Rule {
     const rule = this.rules[ruleId];
 
@@ -66,20 +66,20 @@ export class Rules {
   }
 
   /**
-   * Gets entire rule set
-   *
-   * @returns Rule set
-   */
+  Gets entire rule set
+  
+  @returns Rule set
+  */
   getRules(): Record<string, string> {
     return this.rules;
   }
 
   /**
-   * Registers a rule in the rules object
-   *
-   * @param ruleId Name of the rule
-   * @param filePathToRuleModule File path to rule
-   */
+  Registers a rule in the rules object
+  
+  @param ruleId Name of the rule
+  @param filePathToRuleModule File path to rule
+  */
   registerRule(ruleId: string, filePathToRuleModule: string): void {
     this.rules[ruleId] = filePathToRuleModule;
   }

@@ -15,38 +15,38 @@ const debug = require('debug')('npm-package-json-lint:linter');
 
 export interface CreateResultObjectOptions {
   /**
-   * The current working directory.
-   */
+  The current working directory.
+  */
   cwd: string;
   /**
-   * An optional string representing the package.json file.
-   */
+  An optional string representing the package.json file.
+  */
   fileName: string;
   /**
-   * A flag indicating that the file was skipped.
-   */
+  A flag indicating that the file was skipped.
+  */
   ignored: boolean;
   /**
-   * A list of issues.
-   */
+  A list of issues.
+  */
   issues: LintIssue[];
   /**
-   * Number of errors.
-   */
+  Number of errors.
+  */
   errorCount: number;
   /**
-   * Number of warnings.
-   */
+  Number of warnings.
+  */
   warningCount: number;
 }
 
 /**
- * Creates a results object.
- *
- * @param options A {@link CreateResultObjectOptions} object
- * @returns The lint results {@link PackageJsonFileLintingResult} for the package.json file.
- * @internal
- */
+Creates a results object.
+
+@param options A {@link CreateResultObjectOptions} object
+@returns The lint results {@link PackageJsonFileLintingResult} for the package.json file.
+@internal
+*/
 const createResultObject = (options: CreateResultObjectOptions): PackageJsonFileLintingResult => {
   const {cwd, fileName, ignored, issues, errorCount, warningCount} = options;
 
@@ -60,14 +60,14 @@ const createResultObject = (options: CreateResultObjectOptions): PackageJsonFile
 };
 
 /**
- * Runs configured rules against the provided package.json object.
- *
- * @param packageJsonData Valid package.json data
- * @param configObj Configuration object
- * @param rules Object of rule definitions
- * @return An array of {@link LintIssue} objects.
- * @internal
- */
+Runs configured rules against the provided package.json object.
+
+@param packageJsonData Valid package.json data
+@param configObj Configuration object
+@param rules Object of rule definitions
+@return An array of {@link LintIssue} objects.
+@internal
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const lint = (packageJsonData: any, configObj, rules: Rules): LintIssue[] => {
   const lintIssues = [];
@@ -97,12 +97,15 @@ const lint = (packageJsonData: any, configObj, rules: Rules): LintIssue[] => {
       severity = configObj[rule];
     }
 
-    if (severity !== Severity.Off) {
-      const lintResult = ruleModule.lint(packageJsonData, severity, ruleConfig);
+    if (severity === Severity.Off) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
 
-      if (lintResult !== null) {
-        lintIssues.push(lintResult);
-      }
+    const lintResult = ruleModule.lint(packageJsonData, severity, ruleConfig);
+
+    if (lintResult !== null) {
+      lintIssues.push(lintResult);
     }
   }
 
@@ -110,16 +113,16 @@ const lint = (packageJsonData: any, configObj, rules: Rules): LintIssue[] => {
 };
 
 /**
- * Processes package.json object
- *
- * @param cwd The current working directory.
- * @param packageJsonObj   An object representation of a package.json file.
- * @param config A config object.
- * @param fileName An optional string representing the package.json file.
- * @param rules An instance of `Rules`.
- * @returns A {@link PackageJsonFileLintingResult} object with the result of linting a package.json file.
- * @internal
- */
+Processes package.json object
+
+@param cwd The current working directory.
+@param packageJsonObj   An object representation of a package.json file.
+@param config A config object.
+@param fileName An optional string representing the package.json file.
+@param rules An instance of `Rules`.
+@returns A {@link PackageJsonFileLintingResult} object with the result of linting a package.json file.
+@internal
+*/
 const processPackageJsonObject = (
   cwd: string,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -143,15 +146,15 @@ const processPackageJsonObject = (
 };
 
 /**
- * Processes a package.json file.
- *
- * @param cwd The current working directory.
- * @param fileName The filename of the file being linted.
- * @param config A config object.
- * @param rules An instance of `Rules`.
- * @returns A {@link PackageJsonFileLintingResult} object with the result of linting a package.json file.
- * @internal
- */
+Processes a package.json file.
+
+@param cwd The current working directory.
+@param fileName The filename of the file being linted.
+@param config A config object.
+@param rules An instance of `Rules`.
+@returns A {@link PackageJsonFileLintingResult} object with the result of linting a package.json file.
+@internal
+*/
 const processPackageJsonFile = (cwd: string, fileName: string, config, rules: Rules): PackageJsonFileLintingResult => {
   const packageJsonObj = parseJsonFile(path.resolve(fileName));
 
@@ -162,40 +165,40 @@ export interface LinterResult {
   results: LintIssue[];
   ignoreCount: number;
   /**
-   * Number of errors for the package.json file.
-   */
+  Number of errors for the package.json file.
+  */
   errorCount: number;
   /**
-   * Number of warnings for the package.json file.
-   */
+  Number of warnings for the package.json file.
+  */
   warningCount: number;
 }
 
 export interface ExecuteOnPackageJsonObjectOptions {
   /**
-   * The current working directory.
-   */
+  The current working directory.
+  */
   cwd: string;
   /**
-   *  An object representation of a package.json file.
-   */
+  An object representation of a package.json file.
+  */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonObject: PackageJson | any;
   /**
-   * An optional string representing the texts filename.
-   */
+  An optional string representing the texts filename.
+  */
   filename?: string;
   /**
-   * An instance of the `ignore` module.
-   */
+  An instance of the `ignore` module.
+  */
   ignorer: Ignore;
   /**
-   * An instance of {@Config}.
-   */
+  An instance of {@Config}.
+  */
   configHelper: Config;
   /**
-   * An instance of {@link Rules}
-   */
+  An instance of {@link Rules}
+  */
   rules: Rules;
 }
 
@@ -204,19 +207,18 @@ export interface OverallLintingResult extends OverallAggregatedResultCounts {
 }
 
 /**
- * Executes linter on package.json object
- *
- * @param options A {@link ExecuteOnPackageJsonObjectOptions} object
- * @returns The results {@link OverallLintingResult} from linting a collection of package.json files.
- */
+Executes linter on package.json object
+
+@param options A {@link ExecuteOnPackageJsonObjectOptions} object
+@returns The results {@link OverallLintingResult} from linting a collection of package.json files.
+*/
 export const executeOnPackageJsonObject = (options: ExecuteOnPackageJsonObjectOptions): OverallLintingResult => {
-  const {cwd, packageJsonObject, filename, ignorer, configHelper, rules} = options;
+  const {cwd, packageJsonObject, filename = '', ignorer, configHelper, rules} = options;
 
   debug('executing on package.json object');
   const results = [];
 
-  const filenameDefaulted = filename || '';
-  const resolvedFilename = path.isAbsolute(filenameDefaulted) ? filenameDefaulted : path.resolve(cwd, filenameDefaulted);
+  const resolvedFilename = path.isAbsolute(filename) ? filename : path.resolve(cwd, filename);
   const relativeFilePath = path.relative(cwd, resolvedFilename);
 
   let result;
@@ -258,32 +260,32 @@ export const executeOnPackageJsonObject = (options: ExecuteOnPackageJsonObjectOp
 
 export interface ExecuteOnPackageJsonFilesOptions {
   /**
-   * The current working directory.
-   */
+  The current working directory.
+  */
   cwd: string;
   /**
-   * An array of files and directory names.
-   */
+  An array of files and directory names.
+  */
   fileList: string[];
   /**
-   * An instance of the `ignore` module.
-   */
+  An instance of the `ignore` module.
+  */
   ignorer: Ignore;
   /**
-   * An instance of {@Config}.
-   */
+  An instance of {@Config}.
+  */
   configHelper: Config;
   /**
-   * An instance of {@link Rules}
-   */
+  An instance of {@link Rules}
+  */
   rules: Rules;
 }
 
 /**
- * Executes the current configuration on an array of file and directory names.
- * @param options A {@link ExecuteOnPackageJsonFilesOptions} object
- * @returns The results {@link OverallLintingResult} from linting a collection of package.json files.
- */
+Executes the current configuration on an array of file and directory names.
+@param options A {@link ExecuteOnPackageJsonFilesOptions} object
+@returns The results {@link OverallLintingResult} from linting a collection of package.json files.
+*/
 export const executeOnPackageJsonFiles = (options: ExecuteOnPackageJsonFilesOptions): OverallLintingResult => {
   const {cwd, fileList, ignorer, configHelper, rules} = options;
 

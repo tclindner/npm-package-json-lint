@@ -11,12 +11,12 @@ export interface AlphabeticalOrderResult {
 }
 
 /**
- * Determines whether an array is in alphabetical order
- *
- * @param packageJsonData Valid JSON
- * @param nodeName Name of a node in the package.json file
- * @return Object containing the status and the dependencies that are out of order, if applicable
- */
+Determines whether an array is in alphabetical order
+
+@param packageJsonData Valid JSON
+@param nodeName Name of a node in the package.json file
+@return Object containing the status and the dependencies that are out of order, if applicable
+*/
 export const checkAlphabeticalOrder = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   packageJsonData: PackageJson | any,

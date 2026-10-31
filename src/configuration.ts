@@ -11,36 +11,36 @@ const debug = require('debug')('npm-package-json-lint:Config');
 const noRules = 0;
 
 /**
- * Config class
- * @class
- */
+Config class
+@class
+*/
 export class Config {
   /**
-   * The user passed config object.
-   */
+  The user passed config object.
+  */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   config: any;
 
   /**
-   * The current working directory.
-   */
+  The current working directory.
+  */
   cwd: string;
 
   /**
-   * The user passed configFile path.
-   */
+  The user passed configFile path.
+  */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   configFile: any;
 
   /**
-   * The base directory that config should be pulled from.
-   */
+  The base directory that config should be pulled from.
+  */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   configBaseDirectory: any;
 
   /**
-   * Rules object
-   */
+  Rules object
+  */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rules: any;
 
@@ -57,12 +57,12 @@ export class Config {
   }
 
   /**
-   * Gets the config for a file.
-   *
-   * @param filePath File path of the file being linted.
-   * @returns {Object} A config object.
-   * @memberof Config
-   */
+  Gets the config for a file.
+  
+  @param filePath File path of the file being linted.
+  @returns {Object} A config object.
+  @memberof Config
+  */
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   getConfigForFile(filePath: string) {
     debug(`Getting config for ${filePath}`);

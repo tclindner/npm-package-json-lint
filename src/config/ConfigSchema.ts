@@ -5,10 +5,10 @@ import Ajv from 'ajv';
 import ajvErrors from 'ajv-errors';
 
 /**
- * Lazily creates (and memoizes) the shared Ajv instance.
- *
- * @returns {Ajv} The shared Ajv instance.
- */
+Lazily creates (and memoizes) the shared Ajv instance.
+
+@returns {Ajv} The shared Ajv instance.
+*/
 const getAjv = ((): (() => Ajv) => {
   let ajvInstance: Ajv | undefined;
 
@@ -23,11 +23,11 @@ const getAjv = ((): (() => Ajv) => {
 })();
 
 /**
- * Formats an array of schema validation errors.
- *
- * @param {Array} errors An array of error messages to format.
- * @returns {String} Formatted error message
- */
+Formats an array of schema validation errors.
+
+@param {Array} errors An array of error messages to format.
+@returns {String} Formatted error message
+*/
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const formatSchemaErrors = (errors) => errors.map((error) => `\t- ${error.message}\n`).join('');
 
@@ -147,11 +147,11 @@ const configurationSchema = {
 };
 
 /**
- * Validates standard rules config.
- *
- * @param {Object} ruleConfig The ruleConfig object to validate.
- * @returns {boolean} True if valid. Error if not.
- */
+Validates standard rules config.
+
+@param {Object} ruleConfig The ruleConfig object to validate.
+@returns {boolean} True if valid. Error if not.
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isStandardRuleSchemaValid = (ruleConfig: any): any => {
   const validate = getAjv().compile(standardRuleSchema);
@@ -165,12 +165,12 @@ export const isStandardRuleSchemaValid = (ruleConfig: any): any => {
 };
 
 /**
- * Validates array rules config.
- *
- * @param {Object} ruleConfig The ruleConfig object to validate.
- * @param {number} minItems   Min number of items in the array
- * @returns {boolean} True if valid. Error if not.
- */
+Validates array rules config.
+
+@param {Object} ruleConfig The ruleConfig object to validate.
+@param {number} minItems   Min number of items in the array
+@returns {boolean} True if valid. Error if not.
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isArrayRuleSchemaValid = (ruleConfig: any, minItems: any): any => {
   const validate = getAjv().compile(arrayRuleSchema(minItems));
@@ -184,11 +184,11 @@ export const isArrayRuleSchemaValid = (ruleConfig: any, minItems: any): any => {
 };
 
 /**
- * Validates array rules config.
- *
- * @param {Object} ruleConfig The ruleConfig object to validate.
- * @returns {boolean} True if valid. Error if not.
- */
+Validates array rules config.
+
+@param {Object} ruleConfig The ruleConfig object to validate.
+@returns {boolean} True if valid. Error if not.
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isObjectRuleSchemaValid = (ruleConfig: any): any => {
   const validate = getAjv().compile(objectRuleSchema);
@@ -202,11 +202,11 @@ export const isObjectRuleSchemaValid = (ruleConfig: any): any => {
 };
 
 /**
- * Validates optional object exceptions config.
- *
- * @param {Object} ruleConfig The ruleConfig object to validate.
- * @returns {boolean} True if valid. Error if not.
- */
+Validates optional object exceptions config.
+
+@param {Object} ruleConfig The ruleConfig object to validate.
+@returns {boolean} True if valid. Error if not.
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isOptionalObjExceptSchemaValid = (ruleConfig: any): any => {
   const validate = getAjv().compile(optionalObjExceptionsSchema);
@@ -220,12 +220,12 @@ export const isOptionalObjExceptSchemaValid = (ruleConfig: any): any => {
 };
 
 /**
- * Validates the top level properties of the config object.
- *
- * @param {Object} config The config object to validate.
- * @param {string} source The name of the configuration source to report in any errors.
- * @returns {boolean} True if valid. Error if not.
- */
+Validates the top level properties of the config object.
+
+@param {Object} config The config object to validate.
+@param {string} source The name of the configuration source to report in any errors.
+@returns {boolean} True if valid. Error if not.
+*/
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const isConfigObjectSchemaValid = (config: any, source: any): any => {
   const validate = getAjv().compile(configurationSchema);
