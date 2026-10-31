@@ -30,7 +30,8 @@ const handleError = (fileName: string, err: Error): void => {
   throw new Error(`Failed to read config file: ${fileName}. \nError: ${err.message}`);
 };
 
-export const sourceSymbol = Symbol('JSON source');
+// The parser and rules are bundled separately, so they must share the same metadata key.
+export const sourceSymbol = Symbol.for('npm-package-json-lint:JSON-source');
 
 /**
 Parse a JSON file
