@@ -16,7 +16,7 @@ const exitCodes = {
 };
 
 // configure CLI
-const cli = meow(
+const {input, flags} = meow(
   `
       Usage
         $ npmPkgJsonLint <patterns>
@@ -72,8 +72,6 @@ const cli = meow(
     },
   },
 );
-
-const {input, flags} = cli;
 
 // Validate
 const noPatternsProvided = 0;

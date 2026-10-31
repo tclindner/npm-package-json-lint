@@ -5,12 +5,12 @@ import globby from 'globby';
 const debug = require('debug')('npm-package-json-lint:getFileList');
 
 /**
- * Generates a list of files to lint based on a list of provided patterns
- *
- * @param {Array<string>} patterns An array of patterns
- * @param {string}        cwd      The current working directory.
- * @returns {Array<string>} An array a files to lint.
- */
+Generates a list of files to lint based on a list of provided patterns
+
+@param {Array<string>} patterns An array of patterns
+@param {string}        cwd      The current working directory.
+@returns {Array<string>} An array a files to lint.
+*/
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const getFileList = (patterns, cwd) => {
   debug('patterns');

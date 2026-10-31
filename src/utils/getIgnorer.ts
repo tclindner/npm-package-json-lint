@@ -9,12 +9,12 @@ const DEFAULT_IGNORE_FILENAME = '.npmpackagejsonlintignore';
 const FILE_NOT_FOUND_ERROR_CODE = 'ENOENT';
 
 /**
- * Generates ignorer based on ignore file content.
- *
- * @param cwd Current work directory.
- * @param ignorePath Ignore path.
- * @returns An instance of an Ignorer
- */
+Generates ignorer based on ignore file content.
+
+@param cwd Current work directory.
+@param ignorePath Ignore path.
+@returns An instance of an Ignorer
+*/
 export const getIgnorer = (cwd: string, ignorePath: string): Ignore => {
   const ignoreFilePath = ignorePath || DEFAULT_IGNORE_FILENAME;
 
