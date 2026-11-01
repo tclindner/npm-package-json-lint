@@ -3,7 +3,6 @@ import {defineConfig} from 'tsdown';
 
 const bundledAjvDependencies = [/^(?:ajv(?:-errors)?|fast-deep-equal|fast-uri|json-schema-traverse)(?:\/|$)/];
 
-// eslint-disable-next-line unicorn/no-top-level-side-effects -- calling the config-definition function at module scope is tsdown's documented config format
 export default defineConfig([
   {
     entry: './src/rules/*.ts',
