@@ -15,7 +15,7 @@ export const isValidValue = <T>(
   nodeName: string,
   value: T,
   validValues: T[],
-): boolean => (packageJsonData.hasOwnProperty(nodeName) ? validValues.includes(value) : true);
+): boolean => !packageJsonData.hasOwnProperty(nodeName) || validValues.includes(value);
 
 /**
 Determines whether a node matches a valid value
@@ -32,4 +32,4 @@ export const isMatchingValidValue = (
   nodeName: string,
   value: string,
   validRegexes: RegExp[],
-): boolean => (packageJsonData.hasOwnProperty(nodeName) ? validRegexes.some((r) => r.test(value)) : true);
+): boolean => !packageJsonData.hasOwnProperty(nodeName) || validRegexes.some((r) => r.test(value));
