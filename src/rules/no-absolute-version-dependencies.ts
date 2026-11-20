@@ -19,7 +19,7 @@ export const lint = (
 ): LintResult => {
   const auditResult = auditDependenciesForAbsoluteVersion(packageJsonData, nodeName, config);
 
-  if (packageJsonData.hasOwnProperty(nodeName) && auditResult.onlyAbsoluteVersionsDetected) {
+  if (packageJsonData.hasOwnProperty(nodeName) && auditResult.dependenciesWithAbsoluteVersion.length > 0) {
     return new LintIssue(
       lintId,
       severity,

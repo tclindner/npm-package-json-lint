@@ -391,6 +391,15 @@ const auditAbsoluteVersions = (
   };
 };
 
+/**
+Determines whether or not a dependency spec can be a version from the npm registry.
+Aliases ("npm:pkg@^1"), local paths ("file:../x", "workspace:*"), GitHub shortcuts ("user/repo") and URLs
+are not registry versions, so they are never reported as absolute versions.
+@param version       value of package's version
+@return {boolean}    True if the spec is a plain version, range or dist-tag
+*/
+const isRegistryVersionSpec = (version: string): boolean => !version.includes(':') && !version.includes('/');
+
 export interface AuditDependenciesForAbsoluteVersionResponse {
   onlyAbsoluteVersionsDetected: boolean;
   dependenciesWithAbsoluteVersion: string[];
@@ -420,7 +429,9 @@ export const auditDependenciesForAbsoluteVersion = (
 
   return {
     onlyAbsoluteVersionsDetected: dependenciesChecked > 0 ? onlyAbsoluteVersionDetected : false,
-    dependenciesWithAbsoluteVersion,
+    dependenciesWithAbsoluteVersion: dependenciesWithAbsoluteVersion.filter((name) =>
+      isRegistryVersionSpec(packageJsonData[nodeName][name]),
+    ),
     dependenciesWithoutAbsoluteVersion,
   };
 };
@@ -459,7 +470,9 @@ export const auditDependenciesForNonAbsoluteVersion = (
   };
 };
 
-const GITHUB_SHORTCUT_URL = /^(github:)?[^/]+\/[^/]+/;
+// "user/repo" or "<host>:user/repo". The user name can not contain ":", "@" or ".", which rules out
+// aliases ("npm:@scope/pkg@^1"), other protocols ("file:../x", "workspace:../x") and relative paths.
+const GITHUB_SHORTCUT_URL = /^(?:(?:github|gitlab|bitbucket):)?[\dA-Za-z][\dA-Za-z-]*\/[^/]+/;
 
 /**
 Determines whether or not version is a shortcut to GitHub repository
