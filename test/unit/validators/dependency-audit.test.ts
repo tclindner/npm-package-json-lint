@@ -1147,6 +1147,25 @@ describe('dependency-audit Unit Tests', () => {
           dependenciesWithoutAbsoluteVersion: ['tagged', 'ranged'],
         });
       });
+
+      test('aliases, local specs and shortcuts next to an exact version only flag the exact one', () => {
+        const packageJson = {
+          dependencies: {
+            aliased: 'npm:@babel/core@^7.0.0',
+            local: 'file:../local-pkg',
+            workspace: 'workspace:../pkgs/ws-pkg',
+            shortcut: 'username/repo',
+            pinned: '1.0.0',
+          },
+        };
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
+
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: false,
+          dependenciesWithAbsoluteVersion: ['pinned'],
+          dependenciesWithoutAbsoluteVersion: ['aliased', 'local', 'workspace', 'shortcut'],
+        });
+      });
     });
   });
 

@@ -101,5 +101,6 @@ With exceptions
 
 ## History
 
+* Now reports an error when any dependency uses an exact (absolute) version, not only when all of them do; dist-tags, ranges, npm aliases and local specs are not treated as absolute in version 11.0.2
 * Improved messaging when an invalid configuration is detected in version 6.3.0
 * Introduced in version 3.2.0

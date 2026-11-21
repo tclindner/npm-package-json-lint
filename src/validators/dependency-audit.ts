@@ -387,15 +387,6 @@ const auditAbsoluteVersions = (
   };
 };
 
-/**
-Determines whether or not a dependency spec can be a version from the npm registry.
-Aliases ("npm:pkg@^1"), local paths ("file:../x", "workspace:*"), GitHub shortcuts ("user/repo") and URLs
-are not registry versions, so they are never reported as absolute versions.
-@param version       value of package's version
-@return {boolean}    True if the spec is a plain version, range or dist-tag
-*/
-const isRegistryVersionSpec = (version: string): boolean => !version.includes(':') && !version.includes('/');
-
 export interface AuditDependenciesForAbsoluteVersionResponse {
   onlyAbsoluteVersionsDetected: boolean;
   dependenciesWithAbsoluteVersion: string[];
@@ -425,9 +416,9 @@ export const auditDependenciesForAbsoluteVersion = (
 
   return {
     onlyAbsoluteVersionsDetected: dependenciesChecked > 0 ? onlyAbsoluteVersionDetected : false,
-    dependenciesWithAbsoluteVersion: dependenciesWithAbsoluteVersion.filter((name) =>
-      isRegistryVersionSpec(packageJsonData[nodeName][name]),
-    ),
+    // Aliases, local paths, GitHub shortcuts and URLs never reach this list:
+    // auditAbsoluteVersions only classifies exact versions (semver.clean) as absolute.
+    dependenciesWithAbsoluteVersion,
     dependenciesWithoutAbsoluteVersion,
   };
 };
