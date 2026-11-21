@@ -1085,6 +1085,69 @@ describe('dependency-audit Unit Tests', () => {
         });
       });
     });
+
+    describe('when the node exists in the package.json file, only exact versions count as absolute', () => {
+      test.each([
+        ['a dist-tag', 'latest'],
+        ['another dist-tag', 'next'],
+        ['an x-range', '1.x'],
+        ['a hyphen range', '1.2.3 - 2.0.0'],
+        ['an or-range', '1.0.0 || 2.0.0'],
+        ['an empty spec', ''],
+        ['a caret range', '^1.0.0'],
+        ['a star range', '*'],
+      ])('false should be returned for %s', (_description, version) => {
+        const packageJson = {
+          dependencies: {
+            'module-name': version,
+          },
+        };
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
+
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: false,
+          dependenciesWithAbsoluteVersion: [],
+          dependenciesWithoutAbsoluteVersion: ['module-name'],
+        });
+      });
+
+      test.each([
+        ['an exact version', '1.2.3'],
+        ['an = prefixed exact version', '=2.4.0'],
+        ['a v prefixed exact version', 'v1.2.3'],
+        ['an exact prerelease', '1.0.0-beta.1'],
+      ])('true should be returned for %s', (_description, version) => {
+        const packageJson = {
+          dependencies: {
+            'module-name': version,
+          },
+        };
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
+
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: true,
+          dependenciesWithAbsoluteVersion: ['module-name'],
+          dependenciesWithoutAbsoluteVersion: [],
+        });
+      });
+
+      test('a dist-tag next to an exact version only flags the exact one', () => {
+        const packageJson = {
+          dependencies: {
+            tagged: 'latest',
+            pinned: '1.0.0',
+            ranged: '^2.0.0',
+          },
+        };
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
+
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: false,
+          dependenciesWithAbsoluteVersion: ['pinned'],
+          dependenciesWithoutAbsoluteVersion: ['tagged', 'ranged'],
+        });
+      });
+    });
   });
 
   describe('auditDependenciesForGitRepositoryVersion method', () => {
@@ -1551,7 +1614,14 @@ describe('dependency-audit Unit Tests', () => {
       const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
 
       expect(response.dependenciesWithAbsoluteVersion).toStrictEqual(['pinned', 'pinned-with-equals']);
-      expect(response.dependenciesWithoutAbsoluteVersion).toStrictEqual(['ranged']);
+      expect(response.dependenciesWithoutAbsoluteVersion).toStrictEqual([
+        'ranged',
+        'babel-core',
+        'local-pkg',
+        'ws-pkg',
+        'git-pkg',
+        'url-pkg',
+      ]);
       expect(response.onlyAbsoluteVersionsDetected).toStrictEqual(false);
     });
 
@@ -1602,6 +1672,10 @@ describe('dependency-audit Unit Tests', () => {
       ['github:user/repo', 'github:username/repo'],
       ['gitlab:user/repo', 'gitlab:username/repo'],
       ['bitbucket:user/repo', 'bitbucket:username/repo'],
+      ['a gitlab group with an underscore', 'gitlab:my_group/repo'],
+      ['a gitlab group with a dot', 'gitlab:my.group/repo'],
+      ['a bitbucket workspace with an underscore', 'bitbucket:my_team/repo'],
+      ['a github prefix with a dotted name', 'github:my.name/repo'],
     ])('true should be returned for %s', (_description, version) => {
       const packageJson = {
         dependencies: {

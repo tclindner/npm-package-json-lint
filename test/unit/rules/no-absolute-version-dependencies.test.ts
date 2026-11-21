@@ -141,4 +141,38 @@ describe('no-absolute-version-dependencies Unit Tests', () => {
       expect(response).toBeNull();
     });
   });
+
+  describe('when package.json has only non-exact specs (dist-tags, x-ranges, hyphen ranges, or-ranges)', () => {
+    test('null should be returned', () => {
+      const packageJsonData = {
+        dependencies: {
+          tagged: 'latest',
+          xranged: '1.x',
+          hyphen: '1.2.3 - 2.0.0',
+          orranged: '1.0.0 || 2.0.0',
+          ranged: '^1.0.0',
+        },
+      };
+      const response = lint(packageJsonData, Severity.Error, {});
+
+      expect(response).toBeNull();
+    });
+  });
+
+  describe('when package.json has a dist-tag next to an exact version', () => {
+    test('LintIssue object should list only the exact version', () => {
+      const packageJsonData = {
+        dependencies: {
+          tagged: 'latest',
+          pinned: '1.0.0',
+        },
+      };
+      const response = lint(packageJsonData, Severity.Error, {});
+
+      expect(response.lintId).toStrictEqual('no-absolute-version-dependencies');
+      expect(response.lintMessage).toStrictEqual(
+        'You are using an invalid version range. Please do not use absolute versions. Invalid dependencies include: pinned',
+      );
+    });
+  });
 });
