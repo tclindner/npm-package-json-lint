@@ -351,8 +351,6 @@ const auditAbsoluteVersions = (
   nodeName: string,
   config: OptionalObjectRuleConfig,
 ): AbsoluteVersionCheckerResult => {
-  const notFound = -1;
-  const firstCharOfStr = 0;
   let isOnlyAbsoluteVersionDetected = true;
   let dependenciesChecked = 0;
   const dependenciesWithAbsoluteVersion = [];
@@ -367,13 +365,11 @@ const auditAbsoluteVersions = (
 
     const dependencyVersion: string = packageJsonData[nodeName][dependencyName];
 
-    if (
-      dependencyVersion.startsWith('^', firstCharOfStr) ||
-      dependencyVersion.startsWith('~', firstCharOfStr) ||
-      dependencyVersion.startsWith('>', firstCharOfStr) ||
-      dependencyVersion.startsWith('<', firstCharOfStr) ||
-      dependencyVersion.indexOf('*') !== notFound
-    ) {
+    // Only an exact version counts as absolute (semver.clean succeeds on
+    // "1.2.3", "=1.2.3" and "v1.2.3"). Ranges ("^1.0.0", "1.x",
+    // "1.2.3 - 2.0.0", "1.0.0 || 2.0.0"), dist-tags ("latest") and empty
+    // specs are not absolute.
+    if (semver.clean(dependencyVersion) === null) {
       isOnlyAbsoluteVersionDetected = false;
       dependenciesWithoutAbsoluteVersion.push(dependencyName);
     } else {
@@ -420,6 +416,8 @@ export const auditDependenciesForAbsoluteVersion = (
 
   return {
     onlyAbsoluteVersionsDetected: dependenciesChecked > 0 ? onlyAbsoluteVersionDetected : false,
+    // Aliases, local paths, GitHub shortcuts and URLs never reach this list:
+    // auditAbsoluteVersions only classifies exact versions (semver.clean) as absolute.
     dependenciesWithAbsoluteVersion,
     dependenciesWithoutAbsoluteVersion,
   };
@@ -459,7 +457,11 @@ export const auditDependenciesForNonAbsoluteVersion = (
   };
 };
 
-const GITHUB_SHORTCUT_URL = /^(github:)?[^/]+\/[^/]+/;
+// "user/repo" or "<host>:user/repo" for github/gitlab/bitbucket. After an explicit host prefix the
+// user part may contain anything except "/" (GitLab groups and Bitbucket workspaces allow "_" and
+// "."); a bare "user/repo" keeps the strict GitHub user-name characters, which rules out aliases
+// ("npm:@scope/pkg@^1"), other protocols ("file:../x", "workspace:../x") and relative paths.
+const GITHUB_SHORTCUT_URL = /^(?:(?:github|gitlab|bitbucket):[^/]+|[\dA-Za-z][\dA-Za-z-]*)\/[^/]+/;
 
 /**
 Determines whether or not version is a shortcut to GitHub repository

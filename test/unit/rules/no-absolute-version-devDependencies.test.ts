@@ -91,4 +91,54 @@ describe('no-absolute-version-devDependencies Unit Tests', () => {
       expect(response).toBeNull();
     });
   });
+
+  describe('when package.json has one absolute version and one range', () => {
+    test('LintIssue object should list only the absolute version', () => {
+      const packageJsonData = {
+        devDependencies: {
+          pinned: '1.2.3',
+          ranged: '^1.0.0',
+        },
+      };
+      const response = lint(packageJsonData, Severity.Error, {});
+
+      expect(response.lintId).toStrictEqual('no-absolute-version-devDependencies');
+      expect(response.severity).toStrictEqual('error');
+      expect(response.node).toStrictEqual('devDependencies');
+      expect(response.lintMessage).toStrictEqual(
+        'You are using an invalid version range. Please do not use absolute versions. Invalid devDependencies include: pinned',
+      );
+    });
+  });
+
+  describe('when package.json has an absolute version that is an exception next to a range', () => {
+    test('null should be returned', () => {
+      const packageJsonData = {
+        devDependencies: {
+          pinned: '1.2.3',
+          ranged: '^1.0.0',
+        },
+      };
+      const response = lint(packageJsonData, Severity.Error, {exceptions: ['pinned']});
+
+      expect(response).toBeNull();
+    });
+  });
+
+  describe('when package.json has node with npm aliases, local package specs and ranges', () => {
+    test('null should be returned', () => {
+      const packageJsonData = {
+        devDependencies: {
+          'babel-core': 'npm:@babel/core@^7.0.0',
+          'local-pkg': 'file:../local-pkg',
+          'ws-pkg': 'workspace:*',
+          'git-pkg': 'github:username/repo',
+          ranged: '^1.0.0',
+        },
+      };
+      const response = lint(packageJsonData, Severity.Error, {});
+
+      expect(response).toBeNull();
+    });
+  });
 });

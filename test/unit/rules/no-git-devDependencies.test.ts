@@ -249,4 +249,38 @@ describe('no-git-devDependencies Unit Tests', () => {
       expect(response).toBeNull();
     });
   });
+
+  describe('when package.json has node with npm aliases and local package specs', () => {
+    test('null should be returned', () => {
+      const packageJsonData = {
+        devDependencies: {
+          'babel-core': 'npm:@babel/core@^7.0.0',
+          'local-pkg': 'file:../local-pkg',
+          'ws-pkg': 'workspace:../pkgs/ws-pkg',
+          'linked-pkg': 'link:../linked-pkg',
+          'relative-pkg': '../relative-pkg',
+        },
+      };
+      const response = lint(packageJsonData, Severity.Error, {});
+
+      expect(response).toBeNull();
+    });
+  });
+
+  describe('when package.json has node with a git shortcut next to an npm alias', () => {
+    test('only the git shortcut should be reported', () => {
+      const packageJsonData = {
+        devDependencies: {
+          'babel-core': 'npm:@babel/core@^7.0.0',
+          'my-module': 'gitlab:username/repo',
+        },
+      };
+      const response = lint(packageJsonData, Severity.Error, {});
+
+      expect(response.lintId).toStrictEqual('no-git-devDependencies');
+      expect(response.lintMessage).toStrictEqual(
+        'You are using devDependencies from git repository. Please use devDependencies from npm. Invalid devDependencies include: my-module',
+      );
+    });
+  });
 });

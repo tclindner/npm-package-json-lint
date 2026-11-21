@@ -1085,6 +1085,88 @@ describe('dependency-audit Unit Tests', () => {
         });
       });
     });
+
+    describe('when the node exists in the package.json file, only exact versions count as absolute', () => {
+      test.each([
+        ['a dist-tag', 'latest'],
+        ['another dist-tag', 'next'],
+        ['an x-range', '1.x'],
+        ['a hyphen range', '1.2.3 - 2.0.0'],
+        ['an or-range', '1.0.0 || 2.0.0'],
+        ['an empty spec', ''],
+        ['a caret range', '^1.0.0'],
+        ['a star range', '*'],
+      ])('false should be returned for %s', (_description, version) => {
+        const packageJson = {
+          dependencies: {
+            'module-name': version,
+          },
+        };
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
+
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: false,
+          dependenciesWithAbsoluteVersion: [],
+          dependenciesWithoutAbsoluteVersion: ['module-name'],
+        });
+      });
+
+      test.each([
+        ['an exact version', '1.2.3'],
+        ['an = prefixed exact version', '=2.4.0'],
+        ['a v prefixed exact version', 'v1.2.3'],
+        ['an exact prerelease', '1.0.0-beta.1'],
+      ])('true should be returned for %s', (_description, version) => {
+        const packageJson = {
+          dependencies: {
+            'module-name': version,
+          },
+        };
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
+
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: true,
+          dependenciesWithAbsoluteVersion: ['module-name'],
+          dependenciesWithoutAbsoluteVersion: [],
+        });
+      });
+
+      test('a dist-tag next to an exact version only flags the exact one', () => {
+        const packageJson = {
+          dependencies: {
+            tagged: 'latest',
+            pinned: '1.0.0',
+            ranged: '^2.0.0',
+          },
+        };
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
+
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: false,
+          dependenciesWithAbsoluteVersion: ['pinned'],
+          dependenciesWithoutAbsoluteVersion: ['tagged', 'ranged'],
+        });
+      });
+
+      test('aliases, local specs and shortcuts next to an exact version only flag the exact one', () => {
+        const packageJson = {
+          dependencies: {
+            aliased: 'npm:@babel/core@^7.0.0',
+            local: 'file:../local-pkg',
+            workspace: 'workspace:../pkgs/ws-pkg',
+            shortcut: 'username/repo',
+            pinned: '1.0.0',
+          },
+        };
+        const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
+
+        expect(response).toStrictEqual({
+          onlyAbsoluteVersionsDetected: false,
+          dependenciesWithAbsoluteVersion: ['pinned'],
+          dependenciesWithoutAbsoluteVersion: ['aliased', 'local', 'workspace', 'shortcut'],
+        });
+      });
+    });
   });
 
   describe('auditDependenciesForGitRepositoryVersion method', () => {
@@ -1530,6 +1612,101 @@ describe('dependency-audit Unit Tests', () => {
           dependenciesWithFileUrlVersion: [],
           dependenciesWithoutFileUrlVersion: ['grunt-npm-package-json-lint', 'gulp-npm-package-json-lint'],
         });
+      });
+    });
+  });
+
+  describe('auditDependenciesForAbsoluteVersion method with specs that are not registry versions', () => {
+    test('only the registry versions should be reported as absolute', () => {
+      const packageJson = {
+        dependencies: {
+          pinned: '1.2.3',
+          'pinned-with-equals': '=2.0.0',
+          ranged: '^1.0.0',
+          'babel-core': 'npm:@babel/core@7.0.0',
+          'local-pkg': 'file:../local-pkg',
+          'ws-pkg': 'workspace:1.0.0',
+          'git-pkg': 'username/repo',
+          'url-pkg': 'https://example.com/pkg.tgz',
+        },
+      };
+      const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
+
+      expect(response.dependenciesWithAbsoluteVersion).toStrictEqual(['pinned', 'pinned-with-equals']);
+      expect(response.dependenciesWithoutAbsoluteVersion).toStrictEqual([
+        'ranged',
+        'babel-core',
+        'local-pkg',
+        'ws-pkg',
+        'git-pkg',
+        'url-pkg',
+      ]);
+      expect(response.onlyAbsoluteVersionsDetected).toStrictEqual(false);
+    });
+
+    test('nothing should be reported when every dependency is an alias or a local package', () => {
+      const packageJson = {
+        dependencies: {
+          'babel-core': 'npm:@babel/core@7.0.0',
+          'local-pkg': 'file:../local-pkg',
+        },
+      };
+      const response = dependencyAudit.auditDependenciesForAbsoluteVersion(packageJson, 'dependencies', {});
+
+      expect(response.dependenciesWithAbsoluteVersion).toStrictEqual([]);
+    });
+  });
+
+  describe('auditDependenciesForGitRepositoryVersion method with npm aliases and local package specs', () => {
+    test.each([
+      ['an npm alias', 'npm:@babel/core@^7.0.0'],
+      ['an unscoped npm alias', 'npm:babel-core@7.0.0'],
+      ['a file: spec', 'file:../local-pkg'],
+      ['a workspace: spec', 'workspace:../pkgs/ws-pkg'],
+      ['a link: spec', 'link:../linked-pkg'],
+      ['a relative path', '../relative-pkg'],
+      ['a path starting with a dot', './relative-pkg'],
+      ['an absolute path', '/opt/pkgs/pkg'],
+      ['a version range', '^1.2.3'],
+      ['a dist-tag', 'latest'],
+    ])('false should be returned for %s', (_description, version) => {
+      const packageJson = {
+        dependencies: {
+          'module-name': version,
+        },
+      };
+      const response = dependencyAudit.auditDependenciesForGitRepositoryVersion(packageJson, 'dependencies', {});
+
+      expect(response).toStrictEqual({
+        hasGitRepositoryVersions: false,
+        dependenciesWithGitRepositoryVersion: [],
+        dependenciesWithoutGitRepositoryVersion: ['module-name'],
+      });
+    });
+
+    test.each([
+      ['user/repo', 'username/repo'],
+      ['a hyphenated user name', 'user-name/repo'],
+      ['user/repo#semver:^1.0.0', 'username/repo#semver:^1.0.0'],
+      ['github:user/repo', 'github:username/repo'],
+      ['gitlab:user/repo', 'gitlab:username/repo'],
+      ['bitbucket:user/repo', 'bitbucket:username/repo'],
+      ['a gitlab group with an underscore', 'gitlab:my_group/repo'],
+      ['a gitlab group with a dot', 'gitlab:my.group/repo'],
+      ['a bitbucket workspace with an underscore', 'bitbucket:my_team/repo'],
+      ['a github prefix with a dotted name', 'github:my.name/repo'],
+    ])('true should be returned for %s', (_description, version) => {
+      const packageJson = {
+        dependencies: {
+          'module-name': version,
+        },
+      };
+      const response = dependencyAudit.auditDependenciesForGitRepositoryVersion(packageJson, 'dependencies', {});
+
+      expect(response).toStrictEqual({
+        hasGitRepositoryVersions: true,
+        dependenciesWithGitRepositoryVersion: ['module-name'],
+        dependenciesWithoutGitRepositoryVersion: [],
       });
     });
   });

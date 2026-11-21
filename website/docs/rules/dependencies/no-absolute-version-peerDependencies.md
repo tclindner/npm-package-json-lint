@@ -101,4 +101,5 @@ With exceptions
 
 ## History
 
+* Now reports an error when any peerDependency uses an exact (absolute) version, not only when all of them do; dist-tags, ranges, npm aliases and local specs are not treated as absolute in version 11.0.2
 * Introduced in version 10.1.0
