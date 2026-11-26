@@ -34,7 +34,7 @@ const config = {
 module.exports = config;
 ```
 
-For a complete example of the structure, please see the [built-in default config source](https://github.com/tclindner/npm-package-json-lint/blob/master/src/config/default.ts).
+For a complete example of the structure, please see the [built-in default config source](https://github.com/tclindner/npm-package-json-lint/blob/master/src/config/default-rules.json).
 
 #### How to publish a shared config module
 Follow these instructions for [publishing to npm](https://docs.npmjs.com/getting-started/publishing-npm-packages).  Please add the following keywords for discoverability, `npm-package-json-lint`, `npm-package-json-lintconfig`, and `npm-package-json-lint-config`.
