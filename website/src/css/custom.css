@@ -1,6 +1,6 @@
 /**
- * You can override the default Infima variables here.
- * Note: this is not a complete list of --ifm- variables.
+ * Site-wide theme for npmpackagejsonlint.org.
+ * Overrides Infima variables and adds a few shared tokens (--site-*).
  */
 :root {
   --ifm-color-primary: #194769;
@@ -10,6 +10,36 @@
   --ifm-color-primary-light: #1c4e74;
   --ifm-color-primary-lighter: #1d5279;
   --ifm-color-primary-lightest: #215c88;
+
+  --ifm-font-family-base: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji';
+  --ifm-font-family-monospace: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  --ifm-heading-font-weight: 700;
+  --ifm-line-height-base: 1.7;
+  --ifm-code-font-size: 90%;
+  --ifm-code-border-radius: 6px;
+  --ifm-global-radius: 8px;
+  --ifm-navbar-height: 64px;
+  --ifm-navbar-shadow: none;
+  --ifm-toc-border-color: var(--site-border);
+  --ifm-hr-background-color: var(--site-border);
+  --ifm-link-hover-decoration: none;
+  --ifm-menu-link-padding-vertical: 0.4rem;
+  --ifm-footer-padding-vertical: 3.5rem;
+  --docusaurus-highlighted-code-line-bg: rgba(25, 71, 105, 0.1);
+
+  --site-bg: #ffffff;
+  --site-surface: #ffffff;
+  --site-surface-alt: #f6f8fb;
+  --site-border: #e4e9f0;
+  --site-code-border: #e4e9f0;
+  --site-muted: #5b6b7d;
+  --site-icon-bg: #e9f1f8;
+  --site-icon-fg: #194769;
+  --site-art-bg: #f1f5f9;
+  --site-art-glow: rgba(242, 133, 94, 0.18);
+  --site-shadow-sm: 0 1px 2px rgba(16, 32, 46, 0.04), 0 4px 16px -8px rgba(16, 32, 46, 0.12);
+  --site-shadow-lg: 0 2px 4px rgba(16, 32, 46, 0.04), 0 20px 40px -16px rgba(16, 32, 46, 0.25);
 }
 
 [data-theme='dark'] {
@@ -20,4 +50,303 @@
   --ifm-color-primary-light: #f59d7d;
   --ifm-color-primary-lighter: #f6a88d;
   --ifm-color-primary-lightest: #faccbb;
+
+  --ifm-background-color: #0b1620;
+  --ifm-background-surface-color: #0f1d2a;
+  --ifm-navbar-background-color: rgba(11, 22, 32, 0.8);
+  --ifm-footer-background-color: #08111a;
+  --ifm-color-content: #e3eaf2;
+  --ifm-color-content-secondary: #a9b6c4;
+  --ifm-code-background: rgba(255, 255, 255, 0.07);
+  --ifm-menu-color-background-active: rgba(242, 133, 94, 0.1);
+  --ifm-menu-color-background-hover: rgba(255, 255, 255, 0.05);
+  --ifm-table-stripe-background: rgba(255, 255, 255, 0.03);
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.08);
+
+  --site-bg: #0b1620;
+  --site-surface: #0f1d2a;
+  --site-surface-alt: #0d1a26;
+  --site-border: #1d2e3e;
+  --site-code-border: #1d2e3e;
+  --site-muted: #9fb0c2;
+  --site-icon-bg: rgba(242, 133, 94, 0.12);
+  --site-icon-fg: #f59d7d;
+  --site-art-bg: #13222f;
+  --site-art-glow: rgba(242, 133, 94, 0.16);
+  --site-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --site-shadow-lg: 0 20px 40px -16px rgba(0, 0, 0, 0.6);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--site-bg);
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Navbar ---------- */
+
+.navbar {
+  border-bottom: 1px solid var(--site-border);
+  background-color: rgba(255, 255, 255, 0.82);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+}
+
+[data-theme='dark'] .navbar {
+  background-color: var(--ifm-navbar-background-color);
+}
+
+.navbar__title {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.navbar__logo {
+  height: 1.9rem;
+}
+
+.navbar__link {
+  font-weight: 500;
+}
+
+.header-github-link::before {
+  content: '';
+  display: flex;
+  width: 24px;
+  height: 24px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='black' d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
+    no-repeat center / contain;
+  transition: opacity 0.15s;
+}
+
+.header-github-link:hover::before {
+  opacity: 0.65;
+}
+
+[data-theme='dark'] .header-github-link::before {
+  filter: invert(1);
+}
+
+/* ---------- Docs & content ---------- */
+
+.markdown h1:first-child {
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  letter-spacing: -0.03em;
+}
+
+.markdown h2 {
+  margin-top: 2.5rem;
+}
+
+.markdown > p,
+.markdown li {
+  line-height: 1.75;
+}
+
+.markdown blockquote {
+  border-left-color: var(--ifm-color-primary);
+  border-radius: 0 8px 8px 0;
+  background: var(--site-surface-alt);
+  padding: 0.75rem 1rem;
+}
+
+.markdown table {
+  display: table;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border: 1px solid var(--site-border);
+  border-radius: 10px;
+}
+
+.markdown table thead tr {
+  background: var(--site-surface-alt);
+}
+
+.markdown table tr,
+.markdown table th,
+.markdown table td {
+  border-color: var(--site-border);
+}
+
+.markdown table th,
+.markdown table td {
+  border-width: 0 0 1px;
+}
+
+.markdown table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+code {
+  border: 1px solid var(--site-border);
+}
+
+[data-theme='dark'] code {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+pre code,
+.prism-code code {
+  border: 0;
+}
+
+.theme-code-block {
+  border: 1px solid var(--site-code-border);
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.theme-code-block pre {
+  border-radius: 12px;
+}
+
+.menu__link {
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  font-weight: 600;
+}
+
+.table-of-contents__link--active {
+  font-weight: 600;
+}
+
+.pagination-nav__link {
+  border-color: var(--site-border);
+  border-radius: 12px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: var(--site-shadow-sm);
+}
+
+.theme-doc-sidebar-container {
+  border-right-color: var(--site-border) !important;
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  border-top: 1px solid var(--site-border);
+}
+
+.footer--dark {
+  --ifm-footer-background-color: #0b1620;
+  --ifm-footer-link-color: #a9b6c4;
+  --ifm-footer-link-hover-color: #fff;
+  --ifm-footer-title-color: #fff;
+}
+
+[data-theme='dark'] .footer--dark {
+  --ifm-footer-background-color: #08111a;
+}
+
+.footer__title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.footer__link-item {
+  font-size: 0.95rem;
+}
+
+.footer__logo {
+  max-width: 72px;
+  margin-top: 0.5rem;
+}
+
+.footer__copyright {
+  font-size: 0.85rem;
+  color: #7f8fa1;
+}
+
+/* ---------- Help page ---------- */
+
+.help-page {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 4rem 1rem 5rem;
+}
+
+.help-page h1 {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  letter-spacing: -0.03em;
+}
+
+.help-page__lead {
+  margin-bottom: 2.5rem;
+  font-size: 1.15rem;
+  color: var(--site-muted);
+}
+
+.help-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.help-card {
+  padding: 1.75rem;
+  border: 1px solid var(--site-border);
+  border-radius: 16px;
+  background: var(--site-surface);
+  box-shadow: var(--site-shadow-sm);
+}
+
+.help-card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.help-card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.help-card li + li {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 700px) {
+  .help-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vercel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  background: #000;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.vercel-badge:hover {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #fff;
+  transform: translateY(-1px);
 }
