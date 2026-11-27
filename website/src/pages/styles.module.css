@@ -207,7 +207,7 @@
 .heroLogo {
   position: relative;
   width: 100%;
-  max-width: 420px;
+  max-width: 300px;
   filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.35));
   animation: funRotate 2s;
 }
