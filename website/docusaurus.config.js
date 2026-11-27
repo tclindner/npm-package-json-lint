@@ -35,6 +35,7 @@ module.exports = {
   title: 'npm-package-json-lint',
   tagline: 'A configurable linter for package.json files',
   url: 'https://npmpackagejsonlint.org',
+  favicon: 'img/favicon.svg',
 
   // Used for publishing and more
   projectName,
@@ -53,6 +54,7 @@ module.exports = {
       logo: {
         alt: 'npm-package-json-lint logo',
         src: 'img/logo.svg',
+        srcDark: 'img/logo-dark.svg',
       },
       items: [
         {to: 'docs', label: 'Docs', position: 'left'},
@@ -99,7 +101,7 @@ module.exports = {
       ],
       logo: {
         alt: 'npm-package-json-lint logo',
-        src: 'img/logo.svg',
+        src: 'img/logo-dark.svg',
         href: 'https://npmpackagejsonlint.org/',
       },
       // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.

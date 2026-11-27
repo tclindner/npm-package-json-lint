@@ -159,7 +159,7 @@ const Hero = ({title, tagline}) => (
 
       <div className={styles.heroArt}>
         <div className={styles.heroGlow} aria-hidden="true" />
-        <img alt="npm-package-json-lint logo" className={styles.heroLogo} src={useBaseUrl('img/logo.svg')} />
+        <img alt="npm-package-json-lint logo" className={styles.heroLogo} src={useBaseUrl('img/logo-dark.svg')} />
       </div>
     </div>
   </header>
