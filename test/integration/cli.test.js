@@ -28,6 +28,9 @@ const invalidFixturesPath = `${fixturesPath}/invalidConfig`;
 const invalidRcFile = `${invalidFixturesPath}/.npmpackagejsonlintrc.json`;
 const invalidPkgJsonPropertyPkg = `${invalidFixturesPath}/package.json`;
 const invalidConfigJsFile = `${invalidFixturesPath}/npmpackagejsonlint.config.json`;
+const extendsBuiltInFixturesPath = `${fixturesPath}/extendsBuiltIn`;
+const extendsBuiltInPkg = `${extendsBuiltInFixturesPath}/package.json`;
+const extendsBuiltInRcFile = `${extendsBuiltInFixturesPath}/.npmpackagejsonlintrc.json`;
 
 // Exit codes
 const zeroClean = 0;
@@ -116,6 +119,18 @@ WARNING require-license - node: license - license is required
 0 errors
 1 warning
 
+./test/fixtures/extendsBuiltIn/package.json
+ERROR require-author - node: author - author is required
+ERROR require-description - node: description - description is required
+ERROR require-devDependencies - node: devDependencies - devDependencies is required
+ERROR require-homepage - node: homepage - homepage is required
+ERROR require-keywords - node: keywords - keywords is required
+WARNING require-license - node: license - license is required
+ERROR require-repository - node: repository - repository is required
+ERROR require-version - node: version - version is required
+7 errors
+1 warning
+
 ./test/fixtures/hierarchyWithoutRoot/package.json
 WARNING require-license - node: license - license is required
 0 errors
@@ -179,8 +194,8 @@ WARNING require-license - node: license - license is required
 1 warning
 
 Totals
-2 errors
-16 warnings
+9 errors
+17 warnings
 0 files ignored
 `;
 
@@ -330,6 +345,21 @@ ERROR require-scripts - node: scripts - scripts is required
       const cli = spawnSync(relativePathToCli, ['-c', invalidConfigJsFile, validPkg], {env});
 
       expect(cli.status).toStrictEqual(threeRunTimeException);
+    });
+  });
+
+  describe('when the cli is run with a config that extends the built-in default config', () => {
+    test('and one error, zero warnings is expected', () => {
+      const cli = spawnSync(relativePathToCli, ['-c', extendsBuiltInRcFile, extendsBuiltInPkg], {env});
+      const expected = `
+${extendsBuiltInPkg}
+ERROR require-version - node: version - version is required
+1 error
+0 warnings
+`;
+
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.status).toStrictEqual(twoLintErrorsDetected);
     });
   });
 

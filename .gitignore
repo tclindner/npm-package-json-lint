@@ -62,3 +62,6 @@ typings/
 
 # compile output
 dist
+
+# Fixture module used to test resolving shareable configs from node_modules
+!test/fixtures/extendsModule/node_modules/

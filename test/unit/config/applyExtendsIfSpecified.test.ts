@@ -1,3 +1,4 @@
+import path from 'node:path';
 import {applyExtendsIfSpecified} from '../../../src/config/applyExtendsIfSpecified';
 
 describe('applyExtendsIfSpecified Unit Tests', () => {
@@ -89,7 +90,30 @@ describe('applyExtendsIfSpecified Unit Tests', () => {
 
   test('when file has module extends (valid), a config object is returned', () => {
     const expectedConfigObj = {
-      extends: 'npm-package-json-lint-config-default',
+      extends: 'npm-package-json-lint-config-fixture',
+      rules: {
+        'name-format': 'error',
+        'require-author': 'error',
+        'require-name': 'error',
+        'require-version': 'error',
+      },
+    };
+    const passedConfig = {
+      extends: 'npm-package-json-lint-config-fixture',
+      rules: {
+        'require-author': 'error',
+      },
+    };
+    // Absolute, like the paths cosmiconfig passes in, so resolution starts in the fixture directory.
+    const filePath = path.join(process.cwd(), 'test/fixtures/extendsModule/package.json');
+    const result = applyExtendsIfSpecified(passedConfig, filePath);
+
+    expect(result).toStrictEqual(expectedConfigObj);
+  });
+
+  test('when file has built-in virtual extends (valid), a config object is returned', () => {
+    const expectedConfigObj = {
+      extends: 'npm-package-json-lint:default',
       rules: {
         'bin-type': 'error',
         'config-type': 'error',
@@ -122,7 +146,7 @@ describe('applyExtendsIfSpecified Unit Tests', () => {
       },
     };
     const passedConfig = {
-      extends: 'npm-package-json-lint-config-default',
+      extends: 'npm-package-json-lint:default',
       rules: {
         'require-author': 'error',
       },
@@ -131,6 +155,18 @@ describe('applyExtendsIfSpecified Unit Tests', () => {
     const result = applyExtendsIfSpecified(passedConfig, filePath);
 
     expect(result).toStrictEqual(expectedConfigObj);
+  });
+
+  test('when file has built-in virtual extends, no module resolution is attempted', () => {
+    const passedConfig = {
+      extends: 'npm-package-json-lint:default',
+      rules: {},
+    };
+    const filePath = './test/fixtures/doesNotExist/package.json';
+
+    expect(() => {
+      applyExtendsIfSpecified(passedConfig, filePath);
+    }).not.toThrow();
   });
 
   test('when file module extends (invalid), a config object is returned', () => {

@@ -3,7 +3,7 @@ id: rules
 title: Rules
 ---
 
-Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lint will only run the rules supplied. As of v2.7.0, there are multiple ways to supply [configuration](configuration.md). One of the easiest way is via a [.npmpackagejsonlintrc.json](rcfile-example.md) file. Please see the default config module, [npm-package-json-lint-config-default](https://github.com/tclindner/npm-package-json-lint-config-default) instead.
+Rules allow npm-package-json-lint to be fully customizable. npm-package-json-lint will only run the rules supplied. As of v2.7.0, there are multiple ways to supply [configuration](configuration.md). One of the easiest way is via a [.npmpackagejsonlintrc.json](rcfile-example.md) file. To start from the default rule set, extend the [built-in default config](configuration.md#built-in-default-config) with `"extends": "npm-package-json-lint:default"`.
 
 ## Require node rules
 

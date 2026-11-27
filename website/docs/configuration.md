@@ -34,7 +34,7 @@ const config = {
 module.exports = config;
 ```
 
-For a complete example, please see [npm-package-json-lint-config-default](https://github.com/tclindner/npm-package-json-lint-config-default)
+For a complete example of the structure, please see the [built-in default config source](https://github.com/tclindner/npm-package-json-lint/blob/master/src/config/default-rules.json).
 
 #### How to publish a shared config module
 Follow these instructions for [publishing to npm](https://docs.npmjs.com/getting-started/publishing-npm-packages).  Please add the following keywords for discoverability, `npm-package-json-lint`, `npm-package-json-lintconfig`, and `npm-package-json-lint-config`.
@@ -52,11 +52,25 @@ Add the following to your `.npmpackagejsonlintrc.json` file.
 
 ```
 {
-  "extends": "npm-package-json-lint-config-default"
+  "extends": "npm-package-json-lint-config-awesome"
 }
 ```
 
-`npm-package-json-lint-config-default` can be replaced by the name of the shared module you are using.
+`npm-package-json-lint-config-awesome` can be replaced by the name of the shared module you are using.
+
+### Built-in default config
+
+npm-package-json-lint ships with a default config built in, so you don't need to install a separate module to use it. Add the following to your `.npmpackagejsonlintrc.json` file.
+
+```json
+{
+  "extends": "npm-package-json-lint:default"
+}
+```
+
+This is the same rule set previously published as [npm-package-json-lint-config-default](https://github.com/tclindner/npm-package-json-lint-config-default), which is now deprecated in favor of this built-in config. If you currently extend `npm-package-json-lint-config-default`, switch to `npm-package-json-lint:default` and remove the module from your dependencies.
+
+`npm-package-json-lint-config-default` will continue to work as-is throughout v11.x. Starting in v12, it is no longer supported, so please migrate before then.
 
 ### Configuration override
 
@@ -64,7 +78,7 @@ v4+ added support for configuration overrides. This is great for monorepos. Plea
 
 ```json
 {
-  "extends": "npm-package-json-lint-config-default",
+  "extends": "npm-package-json-lint:default",
   "overrides": [
     {
       "patterns": ["modules/module1/**/package.json"],
