@@ -3,7 +3,7 @@ id: index
 title: What is npm-package-json-lint?
 ---
 
-npm-package-json-lint is a configurable linter that helps enforce standards for your package.json file. By default no rules are enabled. If you would like to use npm-package-json-lint's default ruleset, please see [npm-package-json-lint-config-default](https://github.com/tclindner/npm-package-json-lint-config-default).
+npm-package-json-lint is a configurable linter that helps enforce standards for your package.json file. By default no rules are enabled. If you would like to use npm-package-json-lint's default ruleset, add `"extends": "npm-package-json-lint:default"` to your config. See the [built-in default config](configuration.md#built-in-default-config).
 
 Each rule contains the following properties:
 

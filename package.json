@@ -66,7 +66,6 @@
     "eslint-plugin-unicorn": "80.0.0",
     "globals": "17.14.0",
     "jest": "30.5.2",
-    "npm-package-json-lint-config-default": "10.0.0",
     "prettier": "3.10.1",
     "ts-jest": "29.4.15",
     "tsdown": "0.23.7",

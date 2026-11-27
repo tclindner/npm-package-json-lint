@@ -52,11 +52,11 @@ Add the following to your `.npmpackagejsonlintrc.json` file.
 
 ```
 {
-  "extends": "npm-package-json-lint-config-default"
+  "extends": "npm-package-json-lint-config-awesome"
 }
 ```
 
-`npm-package-json-lint-config-default` can be replaced by the name of the shared module you are using.
+`npm-package-json-lint-config-awesome` can be replaced by the name of the shared module you are using.
 
 ### Built-in default config
 
@@ -78,7 +78,7 @@ v4+ added support for configuration overrides. This is great for monorepos. Plea
 
 ```json
 {
-  "extends": "npm-package-json-lint-config-default",
+  "extends": "npm-package-json-lint:default",
   "overrides": [
     {
       "patterns": ["modules/module1/**/package.json"],
