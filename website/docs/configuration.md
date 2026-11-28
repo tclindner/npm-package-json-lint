@@ -215,6 +215,24 @@ module.exports = {
 };
 ```
 
+To have your editor check the config, annotate it with the `Configuration` type. Put the annotation on a variable, because TypeScript doesn't check a type annotation placed directly on `module.exports`.
+
+```js
+// @ts-check
+'use strict';
+
+/** @type {import('npm-package-json-lint').Configuration} */
+const config = {
+  rules: {
+    'require-author': 'error'
+  }
+};
+
+module.exports = config;
+```
+
+The same type is available in TypeScript with `import type {Configuration} from 'npm-package-json-lint';`.
+
 ## Configuration Schema
 
 A JSON schema is available here to validate your configuration. http://json.schemastore.org/npmpackagejsonlintrc.
