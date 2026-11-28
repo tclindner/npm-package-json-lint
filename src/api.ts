@@ -4,6 +4,14 @@ export {LintIssue} from './lint-issue';
 
 export {Severity} from './types/severity';
 
+export {
+  type Configuration,
+  type ConfigurationOverride,
+  type RuleConfig,
+  type RulesConfig,
+  type RuleSeverity,
+} from './types/configuration';
+
 export {type LinterResult} from './linter/linter';
 
 export {type PackageJsonFileLintingResult} from './types/package-json-linting-result';
