@@ -1,3 +1,4 @@
+import path from 'node:path';
 import {Ignore} from 'ignore';
 import {Config} from 'cosmiconfig/dist/types';
 import {executeOnPackageJsonFiles, executeOnPackageJsonObject} from '../../../src/linter/linter';
@@ -106,6 +107,31 @@ describe('linter Unit Tests', () => {
       });
 
       expect(results).toStrictEqual(expected);
+    });
+
+    test('files outside cwd are reported with a ../ path', () => {
+      const cwd = path.join(process.cwd(), 'test/fixtures/monorepo/packages/packageOne');
+      const mockIgnorer: Ignore = {
+        ignores: (): boolean => true,
+        add: jest.fn(),
+        createFilter: jest.fn(),
+        filter: jest.fn(),
+        test: jest.fn(),
+        checkIgnore: jest.fn(),
+      };
+      const mockConfigHelper: Config = {
+        getConfigForFile: jest.fn(),
+      };
+
+      const results = executeOnPackageJsonFiles({
+        cwd,
+        fileList: [path.join(cwd, '../packageTwo/package.json')],
+        ignorer: mockIgnorer,
+        configHelper: mockConfigHelper,
+        rules: new Rules(),
+      });
+
+      expect(results.results[0].filePath).toStrictEqual(path.join('..', 'packageTwo', 'package.json'));
     });
   });
 

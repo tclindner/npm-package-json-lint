@@ -34,5 +34,7 @@ export const getIgnorer = (cwd: string, ignorePath: string): Ignore => {
 
   debug('Ignore text added');
 
-  return ignore().add(ignoreText);
+  // Files outside cwd (e.g. `npmPkgJsonLint ../sibling`) produce `../` relative paths.
+  // `ignore` throws on those by default, so allow them. Patterns are relative to cwd, so they won't match.
+  return ignore({allowRelativePaths: true}).add(ignoreText);
 };

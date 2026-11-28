@@ -49,9 +49,11 @@ Creates a results object.
 */
 const createResultObject = (options: CreateResultObjectOptions): PackageJsonFileLintingResult => {
   const {cwd, fileName, ignored, issues, errorCount, warningCount} = options;
+  const relativeFilePath = path.relative(cwd, fileName);
 
   return {
-    filePath: `./${path.relative(cwd, fileName)}`,
+    // Files outside cwd already start with `../`, so don't prefix them with `./`
+    filePath: relativeFilePath.startsWith(`..${path.sep}`) ? relativeFilePath : `./${relativeFilePath}`,
     issues,
     ignored,
     errorCount,

@@ -26,4 +26,31 @@ describe('getFileList Unit Tests', () => {
     expect(results[15]).toContain('/test/fixtures/ignorePath/ignoredDirectory/package.json');
     expect(results[16]).toContain('/test/fixtures/npmPackageJsonLintIgnore/ignoredDirectory/package.json');
   });
+
+  describe('when patterns point outside of cwd', () => {
+    const monorepoPath = path.join(__dirname, '../../fixtures/monorepo');
+    const cwd = path.join(monorepoPath, 'packages/packageOne');
+    const packageOne = path.join(monorepoPath, 'packages/packageOne/package.json');
+    const packageTwo = path.join(monorepoPath, 'packages/packageTwo/package.json');
+
+    test('a ../ directory pattern returns the sibling package.json', () => {
+      expect(getFileList(['../packageTwo'], cwd)).toStrictEqual([packageTwo]);
+    });
+
+    test('a ../ file pattern returns the sibling package.json', () => {
+      expect(getFileList(['../packageTwo/package.json'], cwd)).toStrictEqual([packageTwo]);
+    });
+
+    test('a ../ glob pattern returns every matching package.json once', () => {
+      expect(getFileList(['../*/package.json', '.'], cwd)).toStrictEqual([packageOne, packageTwo]);
+    });
+
+    test('an absolute pattern outside cwd returns the matching package.json', () => {
+      expect(getFileList([path.join(monorepoPath, 'packages/packageTwo')], cwd)).toStrictEqual([packageTwo]);
+    });
+
+    test('a parent directory pattern returns the packages below it', () => {
+      expect(getFileList(['..'], cwd)).toStrictEqual([packageOne, packageTwo]);
+    });
+  });
 });

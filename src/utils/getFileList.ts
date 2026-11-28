@@ -1,8 +1,57 @@
 import path from 'node:path';
 import globby from 'globby';
+import {slash} from './slash';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const debug = require('debug')('npm-package-json-lint:getFileList');
+
+const GLOB_CHARS = /[!()*+?@[\]{}]/;
+
+/**
+Splits a glob pattern into its static base directory and the rest of the pattern.
+
+@param pattern A glob pattern with forward slashes
+@returns The static base and the pattern relative to it
+*/
+const splitGlobBase = (pattern: string): {base: string; rest: string} => {
+  const segments = pattern.split('/');
+  const firstGlobIndex = segments.findIndex((segment) => GLOB_CHARS.test(segment));
+  const baseSegments = segments.slice(0, firstGlobIndex === -1 ? -1 : firstGlobIndex);
+  const restSegments = segments.slice(baseSegments.length);
+
+  return {base: `${baseSegments.join('/')}/`, rest: restSegments.join('/')};
+};
+
+/**
+Determines whether a pattern points outside of cwd (e.g. `../sibling`).
+
+@param pattern A glob pattern
+@param cwd     The current working directory
+@returns True if the pattern resolves outside of cwd
+*/
+const isOutsideCwd = (pattern: string, cwd: string): boolean => {
+  const relative = path.relative(cwd, path.resolve(cwd, pattern));
+
+  return relative === '..' || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative);
+};
+
+/**
+Globs a pattern that points outside of cwd from its own static base directory.
+globby's gitignore filter only accepts paths inside its cwd, so these can't share the main glob.
+
+@param pattern A glob pattern that resolves outside of cwd
+@param cwd     The current working directory
+@returns Absolute paths of the matching files
+*/
+const globOutsideCwd = (pattern: string, cwd: string): string[] => {
+  const {base, rest} = splitGlobBase(slash(path.resolve(cwd, pattern)));
+
+  return globby.sync([rest, '!**/node_modules/**'], {
+    cwd: base,
+    gitignore: true,
+    absolute: true,
+  });
+};
 
 /**
 Generates a list of files to lint based on a list of provided patterns
@@ -27,33 +76,28 @@ export const getFileList = (patterns, cwd) => {
     pattern.endsWith(`/package.json`) ? pattern : `${pattern}/**/package.json`,
   );
 
-  globPatterns.push('!**/node_modules/**');
+  // step 3 - glob patterns outside of cwd (e.g. `../sibling`) separately, see `globOutsideCwd`
+  const insidePatterns = globPatterns.filter((pattern) => pattern.startsWith('!') || !isOutsideCwd(pattern, cwd));
+  const outsidePatterns = globPatterns.filter((pattern) => !pattern.startsWith('!') && isOutsideCwd(pattern, cwd));
 
-  debug('globPatterns');
-  debug(globPatterns);
+  debug('insidePatterns');
+  debug(insidePatterns);
+  debug('outsidePatterns');
+  debug(outsidePatterns);
 
-  const files = [];
-  const addedFiles = new Set();
-
-  const globFiles = globby.sync(globPatterns, {
-    cwd,
-    gitignore: true,
-  });
+  const hasInsidePatterns = insidePatterns.some((pattern) => !pattern.startsWith('!'));
+  const globFiles = [
+    ...(hasInsidePatterns
+      ? globby.sync([...insidePatterns, '!**/node_modules/**'], {cwd, gitignore: true, absolute: true})
+      : []),
+    ...outsidePatterns.flatMap((pattern) => globOutsideCwd(pattern, cwd)),
+  ];
 
   debug('globFiles');
   debug(globFiles);
 
-  // eslint-disable-next-line unicorn/no-for-each -- for...of is banned by no-restricted-syntax in this project
-  globFiles.forEach((globFile) => {
-    const filePath = path.resolve(cwd, globFile);
-
-    if (addedFiles.has(filePath)) {
-      return;
-    }
-
-    addedFiles.add(filePath);
-    files.push(filePath);
-  });
+  // step 4 - normalize and de-duplicate, keeping the first occurrence of each file
+  const files = [...new Set(globFiles.map((globFile) => path.resolve(globFile)))];
 
   debug('Final file list from `getFileList`');
   debug(files);
