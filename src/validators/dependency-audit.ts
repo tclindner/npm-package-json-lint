@@ -460,13 +460,29 @@ export const auditDependenciesForNonAbsoluteVersion = (
 };
 
 const GITHUB_SHORTCUT_URL = /^(github:)?[^/]+\/[^/]+/;
+const SPEC_PROTOCOL = /^[a-z][\d+.a-z-]*:/i;
+// based on https://github.com/npm/hosted-git-info
+const HOSTED_GIT_SHORTCUT_PROTOCOLS = new Set(['github:', 'gitlab:', 'bitbucket:', 'gist:']);
+const LOCAL_PATH_PREFIXES = ['./', '../', '/', '~/'];
 
 /**
 Determines whether or not version is a shortcut to GitHub repository
 @param version       value of package's version
 @return {boolean}    True if the version is a shortcut to GitHub repository
 */
-const isGithubRepositoryShortcut = (version): boolean => GITHUB_SHORTCUT_URL.test(version);
+const isGithubRepositoryShortcut = (version: string): boolean => {
+  // Local paths (`../pkg`, `./pkg`, `/abs/pkg`, `~/pkg`) contain slashes but aren't GitHub shortcuts.
+  if (LOCAL_PATH_PREFIXES.some((prefix) => version.startsWith(prefix))) {
+    return false;
+  }
+
+  // Specs with a protocol (`npm:`, `file:`, `workspace:`, `link:`, ...) are only git when the protocol is a
+  // hosted git shortcut. Full git URLs are handled by `isGitRepositoryUrl`.
+  const protocolMatch = SPEC_PROTOCOL.exec(version);
+  const hasNonGitProtocol = protocolMatch !== null && !HOSTED_GIT_SHORTCUT_PROTOCOLS.has(protocolMatch[0].toLowerCase());
+
+  return !hasNonGitProtocol && GITHUB_SHORTCUT_URL.test(version);
+};
 
 /**
 Determines whether or not version is URL to archive
