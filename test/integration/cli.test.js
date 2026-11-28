@@ -529,4 +529,36 @@ Totals
       });
     });
   });
+
+  describe('when the cli is run against a sibling package outside cwd', () => {
+    const siblingCwd = './test/fixtures/monorepo/packages/packageOne';
+    const expected = `
+../packageTwo/package.json
+ERROR license-type - node: license - Type should be a string
+1 error
+0 warnings
+`;
+
+    test('with a ../ directory pattern, the sibling is linted', () => {
+      const cli = spawnSync('../../../../../dist/cli.js', ['../packageTwo'], {
+        env,
+        cwd: siblingCwd,
+      });
+
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(twoLintErrorsDetected);
+    });
+
+    test('with a ../ file pattern, the sibling is linted', () => {
+      const cli = spawnSync('../../../../../dist/cli.js', ['../packageTwo/package.json'], {
+        env,
+        cwd: siblingCwd,
+      });
+
+      expect(cli.stdout.toString()).toStrictEqual(expected);
+      expect(cli.stderr.toString()).toStrictEqual('');
+      expect(cli.status).toStrictEqual(twoLintErrorsDetected);
+    });
+  });
 });

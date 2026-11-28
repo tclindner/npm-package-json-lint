@@ -1241,6 +1241,56 @@ describe('dependency-audit Unit Tests', () => {
       });
     });
 
+    describe('when the node exists in the package.json file with hosted git shortcuts', () => {
+      test.each(['gitlab:username/repo', 'bitbucket:username/repo#v1.0.0', 'gist:username/abc123'])(
+        'true should be returned in case of %s',
+        (version) => {
+          const packageJson = {
+            dependencies: {
+              'module-name': version,
+            },
+          };
+          const response = dependencyAudit.auditDependenciesForGitRepositoryVersion(packageJson, 'dependencies', {});
+
+          expect(response).toStrictEqual({
+            hasGitRepositoryVersions: true,
+            dependenciesWithGitRepositoryVersion: ['module-name'],
+            dependenciesWithoutGitRepositoryVersion: [],
+          });
+        },
+      );
+    });
+
+    describe('when the node exists in the package.json file with non-git specs that contain a slash', () => {
+      test.each([
+        'npm:@babel/core@^7.0.0',
+        'npm:lodash@4/x',
+        'file:../local-pkg',
+        'file:./vendor/pkg',
+        'workspace:../pkgs/ws-pkg',
+        'workspace:*',
+        'link:../linked-pkg',
+        'portal:../portal-pkg',
+        '../local-pkg',
+        './vendor/pkg',
+        '/abs/path/pkg',
+        '~/pkg',
+      ])('false should be returned in case of %s', (version) => {
+        const packageJson = {
+          dependencies: {
+            'module-name': version,
+          },
+        };
+        const response = dependencyAudit.auditDependenciesForGitRepositoryVersion(packageJson, 'dependencies', {});
+
+        expect(response).toStrictEqual({
+          hasGitRepositoryVersions: false,
+          dependenciesWithGitRepositoryVersion: [],
+          dependenciesWithoutGitRepositoryVersion: ['module-name'],
+        });
+      });
+    });
+
     describe('when the node exists in the package.json file, one absolute version but has expection', () => {
       test('false should be returned', () => {
         const packageJson = {

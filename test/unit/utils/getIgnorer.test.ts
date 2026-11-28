@@ -26,6 +26,23 @@ describe('getIgnorer Unit Tests', () => {
     expect(actual).toStrictEqual('done');
   });
 
+  test('ignorer allows paths outside cwd (relative paths starting with ../)', () => {
+    const ignorePath = '../../fixtures/ignorePath/.gitignore-example';
+    const cwd = process.cwd();
+
+    const addMock = jest.fn().mockReturnValue('done');
+    // @ts-expect-error-error test
+    ignore.mockImplementation(() => ({
+      add: addMock,
+    }));
+    // @ts-expect-error-error test
+    fs.readFileSync.mockReturnValue('ignore content');
+
+    getIgnorer(cwd, ignorePath);
+
+    expect(ignore).toHaveBeenLastCalledWith({allowRelativePaths: true});
+  });
+
   test('ignore file passed (absolute) and found', () => {
     const ignorePath = '/home/fixtures/ignorePath/.gitignore-example';
     const cwd = process.cwd();
