@@ -85,7 +85,7 @@ First thing first, let's make sure you have the necessary pre-requisites.
 ##### From the command line
 
 * Once npm-package-json-lint is installed either in the project or globally it can be run with the 
-  following command, `npx npm-package-json-lint`. This will go through the process of linting/validating
+  following command, `npx npm-package-json-lint .`. This will go through the process of linting/validating
   your code to meet your desired specifications. For an example configuration file, please see [configuration examples section  on the website](https://npmpackagejsonlint.org/docs/configuration/#config-examples).
   
 ##### In the program
